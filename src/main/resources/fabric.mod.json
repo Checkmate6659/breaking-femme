@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"id": "breakingfemme",
+	"version": "${version}",
+	"name": "Breaking Femme",
+	"description": "Jesse I'm trans! We need to cook ESTROGEN!",
+	"authors": [
+		"Enigma"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "TODO",
+	"icon": "assets/breakingfemme/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.breakingfemme.BreakingFemme"
+		],
+		"client": [
+			"com.breakingfemme.BreakingFemmeClient"
+		],
+		"fabric-datagen": [
+			"com.breakingfemme.BreakingFemmeDataGenerator"
+		]
+	},
+	"mixins": [
+		"breakingfemme.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.18.2",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
