@@ -15,17 +15,17 @@ import net.minecraft.util.Identifier;
 public class ModItems {
     public static final Item COPPER_SULFATE = registerItem("copper_sulfate", new Item(new FabricItemSettings()));
 
+    private static Item registerItem(String name, Item item)
+    {
+        return Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, name), item);
+    }
+
     public static final ItemGroup ITEM_GROUP = Registry.register(Registries.ITEM_GROUP,
         new Identifier(BreakingFemme.MOD_ID, "breakingfemme"),
         FabricItemGroup.builder().displayName(Text.translatable("itemgroup.breakingfemme"))
         .icon(() -> new ItemStack(ModItems.COPPER_SULFATE)).entries((displayContext, entries) -> {
             entries.add(COPPER_SULFATE);
         }).build());
-
-    private static Item registerItem(String name, Item item)
-    {
-        return Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, name), item);
-    }
 
     public static void registerModItems()
     {
