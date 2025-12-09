@@ -1,6 +1,11 @@
 package com.breakingfemme;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.village.TradeOffer;
+import net.minecraft.village.VillagerProfession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +26,13 @@ public class BreakingFemme implements ModInitializer {
 
 		ModItems.registerModItems();
 		
-		//TODO: add custom trade: farmer sells copper sulfate
-		//https://www.youtube.com/watch?v=rumR-BejsEo
+		//Farmers sell copper sulfate at level 2 (Novice is level 1)
+		TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 2, factories -> {
+			factories.add((entity, random) -> new TradeOffer(
+				new ItemStack(Items.EMERALD, 5),
+				new ItemStack(ModItems.COPPER_SULFATE),
+				1, 10, 0.05f
+			));
+		});
 	}
 }
