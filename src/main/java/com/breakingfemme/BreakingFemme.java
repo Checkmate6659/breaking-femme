@@ -10,6 +10,7 @@ import net.minecraft.village.VillagerProfession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.breakingfemme.block.ModBlocks;
 import com.breakingfemme.item.ModItems;
 
 public class BreakingFemme implements ModInitializer {
@@ -25,6 +26,7 @@ public class BreakingFemme implements ModInitializer {
 		LOGGER.info("Jesse I'm trans! We gotta cook estrogen!");
 
 		ModItems.registerModItems();
+		ModBlocks.registerModBlocks();
 		
 		//Farmers sell copper sulfate at level 2 (Novice is level 1)
 		TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 2, factories -> {

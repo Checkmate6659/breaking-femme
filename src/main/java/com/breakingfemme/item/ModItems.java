@@ -1,9 +1,11 @@
 package com.breakingfemme.item;
 
 import com.breakingfemme.BreakingFemme;
+import com.breakingfemme.block.ModBlocks;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.minecraft.item.AliasedBlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -13,6 +15,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 public class ModItems {
+    public static final Item SOYBEANS = registerItem("soybeans", new AliasedBlockItem(ModBlocks.SOY_CROP, new FabricItemSettings()));
     public static final Item COPPER_SULFATE = registerItem("copper_sulfate", new Item(new FabricItemSettings()));
 
     private static Item registerItem(String name, Item item)
@@ -24,6 +27,7 @@ public class ModItems {
         new Identifier(BreakingFemme.MOD_ID, "breakingfemme"),
         FabricItemGroup.builder().displayName(Text.translatable("itemgroup.breakingfemme"))
         .icon(() -> new ItemStack(ModItems.COPPER_SULFATE)).entries((displayContext, entries) -> {
+            entries.add(SOYBEANS);
             entries.add(COPPER_SULFATE);
         }).build());
 

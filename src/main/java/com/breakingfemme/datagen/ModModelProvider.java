@@ -1,5 +1,7 @@
 package com.breakingfemme.datagen;
 
+import com.breakingfemme.block.ModBlocks;
+import com.breakingfemme.block.SoyCropBlock;
 import com.breakingfemme.item.ModItems;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -16,10 +18,12 @@ public class ModModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
+        blockStateModelGenerator.registerCrop(ModBlocks.SOY_CROP, SoyCropBlock.AGE, 0, 1, 2, 3);
     }
 
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
+        //itemModelGenerator.register(ModItems.SOYBEANS, Models.GENERATED);
         itemModelGenerator.register(ModItems.COPPER_SULFATE, Models.GENERATED);
     }
 }

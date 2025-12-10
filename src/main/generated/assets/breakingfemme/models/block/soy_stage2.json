@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/crop",
+  "textures": {
+    "crop": "breakingfemme:block/soy_stage2"
+  }
+}
