@@ -1,6 +1,8 @@
 package com.breakingfemme.fluid;
 
 import com.breakingfemme.BreakingFemme;
+import com.breakingfemme.item.ModItems;
+import com.breakingfemme.item.SolutionBucketItem;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -8,7 +10,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FluidBlock;
 import net.minecraft.fluid.FlowableFluid;
-import net.minecraft.item.BucketItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
@@ -30,6 +31,6 @@ public class ModFluids {
         COPPER_SULFATE_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "copper_sulfate_solution_block"),
             new FluidBlock(STILL_COPPER_SULFATE, FabricBlockSettings.copyOf(Blocks.WATER)){});
          COPPER_SULFATE_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "copper_sulfate_solution_bucket"),
-            new BucketItem(STILL_COPPER_SULFATE, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
+            new SolutionBucketItem(STILL_COPPER_SULFATE, ModItems.COPPER_SULFATE, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
     }
 }
