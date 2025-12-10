@@ -23,7 +23,7 @@ public class ModModelProvider extends FabricModelProvider {
 
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
-        //itemModelGenerator.register(ModItems.SOYBEANS, Models.GENERATED);
         itemModelGenerator.register(ModItems.COPPER_SULFATE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.NICKEL_SULFATE, Models.GENERATED);
     }
 }

@@ -17,6 +17,7 @@ import net.minecraft.util.Identifier;
 public class ModItems {
     public static final Item SOYBEANS = registerItem("soybeans", new AliasedBlockItem(ModBlocks.SOY_CROP, new FabricItemSettings()));
     public static final Item COPPER_SULFATE = registerItem("copper_sulfate", new Item(new FabricItemSettings()));
+    public static final Item NICKEL_SULFATE = registerItem("nickel_sulfate", new Item(new FabricItemSettings()));
 
     private static Item registerItem(String name, Item item)
     {
@@ -29,6 +30,7 @@ public class ModItems {
         .icon(() -> new ItemStack(ModItems.COPPER_SULFATE)).entries((displayContext, entries) -> {
             entries.add(SOYBEANS);
             entries.add(COPPER_SULFATE);
+            entries.add(NICKEL_SULFATE);
         }).build());
 
     public static void registerModItems()
