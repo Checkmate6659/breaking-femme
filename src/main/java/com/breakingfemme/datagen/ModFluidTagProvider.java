@@ -18,5 +18,7 @@ public class ModFluidTagProvider extends FabricTagProvider.FluidTagProvider {
     protected void configure(WrapperLookup arg) {
         getOrCreateTagBuilder(FluidTags.WATER).add(ModFluids.STILL_COPPER_SULFATE);
         getOrCreateTagBuilder(FluidTags.WATER).add(ModFluids.FLOWING_COPPER_SULFATE);
+        getOrCreateTagBuilder(FluidTags.WATER).add(ModFluids.STILL_NICKEL_SULFATE);
+        getOrCreateTagBuilder(FluidTags.WATER).add(ModFluids.FLOWING_NICKEL_SULFATE);
     }
 }

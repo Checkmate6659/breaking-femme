@@ -30,5 +30,6 @@ public class ModModelProvider extends FabricModelProvider {
 
         //buckets
         itemModelGenerator.register(ModFluids.COPPER_SULFATE_BUCKET, Models.GENERATED);
+        itemModelGenerator.register(ModFluids.NICKEL_SULFATE_BUCKET, Models.GENERATED);
     }
 }
