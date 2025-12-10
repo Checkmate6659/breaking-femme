@@ -1,14 +1,28 @@
 package com.breakingfemme;
 
 import com.breakingfemme.block.ModBlocks;
+import com.breakingfemme.fluid.ModFluids;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
+import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.util.Identifier;
 
 public class BreakingFemmeClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
+        //cutout blocks
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.SOY_CROP, RenderLayer.getCutout());
+
+        //fluids
+        FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.STILL_COPPER_SULFATE, ModFluids.FLOWING_COPPER_SULFATE,
+            new SimpleFluidRenderHandler(
+                new Identifier("minecraft:block/water_still"),
+                new Identifier("minecraft:block/water_flow"),
+                0xC033C1FF) //alpha, r, g, b
+        );
+        BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.STILL_COPPER_SULFATE, ModFluids.FLOWING_COPPER_SULFATE);
     }
 }

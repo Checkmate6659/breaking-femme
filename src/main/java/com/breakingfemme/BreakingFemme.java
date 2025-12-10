@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.breakingfemme.block.ModBlocks;
+import com.breakingfemme.fluid.ModFluids;
 import com.breakingfemme.item.ModItems;
 
 public class BreakingFemme implements ModInitializer {
@@ -27,6 +28,7 @@ public class BreakingFemme implements ModInitializer {
 
 		ModItems.registerModItems();
 		ModBlocks.registerModBlocks();
+		ModFluids.registerModFluids();
 		
 		//Farmers sell copper sulfate at level 2 (Novice is level 1)
 		TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 2, factories -> {

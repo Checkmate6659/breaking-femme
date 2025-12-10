@@ -2,6 +2,7 @@ package com.breakingfemme.item;
 
 import com.breakingfemme.BreakingFemme;
 import com.breakingfemme.block.ModBlocks;
+import com.breakingfemme.fluid.ModFluids;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
@@ -31,6 +32,7 @@ public class ModItems {
             entries.add(SOYBEANS);
             entries.add(COPPER_SULFATE);
             entries.add(NICKEL_SULFATE);
+            entries.add(ModFluids.COPPER_SULFATE_BUCKET);
         }).build());
 
     public static void registerModItems()
