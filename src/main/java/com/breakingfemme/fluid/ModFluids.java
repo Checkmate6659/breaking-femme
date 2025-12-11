@@ -1,11 +1,14 @@
 package com.breakingfemme.fluid;
 
 import com.breakingfemme.BreakingFemme;
+import com.breakingfemme.block.CopperSulfateCauldronBlock;
 import com.breakingfemme.item.ModItems;
 import com.breakingfemme.item.SolutionBucketItem;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.transfer.v1.fluid.CauldronFluidContent;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FluidBlock;
@@ -22,6 +25,7 @@ public class ModFluids {
     public static FlowableFluid FLOWING_COPPER_SULFATE;
     public static Block COPPER_SULFATE_FLUID_BLOCK;
     public static Item COPPER_SULFATE_BUCKET;
+    public static Block COPPER_SULFATE_CAULDRON;
 
     //Nickel sulfate solution
     public static FlowableFluid STILL_NICKEL_SULFATE;
@@ -39,8 +43,13 @@ public class ModFluids {
             new CopperSulfateFluid.Flowing());
         COPPER_SULFATE_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "copper_sulfate_solution_block"),
             new FluidBlock(STILL_COPPER_SULFATE, FabricBlockSettings.copyOf(Blocks.WATER)){});
-         COPPER_SULFATE_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "copper_sulfate_solution_bucket"),
+        COPPER_SULFATE_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "copper_sulfate_solution_bucket"),
             new SolutionBucketItem(STILL_COPPER_SULFATE, ModItems.COPPER_SULFATE, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
+
+        //cauldron fluid content registrations
+        //https://maven.fabricmc.net/docs/fabric-api-0.88.2+1.20.2/net/fabricmc/fabric/api/transfer/v1/fluid/CauldronFluidContent.html
+        COPPER_SULFATE_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "copper_sulfate_cauldron"), new CopperSulfateCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
+        CauldronFluidContent.registerCauldron(COPPER_SULFATE_CAULDRON, STILL_COPPER_SULFATE, FluidConstants.BUCKET, null);
 
         //Nickel sulfate solution
         STILL_NICKEL_SULFATE = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "nickel_sulfate_solution"),
