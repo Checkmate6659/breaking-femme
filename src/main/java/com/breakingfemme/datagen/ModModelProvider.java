@@ -30,6 +30,11 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.PULVERIZED_NICKEL, Models.GENERATED);
         itemModelGenerator.register(ModItems.COPPER_SULFATE, Models.GENERATED);
         itemModelGenerator.register(ModItems.NICKEL_SULFATE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.STEROLS, Models.GENERATED);
+        itemModelGenerator.register(ModItems.CRUDE_ESTRONE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.PURE_ESTRONE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.PURE_ESTRADIOL_CRYSTALS, Models.GENERATED);
+        itemModelGenerator.register(ModItems.PURE_ESTRADIOL_POWDER, Models.GENERATED);
 
         //buckets
         itemModelGenerator.register(ModFluids.COPPER_SULFATE_BUCKET, Models.GENERATED);

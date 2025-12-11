@@ -7,5 +7,10 @@
     "item.breakingfemme.nickel_sulfate": "Nickel Sulfate",
     "item.breakingfemme.copper_sulfate_solution_bucket": "Copper Sulfate Solution Bucket",
     "item.breakingfemme.nickel_sulfate_solution_bucket": "Nickel Sulfate Solution Bucket",
+    "item.breakingfemme.sterols": "Sterols",
+    "item.breakingfemme.crude_estrone": "Crude Estrone",
+    "item.breakingfemme.pure_estrone": "Pure Estrone",
+    "item.breakingfemme.pure_estradiol_crystals": "Pure Estradiol Crystals",
+    "item.breakingfemme.pure_estradiol_powder": "Pure Estradiol Powder",
     "itemgroup.breakingfemme": "Breaking Femme"
 }
