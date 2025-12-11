@@ -1,9 +1,18 @@
 package com.breakingfemme;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
+import net.minecraft.entity.EntityType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.loot.LootPool;
+import net.minecraft.loot.condition.InvertedLootCondition;
+import net.minecraft.loot.condition.KilledByPlayerLootCondition;
+import net.minecraft.loot.entry.ItemEntry;
+import net.minecraft.loot.function.SetCountLootFunction;
+import net.minecraft.loot.provider.number.BinomialLootNumberProvider;
+import net.minecraft.util.Identifier;
 import net.minecraft.village.TradeOffer;
 import net.minecraft.village.VillagerProfession;
 
@@ -29,7 +38,7 @@ public class BreakingFemme implements ModInitializer {
 		ModItems.registerModItems();
 		ModBlocks.registerModBlocks();
 		ModFluids.registerModFluids();
-		
+
 		//Farmers sell copper sulfate at level 2 (Novice is level 1)
 		TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 2, factories -> {
 			factories.add((entity, random) -> new TradeOffer(
@@ -37,6 +46,27 @@ public class BreakingFemme implements ModInitializer {
 				new ItemStack(ModItems.COPPER_SULFATE),
 				1, 10, 0.05f
 			));
+		});
+
+		//add (rare) nickel ingot drop to drowned, (8 times) more common when doing it by hand
+		Identifier LOOT_TABLE_ID = EntityType.DROWNED.getLootTableId();
+		LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+			if (source.isBuiltin() && LOOT_TABLE_ID.equals(id)) {
+				//manual kill (8% chance of getting nickel)
+				LootPool.Builder poolBuilderManual = LootPool.builder()
+					.conditionally(KilledByPlayerLootCondition.builder())
+        	        .with(ItemEntry.builder(ModItems.NICKEL_INGOT))
+					.apply(SetCountLootFunction.builder(BinomialLootNumberProvider.create(1, 0.08f)));
+
+				//automatic kill (1% chance of getting nickel)
+				LootPool.Builder poolBuilderAuto = LootPool.builder()
+					.conditionally(InvertedLootCondition.builder(KilledByPlayerLootCondition.builder()))
+        	        .with(ItemEntry.builder(ModItems.NICKEL_INGOT))
+					.apply(SetCountLootFunction.builder(BinomialLootNumberProvider.create(1, 0.01f)));
+
+				tableBuilder.pool(poolBuilderManual);
+				tableBuilder.pool(poolBuilderAuto);
+			}
 		});
 	}
 }
