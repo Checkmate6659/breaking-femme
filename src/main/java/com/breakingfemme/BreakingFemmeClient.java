@@ -40,5 +40,10 @@ public class BreakingFemmeClient implements ClientModInitializer {
                 0xE21B8D3D)
         );
         BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.STILL_NICKEL_SULFATE, ModFluids.FLOWING_NICKEL_SULFATE);
+        ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
+            if (i == 0)
+                return 0xE21B8D3D;
+            return -1;
+        }, ModFluids.NICKEL_SULFATE_CAULDRON);
     }
 }

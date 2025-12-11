@@ -21,10 +21,7 @@ public class ModModelProvider extends FabricModelProvider {
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
         blockStateModelGenerator.registerCrop(ModBlocks.SOY_CROP, SoyCropBlock.AGE, 0, 1, 2, 3);
 
-        //cauldrons
-        //there is a template_cauldron_full model, the water cauldron inherits from that
-        //so ig we just steal the water cauldron, but somehow replace (or better yet, tint) its texture
-        //blockStateModelGenerator.registerParented(Blocks.WATER_CAULDRON, ModFluids.COPPER_SULFATE_CAULDRON);
+        //cauldrons need to be handmade apparently
     }
 
     @Override

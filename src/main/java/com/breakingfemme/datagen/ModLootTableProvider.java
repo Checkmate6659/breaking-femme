@@ -23,5 +23,6 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.SOY_CROP, cropDrops(ModBlocks.SOY_CROP, ModItems.SOYBEANS, ModItems.SOYBEANS, builder));
 
         addDrop(ModFluids.COPPER_SULFATE_CAULDRON, Blocks.CAULDRON);
+        addDrop(ModFluids.NICKEL_SULFATE_CAULDRON, Blocks.CAULDRON);
     }
 }

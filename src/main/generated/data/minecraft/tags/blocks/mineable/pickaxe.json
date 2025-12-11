@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "breakingfemme:copper_sulfate_cauldron"
+    "breakingfemme:copper_sulfate_cauldron",
+    "breakingfemme:nickel_sulfate_cauldron"
   ]
 }
