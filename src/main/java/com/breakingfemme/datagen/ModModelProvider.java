@@ -25,6 +25,9 @@ public class ModModelProvider extends FabricModelProvider {
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
         //regular items
+        itemModelGenerator.register(ModItems.NICKEL_INGOT, Models.GENERATED);
+        itemModelGenerator.register(ModItems.PULVERIZED_COPPER, Models.GENERATED);
+        itemModelGenerator.register(ModItems.PULVERIZED_NICKEL, Models.GENERATED);
         itemModelGenerator.register(ModItems.COPPER_SULFATE, Models.GENERATED);
         itemModelGenerator.register(ModItems.NICKEL_SULFATE, Models.GENERATED);
 
