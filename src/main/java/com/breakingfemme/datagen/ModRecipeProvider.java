@@ -13,6 +13,7 @@ import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.util.Identifier;
 
 public class ModRecipeProvider extends FabricRecipeProvider {
     public ModRecipeProvider(FabricDataOutput output) {
@@ -21,13 +22,13 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
     void offerPulverizing(Consumer<RecipeJsonProvider> exporter, ItemConvertible input, ItemConvertible output, String group)
     {
-        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, output, 8).input(ItemTags.SAND).input(input, 8).group(group).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter);
+        for(int i = 1; i < 9; i++) //can pulverize less items, but less sand-efficient
+            ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, output, i).input(ItemTags.SAND).input(input, i).group(group).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter, new Identifier(getRecipeName(output) + String.valueOf(i)));
     }
 
     @Override
     public void generate(Consumer<RecipeJsonProvider> exporter) {
         //pulverizing copper/nickel
-        //ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.PULVERIZED_COPPER, 8).input(Blocks.SAND).input(Items.COPPER_INGOT, 8).group("pulverized_copper").criterion("has_sand", conditionsFromItem(Blocks.SAND)).criterion(hasItem(Items.COPPER_INGOT), conditionsFromItem(Items.COPPER_INGOT)).offerTo(exporter);
         offerPulverizing(exporter, Items.COPPER_INGOT, ModItems.PULVERIZED_COPPER, "pulverized_copper");
         offerPulverizing(exporter, ModItems.NICKEL_INGOT, ModItems.PULVERIZED_NICKEL, "pulverized_nickel");
 

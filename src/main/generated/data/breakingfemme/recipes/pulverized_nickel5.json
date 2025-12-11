@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "pulverized_nickel",
+  "ingredients": [
+    {
+      "tag": "minecraft:sand"
+    },
+    {
+      "item": "breakingfemme:nickel_ingot"
+    },
+    {
+      "item": "breakingfemme:nickel_ingot"
+    },
+    {
+      "item": "breakingfemme:nickel_ingot"
+    },
+    {
+      "item": "breakingfemme:nickel_ingot"
+    },
+    {
+      "item": "breakingfemme:nickel_ingot"
+    }
+  ],
+  "result": {
+    "count": 5,
+    "item": "breakingfemme:pulverized_nickel"
+  }
+}
