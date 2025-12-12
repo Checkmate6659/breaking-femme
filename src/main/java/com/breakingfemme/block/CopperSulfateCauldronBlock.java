@@ -13,10 +13,13 @@ import net.minecraft.block.LeveledCauldronBlock;
 import net.minecraft.block.cauldron.CauldronBehavior;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
@@ -39,12 +42,25 @@ public class CopperSulfateCauldronBlock extends AbstractCauldronBlock {
         BEHAVIOR.put(Items.BUCKET, (state, world, pos, player, hand, stack) -> {
             return CauldronBehavior.emptyCauldron(state, world, pos, player, hand, stack, new ItemStack(ModFluids.COPPER_SULFATE_BUCKET), (statex) -> {
                 return true;
-             }, SoundEvents.ITEM_BUCKET_EMPTY);
-       });
+            }, SoundEvents.ITEM_BUCKET_FILL);
+        });
 
-       //my mod's fluids
-       BEHAVIOR.put(ModFluids.COPPER_SULFATE_BUCKET, FILL);
-       NickelSulfateCauldronBlock.BEHAVIOR.put(ModFluids.COPPER_SULFATE_BUCKET, FILL);
+        //my mod's fluids
+        BEHAVIOR.put(ModFluids.COPPER_SULFATE_BUCKET, FILL);
+        NickelSulfateCauldronBlock.BEHAVIOR.put(ModFluids.COPPER_SULFATE_BUCKET, FILL);
+
+        //dissolving copper sulfate in water
+        CauldronBehavior.WATER_CAULDRON_BEHAVIOR.put(ModItems.COPPER_SULFATE, (state, world, pos, player, hand, stack) -> {
+            if ((Integer)state.get(LeveledCauldronBlock.LEVEL) == 3)
+            {
+                player.getStackInHand(hand).decrement(1);
+                world.setBlockState(pos, ModFluids.COPPER_SULFATE_CAULDRON.getDefaultState());
+                world.playSound((PlayerEntity)null, pos, SoundEvents.ITEM_INK_SAC_USE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                world.emitGameEvent((Entity)null, GameEvent.FLUID_PLACE, pos);
+                return ActionResult.success(world.isClient);
+            }
+            return ActionResult.PASS;
+        });
     }
 
     public CopperSulfateCauldronBlock(AbstractBlock.Settings settings) {
