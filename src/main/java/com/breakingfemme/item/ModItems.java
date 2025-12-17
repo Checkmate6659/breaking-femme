@@ -57,6 +57,7 @@ public class ModItems {
             entries.add(ModBlocks.FERMENTER_PANEL);
             entries.add(ModBlocks.FERMENTER_TOP);
             entries.add(ModBlocks.FERMENTER_BOTTOM);
+            entries.add(ModBlocks.FERMENTER_MIXER);
         }).build());
 
     public static void registerModItems()

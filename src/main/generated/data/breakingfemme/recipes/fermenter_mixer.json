@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "fermenter_mixer",
+  "key": {
+    "#": {
+      "item": "breakingfemme:fermenter_bottom"
+    },
+    "-": {
+      "item": "minecraft:iron_ingot"
+    },
+    "O": {
+      "item": "minecraft:repeater"
+    },
+    "w": {
+      "item": "minecraft:redstone_torch"
+    }
+  },
+  "pattern": [
+    " - ",
+    " # ",
+    "OwO"
+  ],
+  "result": {
+    "item": "breakingfemme:fermenter_mixer"
+  },
+  "show_notification": true
+}
