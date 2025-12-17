@@ -25,7 +25,7 @@ public class FermenterPanelBlock extends HorizontalFacingBlock implements Waterl
     protected static final VoxelShape SOUTH_SHAPE;
     protected static final VoxelShape NORTH_SHAPE;
 
-   public FermenterPanelBlock(Settings settings) {
+    public FermenterPanelBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.stateManager.getDefaultState().with(FACING, Direction.NORTH).with(WATERLOGGED, false));
     }

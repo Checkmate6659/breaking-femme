@@ -20,7 +20,7 @@ import net.minecraft.world.WorldAccess;
 public class FermenterTopBlock extends Block implements Waterloggable {
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 
-   public FermenterTopBlock(Settings settings) {
+    public FermenterTopBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.stateManager.getDefaultState().with(WATERLOGGED, false));
     }
