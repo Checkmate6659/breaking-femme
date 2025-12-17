@@ -2,6 +2,7 @@ package com.breakingfemme.datagen;
 
 import java.util.concurrent.CompletableFuture;
 
+import com.breakingfemme.block.ModBlocks;
 import com.breakingfemme.fluid.ModFluids;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -18,5 +19,7 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
     protected void configure(WrapperLookup arg) {
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModFluids.COPPER_SULFATE_CAULDRON);
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModFluids.NICKEL_SULFATE_CAULDRON);
+
+        getOrCreateTagBuilder(BlockTags.AXE_MINEABLE).add(ModBlocks.FERMENTER_PANEL);
     }
 }
