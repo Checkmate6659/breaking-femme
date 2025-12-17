@@ -16,6 +16,7 @@ public class BreakingFemmeClient implements ClientModInitializer {
     public void onInitializeClient() {
         //cutout blocks
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.SOY_CROP, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.FERMENTER_PANEL, RenderLayer.getCutout());
 
         //fluids
         //copper sulfate

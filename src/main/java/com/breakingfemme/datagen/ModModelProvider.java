@@ -21,6 +21,8 @@ public class ModModelProvider extends FabricModelProvider {
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
         blockStateModelGenerator.registerCrop(ModBlocks.SOY_CROP, SoyCropBlock.AGE, 0, 1, 2, 3);
 
+        //registering fermenter panels by hand, because they are unlike any vanilla blocks
+
         //cauldrons need to be handmade apparently
     }
 
@@ -41,5 +43,8 @@ public class ModModelProvider extends FabricModelProvider {
         //buckets
         itemModelGenerator.register(ModFluids.COPPER_SULFATE_BUCKET, Models.GENERATED);
         itemModelGenerator.register(ModFluids.NICKEL_SULFATE_BUCKET, Models.GENERATED);
+
+        //panel
+        itemModelGenerator.register(ModBlocks.FERMENTER_PANEL.asItem(), Models.GENERATED);
     }
 }

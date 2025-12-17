@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "breakingfemme:block/fermenter_panel",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "breakingfemme:block/fermenter_panel"
+    },
+    "facing=south": {
+      "model": "breakingfemme:block/fermenter_panel",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "breakingfemme:block/fermenter_panel",
+      "y": 270
+    }
+  }
+}
