@@ -56,6 +56,7 @@ public class ModItems {
             entries.add(PURE_ESTRADIOL_POWDER);
             entries.add(ModBlocks.FERMENTER_PANEL);
             entries.add(ModBlocks.FERMENTER_TOP);
+            entries.add(ModBlocks.FERMENTER_BOTTOM);
         }).build());
 
     public static void registerModItems()

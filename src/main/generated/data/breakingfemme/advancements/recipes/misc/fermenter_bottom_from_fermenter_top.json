@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_fermenter_top": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "breakingfemme:fermenter_top"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:fermenter_bottom_from_fermenter_top"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_fermenter_top",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:fermenter_bottom_from_fermenter_top"
+    ]
+  },
+  "sends_telemetry_event": false
+}
