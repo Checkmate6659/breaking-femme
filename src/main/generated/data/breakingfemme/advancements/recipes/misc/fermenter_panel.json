@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_iron_bars": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:iron_bars"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "breakingfemme:fermenter_panel"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_iron_bars",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "breakingfemme:fermenter_panel"
+    ]
+  },
+  "sends_telemetry_event": false
+}
