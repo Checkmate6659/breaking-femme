@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:block/template_trapdoor_open",
+  "parent": "breakingfemme:block/panel",
   "textures": {
     "texture": "minecraft:block/barrel_side"
   }
