@@ -40,7 +40,8 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         offerSmelting(exporter, List.of(ModItems.PULVERIZED_NICKEL), RecipeCategory.MISC, ModItems.NICKEL_INGOT, 0, 200, "nickel_ingot");
         offerBlasting(exporter, List.of(ModItems.PULVERIZED_NICKEL), RecipeCategory.MISC, ModItems.NICKEL_INGOT, 0, 100, "nickel_ingot");
 
-        //fermenter panels
+        //fermenter panel and top
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.FERMENTER_PANEL.asItem(), 16).input('#', ItemTags.PLANKS).input('-', Items.IRON_BARS).pattern("###").pattern("---").pattern("###").group("fermenter_panel").criterion(hasItem(Items.IRON_BARS), conditionsFromItem(Items.IRON_BARS)).offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.FERMENTER_TOP.asItem(), 4).input('#', ItemTags.PLANKS).input('-', Items.IRON_INGOT).pattern(" - ").pattern("###").group("fermenter_top").criterion(hasItem(Items.IRON_INGOT), conditionsFromItem(Items.IRON_INGOT)).offerTo(exporter);
     }
 }

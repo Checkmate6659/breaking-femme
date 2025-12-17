@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "fermenter_top",
+  "key": {
+    "#": {
+      "tag": "minecraft:planks"
+    },
+    "-": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    " - ",
+    "###"
+  ],
+  "result": {
+    "count": 4,
+    "item": "breakingfemme:fermenter_top"
+  },
+  "show_notification": true
+}

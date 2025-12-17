@@ -1,0 +1,6 @@
+{
+    "parent": "breakingfemme:block/top_panel",
+    "textures": {
+        "texture": "minecraft:block/spruce_planks"
+    }
+}

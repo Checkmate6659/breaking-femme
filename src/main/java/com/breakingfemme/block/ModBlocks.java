@@ -14,6 +14,7 @@ import net.minecraft.util.Identifier;
 public class ModBlocks {
     public static final Block SOY_CROP = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "soy"), new SoyCropBlock(FabricBlockSettings.copyOf(Blocks.WHEAT)));
     public static final Block FERMENTER_PANEL = registerBlock("fermenter_panel", new FermenterPanelBlock(FabricBlockSettings.copyOf(Blocks.SPRUCE_TRAPDOOR)));
+    public static final Block FERMENTER_TOP = registerBlock("fermenter_top", new FermenterTopBlock(FabricBlockSettings.copyOf(Blocks.SPRUCE_TRAPDOOR)));
 
     //register block and item
     private static final Block registerBlock(String name, Block block)
