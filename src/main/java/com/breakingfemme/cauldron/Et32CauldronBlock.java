@@ -21,7 +21,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 //https://maven.fabricmc.net/docs/fabric-api-0.88.2+1.20.2/net/fabricmc/fabric/api/transfer/v1/fluid/CauldronFluidContent.html
-public class Et95CauldronBlock extends AbstractCauldronBlock {
+public class Et32CauldronBlock extends AbstractCauldronBlock {
     public static final int MIN_LEVEL = 1;
     public static final int MAX_LEVEL = 3;
     public static final IntProperty LEVEL = Properties.LEVEL_3;
@@ -30,16 +30,16 @@ public class Et95CauldronBlock extends AbstractCauldronBlock {
     public static Map<Item, CauldronBehavior> BEHAVIOR = CauldronBehavior.createMap();
     static {
         CauldronBehavior FILL = (state, world, pos, player, hand, stack) -> {
-            return CauldronBehavior.fillCauldron(world, pos, player, hand, stack, ModFluids.ET95_CAULDRON.getDefaultState().with(Et95CauldronBlock.LEVEL, 3), SoundEvents.ITEM_BUCKET_EMPTY);
+            return CauldronBehavior.fillCauldron(world, pos, player, hand, stack, ModFluids.ET32_CAULDRON.getDefaultState().with(Et32CauldronBlock.LEVEL, 3), SoundEvents.ITEM_BUCKET_EMPTY);
         };
 
         //vanilla fluids
-        CauldronBehavior.EMPTY_CAULDRON_BEHAVIOR.put(ModFluids.ET95_BUCKET, FILL);
-        CauldronBehavior.WATER_CAULDRON_BEHAVIOR.put(ModFluids.ET95_BUCKET, FILL);
-        CauldronBehavior.LAVA_CAULDRON_BEHAVIOR.put(ModFluids.ET95_BUCKET, FILL);
+        CauldronBehavior.EMPTY_CAULDRON_BEHAVIOR.put(ModFluids.ET32_BUCKET, FILL);
+        CauldronBehavior.WATER_CAULDRON_BEHAVIOR.put(ModFluids.ET32_BUCKET, FILL);
+        CauldronBehavior.LAVA_CAULDRON_BEHAVIOR.put(ModFluids.ET32_BUCKET, FILL);
         CauldronBehavior.registerBucketBehavior(BEHAVIOR);
         BEHAVIOR.put(Items.BUCKET, (state, world, pos, player, hand, stack) -> {
-            return CauldronBehavior.emptyCauldron(state, world, pos, player, hand, stack, new ItemStack(ModFluids.ET95_BUCKET), (statex) -> {
+            return CauldronBehavior.emptyCauldron(state, world, pos, player, hand, stack, new ItemStack(ModFluids.ET32_BUCKET), (statex) -> {
                 return true;
             }, SoundEvents.ITEM_BUCKET_FILL);
         });
@@ -49,7 +49,7 @@ public class Et95CauldronBlock extends AbstractCauldronBlock {
         //TODO: dissolve soy inside and leave it macerating (hey thats 70% ethanol! https://www.sciencedirect.com/science/article/pii/S2667010021002511)
     }
 
-    public Et95CauldronBlock(AbstractBlock.Settings settings) {
+    public Et32CauldronBlock(AbstractBlock.Settings settings) {
         super(settings, BEHAVIOR);
         this.setDefaultState(this.stateManager.getDefaultState().with(LEVEL, 3));
     }

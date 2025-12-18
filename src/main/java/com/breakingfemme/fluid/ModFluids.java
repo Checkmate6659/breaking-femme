@@ -2,6 +2,8 @@ package com.breakingfemme.fluid;
 
 import com.breakingfemme.BreakingFemme;
 import com.breakingfemme.cauldron.CopperSulfateCauldronBlock;
+import com.breakingfemme.cauldron.Et32CauldronBlock;
+import com.breakingfemme.cauldron.Et64CauldronBlock;
 import com.breakingfemme.cauldron.Et95CauldronBlock;
 import com.breakingfemme.cauldron.NickelSulfateCauldronBlock;
 import com.breakingfemme.item.ModItems;
@@ -40,6 +42,20 @@ public class ModFluids {
     public static Item NICKEL_SULFATE_BUCKET;
     public static Block NICKEL_SULFATE_CAULDRON;
 
+    //32% ethanol
+    public static FlowableFluid STILL_ET32;
+    public static FlowableFluid FLOWING_ET32;
+    public static Block ET32_FLUID_BLOCK;
+    public static Item ET32_BUCKET;
+    public static Block ET32_CAULDRON;
+
+    //64% ethanol
+    public static FlowableFluid STILL_ET64;
+    public static FlowableFluid FLOWING_ET64;
+    public static Block ET64_FLUID_BLOCK;
+    public static Item ET64_BUCKET;
+    public static Block ET64_CAULDRON;
+
     //95% ethanol
     public static FlowableFluid STILL_ET95;
     public static FlowableFluid FLOWING_ET95;
@@ -70,6 +86,26 @@ public class ModFluids {
         NICKEL_SULFATE_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "nickel_sulfate_solution_bucket"),
             new SolutionBucketItem(STILL_NICKEL_SULFATE, ModItems.NICKEL_SULFATE, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
+        //32% ethanol
+        STILL_ET32 = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "ethanol32"),
+            new Et32Fluid.Still());
+        FLOWING_ET32 = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_ethanol32"),
+            new Et32Fluid.Flowing());
+        ET32_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "ethanol32_block"),
+            new FluidBlock(STILL_ET32, FabricBlockSettings.copyOf(Blocks.WATER)){});
+        ET32_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "ethanol32_bucket"),
+            new BucketItem(STILL_ET32, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
+
+        //64% ethanol
+        STILL_ET64 = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "ethanol64"),
+            new Et64Fluid.Still());
+        FLOWING_ET64 = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_ethanol64"),
+            new Et64Fluid.Flowing());
+        ET64_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "ethanol64_block"),
+            new FluidBlock(STILL_ET64, FabricBlockSettings.copyOf(Blocks.WATER)){});
+        ET64_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "ethanol64_bucket"),
+            new BucketItem(STILL_ET64, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
+
         //95% ethanol
         STILL_ET95 = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "ethanol95"),
             new Et95Fluid.Still());
@@ -87,6 +123,10 @@ public class ModFluids {
             CauldronFluidContent.registerCauldron(COPPER_SULFATE_CAULDRON, STILL_COPPER_SULFATE, FluidConstants.BUCKET, null);
         NICKEL_SULFATE_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "nickel_sulfate_cauldron"), new NickelSulfateCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
             CauldronFluidContent.registerCauldron(NICKEL_SULFATE_CAULDRON, STILL_NICKEL_SULFATE, FluidConstants.BUCKET, null);
+        ET32_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "ethanol32_cauldron"), new Et32CauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
+            CauldronFluidContent.registerCauldron(ET32_CAULDRON, STILL_ET32, FluidConstants.BUCKET, null);
+        ET64_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "ethanol64_cauldron"), new Et64CauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
+            CauldronFluidContent.registerCauldron(ET64_CAULDRON, STILL_ET64, FluidConstants.BUCKET, null);
         ET95_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "ethanol95_cauldron"), new Et95CauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
             CauldronFluidContent.registerCauldron(ET95_CAULDRON, STILL_ET95, FluidConstants.BUCKET, null);
     }

@@ -24,6 +24,8 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
 
         addDrop(ModFluids.COPPER_SULFATE_CAULDRON, Blocks.CAULDRON);
         addDrop(ModFluids.NICKEL_SULFATE_CAULDRON, Blocks.CAULDRON);
+        addDrop(ModFluids.ET32_CAULDRON, Blocks.CAULDRON);
+        addDrop(ModFluids.ET64_CAULDRON, Blocks.CAULDRON);
         addDrop(ModFluids.ET95_CAULDRON, Blocks.CAULDRON);
 
         addDrop(ModBlocks.FERMENTER_PANEL);

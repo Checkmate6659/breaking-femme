@@ -20,6 +20,10 @@ public class ModFluidTagProvider extends FabricTagProvider.FluidTagProvider {
         getOrCreateTagBuilder(FluidTags.WATER).add(ModFluids.FLOWING_COPPER_SULFATE);
         getOrCreateTagBuilder(FluidTags.WATER).add(ModFluids.STILL_NICKEL_SULFATE);
         getOrCreateTagBuilder(FluidTags.WATER).add(ModFluids.FLOWING_NICKEL_SULFATE);
+        getOrCreateTagBuilder(FluidTags.WATER).add(ModFluids.STILL_ET32);
+        getOrCreateTagBuilder(FluidTags.WATER).add(ModFluids.FLOWING_ET32);
+        getOrCreateTagBuilder(FluidTags.WATER).add(ModFluids.STILL_ET64);
+        getOrCreateTagBuilder(FluidTags.WATER).add(ModFluids.FLOWING_ET64);
         getOrCreateTagBuilder(FluidTags.WATER).add(ModFluids.STILL_ET95);
         getOrCreateTagBuilder(FluidTags.WATER).add(ModFluids.FLOWING_ET95);
     }

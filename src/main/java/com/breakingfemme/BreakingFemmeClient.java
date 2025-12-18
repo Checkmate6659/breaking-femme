@@ -50,6 +50,34 @@ public class BreakingFemmeClient implements ClientModInitializer {
             return -1;
         }, ModFluids.NICKEL_SULFATE_CAULDRON);
 
+        //32% ethanol
+        FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.STILL_ET32, ModFluids.FLOWING_ET32,
+            new SimpleFluidRenderHandler(
+                new Identifier("minecraft:block/water_still"),
+                new Identifier("minecraft:block/water_flow"),
+                0xE06F98EB) //everything gets affinely interpolated between water and 95% ethanol
+        );
+        BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.STILL_ET32, ModFluids.FLOWING_ET32);
+        ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
+            if (i == 0)
+                return 0xE06F98EB;
+            return -1;
+        }, ModFluids.ET32_CAULDRON);
+
+        //64% ethanol
+        FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.STILL_ET64, ModFluids.FLOWING_ET64,
+            new SimpleFluidRenderHandler(
+                new Identifier("minecraft:block/water_still"),
+                new Identifier("minecraft:block/water_flow"),
+                0xC0A0BBF2) //same here
+        );
+        BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.STILL_ET64, ModFluids.FLOWING_ET64);
+        ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
+            if (i == 0)
+                return 0xC0A0BBF2;
+            return -1;
+        }, ModFluids.ET64_CAULDRON);
+
         //95% ethanol
         FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.STILL_ET95, ModFluids.FLOWING_ET95,
             new SimpleFluidRenderHandler(
