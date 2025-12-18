@@ -26,6 +26,12 @@ public class ModItems {
     public static final Item COPPER_SULFATE = registerItem("copper_sulfate", new Item(new FabricItemSettings()));
     public static final Item NICKEL_SULFATE = registerItem("nickel_sulfate", new Item(new FabricItemSettings()));
 
+    //TODO: add drunkenness status effect and shader, of course using real research because that's the whole point of this mod.
+    //also now the bottle gets consumed and it makes food noises.
+    public static final Item ET32_BOTTLE = registerItem("ethanol32_bottle", new Item(new FabricItemSettings().food(new FoodComponent.Builder().hunger(0).saturationModifier(0f).alwaysEdible().build())));
+    public static final Item ET64_BOTTLE = registerItem("ethanol64_bottle", new Item(new FabricItemSettings()));
+    public static final Item ET95_BOTTLE = registerItem("ethanol95_bottle", new Item(new FabricItemSettings()));
+
     public static final Item STEROLS = registerItem("sterols", new Item(new FabricItemSettings()));
     public static final Item CRUDE_ESTRONE = registerItem("crude_estrone", new Item(new FabricItemSettings()));
     public static final Item PURE_ESTRONE = registerItem("pure_estrone", new Item(new FabricItemSettings()));
@@ -50,6 +56,9 @@ public class ModItems {
             entries.add(NICKEL_SULFATE);
             entries.add(ModFluids.COPPER_SULFATE_BUCKET);
             entries.add(ModFluids.NICKEL_SULFATE_BUCKET);
+            entries.add(ET32_BOTTLE);
+            entries.add(ET64_BOTTLE);
+            entries.add(ET95_BOTTLE);
             entries.add(ModFluids.ET32_BUCKET);
             entries.add(ModFluids.ET64_BUCKET);
             entries.add(ModFluids.ET95_BUCKET);
