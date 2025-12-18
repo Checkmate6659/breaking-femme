@@ -22,6 +22,9 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
             .properties(StatePredicate.Builder.create().exactMatch(SoyCropBlock.AGE, SoyCropBlock.MAX_AGE));
         addDrop(ModBlocks.SOY_CROP, cropDrops(ModBlocks.SOY_CROP, ModItems.SOYBEANS, ModItems.SOYBEANS, builder));
 
+        addDrop(ModFluids.MACERATING_SOY_CAULDRON, Blocks.CAULDRON);
+        addDrop(ModFluids.MACERATING_SOY_CAULDRON, ModItems.SOYBEANS);
+
         addDrop(ModFluids.COPPER_SULFATE_CAULDRON, Blocks.CAULDRON);
         addDrop(ModFluids.NICKEL_SULFATE_CAULDRON, Blocks.CAULDRON);
         addDrop(ModFluids.ET32_CAULDRON, Blocks.CAULDRON);

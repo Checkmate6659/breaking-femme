@@ -22,6 +22,13 @@ public class BreakingFemmeClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.FERMENTER_MIXER, RenderLayer.getCutout());
 
         //fluids
+        //macerating soy (cauldron only)
+        ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
+            if (i == 0)
+                return 0x80A0BBF2; //same color as et64, just more transparent 
+            return -1;
+        }, ModFluids.ET64_CAULDRON);
+
         //copper sulfate
         FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.STILL_COPPER_SULFATE, ModFluids.FLOWING_COPPER_SULFATE,
             new SimpleFluidRenderHandler(

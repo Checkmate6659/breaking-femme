@@ -3,6 +3,8 @@ package com.breakingfemme;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -13,8 +15,10 @@ import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.function.SetCountLootFunction;
 import net.minecraft.loot.provider.number.BinomialLootNumberProvider;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.village.TradeOffer;
 import net.minecraft.village.VillagerProfession;
+import net.minecraft.world.World;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,5 +72,18 @@ public class BreakingFemme implements ModInitializer {
 				tableBuilder.pool(poolBuilderAuto);
 			}
 		});
+	}
+
+	//utility function
+	static final Block[] HOT_BLOCKS = {Blocks.FIRE, Blocks.SOUL_FIRE, Blocks.CAMPFIRE, Blocks.SOUL_CAMPFIRE, Blocks.LAVA, Blocks.MAGMA_BLOCK};
+
+	public static boolean is_block_hot(World world, BlockPos pos)
+	{
+		Block target = world.getBlockState(pos).getBlock();
+		for (Block block : HOT_BLOCKS) {
+			if (block == target)
+				return true;
+		}
+		return false;
 	}
 }

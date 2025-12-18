@@ -153,7 +153,7 @@ public class Et64CauldronBlock extends AbstractCauldronBlock {
             return ActionResult.success(world.isClient);
         });
 
-        //add Et32 or Et64: make Et32
+        //add Et32: make Et32
         BEHAVIOR.put(ModItems.ET32_BOTTLE, (state, world, pos, player, hand, stack) -> {
             if (state.get(LEVEL) == 3) {
                 return ActionResult.PASS;
@@ -172,7 +172,21 @@ public class Et64CauldronBlock extends AbstractCauldronBlock {
             return ActionResult.success(world.isClient);
         });
 
-        //TODO: dissolve soy inside and leave it macerating (hey thats 70% ethanol! https://www.sciencedirect.com/science/article/pii/S2667010021002511)
+        //dissolve soy inside and leave it macerating
+        BEHAVIOR.put(ModItems.SOYBEANS, (state, world, pos, player, hand, stack) -> {
+            if (state.get(LEVEL) != 3) { //only able to do this if full
+                return ActionResult.PASS;
+            } else if (!world.isClient) {
+                Item item = stack.getItem();
+                player.getStackInHand(hand).decrement(1); //consume 1 soybean
+                player.incrementStat(Stats.USE_CAULDRON);
+                player.incrementStat(Stats.USED.getOrCreateStat(item));
+                world.setBlockState(pos, ModFluids.MACERATING_SOY_CAULDRON.getDefaultState());
+                world.playSound((PlayerEntity)null, pos, SoundEvents.ITEM_INK_SAC_USE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                world.emitGameEvent((Entity)null, GameEvent.FLUID_PLACE, pos);
+            }
+            return ActionResult.success(world.isClient);
+        });
     }
 
     public Et64CauldronBlock(AbstractBlock.Settings settings) {
