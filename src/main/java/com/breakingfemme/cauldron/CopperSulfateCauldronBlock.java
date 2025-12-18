@@ -1,4 +1,4 @@
-package com.breakingfemme.block;
+package com.breakingfemme.cauldron;
 
 import java.util.Map;
 
@@ -45,10 +45,6 @@ public class CopperSulfateCauldronBlock extends AbstractCauldronBlock {
             }, SoundEvents.ITEM_BUCKET_FILL);
         });
 
-        //my mod's fluids
-        BEHAVIOR.put(ModFluids.COPPER_SULFATE_BUCKET, FILL);
-        NickelSulfateCauldronBlock.BEHAVIOR.put(ModFluids.COPPER_SULFATE_BUCKET, FILL);
-
         //dissolving copper sulfate in water
         CauldronBehavior.WATER_CAULDRON_BEHAVIOR.put(ModItems.COPPER_SULFATE, (state, world, pos, player, hand, stack) -> {
             if ((Integer)state.get(LeveledCauldronBlock.LEVEL) == 3)
@@ -80,8 +76,8 @@ public class CopperSulfateCauldronBlock extends AbstractCauldronBlock {
         }
     }
 
-    protected void onFireCollision(BlockState state, World world, BlockPos pos) { //if on fire, consume some water from the cauldron, and grab dust
-        BlockState blockState = Blocks.WATER_CAULDRON.getDefaultState().with(LeveledCauldronBlock.LEVEL, 2);
+    protected void onFireCollision(BlockState state, World world, BlockPos pos) { //if on fire, consume fluid from the cauldron, and grab dust
+        BlockState blockState = Blocks.CAULDRON.getDefaultState();
         world.setBlockState(pos, blockState);
         world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, Emitter.of(blockState));
         world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5f, pos.getY() + 0.125f, pos.getZ() + 0.5f, new ItemStack(ModItems.COPPER_SULFATE)));

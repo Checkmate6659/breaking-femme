@@ -43,6 +43,7 @@ public class ModModelProvider extends FabricModelProvider {
         //buckets
         itemModelGenerator.register(ModFluids.COPPER_SULFATE_BUCKET, Models.GENERATED);
         itemModelGenerator.register(ModFluids.NICKEL_SULFATE_BUCKET, Models.GENERATED);
+        itemModelGenerator.register(ModFluids.ET95_BUCKET, Models.GENERATED);
 
         //fermenter
         itemModelGenerator.register(ModBlocks.FERMENTER_PANEL.asItem(), Models.GENERATED);

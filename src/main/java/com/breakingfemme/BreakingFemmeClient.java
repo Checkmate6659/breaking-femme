@@ -49,5 +49,19 @@ public class BreakingFemmeClient implements ClientModInitializer {
                 return 0xE21B8D3D;
             return -1;
         }, ModFluids.NICKEL_SULFATE_CAULDRON);
+
+        //95% ethanol
+        FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.STILL_ET95, ModFluids.FLOWING_ET95,
+            new SimpleFluidRenderHandler(
+                new Identifier("minecraft:block/water_still"),
+                new Identifier("minecraft:block/water_flow"),
+                0xA0D0DEF9) //default water tint is 3F76E4, here we divide all coords by 4 then add 0xC0 to them, and tint is 0xA0 (its 0xFF for water)
+        );
+        BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.STILL_ET95, ModFluids.FLOWING_ET95);
+        ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
+            if (i == 0)
+                return 0xA0D0DEF9;
+            return -1;
+        }, ModFluids.ET95_CAULDRON);
     }
 }

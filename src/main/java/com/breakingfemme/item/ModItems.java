@@ -50,6 +50,7 @@ public class ModItems {
             entries.add(NICKEL_SULFATE);
             entries.add(ModFluids.COPPER_SULFATE_BUCKET);
             entries.add(ModFluids.NICKEL_SULFATE_BUCKET);
+            entries.add(ModFluids.ET95_BUCKET);
             entries.add(CRUDE_ESTRONE);
             entries.add(PURE_ESTRONE);
             entries.add(PURE_ESTRADIOL_CRYSTALS);

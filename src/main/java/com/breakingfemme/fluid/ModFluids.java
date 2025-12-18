@@ -1,8 +1,9 @@
 package com.breakingfemme.fluid;
 
 import com.breakingfemme.BreakingFemme;
-import com.breakingfemme.block.CopperSulfateCauldronBlock;
-import com.breakingfemme.block.NickelSulfateCauldronBlock;
+import com.breakingfemme.cauldron.CopperSulfateCauldronBlock;
+import com.breakingfemme.cauldron.Et95CauldronBlock;
+import com.breakingfemme.cauldron.NickelSulfateCauldronBlock;
 import com.breakingfemme.item.ModItems;
 import com.breakingfemme.item.SolutionBucketItem;
 
@@ -14,6 +15,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FluidBlock;
 import net.minecraft.fluid.FlowableFluid;
+import net.minecraft.item.BucketItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
@@ -21,6 +23,9 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
 public class ModFluids {
+    //Milk cauldron
+    //public static Block MILK_CAULDRON;
+
     //Copper sulfate solution
     public static FlowableFluid STILL_COPPER_SULFATE;
     public static FlowableFluid FLOWING_COPPER_SULFATE;
@@ -34,6 +39,13 @@ public class ModFluids {
     public static Block NICKEL_SULFATE_FLUID_BLOCK;
     public static Item NICKEL_SULFATE_BUCKET;
     public static Block NICKEL_SULFATE_CAULDRON;
+
+    //95% ethanol
+    public static FlowableFluid STILL_ET95;
+    public static FlowableFluid FLOWING_ET95;
+    public static Block ET95_FLUID_BLOCK;
+    public static Item ET95_BUCKET;
+    public static Block ET95_CAULDRON;
 
 
     public static void registerModFluids()
@@ -58,11 +70,24 @@ public class ModFluids {
         NICKEL_SULFATE_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "nickel_sulfate_solution_bucket"),
             new SolutionBucketItem(STILL_NICKEL_SULFATE, ModItems.NICKEL_SULFATE, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
+        //95% ethanol
+        STILL_ET95 = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "ethanol95"),
+            new Et95Fluid.Still());
+        FLOWING_ET95 = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_ethanol95"),
+            new Et95Fluid.Flowing());
+        ET95_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "ethanol95_block"),
+            new FluidBlock(STILL_ET95, FabricBlockSettings.copyOf(Blocks.WATER)){});
+        ET95_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "ethanol95_bucket"),
+            new BucketItem(STILL_ET95, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
+
         //cauldron fluid content registrations (need to be done after everything else fluid-related)
         //https://maven.fabricmc.net/docs/fabric-api-0.88.2+1.20.2/net/fabricmc/fabric/api/transfer/v1/fluid/CauldronFluidContent.html
+        //TODO: milk cauldron?
         COPPER_SULFATE_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "copper_sulfate_cauldron"), new CopperSulfateCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
             CauldronFluidContent.registerCauldron(COPPER_SULFATE_CAULDRON, STILL_COPPER_SULFATE, FluidConstants.BUCKET, null);
         NICKEL_SULFATE_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "nickel_sulfate_cauldron"), new NickelSulfateCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
             CauldronFluidContent.registerCauldron(NICKEL_SULFATE_CAULDRON, STILL_NICKEL_SULFATE, FluidConstants.BUCKET, null);
+        ET95_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "ethanol95_cauldron"), new Et95CauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
+            CauldronFluidContent.registerCauldron(ET95_CAULDRON, STILL_ET95, FluidConstants.BUCKET, null);
     }
 }
