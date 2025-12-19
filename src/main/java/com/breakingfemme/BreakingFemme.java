@@ -3,6 +3,7 @@ package com.breakingfemme;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
+import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.ItemStack;
@@ -73,6 +74,14 @@ public class BreakingFemme implements ModInitializer {
 				tableBuilder.pool(poolBuilderAuto);
 			}
 		});
+
+        //Fuels
+        FuelRegistry.INSTANCE.add(ModFluids.ET95_BUCKET, 5400); //1 bucket of 95% ethanol can cook 27 items
+        FuelRegistry.INSTANCE.add(ModFluids.ET64_BUCKET, 3600);
+        FuelRegistry.INSTANCE.add(ModFluids.ET32_BUCKET, 1800); //this should burn even less well than proportional...
+        FuelRegistry.INSTANCE.add(ModItems.ET95_BOTTLE, 1800);
+        FuelRegistry.INSTANCE.add(ModItems.ET64_BOTTLE, 1200);
+        FuelRegistry.INSTANCE.add(ModItems.ET32_BOTTLE, 600); //all the way down to 3 items for the worst concentration/quantity
 	}
 
 	//basically, is the block in the hot category or is it a lit furnace

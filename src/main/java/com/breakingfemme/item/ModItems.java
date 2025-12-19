@@ -11,6 +11,7 @@ import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
@@ -28,9 +29,9 @@ public class ModItems {
 
     //TODO: add drunkenness status effect and shader, of course using real research because that's the whole point of this mod.
     //also now the bottle gets consumed and it makes food noises.
-    public static final Item ET32_BOTTLE = registerItem("ethanol32_bottle", new AlcoholDrinkItem(new FabricItemSettings().food(new FoodComponent.Builder().hunger(0).saturationModifier(0f).alwaysEdible().build()), 1));
-    public static final Item ET64_BOTTLE = registerItem("ethanol64_bottle", new AlcoholDrinkItem(new FabricItemSettings().food(new FoodComponent.Builder().hunger(0).saturationModifier(0f).alwaysEdible().build()), 2));
-    public static final Item ET95_BOTTLE = registerItem("ethanol95_bottle", new AlcoholDrinkItem(new FabricItemSettings().food(new FoodComponent.Builder().hunger(0).saturationModifier(0f).alwaysEdible().build()), 3));
+    public static final Item ET32_BOTTLE = registerItem("ethanol32_bottle", new AlcoholDrinkItem(new FabricItemSettings().recipeRemainder(Items.GLASS_BOTTLE).food(new FoodComponent.Builder().hunger(0).saturationModifier(0f).alwaysEdible().build()), 1));
+    public static final Item ET64_BOTTLE = registerItem("ethanol64_bottle", new AlcoholDrinkItem(new FabricItemSettings().recipeRemainder(Items.GLASS_BOTTLE).food(new FoodComponent.Builder().hunger(0).saturationModifier(0f).alwaysEdible().build()), 2));
+    public static final Item ET95_BOTTLE = registerItem("ethanol95_bottle", new AlcoholDrinkItem(new FabricItemSettings().recipeRemainder(Items.GLASS_BOTTLE).food(new FoodComponent.Builder().hunger(0).saturationModifier(0f).alwaysEdible().build()), 3));
 
     public static final Item STEROLS = registerItem("sterols", new Item(new FabricItemSettings()));
     public static final Item CRUDE_ESTRONE = registerItem("crude_estrone", new Item(new FabricItemSettings()));
