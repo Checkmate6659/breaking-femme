@@ -74,7 +74,7 @@ public class MaceratingSoyCauldronBlock extends AbstractCauldronBlock {
         return 3;
     }
 
-    //TODO: potentially turn into something good after a little while (random ticks, mb IntProperty for maceration start time)
+    //turn into sterol solution after a little while (random ticks, mb IntProperty for maceration start time)
     //optimal parameters for real sterol extraction from soybean: https://www.sciencedirect.com/science/article/pii/S2667010021002511
     //the real process takes about 2 hours, so here it should be 100 seconds, ie 2k ticks
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
