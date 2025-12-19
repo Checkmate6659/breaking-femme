@@ -15,31 +15,34 @@ import net.minecraft.entity.ItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import net.minecraft.world.event.GameEvent.Emitter;
 
 //https://maven.fabricmc.net/docs/fabric-api-0.88.2+1.20.2/net/fabricmc/fabric/api/transfer/v1/fluid/CauldronFluidContent.html
-public class MaceratingSoyCauldronBlock extends AbstractCauldronBlock {
+public class SterolSolutionCauldronBlock extends AbstractCauldronBlock {
     //custom cauldron behavior
     public static Map<Item, CauldronBehavior> BEHAVIOR = CauldronBehavior.createMap();
     static {
-        //vanilla fluids can replace this if needed
+        CauldronBehavior FILL = (state, world, pos, player, hand, stack) -> {
+            return CauldronBehavior.fillCauldron(world, pos, player, hand, stack, ModFluids.STEROL_SOLUTION_CAULDRON.getDefaultState(), SoundEvents.ITEM_BUCKET_EMPTY);
+        };
+
+        //vanilla fluids
+        CauldronBehavior.EMPTY_CAULDRON_BEHAVIOR.put(ModFluids.STEROL_SOLUTION_BUCKET, FILL);
+        CauldronBehavior.WATER_CAULDRON_BEHAVIOR.put(ModFluids.STEROL_SOLUTION_BUCKET, FILL);
+        CauldronBehavior.LAVA_CAULDRON_BEHAVIOR.put(ModFluids.STEROL_SOLUTION_BUCKET, FILL);
         CauldronBehavior.registerBucketBehavior(BEHAVIOR);
         BEHAVIOR.put(Items.BUCKET, (state, world, pos, player, hand, stack) -> {
-            if(world.isClient) //if bucketing out, recover the 64% ethanol and the soybeans
-                world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5f, pos.getY() + 0.125f, pos.getZ() + 0.5f, new ItemStack(ModItems.SOYBEANS)));
-            return CauldronBehavior.emptyCauldron(state, world, pos, player, hand, stack, new ItemStack(ModFluids.ET64_BUCKET), (statex) -> {
+            return CauldronBehavior.emptyCauldron(state, world, pos, player, hand, stack, new ItemStack(ModFluids.STEROL_SOLUTION_BUCKET), (statex) -> {
                 return true;
             }, SoundEvents.ITEM_BUCKET_FILL);
         });
     }
 
-    public MaceratingSoyCauldronBlock(AbstractBlock.Settings settings) {
+    public SterolSolutionCauldronBlock(AbstractBlock.Settings settings) {
         super(settings, BEHAVIOR);
     }
 
@@ -60,7 +63,7 @@ public class MaceratingSoyCauldronBlock extends AbstractCauldronBlock {
         BlockState blockState = Blocks.CAULDRON.getDefaultState();
         world.setBlockState(pos, blockState);
         world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, Emitter.of(blockState));
-        world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5f, pos.getY() + 0.125f, pos.getZ() + 0.5f, new ItemStack(ModItems.SOYBEANS)));
+        world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5f, pos.getY() + 0.125f, pos.getZ() + 0.5f, new ItemStack(ModItems.STEROLS)));
     }
 
     public boolean isFull(BlockState state) {
@@ -69,13 +72,5 @@ public class MaceratingSoyCauldronBlock extends AbstractCauldronBlock {
 
     public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
         return 3;
-    }
-
-    //TODO: potentially turn into something good after a little while (random ticks, mb IntProperty for maceration start time)
-    //optimal parameters for real sterol extraction from soybean: https://www.sciencedirect.com/science/article/pii/S2667010021002511
-    //the real process takes about 2 hours, so here it should be 100 seconds, ie 2k ticks
-    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if(random.nextInt(3) != 0) //theres a 2/3 chance of succeeding, which makes the expected value close to 100s at random tick speed 3
-            world.setBlockState(pos, ModFluids.STEROL_SOLUTION_CAULDRON.getDefaultState());
     }
 }

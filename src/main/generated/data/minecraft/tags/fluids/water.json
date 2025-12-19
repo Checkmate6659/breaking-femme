@@ -10,6 +10,8 @@
     "breakingfemme:ethanol64",
     "breakingfemme:flowing_ethanol64",
     "breakingfemme:ethanol95",
-    "breakingfemme:flowing_ethanol95"
+    "breakingfemme:flowing_ethanol95",
+    "breakingfemme:sterol_solution",
+    "breakingfemme:flowing_sterol_solution"
   ]
 }
