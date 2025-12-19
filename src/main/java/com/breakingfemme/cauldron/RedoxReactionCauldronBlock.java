@@ -2,6 +2,7 @@ package com.breakingfemme.cauldron;
 
 import java.util.Map;
 
+import com.breakingfemme.BreakingFemme;
 import com.breakingfemme.fluid.ModFluids;
 import com.breakingfemme.item.ModItems;
 
@@ -9,66 +10,39 @@ import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.AbstractCauldronBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.LeveledCauldronBlock;
 import net.minecraft.block.cauldron.CauldronBehavior;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import net.minecraft.world.event.GameEvent.Emitter;
 
 //https://maven.fabricmc.net/docs/fabric-api-0.88.2+1.20.2/net/fabricmc/fabric/api/transfer/v1/fluid/CauldronFluidContent.html
-public class CopperSulfateCauldronBlock extends AbstractCauldronBlock {
+public class RedoxReactionCauldronBlock extends AbstractCauldronBlock {
     //custom cauldron behavior
     public static Map<Item, CauldronBehavior> BEHAVIOR = CauldronBehavior.createMap();
     static {
-        CauldronBehavior FILL = (state, world, pos, player, hand, stack) -> {
-            return CauldronBehavior.fillCauldron(world, pos, player, hand, stack, ModFluids.COPPER_SULFATE_CAULDRON.getDefaultState(), SoundEvents.ITEM_BUCKET_EMPTY);
-        };
-
-        //vanilla fluids
-        CauldronBehavior.EMPTY_CAULDRON_BEHAVIOR.put(ModFluids.COPPER_SULFATE_BUCKET, FILL);
-        CauldronBehavior.WATER_CAULDRON_BEHAVIOR.put(ModFluids.COPPER_SULFATE_BUCKET, FILL);
-        CauldronBehavior.LAVA_CAULDRON_BEHAVIOR.put(ModFluids.COPPER_SULFATE_BUCKET, FILL);
+        //vanilla fluids can replace this if needed
         CauldronBehavior.registerBucketBehavior(BEHAVIOR);
         BEHAVIOR.put(Items.BUCKET, (state, world, pos, player, hand, stack) -> {
+            if(world.isClient) //if bucketing out, recover the copper sulfate and the pulverized nickel
+                world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5f, pos.getY() + 0.125f, pos.getZ() + 0.5f, new ItemStack(ModItems.PULVERIZED_NICKEL)));
             return CauldronBehavior.emptyCauldron(state, world, pos, player, hand, stack, new ItemStack(ModFluids.COPPER_SULFATE_BUCKET), (statex) -> {
                 return true;
             }, SoundEvents.ITEM_BUCKET_FILL);
         });
-
-        //dissolving copper sulfate in water
-        CauldronBehavior.WATER_CAULDRON_BEHAVIOR.put(ModItems.COPPER_SULFATE, (state, world, pos, player, hand, stack) -> {
-            if ((Integer)state.get(LeveledCauldronBlock.LEVEL) == 3)
-            {
-                player.getStackInHand(hand).decrement(1);
-                world.setBlockState(pos, ModFluids.COPPER_SULFATE_CAULDRON.getDefaultState());
-                world.playSound((PlayerEntity)null, pos, SoundEvents.ITEM_INK_SAC_USE, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                world.emitGameEvent((Entity)null, GameEvent.FLUID_PLACE, pos);
-                return ActionResult.success(world.isClient);
-            }
-            return ActionResult.PASS;
-        });
-
-        //dissolving pulverized nickel to make nickel sulfate
-        BEHAVIOR.put(ModItems.PULVERIZED_NICKEL, (state, world, pos, player, hand, stack) -> {
-            player.getStackInHand(hand).decrement(1);
-            world.setBlockState(pos, ModFluids.REDOX_REACTION_CAULDRON.getDefaultState());
-            world.playSound((PlayerEntity)null, pos, SoundEvents.ITEM_INK_SAC_USE, SoundCategory.BLOCKS, 1.0F, 1.0F);
-            world.emitGameEvent((Entity)null, GameEvent.FLUID_PLACE, pos);
-            return ActionResult.success(world.isClient);
-        });
     }
 
-    public CopperSulfateCauldronBlock(AbstractBlock.Settings settings) {
+    public RedoxReactionCauldronBlock(AbstractBlock.Settings settings) {
         super(settings, BEHAVIOR);
     }
 
@@ -89,7 +63,7 @@ public class CopperSulfateCauldronBlock extends AbstractCauldronBlock {
         BlockState blockState = Blocks.CAULDRON.getDefaultState();
         world.setBlockState(pos, blockState);
         world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, Emitter.of(blockState));
-        world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5f, pos.getY() + 0.125f, pos.getZ() + 0.5f, new ItemStack(ModItems.COPPER_SULFATE)));
+        world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5f, pos.getY() + 0.125f, pos.getZ() + 0.5f, new ItemStack(ModItems.PULVERIZED_NICKEL)));
     }
 
     public boolean isFull(BlockState state) {
@@ -98,5 +72,27 @@ public class CopperSulfateCauldronBlock extends AbstractCauldronBlock {
 
     public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
         return 3;
+    }
+
+    //wait for (slow, a bit faster than macerating soy) redox reaction
+    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+        //can only react if the block is hot (otherwise really slow lol, may bother to do it with a very small prob but eh)
+        if(world.getDimension().ultrawarm() || BreakingFemme.isBlockHot(world, pos.down()))
+        {
+            world.setBlockState(pos, ModFluids.NICKEL_SULFATE_CAULDRON.getDefaultState());
+            world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5f, pos.getY() + 0.125f, pos.getZ() + 0.5f, new ItemStack(ModItems.PULVERIZED_COPPER)));
+        }
+    }
+
+    //doing boiling effect when its hot
+    public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
+        if (world.getDimension().ultrawarm() || BreakingFemme.isBlockHot(world, pos.down())) {
+            if(random.nextInt(3) == 0)
+                world.playSound((double)pos.getX() + 0.5, (double)pos.getY() + 0.5, (double)pos.getZ() + 0.75, SoundEvents.BLOCK_BUBBLE_COLUMN_UPWARDS_AMBIENT, SoundCategory.BLOCKS, 192F + random.nextFloat() * 128F, random.nextFloat() * 0.7F + 0.6F, false);
+
+            for(int i = 0; i < random.nextInt(1) + 1; ++i) {
+                world.addParticle(ParticleTypes.BUBBLE_POP, (double)pos.getX() + 0.25F + random.nextFloat() * 0.5F, (double)pos.getY() + 0.9375, (double)pos.getZ() + 0.25F + random.nextFloat() * 0.5F, 0, 0.015625, 0);
+            }
+        }
     }
 }

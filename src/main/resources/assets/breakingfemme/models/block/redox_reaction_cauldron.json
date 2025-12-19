@@ -1,6 +1,6 @@
 {
     "parent": "breakingfemme:block/reaction_cauldron",
     "textures": {
-        "dust": "breakingfemme:block/soy_cauldron"
+        "dust": "breakingfemme:block/nickel_cauldron"
     }
 }
