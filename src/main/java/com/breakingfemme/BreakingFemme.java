@@ -3,8 +3,7 @@ package com.breakingfemme;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -14,6 +13,7 @@ import net.minecraft.loot.condition.KilledByPlayerLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.function.SetCountLootFunction;
 import net.minecraft.loot.provider.number.BinomialLootNumberProvider;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.village.TradeOffer;
@@ -24,6 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.breakingfemme.block.ModBlocks;
+import com.breakingfemme.datagen.ModBlockTagProvider;
 import com.breakingfemme.fluid.ModFluids;
 import com.breakingfemme.item.ModItems;
 
@@ -74,16 +75,11 @@ public class BreakingFemme implements ModInitializer {
 		});
 	}
 
-	//utility function
-	static final Block[] HOT_BLOCKS = {Blocks.FIRE, Blocks.SOUL_FIRE, Blocks.CAMPFIRE, Blocks.SOUL_CAMPFIRE, Blocks.LAVA, Blocks.MAGMA_BLOCK};
-
-	public static boolean is_block_hot(World world, BlockPos pos)
+	//basically, is the block in the hot category or is it a lit furnace
+	public static boolean isBlockHot(World world, BlockPos pos)
 	{
-		Block target = world.getBlockState(pos).getBlock();
-		for (Block block : HOT_BLOCKS) {
-			if (block == target)
-				return true;
-		}
-		return false;
+		BlockState state = world.getBlockState(pos);
+		return state.isIn(ModBlockTagProvider.HOT) || state.isIn(ModBlockTagProvider.CREATE_HOT) ||
+			(state.isIn(ModBlockTagProvider.FURNACE) && state.get(Properties.LIT));
 	}
 }

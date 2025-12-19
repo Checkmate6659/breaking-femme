@@ -2,6 +2,7 @@ package com.breakingfemme.cauldron;
 
 import java.util.Map;
 
+import com.breakingfemme.BreakingFemme;
 import com.breakingfemme.fluid.ModFluids;
 import com.breakingfemme.item.ModItems;
 
@@ -15,7 +16,9 @@ import net.minecraft.entity.ItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
@@ -75,7 +78,21 @@ public class MaceratingSoyCauldronBlock extends AbstractCauldronBlock {
     //optimal parameters for real sterol extraction from soybean: https://www.sciencedirect.com/science/article/pii/S2667010021002511
     //the real process takes about 2 hours, so here it should be 100 seconds, ie 2k ticks
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if(random.nextInt(3) != 0) //theres a 2/3 chance of succeeding, which makes the expected value close to 100s at random tick speed 3
+        //theres a 2/3 chance of succeeding, which makes the expected value close to 100s at random tick speed 3
+        //can only cook if the block is hot tho (or if its in the nether, free heating lol)
+        if(random.nextInt(3) != 0 && (world.getDimension().ultrawarm() || BreakingFemme.isBlockHot(world, pos.down())))
             world.setBlockState(pos, ModFluids.STEROL_SOLUTION_CAULDRON.getDefaultState());
+    }
+
+    //doing boiling effect when its hot
+    public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
+        if (world.getDimension().ultrawarm() || BreakingFemme.isBlockHot(world, pos.down())) {
+            if(random.nextInt(3) == 0)
+                world.playSound((double)pos.getX() + 0.5, (double)pos.getY() + 0.5, (double)pos.getZ() + 0.75, SoundEvents.BLOCK_BUBBLE_COLUMN_UPWARDS_AMBIENT, SoundCategory.BLOCKS, 192F + random.nextFloat() * 128F, random.nextFloat() * 0.7F + 0.6F, false);
+
+            for(int i = 0; i < random.nextInt(1) + 1; ++i) {
+                world.addParticle(ParticleTypes.BUBBLE_POP, (double)pos.getX() + 0.25F + random.nextFloat() * 0.5F, (double)pos.getY() + 0.9375, (double)pos.getZ() + 0.25F + random.nextFloat() * 0.5F, 0, 0.015625, 0);
+            }
+        }
     }
 }

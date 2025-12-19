@@ -48,7 +48,6 @@ public class ModItems {
         FabricItemGroup.builder().displayName(Text.translatable("itemgroup.breakingfemme"))
         .icon(() -> new ItemStack(ModItems.PURE_ESTRADIOL_CRYSTALS)).entries((displayContext, entries) -> {
             entries.add(SOYBEANS);
-            entries.add(STEROLS);
             entries.add(NICKEL_INGOT);
             entries.add(PULVERIZED_COPPER);
             entries.add(PULVERIZED_NICKEL);
@@ -62,6 +61,8 @@ public class ModItems {
             entries.add(ModFluids.ET32_BUCKET);
             entries.add(ModFluids.ET64_BUCKET);
             entries.add(ModFluids.ET95_BUCKET);
+            entries.add(STEROLS);
+            entries.add(ModFluids.STEROL_SOLUTION_BUCKET);
             entries.add(CRUDE_ESTRONE);
             entries.add(PURE_ESTRONE);
             entries.add(PURE_ESTRADIOL_CRYSTALS);
