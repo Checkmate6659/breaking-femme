@@ -22,6 +22,10 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
     public static final TagKey<Item> PULVERIZED_NICKEL = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "dusts/nickel"));
     public static final TagKey<Item> DRINK_BOTTLES = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "drink_containing/bottle"));
     public static final TagKey<Item> DRINKS = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "drinks"));
+    public static final TagKey<Item> MILK = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "milk"));
+    public static final TagKey<Item> MILK_BUCKET = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "buckets/milk"));
+    //TODO: do we accept bottles? if yes, how do we add farmersdelight:milk_bottles? its registered as c:foods/milk, alongside minecraft milk buckets, in common tags
+    public static final TagKey<Item> MILK_BOTTLE = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "milk_bottles")); //counts as 1/3 bucket; usefulfood:milkbottle
 
     public ModItemTagProvider(FabricDataOutput output, CompletableFuture<WrapperLookup> completableFuture) {
         super(output, completableFuture);
@@ -35,5 +39,7 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
         getOrCreateTagBuilder(PULVERIZED_NICKEL).add(ModItems.PULVERIZED_NICKEL);
         getOrCreateTagBuilder(DRINKS).add(ModItems.ET32_BOTTLE, ModItems.ET64_BOTTLE, ModItems.ET95_BOTTLE);
         getOrCreateTagBuilder(DRINK_BOTTLES).add(ModItems.ET32_BOTTLE, ModItems.ET64_BOTTLE, ModItems.ET95_BOTTLE);
+        getOrCreateTagBuilder(MILK).add(Items.MILK_BUCKET);
+        getOrCreateTagBuilder(MILK_BUCKET).add(Items.MILK_BUCKET);
     }
 }
