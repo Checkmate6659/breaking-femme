@@ -45,7 +45,15 @@ public class BreakingFemme implements ModInitializer {
 		ModBlocks.registerModBlocks();
 		ModFluids.registerModFluids();
 
-		//Farmers sell copper sulfate at level 2 (Novice is level 1)
+		//Farmers sell soybeans at level 1
+		TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 1, factories -> {
+			factories.add((entity, random) -> new TradeOffer(
+				new ItemStack(Items.EMERALD, 10), //10 emeralds for a singular bean... and you only get 3 of them.
+				new ItemStack(ModItems.SOYBEANS),
+				3, 3, 0.05f
+			));
+		});
+		//and copper sulfate at level 2
 		TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 2, factories -> {
 			factories.add((entity, random) -> new TradeOffer(
 				new ItemStack(Items.EMERALD, 5),
