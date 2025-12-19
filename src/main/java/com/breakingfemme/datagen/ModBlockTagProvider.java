@@ -15,7 +15,6 @@ import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 
-//TODO: wiki.fabricmc.net/community:common_tags
 public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
     //custom block tags (NOT in common tags)
     public static final TagKey<Block> HOT = TagKey.of(RegistryKeys.BLOCK, new Identifier("c", "hot"));
@@ -44,6 +43,8 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(BlockTags.AXE_MINEABLE).add(ModBlocks.FERMENTER_BOTTOM);
         getOrCreateTagBuilder(BlockTags.AXE_MINEABLE).add(ModBlocks.FERMENTER_MIXER);
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModBlocks.FERMENTER_MIXER);
+
+        //conventional tags
 
         //custom block tags
         getOrCreateTagBuilder(HOT).add(Blocks.FIRE);

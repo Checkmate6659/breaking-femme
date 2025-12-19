@@ -7,13 +7,13 @@
       "tag": "minecraft:sand"
     },
     {
-      "item": "breakingfemme:nickel_ingot"
+      "tag": "c:ingots/nickel"
     },
     {
-      "item": "breakingfemme:nickel_ingot"
+      "tag": "c:ingots/nickel"
     },
     {
-      "item": "breakingfemme:nickel_ingot"
+      "tag": "c:ingots/nickel"
     }
   ],
   "result": {

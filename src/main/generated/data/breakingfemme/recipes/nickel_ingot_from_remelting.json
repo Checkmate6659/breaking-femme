@@ -3,9 +3,8 @@
   "category": "misc",
   "cookingtime": 200,
   "experience": 0.0,
-  "group": "copper_ingot",
   "ingredient": {
-    "item": "breakingfemme:pulverized_copper"
+    "tag": "c:dusts/nickel"
   },
-  "result": "minecraft:copper_ingot"
+  "result": "breakingfemme:nickel_ingot"
 }

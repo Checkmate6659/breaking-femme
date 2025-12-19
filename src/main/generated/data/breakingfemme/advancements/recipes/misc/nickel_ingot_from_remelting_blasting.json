@@ -1,13 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_pulverized_copper": {
+    "has_pulverized_nickel": {
       "conditions": {
         "items": [
           {
-            "items": [
-              "breakingfemme:pulverized_copper"
-            ]
+            "tag": "c:dusts/nickel"
           }
         ]
       },
@@ -15,20 +13,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:copper_ingot_from_blasting_pulverized_copper"
+        "recipe": "minecraft:nickel_ingot_from_remelting_blasting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_pulverized_copper",
+      "has_pulverized_nickel",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:copper_ingot_from_blasting_pulverized_copper"
+      "minecraft:nickel_ingot_from_remelting_blasting"
     ]
   },
   "sends_telemetry_event": false

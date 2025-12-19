@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "breakingfemme:pulverized_nickel"
-            ]
+            "tag": "c:dusts/nickel"
           }
         ]
       },
@@ -15,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:nickel_ingot_from_smelting_pulverized_nickel"
+        "recipe": "minecraft:nickel_ingot_from_remelting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:nickel_ingot_from_smelting_pulverized_nickel"
+      "minecraft:nickel_ingot_from_remelting"
     ]
   },
   "sends_telemetry_event": false

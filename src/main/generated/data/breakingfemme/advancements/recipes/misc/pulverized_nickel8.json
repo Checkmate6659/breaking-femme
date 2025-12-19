@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "breakingfemme:nickel_ingot"
-            ]
+            "tag": "c:ingots/nickel"
           }
         ]
       },

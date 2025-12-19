@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "breakingfemme:pulverized_copper"
-            ]
+            "tag": "c:dusts/copper"
           }
         ]
       },
@@ -15,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:copper_ingot_from_smelting_pulverized_copper"
+        "recipe": "minecraft:copper_ingot_from_remelting_blasting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:copper_ingot_from_smelting_pulverized_copper"
+      "minecraft:copper_ingot_from_remelting_blasting"
     ]
   },
   "sends_telemetry_event": false

@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "breakingfemme:ethanol32_bottle",
+    "breakingfemme:ethanol64_bottle",
+    "breakingfemme:ethanol95_bottle"
+  ]
+}

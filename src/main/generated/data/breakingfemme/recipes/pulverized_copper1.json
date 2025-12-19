@@ -7,7 +7,7 @@
       "tag": "minecraft:sand"
     },
     {
-      "item": "minecraft:copper_ingot"
+      "tag": "c:ingots/copper"
     }
   ],
   "result": {
