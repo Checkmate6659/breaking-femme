@@ -28,6 +28,8 @@ public class ModFluidTagProvider extends FabricTagProvider.FluidTagProvider {
         getOrCreateTagBuilder(FluidTags.WATER).add(ModFluids.FLOWING_ET95);
         getOrCreateTagBuilder(FluidTags.WATER).add(ModFluids.STILL_STEROL_SOLUTION);
         getOrCreateTagBuilder(FluidTags.WATER).add(ModFluids.FLOWING_STEROL_SOLUTION);
+        getOrCreateTagBuilder(FluidTags.WATER).add(ModFluids.STILL_ANDROSTADIENEDIONE);
+        getOrCreateTagBuilder(FluidTags.WATER).add(ModFluids.FLOWING_ANDROSTADIENEDIONE);
         //AUTOGENERATION LABEL DO NOT TOUCH
-    }
+}
 }

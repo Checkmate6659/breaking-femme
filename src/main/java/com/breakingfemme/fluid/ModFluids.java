@@ -11,8 +11,9 @@ import com.breakingfemme.cauldron.Et95CauldronBlock;
 import com.breakingfemme.cauldron.MaceratingSoyCauldronBlock;
 import com.breakingfemme.cauldron.NickelSulfateCauldronBlock;
 import com.breakingfemme.cauldron.RedoxReactionCauldronBlock;
-//AUTOGENERATION LABEL DO NOT TOUCH
 
+import com.breakingfemme.cauldron.AndrostadienedioneCauldronBlock;
+//AUTOGENERATION LABEL DO NOT TOUCH
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.transfer.v1.fluid.CauldronFluidContent;
@@ -78,10 +79,13 @@ public class ModFluids {
     public static Item STEROL_SOLUTION_BUCKET;
     public static Block STEROL_SOLUTION_CAULDRON;
 
+    public static FlowableFluid STILL_ANDROSTADIENEDIONE;
+    public static FlowableFluid FLOWING_ANDROSTADIENEDIONE;
+    public static Block ANDROSTADIENEDIONE_FLUID_BLOCK;
+    public static Item ANDROSTADIENEDIONE_BUCKET;
+    public static Block ANDROSTADIENEDIONE_CAULDRON;
     //AUTOGENERATION LABEL DO NOT TOUCH
-
-
-    public static void registerModFluids()
+public static void registerModFluids()
     {
         //Copper sulfate solution
         STILL_COPPER_SULFATE = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "copper_sulfate_solution"),
@@ -143,9 +147,17 @@ public class ModFluids {
         STEROL_SOLUTION_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "sterol_solution_bucket"),
             new SolutionBucketItem(STILL_STEROL_SOLUTION, ModItems.STEROLS, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
-        //AUTOGENERATION LABEL DO NOT TOUCH
+        STILL_ANDROSTADIENEDIONE = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "androstadienedione_solution"),
+            new AndrostadienedioneFluid.Still());
+        FLOWING_ANDROSTADIENEDIONE = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_androstadienedione_solution"),
+            new AndrostadienedioneFluid.Flowing());
+        ANDROSTADIENEDIONE_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "androstadienedione_solution_block"),
+            new FluidBlock(STILL_ANDROSTADIENEDIONE, FabricBlockSettings.copyOf(Blocks.WATER)){});
+        ANDROSTADIENEDIONE_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "androstadienedione_solution_bucket"),
+            new BucketItem(STILL_ANDROSTADIENEDIONE, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
-        //cauldron fluid content registrations (need to be done after everything else fluid-related)
+        //AUTOGENERATION LABEL DO NOT TOUCH
+//cauldron fluid content registrations (need to be done after everything else fluid-related)
         //https://maven.fabricmc.net/docs/fabric-api-0.88.2+1.20.2/net/fabricmc/fabric/api/transfer/v1/fluid/CauldronFluidContent.html
         MACERATING_SOY_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "macerating_soy_cauldron"), new MaceratingSoyCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
         REDOX_REACTION_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "redox_reaction_cauldron"), new RedoxReactionCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
@@ -161,6 +173,8 @@ public class ModFluids {
         CauldronFluidContent.registerCauldron(ET95_CAULDRON, STILL_ET95, FluidConstants.BOTTLE, Et95CauldronBlock.LEVEL);
         STEROL_SOLUTION_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "sterol_solution_cauldron"), new SterolSolutionCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
         CauldronFluidContent.registerCauldron(STEROL_SOLUTION_CAULDRON, STILL_STEROL_SOLUTION, FluidConstants.BUCKET, null);
+        ANDROSTADIENEDIONE_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "androstadienedione_solution_cauldron"), new AndrostadienedioneCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
+        CauldronFluidContent.registerCauldron(ANDROSTADIENEDIONE_CAULDRON, STILL_ANDROSTADIENEDIONE, FluidConstants.BUCKET, null);
         //AUTOGENERATION LABEL DO NOT TOUCH
-    }
+}
 }
