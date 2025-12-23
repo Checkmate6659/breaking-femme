@@ -119,6 +119,8 @@ public class BreakingFemmeClient implements ClientModInitializer {
                 return 0xC0C87AB4;
             return -1;
         }, ModFluids.STEROL_SOLUTION_CAULDRON);
+
+        //androstadienedione solution
         FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.STILL_ANDROSTADIENEDIONE, ModFluids.FLOWING_ANDROSTADIENEDIONE,
             new SimpleFluidRenderHandler(
                 new Identifier("minecraft:block/water_still"),
@@ -132,6 +134,20 @@ public class BreakingFemmeClient implements ClientModInitializer {
             return -1;
         }, ModFluids.ANDROSTADIENEDIONE_CAULDRON);
 
+        //tar solution
+        FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.STILL_TAR, ModFluids.FLOWING_TAR,
+            new SimpleFluidRenderHandler(
+                new Identifier("minecraft:block/water_still"),
+                new Identifier("minecraft:block/water_flow"),
+                0xFF080808)
+        );
+        BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getCutout(), ModFluids.STILL_TAR, ModFluids.FLOWING_TAR);
+        ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
+            if (i == 0)
+                return 0xFF111111;
+            return -1;
+        }, ModFluids.TAR_CAULDRON);
+
         //AUTOGENERATION LABEL DO NOT TOUCH
-}
+    }
 }

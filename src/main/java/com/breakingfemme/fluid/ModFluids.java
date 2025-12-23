@@ -12,9 +12,10 @@ import com.breakingfemme.cauldron.Et95CauldronBlock;
 import com.breakingfemme.cauldron.MaceratingSoyCauldronBlock;
 import com.breakingfemme.cauldron.NickelSulfateCauldronBlock;
 import com.breakingfemme.cauldron.RedoxReactionCauldronBlock;
-
 import com.breakingfemme.cauldron.AndrostadienedioneCauldronBlock;
+import com.breakingfemme.cauldron.TarCauldronBlock;
 //AUTOGENERATION LABEL DO NOT TOUCH
+
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.transfer.v1.fluid.CauldronFluidContent;
@@ -85,7 +86,15 @@ public class ModFluids {
     public static Block ANDROSTADIENEDIONE_FLUID_BLOCK;
     public static Item ANDROSTADIENEDIONE_BUCKET;
     public static Block ANDROSTADIENEDIONE_CAULDRON;
+    
+
+    public static FlowableFluid STILL_TAR;
+    public static FlowableFluid FLOWING_TAR;
+    public static Block TAR_FLUID_BLOCK;
+    public static Item TAR_BUCKET;
+    public static Block TAR_CAULDRON;
     //AUTOGENERATION LABEL DO NOT TOUCH
+
 public static void registerModFluids()
     {
         //Copper sulfate solution
@@ -158,7 +167,18 @@ public static void registerModFluids()
         ANDROSTADIENEDIONE_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "androstadienedione_solution_bucket"),
             new BucketItem(STILL_ANDROSTADIENEDIONE, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
+        //Coal tar
+        STILL_TAR = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "tar"),
+            new TarFluid.Still());
+        FLOWING_TAR = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_tar"),
+            new TarFluid.Flowing());
+        TAR_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "tar_block"),
+            new FluidBlock(STILL_TAR, FabricBlockSettings.copyOf(Blocks.WATER)){});
+        TAR_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "tar_bucket"),
+            new BucketItem(STILL_TAR, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
+
         //AUTOGENERATION LABEL DO NOT TOUCH
+
 
         //cauldron fluid content registrations (need to be done after everything else fluid-related)
         //https://maven.fabricmc.net/docs/fabric-api-0.88.2+1.20.2/net/fabricmc/fabric/api/transfer/v1/fluid/CauldronFluidContent.html
@@ -178,6 +198,8 @@ public static void registerModFluids()
         CauldronFluidContent.registerCauldron(STEROL_SOLUTION_CAULDRON, STILL_STEROL_SOLUTION, FluidConstants.BUCKET, null);
         ANDROSTADIENEDIONE_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "androstadienedione_solution_cauldron"), new AndrostadienedioneCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
         CauldronFluidContent.registerCauldron(ANDROSTADIENEDIONE_CAULDRON, STILL_ANDROSTADIENEDIONE, FluidConstants.BUCKET, null);
+        TAR_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "tar_cauldron"), new TarCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
+        CauldronFluidContent.registerCauldron(TAR_CAULDRON, STILL_TAR, FluidConstants.BUCKET, null);
         //AUTOGENERATION LABEL DO NOT TOUCH
-}
+    }
 }
