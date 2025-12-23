@@ -45,7 +45,7 @@ public class NickelSulfateCauldronBlock extends AbstractCauldronBlock {
             }, SoundEvents.ITEM_BUCKET_FILL);
         });
 
-        //dissolving copper sulfate in water
+        //dissolving nickel sulfate in water
         CauldronBehavior.WATER_CAULDRON_BEHAVIOR.put(ModItems.NICKEL_SULFATE, (state, world, pos, player, hand, stack) -> {
             if ((Integer)state.get(LeveledCauldronBlock.LEVEL) == 3)
             {
