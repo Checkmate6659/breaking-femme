@@ -1,5 +1,7 @@
 package com.breakingfemme.fluid;
 
+import java.util.Optional;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -8,6 +10,8 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.item.Item;
 import net.minecraft.registry.tag.FluidTags;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
@@ -65,6 +69,10 @@ public abstract class Et64Fluid extends FlowableFluid {
     protected float getBlastResistance()
     {
         return 100f;
+    }
+
+    public Optional<SoundEvent> getBucketFillSound() {
+       return Optional.of(SoundEvents.ITEM_BUCKET_FILL);
     }
 
     @Override
