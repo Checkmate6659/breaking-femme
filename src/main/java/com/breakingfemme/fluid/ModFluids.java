@@ -1,6 +1,7 @@
 package com.breakingfemme.fluid;
 
 import com.breakingfemme.BreakingFemme;
+import com.breakingfemme.block.AndrostadienedioneBlock;
 import com.breakingfemme.item.ModItems;
 import com.breakingfemme.item.SolutionBucketItem;
 import com.breakingfemme.cauldron.SterolSolutionCauldronBlock;
@@ -147,17 +148,19 @@ public static void registerModFluids()
         STEROL_SOLUTION_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "sterol_solution_bucket"),
             new SolutionBucketItem(STILL_STEROL_SOLUTION, ModItems.STEROLS, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
+        //Androstadienedione solution
         STILL_ANDROSTADIENEDIONE = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "androstadienedione_solution"),
             new AndrostadienedioneFluid.Still());
         FLOWING_ANDROSTADIENEDIONE = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_androstadienedione_solution"),
             new AndrostadienedioneFluid.Flowing());
         ANDROSTADIENEDIONE_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "androstadienedione_solution_block"),
-            new FluidBlock(STILL_ANDROSTADIENEDIONE, FabricBlockSettings.copyOf(Blocks.WATER)){});
+            new AndrostadienedioneBlock(STILL_ANDROSTADIENEDIONE, FabricBlockSettings.copyOf(Blocks.WATER)){});
         ANDROSTADIENEDIONE_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "androstadienedione_solution_bucket"),
             new BucketItem(STILL_ANDROSTADIENEDIONE, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
         //AUTOGENERATION LABEL DO NOT TOUCH
-//cauldron fluid content registrations (need to be done after everything else fluid-related)
+
+        //cauldron fluid content registrations (need to be done after everything else fluid-related)
         //https://maven.fabricmc.net/docs/fabric-api-0.88.2+1.20.2/net/fabricmc/fabric/api/transfer/v1/fluid/CauldronFluidContent.html
         MACERATING_SOY_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "macerating_soy_cauldron"), new MaceratingSoyCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
         REDOX_REACTION_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "redox_reaction_cauldron"), new RedoxReactionCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
