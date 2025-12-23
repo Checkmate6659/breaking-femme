@@ -33,6 +33,7 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModFluids.ET64_CAULDRON, Blocks.CAULDRON);
         addDrop(ModFluids.ET95_CAULDRON, Blocks.CAULDRON);
         addDrop(ModFluids.STEROL_SOLUTION_CAULDRON, Blocks.CAULDRON);
+        //AUTOGENERATION LABEL DO NOT TOUCH
 
         addDrop(ModBlocks.FERMENTER_PANEL);
         addDrop(ModBlocks.FERMENTER_TOP);

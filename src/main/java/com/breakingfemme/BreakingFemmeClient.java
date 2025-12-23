@@ -119,5 +119,7 @@ public class BreakingFemmeClient implements ClientModInitializer {
                 return 0xC0C87AB4;
             return -1;
         }, ModFluids.STEROL_SOLUTION_CAULDRON);
+
+        //AUTOGENERATION LABEL DO NOT TOUCH
     }
 }

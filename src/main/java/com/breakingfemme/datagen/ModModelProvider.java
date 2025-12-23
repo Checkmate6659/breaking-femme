@@ -50,6 +50,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModFluids.ET64_BUCKET, Models.GENERATED);
         itemModelGenerator.register(ModFluids.ET95_BUCKET, Models.GENERATED);
         itemModelGenerator.register(ModFluids.STEROL_SOLUTION_BUCKET, Models.GENERATED);
+        //AUTOGENERATION LABEL DO NOT TOUCH
 
         //fermenter
         itemModelGenerator.register(ModBlocks.FERMENTER_PANEL.asItem(), Models.GENERATED);
