@@ -77,6 +77,8 @@ public class ModFluids {
     public static Item STEROL_SOLUTION_BUCKET;
     public static Block STEROL_SOLUTION_CAULDRON;
 
+    //AUTOGENERATION LABEL DO NOT TOUCH
+
 
     public static void registerModFluids()
     {
