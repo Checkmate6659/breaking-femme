@@ -13,11 +13,12 @@ import net.minecraft.util.Identifier;
 
 public class ModBlocks {
     public static final Block SOY_CROP = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "soy"), new SoyCropBlock(FabricBlockSettings.copyOf(Blocks.WHEAT)));
-    public static final Block FERMENTER_PANEL = registerBlock("fermenter_panel", new FermenterPanelBlock(FabricBlockSettings.copyOf(Blocks.SPRUCE_TRAPDOOR)));
-    public static final Block FERMENTER_TOP = registerBlock("fermenter_top", new FermenterTopBlock(FabricBlockSettings.copyOf(Blocks.SPRUCE_TRAPDOOR)));
-    public static final Block FERMENTER_BOTTOM = registerBlock("fermenter_bottom", new FermenterBottomBlock(FabricBlockSettings.copyOf(Blocks.SPRUCE_TRAPDOOR)));
-    public static final Block FERMENTER_MIXER = registerBlock("fermenter_mixer", new FermenterMixerBlock(FabricBlockSettings.copyOf(Blocks.SPRUCE_TRAPDOOR)));
-    public static final Block FERMENTER_HEATER = registerBlock("fermenter_heater", new FermenterHeaterBlock(FabricBlockSettings.copyOf(Blocks.SPRUCE_TRAPDOOR)));
+    public static final Block FERMENTER_CONTROLLER = registerBlock("fermenter_controller", new FermenterControllerBlock(FabricBlockSettings.copyOf(Blocks.SPRUCE_PLANKS)));
+    public static final Block FERMENTER_PANEL = registerBlock("fermenter_panel", new FermenterPanelBlock(FabricBlockSettings.copyOf(Blocks.SPRUCE_PLANKS)));
+    public static final Block FERMENTER_TOP = registerBlock("fermenter_top", new FermenterTopBlock(FabricBlockSettings.copyOf(Blocks.SPRUCE_PLANKS)));
+    public static final Block FERMENTER_BOTTOM = registerBlock("fermenter_bottom", new FermenterBottomBlock(FabricBlockSettings.copyOf(Blocks.SPRUCE_PLANKS)));
+    public static final Block FERMENTER_MIXER = registerBlock("fermenter_mixer", new FermenterMixerBlock(FabricBlockSettings.copyOf(Blocks.SPRUCE_PLANKS)));
+    public static final Block FERMENTER_HEATER = registerBlock("fermenter_heater", new FermenterHeaterBlock(FabricBlockSettings.copyOf(Blocks.SPRUCE_PLANKS)));
 
     //register block and item
     private static final Block registerBlock(String name, Block block)

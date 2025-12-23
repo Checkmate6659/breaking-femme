@@ -41,5 +41,7 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.FERMENTER_TOP);
         addDrop(ModBlocks.FERMENTER_BOTTOM);
         addDrop(ModBlocks.FERMENTER_MIXER);
+        addDrop(ModBlocks.FERMENTER_HEATER);
+        addDrop(ModBlocks.FERMENTER_CONTROLLER);
     }
 }

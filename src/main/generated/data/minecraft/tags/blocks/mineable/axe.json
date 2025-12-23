@@ -4,6 +4,8 @@
     "breakingfemme:fermenter_panel",
     "breakingfemme:fermenter_top",
     "breakingfemme:fermenter_bottom",
-    "breakingfemme:fermenter_mixer"
+    "breakingfemme:fermenter_mixer",
+    "breakingfemme:fermenter_heater",
+    "breakingfemme:fermenter_controller"
   ]
 }

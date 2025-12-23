@@ -2,42 +2,55 @@ package com.breakingfemme.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.block.Waterloggable;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
-public class FermenterMixerBlock extends Block implements Waterloggable {
+//block entity tutorial
+//https://www.youtube.com/watch?v=Y4dK9ETdZCQ
+public class FermenterControllerBlock extends HorizontalFacingBlock implements Waterloggable {
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
-    public static final BooleanProperty POWERED = Properties.POWERED;
+    protected static final VoxelShape EAST_SHAPE;
+    protected static final VoxelShape WEST_SHAPE;
+    protected static final VoxelShape SOUTH_SHAPE;
+    protected static final VoxelShape NORTH_SHAPE;
 
-    public FermenterMixerBlock(Settings settings) {
+    public FermenterControllerBlock(Settings settings) {
         super(settings);
-        this.setDefaultState(this.stateManager.getDefaultState().with(POWERED, false).with(WATERLOGGED, false));
+        this.setDefaultState(this.stateManager.getDefaultState().with(FACING, Direction.NORTH).with(WATERLOGGED, false));
     }
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder)
     {
-        builder.add(POWERED);
+        builder.add(FACING);
         builder.add(WATERLOGGED);
     }
 
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 5.0, 16.0);
+        switch ((Direction)state.get(FACING)) {
+        case NORTH:
+        default:
+            return NORTH_SHAPE;
+        case SOUTH:
+            return SOUTH_SHAPE;
+        case WEST:
+            return WEST_SHAPE;
+        case EAST:
+            return EAST_SHAPE;
+        }
     }
 
     public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
@@ -45,9 +58,10 @@ public class FermenterMixerBlock extends Block implements Waterloggable {
     }
 
     public BlockState getPlacementState(ItemPlacementContext ctx) {
+        BlockState blockState = this.getDefaultState();
         FluidState fluidState = ctx.getWorld().getFluidState(ctx.getBlockPos());
-        return this.getDefaultState().with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER)
-            .with(POWERED, ctx.getWorld().isReceivingRedstonePower(ctx.getBlockPos()));
+        blockState = blockState.with(FACING, ctx.getHorizontalPlayerFacing().getOpposite());
+        return (BlockState)blockState.with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
     }
 
     //copied over from trapdoor
@@ -63,23 +77,10 @@ public class FermenterMixerBlock extends Block implements Waterloggable {
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
-    //code copied over from redstone lamp
-    public void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify) {
-        if (!world.isClient) {
-            boolean bl = (Boolean)state.get(POWERED);
-            if (bl != world.isReceivingRedstonePower(pos)) {
-                if (bl) {
-                    world.scheduleBlockTick(pos, this, 1);
-                } else {
-                    world.setBlockState(pos, (BlockState)state.cycle(POWERED), 2); //why are flags 2? what do flags mean?
-                }
-            }
-        }
-    }
-
-    public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if ((Boolean)state.get(POWERED) && !world.isReceivingRedstonePower(pos)) {
-            world.setBlockState(pos, (BlockState)state.cycle(POWERED), 2);
-        }
+    static {
+        EAST_SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 3.0, 16.0, 16.0);
+        WEST_SHAPE = Block.createCuboidShape(13.0, 0.0, 0.0, 16.0, 16.0, 16.0);
+        SOUTH_SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 16.0, 3.0);
+        NORTH_SHAPE = Block.createCuboidShape(0.0, 0.0, 13.0, 16.0, 16.0, 16.0);
     }
 }
