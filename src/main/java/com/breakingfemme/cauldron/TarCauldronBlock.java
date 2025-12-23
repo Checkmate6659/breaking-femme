@@ -16,6 +16,7 @@ import net.minecraft.item.Items;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import net.minecraft.world.event.GameEvent.Emitter;
@@ -52,19 +53,9 @@ public class TarCauldronBlock extends AbstractCauldronBlock {
     }
 
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        if (!world.isClient && entity.isOnFire() && this.isEntityTouchingFluid(state, pos, entity)) {
-            entity.extinguish();
-            if (entity.canModifyAt(world, pos)) {
-                this.onFireCollision(state, world, pos);
-            }
+        if (this.isEntityTouchingFluid(state, pos, entity)) {
+            entity.slowMovement(state, new Vec3d(0.0625, 0.015625, 0.0625)); //the state parameter is complete bogus here btw, not even used
         }
-    }
-
-    protected void onFireCollision(BlockState state, World world, BlockPos pos) { //if on fire, consume fluid from the cauldron, and grab dust
-        BlockState blockState = Blocks.CAULDRON.getDefaultState();
-        world.setBlockState(pos, blockState);
-        world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, Emitter.of(blockState));
-        //world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5f, pos.getY() + 0.125f, pos.getZ() + 0.5f, new ItemStack(ModItems.TAR)));
     }
 
     public boolean isFull(BlockState state) {

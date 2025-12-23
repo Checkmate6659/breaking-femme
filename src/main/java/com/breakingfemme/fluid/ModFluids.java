@@ -2,6 +2,7 @@ package com.breakingfemme.fluid;
 
 import com.breakingfemme.BreakingFemme;
 import com.breakingfemme.block.AndrostadienedioneBlock;
+import com.breakingfemme.block.TarBlock;
 import com.breakingfemme.item.ModItems;
 import com.breakingfemme.item.SolutionBucketItem;
 import com.breakingfemme.cauldron.SterolSolutionCauldronBlock;
@@ -81,13 +82,14 @@ public class ModFluids {
     public static Item STEROL_SOLUTION_BUCKET;
     public static Block STEROL_SOLUTION_CAULDRON;
 
+    //Androstadienedione solution
     public static FlowableFluid STILL_ANDROSTADIENEDIONE;
     public static FlowableFluid FLOWING_ANDROSTADIENEDIONE;
     public static Block ANDROSTADIENEDIONE_FLUID_BLOCK;
     public static Item ANDROSTADIENEDIONE_BUCKET;
     public static Block ANDROSTADIENEDIONE_CAULDRON;
     
-
+    //Liquid tar
     public static FlowableFluid STILL_TAR;
     public static FlowableFluid FLOWING_TAR;
     public static Block TAR_FLUID_BLOCK;
@@ -167,13 +169,13 @@ public static void registerModFluids()
         ANDROSTADIENEDIONE_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "androstadienedione_solution_bucket"),
             new BucketItem(STILL_ANDROSTADIENEDIONE, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
-        //Coal tar
+        //Liquid tar
         STILL_TAR = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "tar"),
             new TarFluid.Still());
         FLOWING_TAR = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_tar"),
             new TarFluid.Flowing());
         TAR_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "tar_block"),
-            new FluidBlock(STILL_TAR, FabricBlockSettings.copyOf(Blocks.WATER)){});
+            new TarBlock(STILL_TAR, FabricBlockSettings.copyOf(Blocks.WATER)){});
         TAR_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "tar_bucket"),
             new BucketItem(STILL_TAR, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
