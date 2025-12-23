@@ -91,6 +91,7 @@ public class BreakingFemme implements ModInitializer {
         FuelRegistry.INSTANCE.add(ModItems.ET64_BOTTLE, 1200);
         FuelRegistry.INSTANCE.add(ModItems.ET32_BOTTLE, 600); //all the way down to 3 items for the worst concentration/quantity
         FuelRegistry.INSTANCE.add(ModFluids.TAR_BUCKET, 6400); //1 bucket of tar can cook 32 items
+        FuelRegistry.INSTANCE.add(ModItems.TAR, 800); //and a ball of tar is 4 items (worse than coal, so dont use tar for fuel)
 	}
 
 	//basically, is the block in the hot category or is it a lit furnace

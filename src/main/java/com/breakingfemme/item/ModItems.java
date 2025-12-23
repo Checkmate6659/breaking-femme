@@ -33,6 +33,8 @@ public class ModItems {
     public static final Item ET64_BOTTLE = registerItem("ethanol64_bottle", new AlcoholDrinkItem(new FabricItemSettings().recipeRemainder(Items.GLASS_BOTTLE).food(new FoodComponent.Builder().hunger(0).saturationModifier(0f).alwaysEdible().build()), 2));
     public static final Item ET95_BOTTLE = registerItem("ethanol95_bottle", new AlcoholDrinkItem(new FabricItemSettings().recipeRemainder(Items.GLASS_BOTTLE).food(new FoodComponent.Builder().hunger(0).saturationModifier(0f).alwaysEdible().build()), 3));
 
+    public static final Item TAR = registerItem("tar", new Item(new FabricItemSettings()));
+
     public static final Item STEROLS = registerItem("sterols", new Item(new FabricItemSettings()));
     public static final Item CRUDE_ESTRONE = registerItem("crude_estrone", new Item(new FabricItemSettings()));
     public static final Item PURE_ESTRONE = registerItem("pure_estrone", new Item(new FabricItemSettings()));
@@ -62,6 +64,7 @@ public class ModItems {
             entries.add(ModFluids.ET32_BUCKET);
             entries.add(ModFluids.ET64_BUCKET);
             entries.add(ModFluids.ET95_BUCKET);
+            entries.add(TAR);
             entries.add(ModFluids.TAR_BUCKET);
             entries.add(STEROLS);
             entries.add(ModFluids.STEROL_SOLUTION_BUCKET);

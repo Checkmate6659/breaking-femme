@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "tar_bucket",
+  "ingredients": [
+    {
+      "item": "minecraft:bucket"
+    },
+    {
+      "item": "breakingfemme:tar"
+    },
+    {
+      "item": "breakingfemme:tar"
+    },
+    {
+      "item": "breakingfemme:tar"
+    },
+    {
+      "item": "breakingfemme:tar"
+    },
+    {
+      "item": "breakingfemme:tar"
+    },
+    {
+      "item": "breakingfemme:tar"
+    },
+    {
+      "item": "breakingfemme:tar"
+    },
+    {
+      "item": "breakingfemme:tar"
+    }
+  ],
+  "result": {
+    "item": "breakingfemme:tar_bucket"
+  }
+}
