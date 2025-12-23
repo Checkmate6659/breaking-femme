@@ -2,22 +2,22 @@ package com.breakingfemme.cauldron;
 
 import java.util.Map;
 
+import com.breakingfemme.block.AndrostadienedioneBlock;
 import com.breakingfemme.fluid.ModFluids;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.AbstractCauldronBlock;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.cauldron.CauldronBehavior;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.event.GameEvent;
-import net.minecraft.world.event.GameEvent.Emitter;
 
 public class AndrostadienedioneCauldronBlock extends AbstractCauldronBlock {
     //custom cauldron behavior
@@ -48,19 +48,11 @@ public class AndrostadienedioneCauldronBlock extends AbstractCauldronBlock {
     }
 
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        if (!world.isClient && entity.isOnFire() && this.isEntityTouchingFluid(state, pos, entity)) {
-            entity.extinguish();
-            if (entity.canModifyAt(world, pos)) {
-                this.onFireCollision(state, world, pos);
-            }
+        if (!world.isClient && this.isEntityTouchingFluid(state, pos, entity) && entity.isPlayer()) {
+            entity.damage(new DamageSource( //https://en.wikipedia.org/wiki/Novikov_self-consistency_principle
+                world.getRegistryManager().get(RegistryKeys.DAMAGE_TYPE).entryOf(AndrostadienedioneBlock.NOVIKOV)), 37921489645.0f
+            );
         }
-    }
-
-    protected void onFireCollision(BlockState state, World world, BlockPos pos) { //if on fire, consume fluid from the cauldron, and grab dust
-        BlockState blockState = Blocks.CAULDRON.getDefaultState();
-        world.setBlockState(pos, blockState);
-        world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, Emitter.of(blockState));
-        //world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5f, pos.getY() + 0.125f, pos.getZ() + 0.5f, new ItemStack(ModItems.ANDROSTADIENEDIONE)));
     }
 
     public boolean isFull(BlockState state) {
