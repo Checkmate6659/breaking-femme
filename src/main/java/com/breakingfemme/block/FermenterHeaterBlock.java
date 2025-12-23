@@ -49,7 +49,8 @@ public class FermenterHeaterBlock extends Block implements Waterloggable {
 
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         FluidState fluidState = ctx.getWorld().getFluidState(ctx.getBlockPos());
-        return this.getDefaultState().with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
+        return this.getDefaultState().with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER)
+            .with(POWERED, ctx.getWorld().isReceivingRedstonePower(ctx.getBlockPos()));
     }
 
     //copied over from trapdoor

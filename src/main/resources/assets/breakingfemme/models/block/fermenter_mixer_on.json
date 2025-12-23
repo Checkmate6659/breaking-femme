@@ -3,7 +3,7 @@
 	"textures": {
 		"0": "breakingfemme:block/fermenter_element_base",
 		"1": "breakingfemme:block/fermenter_element_sides",
-		"2": "breakingfemme:block/mixer_top",
+		"2": "breakingfemme:block/mixer_top_on",
 		"particle": "minecraft:block/spruce_planks"
 	},
 	"elements": [

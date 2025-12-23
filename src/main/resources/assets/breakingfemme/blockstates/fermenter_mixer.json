@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "powered=false": {
       "model": "breakingfemme:block/fermenter_mixer"
+    },
+    "powered=true": {
+      "model": "breakingfemme:block/fermenter_mixer_on"
     }
   }
 }
