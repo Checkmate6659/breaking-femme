@@ -17,6 +17,7 @@ public class ModBlocks {
     public static final Block FERMENTER_TOP = registerBlock("fermenter_top", new FermenterTopBlock(FabricBlockSettings.copyOf(Blocks.SPRUCE_TRAPDOOR)));
     public static final Block FERMENTER_BOTTOM = registerBlock("fermenter_bottom", new FermenterBottomBlock(FabricBlockSettings.copyOf(Blocks.SPRUCE_TRAPDOOR)));
     public static final Block FERMENTER_MIXER = registerBlock("fermenter_mixer", new FermenterMixerBlock(FabricBlockSettings.copyOf(Blocks.SPRUCE_TRAPDOOR)));
+    public static final Block FERMENTER_HEATER = registerBlock("fermenter_heater", new FermenterHeaterBlock(FabricBlockSettings.copyOf(Blocks.SPRUCE_TRAPDOOR)));
 
     //register block and item
     private static final Block registerBlock(String name, Block block)

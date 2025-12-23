@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "fermenter_heater",
+  "key": {
+    "#": {
+      "item": "breakingfemme:fermenter_bottom"
+    },
+    "-": {
+      "item": "minecraft:magma_block"
+    },
+    "U": {
+      "item": "minecraft:quartz"
+    },
+    "w": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "pattern": [
+    " - ",
+    " # ",
+    "UwU"
+  ],
+  "result": {
+    "item": "breakingfemme:fermenter_heater"
+  },
+  "show_notification": true
+}

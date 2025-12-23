@@ -9,6 +9,7 @@ import com.breakingfemme.item.ModItems;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
+import net.minecraft.block.Blocks;
 import net.minecraft.data.server.recipe.CookingRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
@@ -52,6 +53,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         offerShapelessRecipe(exporter, ModBlocks.FERMENTER_BOTTOM.asItem(), ModBlocks.FERMENTER_TOP.asItem(), "fermenter_top_convert", 1);
         offerShapelessRecipe(exporter, ModBlocks.FERMENTER_TOP.asItem(), ModBlocks.FERMENTER_BOTTOM.asItem(), "fermenter_bottom_convert", 1);
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.FERMENTER_MIXER.asItem()).input('#', ModBlocks.FERMENTER_BOTTOM).input('-', Items.IRON_INGOT).input('w', Items.REDSTONE_TORCH).input('O', Items.REPEATER).pattern(" - ").pattern(" # ").pattern("OwO").group("fermenter_mixer").criterion(hasItem(Items.IRON_INGOT), conditionsFromItem(Items.IRON_INGOT)).offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.FERMENTER_HEATER.asItem()).input('#', ModBlocks.FERMENTER_BOTTOM).input('-', Blocks.MAGMA_BLOCK.asItem()).input('w', Items.REDSTONE).input('U', Items.QUARTZ).pattern(" - ").pattern(" # ").pattern("UwU").group("fermenter_heater").criterion(hasItem(Items.MAGMA_BLOCK), conditionsFromItem(Items.MAGMA_BLOCK)).offerTo(exporter);
 
         //coal tar (can only use coal, NOT wood/charcoal, as it's not the same chemicals irl, wood tar doesn't contain nearly as much benzene or naphthalene for instance)
         offerSmelting(exporter, List.of(Items.COAL), RecipeCategory.MISC, ModItems.TAR, 0, 200, "tar");

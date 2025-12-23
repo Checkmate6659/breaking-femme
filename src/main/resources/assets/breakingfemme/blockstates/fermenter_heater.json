@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "breakingfemme:block/fermenter_heater"
+    },
+    "powered=true": {
+      "model": "breakingfemme:block/fermenter_heater_on"
+    }
+  }
+}
