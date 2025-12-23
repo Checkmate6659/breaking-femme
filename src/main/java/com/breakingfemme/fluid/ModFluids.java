@@ -1,6 +1,8 @@
 package com.breakingfemme.fluid;
 
 import com.breakingfemme.BreakingFemme;
+import com.breakingfemme.item.ModItems;
+import com.breakingfemme.item.SolutionBucketItem;
 import com.breakingfemme.cauldron.SterolSolutionCauldronBlock;
 import com.breakingfemme.cauldron.CopperSulfateCauldronBlock;
 import com.breakingfemme.cauldron.Et32CauldronBlock;
@@ -9,8 +11,7 @@ import com.breakingfemme.cauldron.Et95CauldronBlock;
 import com.breakingfemme.cauldron.MaceratingSoyCauldronBlock;
 import com.breakingfemme.cauldron.NickelSulfateCauldronBlock;
 import com.breakingfemme.cauldron.RedoxReactionCauldronBlock;
-import com.breakingfemme.item.ModItems;
-import com.breakingfemme.item.SolutionBucketItem;
+//AUTOGENERATION LABEL DO NOT TOUCH
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
