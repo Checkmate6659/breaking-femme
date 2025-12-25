@@ -25,9 +25,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.breakingfemme.block.ModBlocks;
+import com.breakingfemme.block.entity.ModBlockEntities;
 import com.breakingfemme.datagen.ModBlockTagProvider;
 import com.breakingfemme.fluid.ModFluids;
 import com.breakingfemme.item.ModItems;
+import com.breakingfemme.screen.ModScreenHandlers;
 
 public class BreakingFemme implements ModInitializer {
 	public static final String MOD_ID = "breakingfemme";
@@ -44,6 +46,8 @@ public class BreakingFemme implements ModInitializer {
 		ModItems.registerModItems();
 		ModBlocks.registerModBlocks();
 		ModFluids.registerModFluids();
+		ModBlockEntities.registerBlockEntities();
+		ModScreenHandlers.registerScreenHandlers();
 
 		//Farmers sell soybeans at level 1
 		TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 1, factories -> {

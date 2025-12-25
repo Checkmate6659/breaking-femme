@@ -2,18 +2,24 @@ package com.breakingfemme;
 
 import com.breakingfemme.block.ModBlocks;
 import com.breakingfemme.fluid.ModFluids;
+import com.breakingfemme.screen.FermenterScreen;
+import com.breakingfemme.screen.ModScreenHandlers;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
+import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.util.Identifier;
 
 public class BreakingFemmeClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
+        //screens/screen handlers
+        HandledScreens.register(ModScreenHandlers.FERMENTER_SCREEN_HANDLER, FermenterScreen::new);
+
         //cutout blocks
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.SOY_CROP, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.FERMENTER_PANEL, RenderLayer.getCutout());
