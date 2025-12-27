@@ -42,6 +42,8 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.ET32_BOTTLE, Models.GENERATED);
         itemModelGenerator.register(ModItems.ET64_BOTTLE, Models.GENERATED);
         itemModelGenerator.register(ModItems.ET95_BOTTLE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.SKIMMED_MILK_BUCKET, Models.GENERATED);
+        itemModelGenerator.register(ModItems.MILKGOT, Models.GENERATED);
         itemModelGenerator.register(ModItems.TAR, Models.GENERATED);
 
         //buckets

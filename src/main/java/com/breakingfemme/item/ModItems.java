@@ -12,6 +12,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.item.MilkBucketItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
@@ -26,6 +27,9 @@ public class ModItems {
     public static final Item PULVERIZED_NICKEL = registerItem("pulverized_nickel", new Item(new FabricItemSettings()));
     public static final Item COPPER_SULFATE = registerItem("copper_sulfate", new Item(new FabricItemSettings()));
     public static final Item NICKEL_SULFATE = registerItem("nickel_sulfate", new Item(new FabricItemSettings()));
+
+    public static final Item SKIMMED_MILK_BUCKET = registerItem("skimmed_milk_bucket", new MilkBucketItem(new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
+    public static final Item MILKGOT = registerItem("milkgot", new Item(new FabricItemSettings()));
 
     //TODO: add drunkenness status effect and shader, of course using real research because that's the whole point of this mod.
     //also now the bottle gets consumed and it makes food noises.
@@ -68,6 +72,8 @@ public class ModItems {
             entries.add(ModFluids.TAR_BUCKET);
             entries.add(STEROLS);
             entries.add(ModFluids.STEROL_SOLUTION_BUCKET);
+            entries.add(SKIMMED_MILK_BUCKET);
+            entries.add(MILKGOT);
             entries.add(ModFluids.ANDROSTADIENEDIONE_BUCKET);
             entries.add(CRUDE_ESTRONE);
             entries.add(PURE_ESTRONE);
