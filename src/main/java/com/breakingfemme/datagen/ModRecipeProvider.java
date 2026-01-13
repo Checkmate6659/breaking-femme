@@ -58,5 +58,8 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         //coal tar (can only use coal, NOT wood/charcoal, as it's not the same chemicals irl, wood tar doesn't contain nearly as much benzene or naphthalene for instance)
         offerSmelting(exporter, List.of(Items.COAL), RecipeCategory.MISC, ModItems.TAR, 0, 200, "tar");
         ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ModFluids.TAR_BUCKET).input(Items.BUCKET).input(Ingredient.ofItems(ModItems.TAR), 8).group("tar_bucket").criterion(hasItem(ModItems.TAR), conditionsFromItem(ModItems.TAR)).offerTo(exporter, "tar_bucket");
+
+        //smelting skimmed milk powder into milkgot causes the bucket to disappear, kind of an issue.
+        //offerSmelting(exporter, List.of(ModItems.SKIMMED_MILK_BUCKET), RecipeCategory.MISC, ModItems.MILKGOT, 0, 200, "milkgot");
     }
 }
