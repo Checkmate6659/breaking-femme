@@ -15,6 +15,8 @@ public class FermenterScreen extends HandledScreen<FermenterScreenHandler> {
 
     public FermenterScreen(FermenterScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
+        backgroundHeight = 174; //this screen is slightly bigger
+        this.playerInventoryTitleY = this.backgroundHeight - 94;
     }
 
     @Override
@@ -35,15 +37,42 @@ public class FermenterScreen extends HandledScreen<FermenterScreenHandler> {
         int y = (height - backgroundHeight) / 2;
         context.drawTexture(TEXTURE, x, y, 0, 0, 176, backgroundHeight);
 
+        renderCapacity(context, x, y);
         renderProgress(context, x, y);
+        renderTemperature(context, x, y);
     }
 
+    //draw the little barrels showing multiblock capacity
+    private void renderCapacity(DrawContext ctx, int x, int y)
+    {
+        int cap = handler.nBarrels();
+        for(int i = 0; i < 4 && i < cap; i++) //safety measure: do not draw more than 4 (is it necessary?)
+        {
+            //draw the barrel the right number of times, from bottom to top
+            ctx.drawTexture(TEXTURE, x + 79, y + 69 - i * 18, 210, 0, 11, 16);
+        }
+    }
+
+    //draw the thermometer
+    private void renderTemperature(DrawContext ctx, int x, int y)
+    {
+        int height = handler.getThermometerHeight();
+        //draw the bottom part of the red overlay
+        ctx.drawTexture(TEXTURE, x + 8, y + height, 240, height, 16, 71); //71: max thermometer height (excluding tip); is not drawing a bunch of transparent pixels worth it?
+
+        //draw the top part (to get rounded top)
+        ctx.drawTexture(TEXTURE, x + 14, y + height - 1, 246, 16, 4, 1);
+    }
+
+    //draw the bubbles with the right colors, white for stage in progress, or brown in case of risk of failure (wrong params at the moment)
     private void renderProgress(DrawContext ctx, int x, int y)
     {
-        if(handler.isCooking())
+        if(!handler.isProcessing()) return;
+
+        for(int i = 0; i < 5; i++) //there are 5 drawable bubbles for the 5 stages
         {
-            //arrow top left at (85, 30); getScaledProgress goes from 0 to 1; arrow width,height: (22, 15)
-            ctx.drawTexture(TEXTURE, x + 80, y + 35, 176, 0, (int)(handler.getScaledProgress() * 22) + 1, 15);
+            int color = handler.getBubbleColor(i); //24 will mean a transparent part of the image get picked and not drawn
+            ctx.drawTexture(TEXTURE, x + 96 + i * 4, y + 45, 176 + i * 7, color * 10, 7, 10); //staggering the bubble overlays allows easier rendering this way
         }
     }
 
@@ -52,6 +81,6 @@ public class FermenterScreen extends HandledScreen<FermenterScreenHandler> {
     {
         renderBackground(ctx);
         super.render(ctx, mouseX, mouseY, delta);
-        drawMouseoverTooltip(ctx, mouseX, mouseY); //TODO: drawing time left tooltip when hovering over arrow
+        drawMouseoverTooltip(ctx, mouseX, mouseY); //TODO: drawing "time left" tooltip when hovering over arrow
     }
 }

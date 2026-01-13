@@ -4,6 +4,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SidedInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.collection.DefaultedList;
@@ -191,6 +192,51 @@ public interface ImplementedInventory extends SidedInventory {
             stack.setCount(getMaxCountPerStack());
         }
         markDirty();
+    }
+
+    //these functions i added to make some stuff easier
+    default boolean hasItemInAmount(Item item, int amount)
+    {
+        for(int i = 0; i < size(); i++)
+        {
+            ItemStack stack = getStack(i);
+            if(stack.getItem() == item)
+            {
+                amount -= stack.getCount();
+                if(amount <= 0)
+                    return true;
+            }
+        }
+
+        return false;
+    }
+
+    //remove the required amount of items from the inventory, if there are, then return true
+    //otherwise return false
+    default boolean removeItems(Item item, int amount)
+    {
+        if(!hasItemInAmount(item, amount))
+            return false;
+
+        for(int i = 0; i < size(); i++)
+        {
+            ItemStack stack = getStack(i);
+            if(stack.getItem() == item)
+            {
+                int count = stack.getCount();
+                amount -= count;
+                if(amount <= 0)
+                {
+                    stack.decrement(count);
+                    return true;
+                }
+                else
+                    stack.decrement(amount);
+            }
+        }
+
+        //this code should be unreachable.
+        return true;
     }
 
     /**

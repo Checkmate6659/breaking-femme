@@ -1,6 +1,5 @@
 package com.breakingfemme.block.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,42 +25,80 @@ import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.dimension.DimensionType;
 
 public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory, ImplementedInventory {
-    private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(5, ItemStack.EMPTY);
-    private static final int OUTPUT_SLOT = 4; //output slot must be right after all input slots
+    private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(8, ItemStack.EMPTY);
+    public static final int STAGE_NOT_IN_USE = 5;
+    private static final int OUTPUT_SLOT_BEGIN = 4; //output slots must be right after all input slots
 
     protected final PropertyDelegate propertyDelegate; //the PropertyDelegate is used for client<->server syncing
 
-    //TODO: do custom recipe format, variable progress etc
-    private int progress = 0;
-    private int maxProgress = 1200; //1 minute (5 mc days = 120k ticks btw)
-    
+    //TODO: do custom recipe format in jsons
+    private int capacity = 1; //0 for incorrect multiblock, 1 for smallest, 4 to largest; TODO: should be floor((number of enclosed tiles + 10) / 9)
+    private int current_stage = STAGE_NOT_IN_USE; //the fermentation's current stage (always goes from 0 to 4 when in use, 5 ie STAGE_NOT_IN_USE when not in use)
+    private int stage_progress = 0; //progress of current stage, in ticks
+    private int min_progress[] = { 0, 0, 0, 0, 0 }; //min progress before stage complete
+    private int max_progress[] = { 0, 0, 0, 0, 0 }; //max progress before failure
+    private float min_temp[] = { 0, 0, 0, 0, 0 }; //temperature bounds
+    private float max_temp[] = { 0, 0, 0, 0, 0 };
+    private Item result_item = Items.COBBLESTONE; //crappy failsafe. at least we know if something is wrong. (TODO: write this in mod docs) (TODO: actually write docs)
+    private float temperature = -69420.0f; //in °C; initial value is for initialization to environment temperature
+    //NOTE: maybe, just maybe, the result item doesn't actually need to be in the property delegate? idk will need to see about that.
+    //also, MIXING should be in the property delegate. as its required for bubble colors.
+
     public FermenterBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.FERMENTER_BLOCK_ENTITY, pos, state);
         this.propertyDelegate = new PropertyDelegate() {
             @Override
             public int get(int index) {
-                return switch(index)
-                {
-                    case 0 -> FermenterBlockEntity.this.progress;
-                    case 1 -> FermenterBlockEntity.this.maxProgress;
-                    default -> 0;
-                };
+                if(index == 0)
+                    return capacity;
+                else if(index == 1)
+                    return current_stage;
+                else if(index == 2)
+                    return stage_progress;
+                else if(index < 8)
+                    return min_progress[index - 3];
+                else if(index < 13)
+                    return max_progress[index - 8];
+                else if(index < 18)
+                    return Math.round(Math.min(min_temp[index - 13], 127.42f) * 16777216f); //*2^24 to not lose too much precision, but temp shall never exceed 128°C (even 100°C) so no issues there
+                else if(index < 23)
+                    return Math.round(Math.min(max_temp[index - 18], 127.42f) * 16777216f);
+                else if(index == 23)
+                    return Item.getRawId(result_item);
+                else if(index == 24)
+                    return Math.round(Math.min(temperature, 127.42f) * 16777216f);
+                return 0;
             }
 
             @Override
             public void set(int index, int value) {
-                switch(index)
-                {
-                    case 0 -> FermenterBlockEntity.this.progress = value;
-                    case 1 -> FermenterBlockEntity.this.maxProgress = value;
-                };
+                if(index == 0)
+                    capacity = value;
+                else if(index == 1)
+                    current_stage = value;
+                else if(index == 2)
+                    stage_progress = value;
+                else if(index < 8)
+                    min_progress[index - 3] = value;
+                else if(index < 13)
+                    max_progress[index - 8] = value;
+                else if(index < 18)
+                    min_temp[index - 13] = ((float)value) * 5.960464477539063e-08f; //*2^-24;
+                else if(index < 23)
+                    max_temp[index - 18] = ((float)value) * 5.960464477539063e-08f;
+                else if(index == 23)
+                    result_item = Item.byRawId(value);
+                else if(index == 24)
+                    temperature = ((float)value) * 5.960464477539063e-08f;
             }
 
             @Override
             public int size() {
-                return 2; //number of values to synchronize
+                return 25; //number of values to synchronize
             }
         };
     }
@@ -81,7 +118,8 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
     {
         super.writeNbt(nbt);
         Inventories.writeNbt(nbt, inventory);
-        nbt.putInt("fermenter.progress", progress);
+        for (int i = 0; i < propertyDelegate.size(); i++) //potentially less debugable but generic way to do this
+            nbt.putInt("fermenter.p" + String.valueOf(i), propertyDelegate.get(i));
     }
 
     @Override
@@ -89,7 +127,8 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
     {
         super.readNbt(nbt);
         Inventories.readNbt(nbt, inventory);
-        progress = nbt.getInt("fermenter.progress");
+        for (int i = 0; i < propertyDelegate.size(); i++)
+            propertyDelegate.set(i, nbt.getInt("fermenter.p" + String.valueOf(i)));
     }
 
     @Override
@@ -102,86 +141,158 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
         buf.writeBlockPos(pos);
     }
 
+
+    //measure environment temperature
+    public static float environment_temperature(World world, BlockPos pos)
+    {
+        DimensionType dimension = world.getDimension();
+        Biome biome = world.getBiome(pos).value();
+
+        float temperature = biome.getTemperature();
+        temperature -= 0.00166667 * (pos.getY() - world.getSeaLevel()); //altitude decrease
+        temperature = (temperature - 0.15f) * 20; //convert to celsius
+
+        if(dimension.ultrawarm()) //Nether (and other modded "hot" dimensions)
+        {
+            temperature += 342; //would be quite a bit hot... probably not amazing to ferment stuff...
+        }
+
+        return temperature;
+    }
     
     public void tick(World world, BlockPos pos, BlockState state)
     {
         if(world.isClient()) return;
-        //this is where the fermenter logic goes
-
-        //and basically copied from the tutorial, simpler than what i will be doing
-        ItemStack output_stack = this.getStack(OUTPUT_SLOT);
-        if(output_stack.isEmpty() || output_stack.getCount() < output_stack.getMaxCount())
+        if(temperature == -69420.0f) //uninitialized temperature should be initialized to environment; cannot be done in constructor since world doesnt exist
         {
-            if(hasRecipeWithOutput(output_stack))
+            temperature = environment_temperature(world, pos); //initial temp is that of environment
+            markDirty(world, pos, state); //need to save, otherwise temp may get reset to envtemp next time the area is loaded
+        }
+
+        //update temperature
+        float outside_temp = environment_temperature(world, pos);
+        int n_heaters = 0; //number of active heaters (TODO: count them)
+        int volume = 8; //number of contained blocks
+        int surface_area = 24; //number of panels the barrel is made out of (for a 2*2*2 barrel its 24) (TODO: calculate)
+        float conductivity = surface_area * 0.91f; //in W / K; coef should be *0.91
+        //discretized differential equation, but time accelerated by a factor of 72 (number of minecraft days in a real day)
+        temperature += (n_heaters * 1e4 + conductivity * (outside_temp - temperature)) / (volume * 1.16139e6); //4.181e6 * 20 / 72; 4.181e6 is water heat capacity, 20 for ticks to seconds
+
+
+        //this is where the fermenter logic goes
+        //check if we can start fermentation
+        boolean relevant_outputs_have_water = true; //all relevant outputs (not exceeding capacity) need water
+        for(int i = OUTPUT_SLOT_BEGIN; i < OUTPUT_SLOT_BEGIN + capacity; i++)
+            if (this.getStack(i).getItem() != Items.WATER_BUCKET)
+                relevant_outputs_have_water = false;
+        if(current_stage == STAGE_NOT_IN_USE //not already fermenting
+            && relevant_outputs_have_water)
+        {
+            Optional<Item> result_option = resultItem(); //can we ferment the inputs into the outputs?
+            if(result_option.isPresent()) //if yes, the ingredients have already been removed
             {
-                progress++;
+                result_item = result_option.get();
+                current_stage = 0;
+
+                //remove relevant water buckets
+                for(int i = OUTPUT_SLOT_BEGIN; i < OUTPUT_SLOT_BEGIN + capacity; i++)
+                    setStack(i, ItemStack.EMPTY); //the buckets are gone, the result will be served in them so they are not lost
+
                 markDirty(world, pos, state); //what does this do
-
-                if(progress >= maxProgress)
+            }
+        }
+        //handle the actual fermenting part
+        else if(current_stage != STAGE_NOT_IN_USE){
+            //handle fermentation progress
+            //TODO: failsafe of up to a minute before failing, for heating/cooling/enabling mixing (should be doable by hand with a clock)
+            if(stage_progress >= min_progress[current_stage]) //trying to transition from one stage to the next
+            {
+                if(stage_progress > max_progress[current_stage]) //failed because waited for too long
                 {
-                    this.craftItem();
+                    //fail, so output sludge
+                    current_stage = STAGE_NOT_IN_USE;
+                    for(int i = OUTPUT_SLOT_BEGIN; i < OUTPUT_SLOT_BEGIN + capacity; i++)
+                        setStack(i, new ItemStack(Items.BUCKET)); //TODO: add sludge bucket item
 
-                    this.progress = 0; //reset progress
+                    markDirty(world, pos, state);
+                    return;
+                }
+                else if(current_stage + 1 == STAGE_NOT_IN_USE)
+                {
+                    //success, so output desired item
+                    current_stage = STAGE_NOT_IN_USE;
+                    for(int i = OUTPUT_SLOT_BEGIN; i < OUTPUT_SLOT_BEGIN + capacity; i++)
+                        setStack(i, new ItemStack(result_item));
+
+                    markDirty(world, pos, state);
+                    return;
+                }
+                else if(temperature >= min_temp[current_stage + 1] && temperature <= max_temp[current_stage + 1])
+                {
+                    //transition to next stage
+                    current_stage++;
+                    stage_progress = 0;
                 }
             }
-            else
-                this.progress = 0; //reset progress
-        }
-        else
-        {
-            this.progress = 0; //reset progress
-            markDirty(world, pos, state);
+
+            //if temperature not in the right bounds, then fail
+            //TODO: fail if mixed incorrectly (not mixed when it should be or backwards)
+            //TODO: add some leniency... especially for the mixing
+            if(temperature < min_temp[current_stage] || temperature > max_temp[current_stage])
+            {
+                //fail, so output sludge
+                current_stage = STAGE_NOT_IN_USE;                
+                for(int i = OUTPUT_SLOT_BEGIN; i < OUTPUT_SLOT_BEGIN + capacity; i++)
+                    setStack(i, new ItemStack(Items.BUCKET)); //TODO: add sludge bucket item
+
+                markDirty(world, pos, state);
+                return;
+            }
         }
     }
 
-    //actual BLOCK ENTITY LOGIC
-    //should just output a list of which items are in the input slots (not ItemStacks, remove empty stacks)
-    //is it faster with items or with their raw ids (Item.getRawId)???
-    private List<Item> getInputItems()
+    //check if inputs contain all required items in the required quantity (ie capacity)
+    //supposes all items in the list are unique (will only be checked on load, as it is slower)
+    private boolean containsItems(List<Item> ingredients)
     {
-        List<Item> inputs = new ArrayList<>(); //if i use List.of() its not mutable for some reason???
-        for(int i = 0; i < OUTPUT_SLOT; i++) //don't touch output slot
-            if(!inventory.get(i).isEmpty())
-                inputs.add(inventory.get(i).getItem());
-        return inputs;
+        for (Item item : ingredients)
+            if(!hasItemInAmount(item, capacity))
+                return false;
+        return true;
     }
 
-    private void craftItem()
+    //remove those items from there
+    //supposes all items in the list are unique (will only be checked on load, as it is slower)
+    private void removeItems(List<Item> ingredients)
     {
-        //do this BEFORE removing items from input slots. otherwise unwrap problems.
-        this.setStack(OUTPUT_SLOT, new ItemStack(resultItem().get(), getStack(OUTPUT_SLOT).getCount() + 1));
-
-        //remove 1 item from each input slot (buckets????)
-        for(int i = 0; i < OUTPUT_SLOT; i++)
-            this.removeStack(i, 1);
+        for (Item item : ingredients)
+            removeItems(item, capacity);
     }
 
     private Optional<Item> resultItem()
     {
         //hardcoded recipes for now
 
-        //nether wart + wheat + water bucket -> beer bucket
+        //sugar + wheat -> beer bucket
 
-        //water bucket + milk bucket + sterols + nickel sulfate -> androstadienedione bucket (consumed bucket? fix that later)
+        //sugar + nether wart + wheat -> nether beer bucket
+
+        //sugar + milkgot + sterols + nickel sulfate -> androstadienedione bucket (consumed bucket? fix that later)
         //mb replace water bucket with sugar? no issue with buckets then too
-        if(getInputItems().containsAll(List.of(
-            Items.WATER_BUCKET,
-            Items.MILK_BUCKET,
+        List<Item> list = List.of(
+            Items.SUGAR,
+            ModItems.MILKGOT,
             ModItems.STEROLS,
             ModItems.NICKEL_SULFATE
-        )))
+        );
+
+        //need to do a loop at some point lol
+        if(containsItems(list))
+        {
+            removeItems(list);
             return Optional.of(ModFluids.ANDROSTADIENEDIONE_BUCKET);
+        }
 
         return Optional.empty();
-    }
-
-    private boolean hasRecipeWithOutput(ItemStack output_stack)
-    {
-        Optional<Item> result = resultItem();
-        if(result.isPresent())
-            //if output slot is clogged, return false; also here we don't do stacking so enough room <=> output not full
-            return output_stack.isEmpty() || output_stack.getItem() == result.get();
-
-        return false;
     }
 }
