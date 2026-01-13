@@ -1,6 +1,5 @@
 package com.breakingfemme.screen;
 
-import com.breakingfemme.BreakingFemme;
 import com.breakingfemme.block.entity.FermenterBlockEntity;
 
 import net.minecraft.block.entity.BlockEntity;
@@ -63,7 +62,6 @@ public class FermenterScreenHandler extends ScreenHandler {
     public int getThermometerHeight() //get which pixel the thermometer should stop at, excluding rounded top
     {
         int temperature = propertyDelegate.get(24); //2^24 times temp in celsius
-        BreakingFemme.LOGGER.info("temp: " + (float)temperature / (16777216.0f));
         temperature = 70 - (temperature >> 25); //70 if 0°C, 20 if 100°C (so each pixel is 2°C)
         if(temperature < 17) temperature = 17; //top of the thermometer, slightly above 100°C
         else if(temperature > 72) temperature = 72; //slightly below 0°C
