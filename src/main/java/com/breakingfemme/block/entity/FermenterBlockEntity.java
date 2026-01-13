@@ -18,10 +18,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.registry.Registries;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -45,7 +47,8 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
     private float max_temp[] = { 0, 0, 0, 0, 0 };
     private Item result_item = Items.COBBLESTONE; //crappy failsafe. at least we know if something is wrong. (TODO: write this in mod docs) (TODO: actually write docs)
     private float temperature = -69420.0f; //in °C; initial value is for initialization to environment temperature
-    //NOTE: maybe, just maybe, the result item doesn't actually need to be in the property delegate? idk will need to see about that.
+    private int grace_time = 0; //accumulated time with wrong conditions. adds 4 if wrong, removes 1 if right, min is 0. if exceeds a certain value, then the recipe fails.
+    //NOTE: maybe grace time won't need to be in there? idk yet tho.
     //also, MIXING should be in the property delegate. as its required for bubble colors.
 
     public FermenterBlockEntity(BlockPos pos, BlockState state) {
@@ -68,7 +71,7 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
                 else if(index < 23)
                     return Math.round(Math.min(max_temp[index - 18], 127.42f) * 16777216f);
                 else if(index == 23)
-                    return Item.getRawId(result_item);
+                    return grace_time;
                 else if(index == 24)
                     return Math.round(Math.min(temperature, 127.42f) * 16777216f);
                 return 0;
@@ -91,7 +94,7 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
                 else if(index < 23)
                     max_temp[index - 18] = ((float)value) * 5.960464477539063e-08f;
                 else if(index == 23)
-                    result_item = Item.byRawId(value);
+                    grace_time = value;
                 else if(index == 24)
                     temperature = ((float)value) * 5.960464477539063e-08f;
             }
@@ -117,8 +120,10 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
     protected void writeNbt(NbtCompound nbt) //saving data from ingame to save
     {
         super.writeNbt(nbt);
+        Identifier id = Registries.ITEM.getId(result_item);
+        nbt.putString("result_item", id == null ? "minecraft:air" : id.toString());; //save this non-property-delegate property
         Inventories.writeNbt(nbt, inventory);
-        for (int i = 0; i < propertyDelegate.size(); i++) //potentially less debugable but generic way to do this
+        for (int i = 0; i < propertyDelegate.size(); i++) //HACK: generic/lazy way to do this, but makes no sense in game. TODO: implement this differently.
             nbt.putInt("fermenter.p" + String.valueOf(i), propertyDelegate.get(i));
     }
 
@@ -126,6 +131,7 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
     public void readNbt(NbtCompound nbt) //loading data from save to ingame
     {
         super.readNbt(nbt);
+        result_item = (Item)Registries.ITEM.get(new Identifier(nbt.getString("result_item")));
         Inventories.readNbt(nbt, inventory);
         for (int i = 0; i < propertyDelegate.size(); i++)
             propertyDelegate.set(i, nbt.getInt("fermenter.p" + String.valueOf(i)));
@@ -143,6 +149,10 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
 
 
     //measure environment temperature
+    //NOTE: doesn't take into account hot/cold blocks nearby, or if some panels are waterlogged
+    //we should be able to waterlog panels to cool down the fermenter... but that should really be heat transfer
+    //but it should be in here too: air temp is usually higher than water temp
+    //TODO: come back when multiblock logic done
     public static float environment_temperature(World world, BlockPos pos)
     {
         DimensionType dimension = world.getDimension();
@@ -198,24 +208,20 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
                 for(int i = OUTPUT_SLOT_BEGIN; i < OUTPUT_SLOT_BEGIN + capacity; i++)
                     setStack(i, ItemStack.EMPTY); //the buckets are gone, the result will be served in them so they are not lost
 
-                markDirty(world, pos, state); //what does this do
+                markDirty(world, pos, state); //save nbt ig? or items?
             }
         }
+
         //handle the actual fermenting part
         else if(current_stage != STAGE_NOT_IN_USE){
             //handle fermentation progress
-            //TODO: failsafe of up to a minute before failing, for heating/cooling/enabling mixing (should be doable by hand with a clock)
+            boolean conditions_wrong = false;
+            stage_progress++;
             if(stage_progress >= min_progress[current_stage]) //trying to transition from one stage to the next
             {
                 if(stage_progress > max_progress[current_stage]) //failed because waited for too long
                 {
-                    //fail, so output sludge
-                    current_stage = STAGE_NOT_IN_USE;
-                    for(int i = OUTPUT_SLOT_BEGIN; i < OUTPUT_SLOT_BEGIN + capacity; i++)
-                        setStack(i, new ItemStack(Items.BUCKET)); //TODO: add sludge bucket item
-
-                    markDirty(world, pos, state);
-                    return;
+                    conditions_wrong = true;
                 }
                 else if(current_stage + 1 == STAGE_NOT_IN_USE)
                 {
@@ -240,13 +246,22 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
             //TODO: add some leniency... especially for the mixing
             if(temperature < min_temp[current_stage] || temperature > max_temp[current_stage])
             {
+                conditions_wrong = true;
+            }
+
+            if(grace_time > 0)
+                grace_time--;
+            if(conditions_wrong) //in wrong conditions
+                grace_time += 5;
+
+            if(grace_time > 4800) //error accumulated to 1 minute
+            {
                 //fail, so output sludge
                 current_stage = STAGE_NOT_IN_USE;                
                 for(int i = OUTPUT_SLOT_BEGIN; i < OUTPUT_SLOT_BEGIN + capacity; i++)
                     setStack(i, new ItemStack(Items.BUCKET)); //TODO: add sludge bucket item
 
                 markDirty(world, pos, state);
-                return;
             }
         }
     }
@@ -289,7 +304,38 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
         //need to do a loop at some point lol
         if(containsItems(list))
         {
+            //remove items from input slots
             removeItems(list);
+
+            //set time and temperature constraints
+            //this is why jsons > hardcoding. and compatibility too.
+            min_progress[0] = 35; //middleground: 4 mc hours or 3min20 irl
+            min_progress[1] = 60; //5 mc days ie 1h40 irl; just split up in 2 for visualization
+            min_progress[2] = 60;
+            min_progress[3] = 1; //get enough time to heat up to sterilization temp
+            min_progress[4] = 30; //3 mc hours
+            /*min_progress[0] = 3500; //middleground: 4 mc hours or 3min20 irl
+            min_progress[1] = 60000; //5 mc days ie 1h40 irl; just split up in 2 for visualization
+            min_progress[2] = 60000;
+            min_progress[3] = 1; //get enough time to heat up to sterilization temp
+            min_progress[4] = 3000;*/ //3 mc hours
+            max_progress[0] = 4500; //adding half a mc hour of tolerance afterwards
+            max_progress[1] = 60001;
+            max_progress[2] = 72000; //adding half a mc day of tolerance
+            max_progress[3] = 6000; //yeah just heat up the mixture. you have 6 hours.
+            max_progress[4] = 3001; //really this doesnt matter too much as long as its >3000.
+            min_temp[0] = 57.0f; //selection step 57-64°C
+            min_temp[1] = 25.0f; //fermentation 25-50°C
+            min_temp[2] = 25.0f;
+            min_temp[3] = 50.0f; //transition towards sterilization
+            min_temp[4] = 100.0f; //sterilization
+            max_temp[0] = 64.0f; //selection
+            max_temp[1] = 55.0f;
+            max_temp[2] = 55.0f;
+            max_temp[3] = 120.0f; //doesnt matter too much, just to get the red color bubble lol
+            max_temp[4] = 69420.0f; //temp as high as we can, this is higher than any reachable temp
+
+            //return result item
             return Optional.of(ModFluids.ANDROSTADIENEDIONE_BUCKET);
         }
 
