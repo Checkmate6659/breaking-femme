@@ -46,10 +46,14 @@ public class FermenterScreen extends HandledScreen<FermenterScreenHandler> {
     private void renderCapacity(DrawContext ctx, int x, int y)
     {
         int cap = handler.nBarrels();
-        for(int i = 0; i < 4 && i < cap; i++) //safety measure: do not draw more than 4 (is it necessary?)
+        for(int i = 0; i < 4; i++)
         {
-            //draw the barrel the right number of times, from bottom to top
-            ctx.drawTexture(TEXTURE, x + 79, y + 69 - i * 18, 210, 0, 11, 16);
+            if (i < cap)
+                //draw the barrel the right number of times, from bottom to top
+                ctx.drawTexture(TEXTURE, x + 79, y + 69 - i * 18, 211, 0, 11, 16);
+            else
+                //draw lock next to inaccessible output slots
+                ctx.drawTexture(TEXTURE, x + 128, y + 70 - i * 18, 239, 1, 15, 15);
         }
     }
 
