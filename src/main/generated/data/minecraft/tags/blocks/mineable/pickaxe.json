@@ -10,6 +10,8 @@
     "breakingfemme:ethanol95_cauldron",
     "breakingfemme:sterol_solution_cauldron",
     "breakingfemme:androstadienedione_solution_cauldron",
-    "breakingfemme:tar_cauldron"
+    "breakingfemme:tar_cauldron",
+    "breakingfemme:beer_cauldron",
+    "breakingfemme:nether_beer_cauldron"
   ]
 }

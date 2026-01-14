@@ -15,6 +15,8 @@ import com.breakingfemme.cauldron.NickelSulfateCauldronBlock;
 import com.breakingfemme.cauldron.RedoxReactionCauldronBlock;
 import com.breakingfemme.cauldron.AndrostadienedioneCauldronBlock;
 import com.breakingfemme.cauldron.TarCauldronBlock;
+import com.breakingfemme.cauldron.BeerCauldronBlock;
+import com.breakingfemme.cauldron.NetherBeerCauldronBlock;
 //AUTOGENERATION LABEL DO NOT TOUCH
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -95,6 +97,18 @@ public class ModFluids {
     public static Block TAR_FLUID_BLOCK;
     public static Item TAR_BUCKET;
     public static Block TAR_CAULDRON;
+    
+    public static FlowableFluid STILL_BEER;
+    public static FlowableFluid FLOWING_BEER;
+    public static Block BEER_FLUID_BLOCK;
+    public static Item BEER_BUCKET;
+    public static Block BEER_CAULDRON;
+    
+    public static FlowableFluid STILL_NETHER_BEER;
+    public static FlowableFluid FLOWING_NETHER_BEER;
+    public static Block NETHER_BEER_FLUID_BLOCK;
+    public static Item NETHER_BEER_BUCKET;
+    public static Block NETHER_BEER_CAULDRON;
     //AUTOGENERATION LABEL DO NOT TOUCH
 
 public static void registerModFluids()
@@ -179,6 +193,24 @@ public static void registerModFluids()
         TAR_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "tar_bucket"),
             new BucketItem(STILL_TAR, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
+        STILL_BEER = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "beer"),
+            new BeerFluid.Still());
+        FLOWING_BEER = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_beer"),
+            new BeerFluid.Flowing());
+        BEER_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "beer_block"),
+            new FluidBlock(STILL_BEER, FabricBlockSettings.copyOf(Blocks.WATER)){});
+        BEER_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "beer_bucket"),
+            new BucketItem(STILL_BEER, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
+
+        STILL_NETHER_BEER = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "nether_beer"),
+            new NetherBeerFluid.Still());
+        FLOWING_NETHER_BEER = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_nether_beer"),
+            new NetherBeerFluid.Flowing());
+        NETHER_BEER_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "nether_beer_block"),
+            new FluidBlock(STILL_NETHER_BEER, FabricBlockSettings.copyOf(Blocks.WATER)){});
+        NETHER_BEER_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "nether_beer_bucket"),
+            new BucketItem(STILL_NETHER_BEER, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
+
         //AUTOGENERATION LABEL DO NOT TOUCH
 
 
@@ -202,6 +234,10 @@ public static void registerModFluids()
         CauldronFluidContent.registerCauldron(ANDROSTADIENEDIONE_CAULDRON, STILL_ANDROSTADIENEDIONE, FluidConstants.BUCKET, null);
         TAR_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "tar_cauldron"), new TarCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
         CauldronFluidContent.registerCauldron(TAR_CAULDRON, STILL_TAR, FluidConstants.BUCKET, null);
+        BEER_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "beer_cauldron"), new BeerCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
+        CauldronFluidContent.registerCauldron(BEER_CAULDRON, STILL_BEER, FluidConstants.BUCKET, null);
+        NETHER_BEER_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "nether_beer_cauldron"), new NetherBeerCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
+        CauldronFluidContent.registerCauldron(NETHER_BEER_CAULDRON, STILL_NETHER_BEER, FluidConstants.BUCKET, null);
         //AUTOGENERATION LABEL DO NOT TOUCH
     }
 }

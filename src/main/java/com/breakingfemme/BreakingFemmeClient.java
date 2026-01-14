@@ -155,6 +155,36 @@ public class BreakingFemmeClient implements ClientModInitializer {
             return -1;
         }, ModFluids.TAR_CAULDRON);
 
+        //beer
+        FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.STILL_BEER, ModFluids.FLOWING_BEER,
+            new SimpleFluidRenderHandler(
+                new Identifier("minecraft:block/water_still"),
+                new Identifier("minecraft:block/water_flow"),
+                0xC0DBDE90)
+        );
+        BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.STILL_BEER, ModFluids.FLOWING_BEER);
+        ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
+            if (i == 0)
+                return 0xC0DBDE90;
+            return -1;
+        }, ModFluids.BEER_CAULDRON);
+
+        //nether beer
+        FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.STILL_NETHER_BEER, ModFluids.FLOWING_NETHER_BEER,
+            new SimpleFluidRenderHandler(
+                new Identifier("minecraft:block/water_still"),
+                new Identifier("minecraft:block/water_flow"),
+                0xC0DA4634)
+        );
+        BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.STILL_NETHER_BEER, ModFluids.FLOWING_NETHER_BEER);
+        ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
+            if (i == 0)
+                return 0xC0DA4634;
+            return -1;
+        }, ModFluids.NETHER_BEER_CAULDRON);
+
         //AUTOGENERATION LABEL DO NOT TOUCH
+
+
     }
 }

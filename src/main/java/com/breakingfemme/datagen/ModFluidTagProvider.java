@@ -30,6 +30,10 @@ public class ModFluidTagProvider extends FabricTagProvider.FluidTagProvider {
         getOrCreateTagBuilder(FluidTags.WATER).add(ModFluids.FLOWING_STEROL_SOLUTION);
         getOrCreateTagBuilder(FluidTags.WATER).add(ModFluids.STILL_ANDROSTADIENEDIONE);
         getOrCreateTagBuilder(FluidTags.WATER).add(ModFluids.FLOWING_ANDROSTADIENEDIONE);
+        getOrCreateTagBuilder(FluidTags.WATER).add(ModFluids.STILL_BEER);
+        getOrCreateTagBuilder(FluidTags.WATER).add(ModFluids.FLOWING_BEER);
+        getOrCreateTagBuilder(FluidTags.WATER).add(ModFluids.STILL_NETHER_BEER);
+        getOrCreateTagBuilder(FluidTags.WATER).add(ModFluids.FLOWING_NETHER_BEER);
         //AUTOGENERATION LABEL DO NOT TOUCH
 
         //NOTE: tar does NOT behave like water. it doesn't make bubbles. its much more viscous than water. and you cant just see if youre submerged in tar.
