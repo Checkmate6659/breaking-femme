@@ -2,6 +2,7 @@ package com.breakingfemme.fluid;
 
 import com.breakingfemme.BreakingFemme;
 import com.breakingfemme.block.AndrostadienedioneBlock;
+import com.breakingfemme.block.PoisonousFluidBlock;
 import com.breakingfemme.block.TarBlock;
 import com.breakingfemme.item.ModItems;
 import com.breakingfemme.item.SolutionBucketItem;
@@ -17,6 +18,7 @@ import com.breakingfemme.cauldron.AndrostadienedioneCauldronBlock;
 import com.breakingfemme.cauldron.TarCauldronBlock;
 import com.breakingfemme.cauldron.BeerCauldronBlock;
 import com.breakingfemme.cauldron.NetherBeerCauldronBlock;
+import com.breakingfemme.cauldron.SludgeCauldronBlock;
 //AUTOGENERATION LABEL DO NOT TOUCH
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -109,6 +111,12 @@ public class ModFluids {
     public static Block NETHER_BEER_FLUID_BLOCK;
     public static Item NETHER_BEER_BUCKET;
     public static Block NETHER_BEER_CAULDRON;
+    
+    public static FlowableFluid STILL_SLUDGE;
+    public static FlowableFluid FLOWING_SLUDGE;
+    public static Block SLUDGE_FLUID_BLOCK;
+    public static Item SLUDGE_BUCKET;
+    public static Block SLUDGE_CAULDRON;
     //AUTOGENERATION LABEL DO NOT TOUCH
 
 public static void registerModFluids()
@@ -211,6 +219,15 @@ public static void registerModFluids()
         NETHER_BEER_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "nether_beer_bucket"),
             new BucketItem(STILL_NETHER_BEER, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
+        STILL_SLUDGE = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "sludge"),
+            new SludgeFluid.Still());
+        FLOWING_SLUDGE = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_sludge"),
+            new SludgeFluid.Flowing());
+        SLUDGE_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "sludge_block"),
+            new PoisonousFluidBlock(STILL_SLUDGE, FabricBlockSettings.copyOf(Blocks.WATER)){});
+        SLUDGE_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "sludge_bucket"),
+            new BucketItem(STILL_SLUDGE, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
+
         //AUTOGENERATION LABEL DO NOT TOUCH
 
 
@@ -238,6 +255,8 @@ public static void registerModFluids()
         CauldronFluidContent.registerCauldron(BEER_CAULDRON, STILL_BEER, FluidConstants.BUCKET, null);
         NETHER_BEER_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "nether_beer_cauldron"), new NetherBeerCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
         CauldronFluidContent.registerCauldron(NETHER_BEER_CAULDRON, STILL_NETHER_BEER, FluidConstants.BUCKET, null);
+        SLUDGE_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "sludge_cauldron"), new SludgeCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
+        CauldronFluidContent.registerCauldron(SLUDGE_CAULDRON, STILL_SLUDGE, FluidConstants.BUCKET, null);
         //AUTOGENERATION LABEL DO NOT TOUCH
     }
 }

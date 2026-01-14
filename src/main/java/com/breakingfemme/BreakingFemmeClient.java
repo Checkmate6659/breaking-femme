@@ -183,8 +183,20 @@ public class BreakingFemmeClient implements ClientModInitializer {
             return -1;
         }, ModFluids.NETHER_BEER_CAULDRON);
 
+        //sludge that poisons you
+        FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.STILL_SLUDGE, ModFluids.FLOWING_SLUDGE,
+            new SimpleFluidRenderHandler(
+                new Identifier("minecraft:block/water_still"),
+                new Identifier("minecraft:block/water_flow"),
+                0xFF794C24)
+        );
+        BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.STILL_SLUDGE, ModFluids.FLOWING_SLUDGE);
+        ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
+            if (i == 0)
+                return 0xFF794C24;
+            return -1;
+        }, ModFluids.SLUDGE_CAULDRON);
+
         //AUTOGENERATION LABEL DO NOT TOUCH
-
-
     }
 }

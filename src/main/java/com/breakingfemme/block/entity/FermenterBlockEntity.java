@@ -259,7 +259,7 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
                 //fail, so output sludge
                 current_stage = STAGE_NOT_IN_USE;                
                 for(int i = OUTPUT_SLOT_BEGIN; i < OUTPUT_SLOT_BEGIN + capacity; i++)
-                    setStack(i, new ItemStack(Items.BUCKET)); //TODO: add sludge bucket item
+                    setStack(i, new ItemStack(ModFluids.SLUDGE_BUCKET));
 
                 markDirty(world, pos, state);
             }
