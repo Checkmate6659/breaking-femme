@@ -4,6 +4,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.block.Waterloggable;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
@@ -14,6 +16,7 @@ import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
@@ -81,5 +84,17 @@ public class FermenterMixerBlock extends Block implements Waterloggable {
         if ((Boolean)state.get(POWERED) && !world.isReceivingRedstonePower(pos)) {
             world.setBlockState(pos, (BlockState)state.cycle(POWERED), 2);
         }
+    }
+
+    //custom code that makes entity spin in trig direction (x rotation -= 15°)
+    //sneaking can stop you from spinning
+    //why does this only affect players, not other entities?
+    @Override
+    public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
+        if (!entity.bypassesSteppingEffects() && state.get(POWERED) && entity instanceof LivingEntity) {
+            entity.setYaw(MathHelper.wrapDegrees(entity.getYaw() - 15));
+        }
+
+        super.onSteppedOn(world, pos, state, entity);
     }
 }
