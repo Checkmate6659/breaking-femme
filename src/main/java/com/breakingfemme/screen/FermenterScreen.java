@@ -62,10 +62,10 @@ public class FermenterScreen extends HandledScreen<FermenterScreenHandler> {
     {
         int height = handler.getThermometerHeight();
         //draw the bottom part of the red overlay
-        ctx.drawTexture(TEXTURE, x + 8, y + height, 240, height, 16, 71); //71: max thermometer height (excluding tip); is not drawing a bunch of transparent pixels worth it?
+        ctx.drawTexture(TEXTURE, x + 8, y + height - 10, 240, height, 16, 71); //71: max thermometer height (excluding tip); is not drawing a bunch of transparent pixels worth it?
 
         //draw the top part (to get rounded top)
-        ctx.drawTexture(TEXTURE, x + 14, y + height - 1, 246, 16, 4, 1);
+        ctx.drawTexture(TEXTURE, x + 14, y + height - 11, 246, height - 1, 4, 1); //this allows blue to red gradient on thermometer
     }
 
     //draw the bubbles with the right colors, white for stage in progress, or brown in case of risk of failure (wrong params at the moment)

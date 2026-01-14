@@ -59,7 +59,7 @@ public class FermenterScreenHandler extends ScreenHandler {
         return propertyDelegate.get(1) != FermenterBlockEntity.STAGE_NOT_IN_USE; //1 is current fermentation stage
     }
 
-    public int getThermometerHeight() //get which pixel the thermometer should stop at, excluding rounded top
+    public int getThermometerHeight() //get which pixel the thermometer should stop at (on the overlay (red) part of the thermometer), excluding rounded top
     {
         int temperature = propertyDelegate.get(24); //2^24 times temp in celsius
         temperature = 70 - (temperature >> 25); //70 if 0°C, 20 if 100°C (so each pixel is 2°C)
