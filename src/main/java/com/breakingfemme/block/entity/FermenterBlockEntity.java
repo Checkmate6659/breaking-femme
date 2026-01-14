@@ -267,6 +267,7 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
     }
 
     //check if inputs contain all required items in the required quantity (ie capacity)
+    //cannot run larger fermenter with less items as a smaller one btw
     //supposes all items in the list are unique (will only be checked on load, as it is slower)
     private boolean containsItems(List<Item> ingredients)
     {

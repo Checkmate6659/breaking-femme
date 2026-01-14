@@ -224,14 +224,15 @@ public interface ImplementedInventory extends SidedInventory {
             if(stack.getItem() == item)
             {
                 int count = stack.getCount();
-                amount -= count;
-                if(amount <= 0)
+                if(amount < count) //removing all items would lead to excess
                 {
-                    stack.decrement(count);
+                    stack.decrement(amount); //remove only what we need to
                     return true;
                 }
-                else
-                    stack.decrement(amount);
+
+                //if reached this point, all items shall be removed because of prev return statement
+                stack.decrement(count);
+                amount -= count; //update number of items left to remove
             }
         }
 
