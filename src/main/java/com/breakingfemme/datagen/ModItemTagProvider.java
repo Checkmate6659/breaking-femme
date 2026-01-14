@@ -20,6 +20,9 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
     public static final TagKey<Item> NICKEL_INGOT = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "ingots/nickel"));
     public static final TagKey<Item> PULVERIZED_COPPER = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "dusts/copper"));
     public static final TagKey<Item> PULVERIZED_NICKEL = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "dusts/nickel"));
+    public static final TagKey<Item> FLOUR = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "flours"));
+    public static final TagKey<Item> FLOUR_WHEAT = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "flours/wheat"));
+    public static final TagKey<Item> YEAST = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "yeast"));
     public static final TagKey<Item> DRINK_BOTTLES = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "drink_containing/bottle"));
     public static final TagKey<Item> DRINKS = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "drinks"));
     public static final TagKey<Item> MILK = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "milk"));
@@ -41,5 +44,8 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
         getOrCreateTagBuilder(DRINK_BOTTLES).add(ModItems.ET32_BOTTLE, ModItems.ET64_BOTTLE, ModItems.ET95_BOTTLE);
         getOrCreateTagBuilder(MILK).add(Items.MILK_BUCKET);
         getOrCreateTagBuilder(MILK_BUCKET).add(Items.MILK_BUCKET);
+        getOrCreateTagBuilder(FLOUR).add(ModItems.FLOUR);
+        getOrCreateTagBuilder(FLOUR_WHEAT).add(ModItems.FLOUR);
+        getOrCreateTagBuilder(YEAST).add(ModItems.YEAST);
     }
 }

@@ -6,6 +6,8 @@ import com.breakingfemme.fluid.ModFluids;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.AliasedBlockItem;
 import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
@@ -36,7 +38,8 @@ public class ModItems {
 
     //TODO: add drunkenness status effect and shader, of course using real research because that's the whole point of this mod.
     //also now the bottle gets consumed and it makes food noises.
-    public static final Item YEAST = registerItem("yeast", new Item(new FabricItemSettings()));
+    public static final Item FLOUR = registerItem("flour", new Item(new FabricItemSettings().food(new FoodComponent.Builder().hunger(1).saturationModifier(0.5f).statusEffect(new StatusEffectInstance(StatusEffects.POISON, 100, 0), 0.0625F).build()))); //1/16 chance only to have problems (probably not realistic)
+    public static final Item YEAST = registerItem("yeast", new Item(new FabricItemSettings().food(new FoodComponent.Builder().hunger(2).saturationModifier(1f).build())));
     public static final Item ET32_BOTTLE = registerItem("ethanol32_bottle", new AlcoholDrinkItem(new FabricItemSettings().recipeRemainder(Items.GLASS_BOTTLE).food(new FoodComponent.Builder().hunger(0).saturationModifier(0f).alwaysEdible().build()), 1));
     public static final Item ET64_BOTTLE = registerItem("ethanol64_bottle", new AlcoholDrinkItem(new FabricItemSettings().recipeRemainder(Items.GLASS_BOTTLE).food(new FoodComponent.Builder().hunger(0).saturationModifier(0f).alwaysEdible().build()), 2));
     public static final Item ET95_BOTTLE = registerItem("ethanol95_bottle", new AlcoholDrinkItem(new FabricItemSettings().recipeRemainder(Items.GLASS_BOTTLE).food(new FoodComponent.Builder().hunger(0).saturationModifier(0f).alwaysEdible().build()), 3));
@@ -67,6 +70,7 @@ public class ModItems {
             entries.add(NICKEL_SULFATE);
             entries.add(ModFluids.COPPER_SULFATE_BUCKET);
             entries.add(ModFluids.NICKEL_SULFATE_BUCKET);
+            entries.add(FLOUR);
             entries.add(YEAST);
             entries.add(ModFluids.BEER_BUCKET);
             entries.add(ModFluids.NETHER_BEER_BUCKET);
