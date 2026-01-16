@@ -6,6 +6,7 @@ import com.breakingfemme.item.ModItems;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.registry.RegistryKeys;
@@ -16,6 +17,7 @@ import net.minecraft.util.Identifier;
 public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
     //common tags for compatibility with other mods
     //wiki.fabricmc.net/community:common_tags
+    public static final TagKey<Item> STONES = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "stones"));
     public static final TagKey<Item> COPPER_INGOT = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "ingots/copper"));
     public static final TagKey<Item> NICKEL_INGOT = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "ingots/nickel"));
     public static final TagKey<Item> PULVERIZED_COPPER = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "dusts/copper"));
@@ -36,6 +38,12 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
 
     @Override
     protected void configure(WrapperLookup arg) {
+        getOrCreateTagBuilder(STONES).add(Blocks.STONE.asItem());
+        getOrCreateTagBuilder(STONES).add(Blocks.DEEPSLATE.asItem());
+        getOrCreateTagBuilder(STONES).add(Blocks.GRANITE.asItem());
+        getOrCreateTagBuilder(STONES).add(Blocks.DIORITE.asItem());
+        getOrCreateTagBuilder(STONES).add(Blocks.ANDESITE.asItem());
+        getOrCreateTagBuilder(STONES).add(Blocks.TUFF.asItem());
         getOrCreateTagBuilder(COPPER_INGOT).add(Items.COPPER_INGOT);
         getOrCreateTagBuilder(NICKEL_INGOT).add(ModItems.NICKEL_INGOT);
         getOrCreateTagBuilder(PULVERIZED_COPPER).add(ModItems.PULVERIZED_COPPER);

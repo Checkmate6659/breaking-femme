@@ -34,7 +34,7 @@ public class ModItems {
     public static final Item MILKGOT = registerItem("milkgot", new Item(new FabricItemSettings()));
 
     //TODO: make custom item class and implement mortar and pestle recipes: crushing wheat into flour, and copper/nickel ingots into dust. make it take time and damage the mortar and pestle
-    public static final Item MORTAR_PESTLE = registerItem("mortar_pestle", new Item(new FabricItemSettings().maxDamage(64)));
+    public static final Item MORTAR_PESTLE = registerItem("mortar_pestle", new MortarPestleItem(new FabricItemSettings().maxDamage(64)));
 
     //TODO: add drunkenness status effect and shader, of course using real research because that's the whole point of this mod.
     //also now the bottle gets consumed and it makes food noises.

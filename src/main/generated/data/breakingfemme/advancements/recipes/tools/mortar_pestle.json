@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_copper_ingot": {
+    "has_stone": {
       "conditions": {
         "items": [
           {
-            "tag": "c:ingots/copper"
+            "tag": "minecraft:stone_crafting_materials"
           }
         ]
       },
@@ -13,20 +13,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:pulverized_copper1"
+        "recipe": "breakingfemme:mortar_pestle"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_copper_ingot",
+      "has_stone",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:pulverized_copper1"
+      "breakingfemme:mortar_pestle"
     ]
   },
   "sends_telemetry_event": false
