@@ -18,7 +18,7 @@ import net.minecraft.util.Identifier;
 public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
     //custom block tags (NOT in common tags)
     public static final TagKey<Block> HOT = TagKey.of(RegistryKeys.BLOCK, new Identifier("c", "hot"));
-    public static final TagKey<Block> FURNACE = TagKey.of(RegistryKeys.BLOCK, new Identifier("c", "furnace"));
+    public static final TagKey<Block> FURNACE = TagKey.of(RegistryKeys.BLOCK, new Identifier("c", "furnaces"));
     //trying to make something compatible with blaze burners/low heaters etc (create & addons)
     public static final TagKey<Block> CREATE_HOT = TagKey.of(RegistryKeys.BLOCK, new Identifier("create", "passive_boiler_heaters"));
 
@@ -31,6 +31,8 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         //vanilla tags
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModFluids.MACERATING_SOY_CAULDRON);
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModFluids.REDOX_REACTION_CAULDRON);
+        getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModFluids.YEAST_STARTER_CAULDRON);
+        getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModFluids.YEAST_CAULDRON);
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModFluids.COPPER_SULFATE_CAULDRON);
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModFluids.NICKEL_SULFATE_CAULDRON);
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModFluids.ET32_CAULDRON);

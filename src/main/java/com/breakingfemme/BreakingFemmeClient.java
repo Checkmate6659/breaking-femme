@@ -39,9 +39,23 @@ public class BreakingFemmeClient implements ClientModInitializer {
         //redoxing copper sulfate (cauldron only)
         ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
             if (i == 0)
-                return 0x8033C1FF; //same color as et64, just more transparent 
+                return 0x8033C1FF; //same color as copper sulfate, just more transparent 
             return -1;
         }, ModFluids.REDOX_REACTION_CAULDRON);
+
+        //yeast starter (cauldron only)
+        ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
+            if (i == 0)
+                return 0xFFF8F8AA; //pale yellow color
+            return -1;
+        }, ModFluids.YEAST_STARTER_CAULDRON);
+
+        //yeast (cauldron only)
+        ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
+            if (i == 0)
+                return 0xFFEEEEAA; //same as yeast starter... but a bit darker
+            return -1;
+        }, ModFluids.YEAST_CAULDRON);
 
         //copper sulfate
         FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.STILL_COPPER_SULFATE, ModFluids.FLOWING_COPPER_SULFATE,

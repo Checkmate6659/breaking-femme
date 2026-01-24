@@ -15,7 +15,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.world.World;
 
-//https://www.youtube.com/watch?v=4N5BY2aHins
 //recipe is done in player inv directly, thus we use PlayerInventory (we would be using SimpleInventory usually)
 public class GrindingRecipe implements Recipe<PlayerInventory> {
     //if we want to make grinding take variable time/hunger, need to do it here

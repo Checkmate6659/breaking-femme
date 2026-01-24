@@ -9,6 +9,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.block.Blocks;
 import net.minecraft.loot.condition.BlockStatePropertyLootCondition;
+import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 import net.minecraft.predicate.StatePredicate;
 
 public class ModLootTableProvider extends FabricBlockLootTableProvider {
@@ -26,6 +27,10 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModFluids.MACERATING_SOY_CAULDRON, ModItems.SOYBEANS);
         addDrop(ModFluids.REDOX_REACTION_CAULDRON, Blocks.CAULDRON);
         addDrop(ModFluids.REDOX_REACTION_CAULDRON, ModItems.PULVERIZED_NICKEL);
+        addDrop(ModFluids.YEAST_STARTER_CAULDRON, Blocks.CAULDRON);
+        addDrop(ModFluids.YEAST_STARTER_CAULDRON, drops(ModItems.FLOUR, UniformLootNumberProvider.create(4, 11)));
+        addDrop(ModFluids.YEAST_CAULDRON, Blocks.CAULDRON);
+        addDrop(ModFluids.YEAST_CAULDRON, ModItems.YEAST);
 
         addDrop(ModFluids.COPPER_SULFATE_CAULDRON, Blocks.CAULDRON);
         addDrop(ModFluids.NICKEL_SULFATE_CAULDRON, Blocks.CAULDRON);
