@@ -29,6 +29,7 @@ import com.breakingfemme.block.entity.ModBlockEntities;
 import com.breakingfemme.datagen.ModBlockTagProvider;
 import com.breakingfemme.fluid.ModFluids;
 import com.breakingfemme.item.ModItems;
+import com.breakingfemme.recipe.ModRecipes;
 import com.breakingfemme.screen.ModScreenHandlers;
 
 public class BreakingFemme implements ModInitializer {
@@ -48,6 +49,7 @@ public class BreakingFemme implements ModInitializer {
 		ModFluids.registerModFluids();
 		ModBlockEntities.registerBlockEntities();
 		ModScreenHandlers.registerScreenHandlers();
+		ModRecipes.registerRecipes();
 
 		//Farmers sell soybeans at level 1
 		TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 1, factories -> {

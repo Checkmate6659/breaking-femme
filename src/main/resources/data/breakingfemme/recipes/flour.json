@@ -1,0 +1,11 @@
+{
+    "type": "breakingfemme:grinding",
+    "input":
+    {
+        "item": "minecraft:wheat"
+    },
+    "output":
+    {
+        "item": "breakingfemme:flour"
+    }
+}

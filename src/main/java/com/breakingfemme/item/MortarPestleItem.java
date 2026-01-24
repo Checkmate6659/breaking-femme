@@ -1,5 +1,9 @@
 package com.breakingfemme.item;
 
+import java.util.Optional;
+
+import com.breakingfemme.recipe.GrindingRecipe;
+
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -46,9 +50,9 @@ public class MortarPestleItem extends Item {
         if(hand != Hand.MAIN_HAND) //must use main hand
             return TypedActionResult.fail(user.getStackInHand(hand));
 
-        //TODO: check if this is an actual recipe before trying to grind it, otherwise fail!
-        Item processed_item = user.getStackInHand(Hand.OFF_HAND).getItem();
-        if(processed_item == Items.AIR) //replace this with function that checks if recipe present
+        Optional<GrindingRecipe> match = world.getRecipeManager()
+            .getFirstMatch(GrindingRecipe.Type.INSTANCE, user.getInventory(), world);
+        if(!match.isPresent())
             return TypedActionResult.fail(user.getStackInHand(hand));
 
         return ItemUsage.consumeHeldItem(world, user, hand);
@@ -84,8 +88,15 @@ public class MortarPestleItem extends Item {
         }
 
         if (user instanceof PlayerEntity) {
-            ItemStack itemStack = new ItemStack(Items.IRON_NUGGET); //TODO: replace with proper recipe result or loot table
+            //get correct recipe (again) and its output item
             PlayerEntity playerEntity = (PlayerEntity)user;
+            Optional<GrindingRecipe> match = world.getRecipeManager()
+                .getFirstMatch(GrindingRecipe.Type.INSTANCE, playerEntity.getInventory(), world);
+            if(!match.isPresent()) //a modded item that changed/disappeared should have been ground => do nothing.
+                return stack;
+            GrindingRecipe recipe = match.get(); //we know match.isPresent here
+
+            ItemStack itemStack = recipe.getOutput(world.getRegistryManager());
             if (!playerEntity.getInventory().insertStack(itemStack)) {
                 playerEntity.dropItem(itemStack, false);
             }

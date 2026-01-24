@@ -1,0 +1,11 @@
+{
+    "type": "breakingfemme:grinding",
+    "input":
+    {
+        "tag": "c:ingots/copper"
+    },
+    "output":
+    {
+        "item": "breakingfemme:pulverized_copper"
+    }
+}
