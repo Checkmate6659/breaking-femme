@@ -17,6 +17,8 @@ import net.minecraft.util.Identifier;
 public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
     //common tags for compatibility with other mods
     //wiki.fabricmc.net/community:common_tags
+    //a lot more stuff here, but only vanilla: https://github.com/FabricMC/fabric-api/tree/HEAD/fabric-convention-tags-v2/src/generated/resources/data/c/tags
+    //generation code: https://github.com/FabricMC/fabric-api/tree/dd6ff61bde15cc0dc6b2ff28866419fd4732082d/fabric-convention-tags-v2/src/datagen/java/net/fabricmc/fabric/impl/tag/convention/datagen/generators
     public static final TagKey<Item> STONES = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "stones"));
     public static final TagKey<Item> COPPER_INGOT = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "ingots/copper"));
     public static final TagKey<Item> NICKEL_INGOT = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "ingots/nickel"));
