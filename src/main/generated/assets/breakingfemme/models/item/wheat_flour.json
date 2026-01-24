@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "breakingfemme:item/flour"
+    "layer0": "breakingfemme:item/wheat_flour"
   }
 }
