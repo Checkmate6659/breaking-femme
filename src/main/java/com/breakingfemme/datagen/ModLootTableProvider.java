@@ -9,7 +9,6 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.block.Blocks;
 import net.minecraft.loot.condition.BlockStatePropertyLootCondition;
-import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 import net.minecraft.predicate.StatePredicate;
 
 public class ModLootTableProvider extends FabricBlockLootTableProvider {
@@ -23,15 +22,8 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
             .properties(StatePredicate.Builder.create().exactMatch(SoyCropBlock.AGE, SoyCropBlock.MAX_AGE));
         addDrop(ModBlocks.SOY_CROP, cropDrops(ModBlocks.SOY_CROP, ModItems.SOYBEANS, ModItems.SOYBEANS, builder));
 
-        addDrop(ModFluids.MACERATING_SOY_CAULDRON, Blocks.CAULDRON);
-        addDrop(ModFluids.MACERATING_SOY_CAULDRON, ModItems.SOYBEANS);
-        addDrop(ModFluids.REDOX_REACTION_CAULDRON, Blocks.CAULDRON);
-        addDrop(ModFluids.REDOX_REACTION_CAULDRON, ModItems.PULVERIZED_NICKEL);
-        addDrop(ModFluids.YEAST_STARTER_CAULDRON, Blocks.CAULDRON);
-        addDrop(ModFluids.YEAST_STARTER_CAULDRON, drops(ModItems.FLOUR, UniformLootNumberProvider.create(4, 11)));
-        addDrop(ModFluids.YEAST_CAULDRON, Blocks.CAULDRON);
-        addDrop(ModFluids.YEAST_CAULDRON, ModItems.YEAST);
-
+        //Cauldron blocks where we should just pick up the cauldron
+        //Where we need an extra item too we must do it by hand
         addDrop(ModFluids.COPPER_SULFATE_CAULDRON, Blocks.CAULDRON);
         addDrop(ModFluids.NICKEL_SULFATE_CAULDRON, Blocks.CAULDRON);
         addDrop(ModFluids.ET32_CAULDRON, Blocks.CAULDRON);
