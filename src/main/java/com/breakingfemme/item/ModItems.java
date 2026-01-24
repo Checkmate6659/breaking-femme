@@ -30,7 +30,11 @@ public class ModItems {
     public static final Item COPPER_SULFATE = registerItem("copper_sulfate", new Item(new FabricItemSettings()));
     public static final Item NICKEL_SULFATE = registerItem("nickel_sulfate", new Item(new FabricItemSettings()));
 
+    //ingot mold for low temperature cooking
+    public static final Item INGOT_MOLD = registerItem("ingot_mold", new Item(new FabricItemSettings()));
+
     public static final Item SKIMMED_MILK_BUCKET = registerItem("skimmed_milk_bucket", new MilkBucketItem(new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
+    public static final Item MILKGOT_MOLD = registerItem("milkgot_mold", new Item(new FabricItemSettings()));
     public static final Item MILKGOT = registerItem("milkgot", new Item(new FabricItemSettings()));
 
     //TODO: make custom item class and implement mortar and pestle recipes: crushing wheat into flour, and copper/nickel ingots into dust.
@@ -57,6 +61,7 @@ public class ModItems {
         return Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, name), item);
     }
 
+    //TODO: potentially re-organize this later
     public static final ItemGroup ITEM_GROUP = Registry.register(Registries.ITEM_GROUP,
         new Identifier(BreakingFemme.MOD_ID, "breakingfemme"),
         FabricItemGroup.builder().displayName(Text.translatable("itemgroup.breakingfemme"))
@@ -84,7 +89,9 @@ public class ModItems {
             entries.add(ModFluids.TAR_BUCKET);
             entries.add(STEROLS);
             entries.add(ModFluids.STEROL_SOLUTION_BUCKET);
+            entries.add(INGOT_MOLD);
             entries.add(SKIMMED_MILK_BUCKET);
+            entries.add(MILKGOT_MOLD);
             entries.add(MILKGOT);
             entries.add(ModFluids.ANDROSTADIENEDIONE_BUCKET);
             entries.add(CRUDE_ESTRONE);

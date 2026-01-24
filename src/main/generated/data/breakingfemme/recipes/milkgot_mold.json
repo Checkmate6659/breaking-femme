@@ -1,0 +1,38 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "milkgot_mold",
+  "ingredients": [
+    {
+      "item": "breakingfemme:skimmed_milk_bucket"
+    },
+    {
+      "item": "breakingfemme:ingot_mold"
+    },
+    {
+      "item": "breakingfemme:ingot_mold"
+    },
+    {
+      "item": "breakingfemme:ingot_mold"
+    },
+    {
+      "item": "breakingfemme:ingot_mold"
+    },
+    {
+      "item": "breakingfemme:ingot_mold"
+    },
+    {
+      "item": "breakingfemme:ingot_mold"
+    },
+    {
+      "item": "breakingfemme:ingot_mold"
+    },
+    {
+      "item": "breakingfemme:ingot_mold"
+    }
+  ],
+  "result": {
+    "count": 8,
+    "item": "breakingfemme:milkgot_mold"
+  }
+}

@@ -35,6 +35,14 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         CookingRecipeJsonBuilder.createSmelting(Ingredient.fromTag(ModItemTagProvider.PULVERIZED_NICKEL), RecipeCategory.MISC, ModItems.NICKEL_INGOT, 0, 200).criterion(hasItem(ModItems.PULVERIZED_NICKEL), conditionsFromTag(ModItemTagProvider.PULVERIZED_NICKEL)).offerTo(exporter, "nickel_ingot_from_remelting");
         CookingRecipeJsonBuilder.createBlasting(Ingredient.fromTag(ModItemTagProvider.PULVERIZED_NICKEL), RecipeCategory.MISC, ModItems.NICKEL_INGOT, 0, 100).criterion(hasItem(ModItems.PULVERIZED_NICKEL), conditionsFromTag(ModItemTagProvider.PULVERIZED_NICKEL)).offerTo(exporter, "nickel_ingot_from_remelting_blasting");
 
+        //clay ingot mold
+        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, ModItems.INGOT_MOLD, 2).input('#', Items.CLAY_BALL).pattern("# #").pattern(" # ").group("ingot_mold").criterion(hasItem(Items.CLAY_BALL), conditionsFromItem(Items.CLAY_BALL)).offerTo(exporter);
+
+        //milkgot processing
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.MILKGOT_MOLD, 8).input(ModItems.SKIMMED_MILK_BUCKET).input(Ingredient.ofItems(ModItems.INGOT_MOLD), 8).group("milkgot_mold").criterion(hasItem(ModItems.SKIMMED_MILK_BUCKET), conditionsFromItem(ModItems.SKIMMED_MILK_BUCKET)).offerTo(exporter);
+        CookingRecipeJsonBuilder.createSmelting(Ingredient.ofItems(ModItems.MILKGOT_MOLD), RecipeCategory.MISC, ModItems.MILKGOT, 0, 200).criterion(hasItem(ModItems.MILKGOT_MOLD), conditionsFromItem(ModItems.MILKGOT_MOLD)).offerTo(exporter, "milkgot");
+        CookingRecipeJsonBuilder.createBlasting(Ingredient.ofItems(ModItems.MILKGOT_MOLD), RecipeCategory.MISC, ModItems.MILKGOT, 0, 100).criterion(hasItem(ModItems.MILKGOT_MOLD), conditionsFromItem(ModItems.MILKGOT_MOLD)).offerTo(exporter, "milkgot_blasting");
+
         //fermenter parts
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.FERMENTER_PANEL.asItem(), 16).input('#', ItemTags.PLANKS).input('-', Items.IRON_BARS).pattern("###").pattern("---").pattern("###").group("fermenter_panel").criterion(hasItem(Items.IRON_BARS), conditionsFromItem(Items.IRON_BARS)).offerTo(exporter);
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.FERMENTER_TOP.asItem(), 4).input('#', ItemTags.PLANKS).input('-', Items.IRON_INGOT).pattern(" - ").pattern("###").group("fermenter_top").criterion(hasItem(Items.IRON_INGOT), conditionsFromItem(Items.IRON_INGOT)).offerTo(exporter);
