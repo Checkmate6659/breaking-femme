@@ -61,8 +61,8 @@ public class BreakingFemme implements ModInitializer {
 		ModRecipes.registerRecipes();
 		ModSounds.registerSounds();
 
-		//Farmers sell soybeans at level 1
-		TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 1, factories -> {
+		//Farmers sell soybeans at level 3 (yes... they won't sell it to people they won't trust! it's their only known source of HRT)
+		TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 3, factories -> {
 			factories.add((entity, random) -> new TradeOffer(
 				new ItemStack(Items.EMERALD, 10), //10 emeralds for a singular bean... and you only get 3 of them.
 				new ItemStack(ModItems.SOYBEANS),
@@ -77,6 +77,7 @@ public class BreakingFemme implements ModInitializer {
 				1, 10, 0.05f
 			));
 		});
+		//TODO: make it that a few (not many) villagers buy estrogen in exchange for loads of emeralds
 
 		//generate nickel in the overworld
 		BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES, NICKEL_ORE_PLACED_FEATURE);
