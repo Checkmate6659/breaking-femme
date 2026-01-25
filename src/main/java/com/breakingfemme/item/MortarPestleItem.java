@@ -2,6 +2,7 @@ package com.breakingfemme.item;
 
 import java.util.Optional;
 
+import com.breakingfemme.ModSounds;
 import com.breakingfemme.recipe.GrindingRecipe;
 
 import net.minecraft.advancement.criterion.Criteria;
@@ -42,7 +43,7 @@ public class MortarPestleItem extends Item {
 
     @Override
 	public SoundEvent getDrinkSound() {
-		return SoundEvents.BLOCK_GRAVEL_BREAK; //TODO: custom sound effect?
+		return ModSounds.GRINDING; //custom sound effect
 	}
 
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {

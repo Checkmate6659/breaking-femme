@@ -11,6 +11,7 @@ public class ModSounds {
 		return Registry.register(Registries.SOUND_EVENT, identifier, SoundEvent.of(identifier));
 	}
 
+	public static final SoundEvent GRINDING = registerSound("grinding");
 	public static final SoundEvent CRANK = registerSound("crank");
 
 	public static void registerSounds() {
