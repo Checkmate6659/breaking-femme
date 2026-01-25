@@ -33,6 +33,7 @@ public class ModItems {
     //ingot mold for low temperature cooking
     public static final Item INGOT_MOLD = registerItem("ingot_mold", new Item(new FabricItemSettings()));
 
+    //could do it so that the filled mold spills if you run too fast
     public static final Item SKIMMED_MILK_BUCKET = registerItem("skimmed_milk_bucket", new MilkBucketItem(new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
     public static final Item MILKGOT_MOLD = registerItem("milkgot_mold", new Item(new FabricItemSettings()));
     public static final Item MILKGOT = registerItem("milkgot", new Item(new FabricItemSettings()));
@@ -89,6 +90,7 @@ public class ModItems {
             entries.add(ModFluids.TAR_BUCKET);
             entries.add(STEROLS);
             entries.add(ModFluids.STEROL_SOLUTION_BUCKET);
+            entries.add(ModBlocks.MILK_SEPARATOR);
             entries.add(INGOT_MOLD);
             entries.add(SKIMMED_MILK_BUCKET);
             entries.add(MILKGOT_MOLD);
