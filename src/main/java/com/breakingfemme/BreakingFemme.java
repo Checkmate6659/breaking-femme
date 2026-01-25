@@ -50,6 +50,7 @@ public class BreakingFemme implements ModInitializer {
 		ModBlockEntities.registerBlockEntities();
 		ModScreenHandlers.registerScreenHandlers();
 		ModRecipes.registerRecipes();
+		ModSounds.registerSounds();
 
 		//Farmers sell soybeans at level 1
 		TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 1, factories -> {

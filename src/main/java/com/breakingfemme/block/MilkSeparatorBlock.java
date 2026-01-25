@@ -1,5 +1,6 @@
 package com.breakingfemme.block;
 
+import com.breakingfemme.ModSounds;
 import com.breakingfemme.item.ModItems;
 
 import net.minecraft.block.Block;
@@ -31,10 +32,12 @@ public class MilkSeparatorBlock extends Block {
     public static final BooleanProperty HAS_SKIMMED_MILK = BooleanProperty.of("has_skimmed_milk");
     public static final BooleanProperty HAS_CREAM = BooleanProperty.of("has_cream");
     public static final IntProperty SPINS = IntProperty.of("spins", 0, 15); //need to click the thing 16 times to centrifuge it properly
+    public static final BooleanProperty IS_SPINNING = BooleanProperty.of("spinning"); //and theres a bit of a cooldown
+    protected static final int SPIN_TICKS = 20; //spins for 20 ticks (ie 1 second) on every click
 
     public MilkSeparatorBlock(Settings settings) {
         super(settings);
-        this.setDefaultState(this.stateManager.getDefaultState().with(HAS_MILK, false).with(HAS_SKIMMED_MILK, false).with(HAS_CREAM, false));
+        this.setDefaultState(this.stateManager.getDefaultState().with(HAS_MILK, false).with(HAS_SKIMMED_MILK, false).with(HAS_CREAM, false).with(SPINS, 0).with(IS_SPINNING, false));
     }
 
     @Override
@@ -44,6 +47,7 @@ public class MilkSeparatorBlock extends Block {
         builder.add(HAS_SKIMMED_MILK);
         builder.add(HAS_CREAM);
         builder.add(SPINS);
+        builder.add(IS_SPINNING);
     }
 
     //TODO: can we create an actual sloped shape? sth like this
@@ -66,7 +70,7 @@ public class MilkSeparatorBlock extends Block {
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit)
     {
-        if(world.isClient())
+        if(world.isClient() || state.get(IS_SPINNING)) //don't do stuff on client side, or if already spinning
             return ActionResult.SUCCESS;
 
         Item in_hand = player.getStackInHand(hand).getItem();
@@ -111,28 +115,28 @@ public class MilkSeparatorBlock extends Block {
         //crank if not interacting with special items & there is milk in the machine
         else if(state.get(HAS_MILK))
         {
-            //TODO: crank sound
-            world.playSound(null, pos, SoundEvents.BLOCK_ANVIL_LAND, SoundCategory.BLOCKS);
+            world.playSound(null, pos, ModSounds.CRANK, SoundCategory.BLOCKS);
 
-            //we could even do some kind of crude animation with the top/side textures with a SPINNING property
-            //could we do the timing for it to stop spinning in the animation?
-            //button/pressure plate block (button is unfindable, pressure plate is AbstractPressurePlateBlock)
-
-            player.addExhaustion(2.0f); //exhaust player A LOT (full hunger -> 2 hunger bars if starting unsaturated)
+            player.addExhaustion(3.0f); //exhaust player A LOT (remove 6 hunger bars for 16 clicks: 4 exhaustion = 1/2 hunger bar)
             if(state.get(SPINS) == 15) //reached the end!
-                world.setBlockState(pos, state.with(HAS_MILK, false).with(HAS_SKIMMED_MILK, true).with(HAS_CREAM, true).with(SPINS, 0));
-            else //add a spin
-                world.setBlockState(pos, state.cycle(SPINS));
+                world.setBlockState(pos, state.with(HAS_MILK, false).with(HAS_SKIMMED_MILK, true).with(HAS_CREAM, true).with(SPINS, 0).with(IS_SPINNING, true));
+            else //add a spin, make it spinning for 16 ticks
+                world.setBlockState(pos, state.cycle(SPINS).with(IS_SPINNING, true));
+            world.scheduleBlockTick(pos, this, SPIN_TICKS);
         }
 
         return ActionResult.SUCCESS;
+    }
+
+    public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+        world.setBlockState(pos, state.with(IS_SPINNING, false));
     }
 
     //random tick: undo a spin, the products recombine if you go take a break
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random)
     {
         int spins = state.get(SPINS);
-        if(spins > 0)
+        if(spins > 0 && !state.get(IS_SPINNING)) //don't undo a spin if the thing is literally in use
             world.setBlockState(pos, state.with(SPINS, spins - 1));
     }
 }

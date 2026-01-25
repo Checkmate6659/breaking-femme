@@ -1,0 +1,6 @@
+{
+  "crank": {
+    "subtitle": "sound.breakingfemme.crank",
+    "sounds": ["breakingfemme:crank1","breakingfemme:crank2","breakingfemme:crank3","breakingfemme:crank4","breakingfemme:crank5","breakingfemme:crank6"]
+  }
+}

@@ -40,6 +40,7 @@
     "block.breakingfemme.fermenter_mixer": "Fermenter Mixer",
     "block.breakingfemme.fermenter_heater": "Fermenter Heater",
     "block.entity.breakingfemme.fermenter": "Fermenter",
+    "sound.breakingfemme.crank": "Crank turns",
     "death.attack.novikov": "%1$s tried to violate the Novikov self-consistency principle",
     "itemgroup.breakingfemme": "Breaking Femme"
 }

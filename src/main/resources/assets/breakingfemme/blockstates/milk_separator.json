@@ -1,387 +1,771 @@
 {
   "variants": {
-    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=0": {
+    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=0,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=0,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
+    },
+    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=1,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
     },
-    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=1": {
+    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=1,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
     },
-    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=2": {
+    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=2,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=2,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
+    },
+    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=3,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
     },
-    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=3": {
+    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=3,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
     },
-    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=4": {
+    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=4,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=4,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
+    },
+    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=5,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
     },
-    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=5": {
+    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=5,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
     },
-    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=6": {
+    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=6,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=6,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
+    },
+    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=7,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
     },
-    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=7": {
+    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=7,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
     },
-    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=8": {
+    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=8,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=8,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
+    },
+    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=9,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
     },
-    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=9": {
+    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=9,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
     },
-    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=10": {
+    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=10,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=10,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
+    },
+    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=11,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
     },
-    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=11": {
+    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=11,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
     },
-    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=12": {
+    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=12,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=12,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
+    },
+    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=13,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
     },
-    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=13": {
+    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=13,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
     },
-    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=14": {
+    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=14,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=14,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
+    },
+    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=15,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
     },
-    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=15": {
+    "has_cream=true,has_milk=true,has_skimmed_milk=true,spins=15,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
     },
-    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=0": {
+    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=0,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=0,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
+    },
+    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=1,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
     },
-    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=1": {
+    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=1,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
     },
-    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=2": {
+    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=2,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=2,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
+    },
+    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=3,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
     },
-    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=3": {
+    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=3,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
     },
-    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=4": {
+    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=4,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=4,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
+    },
+    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=5,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
     },
-    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=5": {
+    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=5,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
     },
-    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=6": {
+    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=6,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=6,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
+    },
+    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=7,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
     },
-    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=7": {
+    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=7,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
     },
-    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=8": {
+    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=8,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=8,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
+    },
+    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=9,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
     },
-    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=9": {
+    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=9,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
     },
-    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=10": {
+    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=10,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=10,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
+    },
+    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=11,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
     },
-    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=11": {
+    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=11,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
     },
-    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=12": {
+    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=12,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=12,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
+    },
+    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=13,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
     },
-    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=13": {
+    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=13,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
     },
-    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=14": {
+    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=14,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=14,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
+    },
+    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=15,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
     },
-    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=15": {
+    "has_cream=true,has_milk=true,has_skimmed_milk=false,spins=15,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
     },
-    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=0": {
+    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=0,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=0,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
+    },
+    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=1,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
     },
-    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=1": {
+    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=1,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
     },
-    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=2": {
+    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=2,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=2,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
+    },
+    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=3,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
     },
-    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=3": {
+    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=3,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
     },
-    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=4": {
+    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=4,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=4,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
+    },
+    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=5,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
     },
-    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=5": {
+    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=5,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
     },
-    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=6": {
+    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=6,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=6,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
+    },
+    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=7,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
     },
-    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=7": {
+    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=7,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
     },
-    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=8": {
+    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=8,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=8,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
+    },
+    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=9,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
     },
-    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=9": {
+    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=9,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
     },
-    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=10": {
+    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=10,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=10,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
+    },
+    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=11,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
     },
-    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=11": {
+    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=11,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
     },
-    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=12": {
+    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=12,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=12,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
+    },
+    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=13,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
     },
-    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=13": {
+    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=13,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
     },
-    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=14": {
+    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=14,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=14,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
+    },
+    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=15,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
     },
-    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=15": {
+    "has_cream=true,has_milk=false,has_skimmed_milk=true,spins=15,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
     },
-    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=0": {
+    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=0,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=0,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
+    },
+    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=1,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
     },
-    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=1": {
+    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=1,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
     },
-    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=2": {
+    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=2,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=2,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
+    },
+    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=3,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
     },
-    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=3": {
+    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=3,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
     },
-    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=4": {
+    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=4,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=4,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
+    },
+    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=5,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
     },
-    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=5": {
+    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=5,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
     },
-    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=6": {
+    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=6,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=6,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
+    },
+    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=7,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
     },
-    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=7": {
+    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=7,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
     },
-    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=8": {
+    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=8,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=8,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
+    },
+    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=9,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
     },
-    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=9": {
+    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=9,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
     },
-    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=10": {
+    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=10,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=10,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
+    },
+    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=11,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
     },
-    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=11": {
+    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=11,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
     },
-    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=12": {
+    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=12,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=12,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
+    },
+    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=13,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
     },
-    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=13": {
+    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=13,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
     },
-    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=14": {
+    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=14,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=14,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
     },
-    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=15": {
+    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=15,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=true,has_milk=false,has_skimmed_milk=false,spins=15,spinning=false": {
       "model": "breakingfemme:block/milk_separator_cream"
+    },
+    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=0,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
     },
-    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=0": {
+    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=0,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=1": {
+    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=1,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=1,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=2": {
+    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=2,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=2,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=3": {
+    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=3,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=3,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=4": {
+    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=4,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=4,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=5": {
+    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=5,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=5,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=6": {
+    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=6,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=6,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=7": {
+    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=7,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=7,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=8": {
+    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=8,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=8,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=9": {
+    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=9,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=9,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=10": {
+    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=10,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=10,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=11": {
+    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=11,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=11,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=12": {
+    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=12,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=12,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=13": {
+    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=13,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=13,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=14": {
+    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=14,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=14,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=15": {
+    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=15,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=true,has_skimmed_milk=true,spins=15,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=0": {
+    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=0,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=0,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=1": {
+    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=1,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=1,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=2": {
+    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=2,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=2,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=3": {
+    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=3,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=3,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=4": {
+    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=4,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=4,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=5": {
+    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=5,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=5,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=6": {
+    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=6,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=6,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=7": {
+    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=7,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=7,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=8": {
+    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=8,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=8,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=9": {
+    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=9,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=9,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=10": {
+    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=10,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=10,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=11": {
+    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=11,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=11,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=12": {
+    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=12,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=12,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=13": {
+    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=13,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=13,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=14": {
+    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=14,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=14,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=15": {
+    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=15,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=true,has_skimmed_milk=false,spins=15,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=0": {
+    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=0,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=0,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=1": {
+    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=1,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=1,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=2": {
+    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=2,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=2,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=3": {
+    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=3,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=3,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=4": {
+    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=4,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=4,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=5": {
+    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=5,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=5,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=6": {
+    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=6,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=6,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=7": {
+    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=7,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=7,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=8": {
+    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=8,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=8,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=9": {
+    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=9,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=9,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=10": {
+    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=10,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=10,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=11": {
+    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=11,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=11,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=12": {
+    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=12,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=12,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=13": {
+    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=13,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=13,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=14": {
+    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=14,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=14,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=15": {
+    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=15,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=false,has_skimmed_milk=true,spins=15,spinning=false": {
       "model": "breakingfemme:block/milk_separator_milk"
     },
-    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=0": {
+    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=0,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=0,spinning=false": {
       "model": "breakingfemme:block/milk_separator_empty"
     },
-    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=1": {
+    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=1,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=1,spinning=false": {
       "model": "breakingfemme:block/milk_separator_empty"
     },
-    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=2": {
+    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=2,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=2,spinning=false": {
       "model": "breakingfemme:block/milk_separator_empty"
     },
-    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=3": {
+    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=3,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=3,spinning=false": {
       "model": "breakingfemme:block/milk_separator_empty"
     },
-    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=4": {
+    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=4,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=4,spinning=false": {
       "model": "breakingfemme:block/milk_separator_empty"
     },
-    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=5": {
+    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=5,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=5,spinning=false": {
       "model": "breakingfemme:block/milk_separator_empty"
     },
-    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=6": {
+    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=6,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=6,spinning=false": {
       "model": "breakingfemme:block/milk_separator_empty"
     },
-    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=7": {
+    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=7,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=7,spinning=false": {
       "model": "breakingfemme:block/milk_separator_empty"
     },
-    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=8": {
+    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=8,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=8,spinning=false": {
       "model": "breakingfemme:block/milk_separator_empty"
     },
-    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=9": {
+    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=9,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=9,spinning=false": {
       "model": "breakingfemme:block/milk_separator_empty"
     },
-    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=10": {
+    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=10,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=10,spinning=false": {
       "model": "breakingfemme:block/milk_separator_empty"
     },
-    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=11": {
+    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=11,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=11,spinning=false": {
       "model": "breakingfemme:block/milk_separator_empty"
     },
-    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=12": {
+    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=12,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=12,spinning=false": {
       "model": "breakingfemme:block/milk_separator_empty"
     },
-    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=13": {
+    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=13,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=13,spinning=false": {
       "model": "breakingfemme:block/milk_separator_empty"
     },
-    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=14": {
+    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=14,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=14,spinning=false": {
       "model": "breakingfemme:block/milk_separator_empty"
     },
-    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=15": {
+    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=15,spinning=true": {
+      "model": "breakingfemme:block/milk_separator_spin"
+    },
+    "has_cream=false,has_milk=false,has_skimmed_milk=false,spins=15,spinning=false": {
       "model": "breakingfemme:block/milk_separator_empty"
     }
   }
