@@ -25,7 +25,8 @@ public class ModItems {
     public static final Item SOYBEANS = registerItem("soybeans", new AliasedBlockItem(ModBlocks.SOY_CROP,
         new FabricItemSettings().food(new FoodComponent.Builder().hunger(2).saturationModifier(0.25f).build())));
 
-    //Metals
+    //Copper, Nickel
+    public static final Item RAW_NICKEL = registerItem("raw_nickel", new Item(new FabricItemSettings()));
     public static final Item NICKEL_INGOT = registerItem("nickel_ingot", new Item(new FabricItemSettings()));
     public static final Item PULVERIZED_COPPER = registerItem("pulverized_copper", new Item(new FabricItemSettings()));
     public static final Item PULVERIZED_NICKEL = registerItem("pulverized_nickel", new Item(new FabricItemSettings()));
@@ -71,7 +72,11 @@ public class ModItems {
         .icon(() -> new ItemStack(ModItems.PURE_ESTRADIOL_CRYSTALS)).entries((displayContext, entries) -> {
             entries.add(MORTAR_PESTLE);
             entries.add(SOYBEANS);
+            entries.add(ModBlocks.NICKEL_ORE);
+            entries.add(ModBlocks.DEEPSLATE_NICKEL_ORE);
+            entries.add(RAW_NICKEL);
             entries.add(NICKEL_INGOT);
+            entries.add(ModBlocks.NICKEL_BLOCK);
             entries.add(PULVERIZED_COPPER);
             entries.add(PULVERIZED_NICKEL);
             entries.add(COPPER_SULFATE);

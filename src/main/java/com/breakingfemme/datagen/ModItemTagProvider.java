@@ -2,6 +2,7 @@ package com.breakingfemme.datagen;
 
 import java.util.concurrent.CompletableFuture;
 
+import com.breakingfemme.block.ModBlocks;
 import com.breakingfemme.item.ModItems;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -22,6 +23,11 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
     //also check this out
     //https://github.com/MehVahdJukaar/Supplementaries/wiki/Mod-Integration
     public static final TagKey<Item> STONES = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "stones"));
+    public static final TagKey<Item> NICKEL_ORES = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "ores/nickel")); //non-conventional
+    public static final TagKey<Item> ORES_STONE = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "ores_in_ground/stone"));
+    public static final TagKey<Item> ORES_DEEPSLATE = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "ores_in_ground/deepslate"));
+    public static final TagKey<Item> NICKEL_BLOCK = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "storage_blocks/nickel")); //non-conventional
+    public static final TagKey<Item> RAW_NICKEL = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "raw_materials/nickel")); //non-conventional
     public static final TagKey<Item> COPPER_INGOT = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "ingots/copper"));
     public static final TagKey<Item> NICKEL_INGOT = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "ingots/nickel"));
     public static final TagKey<Item> PULVERIZED_COPPER = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "dusts/copper"));
@@ -48,6 +54,12 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
         getOrCreateTagBuilder(STONES).add(Blocks.DIORITE.asItem());
         getOrCreateTagBuilder(STONES).add(Blocks.ANDESITE.asItem());
         getOrCreateTagBuilder(STONES).add(Blocks.TUFF.asItem());
+        getOrCreateTagBuilder(NICKEL_BLOCK).add(ModBlocks.NICKEL_BLOCK.asItem());
+        getOrCreateTagBuilder(NICKEL_ORES).add(ModBlocks.NICKEL_ORE.asItem());
+        getOrCreateTagBuilder(NICKEL_ORES).add(ModBlocks.DEEPSLATE_NICKEL_ORE.asItem());
+        getOrCreateTagBuilder(ORES_STONE).add(ModBlocks.NICKEL_ORE.asItem());
+        getOrCreateTagBuilder(ORES_DEEPSLATE).add(ModBlocks.DEEPSLATE_NICKEL_ORE.asItem());
+        getOrCreateTagBuilder(RAW_NICKEL).add(ModItems.RAW_NICKEL);
         getOrCreateTagBuilder(COPPER_INGOT).add(Items.COPPER_INGOT);
         getOrCreateTagBuilder(NICKEL_INGOT).add(ModItems.NICKEL_INGOT);
         getOrCreateTagBuilder(PULVERIZED_COPPER).add(ModItems.PULVERIZED_COPPER);

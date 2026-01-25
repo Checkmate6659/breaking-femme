@@ -21,14 +21,18 @@ public class ModModelProvider extends FabricModelProvider {
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
         blockStateModelGenerator.registerCrop(ModBlocks.SOY_CROP, SoyCropBlock.AGE, 0, 1, 2, 3);
 
-        //registering fermenter panels by hand, because they are unlike any vanilla blocks
+        blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.NICKEL_BLOCK);
+        blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.NICKEL_ORE);
+        blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.DEEPSLATE_NICKEL_ORE);
 
+        //registering fermenter panels by hand, because they are unlike any vanilla blocks
         //cauldrons need to be handmade apparently
     }
 
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
         //regular items
+        itemModelGenerator.register(ModItems.RAW_NICKEL, Models.GENERATED);
         itemModelGenerator.register(ModItems.NICKEL_INGOT, Models.GENERATED);
         itemModelGenerator.register(ModItems.PULVERIZED_COPPER, Models.GENERATED);
         itemModelGenerator.register(ModItems.PULVERIZED_NICKEL, Models.GENERATED);

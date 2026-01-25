@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_milkgot_mold": {
+    "has_raw_nickel": {
       "conditions": {
         "items": [
           {
             "items": [
-              "breakingfemme:milkgot_mold"
+              "breakingfemme:raw_nickel"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:milkgot_smelting"
+        "recipe": "minecraft:nickel_ingot_from_blasting_raw_nickel"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_milkgot_mold",
+      "has_raw_nickel",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:milkgot_smelting"
+      "minecraft:nickel_ingot_from_blasting_raw_nickel"
     ]
   },
   "sends_telemetry_event": false

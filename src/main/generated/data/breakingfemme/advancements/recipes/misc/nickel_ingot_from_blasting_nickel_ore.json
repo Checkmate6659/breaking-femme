@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_creamgot_mold": {
+    "has_nickel_ore": {
       "conditions": {
         "items": [
           {
             "items": [
-              "breakingfemme:creamgot_mold"
+              "breakingfemme:nickel_ore"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:creamgot_smelting"
+        "recipe": "minecraft:nickel_ingot_from_blasting_nickel_ore"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_creamgot_mold",
+      "has_nickel_ore",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:creamgot_smelting"
+      "minecraft:nickel_ingot_from_blasting_nickel_ore"
     ]
   },
   "sends_telemetry_event": false

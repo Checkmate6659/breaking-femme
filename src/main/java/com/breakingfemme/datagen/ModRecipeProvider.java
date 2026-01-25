@@ -1,11 +1,11 @@
 package com.breakingfemme.datagen;
 
-import java.util.List;
 import java.util.function.Consumer;
 
 import com.breakingfemme.block.ModBlocks;
 import com.breakingfemme.fluid.ModFluids;
 import com.breakingfemme.item.ModItems;
+import com.google.common.collect.ImmutableList;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
@@ -26,6 +26,11 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
     @Override
     public void generate(Consumer<RecipeJsonProvider> exporter) {
+        //nickel ore smelting/blasting, nickel ingot compactification
+        offerSmelting(exporter, ImmutableList.of(ModItems.RAW_NICKEL, ModBlocks.NICKEL_ORE, ModBlocks.DEEPSLATE_NICKEL_ORE), RecipeCategory.MISC, ModItems.NICKEL_INGOT, 0.7f, 200, "nickel_ingot");
+        offerBlasting(exporter, ImmutableList.of(ModItems.RAW_NICKEL, ModBlocks.NICKEL_ORE, ModBlocks.DEEPSLATE_NICKEL_ORE), RecipeCategory.MISC, ModItems.NICKEL_INGOT, 0.7f, 100, "nickel_ingot_blasting");
+        offerReversibleCompactingRecipes(exporter, RecipeCategory.MISC, ModItems.NICKEL_INGOT, RecipeCategory.BUILDING_BLOCKS, ModBlocks.NICKEL_BLOCK);
+
         //mortar and pestle
         ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, ModItems.MORTAR_PESTLE).input('#', ModItemTagProvider.STONES).pattern("# #").pattern("###").group("mortar_pestle").criterion(hasItem(Blocks.STONE), conditionsFromTag(ItemTags.STONE_CRAFTING_MATERIALS)).offerTo(exporter);
 
@@ -40,12 +45,12 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
         //milkgot processing
         ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.MILKGOT_MOLD, 8).input(ModItems.SKIMMED_MILK_BUCKET).input(Ingredient.ofItems(ModItems.INGOT_MOLD), 8).group("milkgot_mold").criterion(hasItem(ModItems.SKIMMED_MILK_BUCKET), conditionsFromItem(ModItems.SKIMMED_MILK_BUCKET)).offerTo(exporter);
-        CookingRecipeJsonBuilder.createSmelting(Ingredient.ofItems(ModItems.MILKGOT_MOLD), RecipeCategory.MISC, ModItems.MILKGOT, 0, 200).criterion(hasItem(ModItems.MILKGOT_MOLD), conditionsFromItem(ModItems.MILKGOT_MOLD)).offerTo(exporter, "milkgot_smelting");
+        CookingRecipeJsonBuilder.createSmelting(Ingredient.ofItems(ModItems.MILKGOT_MOLD), RecipeCategory.MISC, ModItems.MILKGOT, 0, 200).criterion(hasItem(ModItems.MILKGOT_MOLD), conditionsFromItem(ModItems.MILKGOT_MOLD)).offerTo(exporter, "milkgot");
         CookingRecipeJsonBuilder.createBlasting(Ingredient.ofItems(ModItems.MILKGOT_MOLD), RecipeCategory.MISC, ModItems.MILKGOT, 0, 100).criterion(hasItem(ModItems.MILKGOT_MOLD), conditionsFromItem(ModItems.MILKGOT_MOLD)).offerTo(exporter, "milkgot_blasting");
         offerShapelessRecipe(exporter, ModItems.INGOT_MOLD, ModItems.MILKGOT_MOLD, "milkgot_discarding", 1);
 
         //creamgot processing
-        CookingRecipeJsonBuilder.createSmelting(Ingredient.ofItems(ModItems.CREAMGOT_MOLD), RecipeCategory.MISC, ModItems.CREAMGOT, 0, 200).criterion(hasItem(ModItems.CREAMGOT_MOLD), conditionsFromItem(ModItems.CREAMGOT_MOLD)).offerTo(exporter, "creamgot_smelting");
+        CookingRecipeJsonBuilder.createSmelting(Ingredient.ofItems(ModItems.CREAMGOT_MOLD), RecipeCategory.MISC, ModItems.CREAMGOT, 0, 200).criterion(hasItem(ModItems.CREAMGOT_MOLD), conditionsFromItem(ModItems.CREAMGOT_MOLD)).offerTo(exporter, "creamgot");
         CookingRecipeJsonBuilder.createBlasting(Ingredient.ofItems(ModItems.CREAMGOT_MOLD), RecipeCategory.MISC, ModItems.CREAMGOT, 0, 100).criterion(hasItem(ModItems.CREAMGOT_MOLD), conditionsFromItem(ModItems.CREAMGOT_MOLD)).offerTo(exporter, "creamgot_blasting");
         offerShapelessRecipe(exporter, ModItems.INGOT_MOLD, ModItems.CREAMGOT_MOLD, "creamgot_discarding", 1);
 
@@ -58,10 +63,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.FERMENTER_HEATER.asItem()).input('#', ModBlocks.FERMENTER_BOTTOM).input('-', Blocks.MAGMA_BLOCK.asItem()).input('w', Items.REDSTONE).input('U', Items.QUARTZ).pattern(" - ").pattern(" # ").pattern("UwU").group("fermenter_heater").criterion(hasItem(Items.MAGMA_BLOCK), conditionsFromItem(Items.MAGMA_BLOCK)).offerTo(exporter);
 
         //coal tar (can only use coal, NOT wood/charcoal, as it's not the same chemicals irl, wood tar doesn't contain nearly as much benzene or naphthalene for instance)
-        offerSmelting(exporter, List.of(Items.COAL), RecipeCategory.MISC, ModItems.TAR, 0, 200, "tar");
+        offerSmelting(exporter, ImmutableList.of(Items.COAL), RecipeCategory.MISC, ModItems.TAR, 0, 200, "tar");
         ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ModFluids.TAR_BUCKET).input(Items.BUCKET).input(Ingredient.ofItems(ModItems.TAR), 8).group("tar_bucket").criterion(hasItem(ModItems.TAR), conditionsFromItem(ModItems.TAR)).offerTo(exporter, "tar_bucket");
-
-        //smelting skimmed milk powder into milkgot causes the bucket to disappear, kind of an issue.
-        //offerSmelting(exporter, List.of(ModItems.SKIMMED_MILK_BUCKET), RecipeCategory.MISC, ModItems.MILKGOT, 0, 200, "milkgot");
     }
 }

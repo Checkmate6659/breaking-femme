@@ -22,13 +22,31 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
     //trying to make something compatible with blaze burners/low heaters etc (create & addons)
     public static final TagKey<Block> CREATE_HOT = TagKey.of(RegistryKeys.BLOCK, new Identifier("create", "passive_boiler_heaters"));
 
+    public static final TagKey<Block> NICKEL_ORES = TagKey.of(RegistryKeys.BLOCK, new Identifier("c", "ores/nickel"));
+    public static final TagKey<Block> ORES_STONE = TagKey.of(RegistryKeys.BLOCK, new Identifier("c", "ores_in_ground/stone"));
+    public static final TagKey<Block> ORES_DEEPSLATE = TagKey.of(RegistryKeys.BLOCK, new Identifier("c", "ores_in_ground/deepslate"));
+    public static final TagKey<Block> NICKEL_BLOCK = TagKey.of(RegistryKeys.BLOCK, new Identifier("c", "storage_blocks/nickel"));
+
     public ModBlockTagProvider(FabricDataOutput output, CompletableFuture<WrapperLookup> completableFuture) {
         super(output, completableFuture);
     }
 
     @Override
     protected void configure(WrapperLookup arg) {
-        //vanilla tags
+        //nickel tags
+        getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModBlocks.NICKEL_BLOCK);
+        getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModBlocks.NICKEL_ORE);
+        getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModBlocks.DEEPSLATE_NICKEL_ORE);
+        getOrCreateTagBuilder(BlockTags.NEEDS_STONE_TOOL).add(ModBlocks.NICKEL_BLOCK);
+        getOrCreateTagBuilder(BlockTags.NEEDS_STONE_TOOL).add(ModBlocks.NICKEL_ORE);
+        getOrCreateTagBuilder(BlockTags.NEEDS_STONE_TOOL).add(ModBlocks.DEEPSLATE_NICKEL_ORE);
+        getOrCreateTagBuilder(NICKEL_BLOCK).add(ModBlocks.NICKEL_BLOCK);
+        getOrCreateTagBuilder(NICKEL_ORES).add(ModBlocks.NICKEL_ORE);
+        getOrCreateTagBuilder(NICKEL_ORES).add(ModBlocks.DEEPSLATE_NICKEL_ORE);
+        getOrCreateTagBuilder(ORES_STONE).add(ModBlocks.NICKEL_ORE);
+        getOrCreateTagBuilder(ORES_DEEPSLATE).add(ModBlocks.DEEPSLATE_NICKEL_ORE);
+
+        //all the cauldrons, vanilla tags
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModFluids.MACERATING_SOY_CAULDRON);
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModFluids.REDOX_REACTION_CAULDRON);
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModFluids.YEAST_STARTER_CAULDRON);
@@ -52,8 +70,6 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(BlockTags.AXE_MINEABLE).add(ModBlocks.FERMENTER_MIXER);
         getOrCreateTagBuilder(BlockTags.AXE_MINEABLE).add(ModBlocks.FERMENTER_HEATER);
         getOrCreateTagBuilder(BlockTags.AXE_MINEABLE).add(ModBlocks.FERMENTER_CONTROLLER);
-
-        //conventional tags
 
         //custom block tags
         getOrCreateTagBuilder(HOT).add(Blocks.FIRE);
