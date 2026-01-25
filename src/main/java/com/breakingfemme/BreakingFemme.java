@@ -78,6 +78,7 @@ public class BreakingFemme implements ModInitializer {
 			));
 		});
 		//TODO: make it that a few (not many) villagers buy estrogen in exchange for loads of emeralds
+		//or a mixin that makes them pick up and consume the estrogen when thrown
 
 		//generate nickel in the overworld
 		BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES, NICKEL_ORE_PLACED_FEATURE);
