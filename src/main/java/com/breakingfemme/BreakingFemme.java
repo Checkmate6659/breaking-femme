@@ -1,6 +1,8 @@
 package com.breakingfemme;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
+import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
@@ -14,12 +16,16 @@ import net.minecraft.loot.condition.KilledByPlayerLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.function.SetCountLootFunction;
 import net.minecraft.loot.provider.number.BinomialLootNumberProvider;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.village.TradeOffer;
 import net.minecraft.village.VillagerProfession;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.GenerationStep;
+import net.minecraft.world.gen.feature.PlacedFeature;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,6 +41,9 @@ import com.breakingfemme.screen.ModScreenHandlers;
 public class BreakingFemme implements ModInitializer {
 	public static final String MOD_ID = "breakingfemme";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+
+	//register nickel ore generation
+	public static final RegistryKey<PlacedFeature> NICKEL_ORE_PLACED_FEATURE = RegistryKey.of(RegistryKeys.PLACED_FEATURE, Identifier.of(MOD_ID, "ore_nickel"));
 
 	@Override
 	public void onInitialize() {
@@ -68,6 +77,9 @@ public class BreakingFemme implements ModInitializer {
 				1, 10, 0.05f
 			));
 		});
+
+		//generate nickel in the overworld
+		BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES, NICKEL_ORE_PLACED_FEATURE);
 
 		//add (rare) nickel ingot drop to drowned, (8 times) more common when doing it by hand
 		Identifier LOOT_TABLE_ID = EntityType.DROWNED.getLootTableId();
