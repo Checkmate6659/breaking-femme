@@ -2,6 +2,7 @@ package com.breakingfemme.cauldron;
 
 import java.util.Map;
 
+import com.breakingfemme.BreakingFemme;
 import com.breakingfemme.fluid.ModFluids;
 import com.breakingfemme.item.ModItems;
 
@@ -15,8 +16,12 @@ import net.minecraft.entity.ItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import net.minecraft.world.event.GameEvent.Emitter;
@@ -66,11 +71,30 @@ public class SterolSolutionCauldronBlock extends AbstractCauldronBlock {
         world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5f, pos.getY() + 0.125f, pos.getZ() + 0.5f, new ItemStack(ModItems.STEROLS)));
     }
 
+    //boil off water to get the copper sulfate out
+    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+        //can only boil if the block is hot (or if its in the nether, free heating lol)
+        if(world.getDimension().ultrawarm() || BreakingFemme.isBlockHot(world, pos.down()))
+            onFireCollision(state, world, pos);
+    }
+
     public boolean isFull(BlockState state) {
         return true;
     }
 
     public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
         return 3;
+    }
+
+    //doing boiling effect when its hot
+    public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
+        if (world.getDimension().ultrawarm() || BreakingFemme.isBlockHot(world, pos.down())) {
+            if(random.nextInt(3) == 0)
+                world.playSound((double)pos.getX() + 0.5, (double)pos.getY() + 0.5, (double)pos.getZ() + 0.75, SoundEvents.BLOCK_BUBBLE_COLUMN_UPWARDS_AMBIENT, SoundCategory.BLOCKS, 192F + random.nextFloat() * 128F, random.nextFloat() * 0.7F + 0.6F, false);
+
+            for(int i = 0; i < random.nextInt(1) + 1; ++i) {
+                world.addParticle(ParticleTypes.BUBBLE_POP, (double)pos.getX() + 0.25F + random.nextFloat() * 0.5F, (double)pos.getY() + 0.9375, (double)pos.getZ() + 0.25F + random.nextFloat() * 0.5F, 0, 0.015625, 0);
+            }
+        }
     }
 }

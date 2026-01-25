@@ -242,9 +242,9 @@ public static void registerModFluids()
         YEAST_STARTER_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "yeast_starter_cauldron"), new YeastStarterCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
         YEAST_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "yeast_cauldron"), new YeastCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
         //for the fluids that go in cauldrons, instead of cauldron alone
-        COPPER_SULFATE_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "copper_sulfate_cauldron"), new CopperSulfateCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
+        COPPER_SULFATE_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "copper_sulfate_cauldron"), new CopperSulfateCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
         CauldronFluidContent.registerCauldron(COPPER_SULFATE_CAULDRON, STILL_COPPER_SULFATE, FluidConstants.BUCKET, null);
-        NICKEL_SULFATE_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "nickel_sulfate_cauldron"), new NickelSulfateCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
+        NICKEL_SULFATE_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "nickel_sulfate_cauldron"), new NickelSulfateCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
         CauldronFluidContent.registerCauldron(NICKEL_SULFATE_CAULDRON, STILL_NICKEL_SULFATE, FluidConstants.BUCKET, null);
         ET32_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "ethanol32_cauldron"), new Et32CauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
         CauldronFluidContent.registerCauldron(ET32_CAULDRON, STILL_ET32, FluidConstants.BOTTLE, Et32CauldronBlock.LEVEL);
@@ -252,7 +252,7 @@ public static void registerModFluids()
         CauldronFluidContent.registerCauldron(ET64_CAULDRON, STILL_ET64, FluidConstants.BOTTLE, Et64CauldronBlock.LEVEL);
         ET95_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "ethanol95_cauldron"), new Et95CauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
         CauldronFluidContent.registerCauldron(ET95_CAULDRON, STILL_ET95, FluidConstants.BOTTLE, Et95CauldronBlock.LEVEL);
-        STEROL_SOLUTION_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "sterol_solution_cauldron"), new SterolSolutionCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
+        STEROL_SOLUTION_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "sterol_solution_cauldron"), new SterolSolutionCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
         CauldronFluidContent.registerCauldron(STEROL_SOLUTION_CAULDRON, STILL_STEROL_SOLUTION, FluidConstants.BUCKET, null);
         ANDROSTADIENEDIONE_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "androstadienedione_solution_cauldron"), new AndrostadienedioneCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
         CauldronFluidContent.registerCauldron(ANDROSTADIENEDIONE_CAULDRON, STILL_ANDROSTADIENEDIONE, FluidConstants.BUCKET, null);
