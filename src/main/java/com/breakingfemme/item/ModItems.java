@@ -37,6 +37,8 @@ public class ModItems {
     public static final Item SKIMMED_MILK_BUCKET = registerItem("skimmed_milk_bucket", new MilkBucketItem(new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
     public static final Item MILKGOT_MOLD = registerItem("milkgot_mold", new Item(new FabricItemSettings()));
     public static final Item MILKGOT = registerItem("milkgot", new Item(new FabricItemSettings()));
+    public static final Item CREAMGOT_MOLD = registerItem("creamgot_mold", new Item(new FabricItemSettings()));
+    public static final Item CREAMGOT = registerItem("creamgot", new Item(new FabricItemSettings()));
 
     //TODO: make custom item class and implement mortar and pestle recipes: crushing wheat into flour, and copper/nickel ingots into dust.
     public static final Item MORTAR_PESTLE = registerItem("mortar_pestle", new MortarPestleItem(new FabricItemSettings().maxDamage(64)));
@@ -91,10 +93,12 @@ public class ModItems {
             entries.add(STEROLS);
             entries.add(ModFluids.STEROL_SOLUTION_BUCKET);
             entries.add(ModBlocks.MILK_SEPARATOR);
-            entries.add(INGOT_MOLD);
             entries.add(SKIMMED_MILK_BUCKET);
+            entries.add(INGOT_MOLD);
             entries.add(MILKGOT_MOLD);
             entries.add(MILKGOT);
+            entries.add(CREAMGOT_MOLD);
+            entries.add(CREAMGOT);
             entries.add(ModFluids.ANDROSTADIENEDIONE_BUCKET);
             entries.add(CRUDE_ESTRONE);
             entries.add(PURE_ESTRONE);

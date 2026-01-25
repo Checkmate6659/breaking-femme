@@ -105,7 +105,7 @@ public class MilkSeparatorBlock extends Block {
             {
                 world.setBlockState(pos, state.with(HAS_CREAM, false));
                 player.getStackInHand(hand).decrement(1);
-                ItemStack itemStack = new ItemStack(Items.TNT); //TODO: creamgot mold
+                ItemStack itemStack = new ItemStack(ModItems.CREAMGOT_MOLD);
                 if (!player.getInventory().insertStack(itemStack)) {
                     player.dropItem(itemStack, false);
                 }

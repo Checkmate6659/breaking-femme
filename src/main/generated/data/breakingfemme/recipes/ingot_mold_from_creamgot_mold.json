@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "creamgot_discarding",
+  "ingredients": [
+    {
+      "item": "breakingfemme:creamgot_mold"
+    }
+  ],
+  "result": {
+    "item": "breakingfemme:ingot_mold"
+  }
+}

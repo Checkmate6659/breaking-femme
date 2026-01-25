@@ -40,8 +40,14 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
         //milkgot processing
         ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.MILKGOT_MOLD, 8).input(ModItems.SKIMMED_MILK_BUCKET).input(Ingredient.ofItems(ModItems.INGOT_MOLD), 8).group("milkgot_mold").criterion(hasItem(ModItems.SKIMMED_MILK_BUCKET), conditionsFromItem(ModItems.SKIMMED_MILK_BUCKET)).offerTo(exporter);
-        CookingRecipeJsonBuilder.createSmelting(Ingredient.ofItems(ModItems.MILKGOT_MOLD), RecipeCategory.MISC, ModItems.MILKGOT, 0, 200).criterion(hasItem(ModItems.MILKGOT_MOLD), conditionsFromItem(ModItems.MILKGOT_MOLD)).offerTo(exporter, "milkgot");
+        CookingRecipeJsonBuilder.createSmelting(Ingredient.ofItems(ModItems.MILKGOT_MOLD), RecipeCategory.MISC, ModItems.MILKGOT, 0, 200).criterion(hasItem(ModItems.MILKGOT_MOLD), conditionsFromItem(ModItems.MILKGOT_MOLD)).offerTo(exporter, "milkgot_smelting");
         CookingRecipeJsonBuilder.createBlasting(Ingredient.ofItems(ModItems.MILKGOT_MOLD), RecipeCategory.MISC, ModItems.MILKGOT, 0, 100).criterion(hasItem(ModItems.MILKGOT_MOLD), conditionsFromItem(ModItems.MILKGOT_MOLD)).offerTo(exporter, "milkgot_blasting");
+        offerShapelessRecipe(exporter, ModItems.INGOT_MOLD, ModItems.MILKGOT_MOLD, "milkgot_discarding", 1);
+
+        //creamgot processing
+        CookingRecipeJsonBuilder.createSmelting(Ingredient.ofItems(ModItems.CREAMGOT_MOLD), RecipeCategory.MISC, ModItems.CREAMGOT, 0, 200).criterion(hasItem(ModItems.CREAMGOT_MOLD), conditionsFromItem(ModItems.CREAMGOT_MOLD)).offerTo(exporter, "creamgot_smelting");
+        CookingRecipeJsonBuilder.createBlasting(Ingredient.ofItems(ModItems.CREAMGOT_MOLD), RecipeCategory.MISC, ModItems.CREAMGOT, 0, 100).criterion(hasItem(ModItems.CREAMGOT_MOLD), conditionsFromItem(ModItems.CREAMGOT_MOLD)).offerTo(exporter, "creamgot_blasting");
+        offerShapelessRecipe(exporter, ModItems.INGOT_MOLD, ModItems.CREAMGOT_MOLD, "creamgot_discarding", 1);
 
         //fermenter parts
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.FERMENTER_PANEL.asItem(), 16).input('#', ItemTags.PLANKS).input('-', Items.IRON_BARS).pattern("###").pattern("---").pattern("###").group("fermenter_panel").criterion(hasItem(Items.IRON_BARS), conditionsFromItem(Items.IRON_BARS)).offerTo(exporter);
