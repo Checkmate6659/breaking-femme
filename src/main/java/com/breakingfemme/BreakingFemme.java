@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.BlockState;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -14,6 +15,7 @@ import net.minecraft.loot.LootPool;
 import net.minecraft.loot.condition.InvertedLootCondition;
 import net.minecraft.loot.condition.KilledByPlayerLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
+import net.minecraft.loot.function.ApplyBonusLootFunction;
 import net.minecraft.loot.function.SetCountLootFunction;
 import net.minecraft.loot.provider.number.BinomialLootNumberProvider;
 import net.minecraft.registry.RegistryKey;
@@ -91,13 +93,15 @@ public class BreakingFemme implements ModInitializer {
 				LootPool.Builder poolBuilderManual = LootPool.builder()
 					.conditionally(KilledByPlayerLootCondition.builder())
         	        .with(ItemEntry.builder(ModItems.NICKEL_INGOT))
-					.apply(SetCountLootFunction.builder(BinomialLootNumberProvider.create(1, 0.08f)));
+					.apply(SetCountLootFunction.builder(BinomialLootNumberProvider.create(1, 0.125f)))
+					.apply(ApplyBonusLootFunction.uniformBonusCount(Enchantments.LOOTING));
 
 				//automatic kill (1% chance of getting nickel)
 				LootPool.Builder poolBuilderAuto = LootPool.builder()
 					.conditionally(InvertedLootCondition.builder(KilledByPlayerLootCondition.builder()))
         	        .with(ItemEntry.builder(ModItems.NICKEL_INGOT))
-					.apply(SetCountLootFunction.builder(BinomialLootNumberProvider.create(1, 0.01f)));
+					.apply(SetCountLootFunction.builder(BinomialLootNumberProvider.create(1, 0.015625f)))
+					.apply(ApplyBonusLootFunction.uniformBonusCount(Enchantments.LOOTING)); //compat with create for instance
 
 				tableBuilder.pool(poolBuilderManual);
 				tableBuilder.pool(poolBuilderAuto);
