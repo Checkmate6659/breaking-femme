@@ -28,19 +28,26 @@ public class BreakingFemmeClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.FERMENTER_BOTTOM, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.FERMENTER_MIXER, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.FERMENTER_CONTROLLER, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.FERMENTER_AIRLOCK, RenderLayer.getCutout()); //can we do something to make block not see through itself??
+
+        ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
+            if (i == 0)
+                return 0x803F76E4; //default water color
+            return -1;
+        }, ModBlocks.FERMENTER_AIRLOCK);
 
         //fluids
         //macerating soy (cauldron only)
         ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
             if (i == 0)
-                return 0x80A0BBF2; //same color as et64, just more transparent 
+                return 0x80A0BBF2; //same color as et64, just more transparent
             return -1;
         }, ModFluids.MACERATING_SOY_CAULDRON);
 
         //redoxing copper sulfate (cauldron only)
         ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
             if (i == 0)
-                return 0x8033C1FF; //same color as copper sulfate, just more transparent 
+                return 0x8033C1FF; //same color as copper sulfate, just more transparent
             return -1;
         }, ModFluids.REDOX_REACTION_CAULDRON);
 

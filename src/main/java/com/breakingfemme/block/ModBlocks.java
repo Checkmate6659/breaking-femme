@@ -24,6 +24,7 @@ public class ModBlocks {
     public static final Block FERMENTER_BOTTOM = registerBlock("fermenter_bottom", new FermenterBottomBlock(FabricBlockSettings.copyOf(Blocks.SPRUCE_PLANKS).pistonBehavior(PistonBehavior.BLOCK)));
     public static final Block FERMENTER_MIXER = registerBlock("fermenter_mixer", new FermenterMixerBlock(FabricBlockSettings.copyOf(Blocks.SPRUCE_PLANKS).pistonBehavior(PistonBehavior.BLOCK)));
     public static final Block FERMENTER_HEATER = registerBlock("fermenter_heater", new FermenterHeaterBlock(FabricBlockSettings.copyOf(Blocks.SPRUCE_PLANKS).pistonBehavior(PistonBehavior.BLOCK)));
+    public static final Block FERMENTER_AIRLOCK = registerBlock("fermenter_airlock", new FermenterAirlockBlock(FabricBlockSettings.copyOf(Blocks.GLASS).noCollision().pistonBehavior(PistonBehavior.DESTROY)));
 
     //register block and item
     private static final Block registerBlock(String name, Block block)

@@ -77,5 +77,6 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModBlocks.FERMENTER_TOP.asItem(), Models.GENERATED);
         itemModelGenerator.register(ModBlocks.FERMENTER_BOTTOM.asItem(), Models.GENERATED);
         itemModelGenerator.register(ModBlocks.FERMENTER_CONTROLLER.asItem(), Models.GENERATED);
+        itemModelGenerator.register(ModBlocks.FERMENTER_AIRLOCK.asItem(), Models.GENERATED);
     }
 }

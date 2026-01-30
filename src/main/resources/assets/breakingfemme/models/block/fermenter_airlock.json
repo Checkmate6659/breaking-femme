@@ -1,0 +1,121 @@
+{
+	"textures": {
+		"particle": "minecraft:block/glass",
+		"texture": "breakingfemme:block/fermenter_airlock",
+		"water": "minecraft:block/water_still"
+	},
+	"elements": [
+		{
+			"from": [7, -2, 7],
+			"to": [9, 0, 9],
+			"faces": {
+				"north": {"uv": [12, 0, 16, 4], "texture": "#texture"},
+				"east": {"uv": [8, 0, 12, 4], "texture": "#texture"},
+				"south": {"uv": [0, 0, 4, 4], "texture": "#texture"},
+				"west": {"uv": [0, 0, 4, 4], "texture": "#texture"},
+				"up": {"uv": [4, 0, 8, 4], "texture": "#texture"}
+			}
+		},
+		{
+			"from": [8, 0, 7],
+			"to": [9, 4, 8],
+			"faces": {
+				"north": {"uv": [4, 4, 6, 12], "texture": "#texture"},
+				"east": {"uv": [0, 4, 2, 12], "texture": "#texture"},
+				"south": {"uv": [2, 4, 4, 12], "texture": "#texture"},
+				"west": {"uv": [8, 4, 6, 12], "texture": "#texture"},
+				"up": {"uv": [4, 4, 2, 6], "rotation": 180, "texture": "#texture"}
+			}
+		},
+		{
+			"from": [8, 3, 6],
+			"to": [9, 4, 7],
+			"faces": {
+				"east": {"uv": [0, 6, 2, 8], "rotation": 90, "texture": "#texture"},
+				"west": {"uv": [0, 6, 2, 8], "rotation": 90, "texture": "#texture"},
+				"up": {"uv": [2, 8, 4, 10], "texture": "#texture"},
+				"down": {"uv": [2, 10, 4, 12], "texture": "#texture"}
+			}
+		},
+		{
+			"from": [8, -2, 5],
+			"to": [9, 4, 6],
+			"faces": {
+				"north": {"uv": [2, 4, 4, 16], "texture": "#texture"},
+				"east": {"uv": [8, 4, 6, 16], "texture": "#texture"},
+				"south": {"uv": [4, 4, 6, 16], "texture": "#texture"},
+				"west": {"uv": [0, 4, 2, 16], "texture": "#texture"},
+				"up": {"uv": [2, 4, 4, 6], "texture": "#texture"}
+			}
+		},
+		{
+			"from": [8, -2, 4],
+			"to": [9, -1, 5],
+			"faces": {
+				"east": {"uv": [4, 12.5, 6, 14.5], "rotation": 270, "texture": "#texture"},
+				"west": {"uv": [0, 12.5, 2, 14.5], "rotation": 90, "texture": "#texture"},
+				"up": {"uv": [2, 14, 4, 16], "texture": "#texture"}
+			}
+		},
+		{
+			"from": [8, -2, 3],
+			"to": [9, 3, 4],
+			"faces": {
+				"north": {"uv": [4, 6, 6, 16], "texture": "#texture"},
+				"east": {"uv": [0, 6, 2, 16], "texture": "#texture"},
+				"south": {"uv": [2, 6, 4, 16], "texture": "#texture"},
+				"west": {"uv": [8, 6, 6, 16], "texture": "#texture"}
+			}
+		},
+		{
+			"from": [8, 3, 3],
+			"to": [9, 4, 4],
+			"faces": {
+				"north": {"uv": [2, 4, 4, 6], "texture": "#texture"},
+				"east": {"uv": [2, 4, 4, 6], "texture": "#texture"},
+				"south": {"uv": [2, 4, 4, 6], "texture": "#texture"},
+				"west": {"uv": [4, 4, 2, 6], "texture": "#texture"},
+				"up": {"uv": [8, 4, 10, 6], "texture": "#texture"}
+			}
+		},
+		{
+			"from": [8.00391, -0.99609, 5.00391],
+			"to": [8.99609, 0.99609, 5.99609],
+			"faces": {
+				"north": {"uv": [12, 0, 16, 8], "texture": "#water", "tintindex": 0},
+				"east": {"uv": [0, 4, 4, 12], "texture": "#water", "tintindex": 0},
+				"south": {"uv": [4, 0, 8, 8], "texture": "#water", "tintindex": 0},
+				"west": {"uv": [8, 4, 12, 12], "texture": "#water", "tintindex": 0},
+				"up": {"uv": [0, 0, 4, 4], "texture": "#water", "tintindex": 0}
+			}
+		},
+		{
+			"from": [8.00391, -0.99609, 3.00391],
+			"to": [8.99609, 0.99609, 3.99609],
+			"faces": {
+				"north": {"uv": [12, 0, 16, 8], "texture": "#water", "tintindex": 0},
+				"east": {"uv": [8, 4, 12, 12], "texture": "#water", "tintindex": 0},
+				"south": {"uv": [4, 0, 8, 8], "texture": "#water", "tintindex": 0},
+				"west": {"uv": [0, 4, 4, 12], "texture": "#water", "tintindex": 0},
+				"up": {"uv": [8, 0, 12, 4], "texture": "#water", "tintindex": 0}
+			}
+		},
+		{
+			"from": [8.00391, -1.98828, 3.00391],
+			"to": [8.99609, -0.99609, 5.99609],
+			"faces": {
+				"north": {"uv": [12, 8, 16, 12], "texture": "#water", "tintindex": 0},
+				"east": {"uv": [0, 12, 12, 16], "texture": "#water", "tintindex": 0},
+				"south": {"uv": [4, 8, 8, 12], "texture": "#water", "tintindex": 0},
+				"west": {"uv": [0, 12, 12, 16], "texture": "#water", "tintindex": 0}
+			}
+		},
+		{
+			"from": [8.25, -1, 4.25],
+			"to": [8.75, -1, 4.75],
+			"faces": {
+				"up": {"uv": [13, 13, 15, 15], "texture": "#water", "tintindex": 0}
+			}
+		}
+	]
+}
