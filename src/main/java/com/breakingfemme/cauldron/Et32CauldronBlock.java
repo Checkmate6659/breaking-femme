@@ -85,7 +85,7 @@ public class Et32CauldronBlock extends AbstractCauldronBlock {
             return ActionResult.success(world.isClient);
         });
 
-        //add Et64 to water cauldron: make water in all cases
+        //add Et32 to water cauldron: make water in all cases
         CauldronBehavior.WATER_CAULDRON_BEHAVIOR.put(ModItems.ET32_BOTTLE, (state, world, pos, player, hand, stack) -> {
             if (state.get(LEVEL) == 3) {
                 return ActionResult.PASS;
