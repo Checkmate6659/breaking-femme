@@ -70,6 +70,7 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
         getOrCreateTagBuilder(MILK_BUCKET).add(Items.MILK_BUCKET);
         getOrCreateTagBuilder(FLOUR).add(ModItems.FLOUR);
         getOrCreateTagBuilder(FLOUR_WHEAT).add(ModItems.FLOUR);
+        getOrCreateTagBuilder(YEAST).add(Items.NETHER_WART);
         getOrCreateTagBuilder(YEAST).add(ModItems.YEAST);
     }
 }

@@ -1,0 +1,55 @@
+{
+    "type": "breakingfemme:fermenting",
+    "input": [
+        {
+            "tag": "c:flours"
+        },
+        {
+            "item": "minecraft:wheat"
+        },
+        {
+            "tag": "c:yeast"
+        }
+    ],
+    "output":
+    {
+        "item": "breakingfemme:beer_bucket"
+    },
+    "stages": [
+        {
+            "min_time": 24000,
+            "max_time": 24000,
+            "min_temperature": 17.0,
+            "max_temperature": 24.0,
+            "mix": false
+        },
+        {
+            "min_time": 24000,
+            "max_time": 24000,
+            "min_temperature": 17.0,
+            "max_temperature": 24.0,
+            "mix": false
+        },
+        {
+            "min_time": 24000,
+            "max_time": 24000,
+            "min_temperature": 17.0,
+            "max_temperature": 24.0,
+            "mix": false
+        },
+        {
+            "min_time": 24000,
+            "max_time": 24000,
+            "min_temperature": 17.0,
+            "max_temperature": 24.0,
+            "mix": false
+        },
+        {
+            "min_time": 24000,
+            "max_time": 24000,
+            "min_temperature": 17.0,
+            "max_temperature": 24.0,
+            "mix": false
+        }
+    ]
+}

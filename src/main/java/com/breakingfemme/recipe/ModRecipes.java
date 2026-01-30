@@ -10,7 +10,12 @@ import net.minecraft.util.Identifier;
 public class ModRecipes {
     public static void registerRecipes()
     {
+        //grinding
         Registry.register(Registries.RECIPE_SERIALIZER, new Identifier(BreakingFemme.MOD_ID, GrindingRecipe.Serializer.ID), GrindingRecipe.Serializer.INSTANCE);
         Registry.register(Registries.RECIPE_TYPE, new Identifier(BreakingFemme.MOD_ID, GrindingRecipe.Type.ID), GrindingRecipe.Type.INSTANCE);
+
+        //fermenting
+        Registry.register(Registries.RECIPE_SERIALIZER, new Identifier(BreakingFemme.MOD_ID, FermentingRecipe.Serializer.ID), FermentingRecipe.Serializer.INSTANCE);
+        Registry.register(Registries.RECIPE_TYPE, new Identifier(BreakingFemme.MOD_ID, FermentingRecipe.Type.ID), FermentingRecipe.Type.INSTANCE);
     }
 }
