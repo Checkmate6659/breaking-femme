@@ -44,7 +44,7 @@ public class GrindingRecipe implements Recipe<PlayerInventory> {
         return true; //what is this even? my guess is its used for crafting table size (2*2 or 3*3)
     }
     //for some reason BookCloningRecipe only returns true if width and height are >= 3
-    //mb its to stop people from duping books in the survival crafting thing?
+    //mb its to stop people from duping books in the survival crafting thing? no it does work... idk then.
 
     @Override
     public Identifier getId() {
