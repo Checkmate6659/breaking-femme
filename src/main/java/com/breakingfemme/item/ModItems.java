@@ -44,12 +44,17 @@ public class ModItems {
     //mortar and pestle items
     public static final Item MORTAR_PESTLE = registerItem("mortar_pestle", new MortarPestleItem(new FabricItemSettings().maxDamage(64)));
 
-    //TODO: add drunkenness status effect and shader, of course using real research because that's the whole point of this mod.
+    //Flour and yeast, to make bread and beer
     public static final Item FLOUR = registerItem("wheat_flour", new Item(new FabricItemSettings().food(new FoodComponent.Builder().hunger(1).saturationModifier(0.5f).statusEffect(new StatusEffectInstance(StatusEffects.POISON, 100, 0), 0.0625F).build()))); //1/16 chance only to have problems (probably not realistic)
     public static final Item YEAST = registerItem("yeast", new Item(new FabricItemSettings().food(new FoodComponent.Builder().hunger(2).saturationModifier(1f).build())));
-    public static final Item ET32_BOTTLE = registerItem("ethanol32_bottle", new AlcoholDrinkItem(new FabricItemSettings().recipeRemainder(Items.GLASS_BOTTLE).food(new FoodComponent.Builder().hunger(0).saturationModifier(0f).alwaysEdible().build()), 1));
-    public static final Item ET64_BOTTLE = registerItem("ethanol64_bottle", new AlcoholDrinkItem(new FabricItemSettings().recipeRemainder(Items.GLASS_BOTTLE).food(new FoodComponent.Builder().hunger(0).saturationModifier(0f).alwaysEdible().build()), 2));
-    public static final Item ET95_BOTTLE = registerItem("ethanol95_bottle", new AlcoholDrinkItem(new FabricItemSettings().recipeRemainder(Items.GLASS_BOTTLE).food(new FoodComponent.Builder().hunger(0).saturationModifier(0f).alwaysEdible().build()), 3));
+
+    //Bottles of alcoholic "beverages"
+    //TODO: add drunkenness status effect and shader, of course using real research because that's the whole point of this mod.
+    public static final Item BEER_BOTTLE = registerItem("beer_bottle", new AlcoholDrinkItem(new FabricItemSettings().maxCount(1).recipeRemainder(Items.GLASS_BOTTLE).food(new FoodComponent.Builder().hunger(0).saturationModifier(0f).alwaysEdible().build()), 0));
+    public static final Item NETHER_BEER_BOTTLE = registerItem("nether_beer_bottle", new AlcoholDrinkItem(new FabricItemSettings().maxCount(1).recipeRemainder(Items.GLASS_BOTTLE).food(new FoodComponent.Builder().hunger(0).saturationModifier(0f).alwaysEdible().build()), 1));
+    public static final Item ET32_BOTTLE = registerItem("ethanol32_bottle", new AlcoholDrinkItem(new FabricItemSettings().maxCount(1).recipeRemainder(Items.GLASS_BOTTLE).food(new FoodComponent.Builder().hunger(0).saturationModifier(0f).alwaysEdible().build()), 1));
+    public static final Item ET64_BOTTLE = registerItem("ethanol64_bottle", new AlcoholDrinkItem(new FabricItemSettings().maxCount(1).recipeRemainder(Items.GLASS_BOTTLE).food(new FoodComponent.Builder().hunger(0).saturationModifier(0f).alwaysEdible().build()), 2));
+    public static final Item ET95_BOTTLE = registerItem("ethanol95_bottle", new AlcoholDrinkItem(new FabricItemSettings().maxCount(1).recipeRemainder(Items.GLASS_BOTTLE).food(new FoodComponent.Builder().hunger(0).saturationModifier(0f).alwaysEdible().build()), 3));
 
     //Coal tar processing
     public static final Item TAR = registerItem("tar", new Item(new FabricItemSettings()));
@@ -86,13 +91,15 @@ public class ModItems {
             entries.add(FLOUR);
             entries.add(YEAST);
             entries.add(ModFluids.BEER_BUCKET);
+            entries.add(BEER_BOTTLE);
             entries.add(ModFluids.NETHER_BEER_BUCKET);
-            entries.add(ET32_BOTTLE);
-            entries.add(ET64_BOTTLE);
-            entries.add(ET95_BOTTLE);
+            entries.add(NETHER_BEER_BOTTLE);
             entries.add(ModFluids.ET32_BUCKET);
+            entries.add(ET32_BOTTLE);
             entries.add(ModFluids.ET64_BUCKET);
+            entries.add(ET64_BOTTLE);
             entries.add(ModFluids.ET95_BUCKET);
+            entries.add(ET95_BOTTLE);
             entries.add(TAR);
             entries.add(ModFluids.TAR_BUCKET);
             entries.add(STEROLS);

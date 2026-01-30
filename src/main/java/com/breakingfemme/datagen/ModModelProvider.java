@@ -43,6 +43,8 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.PURE_ESTRONE, Models.GENERATED);
         itemModelGenerator.register(ModItems.PURE_ESTRADIOL_CRYSTALS, Models.GENERATED);
         itemModelGenerator.register(ModItems.PURE_ESTRADIOL_POWDER, Models.GENERATED);
+        itemModelGenerator.register(ModItems.BEER_BOTTLE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.NETHER_BEER_BOTTLE, Models.GENERATED);
         itemModelGenerator.register(ModItems.ET32_BOTTLE, Models.GENERATED);
         itemModelGenerator.register(ModItems.ET64_BOTTLE, Models.GENERATED);
         itemModelGenerator.register(ModItems.ET95_BOTTLE, Models.GENERATED);

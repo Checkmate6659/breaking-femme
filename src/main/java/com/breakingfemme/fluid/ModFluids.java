@@ -259,9 +259,9 @@ public static void registerModFluids()
         TAR_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "tar_cauldron"), new TarCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
         CauldronFluidContent.registerCauldron(TAR_CAULDRON, STILL_TAR, FluidConstants.BUCKET, null);
         BEER_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "beer_cauldron"), new BeerCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
-        CauldronFluidContent.registerCauldron(BEER_CAULDRON, STILL_BEER, FluidConstants.BUCKET, null);
+        CauldronFluidContent.registerCauldron(BEER_CAULDRON, STILL_BEER, FluidConstants.BOTTLE, BeerCauldronBlock.LEVEL);
         NETHER_BEER_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "nether_beer_cauldron"), new NetherBeerCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
-        CauldronFluidContent.registerCauldron(NETHER_BEER_CAULDRON, STILL_NETHER_BEER, FluidConstants.BUCKET, null);
+        CauldronFluidContent.registerCauldron(NETHER_BEER_CAULDRON, STILL_NETHER_BEER, FluidConstants.BOTTLE, NetherBeerCauldronBlock.LEVEL);
         SLUDGE_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "sludge_cauldron"), new SludgeCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
         CauldronFluidContent.registerCauldron(SLUDGE_CAULDRON, STILL_SLUDGE, FluidConstants.BUCKET, null);
         //AUTOGENERATION LABEL DO NOT TOUCH
