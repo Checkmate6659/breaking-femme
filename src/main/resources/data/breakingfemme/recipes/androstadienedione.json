@@ -1,0 +1,58 @@
+{
+    "type": "breakingfemme:fermenting",
+    "input": [
+        {
+            "tag": "minecraft:sugar"
+        },
+        {
+            "item": "breakingfemme:milkgot"
+        },
+        {
+            "item": "breakingfemme:sterols"
+        },
+        {
+            "tag": "breakingfemme:nickel_sulfate"
+        }
+    ],
+    "output":
+    {
+        "item": "breakingfemme:androstadienedione_solution_bucket"
+    },
+    "stages": [
+        {
+            "min_time": 3500,
+            "max_time": 4500,
+            "min_temperature": 57.0,
+            "max_temperature": 64.0,
+            "mix": true
+        },
+        {
+            "min_time": 60000,
+            "max_time": 60001,
+            "min_temperature": 25.0,
+            "max_temperature": 55.0,
+            "mix": true
+        },
+        {
+            "min_time": 60000,
+            "max_time": 72000,
+            "min_temperature": 25.0,
+            "max_temperature": 55.0,
+            "mix": true
+        },
+        {
+            "min_time": 1,
+            "max_time": 6000,
+            "min_temperature": 50.0,
+            "max_temperature": 127.0,
+            "mix": true
+        },
+        {
+            "min_time": 3000,
+            "max_time": 3001,
+            "min_temperature": 99.0,
+            "max_temperature": 127.0,
+            "mix": true
+        }
+    ]
+}

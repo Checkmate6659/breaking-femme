@@ -1,0 +1,55 @@
+{
+    "type": "breakingfemme:fermenting",
+    "input": [
+        {
+            "tag": "c:flours"
+        },
+        {
+            "item": "minecraft:wheat"
+        },
+        {
+            "tag": "minecraft:nether_wart"
+        }
+    ],
+    "output":
+    {
+        "item": "breakingfemme:nether_beer_bucket"
+    },
+    "stages": [
+        {
+            "min_time": 24000,
+            "max_time": 24000,
+            "min_temperature": 95.0,
+            "max_temperature": 127.0,
+            "mix": false
+        },
+        {
+            "min_time": 24000,
+            "max_time": 24000,
+            "min_temperature": 90.0,
+            "max_temperature": 95.0,
+            "mix": true
+        },
+        {
+            "min_time": 24000,
+            "max_time": 24000,
+            "min_temperature": 85.0,
+            "max_temperature": 90.0,
+            "mix": false
+        },
+        {
+            "min_time": 24000,
+            "max_time": 24000,
+            "min_temperature": 80.0,
+            "max_temperature": 85.0,
+            "mix": true
+        },
+        {
+            "min_time": 24000,
+            "max_time": 24000,
+            "min_temperature": 99.0,
+            "max_temperature": 127.0,
+            "mix": false
+        }
+    ]
+}
