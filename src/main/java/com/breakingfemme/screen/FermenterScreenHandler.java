@@ -21,12 +21,12 @@ public class FermenterScreenHandler extends ScreenHandler {
     public FermenterScreenHandler(int syncId, PlayerInventory inv, PacketByteBuf buf)
     {
         this(syncId, inv, inv.player.getWorld().getBlockEntity(buf.readBlockPos()),
-            new ArrayPropertyDelegate(25)); //this 25 is for the 25 params
+            new ArrayPropertyDelegate(9)); //this 9 is for the 9 params
     }
 
     public FermenterScreenHandler(int syncId, PlayerInventory pinv, BlockEntity blockEntity, PropertyDelegate arrayPropertyDelegate) {
         super(ModScreenHandlers.FERMENTER_SCREEN_HANDLER, syncId);
-        checkSize(pinv, 25); //again, 25 for 25 params
+        checkSize(pinv, 9); //again, 9 for 9 params
         this.inventory = ((Inventory)blockEntity);
         pinv.onOpen(pinv.player);
         this.propertyDelegate = arrayPropertyDelegate;
@@ -34,6 +34,8 @@ public class FermenterScreenHandler extends ScreenHandler {
 
         //slot positions: 4 input and 4 output slots; outputs can accept only water
         //TODO: should we put output slots first? then shift clicking water would always put it in the outputs by priority
+        //TODO: make it so that output slots CANNOT accept water buckets while fermenting!
+        //otherwise a water bucket could be replaced by the product
         this.addSlot(new Slot(inventory, 0, 38, 34));
         this.addSlot(new Slot(inventory, 1, 56, 34));
         this.addSlot(new Slot(inventory, 2, 38, 52));
@@ -61,44 +63,16 @@ public class FermenterScreenHandler extends ScreenHandler {
 
     public int getThermometerHeight() //get which pixel the thermometer should stop at (on the overlay (red) part of the thermometer), excluding rounded top
     {
-        int temperature = propertyDelegate.get(24); //2^24 times temp in celsius
+        int temperature = propertyDelegate.get(3); //2^24 times temp in celsius
         temperature = 70 - (temperature >> 25); //70 if 0°C, 20 if 100°C (so each pixel is 2°C)
         if(temperature < 17) temperature = 17; //top of the thermometer, slightly above 100°C
         else if(temperature > 72) temperature = 72; //slightly below 0°C
         return temperature;
     }
 
-    public int getBubbleColor(int stage) //24 different colors, 0 white, 1 brown, 2 gray, 3 black etc., 24 is empty (transparent picture)
+    public int getBubbleColor(int stage)
     {
-        //preliminary cases
-        if(stage < 0 || stage >= 5) return 24;
-        if(propertyDelegate.get(1) == FermenterBlockEntity.STAGE_NOT_IN_USE) return 24;
-        if(propertyDelegate.get(1) < stage) return 24;
-        
-        //if current stage: pick between white bubble (conditions satisfied) or gray (not satisfied)
-        int color = 0; //white bubble by default
-        if(stage == propertyDelegate.get(1))
-        {
-            int temperature = propertyDelegate.get(24); //2^24 times temp in celsius
-            int lbound = propertyDelegate.get(13 + stage);
-            int ubound = propertyDelegate.get(18 + stage);
-            if(temperature < lbound || temperature > ubound) //incorrect temperature: show brown bubble
-                color = 1;
-        }
-        else //successfully completed stage: show color corresponding to middle temp of lower/upper bounds
-        {
-            //these are 2^24 times the lower/upper temperatures in degrees.
-            int lbound = propertyDelegate.get(13 + stage);
-            int ubound = propertyDelegate.get(18 + stage);
-            int middle = (lbound + ubound + 16777216) >> 25; //this is in degrees celsius, the +16777216 is for rounding (becomes 1/2 after shift)
-            if(middle > 100) middle = 100; //max shown is 100°C
-            else if(middle < 9) middle = 9; //min is 0-9°C interval, so we set it to 9°C
-            //color logic: 0-9°C is highest (22), >=100°C is lowest (2), even numbers only; no mixing yet
-            color = ((119 - middle) / 10) * 2;
-            //TODO: add mixing requirement (or not), which adds 1 to color variable (darker bubbles)
-        }
-
-        return color;
+        return propertyDelegate.get(stage + 4);
     }
 
     @Override

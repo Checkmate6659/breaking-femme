@@ -1,10 +1,11 @@
 package com.breakingfemme.block.entity;
 
-import java.util.List;
 import java.util.Optional;
 
+import com.breakingfemme.BreakingFemme;
 import com.breakingfemme.fluid.ModFluids;
 import com.breakingfemme.item.ModItems;
+import com.breakingfemme.recipe.FermentingRecipe;
 import com.breakingfemme.screen.FermenterScreenHandler;
 
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
@@ -13,12 +14,10 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.registry.Registries;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -35,26 +34,25 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
     public static final int STAGE_NOT_IN_USE = 5;
     private static final int OUTPUT_SLOT_BEGIN = 4; //output slots must be right after all input slots
 
-    protected final PropertyDelegate propertyDelegate; //the PropertyDelegate is used for client<->server syncing
+    protected final PropertyDelegate propertyDelegate; //the PropertyDelegate is used for client<->server syncing (i mean here its really more like server->client, the only client->server is the inventory)
 
-    //TODO: do custom recipe format in jsons
+    private boolean waiting_for_recipe_loading = false;
+    private String deferred_recipe = "minecraft:air"; //this is because when calling readNbt, the world is null, so cannot get its recipe manager immediately
+
     private int capacity = 1; //0 for incorrect multiblock, 1 for smallest, 4 to largest; TODO: should be floor((number of enclosed tiles + 10) / 9)
     private int current_stage = STAGE_NOT_IN_USE; //the fermentation's current stage (always goes from 0 to 4 when in use, 5 ie STAGE_NOT_IN_USE when not in use)
     private int stage_progress = 0; //progress of current stage, in ticks
-    private int min_progress[] = { 0, 0, 0, 0, 0 }; //min progress before stage complete
-    private int max_progress[] = { 0, 0, 0, 0, 0 }; //max progress before failure
-    private float min_temp[] = { 0, 0, 0, 0, 0 }; //temperature bounds
-    private float max_temp[] = { 0, 0, 0, 0, 0 };
-    private Item result_item = Items.COBBLESTONE; //crappy failsafe. at least we know if something is wrong. (TODO: write this in mod docs) (TODO: actually write docs)
+    private FermentingRecipe recipe = FermentingRecipe.NONE; //this should be NONE only when the fermenter is not in use
     private float temperature = -69420.0f; //in °C; initial value is for initialization to environment temperature
+    private boolean is_mixing = false; //will be derived from multiblock checking
     private int grace_time = 0; //accumulated time with wrong conditions. adds 4 if wrong, removes 1 if right, min is 0. if exceeds a certain value, then the recipe fails.
-    //NOTE: maybe grace time won't need to be in there? idk yet tho.
-    //also, MIXING should be in the property delegate. as its required for bubble colors.
 
     public FermenterBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.FERMENTER_BLOCK_ENTITY, pos, state);
         this.propertyDelegate = new PropertyDelegate() {
             @Override
+            //the bubble colors need to be done in this function
+            //as we cannot send an integer recipe identifier
             public int get(int index) {
                 if(index == 0)
                     return capacity;
@@ -62,18 +60,19 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
                     return current_stage;
                 else if(index == 2)
                     return stage_progress;
-                else if(index < 8)
-                    return min_progress[index - 3];
-                else if(index < 13)
-                    return max_progress[index - 8];
-                else if(index < 18)
-                    return Math.round(Math.min(min_temp[index - 13], 127.42f) * 16777216f); //*2^24 to not lose too much precision, but temp shall never exceed 128°C (even 100°C) so no issues there
-                else if(index < 23)
-                    return Math.round(Math.min(max_temp[index - 18], 127.42f) * 16777216f);
-                else if(index == 23)
-                    return grace_time;
-                else if(index == 24)
+                else if(index == 3)
                     return Math.round(Math.min(temperature, 127.42f) * 16777216f);
+                else if(index < 9) //what color does the (index - 4)th bubble need to be??
+                {
+                    //24 different colors, 0 white, 1 brown, 2 gray, 3 black etc., 24 is empty (transparent picture)
+                    int stage = index - 4; //0 to 4
+                    if(stage > current_stage) //future stages
+                        return 24; //draw nothing
+                    else if(stage == current_stage)
+                        return conditionsMet() ? 0 : 1; //white if conditions ok, brown if not
+                    else //past successfully completed stages
+                        return recipe.bubbleColor(stage);
+                }
                 return 0;
             }
 
@@ -85,25 +84,20 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
                     current_stage = value;
                 else if(index == 2)
                     stage_progress = value;
-                else if(index < 8)
-                    min_progress[index - 3] = value;
-                else if(index < 13)
-                    max_progress[index - 8] = value;
-                else if(index < 18)
-                    min_temp[index - 13] = ((float)value) * 5.960464477539063e-08f; //*2^-24;
-                else if(index < 23)
-                    max_temp[index - 18] = ((float)value) * 5.960464477539063e-08f;
-                else if(index == 23)
-                    grace_time = value;
-                else if(index == 24)
+                else if(index == 3)
                     temperature = ((float)value) * 5.960464477539063e-08f;
             }
 
             @Override
             public int size() {
-                return 25; //number of values to synchronize
+                return 9; //number of values to synchronize
             }
         };
+    }
+
+    private boolean conditionsMet()
+    {
+        return recipe.conditionsMet(current_stage, stage_progress, temperature, is_mixing);
     }
 
     @Override
@@ -120,21 +114,67 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
     protected void writeNbt(NbtCompound nbt) //saving data from ingame to save
     {
         super.writeNbt(nbt);
-        Identifier id = Registries.ITEM.getId(result_item);
-        nbt.putString("result_item", id == null ? "minecraft:air" : id.toString());; //save this non-property-delegate property
-        Inventories.writeNbt(nbt, inventory);
-        for (int i = 0; i < propertyDelegate.size(); i++) //HACK: generic/lazy way to do this, but makes no sense in game. TODO: implement this differently.
-            nbt.putInt("fermenter.p" + String.valueOf(i), propertyDelegate.get(i));
+
+        //recipe identifier
+        Identifier id = recipe.getId();
+        nbt.putString("recipe", id.toString()); //save current recipe
+
+        //other variables that must be saved (cannot derive from multiblock checking)
+        nbt.putInt("stage", current_stage);
+        nbt.putInt("stage_progress", stage_progress);
+        nbt.putInt("grace_time", grace_time);
+        nbt.putFloat("temperature", temperature);
+
+        Inventories.writeNbt(nbt, inventory); //save inventory
     }
 
     @Override
     public void readNbt(NbtCompound nbt) //loading data from save to ingame
     {
         super.readNbt(nbt);
-        result_item = (Item)Registries.ITEM.get(new Identifier(nbt.getString("result_item")));
-        Inventories.readNbt(nbt, inventory);
-        for (int i = 0; i < propertyDelegate.size(); i++)
-            propertyDelegate.set(i, nbt.getInt("fermenter.p" + String.valueOf(i)));
+
+        waiting_for_recipe_loading = true;
+        deferred_recipe = nbt.getString("recipe"); //deferred recipe loading, because here this.world is null
+
+        Inventories.readNbt(nbt, inventory); //load inventory
+
+        //load other variables
+        current_stage = nbt.getInt("stage");
+        stage_progress = nbt.getInt("stage_progress");
+        grace_time = nbt.getInt("grace_time");
+        temperature = nbt.getFloat("temperature");
+    }
+
+    private boolean tryLoadRecipe()
+    {
+        //even if recipe loading fails, just give up, don't do it every single tick. this is just for loading anyway.
+        waiting_for_recipe_loading = false;
+
+        if(deferred_recipe.equals("minecraft:air")) //should be no recipe. this behavior is normal, don't print an error.
+        {
+            recipe = FermentingRecipe.NONE;
+            return true;
+        }
+
+        //we do not want an errored identifier to crash-loop and render the whole map useless
+        //so we instead set the recipe to NONE if an error occurs (recipe doesn't exist, or is not a fermenting recipe)
+        try
+        {
+            @SuppressWarnings("unchecked") //there is genuinely no better way I found to do it than this. i hate this line of code.
+            Optional<FermentingRecipe> opt_rec = (Optional<FermentingRecipe>)(world.getRecipeManager().get(new Identifier(deferred_recipe)));
+
+            recipe = opt_rec.get(); //if this errors, the recipe will just be NONE, because of the existing try block.
+
+            return true;
+        }
+        catch(Exception e)
+        {
+            BreakingFemme.LOGGER.error("Error when loading recipe " + deferred_recipe + ":");
+            BreakingFemme.LOGGER.error(e.toString());
+            recipe = FermentingRecipe.NONE;
+
+            return false;
+        }
     }
 
     @Override
@@ -152,6 +192,9 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
     //NOTE: doesn't take into account hot/cold blocks nearby, or if some panels are waterlogged
     //we should be able to waterlog panels to cool down the fermenter... but that should really be heat transfer
     //but it should be in here too: air temp is usually higher than water temp
+    //also, day temp higher than night temp... except if doing this in a cave/basement/cellar
+    //that actually is a real thing, fermenting beer and wine in a cellar to stabilize the temperature
+    //it turns out that the cool and stable temperatures from a cellar are perfect for making beer
     //TODO: come back when multiblock logic done
     public static float environment_temperature(World world, BlockPos pos)
     {
@@ -170,21 +213,40 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
         return temperature;
     }
     
+    private void checkMultiblock()
+    {
+        //TODO: implement proper multiblock check
+        //TODO: interrupt recipe if multiblock size changed (it may be possible, using bugs, to change barrel size without getting caught)
+        //could also be possible if the multiblock check isn't done every tick (would probably be too laggy)
+
+        temperature = environment_temperature(world, pos); //initial temp is that of environment
+        //actually, this should happen as soon as water buckets added in.
+        //like the buckets in the output slots should raise the heat capacity/carry energy
+    }
+
     public void tick(World world, BlockPos pos, BlockState state)
     {
         if(world.isClient()) return;
-        if(temperature == -69420.0f) //uninitialized temperature should be initialized to environment; cannot be done in constructor since world doesnt exist
+
+        //deferred recipe loading
+        if(waiting_for_recipe_loading)
+            tryLoadRecipe();
+
+        //temperature serves as "uninitialized detector"; temp cannot go this low naturally
+        if(temperature == -69420.0f)
         {
-            temperature = environment_temperature(world, pos); //initial temp is that of environment
+            checkMultiblock();
             markDirty(world, pos, state); //need to save, otherwise temp may get reset to envtemp next time the area is loaded
         }
 
         //update temperature
+        //TODO: move some of this stuff to multiblock check/private variables!
         float outside_temp = environment_temperature(world, pos);
-        int n_heaters = 0; //number of active heaters (TODO: count them)
+        int n_heaters = 0; //number of active heaters (TODO: count them in multiblock check)
         int volume = 8; //number of contained blocks
         int surface_area = 24; //number of panels the barrel is made out of (for a 2*2*2 barrel its 24) (TODO: calculate)
         float conductivity = surface_area * 0.91f; //in W / K; coef should be *0.91
+
         //discretized differential equation, but time accelerated by a factor of 72 (number of minecraft days in a real day)
         temperature += (n_heaters * 1e4 + conductivity * (outside_temp - temperature)) / (volume * 1.16139e6); //4.181e6 * 20 / 72; 4.181e6 is water heat capacity, 20 for ticks to seconds
 
@@ -195,14 +257,20 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
         for(int i = OUTPUT_SLOT_BEGIN; i < OUTPUT_SLOT_BEGIN + capacity; i++)
             if (this.getStack(i).getItem() != Items.WATER_BUCKET)
                 relevant_outputs_have_water = false;
-        if(current_stage == STAGE_NOT_IN_USE //not already fermenting
+        if(recipe.isNone() //not already fermenting
             && relevant_outputs_have_water)
         {
-            Optional<Item> result_option = resultItem(); //can we ferment the inputs into the outputs?
-            if(result_option.isPresent()) //if yes, the ingredients have already been removed
+            //TODO: optimization: only calling this method if inventory has changed
+            //because checking all recipes if they match every single frame could be a problem
+            //the more recipes, the laggier each block. kinda bad.
+            Optional<FermentingRecipe> opt_rec = optRecipe(); //can we ferment the inputs into the outputs?
+            if(opt_rec.isPresent()) //if yes (why does this NOT happen when it should??)
             {
-                result_item = result_option.get();
-                current_stage = 0;
+                consumeItems(); //consume input items
+                current_stage = 0; //start fermentation
+                stage_progress = 0;
+                grace_time = 0; //reset potential grace time
+                recipe = opt_rec.get(); //set recipe
 
                 //remove relevant water buckets
                 for(int i = OUTPUT_SLOT_BEGIN; i < OUTPUT_SLOT_BEGIN + capacity; i++)
@@ -213,51 +281,40 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
         }
 
         //handle the actual fermenting part
-        else if(current_stage != STAGE_NOT_IN_USE){
+        else if(!recipe.isNone()) {
             //handle fermentation progress
-            boolean conditions_wrong = false;
             stage_progress++;
-            if(stage_progress >= min_progress[current_stage]) //trying to transition from one stage to the next
+            if(recipe.canTransition(current_stage, stage_progress, temperature)) //trying to transition from one stage to the next
             {
-                if(stage_progress > max_progress[current_stage]) //failed because waited for too long
-                {
-                    conditions_wrong = true;
-                }
-                else if(current_stage + 1 == STAGE_NOT_IN_USE)
+                if(current_stage == 4) //finish fermentation
                 {
                     //success, so output desired item
                     current_stage = STAGE_NOT_IN_USE;
+                    grace_time = 0;
                     for(int i = OUTPUT_SLOT_BEGIN; i < OUTPUT_SLOT_BEGIN + capacity; i++)
-                        setStack(i, new ItemStack(result_item));
-
-                    markDirty(world, pos, state);
-                    return;
+                        setStack(i, recipe.getOutput(world.getRegistryManager()));
+                    recipe = FermentingRecipe.NONE; //reset the recipe AFTER we need it!!!
                 }
-                else if(temperature >= min_temp[current_stage + 1] && temperature <= max_temp[current_stage + 1])
+                else
                 {
                     //transition to next stage
                     current_stage++;
                     stage_progress = 0;
                 }
-            }
-
-            //if temperature not in the right bounds, then fail
-            //TODO: fail if mixed incorrectly (not mixed when it should be or backwards)
-            //TODO: add some leniency... especially for the mixing
-            if(temperature < min_temp[current_stage] || temperature > max_temp[current_stage])
-            {
-                conditions_wrong = true;
+                markDirty(world, pos, state);
             }
 
             if(grace_time > 0)
                 grace_time--;
-            if(conditions_wrong) //in wrong conditions
-                grace_time += 5;
+            if(!conditionsMet())
+                grace_time += 5; //so it adds 4 in total
 
             if(grace_time > 4800) //error accumulated to 1 minute
             {
                 //fail, so output sludge
-                current_stage = STAGE_NOT_IN_USE;                
+                current_stage = STAGE_NOT_IN_USE;
+                recipe = FermentingRecipe.NONE;
+                grace_time = 0;
                 for(int i = OUTPUT_SLOT_BEGIN; i < OUTPUT_SLOT_BEGIN + capacity; i++)
                     setStack(i, new ItemStack(ModFluids.SLUDGE_BUCKET));
 
@@ -266,80 +323,18 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
         }
     }
 
-    //check if inputs contain all required items in the required quantity (ie capacity)
-    //cannot run larger fermenter with less items as a smaller one btw
-    //supposes all items in the list are unique (will only be checked on load, as it is slower)
-    private boolean containsItems(List<Item> ingredients)
+    //remove 1 item in each non-empty slot
+    //when calling we know that this is a correct recipe
+    private void consumeItems()
     {
-        for (Item item : ingredients)
-            if(!hasItemInAmount(item, capacity))
-                return false;
-        return true;
+        for (int i = 0; i < OUTPUT_SLOT_BEGIN; i++)
+            if(!inventory.get(i).isEmpty())
+                inventory.get(i).decrement(1);
     }
 
-    //remove those items from there
-    //supposes all items in the list are unique (will only be checked on load, as it is slower)
-    private void removeItems(List<Item> ingredients)
+    private Optional<FermentingRecipe> optRecipe()
     {
-        for (Item item : ingredients)
-            removeItems(item, capacity);
-    }
-
-    private Optional<Item> resultItem()
-    {
-        //hardcoded recipes for now
-
-        //sugar + wheat -> beer bucket
-
-        //sugar + nether wart + wheat -> nether beer bucket
-
-        //sugar + milkgot + sterols + nickel sulfate -> androstadienedione bucket (consumed bucket? fix that later)
-        //mb replace water bucket with sugar? no issue with buckets then too
-        List<Item> list = List.of(
-            Items.SUGAR,
-            ModItems.MILKGOT,
-            ModItems.STEROLS,
-            ModItems.NICKEL_SULFATE
-        );
-
-        //need to do a loop at some point lol
-        if(containsItems(list))
-        {
-            //remove items from input slots
-            removeItems(list);
-
-            //set time and temperature constraints
-            //this is why jsons > hardcoding. and compatibility too.
-            min_progress[0] = 35; //middleground: 4 mc hours or 3min20 irl
-            min_progress[1] = 60; //5 mc days ie 1h40 irl; just split up in 2 for visualization
-            min_progress[2] = 60;
-            min_progress[3] = 1; //get enough time to heat up to sterilization temp
-            min_progress[4] = 30; //3 mc hours
-            /*min_progress[0] = 3500; //middleground: 4 mc hours or 3min20 irl
-            min_progress[1] = 60000; //5 mc days ie 1h40 irl; just split up in 2 for visualization
-            min_progress[2] = 60000;
-            min_progress[3] = 1; //get enough time to heat up to sterilization temp
-            min_progress[4] = 3000;*/ //3 mc hours
-            max_progress[0] = 4500; //adding half a mc hour of tolerance afterwards
-            max_progress[1] = 60001;
-            max_progress[2] = 72000; //adding half a mc day of tolerance
-            max_progress[3] = 6000; //yeah just heat up the mixture. you have 6 hours.
-            max_progress[4] = 3001; //really this doesnt matter too much as long as its >3000.
-            min_temp[0] = 57.0f; //selection step 57-64°C
-            min_temp[1] = 25.0f; //fermentation 25-50°C
-            min_temp[2] = 25.0f;
-            min_temp[3] = 50.0f; //transition towards sterilization
-            min_temp[4] = 100.0f; //sterilization
-            max_temp[0] = 64.0f; //selection
-            max_temp[1] = 55.0f;
-            max_temp[2] = 55.0f;
-            max_temp[3] = 120.0f; //doesnt matter too much, just to get the red color bubble lol
-            max_temp[4] = 69420.0f; //temp as high as we can, this is higher than any reachable temp
-
-            //return result item
-            return Optional.of(ModFluids.ANDROSTADIENEDIONE_BUCKET);
-        }
-
-        return Optional.empty();
+        //get first recipe that matches the fermenter's inventory
+        return world.getRecipeManager().getFirstMatch(FermentingRecipe.Type.INSTANCE, this, world);
     }
 }
