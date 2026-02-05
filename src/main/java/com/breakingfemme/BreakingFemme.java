@@ -3,6 +3,7 @@ package com.breakingfemme;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
@@ -46,7 +47,7 @@ public class BreakingFemme implements ModInitializer {
 
 	//register nickel ore generation
 	public static final RegistryKey<PlacedFeature> NICKEL_ORE_PLACED_FEATURE = RegistryKey.of(RegistryKeys.PLACED_FEATURE, Identifier.of(MOD_ID, "ore_nickel"));
-
+	
 	@Override
 	public void onInitialize() {
 		// This code runs as soon as Minecraft is in a mod-load-ready state.
@@ -62,6 +63,10 @@ public class BreakingFemme implements ModInitializer {
 		ModScreenHandlers.registerScreenHandlers();
 		ModRecipes.registerRecipes();
 		ModSounds.registerSounds();
+		KineticsAttachments.registerAttachments();
+
+		//Register kinetics command (shows levels of different chemicals in the player)
+		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> KineticsCommand.register(dispatcher));
 
 		//Farmers sell soybeans at level 3 (yes... they won't sell it to people they won't trust! it's their only known source of HRT)
 		TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 3, factories -> {
