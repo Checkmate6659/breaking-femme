@@ -10,6 +10,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsage;
 import net.minecraft.item.Items;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
@@ -77,12 +79,12 @@ public class AlcoholDrinkItem extends Item {
     }
 
     /*public SoundEvent getDrinkSound() {
-        return SoundEvents.DRINK;
-    }
+        return SoundEvents.ENTITY_GENERIC_DRINK;
+    }*/
 
     public SoundEvent getEatSound() {
-        return SoundEvents.POTION_;
-    }*/
+        return SoundEvents.ENTITY_GENERIC_DRINK;
+    }
 
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         return ItemUsage.consumeHeldItem(world, user, hand);

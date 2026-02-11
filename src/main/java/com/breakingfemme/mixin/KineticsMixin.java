@@ -46,7 +46,7 @@ public class KineticsMixin {
 		float char_time = 200f + 1000f * food; //characteristic absorption time should be 1200t when hunger = 1 and 200t when its 0, in ticks
 		float absorbed_mass = buf_etoh / char_time; //mass absorbed in a tick, in grams (multiplying by 1 tick, ie doing nothing)
 		buf_etoh -= absorbed_mass;
-		etoh += absorbed_mass * 0.017857142857142856f; //Vd = 0.7 (in L/kg of body mass, for male body, assuming 80kg gives us 56L, this number is its inverse in L^-1)
+		etoh += absorbed_mass * 0.03; //after 3 beers (fed? fasted? in the middle?) it should peak at 1g/L, worked out with a driving blood alcohol content chart and trial and error, assuming 80kg, or 180lb because the chart is in lb
 
 		//Michaelis-Menten kinetics for ethanol metabolism
 		//https://pubmed.ncbi.nlm.nih.gov/7332732/
@@ -63,8 +63,9 @@ public class KineticsMixin {
 		//it even has its sim code on a gh: https://github.com/LMSE/HH-PBPK-Ethanol
 		//but its way more complex than what we do here, it has all the organs separate from eachother. we don't do that here.
 		//it seems to be using another Michaelis-Menten model for each organ tho, with possible transfers (I do not do transfers tho, only blood)
-		//TODO: proper numbers. this is just made by eye with pcbi.1009110.s003.tif, numbers not actually extracted from the code.
-		ach -= 1.8e-4 * ach / (ach + 0.3125f); //using K_m = 0.3125 g/L and V_max = 0.18 g/L/h
+		//K_m from https://pmc.ncbi.nlm.nih.gov/articles/PMC3929114/: 0.2umol/L = 8.8ug/L
+		//V_max from... my ass. TODO: find a proper source. that doesn't make all kinetics fucked up and not like the real ones when im trying to impl it.
+		ach -= 6.0e-5 * ach / (ach + 8.8e-6); //using K_m = 8.8ug/L and V_max = 60 mg/L/h
 
 		player.setAttached(KineticsAttachments.BUFFERED_ETHANOL, clampZero(buf_etoh));
 		player.setAttached(KineticsAttachments.ETHANOL, clampZero(etoh));
