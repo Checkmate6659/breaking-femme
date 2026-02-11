@@ -19,6 +19,7 @@ public class KineticsAttachments {
 		Identifier.of(BreakingFemme.MOD_ID, "level_acetaldehyde"), Codec.floatRange(0f, MAX_FLOAT));
 
 	//TODO (in other mixins): apply effects of ethanol
+	//https://www.youtube.com/watch?v=z9QqEf93sBY
 	//0.3-0.5 g/L: disinhibition, more talkative, mild euphoria
 	//0.8-1.2 g/L: slower reaction time, beginning of staggering and slurred speech
 	//2 g/L: gross intoxication and incapacitation
@@ -26,6 +27,9 @@ public class KineticsAttachments {
 	//apply effects of acetaldehyde
 	//https://pmc.ncbi.nlm.nih.gov/articles/PMC6527032/
 	//apparently some effects are the same as for ethanol
+
+	//https://github.com/Petrolpark-Mods/Destroy/blob/1.20.1/src/main/java/com/petrolpark/destroy/content/product/alcohol/HangoverMobEffect.java
+	//hangover effect implementation here: player is 10% slower and gets hurt when a loud enough sound is heard, by headache
 
 	public static float getLevel(PlayerEntity player, AttachmentType<Float> att)
 	{
