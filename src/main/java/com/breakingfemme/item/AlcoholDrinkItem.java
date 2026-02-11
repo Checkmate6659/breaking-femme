@@ -1,5 +1,7 @@
 package com.breakingfemme.item;
 
+import com.breakingfemme.KineticsAttachments;
+
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -28,12 +30,22 @@ public class AlcoholDrinkItem extends Item {
 
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
         super.finishUsing(stack, world, user);
-        if (user instanceof ServerPlayerEntity serverPlayerEntity) {
-            Criteria.CONSUME_ITEM.trigger(serverPlayerEntity, stack);
-            serverPlayerEntity.incrementStat(Stats.USED.getOrCreateStat(this));
-        }
+        if (user instanceof ServerPlayerEntity player) {
+            Criteria.CONSUME_ITEM.trigger(player, stack);
+            player.incrementStat(Stats.USED.getOrCreateStat(this));
 
-        //add drunk status effect here
+            //add to ethanol level
+            //https://wires.onlinelibrary.wiley.com/doi/epdf/10.1002/wfs2.1340, paragraph 4
+            float amount = switch(LEVEL)
+            {
+                case 0 -> 12.8f; //in grams
+                case 1 -> 80.0f;
+                case 2 -> 160.0f;
+                case 3 -> 240.0f;
+                default -> 0f; //invalid level
+            };
+            KineticsAttachments.incLevel(player, KineticsAttachments.BUFFERED_ETHANOL, amount);
+        }
 
         //set player on fire if too much alcohol
         if(LEVEL == 2) //level 2 or 3
