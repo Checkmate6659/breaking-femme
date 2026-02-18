@@ -38,6 +38,7 @@ import com.breakingfemme.block.entity.ModBlockEntities;
 import com.breakingfemme.datagen.ModBlockTagProvider;
 import com.breakingfemme.fluid.ModFluids;
 import com.breakingfemme.item.ModItems;
+import com.breakingfemme.networking.ModNetworking;
 import com.breakingfemme.recipe.ModRecipes;
 import com.breakingfemme.screen.ModScreenHandlers;
 
@@ -64,6 +65,8 @@ public class BreakingFemme implements ModInitializer {
 		ModRecipes.registerRecipes();
 		ModSounds.registerSounds();
 		KineticsAttachments.registerAttachments();
+		ModNetworking.registerC2SPackets();
+		ModNetworking.registerS2CPackets();
 
 		//Register kinetics command (shows levels of different chemicals in the player)
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> KineticsCommand.register(dispatcher));

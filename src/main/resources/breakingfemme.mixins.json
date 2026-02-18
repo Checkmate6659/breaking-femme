@@ -5,6 +5,9 @@
 	"mixins": [
 		"KineticsMixin"
 	],
+	"client": [
+		"StaggeringMixin"
+	],
 	"injectors": {
 		"defaultRequire": 1
 	},

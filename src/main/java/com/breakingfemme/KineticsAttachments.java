@@ -13,8 +13,11 @@ public class KineticsAttachments {
 	static final float MAX_FLOAT = 3.4028235e38f;
 	public static final AttachmentType<Float> BUFFERED_ETHANOL = AttachmentRegistry.createPersistent( //unit: g
 		Identifier.of(BreakingFemme.MOD_ID, "level_buffered_ethanol"), Codec.floatRange(0f, MAX_FLOAT));
-	public static final AttachmentType<Float> ETHANOL = AttachmentRegistry.createPersistent( //unit: g/L in blood
-		Identifier.of(BreakingFemme.MOD_ID, "level_ethanol"), Codec.floatRange(0f, MAX_FLOAT));
+	//public static final AttachmentType<Float> ETHANOL = AttachmentRegistry.createPersistent( //unit: g/L in blood
+	//	Identifier.of(BreakingFemme.MOD_ID, "level_ethanol"), Codec.floatRange(0f, MAX_FLOAT));
+	public static final AttachmentType<Float> ETHANOL = AttachmentRegistry.<Float>builder() //unit: g/L in blood
+		.persistent(Codec.floatRange(0f, MAX_FLOAT))
+		.buildAndRegister(Identifier.of(BreakingFemme.MOD_ID, "level_ethanol"));
 	public static final AttachmentType<Float> ACETALDEHYDE = AttachmentRegistry.createPersistent( //unit: g/L in blood
 		Identifier.of(BreakingFemme.MOD_ID, "level_acetaldehyde"), Codec.floatRange(0f, MAX_FLOAT));
 
@@ -34,6 +37,13 @@ public class KineticsAttachments {
 	public static float getLevel(PlayerEntity player, AttachmentType<Float> att)
 	{
 		return player.getAttachedOrElse(att, 0f);
+	}
+
+	public static void setLevel(PlayerEntity player, AttachmentType<Float> att, float value)
+	{
+		value = (value < 0f) ? 0f : value; //clamp to be at least zero
+		value = (value > MAX_FLOAT) ? MAX_FLOAT : value; //clamp to be at most MAX_FLOAT
+		player.setAttached(att, value);
 	}
 
 	public static void incLevel(PlayerEntity player, AttachmentType<Float> att, float value)

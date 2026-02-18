@@ -32,7 +32,7 @@ public class AlcoholDrinkItem extends Item {
 
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
         super.finishUsing(stack, world, user);
-        if (user instanceof ServerPlayerEntity player) {
+        if (user instanceof ServerPlayerEntity player) { //only do it on the server
             Criteria.CONSUME_ITEM.trigger(player, stack);
             player.incrementStat(Stats.USED.getOrCreateStat(this));
 
