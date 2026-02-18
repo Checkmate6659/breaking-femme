@@ -1,13 +1,19 @@
 package com.breakingfemme.mixin;
 
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.player.HungerManager;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.server.network.ServerPlayerEntity;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.breakingfemme.KineticsAttachments;
+import com.breakingfemme.networking.ModNetworking;
 
 @Mixin(PlayerEntity.class)
 public class KineticsMixin {
@@ -70,5 +76,17 @@ public class KineticsMixin {
 		player.setAttached(KineticsAttachments.BUFFERED_ETHANOL, clampZero(buf_etoh));
 		player.setAttached(KineticsAttachments.ETHANOL, clampZero(etoh));
 		player.setAttached(KineticsAttachments.ACETALDEHYDE, clampZero(ach));
+
+
+		//sync between client and server
+		if(!player.getWorld().isClient()) //we want to execute this only on the server. sim is done on client too tho, for smoother experience in case some packets get lost on the way
+        {
+            //send a packet to the client to update its levels
+            //corresponding receiving is in ModNetworking
+            PacketByteBuf buf = PacketByteBufs.create();
+            buf.writeFloat(KineticsAttachments.getLevel(player, KineticsAttachments.ETHANOL));
+            buf.writeFloat(KineticsAttachments.getLevel(player, KineticsAttachments.ACETALDEHYDE));
+            ServerPlayNetworking.send((ServerPlayerEntity)player, ModNetworking.KINETICS_SYNC_ID, buf);
+        }
 	}
 }
