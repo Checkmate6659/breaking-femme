@@ -3,11 +3,9 @@ package com.breakingfemme.mixin;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MovementType;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.text.Text;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.noise.SimplexNoiseSampler;
-import net.minecraft.util.math.random.Random;
 
+import org.joml.SimplexNoise;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -28,28 +26,40 @@ public class StaggeringMixin {
         if(!player.getWorld().isClient()) //don't execute on the server
             return;
         
+        if(!player.isOnGround()) //only stagger on the ground, not in the air
+            return;
+
         float etoh = KineticsAttachments.getLevel(player, KineticsAttachments.ETHANOL);
         float ach = KineticsAttachments.getLevel(player, KineticsAttachments.ACETALDEHYDE);
 
         float stagger = etoh + 1.5f * ach - 0.0625f; //coef of acetaldehyde pulled out of my ass, threshold not so much
         if(stagger < 0) //not drunk enough to get an effect
             return;
-        stagger = (float)Math.tanh(stagger * stagger * 200) * 0.5f; //formula pulled out of my ass once again
+        stagger = (float)Math.tanh(stagger * stagger * 200); //formula pulled out of my ass once again
 
-        Random random = player.getWorld().random;
-        SimplexNoiseSampler sampler = new SimplexNoiseSampler(random); //why is it shaky? theres not supposed to be octaves. but ig its fine, it sells the effect a bit more.
         float time = (player.getWorld().getTime() & 65535) * 9.587379924285257e-05f; //time in 65536-ticks, but *2pi (period of the staggering is that long, about an hour, should be unnoticeable); this var goes from 0 to 2pi in 65536t.
-        float noiseval = (float)sampler.sample(Math.cos(time) * 1024 + 0.42069, Math.sin(time) * 1024 + 6.7); //what multiplier for cos and sin of time? even 64 too much?!?!
+        float noiseval = SimplexNoise.noise((float)Math.cos(time) * 256 + 0.42069f, (float)Math.sin(time) * 256 + 6.7f);
 
         float coef = noiseval * stagger;
         Vec3d vel = player.getVelocity();
-        player.move(MovementType.SELF, vel.multiply(coef, 0, coef).crossProduct(new Vec3d(0, 1, 0))); //add horizontal velocity perpendicular to current vel
-        //player.sendMessage(Text.literal("coords " + Math.cos(time) * 1024 + 0.42069 + ", " + Math.sin(time) * 1024 + 6.7));
-        //player.sendMessage(Text.literal("noise " + noiseval));
+        Vec3d dir = vel.multiply(coef, 0, coef).crossProduct(new Vec3d(0, 1, 0)).add(0.0, -2.2737367544323206e-13, 0.0); //to make player touch ground and able to jump etc
+        player.move(MovementType.SELF, dir); //add horizontal velocity perpendicular to current vel
+
+        //make camera drift around
+        //a bit too choppy like this tho... needs to be done per frame instead of per tick. also not overriding user input would be nice.
+        /*float headp = SimplexNoise.noise((float)Math.sin(time) * 256 + 69007.47f, (float)Math.cos(time) * 256 + 137.42069f);
+        float heady = SimplexNoise.noise(-(float)Math.cos(time) * 256 - 42.069f, (float)Math.sin(time) * 256 + 69420.874041f);
+        float pitch = player.getPitch();
+        float yaw = player.getHeadYaw();
+        float cosp = (float)Math.cos(pitch * 0.017453292F); //pi/180 conversion factor
+        pitch = pitch + headp * cosp;
+        player.setPitch(pitch < -90 ? -90 : (pitch > 90 ? 90 : pitch)); //because i dont have access to Math.clamp for some reason
+        player.setYaw(yaw + heady * cosp);*/
     }
 
     //TODO: make eye position slowly drift
     //TODO (different mixin): make camera move around slower, like brewin' n chewin'
+    //TODO: mixin PlayerEntity.clipAtLedge to make player fall off ledges when trying to sneak
 
     //this is called separately on the client and the server
     //on the server it does nothing
