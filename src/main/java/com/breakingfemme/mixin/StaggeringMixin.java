@@ -59,7 +59,6 @@ public class StaggeringMixin {
 
     //TODO: make eye position slowly drift
     //TODO (different mixin): make camera move around slower, like brewin' n chewin'
-    //TODO: mixin PlayerEntity.clipAtLedge to make player fall off ledges when trying to sneak
 
     //this is called separately on the client and the server
     //on the server it does nothing

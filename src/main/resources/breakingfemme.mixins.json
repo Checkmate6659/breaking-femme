@@ -6,7 +6,8 @@
 		"KineticsMixin"
 	],
 	"client": [
-		"StaggeringMixin"
+		"StaggeringMixin",
+		"StaggeringSneakMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
