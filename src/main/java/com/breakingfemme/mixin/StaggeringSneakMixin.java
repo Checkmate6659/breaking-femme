@@ -22,7 +22,7 @@ public class StaggeringSneakMixin {
         float etoh = KineticsAttachments.getLevel(player, KineticsAttachments.ETHANOL);
         float ach = KineticsAttachments.getLevel(player, KineticsAttachments.ACETALDEHYDE);
 
-        if(etoh + 3.0f * ach > 1.5f) //threshold and ach coef pulled out of my ass as usual
+        if(etoh + ach > 1.5f) //threshold and ach coef pulled out of my ass as usual
             cir.setReturnValue(false);
 	}
 }
