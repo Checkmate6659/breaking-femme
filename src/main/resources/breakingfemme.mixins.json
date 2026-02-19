@@ -6,6 +6,7 @@
 		"KineticsMixin"
 	],
 	"client": [
+		"AlteredVisionMixin",
 		"StaggeringMixin",
 		"StaggeringSneakMixin"
 	],
