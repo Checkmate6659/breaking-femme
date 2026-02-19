@@ -4,7 +4,7 @@
     ],
     "passes": [
         {
-            "name": "bits",
+            "name": "breakingfemme_87yde7an4a3l9bbd_breakingfemme_altered_vision",
             "intarget": "minecraft:main",
             "outtarget": "swap"
         },

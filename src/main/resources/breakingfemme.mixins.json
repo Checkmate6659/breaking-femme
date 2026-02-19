@@ -3,6 +3,7 @@
 	"package": "com.breakingfemme.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
+		"JsonEffectShaderProgramMixin",
 		"KineticsMixin"
 	],
 	"client": [
