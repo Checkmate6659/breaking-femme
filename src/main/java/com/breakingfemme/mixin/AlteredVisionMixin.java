@@ -44,8 +44,8 @@ public abstract class AlteredVisionMixin {
 				//todo: set uniforms
 				//shader tutorial (GLSL, jsons): https://www.minecraftforum.net/forums/mapping-and-modding-java-edition/mapping-and-modding-tutorials/3201009-tutorial-vanilla-minecraft-shaders-creating-post
 				//https://docs.google.com/document/d/15TOAOVLgSNEoHGzpNlkez5cryH3hFF3awXL5Py81EMk/edit?tab=t.0
-				invokeSetPostProcessor(Identifier.of("minecraft", "shaders/post/spider.json"));
-				//invokeSetPostProcessor(Identifier.of(BreakingFemme.MOD_ID, "shaders/post/altered_vision.json"));
+				//invokeSetPostProcessor(Identifier.of("minecraft", "shaders/post/spider.json"));
+				invokeSetPostProcessor(Identifier.of(BreakingFemme.MOD_ID, "shaders/post/altered_vision.json"));
 			}
 		}
 		else
