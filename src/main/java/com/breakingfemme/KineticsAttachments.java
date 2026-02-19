@@ -1,10 +1,15 @@
 package com.breakingfemme;
 
+import com.breakingfemme.networking.ModNetworking;
 import com.mojang.serialization.Codec;
 
 import net.fabricmc.fabric.api.attachment.v1.AttachmentRegistry;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentType;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 
 public class KineticsAttachments {
@@ -33,6 +38,21 @@ public class KineticsAttachments {
 
 	//https://github.com/Petrolpark-Mods/Destroy/blob/1.20.1/src/main/java/com/petrolpark/destroy/content/product/alcohol/HangoverMobEffect.java
 	//hangover effect implementation here: player is 10% slower and gets hurt when a loud enough sound is heard, by headache
+
+	//send values from the server to the client. only executes on the server.
+	public static void syncClientValues(ServerPlayerEntity player)
+	{
+		//sync between client and server
+		if(!player.getWorld().isClient())
+        {
+            //send a packet to the client to update its levels
+            //corresponding receiving is in ModNetworking
+            PacketByteBuf buf = PacketByteBufs.create();
+            buf.writeFloat(KineticsAttachments.getLevel(player, KineticsAttachments.ETHANOL));
+            buf.writeFloat(KineticsAttachments.getLevel(player, KineticsAttachments.ACETALDEHYDE));
+            ServerPlayNetworking.send(player, ModNetworking.KINETICS_SYNC_ID, buf);
+        }
+	}
 
 	public static float getLevel(PlayerEntity player, AttachmentType<Float> att)
 	{

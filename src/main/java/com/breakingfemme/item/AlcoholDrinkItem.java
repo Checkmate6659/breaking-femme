@@ -47,6 +47,7 @@ public class AlcoholDrinkItem extends Item {
                 default -> 0f; //invalid level
             };
             KineticsAttachments.incLevel(player, KineticsAttachments.BUFFERED_ETHANOL, amount);
+            KineticsAttachments.syncClientValues(player);
         }
 
         //set player on fire if too much alcohol
@@ -77,10 +78,6 @@ public class AlcoholDrinkItem extends Item {
     public UseAction getUseAction(ItemStack stack) {
         return UseAction.DRINK;
     }
-
-    /*public SoundEvent getDrinkSound() {
-        return SoundEvents.ENTITY_GENERIC_DRINK;
-    }*/
 
     public SoundEvent getEatSound() {
         return SoundEvents.ENTITY_GENERIC_DRINK;

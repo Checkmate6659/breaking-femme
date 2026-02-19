@@ -20,7 +20,7 @@ public class ModNetworking {
         ClientPlayNetworking.registerGlobalReceiver(KINETICS_SYNC_ID,
             (client, handler, buf, responseSender) ->
             {
-                //corresponding sending is in StaggeringMixin
+                //corresponding sending is in KineticsAttachments
                 float etoh = buf.readFloat();
                 float ach = buf.readFloat();
 
