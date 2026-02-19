@@ -24,5 +24,10 @@ public class StaggeringSneakMixin {
 
         if(etoh + ach > 1.5f) //threshold and ach coef pulled out of my ass as usual
             cir.setReturnValue(false);
+
+        //TODO: achievement for falling off a ledge
+        //to check that, we need to call PlayerEntity.method_30263 (private), or reimpl it
+        //its code: this.isOnGround() || this.fallDistance < this.getStepHeight() && !this.getWorld().isSpaceEmpty(this, this.getBoundingBox().offset(0.0, (double)(this.fallDistance - this.getStepHeight()), 0.0))
+        //only stuff visible from here, perfect
 	}
 }
