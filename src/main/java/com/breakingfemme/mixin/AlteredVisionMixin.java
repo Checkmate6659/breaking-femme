@@ -1,5 +1,7 @@
 package com.breakingfemme.mixin;
 
+import java.util.List;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 import org.spongepowered.asm.mixin.injection.At;
@@ -10,6 +12,7 @@ import com.breakingfemme.BreakingFemme;
 import com.breakingfemme.KineticsAttachments;
 
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gl.PostEffectPass;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.util.Identifier;
@@ -38,6 +41,9 @@ public abstract class AlteredVisionMixin {
 
 		if(etoh > 1.25f)
 		{
+			//get proper name with this? if its null then ofc its not bound.
+			//((GameRenderer)(Object)this).getPostProcessor().getName()
+
 			//FIXME: does this leak resources??
 			if(((GameRenderer)(Object)this).getPostProcessor() == null) //we do not want invokeSetPostProcessor to be called again and again
 			{
@@ -46,6 +52,13 @@ public abstract class AlteredVisionMixin {
 				//https://docs.google.com/document/d/15TOAOVLgSNEoHGzpNlkez5cryH3hFF3awXL5Py81EMk/edit?tab=t.0
 				//invokeSetPostProcessor(Identifier.of("minecraft", "shaders/post/spider.json"));
 				breakingfemme_invokeSetPostProcessor(Identifier.of(BreakingFemme.MOD_ID, "shaders/post/altered_vision.json"));
+
+				//set uniforms
+				List<PostEffectPass> passes = ((PostEffectPassAccessor)(((GameRenderer)(Object)this).getPostProcessor())).breakingfemme$getPasses();
+
+				long time = player.getWorld().getTime();
+				passes.get(1).getProgram().getUniformByNameOrDummy("Radius").set(30f);
+				passes.get(2).getProgram().getUniformByNameOrDummy("Radius").set(30f - (time % 3000) / 100f); //using time turns it into a black screen?
 			}
 		}
 		else
