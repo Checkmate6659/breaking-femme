@@ -1,6 +1,7 @@
 package com.breakingfemme.mixin;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
@@ -14,32 +15,39 @@ import net.minecraft.util.Identifier;
 //this is kinda dirty. but i cant really find a better way
 @Mixin(JsonEffectShaderProgram.class)
 public class JsonEffectShaderProgramMixin {
-    private static final String TARGET = "breakingfemme_87yde7an4a3l9bbd_breakingfemme_";
+    @Unique
+    private static final String TARGET = "breakingfemme_";
 
-    private static Identifier hijack(Identifier id)
+    private static Identifier breakingfemme_hijack(Identifier id)
     {
         String path = id.getPath();
         if(path.contains(TARGET))
         {
-            path = path.split(TARGET)[1];
-            BreakingFemme.LOGGER.info("Redirecting shader load " + path + " to breakingfemme:shaders/program/" + path);
+            //path = path.split(TARGET)[1];
+            //BreakingFemme.LOGGER.info("Redirecting shader load " + path + " to breakingfemme:shaders/program/" + path);
+            BreakingFemme.LOGGER.info("Redirecting shader load " + path + " to breakingfemme:" + path);
 
             //extract stuff AFTER the marker, use that as the name
-            return Identifier.of(BreakingFemme.MOD_ID, "shaders/program/" + path);
+            //return Identifier.of(BreakingFemme.MOD_ID, "shaders/program/" + path);
+
+            //no. just return the whole thing. to avoid black screen/cant find uniform issue.
+            return Identifier.of(BreakingFemme.MOD_ID, path);
         }
         else
             return id;
     }
 
     @ModifyVariable(method = "<init>", at = @At("STORE"), ordinal = 0)
-    private Identifier hijackConstructor(Identifier id)
+    private Identifier breakingfemme_hijackConstructor(Identifier id)
     {
-        return hijack(id);
+        return breakingfemme_hijack(id);
     }
 
     @ModifyVariable(method = "loadEffect", at = @At("STORE"), ordinal = 0)
-    private static Identifier hijackLoadEffect(Identifier id)
+    private static Identifier breakingfemme_hijackLoadEffect(Identifier id)
     {
-        return hijack(id);
+        id = breakingfemme_hijack(id);
+        BreakingFemme.LOGGER.error("Loading effect " + id.toString());
+        return id;
     }
 }

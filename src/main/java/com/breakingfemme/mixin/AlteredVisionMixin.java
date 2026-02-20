@@ -17,13 +17,13 @@ import net.minecraft.util.Identifier;
 @Mixin(GameRenderer.class)
 public abstract class AlteredVisionMixin {
     @Invoker("disablePostProcessor") //TODO: doesn't actually need an invoker
-	public abstract void invokeClearPostProcessor();
+	public abstract void breakingfemme_invokeClearPostProcessor();
 
 	@Invoker("loadPostProcessor")
-	public abstract void invokeSetPostProcessor(Identifier id);
+	public abstract void breakingfemme_invokeSetPostProcessor(Identifier id);
 
 	@Inject(at = @At("HEAD"), method = "renderWorld")
-	private void applyAlteredVision(CallbackInfo info) {
+	private void breakingfemme_applyAlteredVision(CallbackInfo info) {
 		MinecraftClient client = MinecraftClient.getInstance();
 		ClientPlayerEntity player = client.player;
 
@@ -41,16 +41,16 @@ public abstract class AlteredVisionMixin {
 			//FIXME: does this leak resources??
 			if(((GameRenderer)(Object)this).getPostProcessor() == null) //we do not want invokeSetPostProcessor to be called again and again
 			{
-				//todo: set uniforms
+				//TODO: set uniforms: PostEffectPass, line 73
 				//shader tutorial (GLSL, jsons): https://www.minecraftforum.net/forums/mapping-and-modding-java-edition/mapping-and-modding-tutorials/3201009-tutorial-vanilla-minecraft-shaders-creating-post
 				//https://docs.google.com/document/d/15TOAOVLgSNEoHGzpNlkez5cryH3hFF3awXL5Py81EMk/edit?tab=t.0
 				//invokeSetPostProcessor(Identifier.of("minecraft", "shaders/post/spider.json"));
-				invokeSetPostProcessor(Identifier.of(BreakingFemme.MOD_ID, "shaders/post/altered_vision.json"));
+				breakingfemme_invokeSetPostProcessor(Identifier.of(BreakingFemme.MOD_ID, "shaders/post/altered_vision.json"));
 			}
 		}
 		else
 		{
-			invokeClearPostProcessor();
+			breakingfemme_invokeClearPostProcessor();
 		}
     }
 }
