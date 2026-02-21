@@ -17,6 +17,11 @@ import net.minecraft.util.Identifier;
 public class BreakingFemmeClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
+        //TODO: effect shaders HERE instead of mixin
+        //WorldRenderEvents.AFTER_TRANSLUCENT.register(context -> {
+        //    final GameRenderer renderer = MinecraftClient.getInstance().gameRenderer;
+        //});
+
         //screens/screen handlers
         HandledScreens.register(ModScreenHandlers.FERMENTER_SCREEN_HANDLER, FermenterScreen::new);
 
