@@ -32,7 +32,7 @@ public class StaggeringMixin {
         float etoh = KineticsAttachments.getLevel(player, KineticsAttachments.ETHANOL);
         float ach = KineticsAttachments.getLevel(player, KineticsAttachments.ACETALDEHYDE);
 
-        float stagger = etoh + 1.5f * ach - 0.0625f; //coef of acetaldehyde pulled out of my ass, threshold not so much
+        float stagger = etoh + 1.5f * ach - 0.75f; //coef of acetaldehyde pulled out of my ass, threshold not so much
         if(stagger < 0) //not drunk enough to get an effect
             return;
         stagger = (float)Math.tanh(stagger * stagger * 200); //formula pulled out of my ass once again
@@ -79,7 +79,7 @@ public class StaggeringMixin {
         float etoh = KineticsAttachments.getLevel(player, KineticsAttachments.ETHANOL); //why this 0
         float ach = KineticsAttachments.getLevel(player, KineticsAttachments.ACETALDEHYDE);
 
-        float slowdown = etoh + 1.5f * ach - 0.125f; //coef of acetaldehyde pulled out of my ass, threshold not so much (based on just etoh)
+        float slowdown = etoh + 1.5f * ach - 1.0f; //coef of acetaldehyde pulled out of my ass, threshold not so much (based on just etoh)
         if(slowdown < 0f)
             slowdown = 0f;
         slowdown *= 0.125f; //we want about 25% speed when reaching 2g/L (theres also acetaldehyde)
