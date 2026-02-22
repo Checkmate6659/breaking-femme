@@ -22,6 +22,7 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -317,6 +318,12 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
                     //success, so output desired item
                     current_stage = STAGE_NOT_IN_USE;
                     grace_time = 0;
+
+                    //WARNING: there can be water buckets in the output slots!! we don't want to just nuke them
+                    for(int i = OUTPUT_SLOT_BEGIN; i < OUTPUT_SLOT_BEGIN + capacity; i++)
+                        ItemScatterer.spawn(world, pos.getX(), pos.getY(), pos.getZ(), getStack(i));
+
+                    //now we're clear
                     for(int i = OUTPUT_SLOT_BEGIN; i < OUTPUT_SLOT_BEGIN + capacity; i++)
                         setStack(i, recipe.getOutput(world.getRegistryManager()));
                     recipe = FermentingRecipe.NONE; //reset the recipe AFTER we need it!!!
