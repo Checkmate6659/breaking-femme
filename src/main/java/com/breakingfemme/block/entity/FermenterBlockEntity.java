@@ -63,7 +63,7 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
     private int n_heaters = 0;
     private int volume = 1;
     private float conductivity = 0;
-    private boolean is_mixing = false; //will be derived from multiblock checking
+    private boolean is_mixing = false;
 
 
     public FermenterBlockEntity(BlockPos pos, BlockState state) {
@@ -328,7 +328,6 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
         }
         if(plusx <= minusx || plusz <= minusz) return; //almost same as before; here there are only side panels and no separate top/bottom, but the starting position was on the inside.
         if(plusx - minusx > 4 || plusz - minusz > 4) return; //dimensions inconsistent again, here more lenient tho.
-        BreakingFemme.LOGGER.info("step 3 complete");
 
         //step 4: check every relevant block for if it is there; in that time, check if mixing and count active heaters
         //step 4.1: checking top and bottom blocks
@@ -353,7 +352,6 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
                 if(world.getBlockState(new BlockPos(x, top + 1, z)).isIn(ModBlockTagProvider.FERMENTER_AIRLOCK))
                     no_airlock = false;
             }
-        BreakingFemme.LOGGER.info("step 4.1: no_airlock " + no_airlock);
         if(no_airlock) return;
 
         //step 4.2: check east (plusx) and west (minusx): fixed x, variable y and z; also there can only be ONE controller block. otherwise its invalid.
@@ -393,7 +391,6 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
                     return;
             }
         }
-        BreakingFemme.LOGGER.info("step 4.2, 4.3 passed");
 
         //step 4.4: check if the barrel really is hollow
         for(int x = minusx + 1; x < plusx; x++)
@@ -410,8 +407,6 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
         surface_area = 2 * (height * widthx + height * widthy + widthx * widthy); //is there a way to factor this expression? yes its equal to (sum of dimensions)^2 - sum of (dimensions^2) wait why is it the same formula as the variance for probability distributions. can you do cool stuff with this? also this same formula is found somewhere when using characters, like the decomposition of the tensor product of characters of dimension >1 iirc, but i cant find it right now.
         conductivity = surface_area * 0.91f; //in W / K; coef should be *0.91
         capacity = (volume + 10) / 9;
-
-        BreakingFemme.LOGGER.info("success, volume " + volume + " surface " + surface_area + " heaters " + n_heaters + " mixing " + is_mixing);
     }
 
     private static int global_checking_class = 0;
@@ -424,6 +419,7 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
         if(waiting_for_recipe_loading)
             tryLoadRecipe();
 
+        int capacity_before_check = capacity; //detect if by some miracle (or modded machines, or tick freeze or sth) the capacity changed between 2 checks; it would be more robust to monitor all bounds in checkMultiblock but this should be good enough really
         if(checking_class == -1) //not redundant with the temperature if statement below: that one would not get triggered if temp is already defined!
         {
             checking_class = global_checking_class;
@@ -442,12 +438,24 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
         else if(world.getTime() % MULTIBLOCK_CHECK_PERIOD == checking_class) //recheck regularly (every 2 seconds)
             checkMultiblock(pos, state);
 
-        if(capacity == 0) //multiblock is INCORRECT! => do not tick
+        if(capacity == 0 || (capacity != capacity_before_check && capacity_before_check != 0)) //multiblock is INCORRECT or changed capacity (and hasn't just been made ofc)! => do not tick
         {
-            //TODO: don't absorb buckets if currently running a recipe, but put them back (as sludge ofc) where they were
+            //don't just obliterate buckets if currently running a recipe, but put them back (as sludge ofc) where they were in the slots
+            if(current_stage != STAGE_NOT_IN_USE)
+            {
+                //WARNING: there can be water buckets in the output slots!! we don't want to just nuke them
+                for(int i = OUTPUT_SLOT_BEGIN; i < OUTPUT_SLOT_BEGIN + capacity_before_check; i++)
+                    ItemScatterer.spawn(world, pos.getX(), pos.getY(), pos.getZ(), getStack(i));
+
+                //now we're clear to get the fermenter dirty
+                for(int i = OUTPUT_SLOT_BEGIN; i < OUTPUT_SLOT_BEGIN + capacity_before_check; i++)
+                    setStack(i, new ItemStack(ModFluids.SLUDGE_BUCKET));
+            }
 
             temperature = outside_temp; //bye temperature data! :3
-            current_stage = STAGE_NOT_IN_USE;
+            current_stage = STAGE_NOT_IN_USE; //we ain't cookin' anymore!
+            recipe = FermentingRecipe.NONE; //bye recipe!
+            markDirty(); //save the data
             return;
         }
 
@@ -526,6 +534,12 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
                 current_stage = STAGE_NOT_IN_USE;
                 recipe = FermentingRecipe.NONE;
                 grace_time = 0;
+
+                //WARNING: there can be water buckets in the output slots!! we don't want to just nuke them
+                for(int i = OUTPUT_SLOT_BEGIN; i < OUTPUT_SLOT_BEGIN + capacity; i++)
+                    ItemScatterer.spawn(world, pos.getX(), pos.getY(), pos.getZ(), getStack(i));
+
+                //now we're clear to get the fermenter dirty
                 for(int i = OUTPUT_SLOT_BEGIN; i < OUTPUT_SLOT_BEGIN + capacity; i++)
                     setStack(i, new ItemStack(ModFluids.SLUDGE_BUCKET));
 
