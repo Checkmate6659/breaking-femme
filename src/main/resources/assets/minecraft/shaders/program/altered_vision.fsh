@@ -9,7 +9,6 @@ uniform vec2 InSize;
 
 uniform float EffectStrength;
 uniform float Resolution;
-uniform float Saturation;
 uniform float MosaicSize;
 
 out vec4 fragColor;
@@ -23,7 +22,7 @@ void main() {
 
     vec3 fractTexel = baseTexel.rgb - fract(baseTexel.rgb * Resolution) / Resolution;
     float luma = dot(fractTexel, vec3(0.3, 0.59, 0.11));
-    vec3 chroma = (fractTexel - luma) * Saturation;
+    vec3 chroma = (fractTexel - luma);
     baseTexel.rgb = luma + chroma;
     baseTexel.a = 1.0;
 
