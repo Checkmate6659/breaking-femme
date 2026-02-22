@@ -1,10 +1,10 @@
 {
     "targets": [
-        "swap"
+        "swap", "swap2"
     ],
     "passes": [
         {
-            "name": "altered_vision",
+            "name": "breakingfemme_diplopia",
             "intarget": "minecraft:main",
             "outtarget": "swap",
             "uniforms": [
@@ -15,39 +15,34 @@
             ]
         },
         {
-            "name": "blur",
+            "name": "breakingfemme_blur",
             "intarget": "swap",
+            "outtarget": "swap2",
+            "uniforms": [
+                {
+                    "name": "Direction",
+                    "values": [ 0.0 ]
+                },
+                {
+                    "name": "BlurStrength",
+                    "values": [ 8.0 ]
+                }
+            ]
+        },
+        {
+            "name": "breakingfemme_blur",
+            "intarget": "swap2",
             "outtarget": "minecraft:main",
             "uniforms": [
                 {
-                    "name": "BlurDir",
-                    "values": [ 1.0, 0.0 ]
+                    "name": "Direction",
+                    "values": [ 1.0 ]
                 },
                 {
-                    "name": "Radius",
-                    "values": [ 10.0 ]
+                    "name": "BlurStrength",
+                    "values": [ 8.0 ]
                 }
             ]
-        },
-        {
-            "name": "blur",
-            "intarget": "minecraft:main",
-            "outtarget": "swap",
-            "uniforms": [
-                {
-                    "name": "BlurDir",
-                    "values": [ 0.0, 1.0 ]
-                },
-                {
-                    "name": "Radius",
-                    "values": [ 10.0 ]
-                }
-            ]
-        },
-        {
-            "name": "blit",
-            "intarget": "swap",
-            "outtarget": "minecraft:main"
         }
     ]
 }

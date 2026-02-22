@@ -66,8 +66,8 @@ public abstract class AlteredVisionMixin {
 				List<PostEffectPass> passes = ((PostEffectPassAccessor)(((GameRenderer)(Object)this).getPostProcessor())).breakingfemme$getPasses();
 
 				//TODO: fix the issue that the blur shaders actually change the brightness when given a small, non-integer radius
-				passes.get(1).getProgram().getUniformByNameOrDummy("Radius").set(64f * blur_strength);
-				passes.get(2).getProgram().getUniformByNameOrDummy("Radius").set(16f * blur_strength); //more horizontal blur => primitive diplopia emulation (if can't use custom shaders)
+				//passes.get(1).getProgram().getUniformByNameOrDummy("Radius").set(64f * blur_strength);
+				//passes.get(2).getProgram().getUniformByNameOrDummy("Radius").set(16f * blur_strength); //more horizontal blur => primitive diplopia emulation (if can't use custom shaders)
 			}
 		}
 		else if((player.getWorld().getTime() & 1) == 0)
