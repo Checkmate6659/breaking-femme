@@ -33,6 +33,8 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
     public static final TagKey<Block> FERMENTER_TOP_PANEL = TagKey.of(RegistryKeys.BLOCK, new Identifier(BreakingFemme.MOD_ID, "fermenter_top_panel"));
     public static final TagKey<Block> FERMENTER_BOTTOM_PANEL = TagKey.of(RegistryKeys.BLOCK, new Identifier(BreakingFemme.MOD_ID, "fermenter_bottom_panel"));
     public static final TagKey<Block> FERMENTER_AIRLOCK = TagKey.of(RegistryKeys.BLOCK, new Identifier(BreakingFemme.MOD_ID, "fermenter_airlock"));
+    public static final TagKey<Block> FERMENTER_HEATER = TagKey.of(RegistryKeys.BLOCK, new Identifier(BreakingFemme.MOD_ID, "fermenter_heater"));
+    public static final TagKey<Block> FERMENTER_MIXER = TagKey.of(RegistryKeys.BLOCK, new Identifier(BreakingFemme.MOD_ID, "fermenter_mixer"));
 
     public ModBlockTagProvider(FabricDataOutput output, CompletableFuture<WrapperLookup> completableFuture) {
         super(output, completableFuture);
@@ -79,6 +81,8 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(FERMENTER_BOTTOM_PANEL).add(ModBlocks.FERMENTER_HEATER);
         getOrCreateTagBuilder(FERMENTER_SIDE_PANEL).add(ModBlocks.FERMENTER_CONTROLLER);
         getOrCreateTagBuilder(FERMENTER_AIRLOCK).add(ModBlocks.FERMENTER_AIRLOCK);
+        getOrCreateTagBuilder(FERMENTER_HEATER).add(ModBlocks.FERMENTER_HEATER);
+        getOrCreateTagBuilder(FERMENTER_MIXER).add(ModBlocks.FERMENTER_MIXER);
         getOrCreateTagBuilder(BlockTags.AXE_MINEABLE).add(ModBlocks.FERMENTER_PANEL);
         getOrCreateTagBuilder(BlockTags.AXE_MINEABLE).add(ModBlocks.FERMENTER_TOP);
         getOrCreateTagBuilder(BlockTags.AXE_MINEABLE).add(ModBlocks.FERMENTER_BOTTOM);

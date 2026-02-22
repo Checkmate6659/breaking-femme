@@ -4,6 +4,8 @@ import java.util.Optional;
 
 import com.breakingfemme.BreakingFemme;
 import com.breakingfemme.block.FermenterControllerBlock;
+import com.breakingfemme.block.FermenterHeaterBlock;
+import com.breakingfemme.block.FermenterMixerBlock;
 import com.breakingfemme.datagen.ModBlockTagProvider;
 import com.breakingfemme.fluid.ModFluids;
 import com.breakingfemme.recipe.FermentingRecipe;
@@ -22,6 +24,7 @@ import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.state.property.Property;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.ItemScatterer;
@@ -226,6 +229,16 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
         return temperature;
     }
     
+    //returns true as a default, if the property doesn't exist (we wouldn't want to add mixers and heaters that are just fancy bottom panels)
+    private boolean safeGetBooleanProperty(BlockState state, Property<Boolean> prop)
+    {
+        try {
+            return state.get(prop);
+        } catch (IllegalArgumentException e) {
+            return true;
+        }
+    }
+
     private void checkMultiblock(BlockPos pos, BlockState state)
     {
         BreakingFemme.LOGGER.info("Multiblock check!");
@@ -264,16 +277,15 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
                 break;
             }
         }
-        BreakingFemme.LOGGER.info("top: " + top + " bottom: " + bottom);
         if(top <= bottom) return; //no top/bottom found! => FAILURE
         if(top - bottom > 2) return; //inconsistent dimensions: fermenter is too tall!
-        BreakingFemme.LOGGER.info("step 2 complete");
 
         //step 3: go to the left, right and back to get width and height; at most 3 blocks, these will be on the edges where the side panels are, NOT inside the fermenter.
-        long plusx = Long.MIN_VALUE;
-        long minusx = Long.MAX_VALUE;
-        long plusz = Long.MIN_VALUE;
-        long minusz = Long.MAX_VALUE;
+        //compass: positive x is east, positive z is south
+        int plusx = Integer.MIN_VALUE;
+        int minusx = Integer.MAX_VALUE;
+        int plusz = Integer.MIN_VALUE;
+        int minusz = Integer.MAX_VALUE;
         for(int i = 0; i < 3; i++)
         {
             if(world.getBlockState(insidePos.offset(Axis.X, i)).isIn(ModBlockTagProvider.FERMENTER_SIDE_PANEL))
@@ -306,17 +318,37 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
                 break;
             }
         }
-    
-        BreakingFemme.LOGGER.info("plusx: " + plusx + " minusx: " + minusx);
-        BreakingFemme.LOGGER.info("plusz: " + plusz + " minusz: " + minusz);
         if(plusx <= minusx || plusz <= minusz) return; //almost same as before; here there are only side panels and no separate top/bottom, but the starting position was on the inside.
         if(plusx - minusx > 4 || plusz - minusz > 4) return; //dimensions inconsistent again, here more lenient tho.
         BreakingFemme.LOGGER.info("step 3 complete");
 
-        //step 4: check for airlock
-        //step 5: check every relevant block for if it is there; in that time, check if mixing and count active heaters
+        //step 4: check every relevant block for if it is there; in that time, check if mixing and count active heaters
+        //step 4.1: checking top and bottom blocks
+        boolean no_airlock = true;
+        for(int x = minusx + 1; x < plusx; x++)
+            for(int z = minusz + 1; z < plusz; z++)
+            {
+                //check top
+                if(!world.getBlockState(new BlockPos(x, top, z)).isIn(ModBlockTagProvider.FERMENTER_TOP_PANEL))
+                    return;
 
-        //step 6: compute variables from this state
+                BlockState bottom_state = world.getBlockState(new BlockPos(x, bottom, z));
+                if(!bottom_state.isIn(ModBlockTagProvider.FERMENTER_BOTTOM_PANEL))
+                    return;
+                //counting heaters and checking if there's an active mixer
+                else if(bottom_state.isIn(ModBlockTagProvider.FERMENTER_HEATER) && safeGetBooleanProperty(bottom_state, FermenterHeaterBlock.POWERED))
+                    n_heaters++;
+                else if(!is_mixing && bottom_state.isIn(ModBlockTagProvider.FERMENTER_MIXER) && safeGetBooleanProperty(bottom_state, FermenterMixerBlock.POWERED))
+                    is_mixing = true;
+
+                //check airlock
+                if(world.getBlockState(new BlockPos(x, top + 1, z)).isIn(ModBlockTagProvider.FERMENTER_AIRLOCK))
+                    no_airlock = false;
+            }
+        BreakingFemme.LOGGER.info("step 4.1: no_airlock " + no_airlock);
+        if(no_airlock) return;
+
+        //step 5: compute variables from this state
         int height = top - bottom + 1;
         int widthx = (int)(plusx - minusx - 1);
         int widthy = (int)(plusz - minusz - 1);
@@ -326,7 +358,7 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
         outside_temp = environment_temperature(world, pos);
         capacity = (volume + 10) / 9;
 
-        BreakingFemme.LOGGER.info("success, volume " + volume + " surface " + surface_area);
+        BreakingFemme.LOGGER.info("success, volume " + volume + " surface " + surface_area + " heaters " + n_heaters + " mixing " + is_mixing);
     }
 
     private static int global_checking_class = 0;
