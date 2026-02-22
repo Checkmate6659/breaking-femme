@@ -3,6 +3,8 @@ package com.breakingfemme.block.entity;
 import java.util.Optional;
 
 import com.breakingfemme.BreakingFemme;
+import com.breakingfemme.block.FermenterControllerBlock;
+import com.breakingfemme.datagen.ModBlockTagProvider;
 import com.breakingfemme.fluid.ModFluids;
 import com.breakingfemme.recipe.FermentingRecipe;
 import com.breakingfemme.screen.FermenterScreenHandler;
@@ -25,6 +27,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction.Axis;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.dimension.DimensionType;
@@ -34,6 +37,7 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
     public static final int STAGE_NOT_IN_USE = 5; //5 stages 0 to 4, and this value to stop when its done
     private static final int OUTPUT_SLOT_BEGIN = 4; //output slots must be right after all input slots
     private static final int MULTIBLOCK_CHECK_PERIOD = 40; //checking integrity and outside temp every 40 ticks
+    private static final int MULTIBLOCK_CHECK_STATIC_DELTA = 17; //must be relatively prime with MULTIBLOCK_CHECK_PERIOD and below it, and such that its first few multiples cover [[0; MULTIBLOCK_CHECK_PERIOD]] as evenly as possible
 
     protected final PropertyDelegate propertyDelegate; //the PropertyDelegate is used for client<->server syncing (i mean here its really more like server->client, the only client->server is the inventory)
 
@@ -51,7 +55,7 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
     private int capacity = 0; //0 for incorrect multiblock, 1 for smallest (1*2*1), 4 to largest (3*3*3)
     private float outside_temp = 0;
     private int n_heaters = 0;
-    private int volume = 0;
+    private int volume = 1;
     private float conductivity = 0;
     private boolean is_mixing = false; //will be derived from multiblock checking
 
@@ -222,24 +226,107 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
         return temperature;
     }
     
-    private void checkMultiblock()
+    private void checkMultiblock(BlockPos pos, BlockState state)
     {
+        BreakingFemme.LOGGER.info("Multiblock check!");
+
         //TODO: implement proper multiblock check
-        //TODO: interrupt recipe if multiblock size changed (it may be possible, using bugs, to change barrel size without getting caught)
+        //TODO: interrupt recipe if multiblock size changed (it may be possible, using bugs or just speed, to change barrel size without getting caught)
         //could also be possible if the multiblock check isn't done every tick (would probably be too laggy)
 
-        //actually, this should happen as soon as water buckets added in.
-        //like the buckets in the output slots should raise the heat capacity/carry energy
-
+        //set up invalid state (can just return if invalid)
         capacity = 0; //0: incorrect multiblock; must be the initial value (in case we fail!)
-        volume = 8; //number of contained blocks; can go from 2 (1*2*1 minimum size) to 27 (3*3*3)
-        int surface_area = 24; //number of panels the barrel is made out of (for a 2*2*2 barrel its 24) (TODO: calculate)
+        volume = 1; //number of contained blocks; can go from 2 (1*2*1 minimum size) to 27 (3*3*3); 1 means invalid.
+        int surface_area = 24; //number of panels the barrel is made out of (for a 2*2*2 barrel its 24)
         is_mixing = false; //are there any powered mixers on the bottom (just 1 is enough)
         n_heaters = 0; //number of active heaters
 
+        //NOTE: here we are assuming that the multiblock is valid. an inconsistency would prove that it isn't, and we will need to check that an invalid multiblock is always inconsistent
+        //step 1: get block behind controller (1 block in the opposite direction of the controller's facing)
+        BlockPos insidePos = pos.offset(state.get(FermenterControllerBlock.FACING).getOpposite());
+
+        //step 2: go top and bottom to determine top and bottom height (where there are suitable top/bottom panels); at most 2 blocks (max height 3). These will be where top and bottom panels are, inside the fermenter
+        int top = Integer.MIN_VALUE; //error state: top should be strictly more than bottom! (cant have a top and bottom block in the same spot)
+        int bottom = Integer.MAX_VALUE;
+        for(int i = 0; i < 3; i++)
+        {
+            if(world.getBlockState(insidePos.offset(Axis.Y, i)).isIn(ModBlockTagProvider.FERMENTER_TOP_PANEL))
+            {
+                top = insidePos.getY() + i;
+                break;
+            }
+        }
+        for(int i = 0; i < 3; i++)
+        {
+            if(world.getBlockState(insidePos.offset(Axis.Y, -i)).isIn(ModBlockTagProvider.FERMENTER_BOTTOM_PANEL))
+            {
+                bottom = insidePos.getY() - i;
+                break;
+            }
+        }
+        BreakingFemme.LOGGER.info("top: " + top + " bottom: " + bottom);
+        if(top <= bottom) return; //no top/bottom found! => FAILURE
+        if(top - bottom > 2) return; //inconsistent dimensions: fermenter is too tall!
+        BreakingFemme.LOGGER.info("step 2 complete");
+
+        //step 3: go to the left, right and back to get width and height; at most 3 blocks, these will be on the edges where the side panels are, NOT inside the fermenter.
+        long plusx = Long.MIN_VALUE;
+        long minusx = Long.MAX_VALUE;
+        long plusz = Long.MIN_VALUE;
+        long minusz = Long.MAX_VALUE;
+        for(int i = 0; i < 3; i++)
+        {
+            if(world.getBlockState(insidePos.offset(Axis.X, i)).isIn(ModBlockTagProvider.FERMENTER_SIDE_PANEL))
+            {
+                plusx = insidePos.getX() + i;
+                break;
+            }
+        }
+        for(int i = 0; i < 3; i++)
+        {
+            if(world.getBlockState(insidePos.offset(Axis.X, -i)).isIn(ModBlockTagProvider.FERMENTER_SIDE_PANEL))
+            {
+                minusx = insidePos.getX() - i;
+                break;
+            }
+        }
+        for(int i = 0; i < 3; i++)
+        {
+            if(world.getBlockState(insidePos.offset(Axis.Z, i)).isIn(ModBlockTagProvider.FERMENTER_SIDE_PANEL))
+            {
+                plusz = insidePos.getZ() + i;
+                break;
+            }
+        }
+        for(int i = 0; i < 3; i++)
+        {
+            if(world.getBlockState(insidePos.offset(Axis.Z, -i)).isIn(ModBlockTagProvider.FERMENTER_SIDE_PANEL))
+            {
+                minusz = insidePos.getZ() - i;
+                break;
+            }
+        }
+    
+        BreakingFemme.LOGGER.info("plusx: " + plusx + " minusx: " + minusx);
+        BreakingFemme.LOGGER.info("plusz: " + plusz + " minusz: " + minusz);
+        if(plusx <= minusx || plusz <= minusz) return; //almost same as before; here there are only side panels and no separate top/bottom, but the starting position was on the inside.
+        if(plusx - minusx > 4 || plusz - minusz > 4) return; //dimensions inconsistent again, here more lenient tho.
+        BreakingFemme.LOGGER.info("step 3 complete");
+
+        //step 4: check for airlock
+        //step 5: check every relevant block for if it is there; in that time, check if mixing and count active heaters
+
+        //step 6: compute variables from this state
+        int height = top - bottom + 1;
+        int widthx = (int)(plusx - minusx - 1);
+        int widthy = (int)(plusz - minusz - 1);
+        volume = height * widthx * widthy; //whats inside should be an integer due to the checks before
+        surface_area = 2 * (height * widthx + height * widthy + widthx * widthy); //is there a way to factor this expression? yes its equal to (sum of dimensions)^2 - sum of (dimensions^2) wait why is it the same formula as the variance for probability distributions. can you do cool stuff with this? also this same formula is found somewhere when using characters, like the decomposition of the tensor product of characters of dimension >1 iirc, but i cant find it right now.
         conductivity = surface_area * 0.91f; //in W / K; coef should be *0.91
         outside_temp = environment_temperature(world, pos);
         capacity = (volume + 10) / 9;
+
+        BreakingFemme.LOGGER.info("success, volume " + volume + " surface " + surface_area);
     }
 
     private static int global_checking_class = 0;
@@ -255,20 +342,20 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
         if(checking_class == -1) //not redundant with the temperature if statement below: that one would not get triggered if temp is already defined!
         {
             checking_class = global_checking_class;
-            global_checking_class++;
+            global_checking_class += MULTIBLOCK_CHECK_STATIC_DELTA;
             if(global_checking_class >= MULTIBLOCK_CHECK_PERIOD) global_checking_class -= MULTIBLOCK_CHECK_PERIOD; //must be representative in [[0; MULTIBLOCK_CHECK_PERIOD - 1]]
-            checkMultiblock(); //on placement of the fermenter it will be checked twice. but that doesn't happen continuously, so its fine.
+            checkMultiblock(pos, state); //on placement of the fermenter it will be checked twice. but that doesn't happen continuously, so its fine.
         }
 
         //temperature serves as "uninitialized detector"; temp cannot go this low naturally
         if(temperature == -69420.0f)
         {
-            checkMultiblock();
+            checkMultiblock(pos, state);
             temperature = outside_temp; //temp was uninitialized, so set it to outside temp
             markDirty(world, pos, state); //need to save, otherwise temp may get reset to envtemp next time the area is loaded
         }
         else if(world.getTime() % MULTIBLOCK_CHECK_PERIOD == checking_class) //recheck regularly (every 2 seconds)
-            checkMultiblock();
+            checkMultiblock(pos, state);
 
         if(capacity == 0) //multiblock is INCORRECT! => do not tick
             return;

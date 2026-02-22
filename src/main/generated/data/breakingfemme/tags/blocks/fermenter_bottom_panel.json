@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "breakingfemme:fermenter_bottom",
+    "breakingfemme:fermenter_mixer",
+    "breakingfemme:fermenter_heater"
+  ]
+}
