@@ -4,7 +4,7 @@
     ],
     "passes": [
         {
-            "name": "blit",
+            "name": "altered_vision",
             "intarget": "minecraft:main",
             "outtarget": "swap"
         },
