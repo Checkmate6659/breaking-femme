@@ -52,6 +52,7 @@
     "sound.breakingfemme.grinding": "Grinding",
     "sound.breakingfemme.crank": "Crank turns",
     "death.attack.novikov": "%1$s tried to violate the Novikov self-consistency principle",
+    "death.attack.distraction": "%1$s got distracted from her main purpose in this game",
     "command.breakingfemme.kinetics.summary": "Kinetics data of %1$s:",
     "command.breakingfemme.kinetics.not_player": "Cannot get kinetic data of non-player entity",
     "command.breakingfemme.kinetics.buffered_ethanol": "Ethanol (buffered)",

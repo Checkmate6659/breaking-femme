@@ -2,6 +2,7 @@ package com.breakingfemme.cauldron;
 
 import java.util.Map;
 
+import com.breakingfemme.BreakingFemme;
 import com.breakingfemme.block.AndrostadienedioneBlock;
 import com.breakingfemme.fluid.ModFluids;
 
@@ -54,7 +55,7 @@ public class AndrostadienedioneCauldronBlock extends AbstractCauldronBlock {
         if (!world.isClient && this.isEntityTouchingFluid(state, pos, entity)) {
             if(entity.isPlayer()) {
                 entity.damage(new DamageSource( //https://en.wikipedia.org/wiki/Novikov_self-consistency_principle
-                    world.getRegistryManager().get(RegistryKeys.DAMAGE_TYPE).entryOf(AndrostadienedioneBlock.NOVIKOV)), 37921489645.0f
+                    world.getRegistryManager().get(RegistryKeys.DAMAGE_TYPE).entryOf(BreakingFemme.NOVIKOV)), 37921489645.0f
                 );
             }
             else if (entity.isLiving())

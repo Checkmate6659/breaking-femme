@@ -2,8 +2,11 @@ package com.breakingfemme.mixin;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MovementType;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
 
 import org.joml.SimplexNoise;
 import org.spongepowered.asm.mixin.Mixin;
@@ -12,6 +15,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import com.breakingfemme.BreakingFemme;
 import com.breakingfemme.KineticsAttachments;
 
 @Mixin(LivingEntity.class)
@@ -55,6 +59,32 @@ public class StaggeringMixin {
         pitch = pitch + headp * cosp;
         player.setPitch(pitch < -90 ? -90 : (pitch > 90 ? 90 : pitch)); //because i dont have access to Math.clamp for some reason
         player.setYaw(yaw + heady * cosp);*/
+    }
+
+    @Inject(at = @At("HEAD"), method = "tick")
+    private void addDamage(CallbackInfo info)
+    {
+        if(!((LivingEntity)(Object)this).isPlayer())
+            return;
+
+        PlayerEntity player = ((PlayerEntity)(Object)this);
+        World world = player.getWorld();
+
+        if(world.isClient()) //ONLY execute on the server
+            return;
+        
+        if(world.getTime() % 40 != 0) //don't damage ALL the time
+            return;
+        
+        float etoh = KineticsAttachments.getLevel(player, KineticsAttachments.ETHANOL);
+        float ach = KineticsAttachments.getLevel(player, KineticsAttachments.ACETALDEHYDE);
+
+        //taking damage when above 3 (count acetaldehyde as well, again coef out my ass)
+        float damage_number = 0.5f * etoh + 3.0f * ach - 0.5f; //start when etoh + 6ach = 3
+        if(damage_number > 1.0f) //start at 1 heart of damage (scaled afterwards)
+        player.damage(new DamageSource(
+            world.getRegistryManager().get(RegistryKeys.DAMAGE_TYPE).entryOf(BreakingFemme.DISTRACTION)), damage_number
+        );
     }
 
     //TODO: make eye position slowly drift
