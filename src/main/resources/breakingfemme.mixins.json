@@ -6,7 +6,6 @@
 		"KineticsMixin"
 	],
 	"client": [
-		"AlteredVisionMixin",
 		"PostEffectPassAccessor",
 		"StaggeringMixin",
 		"StaggeringSneakMixin"

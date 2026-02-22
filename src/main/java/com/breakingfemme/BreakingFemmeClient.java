@@ -1,26 +1,88 @@
 package com.breakingfemme;
 
+import java.io.IOException;
+import java.util.List;
+
+import org.apache.commons.lang3.mutable.MutableObject;
+
 import com.breakingfemme.block.ModBlocks;
 import com.breakingfemme.fluid.ModFluids;
+import com.breakingfemme.mixin.PostEffectPassAccessor;
 import com.breakingfemme.screen.FermenterScreen;
 import com.breakingfemme.screen.ModScreenHandlers;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gl.PostEffectPass;
+import net.minecraft.client.gl.PostEffectProcessor;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 
 public class BreakingFemmeClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
+        //example repo: https://github.com/CelDaemon/post-process-example/blob/main/src/client/java/net/voidgroup/postProcessExample/client/PostProcessExampleClient.java
+        //its on mojmaps tho, im on yarn
+        //PostChain -> PostEffectProcessor
         //TODO: effect shaders HERE instead of mixin
-        //WorldRenderEvents.AFTER_TRANSLUCENT.register(context -> {
-        //    final GameRenderer renderer = MinecraftClient.getInstance().gameRenderer;
-        //});
+        final var client = new MutableObject<MinecraftClient>();
+        final var postprocessor = new MutableObject<PostEffectProcessor>();
+        ClientLifecycleEvents.CLIENT_STARTED.register(cl -> {
+            client.setValue(cl);
+            try {
+                postprocessor.setValue(new PostEffectProcessor(cl.getTextureManager(), cl.getResourceManager(), cl.getFramebuffer(), new Identifier("shaders/post/altered_vision.json")));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        WorldRenderEvents.AFTER_TRANSLUCENT.register(context -> {
+            final var mainFramebuffer = client.getValue().getFramebuffer();
+            final var currentPostProcessor = postprocessor.getValue();
+            final PlayerEntity player = client.getValue().player;
+
+            //this is where we set our uniforms and shit
+            float etoh = KineticsAttachments.getLevel(player, KineticsAttachments.ETHANOL);
+            if(etoh <= 1.25f || player.isSpectator()) //no visual effects: set all uniforms to 0
+            {
+				List<PostEffectPass> passes = ((PostEffectPassAccessor)currentPostProcessor).breakingfemme$getPasses();
+
+				passes.get(0).getProgram().getUniformByNameOrDummy("EffectStrength").set(0f);
+				passes.get(0).getProgram().getUniformByNameOrDummy("Blindness").set(0f);
+				passes.get(1).getProgram().getUniformByNameOrDummy("BlurStrength").set(0f);
+				passes.get(2).getProgram().getUniformByNameOrDummy("BlurStrength").set(0f);
+            }
+            else //compute and set uniforms
+            {
+				float strength = (etoh - 1.25f) * 0.5f; //goes between 0 and 1, for diplopia and blurring
+				if(strength > 1.0f) strength = 1.0f;
+				float blinding = etoh - 2.0f; //goes from 0 (at 2) to 1 (at 3)
+				if(blinding < 0.0f) blinding = 0.0f;
+				else if(blinding > 1.0f) blinding = 1.0f;
+				blinding *= blinding; //it is a more abrupt change; shouldnt really be noticeable at 2, but blacked out at 3
+				
+				//set uniforms
+				List<PostEffectPass> passes = ((PostEffectPassAccessor)currentPostProcessor).breakingfemme$getPasses();
+
+                //why choppy uniforms???
+				passes.get(0).getProgram().getUniformByNameOrDummy("EffectStrength").set(0.05f * strength);
+				passes.get(0).getProgram().getUniformByNameOrDummy("Blindness").set(blinding);
+				passes.get(1).getProgram().getUniformByNameOrDummy("BlurStrength").set(16f * strength); //up to 16.0 (other to 32 or 64?)
+				passes.get(2).getProgram().getUniformByNameOrDummy("BlurStrength").set(24f * strength); //more horizontal blur => primitive diplopia emulation
+            }
+            
+            currentPostProcessor.setupDimensions(mainFramebuffer.textureWidth, mainFramebuffer.textureHeight);
+            currentPostProcessor.render(0);
+            mainFramebuffer.beginWrite(true);
+        });
 
         //screens/screen handlers
         HandledScreens.register(ModScreenHandlers.FERMENTER_SCREEN_HANDLER, FermenterScreen::new);
