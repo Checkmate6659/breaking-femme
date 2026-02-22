@@ -37,7 +37,9 @@ public class StaggeringMixin {
         float ach = KineticsAttachments.getLevel(player, KineticsAttachments.ACETALDEHYDE);
 
         float stagger = etoh + 1.5f * ach - 0.75f; //coef of acetaldehyde pulled out of my ass, threshold not so much
-        if(stagger < 0) //not drunk enough to get an effect
+        if(stagger > 0.75f) //at 1.5
+            player.setSprinting(false); //makes sense, right? also stops player from using speed boost when sprint-jumping to move with zero movement speed
+        if(stagger < 0)
             return;
         stagger = (float)Math.tanh(stagger * stagger * 200); //formula pulled out of my ass once again
 
