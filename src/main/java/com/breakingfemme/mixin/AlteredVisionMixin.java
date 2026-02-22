@@ -59,13 +59,18 @@ public abstract class AlteredVisionMixin {
 			//why do they only get set every once in a while?
 			if(((GameRenderer)(Object)this).getPostProcessor() != null && ((GameRenderer)(Object)this).getPostProcessor().getName().equals(ALTERED_VISION_ID.toString())) //triggers after getting set to not be null => cant use if else
 			{
-				float strength = (etoh - 1.25f) * 0.5f; //goes between 0 and 1: more drunk => see worse
+				float strength = (etoh - 1.25f) * 0.5f; //goes between 0 and 1, for diplopia and blurring
 				if(strength > 1.0f) strength = 1.0f;
+				float blinding = etoh - 2.0f; //goes from 0 (at 2) to 1 (at 3)
+				if(blinding < 0.0f) blinding = 0.0f;
+				else if(blinding > 1.0f) blinding = 1.0f;
+				blinding *= blinding; //it is a more abrupt change; shouldnt really be noticeable at 2, but blacked out at 3
 				
 				//set uniforms
 				List<PostEffectPass> passes = ((PostEffectPassAccessor)(((GameRenderer)(Object)this).getPostProcessor())).breakingfemme$getPasses();
 
 				passes.get(0).getProgram().getUniformByNameOrDummy("EffectStrength").set(0.05f * strength);
+				passes.get(0).getProgram().getUniformByNameOrDummy("Blindness").set(blinding);
 				passes.get(1).getProgram().getUniformByNameOrDummy("BlurStrength").set(16f * strength); //up to 16.0 (other to 32 or 64?)
 				passes.get(2).getProgram().getUniformByNameOrDummy("BlurStrength").set(24f * strength); //more horizontal blur => primitive diplopia emulation
 			}

@@ -82,10 +82,16 @@ public class StaggeringMixin {
         float slowdown = etoh + 1.5f * ach - 1.0f; //coef of acetaldehyde pulled out of my ass, threshold not so much (based on just etoh)
         if(slowdown < 0f)
             slowdown = 0f;
-        slowdown *= 0.125f; //we want about 25% speed when reaching 2g/L (theres also acetaldehyde)
-        if(slowdown > 0.75f) //at least keep a quarter of original speed
+        slowdown *= 0.125f; //we want about 25% speed when reaching 2g/L (theres also acetaldehyde but yeah)
+        if(slowdown > 0.75f) //at least keep a quarter of original speed... in the first phase.
             slowdown = 0.75f;
 
-        cir.setReturnValue(cir.getReturnValue() * (1.0f - slowdown));
+        //this code makes the player just unable to move when blacked out
+        float blinding = etoh - 2.0f; //goes from 0 (at 2) to 1 (at 3)
+        if(blinding < 0.0f) blinding = 0.0f;
+        else if(blinding > 1.0f) blinding = 1.0f;
+        blinding *= blinding; //it is a more abrupt change; shouldnt really be noticeable at 2, but blacked out at 3
+
+        cir.setReturnValue(cir.getReturnValue() * (1.0f - slowdown) * (1.0f - blinding));
 	}
 }

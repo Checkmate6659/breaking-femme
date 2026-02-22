@@ -6,6 +6,7 @@ in vec2 texCoord;
 in vec2 oneTexel; //whats this used for
 
 uniform float EffectStrength;
+uniform float Blindness;
 
 out vec4 fragColor;
 
@@ -17,6 +18,6 @@ void main() {
     vec3 rightColor = texture(DiffuseSampler, rightCoord).xyz;
     vec3 leftColor = texture(DiffuseSampler, leftCoord).xyz;
 
-    fragColor.xyz = 0.5 * (rightColor + leftColor);
+    fragColor.xyz = 0.5 * (rightColor + leftColor) * (1.0 - Blindness);
     fragColor.a = 1.0;
 }
