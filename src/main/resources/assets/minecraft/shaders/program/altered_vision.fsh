@@ -7,7 +7,7 @@ in vec2 oneTexel;
 
 uniform vec2 InSize;
 
-//TODO: my own uniform EffectStrength
+uniform float EffectStrength;
 uniform float Resolution;
 uniform float Saturation;
 uniform float MosaicSize;
@@ -15,6 +15,7 @@ uniform float MosaicSize;
 out vec4 fragColor;
 
 void main() {
+    //i cant get rid of this fucking code otherwise it black screens??
     vec2 mosaicInSize = InSize / MosaicSize;
     vec2 fractPix = fract(texCoord * mosaicInSize) / mosaicInSize;
 
@@ -28,13 +29,13 @@ void main() {
 
     fragColor = baseTexel;
 
-    /*  
-    vec2 leftCoord = texCoord * vec2(1.0 + EffectStrength, 1.0);
-    vec2 rightCoord = leftCoord - vec2(EffectStrength, 0.0);
 
-    vec3 left_color = texture(DiffuseSampler, leftCoord).xyz;
-    vec3 right_color = texture(DiffuseSampler, rightCoord).xyz;
+    //my own shit goes here
+    vec2 rightCoord = texCoord * vec2(1.0 - EffectStrength, 1.0);
+    vec2 leftCoord = rightCoord + vec2(EffectStrength, 0.0);
 
-    fragColor.xyz = 0.5 * (left_color + right_color);
-    */
+    vec3 rightColor = texture(DiffuseSampler, rightCoord).xyz;
+    vec3 leftColor = texture(DiffuseSampler, leftCoord).xyz;
+
+    fragColor.xyz = 0.5 * (rightColor + leftColor);
 }
