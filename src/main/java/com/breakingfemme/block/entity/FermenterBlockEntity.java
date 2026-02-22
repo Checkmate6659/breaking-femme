@@ -4,7 +4,6 @@ import java.util.Optional;
 
 import com.breakingfemme.BreakingFemme;
 import com.breakingfemme.fluid.ModFluids;
-import com.breakingfemme.item.ModItems;
 import com.breakingfemme.recipe.FermentingRecipe;
 import com.breakingfemme.screen.FermenterScreenHandler;
 
@@ -29,23 +28,32 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.dimension.DimensionType;
 
-public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory, ImplementedInventory {
+public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory, ImplementedInventory { //could be transitioned to SimpleInventory for less hassle/not have an extra class?
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(8, ItemStack.EMPTY);
-    public static final int STAGE_NOT_IN_USE = 5;
+    public static final int STAGE_NOT_IN_USE = 5; //5 stages 0 to 4, and this value to stop when its done
     private static final int OUTPUT_SLOT_BEGIN = 4; //output slots must be right after all input slots
+    private static final int MULTIBLOCK_CHECK_PERIOD = 40; //checking integrity and outside temp every 40 ticks
 
     protected final PropertyDelegate propertyDelegate; //the PropertyDelegate is used for client<->server syncing (i mean here its really more like server->client, the only client->server is the inventory)
 
     private boolean waiting_for_recipe_loading = false;
     private String deferred_recipe = "minecraft:air"; //this is because when calling readNbt, the world is null, so cannot get its recipe manager immediately
 
-    private int capacity = 1; //0 for incorrect multiblock, 1 for smallest, 4 to largest; TODO: should be floor((number of enclosed tiles + 10) / 9)
+    //these are saved variables: cannot derive from multiblock checking
     private int current_stage = STAGE_NOT_IN_USE; //the fermentation's current stage (always goes from 0 to 4 when in use, 5 ie STAGE_NOT_IN_USE when not in use)
     private int stage_progress = 0; //progress of current stage, in ticks
     private FermentingRecipe recipe = FermentingRecipe.NONE; //this should be NONE only when the fermenter is not in use
     private float temperature = -69420.0f; //in °C; initial value is for initialization to environment temperature
-    private boolean is_mixing = false; //will be derived from multiblock checking
     private int grace_time = 0; //accumulated time with wrong conditions. adds 4 if wrong, removes 1 if right, min is 0. if exceeds a certain value, then the recipe fails.
+
+    //these variables arent saved, can be derived from multiblock checking
+    private int capacity = 0; //0 for incorrect multiblock, 1 for smallest (1*2*1), 4 to largest (3*3*3)
+    private float outside_temp = 0;
+    private int n_heaters = 0;
+    private int volume = 0;
+    private float conductivity = 0;
+    private boolean is_mixing = false; //will be derived from multiblock checking
+
 
     public FermenterBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.FERMENTER_BLOCK_ENTITY, pos, state);
@@ -219,11 +227,22 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
         //TODO: interrupt recipe if multiblock size changed (it may be possible, using bugs, to change barrel size without getting caught)
         //could also be possible if the multiblock check isn't done every tick (would probably be too laggy)
 
-        temperature = environment_temperature(world, pos); //initial temp is that of environment
         //actually, this should happen as soon as water buckets added in.
         //like the buckets in the output slots should raise the heat capacity/carry energy
+
+        capacity = 0; //0: incorrect multiblock; must be the initial value (in case we fail!)
+        volume = 8; //number of contained blocks; can go from 2 (1*2*1 minimum size) to 27 (3*3*3)
+        int surface_area = 24; //number of panels the barrel is made out of (for a 2*2*2 barrel its 24) (TODO: calculate)
+        is_mixing = false; //are there any powered mixers on the bottom (just 1 is enough)
+        n_heaters = 0; //number of active heaters
+
+        conductivity = surface_area * 0.91f; //in W / K; coef should be *0.91
+        outside_temp = environment_temperature(world, pos);
+        capacity = (volume + 10) / 9;
     }
 
+    private static int global_checking_class = 0;
+    private int checking_class = -1; //variable set up to have not all fermenters multiblock check at the same time => more lag friendly
     public void tick(World world, BlockPos pos, BlockState state)
     {
         if(world.isClient()) return;
@@ -232,21 +251,28 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
         if(waiting_for_recipe_loading)
             tryLoadRecipe();
 
+        if(checking_class == -1) //not redundant with the temperature if statement below: that one would not get triggered if temp is already defined!
+        {
+            checking_class = global_checking_class;
+            global_checking_class++;
+            if(global_checking_class >= MULTIBLOCK_CHECK_PERIOD) global_checking_class -= MULTIBLOCK_CHECK_PERIOD; //must be representative in [[0; MULTIBLOCK_CHECK_PERIOD - 1]]
+            checkMultiblock(); //on placement of the fermenter it will be checked twice. but that doesn't happen continuously, so its fine.
+        }
+
         //temperature serves as "uninitialized detector"; temp cannot go this low naturally
         if(temperature == -69420.0f)
         {
             checkMultiblock();
+            temperature = outside_temp; //temp was uninitialized, so set it to outside temp
             markDirty(world, pos, state); //need to save, otherwise temp may get reset to envtemp next time the area is loaded
         }
+        else if(world.getTime() % MULTIBLOCK_CHECK_PERIOD == checking_class) //recheck regularly (every 2 seconds)
+            checkMultiblock();
+
+        if(capacity == 0) //multiblock is INCORRECT! => do not tick
+            return;
 
         //update temperature
-        //TODO: move some of this stuff to multiblock check/private variables!
-        float outside_temp = environment_temperature(world, pos);
-        int n_heaters = 0; //number of active heaters (TODO: count them in multiblock check)
-        int volume = 8; //number of contained blocks
-        int surface_area = 24; //number of panels the barrel is made out of (for a 2*2*2 barrel its 24) (TODO: calculate)
-        float conductivity = surface_area * 0.91f; //in W / K; coef should be *0.91
-
         //discretized differential equation, but time accelerated by a factor of 72 (number of minecraft days in a real day)
         temperature += (n_heaters * 1e4 + conductivity * (outside_temp - temperature)) / (volume * 1.16139e6); //4.181e6 * 20 / 72; 4.181e6 is water heat capacity, 20 for ticks to seconds
 
