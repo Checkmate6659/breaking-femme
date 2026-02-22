@@ -104,7 +104,9 @@ public class StaggeringMixin {
         if(!player.getWorld().isClient()) //don't execute on the server
             return;
 
-        //TODO: disable during creative flying
+        //disable if creative or spectator
+        if(player.isCreative() || player.isSpectator())
+            return;
 
         float etoh = KineticsAttachments.getLevel(player, KineticsAttachments.ETHANOL);
         float ach = KineticsAttachments.getLevel(player, KineticsAttachments.ACETALDEHYDE);
@@ -134,6 +136,10 @@ public class StaggeringMixin {
         PlayerEntity player = ((PlayerEntity)(Object)this);
 
         if(!player.getWorld().isClient()) //don't execute on the server
+            return;
+
+        //disable if creative or spectator
+        if(player.isCreative() || player.isSpectator())
             return;
 
         float etoh = KineticsAttachments.getLevel(player, KineticsAttachments.ETHANOL);
