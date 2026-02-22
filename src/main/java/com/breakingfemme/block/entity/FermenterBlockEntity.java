@@ -6,6 +6,8 @@ import com.breakingfemme.BreakingFemme;
 import com.breakingfemme.block.FermenterControllerBlock;
 import com.breakingfemme.block.FermenterHeaterBlock;
 import com.breakingfemme.block.FermenterMixerBlock;
+import com.breakingfemme.block.FermenterPanelBlock;
+import com.breakingfemme.block.ModBlocks;
 import com.breakingfemme.datagen.ModBlockTagProvider;
 import com.breakingfemme.fluid.ModFluids;
 import com.breakingfemme.recipe.FermentingRecipe;
@@ -30,6 +32,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Direction.Axis;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -239,6 +242,16 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
         }
     }
 
+    //returns true if property doesn't exist (full blocks as panels makes more sense than completely non-solid blocks), otherwise true iff property matches wanted
+    private boolean safeCheckDirectionProperty(BlockState state, Property<Direction> prop, Direction wanted)
+    {
+        try {
+            return state.get(prop) == wanted;
+        } catch (IllegalArgumentException e) {
+            return true;
+        }
+    }
+
     private void checkMultiblock(BlockPos pos, BlockState state)
     {
         BreakingFemme.LOGGER.info("Multiblock check!");
@@ -348,6 +361,47 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
         BreakingFemme.LOGGER.info("step 4.1: no_airlock " + no_airlock);
         if(no_airlock) return;
 
+        //step 4.2: check east (plusx) and west (minusx): fixed x, variable y and z; also there can only be ONE controller block. otherwise its invalid.
+        for(int y = bottom; y <= top; y++)
+        {
+            for(int z = minusz + 1; z < plusz; z++)
+            {
+                //check east (panels must be facing east!) and west
+                BlockState east_state = world.getBlockState(new BlockPos(plusx, y, z));
+                if(!east_state.isIn(ModBlockTagProvider.FERMENTER_SIDE_PANEL) || !safeCheckDirectionProperty(east_state, FermenterPanelBlock.FACING, Direction.EAST))
+                    return;
+                BlockState west_state = world.getBlockState(new BlockPos(minusx, y, z));
+                if(!west_state.isIn(ModBlockTagProvider.FERMENTER_SIDE_PANEL) || !safeCheckDirectionProperty(west_state, FermenterPanelBlock.FACING, Direction.WEST))
+                    return;
+
+                //controller block uniqueness
+                //if(east_state.isOf(ModBlocks.FERMENTER_CONTROLLER) && pos.equals(new BlockPos(plusx, y, z)))
+                //    return;
+                //if(west_state.isOf(ModBlocks.FERMENTER_CONTROLLER) && pos.equals(new BlockPos(minusx, y, z)))
+                //    return;
+            }
+        
+            //step 4.3: check south (plusz) and north (minusz): fixed z, variable x and y
+            for(int x = minusx + 1; x < plusx; x++)
+            {
+                BlockState south_state = world.getBlockState(new BlockPos(x, y, plusz));
+                if(!south_state.isIn(ModBlockTagProvider.FERMENTER_SIDE_PANEL) || !safeCheckDirectionProperty(south_state, FermenterPanelBlock.FACING, Direction.SOUTH))
+                    return;
+                BlockState north_state = world.getBlockState(new BlockPos(x, y, minusz));
+                if(!north_state.isIn(ModBlockTagProvider.FERMENTER_SIDE_PANEL) || !safeCheckDirectionProperty(north_state, FermenterPanelBlock.FACING, Direction.NORTH))
+                    return;
+
+                //controller block uniqueness
+                //if(south_state.isOf(ModBlocks.FERMENTER_CONTROLLER) && pos.equals(new BlockPos(x, y, plusz)))
+                //    return;
+                //if(north_state.isOf(ModBlocks.FERMENTER_CONTROLLER) && pos.equals(new BlockPos(x, y, minusz)))
+                //    return;
+            }
+        }
+        BreakingFemme.LOGGER.info("step 4.2, 4.3 passed");
+
+        //step 4.4: check if the barrel really is hollow
+
         //step 5: compute variables from this state
         int height = top - bottom + 1;
         int widthx = (int)(plusx - minusx - 1);
@@ -390,7 +444,12 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
             checkMultiblock(pos, state);
 
         if(capacity == 0) //multiblock is INCORRECT! => do not tick
+        {
+            //TODO: don't absorb buckets if currently running a recipe, but put them back (as sludge ofc) where they were
+
+            current_stage = STAGE_NOT_IN_USE;
             return;
+        }
 
         //update temperature
         //discretized differential equation, but time accelerated by a factor of 72 (number of minecraft days in a real day)
