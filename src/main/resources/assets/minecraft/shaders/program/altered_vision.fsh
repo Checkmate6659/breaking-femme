@@ -5,18 +5,13 @@ uniform sampler2D DiffuseSampler;
 in vec2 texCoord;
 in vec2 oneTexel;
 
-uniform vec2 InSize;
-
 uniform float EffectStrength;
 
 out vec4 fragColor;
 
 void main() {
     //i cant get rid of this fucking code otherwise it black screens??
-    vec2 mosaicInSize = InSize;
-    vec2 fractPix = fract(texCoord * mosaicInSize) / mosaicInSize;
-
-    vec4 baseTexel = texture(DiffuseSampler, texCoord - fractPix);
+    vec4 baseTexel = texture(DiffuseSampler, texCoord);
 
     vec3 fractTexel = baseTexel.rgb - fract(baseTexel.rgb);
     float luma = dot(fractTexel, vec3(0.3, 0.59, 0.11));
