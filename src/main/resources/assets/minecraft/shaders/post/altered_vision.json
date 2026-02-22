@@ -10,7 +10,7 @@
             "uniforms": [
                 {
                     "name": "EffectStrength",
-                    "values": [ 0.02 ]
+                    "values": [ 0.00 ]
                 }
             ]
         },
