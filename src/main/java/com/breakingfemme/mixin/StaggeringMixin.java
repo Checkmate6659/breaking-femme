@@ -76,7 +76,7 @@ public class StaggeringMixin {
 
         //TODO: disable during creative flying
 
-        float etoh = KineticsAttachments.getLevel(player, KineticsAttachments.ETHANOL); //why this 0
+        float etoh = KineticsAttachments.getLevel(player, KineticsAttachments.ETHANOL);
         float ach = KineticsAttachments.getLevel(player, KineticsAttachments.ACETALDEHYDE);
 
         float slowdown = etoh + 1.5f * ach - 1.0f; //coef of acetaldehyde pulled out of my ass, threshold not so much (based on just etoh)
@@ -93,5 +93,27 @@ public class StaggeringMixin {
         blinding *= blinding; //it is a more abrupt change; shouldnt really be noticeable at 2, but blacked out at 3
 
         cir.setReturnValue(cir.getReturnValue() * (1.0f - slowdown) * (1.0f - blinding));
+	}
+
+    //reduce jump height when blacked out
+    @Inject(at = @At("RETURN"), method = "getJumpVelocity", cancellable = true)
+	private void reduceJumpHeight(CallbackInfoReturnable<Float> cir) {
+        if(!((LivingEntity)(Object)this).isPlayer())
+            return;
+
+        PlayerEntity player = ((PlayerEntity)(Object)this);
+
+        if(!player.getWorld().isClient()) //don't execute on the server
+            return;
+
+        float etoh = KineticsAttachments.getLevel(player, KineticsAttachments.ETHANOL);
+
+        //reduction of jump height
+        float blinding = etoh - 2.0f; //goes from 0 (at 2) to 1 (at 3)
+        if(blinding < 0.0f) blinding = 0.0f;
+        else if(blinding > 1.0f) blinding = 1.0f;
+        blinding *= blinding; //it is a more abrupt change; shouldnt really be noticeable at 2, but blacked out at 3
+
+        cir.setReturnValue(cir.getReturnValue() * (1.0f - blinding));
 	}
 }
