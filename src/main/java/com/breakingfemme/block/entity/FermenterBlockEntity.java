@@ -254,18 +254,13 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
 
     private void checkMultiblock(BlockPos pos, BlockState state)
     {
-        BreakingFemme.LOGGER.info("Multiblock check!");
-
-        //TODO: implement proper multiblock check
-        //TODO: interrupt recipe if multiblock size changed (it may be possible, using bugs or just speed, to change barrel size without getting caught)
-        //could also be possible if the multiblock check isn't done every tick (would probably be too laggy)
-
         //set up invalid state (can just return if invalid)
         capacity = 0; //0: incorrect multiblock; must be the initial value (in case we fail!)
         volume = 1; //number of contained blocks; can go from 2 (1*2*1 minimum size) to 27 (3*3*3); 1 means invalid.
         int surface_area = 24; //number of panels the barrel is made out of (for a 2*2*2 barrel its 24)
         is_mixing = false; //are there any powered mixers on the bottom (just 1 is enough)
         n_heaters = 0; //number of active heaters
+        outside_temp = environment_temperature(world, pos); //measure this anyway (TODO: setting to do a measurement without knowing multiblock size)
 
         //NOTE: here we are assuming that the multiblock is valid. an inconsistency would prove that it isn't, and we will need to check that an invalid multiblock is always inconsistent
         //step 1: get block behind controller (1 block in the opposite direction of the controller's facing)
@@ -299,7 +294,7 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
         int minusx = Integer.MAX_VALUE;
         int plusz = Integer.MIN_VALUE;
         int minusz = Integer.MAX_VALUE;
-        for(int i = 0; i < 3; i++)
+        for(int i = 1; i < 4; i++)
         {
             if(world.getBlockState(insidePos.offset(Axis.X, i)).isIn(ModBlockTagProvider.FERMENTER_SIDE_PANEL))
             {
@@ -307,7 +302,7 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
                 break;
             }
         }
-        for(int i = 0; i < 3; i++)
+        for(int i = 1; i < 4; i++)
         {
             if(world.getBlockState(insidePos.offset(Axis.X, -i)).isIn(ModBlockTagProvider.FERMENTER_SIDE_PANEL))
             {
@@ -315,7 +310,7 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
                 break;
             }
         }
-        for(int i = 0; i < 3; i++)
+        for(int i = 1; i < 4; i++)
         {
             if(world.getBlockState(insidePos.offset(Axis.Z, i)).isIn(ModBlockTagProvider.FERMENTER_SIDE_PANEL))
             {
@@ -323,7 +318,7 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
                 break;
             }
         }
-        for(int i = 0; i < 3; i++)
+        for(int i = 1; i < 4; i++)
         {
             if(world.getBlockState(insidePos.offset(Axis.Z, -i)).isIn(ModBlockTagProvider.FERMENTER_SIDE_PANEL))
             {
@@ -375,10 +370,10 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
                     return;
 
                 //controller block uniqueness
-                //if(east_state.isOf(ModBlocks.FERMENTER_CONTROLLER) && pos.equals(new BlockPos(plusx, y, z)))
-                //    return;
-                //if(west_state.isOf(ModBlocks.FERMENTER_CONTROLLER) && pos.equals(new BlockPos(minusx, y, z)))
-                //    return;
+                if(east_state.isOf(ModBlocks.FERMENTER_CONTROLLER) && !pos.equals(new BlockPos(plusx, y, z)))
+                    return;
+                if(west_state.isOf(ModBlocks.FERMENTER_CONTROLLER) && !pos.equals(new BlockPos(minusx, y, z)))
+                    return;
             }
         
             //step 4.3: check south (plusz) and north (minusz): fixed z, variable x and y
@@ -392,15 +387,20 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
                     return;
 
                 //controller block uniqueness
-                //if(south_state.isOf(ModBlocks.FERMENTER_CONTROLLER) && pos.equals(new BlockPos(x, y, plusz)))
-                //    return;
-                //if(north_state.isOf(ModBlocks.FERMENTER_CONTROLLER) && pos.equals(new BlockPos(x, y, minusz)))
-                //    return;
+                if(south_state.isOf(ModBlocks.FERMENTER_CONTROLLER) && !pos.equals(new BlockPos(x, y, plusz)))
+                    return;
+                if(north_state.isOf(ModBlocks.FERMENTER_CONTROLLER) && !pos.equals(new BlockPos(x, y, minusz)))
+                    return;
             }
         }
         BreakingFemme.LOGGER.info("step 4.2, 4.3 passed");
 
         //step 4.4: check if the barrel really is hollow
+        for(int x = minusx + 1; x < plusx; x++)
+            for(int y = bottom + 1; y < top; y++)
+                for(int z = minusz + 1; z < plusz; z++)
+                    if(!world.getBlockState(new BlockPos(x, y, z)).isAir())
+                        return;
 
         //step 5: compute variables from this state
         int height = top - bottom + 1;
@@ -409,7 +409,6 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
         volume = height * widthx * widthy; //whats inside should be an integer due to the checks before
         surface_area = 2 * (height * widthx + height * widthy + widthx * widthy); //is there a way to factor this expression? yes its equal to (sum of dimensions)^2 - sum of (dimensions^2) wait why is it the same formula as the variance for probability distributions. can you do cool stuff with this? also this same formula is found somewhere when using characters, like the decomposition of the tensor product of characters of dimension >1 iirc, but i cant find it right now.
         conductivity = surface_area * 0.91f; //in W / K; coef should be *0.91
-        outside_temp = environment_temperature(world, pos);
         capacity = (volume + 10) / 9;
 
         BreakingFemme.LOGGER.info("success, volume " + volume + " surface " + surface_area + " heaters " + n_heaters + " mixing " + is_mixing);
@@ -447,6 +446,7 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
         {
             //TODO: don't absorb buckets if currently running a recipe, but put them back (as sludge ofc) where they were
 
+            temperature = outside_temp; //bye temperature data! :3
             current_stage = STAGE_NOT_IN_USE;
             return;
         }
