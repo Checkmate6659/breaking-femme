@@ -77,7 +77,7 @@ public class KineticsMixin {
 
 		//sync between client and server
 		World world = player.getWorld();
-		if(!world.isClient() && ((world.getTime() & 31) == 0)) //sync every 32 ticks, or 1.5 seconds, for efficiency/data usage
+		if(!world.isClient()) //if we dont sync every tick, the client will have choppy vision alteration; i would like to sync every 32t, need to sim on the client too for that tho
             KineticsAttachments.syncClientValues((ServerPlayerEntity)player);
 	}
 }

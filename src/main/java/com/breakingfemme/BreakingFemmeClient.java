@@ -72,7 +72,6 @@ public class BreakingFemmeClient implements ClientModInitializer {
 				//set uniforms
 				List<PostEffectPass> passes = ((PostEffectPassAccessor)currentPostProcessor).breakingfemme$getPasses();
 
-                //why choppy uniforms???
 				passes.get(0).getProgram().getUniformByNameOrDummy("EffectStrength").set(0.05f * strength);
 				passes.get(0).getProgram().getUniformByNameOrDummy("Blindness").set(blinding);
 				passes.get(1).getProgram().getUniformByNameOrDummy("BlurStrength").set(16f * strength); //up to 16.0 (other to 32 or 64?)
