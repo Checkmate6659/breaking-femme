@@ -14,14 +14,14 @@ import com.breakingfemme.KineticsAttachments;
 
 @Mixin(PlayerEntity.class)
 public class KineticsMixin {
-	private float clampZero(float f)
+	private float breakingfemme$clampZero(float f)
 	{
 		if(f > 0f) return f;
 		return 0f;
 	}
 
 	@Inject(at = @At("HEAD"), method = "tick")
-	private void updateLevels(CallbackInfo info) {
+	private void breakingfemme$updateLevels(CallbackInfo info) {
 		PlayerEntity player = ((PlayerEntity)(Object)this);
 		//TODO: simulate during sleep!!! as in simulate kinetics when skipping time
 
@@ -35,7 +35,7 @@ public class KineticsMixin {
 
 		//hunger is important for ethanol kinetics: an empty stomach makes absorption faster
 		HungerManager manager = player.getHungerManager();
-		float food = clampZero(manager.getFoodLevel() * 0.5f + manager.getSaturationLevel() - manager.getExhaustion() * 0.25f) * 0.03225806451612903f; //goes from 0 to 1, number is 1/31
+		float food = breakingfemme$clampZero(manager.getFoodLevel() * 0.5f + manager.getSaturationLevel() - manager.getExhaustion() * 0.25f) * 0.03225806451612903f; //goes from 0 to 1, number is 1/31
 
 		//ethanol absorption
 		//TODO: 2 compartment Michaelis-Menten model ig?
@@ -70,9 +70,9 @@ public class KineticsMixin {
 		//V_max from... my ass. TODO: find a proper source. that doesn't make all kinetics fucked up and not like the real ones when im trying to impl it.
 		ach -= 6.0e-5 * ach / (ach + 8.8e-6); //using K_m = 8.8ug/L and V_max = 60 mg/L/h
 
-		player.setAttached(KineticsAttachments.BUFFERED_ETHANOL, clampZero(buf_etoh));
-		player.setAttached(KineticsAttachments.ETHANOL, clampZero(etoh));
-		player.setAttached(KineticsAttachments.ACETALDEHYDE, clampZero(ach));
+		player.setAttached(KineticsAttachments.BUFFERED_ETHANOL, breakingfemme$clampZero(buf_etoh));
+		player.setAttached(KineticsAttachments.ETHANOL, breakingfemme$clampZero(etoh));
+		player.setAttached(KineticsAttachments.ACETALDEHYDE, breakingfemme$clampZero(ach));
 
 
 		//sync between client and server

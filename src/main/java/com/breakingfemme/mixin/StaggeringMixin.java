@@ -21,7 +21,7 @@ import com.breakingfemme.KineticsAttachments;
 @Mixin(LivingEntity.class)
 public class StaggeringMixin {
     @Inject(at = @At("HEAD"), method = "tickMovement")
-	private void addStagger(CallbackInfo info) {
+	private void breakingfemme$addStagger(CallbackInfo info) {
         if(!((LivingEntity)(Object)this).isPlayer())
             return;
 
@@ -46,7 +46,7 @@ public class StaggeringMixin {
 
         float coef = noiseval * stagger;
         Vec3d vel = player.getVelocity();
-        Vec3d dir = vel.multiply(coef, 0, coef).crossProduct(new Vec3d(0, 1, 0)).add(0.0, -2.2737367544323206e-13, 0.0); //to make player touch ground and able to jump etc
+        Vec3d dir = vel.multiply(coef, 0, coef).crossProduct(new Vec3d(0, 1, 0)).add(0.0, -1.52587890625e-5, 0.0); //to make player touch ground and able to jump etc
         player.move(MovementType.SELF, dir); //add horizontal velocity perpendicular to current vel
 
         //make camera drift around
@@ -62,7 +62,7 @@ public class StaggeringMixin {
     }
 
     @Inject(at = @At("HEAD"), method = "tick")
-    private void addDamage(CallbackInfo info)
+    private void breakingfemme$addDamage(CallbackInfo info)
     {
         if(!((LivingEntity)(Object)this).isPlayer())
             return;
@@ -95,7 +95,7 @@ public class StaggeringMixin {
     //on the client it actually does sth
     //ig for players specifically the client is entirely responsible for the player movement, but the server has the attachments
     @Inject(at = @At("RETURN"), method = "getMovementSpeed", cancellable = true)
-	private void addSlowdown(CallbackInfoReturnable<Float> cir) {
+	private void breakingfemme$addSlowdown(CallbackInfoReturnable<Float> cir) {
         if(!((LivingEntity)(Object)this).isPlayer())
             return;
 
@@ -129,7 +129,7 @@ public class StaggeringMixin {
 
     //reduce jump height when blacked out
     @Inject(at = @At("RETURN"), method = "getJumpVelocity", cancellable = true)
-	private void reduceJumpHeight(CallbackInfoReturnable<Float> cir) {
+	private void breakingfemme$reduceJumpHeight(CallbackInfoReturnable<Float> cir) {
         if(!((LivingEntity)(Object)this).isPlayer())
             return;
 

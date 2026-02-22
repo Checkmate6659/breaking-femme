@@ -13,7 +13,7 @@ import com.breakingfemme.KineticsAttachments;
 public class StaggeringSneakMixin {
     //mixin PlayerEntity.clipAtLedge to make player fall off ledges when trying to sneak
     @Inject(at = @At("RETURN"), method = "clipAtLedge", cancellable = true)
-	private void addSlowdown(CallbackInfoReturnable<Boolean> cir) {
+	private void breakingfemme$fallOffLedge(CallbackInfoReturnable<Boolean> cir) {
         PlayerEntity player = ((PlayerEntity)(Object)this);
 
         if(!player.getWorld().isClient()) //don't execute on the server

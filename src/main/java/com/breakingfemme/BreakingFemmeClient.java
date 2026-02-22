@@ -38,7 +38,7 @@ public class BreakingFemmeClient implements ClientModInitializer {
         ClientLifecycleEvents.CLIENT_STARTED.register(cl -> {
             client.setValue(cl);
             try {
-                postprocessor.setValue(new PostEffectProcessor(cl.getTextureManager(), cl.getResourceManager(), cl.getFramebuffer(), new Identifier("shaders/post/altered_vision.json")));
+                postprocessor.setValue(new PostEffectProcessor(cl.getTextureManager(), cl.getResourceManager(), cl.getFramebuffer(), new Identifier("shaders/post/breakingfemme_altered_vision.json")));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
