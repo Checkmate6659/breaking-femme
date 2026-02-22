@@ -24,7 +24,7 @@ void main() {
     float normalization_constant = 0.0;
     vec3 color_avg = vec3(0.0);
     float r0 = BlurStrength * 3.0; //im neglecting the rest of the distrib (3sigma), its so tiny
-    float dr = 2.0 * r0 / ceil(8.0 * r0); //let dr be close to but under 0.25, but be an integer amount between -r0 and r0
+    float dr = 2.0 * r0 / ceil(8.0 * r0 + 5.0); //let dr be close to but under 0.25, but be an integer amount between -r0 and r0; also we need at least 5 samples
     for(float r = -r0; r < r0 + 0.5 * dr; r += dr) //worst for loop ever. should have at least 1 element
     {
         float weight = gauss(r, invstd2);

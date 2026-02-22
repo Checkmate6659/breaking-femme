@@ -59,15 +59,15 @@ public abstract class AlteredVisionMixin {
 			//why do they only get set every once in a while?
 			if(((GameRenderer)(Object)this).getPostProcessor() != null && ((GameRenderer)(Object)this).getPostProcessor().getName().equals(ALTERED_VISION_ID.toString())) //triggers after getting set to not be null => cant use if else
 			{
-				float blur_strength = (etoh - 1.25f) * 0.5f; //goes between 0 and 1: more drunk => see worse
-				if(blur_strength > 1.0f) blur_strength = 1.0f;
+				float strength = (etoh - 1.25f) * 0.5f; //goes between 0 and 1: more drunk => see worse
+				if(strength > 1.0f) strength = 1.0f;
 				
 				//set uniforms
 				List<PostEffectPass> passes = ((PostEffectPassAccessor)(((GameRenderer)(Object)this).getPostProcessor())).breakingfemme$getPasses();
 
-				//TODO: fix the issue that the blur shaders actually change the brightness when given a small, non-integer radius
-				//passes.get(1).getProgram().getUniformByNameOrDummy("Radius").set(64f * blur_strength);
-				//passes.get(2).getProgram().getUniformByNameOrDummy("Radius").set(16f * blur_strength); //more horizontal blur => primitive diplopia emulation (if can't use custom shaders)
+				passes.get(0).getProgram().getUniformByNameOrDummy("EffectStrength").set(0.05f * strength);
+				passes.get(1).getProgram().getUniformByNameOrDummy("BlurStrength").set(16f * strength); //up to 16.0 (other to 32 or 64?)
+				passes.get(2).getProgram().getUniformByNameOrDummy("BlurStrength").set(24f * strength); //more horizontal blur => primitive diplopia emulation
 			}
 		}
 		else if((player.getWorld().getTime() & 1) == 0)
