@@ -6,7 +6,13 @@
         {
             "name": "altered_vision",
             "intarget": "minecraft:main",
-            "outtarget": "swap"
+            "outtarget": "swap",
+            "uniforms": [
+                {
+                    "name": "EffectStrength",
+                    "values": [ 0.02 ]
+                }
+            ]
         },
         {
             "name": "blur",
