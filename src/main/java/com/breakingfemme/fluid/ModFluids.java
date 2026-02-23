@@ -21,6 +21,7 @@ import com.breakingfemme.cauldron.YeastStarterCauldronBlock;
 import com.breakingfemme.cauldron.BeerCauldronBlock;
 import com.breakingfemme.cauldron.NetherBeerCauldronBlock;
 import com.breakingfemme.cauldron.SludgeCauldronBlock;
+import com.breakingfemme.cauldron.AndrostadienedioneOilSolutionCauldronBlock;
 //AUTOGENERATION LABEL DO NOT TOUCH
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -121,6 +122,12 @@ public class ModFluids {
     public static Block SLUDGE_FLUID_BLOCK;
     public static Item SLUDGE_BUCKET;
     public static Block SLUDGE_CAULDRON;
+    
+    public static FlowableFluid STILL_ANDROSTADIENEDIONE_OIL_SOLUTION;
+    public static FlowableFluid FLOWING_ANDROSTADIENEDIONE_OIL_SOLUTION;
+    public static Block ANDROSTADIENEDIONE_OIL_SOLUTION_FLUID_BLOCK;
+    public static Item ANDROSTADIENEDIONE_OIL_SOLUTION_BUCKET;
+    public static Block ANDROSTADIENEDIONE_OIL_SOLUTION_CAULDRON;
     //AUTOGENERATION LABEL DO NOT TOUCH
 
 public static void registerModFluids()
@@ -232,6 +239,15 @@ public static void registerModFluids()
         SLUDGE_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "sludge_bucket"),
             new BucketItem(STILL_SLUDGE, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
+        STILL_ANDROSTADIENEDIONE_OIL_SOLUTION = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "androstadienedione_oil_solution"),
+            new AndrostadienedioneOilSolutionFluid.Still());
+        FLOWING_ANDROSTADIENEDIONE_OIL_SOLUTION = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_androstadienedione_oil_solution"),
+            new AndrostadienedioneOilSolutionFluid.Flowing());
+        ANDROSTADIENEDIONE_OIL_SOLUTION_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "androstadienedione_oil_solution_block"),
+            new AndrostadienedioneBlock(STILL_ANDROSTADIENEDIONE_OIL_SOLUTION, FabricBlockSettings.copyOf(Blocks.WATER)){});
+        ANDROSTADIENEDIONE_OIL_SOLUTION_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "androstadienedione_oil_solution_bucket"),
+            new BucketItem(STILL_ANDROSTADIENEDIONE_OIL_SOLUTION, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
+
         //AUTOGENERATION LABEL DO NOT TOUCH
 
 
@@ -264,6 +280,9 @@ public static void registerModFluids()
         CauldronFluidContent.registerCauldron(NETHER_BEER_CAULDRON, STILL_NETHER_BEER, FluidConstants.BOTTLE, NetherBeerCauldronBlock.LEVEL);
         SLUDGE_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "sludge_cauldron"), new SludgeCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
         CauldronFluidContent.registerCauldron(SLUDGE_CAULDRON, STILL_SLUDGE, FluidConstants.BUCKET, null);
+        ANDROSTADIENEDIONE_OIL_SOLUTION_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "androstadienedione_oil_solution_cauldron"), new AndrostadienedioneOilSolutionCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
+        CauldronFluidContent.registerCauldron(ANDROSTADIENEDIONE_OIL_SOLUTION_CAULDRON, STILL_ANDROSTADIENEDIONE_OIL_SOLUTION, FluidConstants.BUCKET, null);
         //AUTOGENERATION LABEL DO NOT TOUCH
+
     }
 }
