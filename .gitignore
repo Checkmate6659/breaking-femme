@@ -41,3 +41,6 @@ replay_*.log
 
 # datagen
 src/main/generated/.cache
+
+#test recipe
+src/main/resources/data/breakingfemme/recipes/test.json
