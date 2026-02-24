@@ -92,6 +92,10 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(BlockTags.AXE_MINEABLE).add(ModBlocks.FERMENTER_CONTROLLER);
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModBlocks.FERMENTER_AIRLOCK);
 
+        //distiller tags
+        getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModBlocks.DISTILLER_COLUMN);
+        getOrCreateTagBuilder(BlockTags.NEEDS_STONE_TOOL).add(ModBlocks.DISTILLER_COLUMN);
+
         //custom block tags
         getOrCreateTagBuilder(HOT).add(Blocks.FIRE);
         getOrCreateTagBuilder(HOT).add(Blocks.SOUL_FIRE);

@@ -125,6 +125,7 @@ public class ModItems {
             entries.add(ModBlocks.FERMENTER_HEATER);
             entries.add(ModBlocks.FERMENTER_AIRLOCK);
             entries.add(ModFluids.SLUDGE_BUCKET);
+            entries.add(ModBlocks.DISTILLER_COLUMN);
             //AUTOGENERATION LABEL DO NOT TOUCH
 
 

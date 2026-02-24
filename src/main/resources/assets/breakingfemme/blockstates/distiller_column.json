@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "full=false": {
+      "model": "breakingfemme:block/distiller_column"
+    },
+    "full=true": {
+      "model": "breakingfemme:block/distiller_column_full"
+    }
+  }
+}

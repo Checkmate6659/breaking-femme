@@ -1,0 +1,39 @@
+{
+  "type": "minecraft:block",
+  "functions": [
+    {
+      "function": "minecraft:explosion_decay"
+    }
+  ],
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "breakingfemme:distiller_column"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "breakingfemme:distiller_column",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "full": "true"
+              }
+            }
+          ],
+          "name": "minecraft:gravel"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}
