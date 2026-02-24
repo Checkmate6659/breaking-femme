@@ -46,21 +46,24 @@ public class DistillerColumnBlock extends Block {
 
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit)
     {
-        if(world.isClient())
-            return ActionResult.SUCCESS;
-
         if(!state.get(FULL) && player.getStackInHand(hand).isOf(Blocks.GRAVEL.asItem())) //place gravel in the column
         {
-            player.getStackInHand(hand).decrement(1);
-            world.setBlockState(pos, state.with(FULL, true));
+            //apparently i need to also do this on the client, otherwise its inaudible
             world.playSoundAtBlockCenter(pos, SoundEvents.BLOCK_GRAVEL_PLACE, SoundCategory.BLOCKS, 1, 1, true);
+
+            if(world.isClient())
+                return ActionResult.SUCCESS; //send to process on the server
+
+            if(!player.isCreative()) //don't take gravel away in creative mode
+                player.getStackInHand(hand).decrement(1);
+            world.setBlockState(pos, state.with(FULL, true));
 
             gravelFall(state.with(FULL, true), world, pos); //make gravel fall down
 
             return ActionResult.SUCCESS;
         }
 
-        return ActionResult.FAIL;
+        return ActionResult.PASS;
     }
 
     public void gravelFall(BlockState state, World world, BlockPos pos)
