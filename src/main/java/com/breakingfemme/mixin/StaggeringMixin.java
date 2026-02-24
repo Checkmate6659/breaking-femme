@@ -82,7 +82,7 @@ public class StaggeringMixin {
         float ach = KineticsAttachments.getLevel(player, KineticsAttachments.ACETALDEHYDE);
 
         //taking damage when above 3 (count acetaldehyde as well, again coef out my ass)
-        float damage_number = 0.5f * etoh + 3.0f * ach - 0.5f; //start when etoh + 6ach = 3
+        float damage_number = 0.5f * etoh + ach - 0.5f; //start when etoh + 2ach = 3
         if(damage_number > 1.0f) //start at 1 heart of damage (scaled afterwards)
         player.damage(new DamageSource(
             world.getRegistryManager().get(RegistryKeys.DAMAGE_TYPE).entryOf(BreakingFemme.DISTRACTION)), damage_number
