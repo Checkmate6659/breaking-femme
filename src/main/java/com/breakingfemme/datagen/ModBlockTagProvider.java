@@ -72,6 +72,7 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModFluids.NETHER_BEER_CAULDRON);
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModFluids.SLUDGE_CAULDRON);
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModFluids.ANDROSTADIENEDIONE_OIL_SOLUTION_CAULDRON);
+        getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModFluids.COAL_OIL_CAULDRON);
         //AUTOGENERATION LABEL DO NOT TOUCH
 
         //fermenter tags

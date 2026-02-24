@@ -40,6 +40,7 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModFluids.NETHER_BEER_CAULDRON, Blocks.CAULDRON);
         addDrop(ModFluids.SLUDGE_CAULDRON, Blocks.CAULDRON);
         addDrop(ModFluids.ANDROSTADIENEDIONE_OIL_SOLUTION_CAULDRON, Blocks.CAULDRON);
+        addDrop(ModFluids.COAL_OIL_CAULDRON, Blocks.CAULDRON);
         //AUTOGENERATION LABEL DO NOT TOUCH
 
         addDrop(ModBlocks.NICKEL_BLOCK);

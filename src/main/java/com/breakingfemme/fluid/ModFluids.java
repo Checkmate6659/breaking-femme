@@ -2,6 +2,7 @@ package com.breakingfemme.fluid;
 
 import com.breakingfemme.BreakingFemme;
 import com.breakingfemme.block.AndrostadienedioneBlock;
+import com.breakingfemme.block.FlammableFluidBlock;
 import com.breakingfemme.block.PoisonousFluidBlock;
 import com.breakingfemme.block.TarBlock;
 import com.breakingfemme.item.ModItems;
@@ -22,6 +23,7 @@ import com.breakingfemme.cauldron.BeerCauldronBlock;
 import com.breakingfemme.cauldron.NetherBeerCauldronBlock;
 import com.breakingfemme.cauldron.SludgeCauldronBlock;
 import com.breakingfemme.cauldron.AndrostadienedioneOilSolutionCauldronBlock;
+import com.breakingfemme.cauldron.CoalOilCauldronBlock;
 //AUTOGENERATION LABEL DO NOT TOUCH
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -128,6 +130,12 @@ public class ModFluids {
     public static Block ANDROSTADIENEDIONE_OIL_SOLUTION_FLUID_BLOCK;
     public static Item ANDROSTADIENEDIONE_OIL_SOLUTION_BUCKET;
     public static Block ANDROSTADIENEDIONE_OIL_SOLUTION_CAULDRON;
+    
+    public static FlowableFluid STILL_COAL_OIL;
+    public static FlowableFluid FLOWING_COAL_OIL;
+    public static Block COAL_OIL_FLUID_BLOCK;
+    public static Item COAL_OIL_BUCKET;
+    public static Block COAL_OIL_CAULDRON;
     //AUTOGENERATION LABEL DO NOT TOUCH
 
 public static void registerModFluids()
@@ -248,6 +256,15 @@ public static void registerModFluids()
         ANDROSTADIENEDIONE_OIL_SOLUTION_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "androstadienedione_oil_solution_bucket"),
             new BucketItem(STILL_ANDROSTADIENEDIONE_OIL_SOLUTION, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
+        STILL_COAL_OIL = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "coal_oil"),
+            new CoalOilFluid.Still());
+        FLOWING_COAL_OIL = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_coal_oil"),
+            new CoalOilFluid.Flowing());
+        COAL_OIL_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "coal_oil_block"),
+            new FlammableFluidBlock(STILL_COAL_OIL, FabricBlockSettings.copyOf(Blocks.WATER)){});
+        COAL_OIL_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "coal_oil_bucket"),
+            new BucketItem(STILL_COAL_OIL, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
+
         //AUTOGENERATION LABEL DO NOT TOUCH
 
 
@@ -282,6 +299,8 @@ public static void registerModFluids()
         CauldronFluidContent.registerCauldron(SLUDGE_CAULDRON, STILL_SLUDGE, FluidConstants.BUCKET, null);
         ANDROSTADIENEDIONE_OIL_SOLUTION_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "androstadienedione_oil_solution_cauldron"), new AndrostadienedioneOilSolutionCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
         CauldronFluidContent.registerCauldron(ANDROSTADIENEDIONE_OIL_SOLUTION_CAULDRON, STILL_ANDROSTADIENEDIONE_OIL_SOLUTION, FluidConstants.BUCKET, null);
+        COAL_OIL_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "coal_oil_cauldron"), new CoalOilCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
+        CauldronFluidContent.registerCauldron(COAL_OIL_CAULDRON, STILL_COAL_OIL, FluidConstants.BUCKET, null);
         //AUTOGENERATION LABEL DO NOT TOUCH
 
     }
