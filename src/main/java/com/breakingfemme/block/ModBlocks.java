@@ -6,7 +6,6 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.MapColor;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.item.BlockItem;
 import net.minecraft.registry.Registries;
@@ -30,7 +29,8 @@ public class ModBlocks {
     public static final Block FERMENTER_AIRLOCK = registerBlock("fermenter_airlock", new FermenterAirlockBlock(FabricBlockSettings.copyOf(Blocks.GLASS).noCollision().pistonBehavior(PistonBehavior.DESTROY)));
 
     //distiller blocks
-    public static final Block DISTILLER_COLUMN = registerBlock("distiller_column", new DistillerColumnBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).mapColor(MapColor.IRON_GRAY).pistonBehavior(PistonBehavior.BLOCK)));
+    public static final Block DISTILLER_TOP = registerBlock("distiller_top", new DistillerTopBlock(FabricBlockSettings.copyOf(Blocks.IRON_TRAPDOOR).pistonBehavior(PistonBehavior.BLOCK)));
+    public static final Block DISTILLER_COLUMN = registerBlock("distiller_column", new DistillerColumnBlock(FabricBlockSettings.copyOf(Blocks.IRON_TRAPDOOR).pistonBehavior(PistonBehavior.BLOCK)));
 
     //register block and item
     private static final Block registerBlock(String name, Block block)

@@ -62,5 +62,6 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
             .pool(LootPool.builder().with(ItemEntry.builder(ModBlocks.DISTILLER_COLUMN)))
             .pool(LootPool.builder().with(ItemEntry.builder(Blocks.GRAVEL).conditionally(distiller_gravel_condition)))
         ));
+        addDrop(ModBlocks.DISTILLER_TOP);
     }
 }
