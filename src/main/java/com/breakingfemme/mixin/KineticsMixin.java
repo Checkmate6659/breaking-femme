@@ -77,7 +77,7 @@ public class KineticsMixin {
 
 		//sync between client and server
 		World world = player.getWorld();
-		if(!world.isClient()) //if we dont sync every tick, the client will have choppy vision alteration; i would like to sync every 32t, need to sim on the client too for that tho
+		if(!world.isClient() && (etoh > 1.25 || (world.getTime() & 31) == 0)) //if we dont sync every tick when vision blurred, the client will have choppy vision alteration; every 32t is enough for staggering tho.
             KineticsAttachments.syncClientValues((ServerPlayerEntity)player);
 	}
 }
