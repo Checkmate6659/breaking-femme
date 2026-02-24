@@ -4,8 +4,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.ShapeContext;
+import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
@@ -53,12 +55,46 @@ public class DistillerColumnBlock extends Block {
             world.setBlockState(pos, state.with(FULL, true));
             world.playSoundAtBlockCenter(pos, SoundEvents.BLOCK_GRAVEL_PLACE, SoundCategory.BLOCKS, 1, 1, true);
 
-            //TODO: make gravel fall to the bottom of the column (and as item if cant do that)
+            gravelFall(state.with(FULL, true), world, pos); //make gravel fall down
 
             return ActionResult.SUCCESS;
         }
 
         return ActionResult.FAIL;
+    }
+
+    public void gravelFall(BlockState state, World world, BlockPos pos)
+    {
+        if(!state.get(FULL)) //if empty column, don't do anything.
+            return;
+
+        BlockPos cur_pos = pos.down();
+        BlockState cur_state;
+        cur_state = world.getBlockState(cur_pos);
+        if((!cur_state.isOf(ModBlocks.DISTILLER_COLUMN) || cur_state.get(FULL)) && !cur_state.isAir()) //cannot empty and refill afterwards, as that would make block updates!
+            return;
+
+        world.setBlockState(pos, state.with(FULL, false)); //empty it out (WILL NOT refill later)
+
+        while(cur_state.isOf(ModBlocks.DISTILLER_COLUMN) && !cur_state.get(FULL)) //stop when not on an empty column
+        {
+            cur_pos = cur_pos.down();
+            cur_state = world.getBlockState(cur_pos);
+        }
+
+        if(cur_state.isAir()) //emptying out above air
+        {
+            ItemEntity itemEntity = new ItemEntity(world, cur_pos.getX() + 0.5, cur_pos.getY() + 1.25, cur_pos.getZ() + 0.5, new ItemStack(Blocks.GRAVEL));
+            itemEntity.setVelocity(0, 0, 0);
+            world.spawnEntity(itemEntity);
+        }
+        else //just land normally
+            world.setBlockState(cur_pos.up(), this.getDefaultState().with(FULL, true));
+    }
+
+    public void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify) {
+        if (!world.isClient && state.get(FULL))
+            gravelFall(state, world, pos);
     }
 
     static {
