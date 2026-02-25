@@ -34,5 +34,8 @@
       "made_androstadienedione"
     ]
   ],
+  "rewards": {
+    "experience": 6000
+  },
   "sends_telemetry_event": true
 }

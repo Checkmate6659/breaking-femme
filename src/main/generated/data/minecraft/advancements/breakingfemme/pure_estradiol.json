@@ -1,12 +1,12 @@
 {
-  "parent": "minecraft:breakingfemme/soybeans",
+  "parent": "minecraft:breakingfemme/pure_estrone",
   "criteria": {
-    "made_sterols": {
+    "made_pure_estradiol": {
       "conditions": {
         "items": [
           {
             "items": [
-              "breakingfemme:sterols"
+              "breakingfemme:pure_estradiol_crystals"
             ]
           }
         ]
@@ -17,25 +17,25 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancement.breakingfemme.sterols.description"
+      "translate": "advancement.breakingfemme.pure_estradiol.description"
     },
-    "frame": "task",
+    "frame": "challenge",
     "hidden": false,
     "icon": {
-      "item": "breakingfemme:sterols"
+      "item": "breakingfemme:pure_estradiol_crystals"
     },
     "show_toast": true,
     "title": {
-      "translate": "advancement.breakingfemme.sterols.title"
+      "translate": "advancement.breakingfemme.pure_estradiol.title"
     }
   },
   "requirements": [
     [
-      "made_sterols"
+      "made_pure_estradiol"
     ]
   ],
   "rewards": {
-    "experience": 1000
+    "experience": 36000
   },
   "sends_telemetry_event": true
 }

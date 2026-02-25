@@ -1,12 +1,12 @@
 {
-  "parent": "minecraft:breakingfemme/soybeans",
+  "parent": "minecraft:breakingfemme/androstadienedione",
   "criteria": {
-    "made_sterols": {
+    "made_crude_estrone": {
       "conditions": {
         "items": [
           {
             "items": [
-              "breakingfemme:sterols"
+              "breakingfemme:crude_estrone"
             ]
           }
         ]
@@ -17,25 +17,25 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancement.breakingfemme.sterols.description"
+      "translate": "advancement.breakingfemme.crude_estrone.description"
     },
-    "frame": "task",
+    "frame": "goal",
     "hidden": false,
     "icon": {
-      "item": "breakingfemme:sterols"
+      "item": "breakingfemme:crude_estrone"
     },
     "show_toast": true,
     "title": {
-      "translate": "advancement.breakingfemme.sterols.title"
+      "translate": "advancement.breakingfemme.crude_estrone.title"
     }
   },
   "requirements": [
     [
-      "made_sterols"
+      "made_crude_estrone"
     ]
   ],
   "rewards": {
-    "experience": 1000
+    "experience": 12000
   },
   "sends_telemetry_event": true
 }

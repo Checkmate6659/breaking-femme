@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:breakingfemme/et95",
+  "parent": "minecraft:breakingfemme/tar",
   "criteria": {
     "made_oil": {
       "conditions": {

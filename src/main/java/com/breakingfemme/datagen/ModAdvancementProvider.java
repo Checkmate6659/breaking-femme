@@ -113,6 +113,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                     true,
                     false
             )
+            .rewards(AdvancementRewards.Builder.experience(1000))
             .criterion("made_sterols", InventoryChangedCriterion.Conditions.items(ModItems.STEROLS))
             .build(consumer, BreakingFemme.MOD_ID + "/sterols");
 
@@ -127,8 +128,54 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                     true,
                     false
             )
+            .rewards(AdvancementRewards.Builder.experience(6000))
             .criterion("made_androstadienedione", InventoryChangedCriterion.Conditions.items(ModFluids.ANDROSTADIENEDIONE_BUCKET))
             .build(consumer, BreakingFemme.MOD_ID + "/androstadienedione");
+
+        Advancement crude_estrone = Advancement.Builder.create().parent(androstadienedione)
+            .display(
+                    ModItems.CRUDE_ESTRONE,
+                    Text.translatable("advancement.breakingfemme.crude_estrone.title"),
+                    Text.translatable("advancement.breakingfemme.crude_estrone.description"),
+                    null, // children to parent advancements don't need a background set
+                    AdvancementFrame.GOAL,
+                    true,
+                    true,
+                    false
+            )
+            .rewards(AdvancementRewards.Builder.experience(12000))
+            .criterion("made_crude_estrone", InventoryChangedCriterion.Conditions.items(ModItems.CRUDE_ESTRONE))
+            .build(consumer, BreakingFemme.MOD_ID + "/crude_estrone");
+
+        Advancement pure_estrone = Advancement.Builder.create().parent(crude_estrone)
+            .display(
+                    ModItems.PURE_ESTRONE,
+                    Text.translatable("advancement.breakingfemme.pure_estrone.title"),
+                    Text.translatable("advancement.breakingfemme.pure_estrone.description"),
+                    null, // children to parent advancements don't need a background set
+                    AdvancementFrame.TASK,
+                    true,
+                    true,
+                    false
+            )
+            .rewards(AdvancementRewards.Builder.experience(3000))
+            .criterion("made_pure_estrone", InventoryChangedCriterion.Conditions.items(ModItems.PURE_ESTRONE))
+            .build(consumer, BreakingFemme.MOD_ID + "/pure_estrone");
+
+        Advancement pure_estradiol = Advancement.Builder.create().parent(pure_estrone)
+            .display(
+                    ModItems.PURE_ESTRADIOL_CRYSTALS,
+                    Text.translatable("advancement.breakingfemme.pure_estradiol.title"),
+                    Text.translatable("advancement.breakingfemme.pure_estradiol.description"),
+                    null, // children to parent advancements don't need a background set
+                    AdvancementFrame.CHALLENGE,
+                    true,
+                    true,
+                    false
+            )
+            .rewards(AdvancementRewards.Builder.experience(36000))
+            .criterion("made_pure_estradiol", InventoryChangedCriterion.Conditions.items(ModItems.PURE_ESTRADIOL_CRYSTALS))
+            .build(consumer, BreakingFemme.MOD_ID + "/pure_estradiol");
 
         //fermenting and distilling branch
         Advancement fermenter = Advancement.Builder.create().parent(root)
@@ -220,7 +267,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
             .criterion("made_tar", InventoryChangedCriterion.Conditions.items(ModItems.TAR))
             .build(consumer, BreakingFemme.MOD_ID + "/tar");
         
-        Advancement coal_oil = Advancement.Builder.create().parent(ethanol)
+        Advancement coal_oil = Advancement.Builder.create().parent(coal_tar)
             .display(
                     ModFluids.TAR_BUCKET,
                     Text.translatable("advancement.breakingfemme.oil.title"),
