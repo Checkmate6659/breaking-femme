@@ -87,7 +87,7 @@ public class NickelSulfateCauldronBlock extends AbstractCauldronBlock {
         world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5f, pos.getY() + 0.125f, pos.getZ() + 0.5f, new ItemStack(ModItems.NICKEL_SULFATE)));
     }
 
-    //boil off water to get the copper sulfate out
+    //boil off water to get the nickel sulfate out
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         //can only boil if the block is hot (or if its in the nether, free heating lol)
         if(world.getDimension().ultrawarm() || BreakingFemme.isBlockHot(world, pos.down()))
