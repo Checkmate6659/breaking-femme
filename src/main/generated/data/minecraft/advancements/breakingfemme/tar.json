@@ -1,12 +1,12 @@
 {
-  "parent": "minecraft:breakingfemme/pulverized_nickel",
+  "parent": "minecraft:breakingfemme/et95",
   "criteria": {
-    "bought_copper_sulfate": {
+    "made_tar": {
       "conditions": {
         "items": [
           {
             "items": [
-              "breakingfemme:copper_sulfate"
+              "breakingfemme:tar"
             ]
           }
         ]
@@ -17,21 +17,21 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancement.breakingfemme.copper_sulfate.description"
+      "translate": "advancement.breakingfemme.tar.description"
     },
-    "frame": "task",
+    "frame": "goal",
     "hidden": false,
     "icon": {
-      "item": "breakingfemme:copper_sulfate"
+      "item": "breakingfemme:tar_bucket"
     },
     "show_toast": true,
     "title": {
-      "translate": "advancement.breakingfemme.copper_sulfate.title"
+      "translate": "advancement.breakingfemme.tar.title"
     }
   },
   "requirements": [
     [
-      "bought_copper_sulfate"
+      "made_tar"
     ]
   ],
   "sends_telemetry_event": true

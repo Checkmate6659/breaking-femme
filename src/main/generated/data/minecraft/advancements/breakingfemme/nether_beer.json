@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:breakingfemme/beer",
+  "parent": "minecraft:breakingfemme/et95",
   "criteria": {
     "made_nether_beer": {
       "conditions": {

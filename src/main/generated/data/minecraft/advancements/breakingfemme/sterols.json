@@ -1,12 +1,12 @@
 {
-  "parent": "minecraft:breakingfemme/pulverized_nickel",
+  "parent": "minecraft:breakingfemme/soybeans",
   "criteria": {
-    "bought_copper_sulfate": {
+    "made_sterols": {
       "conditions": {
         "items": [
           {
             "items": [
-              "breakingfemme:copper_sulfate"
+              "breakingfemme:sterols"
             ]
           }
         ]
@@ -17,21 +17,21 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancement.breakingfemme.copper_sulfate.description"
+      "translate": "advancement.breakingfemme.sterols.description"
     },
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "breakingfemme:copper_sulfate"
+      "item": "breakingfemme:sterols"
     },
     "show_toast": true,
     "title": {
-      "translate": "advancement.breakingfemme.copper_sulfate.title"
+      "translate": "advancement.breakingfemme.sterols.title"
     }
   },
   "requirements": [
     [
-      "bought_copper_sulfate"
+      "made_sterols"
     ]
   ],
   "sends_telemetry_event": true

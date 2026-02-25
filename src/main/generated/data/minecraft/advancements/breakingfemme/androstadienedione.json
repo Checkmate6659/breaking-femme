@@ -1,12 +1,12 @@
 {
-  "parent": "minecraft:breakingfemme/pulverized_nickel",
+  "parent": "minecraft:breakingfemme/sterols",
   "criteria": {
-    "bought_copper_sulfate": {
+    "made_androstadienedione": {
       "conditions": {
         "items": [
           {
             "items": [
-              "breakingfemme:copper_sulfate"
+              "breakingfemme:androstadienedione_solution_bucket"
             ]
           }
         ]
@@ -17,21 +17,21 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancement.breakingfemme.copper_sulfate.description"
+      "translate": "advancement.breakingfemme.androstadienedione.description"
     },
-    "frame": "task",
+    "frame": "goal",
     "hidden": false,
     "icon": {
-      "item": "breakingfemme:copper_sulfate"
+      "item": "breakingfemme:androstadienedione_solution_bucket"
     },
     "show_toast": true,
     "title": {
-      "translate": "advancement.breakingfemme.copper_sulfate.title"
+      "translate": "advancement.breakingfemme.androstadienedione.title"
     }
   },
   "requirements": [
     [
-      "bought_copper_sulfate"
+      "made_androstadienedione"
     ]
   ],
   "sends_telemetry_event": true

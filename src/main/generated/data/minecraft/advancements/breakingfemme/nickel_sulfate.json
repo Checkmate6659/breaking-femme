@@ -1,12 +1,12 @@
 {
-  "parent": "minecraft:breakingfemme/pulverized_nickel",
+  "parent": "minecraft:breakingfemme/copper_sulfate",
   "criteria": {
-    "bought_copper_sulfate": {
+    "made_nickel_sulfate": {
       "conditions": {
         "items": [
           {
             "items": [
-              "breakingfemme:copper_sulfate"
+              "breakingfemme:nickel_sulfate"
             ]
           }
         ]
@@ -17,21 +17,21 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancement.breakingfemme.copper_sulfate.description"
+      "translate": "advancement.breakingfemme.nickel_sulfate.description"
     },
-    "frame": "task",
+    "frame": "goal",
     "hidden": false,
     "icon": {
-      "item": "breakingfemme:copper_sulfate"
+      "item": "breakingfemme:nickel_sulfate"
     },
     "show_toast": true,
     "title": {
-      "translate": "advancement.breakingfemme.copper_sulfate.title"
+      "translate": "advancement.breakingfemme.nickel_sulfate.title"
     }
   },
   "requirements": [
     [
-      "bought_copper_sulfate"
+      "made_nickel_sulfate"
     ]
   ],
   "sends_telemetry_event": true
