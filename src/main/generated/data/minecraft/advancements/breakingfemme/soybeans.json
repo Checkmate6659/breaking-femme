@@ -17,7 +17,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "text": "Buy soybeans from a farmer"
+      "translate": "advancement.breakingfemme.soybeans.description"
     },
     "frame": "task",
     "hidden": false,
@@ -26,7 +26,7 @@
     },
     "show_toast": true,
     "title": {
-      "text": "Primitive HRT"
+      "translate": "advancement.breakingfemme.soybeans.title"
     }
   },
   "requirements": [

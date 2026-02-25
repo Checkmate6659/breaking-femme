@@ -17,7 +17,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "text": "Catch wild yeast by leaving flour and water in a cauldron"
+      "translate": "advancement.breakingfemme.yeast.description"
     },
     "frame": "task",
     "hidden": false,
@@ -26,7 +26,7 @@
     },
     "show_toast": true,
     "title": {
-      "text": "A hopefully nice starter"
+      "translate": "advancement.breakingfemme.yeast.title"
     }
   },
   "requirements": [

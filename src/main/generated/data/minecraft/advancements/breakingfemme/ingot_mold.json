@@ -17,7 +17,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "text": "Craft a single-use ingot mold out of clay"
+      "translate": "advancement.breakingfemme.ingot_mold.description"
     },
     "frame": "task",
     "hidden": false,
@@ -26,7 +26,7 @@
     },
     "show_toast": true,
     "title": {
-      "text": "The basis of all dairy processing"
+      "translate": "advancement.breakingfemme.ingot_mold.title"
     }
   },
   "requirements": [

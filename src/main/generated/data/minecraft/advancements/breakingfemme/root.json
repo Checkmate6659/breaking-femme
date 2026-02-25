@@ -17,7 +17,7 @@
     "announce_to_chat": false,
     "background": "breakingfemme:textures/gui/advancements.png",
     "description": {
-      "text": "Jesse I'm trans! We gotta cook estrogen!"
+      "translate": "advancement.breakingfemme.root.description"
     },
     "frame": "task",
     "hidden": false,
@@ -27,7 +27,7 @@
     },
     "show_toast": true,
     "title": {
-      "text": "Breaking Femme"
+      "translate": "advancement.breakingfemme.root.title"
     }
   },
   "requirements": [

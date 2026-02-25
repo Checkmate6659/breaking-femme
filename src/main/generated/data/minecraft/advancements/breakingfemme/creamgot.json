@@ -17,7 +17,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "text": "Cast the cream into ingots. This is not the last time you will be seeing them..."
+      "translate": "advancement.breakingfemme.creamgot.description"
     },
     "frame": "task",
     "hidden": false,
@@ -26,7 +26,7 @@
     },
     "show_toast": true,
     "title": {
-      "text": "Totally normal dairy processing"
+      "translate": "advancement.breakingfemme.creamgot.title"
     }
   },
   "requirements": [

@@ -17,7 +17,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "text": "Buy copper sulfate powder from a farmer"
+      "translate": "advancement.breakingfemme.copper_sulfate.description"
     },
     "frame": "task",
     "hidden": false,
@@ -26,7 +26,7 @@
     },
     "show_toast": true,
     "title": {
-      "text": "Pesticides"
+      "translate": "advancement.breakingfemme.copper_sulfate.title"
     }
   },
   "requirements": [

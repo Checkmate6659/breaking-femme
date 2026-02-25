@@ -17,7 +17,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "text": "Cast the skimmed milk into ingots, a good nitrogen source for fermentation"
+      "translate": "advancement.breakingfemme.milkgot.description"
     },
     "frame": "task",
     "hidden": false,
@@ -26,7 +26,7 @@
     },
     "show_toast": true,
     "title": {
-      "text": "Nitrogen Source"
+      "translate": "advancement.breakingfemme.milkgot.title"
     }
   },
   "requirements": [

@@ -17,7 +17,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "text": "Craft a Fermenter Controller"
+      "translate": "advancement.breakingfemme.fermenter.description"
     },
     "frame": "task",
     "hidden": false,
@@ -26,7 +26,7 @@
     },
     "show_toast": true,
     "title": {
-      "text": "First Steps into Brewing"
+      "translate": "advancement.breakingfemme.fermenter.title"
     }
   },
   "requirements": [

@@ -28,8 +28,8 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
         Advancement root = Advancement.Builder.create()
             .display(
                     ModItems.MORTAR_PESTLE, // The display icon
-                    Text.literal("Breaking Femme"), // The title
-                    Text.literal("Jesse I'm trans! We gotta cook estrogen!"), // The description
+                    Text.translatable("advancement.breakingfemme.root.title"), // The title
+                    Text.translatable("advancement.breakingfemme.root.description"), // The description
                     new Identifier(BreakingFemme.MOD_ID, "textures/gui/advancements.png"), // Background image used (for the advancements tab)
                     AdvancementFrame.TASK, // Options: TASK, CHALLENGE, GOAL
                     true, // Show toast top right
@@ -44,8 +44,8 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
         Advancement milk = Advancement.Builder.create().parent(root)
             .display(
                     Items.MILK_BUCKET,
-                    Text.literal("Mooooo!"),
-                    Text.literal("Obtain a bucket of milk"),
+                    Text.translatable("advancement.breakingfemme.milk.title"),
+                    Text.translatable("advancement.breakingfemme.milk.description"),
                     null, // children to parent advancements don't need a background set
                     AdvancementFrame.TASK,
                     true,
@@ -58,8 +58,8 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
         Advancement ingot_mold = Advancement.Builder.create().parent(milk)
             .display(
                     ModItems.INGOT_MOLD,
-                    Text.literal("The basis of all dairy processing"),
-                    Text.literal("Craft a single-use ingot mold out of clay"),
+                    Text.translatable("advancement.breakingfemme.ingot_mold.title"),
+                    Text.translatable("advancement.breakingfemme.ingot_mold.description"),
                     null, // children to parent advancements don't need a background set
                     AdvancementFrame.TASK,
                     true,
@@ -72,8 +72,8 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
         Advancement separate = Advancement.Builder.create().parent(ingot_mold)
             .display(
                     ModBlocks.MILK_SEPARATOR,
-                    Text.literal("Centrifugal Separation"),
-                    Text.literal("Craft a Milk Separator"),
+                    Text.translatable("advancement.breakingfemme.milk_separator.title"),
+                    Text.translatable("advancement.breakingfemme.milk_separator.description"),
                     null, // children to parent advancements don't need a background set
                     AdvancementFrame.TASK,
                     true,
@@ -86,8 +86,8 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
         Advancement cream = Advancement.Builder.create().parent(separate)
             .display(
                     ModItems.CREAMGOT,
-                    Text.literal("Totally normal dairy processing"),
-                    Text.literal("Cast the cream into ingots. This is not the last time you will be seeing them..."),
+                    Text.translatable("advancement.breakingfemme.creamgot.title"),
+                    Text.translatable("advancement.breakingfemme.creamgot.description"),
                     null, // children to parent advancements don't need a background set
                     AdvancementFrame.TASK,
                     true,
@@ -101,8 +101,8 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
         Advancement skimmed_milk = Advancement.Builder.create().parent(separate)
             .display(
                     ModItems.SKIMMED_MILK_BUCKET,
-                    Text.literal("Is this just fancy milk?"),
-                    Text.literal("Get a bucket of Skimmed Milk"),
+                    Text.translatable("advancement.breakingfemme.skimmed_milk.title"),
+                    Text.translatable("advancement.breakingfemme.skimmed_milk.description"),
                     null, // children to parent advancements don't need a background set
                     AdvancementFrame.TASK,
                     true,
@@ -116,8 +116,8 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
         Advancement milkgot = Advancement.Builder.create().parent(skimmed_milk)
             .display(
                     ModItems.MILKGOT,
-                    Text.literal("Nitrogen Source"),
-                    Text.literal("Cast the skimmed milk into ingots, a good nitrogen source for fermentation"),
+                    Text.translatable("advancement.breakingfemme.milkgot.title"),
+                    Text.translatable("advancement.breakingfemme.milkgot.description"),
                     null, // children to parent advancements don't need a background set
                     AdvancementFrame.TASK,
                     true,
@@ -131,8 +131,8 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
         Advancement fermenter = Advancement.Builder.create().parent(root)
             .display(
                     Blocks.BARREL,
-                    Text.literal("First Steps into Brewing"),
-                    Text.literal("Craft a Fermenter Controller"),
+                    Text.translatable("advancement.breakingfemme.fermenter.title"),
+                    Text.translatable("advancement.breakingfemme.fermenter.description"),
                     null, // children to parent advancements don't need a background set
                     AdvancementFrame.TASK,
                     true,
@@ -146,8 +146,8 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
         Advancement yeast = Advancement.Builder.create().parent(fermenter)
             .display(
                     ModItems.YEAST,
-                    Text.literal("A hopefully nice starter"),
-                    Text.literal("Catch wild yeast by leaving flour and water in a cauldron"),
+                    Text.translatable("advancement.breakingfemme.yeast.title"),
+                    Text.translatable("advancement.breakingfemme.yeast.description"),
                     null, // children to parent advancements don't need a background set
                     AdvancementFrame.TASK,
                     true,
@@ -161,8 +161,8 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
         Advancement beer = Advancement.Builder.create().parent(yeast)
             .display(
                     ModItems.BEER_BOTTLE,
-                    Text.literal("Homebrewing"),
-                    Text.literal("Make beer inside the fermenter"),
+                    Text.translatable("advancement.breakingfemme.beer.title"),
+                    Text.translatable("advancement.breakingfemme.beer.description"),
                     null, // children to parent advancements don't need a background set
                     AdvancementFrame.TASK,
                     true,
@@ -176,8 +176,8 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
         Advancement ethanol = Advancement.Builder.create().parent(beer)
             .display(
                     ModFluids.ET95_BUCKET,
-                    Text.literal("Aezotropic mixture"),
-                    Text.literal("Distill beer to get 95% ethanol"),
+                    Text.translatable("advancement.breakingfemme.et95.title"),
+                    Text.translatable("advancement.breakingfemme.et95.description"),
                     null, // children to parent advancements don't need a background set
                     AdvancementFrame.GOAL,
                     true,
@@ -191,8 +191,8 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
         Advancement nether_beer = Advancement.Builder.create().parent(beer)
             .display(
                     ModItems.NETHER_BEER_BOTTLE,
-                    Text.literal("A better source of alcohol"),
-                    Text.literal("Brew beer using the more resilient Nether Wart as yeast"),
+                    Text.translatable("advancement.breakingfemme.nether_beer.title"),
+                    Text.translatable("advancement.breakingfemme.nether_beer.description"),
                     null, // children to parent advancements don't need a background set
                     AdvancementFrame.GOAL,
                     true,
@@ -207,8 +207,8 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
         Advancement soybeans = Advancement.Builder.create().parent(root)
             .display(
                     ModItems.SOYBEANS,
-                    Text.literal("Primitive HRT"),
-                    Text.literal("Buy soybeans from a farmer"),
+                    Text.translatable("advancement.breakingfemme.soybeans.title"),
+                    Text.translatable("advancement.breakingfemme.soybeans.description"),
                     null, // children to parent advancements don't need a background set
                     AdvancementFrame.TASK,
                     true,
@@ -222,8 +222,8 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
         Advancement copper_sulfate = Advancement.Builder.create().parent(root)
             .display(
                     ModItems.COPPER_SULFATE,
-                    Text.literal("Pesticides"),
-                    Text.literal("Buy copper sulfate powder from a farmer"),
+                    Text.translatable("advancement.breakingfemme.copper_sulfate.title"),
+                    Text.translatable("advancement.breakingfemme.copper_sulfate.description"),
                     null, // children to parent advancements don't need a background set
                     AdvancementFrame.TASK,
                     true,
@@ -232,6 +232,5 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
             )
             .criterion("bought_copper_sulfate", InventoryChangedCriterion.Conditions.items(ModItems.COPPER_SULFATE))
             .build(consumer, BreakingFemme.MOD_ID + "/copper_sulfate");
-
     }
 }

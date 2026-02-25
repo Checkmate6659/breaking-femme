@@ -17,7 +17,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "text": "Obtain a bucket of milk"
+      "translate": "advancement.breakingfemme.milk.description"
     },
     "frame": "task",
     "hidden": false,
@@ -26,7 +26,7 @@
     },
     "show_toast": true,
     "title": {
-      "text": "Mooooo!"
+      "translate": "advancement.breakingfemme.milk.title"
     }
   },
   "requirements": [

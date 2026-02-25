@@ -17,7 +17,7 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "text": "Distill beer to get 95% ethanol"
+      "translate": "advancement.breakingfemme.et95.description"
     },
     "frame": "goal",
     "hidden": false,
@@ -26,7 +26,7 @@
     },
     "show_toast": true,
     "title": {
-      "text": "Aezotropic mixture"
+      "translate": "advancement.breakingfemme.et95.title"
     }
   },
   "requirements": [
