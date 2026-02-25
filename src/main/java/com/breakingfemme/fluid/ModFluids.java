@@ -5,6 +5,7 @@ import com.breakingfemme.block.AndrostadienedioneBlock;
 import com.breakingfemme.block.FlammableFluidBlock;
 import com.breakingfemme.block.PoisonousFluidBlock;
 import com.breakingfemme.block.TarBlock;
+import com.breakingfemme.item.FlammableBucketItem;
 import com.breakingfemme.item.ModItems;
 import com.breakingfemme.item.SolutionBucketItem;
 import com.breakingfemme.cauldron.SterolSolutionCauldronBlock;
@@ -176,9 +177,9 @@ public static void registerModFluids()
         FLOWING_ET64 = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_ethanol64"),
             new Et64Fluid.Flowing());
         ET64_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "ethanol64_block"),
-            new FluidBlock(STILL_ET64, FabricBlockSettings.copyOf(Blocks.WATER)){});
+            new FlammableFluidBlock(STILL_ET64, FabricBlockSettings.copyOf(Blocks.WATER)){});
         ET64_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "ethanol64_bucket"),
-            new BucketItem(STILL_ET64, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
+            new FlammableBucketItem(STILL_ET64, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
         //95% ethanol
         STILL_ET95 = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "ethanol95"),
@@ -186,9 +187,9 @@ public static void registerModFluids()
         FLOWING_ET95 = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_ethanol95"),
             new Et95Fluid.Flowing());
         ET95_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "ethanol95_block"),
-            new FluidBlock(STILL_ET95, FabricBlockSettings.copyOf(Blocks.WATER)){});
+            new FlammableFluidBlock(STILL_ET95, FabricBlockSettings.copyOf(Blocks.WATER)){});
         ET95_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "ethanol95_bucket"),
-            new BucketItem(STILL_ET95, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
+            new FlammableBucketItem(STILL_ET95, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
         //Sterol solution
         STILL_STEROL_SOLUTION = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "sterol_solution"),
@@ -196,9 +197,9 @@ public static void registerModFluids()
         FLOWING_STEROL_SOLUTION = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_sterol_solution"),
             new SterolSolutionFluid.Flowing());
         STEROL_SOLUTION_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "sterol_solution_block"),
-            new FluidBlock(STILL_STEROL_SOLUTION, FabricBlockSettings.copyOf(Blocks.WATER)){});
+            new FlammableFluidBlock(STILL_STEROL_SOLUTION, FabricBlockSettings.copyOf(Blocks.WATER)){});
         STEROL_SOLUTION_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "sterol_solution_bucket"),
-            new SolutionBucketItem(STILL_STEROL_SOLUTION, ModItems.STEROLS, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
+            new FlammableBucketItem(STILL_STEROL_SOLUTION, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
         //Androstadienedione solution
         STILL_ANDROSTADIENEDIONE = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "androstadienedione_solution"),
@@ -254,7 +255,7 @@ public static void registerModFluids()
         ANDROSTADIENEDIONE_OIL_SOLUTION_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "androstadienedione_oil_solution_block"),
             new AndrostadienedioneBlock(STILL_ANDROSTADIENEDIONE_OIL_SOLUTION, FabricBlockSettings.copyOf(Blocks.WATER)){});
         ANDROSTADIENEDIONE_OIL_SOLUTION_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "androstadienedione_oil_solution_bucket"),
-            new BucketItem(STILL_ANDROSTADIENEDIONE_OIL_SOLUTION, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
+            new FlammableBucketItem(STILL_ANDROSTADIENEDIONE_OIL_SOLUTION, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
         STILL_COAL_OIL = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "coal_oil"),
             new CoalOilFluid.Still());
@@ -263,7 +264,7 @@ public static void registerModFluids()
         COAL_OIL_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "coal_oil_block"),
             new FlammableFluidBlock(STILL_COAL_OIL, FabricBlockSettings.copyOf(Blocks.WATER)){});
         COAL_OIL_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "coal_oil_bucket"),
-            new BucketItem(STILL_COAL_OIL, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
+            new FlammableBucketItem(STILL_COAL_OIL, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
         //AUTOGENERATION LABEL DO NOT TOUCH
 

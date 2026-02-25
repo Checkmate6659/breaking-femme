@@ -122,11 +122,9 @@ public class BreakingFemme implements ModInitializer {
 
         //Fuels
         FuelRegistry.INSTANCE.add(ModFluids.ET95_BUCKET, 5400); //1 bucket of 95% ethanol can cook 27 items
-        FuelRegistry.INSTANCE.add(ModFluids.ET64_BUCKET, 3600);
-        FuelRegistry.INSTANCE.add(ModFluids.ET32_BUCKET, 1800); //this should burn even less well than proportional...
+        FuelRegistry.INSTANCE.add(ModFluids.ET64_BUCKET, 3000); //can cook 15, not quite 18, because more water
         FuelRegistry.INSTANCE.add(ModItems.ET95_BOTTLE, 1800);
-        FuelRegistry.INSTANCE.add(ModItems.ET64_BOTTLE, 1200);
-        FuelRegistry.INSTANCE.add(ModItems.ET32_BOTTLE, 600); //all the way down to 3 items for the worst concentration/quantity
+        FuelRegistry.INSTANCE.add(ModItems.ET64_BOTTLE, 1000); //5 items
         FuelRegistry.INSTANCE.add(ModFluids.TAR_BUCKET, 6400); //1 bucket of tar can cook 32 items
         FuelRegistry.INSTANCE.add(ModItems.TAR, 800); //and a ball of tar is 4 items (worse than coal, so dont use tar for fuel)
         FuelRegistry.INSTANCE.add(ModFluids.COAL_OIL_BUCKET, 12800); //you can use coal oil tho. its not gasoline but it does cook a stack of items.

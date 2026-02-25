@@ -7,12 +7,6 @@
     "breakingfemme:flowing_nickel_sulfate_solution",
     "breakingfemme:ethanol32",
     "breakingfemme:flowing_ethanol32",
-    "breakingfemme:ethanol64",
-    "breakingfemme:flowing_ethanol64",
-    "breakingfemme:ethanol95",
-    "breakingfemme:flowing_ethanol95",
-    "breakingfemme:sterol_solution",
-    "breakingfemme:flowing_sterol_solution",
     "breakingfemme:androstadienedione_solution",
     "breakingfemme:flowing_androstadienedione_solution",
     "breakingfemme:beer",
@@ -20,8 +14,6 @@
     "breakingfemme:nether_beer",
     "breakingfemme:flowing_nether_beer",
     "breakingfemme:sludge",
-    "breakingfemme:flowing_sludge",
-    "breakingfemme:androstadienedione_oil_solution",
-    "breakingfemme:flowing_androstadienedione_oil_solution"
+    "breakingfemme:flowing_sludge"
   ]
 }

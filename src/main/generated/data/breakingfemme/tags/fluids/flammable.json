@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "breakingfemme:ethanol64",
+    "breakingfemme:flowing_ethanol64",
+    "breakingfemme:ethanol95",
+    "breakingfemme:flowing_ethanol95",
+    "breakingfemme:sterol_solution",
+    "breakingfemme:flowing_sterol_solution",
+    "breakingfemme:androstadienedione_oil_solution",
+    "breakingfemme:flowing_androstadienedione_oil_solution",
+    "breakingfemme:coal_oil",
+    "breakingfemme:flowing_coal_oil"
+  ]
+}
