@@ -50,6 +50,7 @@ public class DistillerTopBlock extends Block {
             Block.createCuboidShape(2.0, 0.0, 12.0, 14.0, 11.0, 14.0),
             Block.createCuboidShape(2.0, 0.0, 2.0, 4.0, 11.0, 14.0),
             Block.createCuboidShape(12.0, 0.0, 2.0, 14.0, 11.0, 14.0),
+            Block.createCuboidShape(2.0, 1.0, 2.0, 14.0, 16.0, 14.0),
             Block.createCuboidShape(0.0, 11.0, 0.0, 16.0, 16.0, 16.0)
         );
     }
