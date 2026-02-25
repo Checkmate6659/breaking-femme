@@ -1,11 +1,12 @@
 {
+  "parent": "minecraft:breakingfemme/milk_separator",
   "criteria": {
-    "made_mortar_pestle": {
+    "made_creamgot": {
       "conditions": {
         "items": [
           {
             "items": [
-              "breakingfemme:mortar_pestle"
+              "breakingfemme:creamgot"
             ]
           }
         ]
@@ -14,26 +15,27 @@
     }
   },
   "display": {
-    "announce_to_chat": false,
-    "background": "breakingfemme:textures/gui/advancements.png",
+    "announce_to_chat": true,
     "description": {
-      "text": "Jesse I'm trans! We gotta cook estrogen!"
+      "text": "Cast the cream into ingots. This is not the last time you will be seeing them..."
     },
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "breakingfemme:mortar_pestle",
-      "nbt": "{Damage:0}"
+      "item": "breakingfemme:creamgot"
     },
     "show_toast": true,
     "title": {
-      "text": "Breaking Femme"
+      "text": "Totally normal dairy processing"
     }
   },
   "requirements": [
     [
-      "made_mortar_pestle"
+      "made_creamgot"
     ]
   ],
+  "rewards": {
+    "experience": 3000
+  },
   "sends_telemetry_event": true
 }

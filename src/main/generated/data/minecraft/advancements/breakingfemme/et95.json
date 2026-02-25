@@ -1,11 +1,12 @@
 {
+  "parent": "minecraft:breakingfemme/beer",
   "criteria": {
-    "made_mortar_pestle": {
+    "made_et95": {
       "conditions": {
         "items": [
           {
             "items": [
-              "breakingfemme:mortar_pestle"
+              "breakingfemme:ethanol95_bucket"
             ]
           }
         ]
@@ -14,26 +15,27 @@
     }
   },
   "display": {
-    "announce_to_chat": false,
-    "background": "breakingfemme:textures/gui/advancements.png",
+    "announce_to_chat": true,
     "description": {
-      "text": "Jesse I'm trans! We gotta cook estrogen!"
+      "text": "Distill beer to get 95% ethanol"
     },
-    "frame": "task",
+    "frame": "goal",
     "hidden": false,
     "icon": {
-      "item": "breakingfemme:mortar_pestle",
-      "nbt": "{Damage:0}"
+      "item": "breakingfemme:ethanol95_bucket"
     },
     "show_toast": true,
     "title": {
-      "text": "Breaking Femme"
+      "text": "Aezotropic mixture"
     }
   },
   "requirements": [
     [
-      "made_mortar_pestle"
+      "made_et95"
     ]
   ],
+  "rewards": {
+    "experience": 6000
+  },
   "sends_telemetry_event": true
 }

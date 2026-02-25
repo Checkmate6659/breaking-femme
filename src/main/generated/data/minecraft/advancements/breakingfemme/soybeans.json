@@ -1,11 +1,12 @@
 {
+  "parent": "minecraft:breakingfemme/root",
   "criteria": {
-    "made_mortar_pestle": {
+    "bought_soybeans": {
       "conditions": {
         "items": [
           {
             "items": [
-              "breakingfemme:mortar_pestle"
+              "breakingfemme:soybeans"
             ]
           }
         ]
@@ -14,25 +15,23 @@
     }
   },
   "display": {
-    "announce_to_chat": false,
-    "background": "breakingfemme:textures/gui/advancements.png",
+    "announce_to_chat": true,
     "description": {
-      "text": "Jesse I'm trans! We gotta cook estrogen!"
+      "text": "Buy soybeans from a farmer"
     },
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "breakingfemme:mortar_pestle",
-      "nbt": "{Damage:0}"
+      "item": "breakingfemme:soybeans"
     },
     "show_toast": true,
     "title": {
-      "text": "Breaking Femme"
+      "text": "Primitive HRT"
     }
   },
   "requirements": [
     [
-      "made_mortar_pestle"
+      "bought_soybeans"
     ]
   ],
   "sends_telemetry_event": true

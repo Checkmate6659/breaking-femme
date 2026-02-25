@@ -1,11 +1,12 @@
 {
+  "parent": "minecraft:breakingfemme/yeast",
   "criteria": {
-    "made_mortar_pestle": {
+    "made_beer": {
       "conditions": {
         "items": [
           {
             "items": [
-              "breakingfemme:mortar_pestle"
+              "breakingfemme:beer_bucket"
             ]
           }
         ]
@@ -14,26 +15,27 @@
     }
   },
   "display": {
-    "announce_to_chat": false,
-    "background": "breakingfemme:textures/gui/advancements.png",
+    "announce_to_chat": true,
     "description": {
-      "text": "Jesse I'm trans! We gotta cook estrogen!"
+      "text": "Make beer inside the fermenter"
     },
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "breakingfemme:mortar_pestle",
-      "nbt": "{Damage:0}"
+      "item": "breakingfemme:beer_bottle"
     },
     "show_toast": true,
     "title": {
-      "text": "Breaking Femme"
+      "text": "Homebrewing"
     }
   },
   "requirements": [
     [
-      "made_mortar_pestle"
+      "made_beer"
     ]
   ],
+  "rewards": {
+    "experience": 3000
+  },
   "sends_telemetry_event": true
 }

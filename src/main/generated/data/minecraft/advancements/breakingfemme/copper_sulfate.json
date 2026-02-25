@@ -1,11 +1,12 @@
 {
+  "parent": "minecraft:breakingfemme/root",
   "criteria": {
-    "made_mortar_pestle": {
+    "bought_copper_sulfate": {
       "conditions": {
         "items": [
           {
             "items": [
-              "breakingfemme:mortar_pestle"
+              "breakingfemme:copper_sulfate"
             ]
           }
         ]
@@ -14,25 +15,23 @@
     }
   },
   "display": {
-    "announce_to_chat": false,
-    "background": "breakingfemme:textures/gui/advancements.png",
+    "announce_to_chat": true,
     "description": {
-      "text": "Jesse I'm trans! We gotta cook estrogen!"
+      "text": "Buy copper sulfate powder from a farmer"
     },
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "breakingfemme:mortar_pestle",
-      "nbt": "{Damage:0}"
+      "item": "breakingfemme:copper_sulfate"
     },
     "show_toast": true,
     "title": {
-      "text": "Breaking Femme"
+      "text": "Pesticides"
     }
   },
   "requirements": [
     [
-      "made_mortar_pestle"
+      "bought_copper_sulfate"
     ]
   ],
   "sends_telemetry_event": true

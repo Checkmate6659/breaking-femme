@@ -1,11 +1,12 @@
 {
+  "parent": "minecraft:breakingfemme/ingot_mold",
   "criteria": {
-    "made_mortar_pestle": {
+    "made_milk_separator": {
       "conditions": {
         "items": [
           {
             "items": [
-              "breakingfemme:mortar_pestle"
+              "breakingfemme:milk_separator"
             ]
           }
         ]
@@ -14,25 +15,23 @@
     }
   },
   "display": {
-    "announce_to_chat": false,
-    "background": "breakingfemme:textures/gui/advancements.png",
+    "announce_to_chat": true,
     "description": {
-      "text": "Jesse I'm trans! We gotta cook estrogen!"
+      "text": "Craft a Milk Separator"
     },
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "breakingfemme:mortar_pestle",
-      "nbt": "{Damage:0}"
+      "item": "breakingfemme:milk_separator"
     },
     "show_toast": true,
     "title": {
-      "text": "Breaking Femme"
+      "text": "Centrifugal Separation"
     }
   },
   "requirements": [
     [
-      "made_mortar_pestle"
+      "made_milk_separator"
     ]
   ],
   "sends_telemetry_event": true

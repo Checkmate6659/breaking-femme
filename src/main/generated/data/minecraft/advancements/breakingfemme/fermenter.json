@@ -1,11 +1,12 @@
 {
+  "parent": "minecraft:breakingfemme/root",
   "criteria": {
-    "made_mortar_pestle": {
+    "made_fermenter": {
       "conditions": {
         "items": [
           {
             "items": [
-              "breakingfemme:mortar_pestle"
+              "breakingfemme:fermenter_controller"
             ]
           }
         ]
@@ -14,26 +15,27 @@
     }
   },
   "display": {
-    "announce_to_chat": false,
-    "background": "breakingfemme:textures/gui/advancements.png",
+    "announce_to_chat": true,
     "description": {
-      "text": "Jesse I'm trans! We gotta cook estrogen!"
+      "text": "Craft a Fermenter Controller"
     },
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "breakingfemme:mortar_pestle",
-      "nbt": "{Damage:0}"
+      "item": "minecraft:barrel"
     },
     "show_toast": true,
     "title": {
-      "text": "Breaking Femme"
+      "text": "First Steps into Brewing"
     }
   },
   "requirements": [
     [
-      "made_mortar_pestle"
+      "made_fermenter"
     ]
   ],
+  "rewards": {
+    "experience": 1000
+  },
   "sends_telemetry_event": true
 }

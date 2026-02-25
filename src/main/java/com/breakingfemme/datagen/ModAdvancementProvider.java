@@ -3,13 +3,18 @@ package com.breakingfemme.datagen;
 import java.util.function.Consumer;
 
 import com.breakingfemme.BreakingFemme;
+import com.breakingfemme.block.ModBlocks;
+import com.breakingfemme.fluid.ModFluids;
 import com.breakingfemme.item.ModItems;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
 import net.minecraft.advancement.Advancement;
 import net.minecraft.advancement.AdvancementFrame;
+import net.minecraft.advancement.AdvancementRewards;
 import net.minecraft.advancement.criterion.InventoryChangedCriterion;
+import net.minecraft.block.Blocks;
+import net.minecraft.item.Items;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
@@ -32,7 +37,201 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                     false // Hidden in the advancement tab
             )
             // The first string used in criterion is the name referenced by other advancements when they want to have 'requirements'
-            .criterion("got_mortar_pestle", InventoryChangedCriterion.Conditions.items(ModItems.MORTAR_PESTLE))
+            .criterion("made_mortar_pestle", InventoryChangedCriterion.Conditions.items(ModItems.MORTAR_PESTLE))
             .build(consumer, BreakingFemme.MOD_ID + "/root");
+        
+        //milk processing branch
+        Advancement milk = Advancement.Builder.create().parent(root)
+            .display(
+                    Items.MILK_BUCKET,
+                    Text.literal("Mooooo!"),
+                    Text.literal("Obtain a bucket of milk"),
+                    null, // children to parent advancements don't need a background set
+                    AdvancementFrame.TASK,
+                    true,
+                    true,
+                    false
+            )
+            .criterion("milked_cow", InventoryChangedCriterion.Conditions.items(Items.MILK_BUCKET))
+            .build(consumer, BreakingFemme.MOD_ID + "/milk");
+
+        Advancement ingot_mold = Advancement.Builder.create().parent(milk)
+            .display(
+                    ModItems.INGOT_MOLD,
+                    Text.literal("The basis of all dairy processing"),
+                    Text.literal("Craft a single-use ingot mold out of clay"),
+                    null, // children to parent advancements don't need a background set
+                    AdvancementFrame.TASK,
+                    true,
+                    true,
+                    false
+            )
+            .criterion("made_ingot_mold", InventoryChangedCriterion.Conditions.items(ModItems.INGOT_MOLD))
+            .build(consumer, BreakingFemme.MOD_ID + "/ingot_mold");
+
+        Advancement separate = Advancement.Builder.create().parent(ingot_mold)
+            .display(
+                    ModBlocks.MILK_SEPARATOR,
+                    Text.literal("Centrifugal Separation"),
+                    Text.literal("Craft a Milk Separator"),
+                    null, // children to parent advancements don't need a background set
+                    AdvancementFrame.TASK,
+                    true,
+                    true,
+                    false
+            )
+            .criterion("made_milk_separator", InventoryChangedCriterion.Conditions.items(ModBlocks.MILK_SEPARATOR))
+            .build(consumer, BreakingFemme.MOD_ID + "/milk_separator");
+
+        Advancement cream = Advancement.Builder.create().parent(separate)
+            .display(
+                    ModItems.CREAMGOT,
+                    Text.literal("Totally normal dairy processing"),
+                    Text.literal("Cast the cream into ingots. This is not the last time you will be seeing them..."),
+                    null, // children to parent advancements don't need a background set
+                    AdvancementFrame.TASK,
+                    true,
+                    true,
+                    false
+            )
+            .rewards(AdvancementRewards.Builder.experience(3000))
+            .criterion("made_creamgot", InventoryChangedCriterion.Conditions.items(ModItems.CREAMGOT))
+            .build(consumer, BreakingFemme.MOD_ID + "/creamgot");
+
+        Advancement skimmed_milk = Advancement.Builder.create().parent(separate)
+            .display(
+                    ModItems.SKIMMED_MILK_BUCKET,
+                    Text.literal("Is this just fancy milk?"),
+                    Text.literal("Get a bucket of Skimmed Milk"),
+                    null, // children to parent advancements don't need a background set
+                    AdvancementFrame.TASK,
+                    true,
+                    true,
+                    false
+            )
+            .rewards(AdvancementRewards.Builder.experience(3000))
+            .criterion("made_skimmed_milk", InventoryChangedCriterion.Conditions.items(ModItems.SKIMMED_MILK_BUCKET))
+            .build(consumer, BreakingFemme.MOD_ID + "/skimmed_milk");
+
+        Advancement milkgot = Advancement.Builder.create().parent(skimmed_milk)
+            .display(
+                    ModItems.MILKGOT,
+                    Text.literal("Nitrogen Source"),
+                    Text.literal("Cast the skimmed milk into ingots, a good nitrogen source for fermentation"),
+                    null, // children to parent advancements don't need a background set
+                    AdvancementFrame.TASK,
+                    true,
+                    true,
+                    false
+            )
+            .criterion("made_milkgot", InventoryChangedCriterion.Conditions.items(ModItems.MILKGOT))
+            .build(consumer, BreakingFemme.MOD_ID + "/milkgot");
+
+        //fermenting and distilling branch
+        Advancement fermenter = Advancement.Builder.create().parent(root)
+            .display(
+                    Blocks.BARREL,
+                    Text.literal("First Steps into Brewing"),
+                    Text.literal("Craft a Fermenter Controller"),
+                    null, // children to parent advancements don't need a background set
+                    AdvancementFrame.TASK,
+                    true,
+                    true,
+                    false
+            )
+            .rewards(AdvancementRewards.Builder.experience(1000))
+            .criterion("made_fermenter", InventoryChangedCriterion.Conditions.items(ModBlocks.FERMENTER_CONTROLLER))
+            .build(consumer, BreakingFemme.MOD_ID + "/fermenter");
+        
+        Advancement yeast = Advancement.Builder.create().parent(fermenter)
+            .display(
+                    ModItems.YEAST,
+                    Text.literal("A hopefully nice starter"),
+                    Text.literal("Catch wild yeast by leaving flour and water in a cauldron"),
+                    null, // children to parent advancements don't need a background set
+                    AdvancementFrame.TASK,
+                    true,
+                    true,
+                    false
+            )
+            .rewards(AdvancementRewards.Builder.experience(1000))
+            .criterion("got_yeast", InventoryChangedCriterion.Conditions.items(ModItems.YEAST))
+            .build(consumer, BreakingFemme.MOD_ID + "/yeast");
+        
+        Advancement beer = Advancement.Builder.create().parent(yeast)
+            .display(
+                    ModItems.BEER_BOTTLE,
+                    Text.literal("Homebrewing"),
+                    Text.literal("Make beer inside the fermenter"),
+                    null, // children to parent advancements don't need a background set
+                    AdvancementFrame.TASK,
+                    true,
+                    true,
+                    false
+            )
+            .rewards(AdvancementRewards.Builder.experience(3000))
+            .criterion("made_beer", InventoryChangedCriterion.Conditions.items(ModFluids.BEER_BUCKET))
+            .build(consumer, BreakingFemme.MOD_ID + "/beer");
+        
+        Advancement ethanol = Advancement.Builder.create().parent(beer)
+            .display(
+                    ModFluids.ET95_BUCKET,
+                    Text.literal("Aezotropic mixture"),
+                    Text.literal("Distill beer to get 95% ethanol"),
+                    null, // children to parent advancements don't need a background set
+                    AdvancementFrame.GOAL,
+                    true,
+                    true,
+                    false
+            )
+            .rewards(AdvancementRewards.Builder.experience(6000))
+            .criterion("made_et95", InventoryChangedCriterion.Conditions.items(ModFluids.ET95_BUCKET))
+            .build(consumer, BreakingFemme.MOD_ID + "/et95");
+        
+        Advancement nether_beer = Advancement.Builder.create().parent(beer)
+            .display(
+                    ModItems.NETHER_BEER_BOTTLE,
+                    Text.literal("A better source of alcohol"),
+                    Text.literal("Brew beer using the more resilient Nether Wart as yeast"),
+                    null, // children to parent advancements don't need a background set
+                    AdvancementFrame.GOAL,
+                    true,
+                    true,
+                    false
+            )
+            .rewards(AdvancementRewards.Builder.experience(3000))
+            .criterion("made_nether_beer", InventoryChangedCriterion.Conditions.items(ModFluids.NETHER_BEER_BUCKET))
+            .build(consumer, BreakingFemme.MOD_ID + "/nether_beer");
+        
+        //soybean (main) branch
+        Advancement soybeans = Advancement.Builder.create().parent(root)
+            .display(
+                    ModItems.SOYBEANS,
+                    Text.literal("Primitive HRT"),
+                    Text.literal("Buy soybeans from a farmer"),
+                    null, // children to parent advancements don't need a background set
+                    AdvancementFrame.TASK,
+                    true,
+                    true,
+                    false
+            )
+            .criterion("bought_soybeans", InventoryChangedCriterion.Conditions.items(ModItems.SOYBEANS))
+            .build(consumer, BreakingFemme.MOD_ID + "/soybeans");
+        
+        //nickel sulfate branch
+        Advancement copper_sulfate = Advancement.Builder.create().parent(root)
+            .display(
+                    ModItems.COPPER_SULFATE,
+                    Text.literal("Pesticides"),
+                    Text.literal("Buy copper sulfate powder from a farmer"),
+                    null, // children to parent advancements don't need a background set
+                    AdvancementFrame.TASK,
+                    true,
+                    true,
+                    false
+            )
+            .criterion("bought_copper_sulfate", InventoryChangedCriterion.Conditions.items(ModItems.COPPER_SULFATE))
+            .build(consumer, BreakingFemme.MOD_ID + "/copper_sulfate");
+
     }
 }

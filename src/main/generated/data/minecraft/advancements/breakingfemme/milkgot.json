@@ -1,11 +1,12 @@
 {
+  "parent": "minecraft:breakingfemme/skimmed_milk",
   "criteria": {
-    "made_mortar_pestle": {
+    "made_milkgot": {
       "conditions": {
         "items": [
           {
             "items": [
-              "breakingfemme:mortar_pestle"
+              "breakingfemme:milkgot"
             ]
           }
         ]
@@ -14,25 +15,23 @@
     }
   },
   "display": {
-    "announce_to_chat": false,
-    "background": "breakingfemme:textures/gui/advancements.png",
+    "announce_to_chat": true,
     "description": {
-      "text": "Jesse I'm trans! We gotta cook estrogen!"
+      "text": "Cast the skimmed milk into ingots, a good nitrogen source for fermentation"
     },
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "breakingfemme:mortar_pestle",
-      "nbt": "{Damage:0}"
+      "item": "breakingfemme:milkgot"
     },
     "show_toast": true,
     "title": {
-      "text": "Breaking Femme"
+      "text": "Nitrogen Source"
     }
   },
   "requirements": [
     [
-      "made_mortar_pestle"
+      "made_milkgot"
     ]
   ],
   "sends_telemetry_event": true

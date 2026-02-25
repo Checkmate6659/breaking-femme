@@ -1,11 +1,12 @@
 {
+  "parent": "minecraft:breakingfemme/milk_separator",
   "criteria": {
-    "made_mortar_pestle": {
+    "made_skimmed_milk": {
       "conditions": {
         "items": [
           {
             "items": [
-              "breakingfemme:mortar_pestle"
+              "breakingfemme:skimmed_milk_bucket"
             ]
           }
         ]
@@ -14,26 +15,27 @@
     }
   },
   "display": {
-    "announce_to_chat": false,
-    "background": "breakingfemme:textures/gui/advancements.png",
+    "announce_to_chat": true,
     "description": {
-      "text": "Jesse I'm trans! We gotta cook estrogen!"
+      "text": "Get a bucket of Skimmed Milk"
     },
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "breakingfemme:mortar_pestle",
-      "nbt": "{Damage:0}"
+      "item": "breakingfemme:skimmed_milk_bucket"
     },
     "show_toast": true,
     "title": {
-      "text": "Breaking Femme"
+      "text": "Is this just fancy milk?"
     }
   },
   "requirements": [
     [
-      "made_mortar_pestle"
+      "made_skimmed_milk"
     ]
   ],
+  "rewards": {
+    "experience": 3000
+  },
   "sends_telemetry_event": true
 }

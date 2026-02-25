@@ -1,11 +1,12 @@
 {
+  "parent": "minecraft:breakingfemme/fermenter",
   "criteria": {
-    "made_mortar_pestle": {
+    "got_yeast": {
       "conditions": {
         "items": [
           {
             "items": [
-              "breakingfemme:mortar_pestle"
+              "breakingfemme:yeast"
             ]
           }
         ]
@@ -14,26 +15,27 @@
     }
   },
   "display": {
-    "announce_to_chat": false,
-    "background": "breakingfemme:textures/gui/advancements.png",
+    "announce_to_chat": true,
     "description": {
-      "text": "Jesse I'm trans! We gotta cook estrogen!"
+      "text": "Catch wild yeast by leaving flour and water in a cauldron"
     },
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "breakingfemme:mortar_pestle",
-      "nbt": "{Damage:0}"
+      "item": "breakingfemme:yeast"
     },
     "show_toast": true,
     "title": {
-      "text": "Breaking Femme"
+      "text": "A hopefully nice starter"
     }
   },
   "requirements": [
     [
-      "made_mortar_pestle"
+      "got_yeast"
     ]
   ],
+  "rewards": {
+    "experience": 1000
+  },
   "sends_telemetry_event": true
 }

@@ -1,11 +1,12 @@
 {
+  "parent": "minecraft:breakingfemme/beer",
   "criteria": {
-    "made_mortar_pestle": {
+    "made_nether_beer": {
       "conditions": {
         "items": [
           {
             "items": [
-              "breakingfemme:mortar_pestle"
+              "breakingfemme:nether_beer_bucket"
             ]
           }
         ]
@@ -14,26 +15,27 @@
     }
   },
   "display": {
-    "announce_to_chat": false,
-    "background": "breakingfemme:textures/gui/advancements.png",
+    "announce_to_chat": true,
     "description": {
-      "text": "Jesse I'm trans! We gotta cook estrogen!"
+      "text": "Brew beer using the more resilient Nether Wart as yeast"
     },
-    "frame": "task",
+    "frame": "goal",
     "hidden": false,
     "icon": {
-      "item": "breakingfemme:mortar_pestle",
-      "nbt": "{Damage:0}"
+      "item": "breakingfemme:nether_beer_bottle"
     },
     "show_toast": true,
     "title": {
-      "text": "Breaking Femme"
+      "text": "A better source of alcohol"
     }
   },
   "requirements": [
     [
-      "made_mortar_pestle"
+      "made_nether_beer"
     ]
   ],
+  "rewards": {
+    "experience": 3000
+  },
   "sends_telemetry_event": true
 }
