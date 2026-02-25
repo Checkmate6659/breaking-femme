@@ -1,22 +1,19 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "equipment",
-  "group": "mortar_pestle",
+  "category": "misc",
+  "group": "distiller_column",
   "key": {
     "#": {
-      "tag": "c:stones"
-    },
-    "|": {
       "tag": "c:ingots/iron"
     }
   },
   "pattern": [
-    " | ",
-    "#|#",
-    "###"
+    "# #",
+    "# #",
+    "# #"
   ],
   "result": {
-    "item": "breakingfemme:mortar_pestle"
+    "item": "breakingfemme:distiller_column"
   },
   "show_notification": true
 }

@@ -1,22 +1,21 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "misc",
-  "group": "fermenter_top",
+  "group": "distiller_top",
   "key": {
     "#": {
-      "tag": "minecraft:planks"
-    },
-    "-": {
       "tag": "c:ingots/iron"
+    },
+    "H": {
+      "item": "breakingfemme:distiller_column"
     }
   },
   "pattern": [
-    " - ",
-    "###"
+    "#",
+    "H"
   ],
   "result": {
-    "count": 4,
-    "item": "breakingfemme:fermenter_top"
+    "item": "breakingfemme:distiller_top"
   },
   "show_notification": true
 }

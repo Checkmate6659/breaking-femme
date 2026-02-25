@@ -7,7 +7,7 @@
       "item": "breakingfemme:fermenter_bottom"
     },
     "-": {
-      "item": "minecraft:iron_ingot"
+      "tag": "c:ingots/iron"
     },
     "O": {
       "item": "minecraft:repeater"
