@@ -1,0 +1,39 @@
+{
+  "criteria": {
+    "got_mortar_pestle": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "breakingfemme:mortar_pestle"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "breakingfemme:textures/gui/advancements.png",
+    "description": {
+      "text": "Jesse I'm trans! We gotta cook estrogen!"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "breakingfemme:mortar_pestle",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "Breaking Femme"
+    }
+  },
+  "requirements": [
+    [
+      "got_mortar_pestle"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

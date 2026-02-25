@@ -1,5 +1,6 @@
 package com.breakingfemme;
 
+import com.breakingfemme.datagen.ModAdvancementProvider;
 import com.breakingfemme.datagen.ModBlockTagProvider;
 import com.breakingfemme.datagen.ModFluidTagProvider;
 import com.breakingfemme.datagen.ModItemTagProvider;
@@ -22,5 +23,6 @@ public class BreakingFemmeDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(ModLootTableProvider::new);
 		pack.addProvider(ModModelProvider::new);
 		pack.addProvider(ModRecipeProvider::new);
+		pack.addProvider(ModAdvancementProvider::new);
 	}
 }
