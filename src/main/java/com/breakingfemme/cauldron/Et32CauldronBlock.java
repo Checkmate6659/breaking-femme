@@ -31,6 +31,7 @@ import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
@@ -200,8 +201,12 @@ public class Et32CauldronBlock extends AbstractCauldronBlock {
     }
     //evaporation of ethanol (faster when hot, faster when more concentrated)
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        //can only boil if the block is hot (or if its in the nether, free heating lol)
         if(random.nextInt(3) != 0) return; //evaporation speed 1/3 that of 95%
+
+        //its capped off, so don't evaporate
+        if(isFaceFullSquare(world.getBlockState(pos.up()).getCollisionShape(world, pos), Direction.DOWN))
+            return;
+
         if(random.nextInt(3) == 0 || world.getDimension().ultrawarm() || BreakingFemme.isBlockHot(world, pos.down()))
         {
             //ethanol boils off before water does, so just make water
@@ -212,6 +217,10 @@ public class Et32CauldronBlock extends AbstractCauldronBlock {
 
     //doing boiling effect when its hot
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
+        //its capped off, so don't evaporate
+        if(isFaceFullSquare(world.getBlockState(pos.up()).getCollisionShape(world, pos), Direction.DOWN))
+            return;
+
         if (world.getDimension().ultrawarm() || BreakingFemme.isBlockHot(world, pos.down())) {
             if(random.nextInt(3) == 0)
                 world.playSound((double)pos.getX() + 0.5, (double)pos.getY() + 0.5, (double)pos.getZ() + 0.75, SoundEvents.BLOCK_BUBBLE_COLUMN_UPWARDS_AMBIENT, SoundCategory.BLOCKS, 192F + random.nextFloat() * 128F, random.nextFloat() * 0.7F + 0.6F, false);
