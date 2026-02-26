@@ -6,5 +6,9 @@
   "grinding": {
     "subtitle": "sound.breakingfemme.grinding",
     "sounds": ["breakingfemme:grind1","breakingfemme:grind2","breakingfemme:grind3","breakingfemme:grind4","breakingfemme:grind5","breakingfemme:grind6","breakingfemme:grind7","breakingfemme:grind8","breakingfemme:grind9","breakingfemme:grind10"]
+  },
+  "metal_pipe": {
+    "subtitle": "sound.breakingfemme.metal_pipe",
+    "sounds": ["breakingfemme:metal_pipe"]
   }
 }
