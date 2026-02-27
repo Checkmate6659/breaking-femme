@@ -58,7 +58,7 @@ public class ModItems {
 
     //Coal tar processing
     public static final Item TAR = registerItem("tar", new Item(new FabricItemSettings()));
-    public static final Item NICKEL_PIPE = registerItem("nickel_pipe", new MetalPipeItem(new FabricItemSettings(), 3.0f));
+    public static final Item NICKEL_PIPE = registerItem("nickel_pipe", new MetalPipeItem(new FabricItemSettings()));
 
     public static final Item STEROLS = registerItem("sterols", new Item(new FabricItemSettings()));
     public static final Item CRUDE_ESTRONE = registerItem("crude_estrone", new Item(new FabricItemSettings()));

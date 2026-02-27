@@ -47,7 +47,7 @@
     "advancement.breakingfemme.nickel_sulfate.description": "Make nickel sulfate solution by oxidizing nickel, then get out the nickel sulfate by boiling off the water",
     "item.breakingfemme.soybeans": "Soybeans",
     "item.breakingfemme.nickel_ingot": "Nickel Ingot",
-    "item.breakingfemme.metal_pipe.tooltip": "Do not drop this item",
+    "item.breakingfemme.metal_pipe.tooltip": "Please do not drop this",
     "item.breakingfemme.nickel_pipe": "Nickel Pipe",
     "item.breakingfemme.pulverized_copper": "Pulverized Copper",
     "item.breakingfemme.pulverized_nickel": "Pulverized Nickel",
