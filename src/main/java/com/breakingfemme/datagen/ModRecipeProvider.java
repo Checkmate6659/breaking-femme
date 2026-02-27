@@ -67,7 +67,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.FERMENTER_HEATER.asItem()).input('#', ModBlocks.FERMENTER_BOTTOM).input('-', Blocks.MAGMA_BLOCK.asItem()).input('w', Items.REDSTONE).input('U', Items.QUARTZ).pattern(" - ").pattern(" # ").pattern("UwU").group("fermenter_heater").criterion(hasItem(Items.MAGMA_BLOCK), conditionsFromItem(Items.MAGMA_BLOCK)).offerTo(exporter);
 
         //distiller parts
-        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.DISTILLER_COLUMN).input('#', ModItemTagProvider.IRON_INGOT).pattern("# #").pattern("# #").pattern("# #").group("distiller_column").criterion(hasItem(Items.IRON_INGOT), conditionsFromItem(Items.IRON_INGOT)).offerTo(exporter);
-        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.DISTILLER_TOP).input('#', ModItemTagProvider.IRON_INGOT).input('H', ModBlocks.DISTILLER_COLUMN).pattern("#").pattern("H").group("distiller_top").criterion(hasItem(Items.IRON_INGOT), conditionsFromItem(Items.IRON_INGOT)).offerTo(exporter);
+        offer2x2CompactingRecipe(exporter, RecipeCategory.MISC, ModBlocks.DISTILLER_COLUMN, ModItems.NICKEL_PIPE);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.DISTILLER_TOP).input('S', ModItemTagProvider.NICKEL_INGOT).input('H', ModBlocks.DISTILLER_COLUMN).input('E', ModItems.NICKEL_PIPE).pattern("S").pattern("H").pattern("E").group("distiller_top").criterion(hasItem(Items.IRON_INGOT), conditionsFromItem(ModItems.NICKEL_PIPE)).offerTo(exporter);
     }
 }

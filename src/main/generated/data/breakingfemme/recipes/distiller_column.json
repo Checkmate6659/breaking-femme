@@ -1,16 +1,14 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "misc",
-  "group": "distiller_column",
   "key": {
     "#": {
-      "tag": "c:ingots/iron"
+      "item": "breakingfemme:nickel_pipe"
     }
   },
   "pattern": [
-    "# #",
-    "# #",
-    "# #"
+    "##",
+    "##"
   ],
   "result": {
     "item": "breakingfemme:distiller_column"
