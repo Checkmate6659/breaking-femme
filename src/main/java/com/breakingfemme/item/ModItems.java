@@ -58,6 +58,7 @@ public class ModItems {
 
     //Coal tar processing
     public static final Item TAR = registerItem("tar", new Item(new FabricItemSettings()));
+    public static final Item NICKEL_PIPE = registerItem("nickel_pipe", new MetalPipeItem(new FabricItemSettings(), 3.0f));
 
     public static final Item STEROLS = registerItem("sterols", new Item(new FabricItemSettings()));
     public static final Item CRUDE_ESTRONE = registerItem("crude_estrone", new Item(new FabricItemSettings()));
@@ -126,6 +127,7 @@ public class ModItems {
             entries.add(ModBlocks.FERMENTER_HEATER);
             entries.add(ModBlocks.FERMENTER_AIRLOCK);
             entries.add(ModFluids.SLUDGE_BUCKET);
+            entries.add(NICKEL_PIPE);
             entries.add(ModBlocks.DISTILLER_TOP);
             entries.add(ModBlocks.DISTILLER_COLUMN);
             //AUTOGENERATION LABEL DO NOT TOUCH

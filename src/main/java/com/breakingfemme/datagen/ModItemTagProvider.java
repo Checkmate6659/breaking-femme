@@ -2,6 +2,7 @@ package com.breakingfemme.datagen;
 
 import java.util.concurrent.CompletableFuture;
 
+import com.breakingfemme.BreakingFemme;
 import com.breakingfemme.block.ModBlocks;
 import com.breakingfemme.item.ModItems;
 
@@ -31,6 +32,7 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
     public static final TagKey<Item> IRON_INGOT = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "ingots/iron"));
     public static final TagKey<Item> COPPER_INGOT = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "ingots/copper"));
     public static final TagKey<Item> NICKEL_INGOT = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "ingots/nickel"));
+    public static final TagKey<Item> METAL_PIPE = TagKey.of(RegistryKeys.ITEM, new Identifier(BreakingFemme.MOD_ID, "metal_pipe"));
     public static final TagKey<Item> PULVERIZED_COPPER = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "dusts/copper"));
     public static final TagKey<Item> PULVERIZED_NICKEL = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "dusts/nickel"));
     public static final TagKey<Item> FLOUR = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "flours"));
@@ -49,6 +51,7 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
 
     @Override
     protected void configure(WrapperLookup arg) {
+        getOrCreateTagBuilder(METAL_PIPE).add(ModItems.NICKEL_PIPE);
         getOrCreateTagBuilder(STONES).add(Blocks.STONE.asItem());
         getOrCreateTagBuilder(STONES).add(Blocks.DEEPSLATE.asItem());
         getOrCreateTagBuilder(STONES).add(Blocks.GRANITE.asItem());
