@@ -98,6 +98,8 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(BlockTags.NEEDS_STONE_TOOL).add(ModBlocks.DISTILLER_TOP);
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModBlocks.DISTILLER_COLUMN);
         getOrCreateTagBuilder(BlockTags.NEEDS_STONE_TOOL).add(ModBlocks.DISTILLER_COLUMN);
+        getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModBlocks.DISTILLER_BASE);
+        getOrCreateTagBuilder(BlockTags.NEEDS_STONE_TOOL).add(ModBlocks.DISTILLER_BASE);
 
         //custom block tags
         getOrCreateTagBuilder(HOT).add(Blocks.FIRE);

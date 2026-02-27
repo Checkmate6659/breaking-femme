@@ -29,6 +29,7 @@ public class ModBlocks {
     public static final Block FERMENTER_AIRLOCK = registerBlock("fermenter_airlock", new FermenterAirlockBlock(FabricBlockSettings.copyOf(Blocks.GLASS).noCollision().pistonBehavior(PistonBehavior.DESTROY)));
 
     //distiller blocks
+    public static final Block DISTILLER_BASE = registerBlock("distiller_base", new DistillerBaseBlock(FabricBlockSettings.copyOf(Blocks.IRON_TRAPDOOR))); //block entity already cannot be pushed
     public static final Block DISTILLER_TOP = registerBlock("distiller_top", new DistillerTopBlock(FabricBlockSettings.copyOf(Blocks.IRON_TRAPDOOR).pistonBehavior(PistonBehavior.BLOCK)));
     public static final Block DISTILLER_COLUMN = registerBlock("distiller_column", new DistillerColumnBlock(FabricBlockSettings.copyOf(Blocks.IRON_TRAPDOOR).pistonBehavior(PistonBehavior.BLOCK)));
 
