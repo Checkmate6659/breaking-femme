@@ -1,6 +1,8 @@
 {
+	"parent": "block/block",
 	"textures": {
 		"0": "breakingfemme:block/distiller_base",
+		"1": "breakingfemme:block/mesh",
 		"particle": "breakingfemme:block/distiller_base"
 	},
 	"elements": [
@@ -54,6 +56,13 @@
 				"west": {"uv": [0, 14, 16, 16], "texture": "#0", "cullface": "west"},
 				"up": {"uv": [0, 0, 16, 16], "texture": "#0"},
 				"down": {"uv": [0, 0, 16, 16], "texture": "#0", "cullface": "down"}
+			}
+		},
+		{
+			"from": [1.5, 15.5, 1.5],
+			"to": [14.5, 15.5, 14.5],
+			"faces": {
+				"up": {"uv": [0, 0, 13, 13], "texture": "#1"}
 			}
 		}
 	]

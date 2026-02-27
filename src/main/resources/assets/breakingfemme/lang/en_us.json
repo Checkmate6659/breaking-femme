@@ -101,6 +101,7 @@
     "block.entity.breakingfemme.fermenter": "Fermenter",
     "block.breakingfemme.distiller_top": "Distiller Top",
     "block.breakingfemme.distiller_column": "Distiller Column",
+    "block.breakingfemme.distiller_base": "Distiller Base",
     "sound.breakingfemme.grinding": "Grinding",
     "sound.breakingfemme.crank": "Crank turns",
     "sound.breakingfemme.metal_pipe": "Metal pipe clangs",

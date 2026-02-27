@@ -123,7 +123,7 @@ public class DistillerBaseBlock extends Block /*extends BlockWithEntity*/ {
             Block.createCuboidShape(0, 0, 0, 2, 16, 16),
             Block.createCuboidShape(14, 0, 0, 16, 16, 16),
             Block.createCuboidShape(0, 0, 14, 16, 16, 16),
-            Block.createCuboidShape(0, 0, 0, 16, 2, 16)
+            Block.createCuboidShape(0, 0, 0, 16, 15, 16)
         );
     }
 }

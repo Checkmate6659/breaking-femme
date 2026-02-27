@@ -86,7 +86,7 @@ public class BreakingFemmeClient implements ClientModInitializer {
         //screens/screen handlers
         HandledScreens.register(ModScreenHandlers.FERMENTER_SCREEN_HANDLER, FermenterScreen::new);
 
-        //cutout blocks
+        //cutout blocks (blocks that have transparent textures basically)
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.SOY_CROP, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.MILK_SEPARATOR, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.FERMENTER_PANEL, RenderLayer.getCutout());
@@ -95,6 +95,7 @@ public class BreakingFemmeClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.FERMENTER_MIXER, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.FERMENTER_CONTROLLER, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.FERMENTER_AIRLOCK, RenderLayer.getCutout()); //can we do something to make block not see through itself??
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.DISTILLER_BASE, RenderLayer.getCutout());
 
         ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
             if (i == 0)
