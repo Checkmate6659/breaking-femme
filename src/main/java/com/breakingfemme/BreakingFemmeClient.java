@@ -89,11 +89,6 @@ public class BreakingFemmeClient implements ClientModInitializer {
         //cutout blocks (blocks that have transparent textures basically)
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.SOY_CROP, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.MILK_SEPARATOR, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.FERMENTER_PANEL, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.FERMENTER_TOP, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.FERMENTER_BOTTOM, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.FERMENTER_MIXER, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.FERMENTER_CONTROLLER, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.FERMENTER_AIRLOCK, RenderLayer.getCutout()); //can we do something to make block not see through itself??
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.DISTILLER_BASE, RenderLayer.getCutout());
 
