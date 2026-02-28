@@ -1,5 +1,7 @@
 package com.breakingfemme.mixin;
 
+import java.util.Set;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -7,6 +9,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import com.breakingfemme.VillagerAttachments;
+import com.google.common.collect.ImmutableSet;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 
 import net.minecraft.entity.passive.VillagerEntity;
@@ -16,11 +21,11 @@ import net.minecraft.item.ItemStack;
 
 @Mixin(VillagerEntity.class)
 public class VillagerPickupMixin {
-    @Inject(at = @At("RETURN"), method = "canGather", cancellable = true)
-	private void breakingfemme$canGrabGirlPotion(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
+    @WrapOperation(at = @At(value = "INVOKE:FIRST", target = "contains"), method = "canGather")
+	private boolean breakingfemme$canGrabGirlPotion(Set<Item> set, Object item, Operation<Boolean> operation) {
         VillagerEntity villager = (VillagerEntity)(Object)this;
-        if(VillagerAttachments.isEstrogen(stack.getItem()) && VillagerAttachments.isTransfem(villager))
-            cir.setReturnValue(true);
+        return (VillagerAttachments.isTransfem(villager) && VillagerAttachments.isEstrogen((Item)item))
+            || operation.call(set, item);
     }
 
     //in loot method, using ItemEntity.getOwner(), give some cash to the player who dropped it... if a player did, and is close enough
