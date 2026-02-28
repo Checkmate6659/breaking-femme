@@ -32,14 +32,17 @@ public class VillagerPickupMixin {
     @Inject(at = @At("HEAD"), method = "mobTick")
     private void breakingfemme$useGirlPotion(CallbackInfo ci)
     {
-        //TODO: take time when using the estrogen
-
+        //take time when using the estrogen
         VillagerEntity villager = (VillagerEntity)(Object)this;
+        if(!VillagerAttachments.needsEstrogen(villager))
+            return;
+
         SimpleInventory inventory = villager.getInventory();
         int size = inventory.size();
 
         int estro_slot; //if this is equal to size at the end, we did not find any estrogen
         ItemStack stack = inventory.getStack(0); //because java says this isnt initialized if i dont initialize it here. wtf java just let me do stuff that i know is right but you dont.
+        //TODO: smarter slot picking: consume from stack that is shortest to consume entirely => free up space asap
         for(estro_slot = 0; estro_slot < size; estro_slot++)
         {
             stack = inventory.getStack(estro_slot);
@@ -50,12 +53,12 @@ public class VillagerPickupMixin {
         //consume an estrogen if possible, and increase the estrogen number
         if(estro_slot < size)
         {
-            //this small bit works... sure.
+            int estro_time = VillagerAttachments.estrogenTime(stack.getItem());
             stack.decrement(1);
             inventory.setStack(estro_slot, stack);
-            VillagerAttachments.addProgress(villager, 1); //TODO: different amounts for different estrogens
+            VillagerAttachments.giveEstrogenFor(villager, estro_time);
 
-            //happy particles!
+            //happy particles! would need that in loot actually, but this is like for debugging
             villager.getWorld().sendEntityStatus(villager, EntityStatuses.ADD_VILLAGER_HAPPY_PARTICLES);
         }
     }
