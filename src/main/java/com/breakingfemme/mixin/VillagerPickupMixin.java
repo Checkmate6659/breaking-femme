@@ -6,14 +6,12 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import com.breakingfemme.VillagerAttachments;
-import com.google.common.collect.ImmutableSet;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import com.llamalad7.mixinextras.sugar.Local;
 
+import net.minecraft.entity.EntityStatuses;
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.Item;
@@ -31,9 +29,11 @@ public class VillagerPickupMixin {
     //in loot method, using ItemEntity.getOwner(), give some cash to the player who dropped it... if a player did, and is close enough
     //mb the closest player if theres a player close enough otherwise? idk.
 
-    /*@Inject(at = @At("HEAD"), method = "mobTick")
-    private void breakingfemme$buyGirlPotion(CallbackInfo ci)
+    @Inject(at = @At("HEAD"), method = "mobTick")
+    private void breakingfemme$useGirlPotion(CallbackInfo ci)
     {
+        //TODO: take time when using the estrogen
+
         VillagerEntity villager = (VillagerEntity)(Object)this;
         SimpleInventory inventory = villager.getInventory();
         int size = inventory.size();
@@ -50,9 +50,13 @@ public class VillagerPickupMixin {
         //consume an estrogen if possible, and increase the estrogen number
         if(estro_slot < size)
         {
+            //this small bit works... sure.
             stack.decrement(1);
             inventory.setStack(estro_slot, stack);
             VillagerAttachments.addProgress(villager, 1); //TODO: different amounts for different estrogens
+
+            //happy particles!
+            villager.getWorld().sendEntityStatus(villager, EntityStatuses.ADD_VILLAGER_HAPPY_PARTICLES);
         }
-    }*/
+    }
 }
