@@ -7,7 +7,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import com.breakingfemme.BreakingFemme;
 import com.breakingfemme.VillagerAttachments;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -59,7 +58,6 @@ public class VillagerPickupMixin {
         }
 
         //consume an estrogen if possible, and increase the estrogen number
-        BreakingFemme.LOGGER.info("estro_slot " + estro_slot);
         if(estro_slot > -1)
         {
             ItemStack stack = inventory.getStack(estro_slot);

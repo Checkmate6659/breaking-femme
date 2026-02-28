@@ -10,8 +10,8 @@ import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 
 public class VillagerAttachments {
-    public static final AttachmentType<Boolean> IS_TRANSFEM = AttachmentRegistry.createPersistent( //is villager transfem
-        Identifier.of(BreakingFemme.MOD_ID, "is_transfem"), Codec.BOOL);
+    public static final AttachmentType<Integer> IS_TRANSFEM = AttachmentRegistry.createPersistent( //is villager transfem? (should be a boolean but that gets forgotten, so we do this instead)
+        Identifier.of(BreakingFemme.MOD_ID, "is_transfem"), Codec.intRange(0, 255));
     
     //TODO: add villagers that turn into the agents from the matrix and try to kill you
  
@@ -41,7 +41,7 @@ public class VillagerAttachments {
 	{
         //need to set when queried, otherwise it would be a different random pick afterwards!
         //also, the transfem-ness status of a villager isnt changeable after being set like this
-		return villager.getAttachedOrSet(IS_TRANSFEM, villager.getWorld().getRandom().nextBoolean());
+		return villager.getAttachedOrSet(IS_TRANSFEM, villager.getWorld().getRandom().nextInt(256)) < 254; //this adjusts the probability of being transfem
 	}
 
     public static int getTransitionTime(VillagerEntity villager)
