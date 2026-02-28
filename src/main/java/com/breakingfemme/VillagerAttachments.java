@@ -10,7 +10,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 
 public class VillagerAttachments {
-    public static final AttachmentType<Boolean> IS_TRANSFEM = AttachmentRegistry.createPersistent( //basically like number of doses of estrogen
+    public static final AttachmentType<Boolean> IS_TRANSFEM = AttachmentRegistry.createPersistent( //is villager transfem
         Identifier.of(BreakingFemme.MOD_ID, "is_transfem"), Codec.BOOL);
     
     //TODO: add villagers that turn into the agents from the matrix and try to kill you
