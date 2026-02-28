@@ -18,8 +18,8 @@ public class VillagerAttachments {
     public static final int MAX_ESTRO_PROGRESS = 4095; //this really is the amount of time the villager needs to transition
     public static final AttachmentType<Integer> ESTRO_PROGRESS = AttachmentRegistry.createPersistent( //basically like number of doses of estrogen
         Identifier.of(BreakingFemme.MOD_ID, "estro_progress"), Codec.intRange(0, MAX_ESTRO_PROGRESS));
-    public static final AttachmentType<Integer> ESTRO_NEED_AGE = AttachmentRegistry.createPersistent( //time before needing estrogen again
-        Identifier.of(BreakingFemme.MOD_ID, "estro_progress"), Codec.INT);
+    public static final AttachmentType<Integer> ESTRO_NEED_AGE = AttachmentRegistry.createPersistent( //age when needing estrogen again
+        Identifier.of(BreakingFemme.MOD_ID, "estro_need_age"), Codec.intRange(0, Integer.MAX_VALUE));
 
     //check if an item is an estrogen (for villagers)
     public static boolean isEstrogen(Item item)
