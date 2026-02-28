@@ -28,11 +28,22 @@ public class VillagerAttachments {
         return item.equals(ModItems.PURE_ESTRADIOL_POWDER);
     }
 
+    //time of activity of an estrogen
     public static int estrogenTime(Item item)
     {
         //TODO: change! mb move to another method
         if(item.equals(ModItems.PURE_ESTRADIOL_POWDER))
             return 100; //just 5 seconds; TODO: change!! and add more different estrogens!
+
+        return 0;
+    }
+
+    //get value of an estrogen item in emeralds
+    public static int getValue(Item item)
+    {
+        //TODO: change! mb move to another method
+        if(item.equals(ModItems.PURE_ESTRADIOL_POWDER))
+            return 1;
 
         return 0;
     }
