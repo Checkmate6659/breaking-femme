@@ -5,7 +5,8 @@
 	"mixins": [
 		"CustomFluidTagsMixin",
 		"KineticsMixin",
-		"MetalPipeClangMixin"
+		"MetalPipeClangMixin",
+		"VillagerPickupMixin"
 	],
 	"client": [
 		"AdvancementTabMixin",
