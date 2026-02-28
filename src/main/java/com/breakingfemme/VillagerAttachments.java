@@ -15,7 +15,7 @@ public class VillagerAttachments {
     
     //TODO: add villagers that turn into the agents from the matrix and try to kill you
  
-    public static final int MAX_ESTRO_PROGRESS = 4095; //this really is the amount of time the villager needs to transition
+    public static final int MAX_ESTRO_PROGRESS = 288000; //this really is the amount of time the villager needs to transition: about 3h 40min irl
     public static final AttachmentType<Integer> ESTRO_PROGRESS = AttachmentRegistry.createPersistent( //basically like number of doses of estrogen
         Identifier.of(BreakingFemme.MOD_ID, "estro_progress"), Codec.intRange(0, MAX_ESTRO_PROGRESS));
     public static final AttachmentType<Integer> ESTRO_NEED_AGE = AttachmentRegistry.createPersistent( //age when needing estrogen again
