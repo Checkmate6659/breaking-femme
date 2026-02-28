@@ -7,6 +7,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import com.breakingfemme.BreakingFemme;
 import com.breakingfemme.VillagerAttachments;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -40,19 +41,28 @@ public class VillagerPickupMixin {
         SimpleInventory inventory = villager.getInventory();
         int size = inventory.size();
 
-        int estro_slot; //if this is equal to size at the end, we did not find any estrogen
-        ItemStack stack = inventory.getStack(0); //because java says this isnt initialized if i dont initialize it here. wtf java just let me do stuff that i know is right but you dont.
+        int estro_slot = -1; //if this is equal to -1 at the end, we did not find any estrogen in the inventory
+        int best_score = Integer.MAX_VALUE; //lowest score is better
         //TODO: smarter slot picking: consume from stack that is shortest to consume entirely => free up space asap
-        for(estro_slot = 0; estro_slot < size; estro_slot++)
+        for(int i = 0; i < size; i++)
         {
-            stack = inventory.getStack(estro_slot);
-            if(VillagerAttachments.isEstrogen(stack.getItem())) //we found a slot!
-                break;
+            ItemStack cur_stack = inventory.getStack(i);
+            if(VillagerAttachments.isEstrogen(cur_stack.getItem())) //we found a slot with estrogen inside
+            {
+                int score = cur_stack.getCount() * VillagerAttachments.estrogenTime(cur_stack.getItem());
+                if(score <= best_score)
+                {
+                    best_score = score;
+                    estro_slot = i;
+                }
+            }
         }
 
         //consume an estrogen if possible, and increase the estrogen number
-        if(estro_slot < size)
+        BreakingFemme.LOGGER.info("estro_slot " + estro_slot);
+        if(estro_slot > -1)
         {
+            ItemStack stack = inventory.getStack(estro_slot);
             int estro_time = VillagerAttachments.estrogenTime(stack.getItem());
             stack.decrement(1);
             inventory.setStack(estro_slot, stack);
