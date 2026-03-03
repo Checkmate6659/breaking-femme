@@ -22,6 +22,12 @@ public class VillagerAttachments {
     public static final AttachmentType<Long> ESTRO_NEED_TIME = AttachmentRegistry.createPersistent( //age when needing estrogen again
         Identifier.of(BreakingFemme.MOD_ID, "estro_need_time"), Codec.LONG);
 
+    //if i dont do this, attachments wont exist before a villager gets ticked, i.e. during deserialization of the world
+    public static void registerAttachments()
+    {
+        //
+    }
+    
     //check if an item is an estrogen (for villagers)
     public static boolean isEstrogen(Item item)
     {

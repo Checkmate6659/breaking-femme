@@ -69,6 +69,7 @@ public class BreakingFemme implements ModInitializer {
 		ModRecipes.registerRecipes();
 		ModSounds.registerSounds();
 		KineticsAttachments.registerAttachments();
+		VillagerAttachments.registerAttachments();
 		ModNetworking.registerC2SPackets();
 		ModNetworking.registerS2CPackets();
 
