@@ -7,6 +7,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import com.breakingfemme.BreakingFemme;
 import com.breakingfemme.VillagerAttachments;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -19,7 +20,10 @@ import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.particle.ParticleType;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
@@ -109,7 +113,11 @@ public class VillagerPickupMixin {
             world.spawnEntity(pile);
 
             //happy particles!
-            villager.getWorld().sendEntityStatus(villager, EntityStatuses.ADD_VILLAGER_HAPPY_PARTICLES);
+            //world.sendEntityStatus(villager, EntityStatuses.ADD_VILLAGER_HAPPY_PARTICLES);
+            ServerWorld sworld = (ServerWorld)world;
+            sworld.spawnParticles(BreakingFemme.COLON_THREE_PARTICLE, villager.getX(), villager.getEyeY(), villager.getZ(), 5, 0.5, 0.5, 0.5, 0);
+
+            //advancement: TODO: distract_piglin in VanillaNetherTabAdvancementGenerator
         }
     }
 

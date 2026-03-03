@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
+import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.Enchantments;
@@ -20,6 +21,9 @@ import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.function.ApplyBonusLootFunction;
 import net.minecraft.loot.function.SetCountLootFunction;
 import net.minecraft.loot.provider.number.BinomialLootNumberProvider;
+import net.minecraft.particle.DefaultParticleType;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.state.property.Properties;
@@ -49,9 +53,16 @@ public class BreakingFemme implements ModInitializer {
 
 	//register nickel ore generation
 	public static final RegistryKey<PlacedFeature> NICKEL_ORE_PLACED_FEATURE = RegistryKey.of(RegistryKeys.PLACED_FEATURE, Identifier.of(MOD_ID, "ore_nickel"));
-	
+
+	//register damage types
 	public static final RegistryKey<DamageType> NOVIKOV = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, new Identifier(BreakingFemme.MOD_ID, "novikov"));
 	public static final RegistryKey<DamageType> DISTRACTION = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, new Identifier(BreakingFemme.MOD_ID, "distraction"));
+
+	//register particles
+	// This DefaultParticleType gets called when you want to use your particle in code.
+	public static final DefaultParticleType COLON_THREE_PARTICLE = FabricParticleTypes.simple();
+
+	// Register our custom particle type in the mod initializer.
 
 	@Override
 	public void onInitialize() {
@@ -75,6 +86,9 @@ public class BreakingFemme implements ModInitializer {
 
 		//Register kinetics command (shows levels of different chemicals in the player)
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> KineticsCommand.register(dispatcher));
+
+		//Register :3 particle
+		Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MOD_ID, "colon_three_particle"), COLON_THREE_PARTICLE);
 
 		//Farmers sell soybeans at level 3 (yes... they won't sell it to people they won't trust! it's their only known source of HRT)
 		TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 3, factories -> {
