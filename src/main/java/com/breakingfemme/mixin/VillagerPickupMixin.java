@@ -107,6 +107,9 @@ public class VillagerPickupMixin {
             ItemEntity pile = new ItemEntity(world, villager.getX(), villager.getEyeY(), villager.getZ(),
                 cash, velocity.getX(), velocity.getY(), velocity.getZ());
             world.spawnEntity(pile);
+
+            //happy particles!
+            villager.getWorld().sendEntityStatus(villager, EntityStatuses.ADD_VILLAGER_HAPPY_PARTICLES);
         }
     }
 
@@ -146,9 +149,6 @@ public class VillagerPickupMixin {
             stack.decrement(1);
             inventory.setStack(estro_slot, stack);
             VillagerAttachments.giveEstrogenFor(villager, estro_time);
-
-            //happy particles! would need that in loot actually, but this is like for debugging
-            villager.getWorld().sendEntityStatus(villager, EntityStatuses.ADD_VILLAGER_HAPPY_PARTICLES);
         }
     }
 }
