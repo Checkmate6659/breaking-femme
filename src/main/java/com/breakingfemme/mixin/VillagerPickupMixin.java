@@ -83,11 +83,15 @@ public class VillagerPickupMixin {
     }
 
     //in loot method, using ItemEntity.getOwner(), give some cash to the player who dropped it... if a player did, and is close enough
-    //mb the closest player if theres a player close enough otherwise? idk.
+    //mb the closest player if theres a player close enough otherwise (max 8 blocks)
     @Inject(at = @At("HEAD"), method = "loot")
     private void breakingfemme$payForGirlPotion(ItemEntity itemEntity, CallbackInfo ci)
     {
+        VillagerEntity villager = (VillagerEntity)(Object)this;
         Entity dealer = itemEntity.getOwner();
+        if(!(dealer instanceof ServerPlayerEntity)) //try to find player if item not dropped by a player
+            dealer = villager.getWorld().getClosestPlayer(villager, 8); //just returns null if no player in range
+
         if (dealer instanceof ServerPlayerEntity) //if item got thrown by a player who is online at the moment
         {
             //compute amount of emeralds to pay
@@ -95,7 +99,6 @@ public class VillagerPickupMixin {
             int value = dope.getCount() * VillagerAttachments.getValue(dope.getItem());
 
             //compute emerald velocity
-            VillagerEntity villager = (VillagerEntity)(Object)this;
             Vec3d velocity = breakingfemme$computeVelocity(dealer.getPos().subtract(villager.getPos()));
 
             //actually pay
