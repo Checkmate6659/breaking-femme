@@ -27,7 +27,7 @@ public class VillagerAttachments {
     {
         //
     }
-    
+
     //check if an item is an estrogen (for villagers)
     public static boolean isEstrogen(Item item)
     {
@@ -61,7 +61,7 @@ public class VillagerAttachments {
         //also, the transfem-ness status of a villager isnt changeable after being set like this
         if(!villager.hasAttached(IS_TRANSFEM))
         {
-            boolean is_transfem = villager.getWorld().getRandom().nextInt(256) < 254; //this adjusts the probability of being transfem (TODO: set it to sth not absurdly high after it works)
+            boolean is_transfem = villager.getWorld().getRandom().nextInt(16) == 0; //this adjusts the probability of being transfem (TODO: set it to sth not absurdly high after it works)
             villager.setAttached(IS_TRANSFEM, is_transfem);
         }
 		return villager.getAttached(IS_TRANSFEM);
