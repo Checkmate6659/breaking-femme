@@ -269,7 +269,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
         
         Advancement coal_oil = Advancement.Builder.create().parent(coal_tar)
             .display(
-                    ModFluids.TAR_BUCKET,
+                    ModFluids.COAL_OIL_BUCKET,
                     Text.translatable("advancement.breakingfemme.oil.title"),
                     Text.translatable("advancement.breakingfemme.oil.description"),
                     null, // children to parent advancements don't need a background set
