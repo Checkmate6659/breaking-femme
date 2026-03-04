@@ -20,6 +20,8 @@ import net.minecraft.world.World;
 public class VillagerAttachments {
     public static final AttachmentType<Boolean> IS_TRANSFEM = AttachmentRegistry.createPersistent( //is villager transfem?
         Identifier.of(BreakingFemme.MOD_ID, "is_transfem"), Codec.BOOL);
+    public static final AttachmentType<Boolean> IS_NAMEFLUID = AttachmentRegistry.createPersistent( //is villager namefluid? (changes name every once in a while)
+        Identifier.of(BreakingFemme.MOD_ID, "is_namefluid"), Codec.BOOL);
     
     //TODO: add villagers that turn into the agents from the matrix and try to kill you
  
@@ -107,10 +109,22 @@ public class VillagerAttachments {
         //also, the transfem-ness status of a villager isnt changeable after being set like this
         if(!villager.hasAttached(IS_TRANSFEM))
         {
-            boolean is_transfem = villager.getWorld().getRandom().nextInt(16) == 0; //this adjusts the probability of being transfem (TODO: set it to sth not absurdly high after it works)
+            boolean is_transfem = villager.getWorld().getRandom().nextInt(16) == 0; //this adjusts the probability of being transfem
             villager.setAttached(IS_TRANSFEM, is_transfem);
         }
 		return villager.getAttached(IS_TRANSFEM);
+	}
+
+    public static boolean isNamefluid(VillagerEntity villager)
+	{
+        //need to set when queried, otherwise it would be a different random pick afterwards!
+        //also, the namefluid-ness status of a villager isnt changeable after being set like this
+        if(!villager.hasAttached(IS_NAMEFLUID))
+        {
+            boolean is_namefluid = isTransfem(villager) && villager.getWorld().getRandom().nextInt(64) == 0; //this adjusts the probability of being namefluid (among transfems) (so in total 1 in 1024 villagers are namefluid)
+            villager.setAttached(IS_NAMEFLUID, is_namefluid);
+        }
+		return villager.getAttached(IS_NAMEFLUID);
 	}
 
     public static boolean hasName(VillagerEntity villager)
@@ -129,6 +143,7 @@ public class VillagerAttachments {
 
     public static void setNameToChosen(VillagerEntity villager)
     {
+        //possibility: namefluid tag => very small probability of picking another name
         if(villager.hasAttached(NAME))
             villager.setCustomName(Text.literal(villager.getAttached(NAME)));
     }

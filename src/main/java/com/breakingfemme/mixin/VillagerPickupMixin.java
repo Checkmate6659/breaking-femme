@@ -22,6 +22,7 @@ import net.minecraft.item.Items;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 
 @Mixin(VillagerEntity.class)
@@ -150,8 +151,12 @@ public class VillagerPickupMixin {
     {
         VillagerEntity villager = (VillagerEntity)(Object)this;
 
-        //set the name to the right one after some time (not immediately tho, but still do)
-        if(villager.getRandom().nextInt(4096) == 0)
+        Random random = villager.getRandom();
+        //namefluid villagers change names on avg every 14.5 hours
+        if(VillagerAttachments.isNamefluid(villager) && random.nextInt(1048576) == 0)
+            VillagerAttachments.chooseName(villager);
+        //set the name to the right one after some time (not immediately tho, but still do, on avg after a few minutes)
+        else if(random.nextInt(4096) == 0)
             VillagerAttachments.setNameToChosen(villager);
 
         //take time when using the estrogen
