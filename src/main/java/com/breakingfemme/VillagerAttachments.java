@@ -1,5 +1,10 @@
 package com.breakingfemme;
 
+import java.io.BufferedReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.breakingfemme.item.ModItems;
 import com.mojang.serialization.Codec;
 
@@ -7,7 +12,7 @@ import net.fabricmc.fabric.api.attachment.v1.AttachmentRegistry;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentType;
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.item.Item;
-import net.minecraft.item.Items;
+import net.minecraft.resource.ResourceManager;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
@@ -26,10 +31,47 @@ public class VillagerAttachments {
     public static final AttachmentType<Long> ESTRO_NEED_TIME = AttachmentRegistry.createPersistent( //age when needing estrogen again
         Identifier.of(BreakingFemme.MOD_ID, "estro_need_time"), Codec.LONG);
 
+    static final Identifier NAMES_PATH = Identifier.of(BreakingFemme.MOD_ID, "names.txt"); //in assets folder
+    static ArrayList<String> NAMES;
+
     //if i dont do this, attachments wont exist before a villager gets ticked, i.e. during deserialization of the world
     public static void registerAttachments()
     {
         //
+    }
+
+    private static void loadNames(ResourceManager rm)
+    {
+        //if names already loaded, dont bother!
+        if(NAMES != null)
+            return;
+
+        //load names
+        try {
+            BufferedReader reader = rm.openAsReader(NAMES_PATH);
+
+            try {
+                NAMES = (ArrayList<String>)reader.lines().collect(Collectors.toList());
+            } catch (Throwable error) {
+                if (reader != null) {
+                    try {
+                        reader.close();
+                    } catch (Throwable error_while_closing) {
+                        error.addSuppressed(error_while_closing);
+                    }
+                }
+
+                throw error;
+            }
+
+            if (reader != null) {
+                reader.close();
+            }
+        } catch (Throwable error) {
+            error.printStackTrace();
+            BreakingFemme.LOGGER.error("ERROR: was unable to load data file " + NAMES_PATH.toString());
+            NAMES = (ArrayList<String>)List.of("NO AVAILABLE NAMES");
+        }
     }
 
     //check if an item is an estrogen (for villagers)
@@ -78,7 +120,9 @@ public class VillagerAttachments {
 
     public static void chooseName(VillagerEntity villager)
     {
-        String name = ":3"; //this is temporary! TODO: pick random name from list
+        loadNames(villager.getServer().getResourceManager()); //if names not already loaded, load them
+
+        String name = NAMES.get(villager.getRandom().nextInt(NAMES.size())); //this is temporary! TODO: pick random name from list
         villager.setAttached(NAME, name);
         villager.setCustomName(Text.literal(name));
     }

@@ -62,8 +62,6 @@ public class BreakingFemme implements ModInitializer {
 	// This DefaultParticleType gets called when you want to use your particle in code.
 	public static final DefaultParticleType COLON_THREE_PARTICLE = FabricParticleTypes.simple();
 
-	// Register our custom particle type in the mod initializer.
-
 	@Override
 	public void onInitialize() {
 		// This code runs as soon as Minecraft is in a mod-load-ready state.
