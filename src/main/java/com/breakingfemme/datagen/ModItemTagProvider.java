@@ -13,6 +13,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper.WrapperLookup;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 
@@ -51,6 +52,7 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
 
     @Override
     protected void configure(WrapperLookup arg) {
+        getOrCreateTagBuilder(ItemTags.MUSIC_DISCS).add(ModItems.ACT_RIGHT_MUSIC_DISC);
         getOrCreateTagBuilder(METAL_PIPE).add(ModItems.NICKEL_PIPE);
         getOrCreateTagBuilder(STONES).add(Blocks.STONE.asItem());
         getOrCreateTagBuilder(STONES).add(Blocks.DEEPSLATE.asItem());

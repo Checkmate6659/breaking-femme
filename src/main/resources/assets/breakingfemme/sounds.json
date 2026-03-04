@@ -10,5 +10,13 @@
   "metal_pipe": {
     "subtitle": "sound.breakingfemme.metal_pipe",
     "sounds": ["breakingfemme:metal_pipe"]
+  },
+  "act_right": {
+    "sounds": [
+      {
+        "name": "breakingfemme:act_right",
+        "stream": true
+      }
+    ]
   }
 }
