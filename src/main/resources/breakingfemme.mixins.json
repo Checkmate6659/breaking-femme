@@ -6,6 +6,7 @@
 		"CustomFluidTagsMixin",
 		"KineticsMixin",
 		"MetalPipeClangMixin",
+		"VillagerAssignMixin",
 		"VillagerPickupMixin"
 	],
 	"client": [
