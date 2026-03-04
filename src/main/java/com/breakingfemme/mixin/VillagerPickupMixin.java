@@ -29,7 +29,7 @@ public class VillagerPickupMixin {
     @WrapOperation(at = @At(value = "INVOKE:FIRST", target = "contains"), method = "canGather")
 	private boolean breakingfemme$canGrabGirlPotion(Set<Item> set, Object item, Operation<Boolean> operation) {
         VillagerEntity villager = (VillagerEntity)(Object)this;
-        return (VillagerAttachments.isTransfem(villager) && VillagerAttachments.isEstrogen((Item)item))
+        return (VillagerAttachments.isTransfem(villager) && (VillagerAttachments.isEstrogen((Item)item)))
             || operation.call(set, item);
     }
 
@@ -88,6 +88,10 @@ public class VillagerPickupMixin {
     @Inject(at = @At("HEAD"), method = "loot")
     private void breakingfemme$payForGirlPotion(ItemEntity itemEntity, CallbackInfo ci)
     {
+        //this code only applies to estrogens! (lol)
+        if(!VillagerAttachments.isEstrogen(itemEntity.getStack().getItem()))
+            return;
+
         VillagerEntity villager = (VillagerEntity)(Object)this;
         Entity dealer = itemEntity.getOwner();
         if(!(dealer instanceof ServerPlayerEntity)) //try to find player if item not dropped by a player
