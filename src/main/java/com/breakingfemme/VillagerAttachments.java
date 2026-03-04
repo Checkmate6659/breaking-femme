@@ -7,15 +7,19 @@ import net.fabricmc.fabric.api.attachment.v1.AttachmentRegistry;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentType;
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 
 public class VillagerAttachments {
-    public static final AttachmentType<Boolean> IS_TRANSFEM = AttachmentRegistry.createPersistent( //is villager transfem? (should be a boolean but that gets forgotten, so we do this instead)
+    public static final AttachmentType<Boolean> IS_TRANSFEM = AttachmentRegistry.createPersistent( //is villager transfem?
         Identifier.of(BreakingFemme.MOD_ID, "is_transfem"), Codec.BOOL);
     
     //TODO: add villagers that turn into the agents from the matrix and try to kill you
  
+    public static final AttachmentType<String> NAME = AttachmentRegistry.createPersistent( //custom name of the villager (if it doesnt exist, it doesnt have one)
+        Identifier.of(BreakingFemme.MOD_ID, "name"), Codec.STRING);
     public static final int MAX_ESTRO_PROGRESS = 288000; //this really is the amount of time the villager needs to transition: about 3h 40min irl
     public static final AttachmentType<Integer> ESTRO_PROGRESS = AttachmentRegistry.createPersistent( //basically like number of doses of estrogen
         Identifier.of(BreakingFemme.MOD_ID, "estro_progress"), Codec.intRange(0, MAX_ESTRO_PROGRESS));
@@ -66,6 +70,24 @@ public class VillagerAttachments {
         }
 		return villager.getAttached(IS_TRANSFEM);
 	}
+
+    public static boolean hasName(VillagerEntity villager)
+    {
+        return villager.hasAttached(NAME);
+    }
+
+    public static void chooseName(VillagerEntity villager)
+    {
+        String name = ":3"; //this is temporary! TODO: pick random name from list
+        villager.setAttached(NAME, name);
+        villager.setCustomName(Text.literal(name));
+    }
+
+    public static void setNameToChosen(VillagerEntity villager)
+    {
+        if(villager.hasAttached(NAME))
+            villager.setCustomName(Text.literal(villager.getAttached(NAME)));
+    }
 
     public static int getTransitionTime(VillagerEntity villager)
     {

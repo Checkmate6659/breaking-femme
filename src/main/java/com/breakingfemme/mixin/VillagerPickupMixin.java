@@ -27,9 +27,9 @@ import net.minecraft.world.World;
 @Mixin(VillagerEntity.class)
 public class VillagerPickupMixin {
     @WrapOperation(at = @At(value = "INVOKE:FIRST", target = "contains"), method = "canGather")
-	private boolean breakingfemme$canGrabGirlPotion(Set<Item> set, Object item, Operation<Boolean> operation) {
+	private boolean breakingfemme$canGrabGirlPotionOrNameTag(Set<Item> set, Object item, Operation<Boolean> operation) {
         VillagerEntity villager = (VillagerEntity)(Object)this;
-        return (VillagerAttachments.isTransfem(villager) && (VillagerAttachments.isEstrogen((Item)item)))
+        return (VillagerAttachments.isTransfem(villager) && (VillagerAttachments.isEstrogen((Item)item) || (!VillagerAttachments.hasName(villager) && Items.NAME_TAG.equals((Item)item))))
             || operation.call(set, item);
     }
 
@@ -85,33 +85,34 @@ public class VillagerPickupMixin {
 
     //in loot method, using ItemEntity.getOwner(), give some cash to the player who dropped it... if a player did, and is close enough
     //mb the closest player if theres a player close enough otherwise (max 8 blocks)
-    @Inject(at = @At("HEAD"), method = "loot")
-    private void breakingfemme$payForGirlPotion(ItemEntity itemEntity, CallbackInfo ci)
+    @Inject(at = @At("HEAD"), method = "loot", cancellable = true)
+    private void breakingfemme$payForGirlPotionOrNameTag(ItemEntity itemEntity, CallbackInfo ci)
     {
         //this code only applies to estrogens! (lol)
-        if(!VillagerAttachments.isEstrogen(itemEntity.getStack().getItem()))
+        ItemStack stack = itemEntity.getStack();
+        if(!(VillagerAttachments.isEstrogen(itemEntity.getStack().getItem()) || Items.NAME_TAG.equals(stack.getItem())))
             return;
 
         VillagerEntity villager = (VillagerEntity)(Object)this;
-        Entity dealer = itemEntity.getOwner();
-        if(!(dealer instanceof ServerPlayerEntity)) //try to find player if item not dropped by a player
-            dealer = villager.getWorld().getClosestPlayer(villager, 8); //just returns null if no player in range
+        Entity owner = itemEntity.getOwner();
+        if(!(owner instanceof ServerPlayerEntity)) //try to find player if item not dropped by a player
+            owner = villager.getWorld().getClosestPlayer(villager, 8); //just returns null if no player in range
 
-        if (dealer instanceof ServerPlayerEntity) //if item got thrown by a player who is online at the moment
+        if (owner instanceof ServerPlayerEntity) //if item got thrown by a player who is online at the moment
         {
             //compute amount of emeralds to pay
-            ItemStack dope = itemEntity.getStack();
-            int value = dope.getCount() * VillagerAttachments.getValue(dope.getItem());
+            int value = stack.getCount() * VillagerAttachments.getValue(stack.getItem());
+            if(stack.isOf(Items.NAME_TAG)) value = 4; //1 name tag -> 4 emeralds
 
             //compute emerald velocity
-            Vec3d velocity = breakingfemme$computeVelocity(dealer.getPos().subtract(villager.getPos()));
+            Vec3d velocity = breakingfemme$computeVelocity(owner.getPos().subtract(villager.getPos()));
 
             //actually pay
             World world = villager.getWorld();
-            ItemStack cash = new ItemStack(Items.EMERALD, value);
-            ItemEntity pile = new ItemEntity(world, villager.getX(), villager.getEyeY(), villager.getZ(),
-                cash, velocity.getX(), velocity.getY(), velocity.getZ());
-            world.spawnEntity(pile);
+            ItemStack payment = new ItemStack(Items.EMERALD, value);
+            ItemEntity payment_entity = new ItemEntity(world, villager.getX(), villager.getEyeY(), villager.getZ(),
+                payment, velocity.getX(), velocity.getY(), velocity.getZ());
+            world.spawnEntity(payment_entity);
 
             //happy particles!
             //world.sendEntityStatus(villager, EntityStatuses.ADD_VILLAGER_HAPPY_PARTICLES);
@@ -120,13 +121,40 @@ public class VillagerPickupMixin {
 
             //advancement: TODO: distract_piglin in VanillaNetherTabAdvancementGenerator
         }
+
+        //choose a name if picked up a name tag
+        if(stack.isOf(Items.NAME_TAG))
+        {
+            VillagerAttachments.chooseName(villager);
+            //TODO: make it so that if you try to rename her afterwards she wont let you + you anger the village
+            //doable with setAttacker => starts gossip; could also do that AND start gossip directly (major negative)
+            //instead of setAttacker we could also just do sayNo() with accessor (or copy it over without accessor) and decrease rep
+            //its fucking impossible to play a sound from the server tho... like wtf
+            //need to send a packet like PlaySoundCommand
+
+            //now dont actually pick up the item, just look like you did
+            villager.sendPickup(itemEntity, 1); //we just need 1 tag
+            if(stack.getCount() == 1) //there was only 1
+                itemEntity.discard();
+            else //only pickup 1 of them
+            {
+                stack.decrement(1);
+                itemEntity.setStack(stack);
+            }
+            ci.cancel(); //dont keep going to normal pickup (that goes to inventory etc)
+        }
     }
 
     @Inject(at = @At("HEAD"), method = "mobTick")
-    private void breakingfemme$useGirlPotion(CallbackInfo ci)
+    private void breakingfemme$useGirlPotionAndUpdateName(CallbackInfo ci)
     {
-        //take time when using the estrogen
         VillagerEntity villager = (VillagerEntity)(Object)this;
+
+        //set the name to the right one after some time (not immediately tho, but still do)
+        if(villager.getRandom().nextInt(4096) == 0)
+            VillagerAttachments.setNameToChosen(villager);
+
+        //take time when using the estrogen
         if(!VillagerAttachments.needsEstrogen(villager))
             return;
 
