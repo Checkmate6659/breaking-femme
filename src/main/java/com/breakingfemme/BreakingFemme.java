@@ -57,6 +57,7 @@ public class BreakingFemme implements ModInitializer {
 	//register damage types
 	public static final RegistryKey<DamageType> NOVIKOV = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, new Identifier(BreakingFemme.MOD_ID, "novikov"));
 	public static final RegistryKey<DamageType> DISTRACTION = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, new Identifier(BreakingFemme.MOD_ID, "distraction"));
+	public static final RegistryKey<DamageType> HEADACHE = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, new Identifier(BreakingFemme.MOD_ID, "headache"));
 
 	//register particles
 	// This DefaultParticleType gets called when you want to use your particle in code.
