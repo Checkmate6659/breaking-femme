@@ -34,7 +34,6 @@ public class BreakingFemmeClient implements ClientModInitializer {
         //example repo: https://github.com/CelDaemon/post-process-example/blob/main/src/client/java/net/voidgroup/postProcessExample/client/PostProcessExampleClient.java
         //its on mojmaps tho, im on yarn
         //PostChain -> PostEffectProcessor
-        //TODO: effect shaders HERE instead of mixin
         final var client = new MutableObject<MinecraftClient>();
         final var postprocessor = new MutableObject<PostEffectProcessor>();
         ClientLifecycleEvents.CLIENT_STARTED.register(cl -> {
