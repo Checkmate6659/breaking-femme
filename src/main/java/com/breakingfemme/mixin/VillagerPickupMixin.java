@@ -101,14 +101,31 @@ public class VillagerPickupMixin {
 
         if (owner instanceof ServerPlayerEntity) //if item got thrown by a player who is online at the moment
         {
-            //compute amount of emeralds to pay
-            int value = stack.getCount() * VillagerAttachments.getValue(stack.getItem());
-            if(stack.isOf(Items.NAME_TAG)) value = 4; //1 name tag -> 4 emeralds
+            //compute amount of emeralds to pay: check how many items can be inserted
+            int value = 4; //number of insertable stacks
+            if(!stack.isOf(Items.NAME_TAG)) value = 4; //1 name tag -> 4 emeralds
+            {
+                Item item = stack.getItem();
+                int init_count = stack.getCount();
+                SimpleInventory inv = villager.getInventory();
+                for(int i = 0; i < inv.size() && !stack.isEmpty(); i++)
+                {
+                    if(ItemStack.canCombine(inv.getStack(i), stack))
+                    {
+                        stack.decrement(64 - inv.getStack(i).getCount());
+                    }
+                }
+
+                value = init_count - stack.getCount();
+                if(value > init_count) value = init_count; //stack count CAN be negative!!! so need to bound manually
+                value *= VillagerAttachments.getValue(item); //value of a single item * number of items picked up
+            }
 
             //compute emerald velocity
             Vec3d velocity = breakingfemme$computeVelocity(owner.getPos().subtract(villager.getPos()));
 
             //actually pay
+            //TODO: send more than one stack of emeralds for estrogens that cost more than 1 emerald
             World world = villager.getWorld();
             ItemStack payment = new ItemStack(Items.EMERALD, value);
             ItemEntity payment_entity = new ItemEntity(world, villager.getX(), villager.getEyeY(), villager.getZ(),
