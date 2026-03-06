@@ -65,6 +65,10 @@ public class ModItems {
     public static final Item TAR = registerItem("tar", new Item(new FabricItemSettings()));
     public static final Item NICKEL_PIPE = registerItem("nickel_pipe", new MetalPipeItem(new FabricItemSettings()));
 
+    public static final Item COAL_OIL_BOTTLE = registerItem("coal_oil_bottle", new Item(new FabricItemSettings().maxCount(1).recipeRemainder(Items.GLASS_BOTTLE)));
+    public static final Item ANDROSTADIENEDIONE_BOTTLE = registerItem("androstadienedione_solution_bottle", new Item(new FabricItemSettings().maxCount(1).recipeRemainder(Items.GLASS_BOTTLE)));
+    public static final Item ANDROSTADIENEDIONE_OIL_BOTTLE = registerItem("androstadienedione_oil_solution_bottle", new Item(new FabricItemSettings().maxCount(1).recipeRemainder(Items.GLASS_BOTTLE)));
+
     public static final Item STEROLS = registerItem("sterols", new Item(new FabricItemSettings()));
     public static final Item CRUDE_ESTRONE = registerItem("crude_estrone", new Item(new FabricItemSettings()));
     public static final Item PURE_ESTRONE = registerItem("pure_estrone", new Item(new FabricItemSettings()));
@@ -118,8 +122,11 @@ public class ModItems {
             entries.add(CREAMGOT_MOLD);
             entries.add(CREAMGOT);
             entries.add(ModFluids.COAL_OIL_BUCKET);
+            entries.add(COAL_OIL_BOTTLE);
             entries.add(ModFluids.ANDROSTADIENEDIONE_BUCKET);
+            entries.add(ANDROSTADIENEDIONE_BOTTLE);
             entries.add(ModFluids.ANDROSTADIENEDIONE_OIL_SOLUTION_BUCKET);
+            entries.add(ANDROSTADIENEDIONE_OIL_BOTTLE);
             entries.add(CRUDE_ESTRONE);
             entries.add(PURE_ESTRONE);
             entries.add(PURE_ESTRADIOL_CRYSTALS);
