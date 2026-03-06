@@ -3,28 +3,41 @@ package com.breakingfemme.cauldron;
 import java.util.Map;
 
 import com.breakingfemme.fluid.ModFluids;
+import com.breakingfemme.item.ModItems;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.AbstractCauldronBlock;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
+import net.minecraft.block.LeveledCauldronBlock;
 import net.minecraft.block.cauldron.CauldronBehavior;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemUsage;
 import net.minecraft.item.Items;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.stat.Stats;
+import net.minecraft.state.StateManager;
+import net.minecraft.state.property.IntProperty;
+import net.minecraft.state.property.Properties;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
-import net.minecraft.world.event.GameEvent.Emitter;
 
 public class CoalOilCauldronBlock extends AbstractCauldronBlock {
+    public static final int MIN_LEVEL = 1;
+    public static final int MAX_LEVEL = 3;
+    public static final IntProperty LEVEL = Properties.LEVEL_3;
+
     //custom cauldron behavior
     public static Map<Item, CauldronBehavior> BEHAVIOR = CauldronBehavior.createMap();
     static {
         CauldronBehavior FILL = (state, world, pos, player, hand, stack) -> {
-            return CauldronBehavior.fillCauldron(world, pos, player, hand, stack, ModFluids.COAL_OIL_CAULDRON.getDefaultState(), SoundEvents.ITEM_BUCKET_EMPTY);
+            return CauldronBehavior.fillCauldron(world, pos, player, hand, stack, ModFluids.COAL_OIL_CAULDRON.getDefaultState().with(LEVEL, 3), SoundEvents.ITEM_BUCKET_EMPTY);
         };
 
         //vanilla fluids
@@ -37,27 +50,80 @@ public class CoalOilCauldronBlock extends AbstractCauldronBlock {
                 return true;
             }, SoundEvents.ITEM_BUCKET_FILL);
         });
+
+        //scoop up bottle
+        BEHAVIOR.put(Items.GLASS_BOTTLE, (state, world, pos, player, hand, stack) -> {
+            if (!world.isClient) {
+                Item item = stack.getItem();
+                player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, new ItemStack(ModItems.COAL_OIL_BOTTLE)));
+                player.incrementStat(Stats.USE_CAULDRON);
+                player.incrementStat(Stats.USED.getOrCreateStat(item));
+                decrementFluidLevel(state, world, pos);
+                world.playSound((PlayerEntity)null, pos, SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                world.emitGameEvent((Entity)null, GameEvent.FLUID_PICKUP, pos);
+            }
+            return ActionResult.SUCCESS;
+        });
+
+        //add bottle to empty cauldron
+        CauldronBehavior.EMPTY_CAULDRON_BEHAVIOR.put(ModItems.COAL_OIL_BOTTLE, (state, world, pos, player, hand, stack) -> {
+            if (!world.isClient) {
+                Item item = stack.getItem();
+                player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, new ItemStack(Items.GLASS_BOTTLE)));
+                player.incrementStat(Stats.USE_CAULDRON);
+                player.incrementStat(Stats.USED.getOrCreateStat(item));
+                world.setBlockState(pos, ModFluids.COAL_OIL_CAULDRON.getDefaultState());
+                world.playSound((PlayerEntity)null, pos, SoundEvents.ITEM_BOTTLE_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                world.emitGameEvent((Entity)null, GameEvent.FLUID_PLACE, pos);
+            }
+            return ActionResult.success(world.isClient);
+        });
+
+        //add bottle to partially full cauldron
+        BEHAVIOR.put(ModItems.COAL_OIL_BOTTLE, (state, world, pos, player, hand, stack) -> {
+            if (state.get(LEVEL) == 3) {
+                return ActionResult.PASS;
+            } else if (!world.isClient) {
+                Item item = stack.getItem();
+                player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, new ItemStack(Items.GLASS_BOTTLE)));
+                player.incrementStat(Stats.USE_CAULDRON);
+                player.incrementStat(Stats.USED.getOrCreateStat(item));
+                world.setBlockState(pos, (BlockState)state.cycle(LEVEL));
+                world.playSound((PlayerEntity)null, pos, SoundEvents.ITEM_BOTTLE_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                world.emitGameEvent((Entity)null, GameEvent.FLUID_PLACE, pos);
+            }
+            return ActionResult.success(world.isClient);
+        });
     }
 
     public CoalOilCauldronBlock(AbstractBlock.Settings settings) {
         super(settings, BEHAVIOR);
+        this.setDefaultState(this.stateManager.getDefaultState().with(LEVEL, 1));
+    }
+
+    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+        builder.add(LEVEL);
+    }
+
+    public boolean isFull(BlockState state) {
+        return (Integer)state.get(LEVEL) == 3;
+    }
+
+    public static void decrementFluidLevel(BlockState state, World world, BlockPos pos) {
+        LeveledCauldronBlock.decrementFluidLevel(state, world, pos);
     }
 
     protected double getFluidHeight(BlockState state) {
-        return 0.9375;
+        return (6.0 + (double)(Integer)state.get(LEVEL) * 3.0) / 16.0;
+    }
+
+    public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
+        return state.get(LEVEL);
     }
 
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         if (!world.isClient && entity.isOnFire() && this.isEntityTouchingFluid(state, pos, entity)) {
             entity.setOnFireFromLava(); //this stuff is FLAMMABLE!!
         }
-    }
-
-    public boolean isFull(BlockState state) {
-        return true;
-    }
-
-    public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
-        return 3;
     }
 }
