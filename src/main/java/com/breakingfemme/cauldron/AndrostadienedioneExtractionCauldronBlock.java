@@ -52,7 +52,7 @@ public class AndrostadienedioneExtractionCauldronBlock extends AbstractCauldronB
             }, SoundEvents.ITEM_BUCKET_FILL);
         });
 
-        //mix it around with a stick (TODO: use a tag!)
+        //mix it around with a stick (kind of an issue that we cant use a tag; i could have added tag containing stick, end rod, shovels and metal pipes)
         BEHAVIOR.put(Items.STICK, (state, world, pos, player, hand, stack) -> {
             if (!world.isClient) {
                 Item item = stack.getItem();
