@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "stirs=0": {
+      "model": "minecraft:block/water_cauldron_full"
+    },
+    "stirs=1": {
+      "model": "minecraft:block/water_cauldron_full"
+    },
+    "stirs=2": {
+      "model": "minecraft:block/water_cauldron_full"
+    },
+    "stirs=3": {
+      "model": "minecraft:block/water_cauldron_full"
+    }
+  }
+}

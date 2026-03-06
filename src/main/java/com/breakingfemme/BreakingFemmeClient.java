@@ -117,6 +117,13 @@ public class BreakingFemmeClient implements ClientModInitializer {
             return -1;
         }, ModFluids.REDOX_REACTION_CAULDRON);
 
+        //extractiong androstadienedione into oil (cauldron only)
+        ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
+            if (i == 0)
+                return 0xEEEEEE00; //same color as coal oil/solution in coal oil
+            return -1;
+        }, ModFluids.ANDROSTADIENEDIONE_EXTRACTION_CAULDRON);
+
         //yeast starter (cauldron only)
         ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
             if (i == 0)

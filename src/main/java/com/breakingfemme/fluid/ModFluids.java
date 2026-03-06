@@ -17,6 +17,7 @@ import com.breakingfemme.cauldron.MaceratingSoyCauldronBlock;
 import com.breakingfemme.cauldron.NickelSulfateCauldronBlock;
 import com.breakingfemme.cauldron.RedoxReactionCauldronBlock;
 import com.breakingfemme.cauldron.AndrostadienedioneCauldronBlock;
+import com.breakingfemme.cauldron.AndrostadienedioneExtractionCauldronBlock;
 import com.breakingfemme.cauldron.TarCauldronBlock;
 import com.breakingfemme.cauldron.YeastCauldronBlock;
 import com.breakingfemme.cauldron.YeastStarterCauldronBlock;
@@ -49,6 +50,7 @@ public class ModFluids {
     //Reaction cauldrons
     public static Block MACERATING_SOY_CAULDRON;
     public static Block REDOX_REACTION_CAULDRON;
+    public static Block ANDROSTADIENEDIONE_EXTRACTION_CAULDRON;
     public static Block YEAST_STARTER_CAULDRON;
     public static Block YEAST_CAULDRON;
 
@@ -273,6 +275,7 @@ public static void registerModFluids()
         //https://maven.fabricmc.net/docs/fabric-api-0.88.2+1.20.2/net/fabricmc/fabric/api/transfer/v1/fluid/CauldronFluidContent.html
         MACERATING_SOY_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "macerating_soy_cauldron"), new MaceratingSoyCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
         REDOX_REACTION_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "redox_reaction_cauldron"), new RedoxReactionCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
+        ANDROSTADIENEDIONE_EXTRACTION_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "androstadienedione_extraction_cauldron"), new AndrostadienedioneExtractionCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
         YEAST_STARTER_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "yeast_starter_cauldron"), new YeastStarterCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
         YEAST_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "yeast_cauldron"), new YeastCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
         //for the fluids that go in cauldrons, instead of cauldron alone

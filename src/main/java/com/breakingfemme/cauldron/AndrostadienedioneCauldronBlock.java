@@ -100,6 +100,22 @@ public class AndrostadienedioneCauldronBlock extends AbstractCauldronBlock {
             }
             return ActionResult.success(world.isClient);
         });
+
+        //extraction of androstadienedione into oil
+        BEHAVIOR.put(ModItems.COAL_OIL_BOTTLE, (state, world, pos, player, hand, stack) -> {
+            if (state.get(LEVEL) != 2) {
+                return ActionResult.PASS;
+            } else if (!world.isClient) {
+                Item item = stack.getItem();
+                player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, new ItemStack(Items.GLASS_BOTTLE)));
+                player.incrementStat(Stats.USE_CAULDRON);
+                player.incrementStat(Stats.USED.getOrCreateStat(item));
+                world.setBlockState(pos, ModFluids.ANDROSTADIENEDIONE_EXTRACTION_CAULDRON.getDefaultState());
+                world.playSound((PlayerEntity)null, pos, SoundEvents.ITEM_BOTTLE_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                world.emitGameEvent((Entity)null, GameEvent.FLUID_PLACE, pos);
+            }
+            return ActionResult.success(world.isClient);
+        });
     }
 
     public AndrostadienedioneCauldronBlock(AbstractBlock.Settings settings) {
