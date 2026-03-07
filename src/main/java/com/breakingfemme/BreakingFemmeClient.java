@@ -52,10 +52,9 @@ public class BreakingFemmeClient implements ClientModInitializer {
 
             //this is where we set our uniforms and shit
             float etoh = KineticsAttachments.getLevel(player, KineticsAttachments.ETHANOL);
+            List<PostEffectPass> passes = ((PostEffectPassAccessor)currentPostProcessor).breakingfemme$getPasses();
             if(etoh <= 1.25f || player.isSpectator()) //no visual effects: set all uniforms to 0
             {
-				List<PostEffectPass> passes = ((PostEffectPassAccessor)currentPostProcessor).breakingfemme$getPasses();
-
 				passes.get(0).getProgram().getUniformByNameOrDummy("EffectStrength").set(0f);
 				passes.get(0).getProgram().getUniformByNameOrDummy("Blindness").set(0f);
 				passes.get(1).getProgram().getUniformByNameOrDummy("BlurStrength").set(0f);
@@ -71,14 +70,15 @@ public class BreakingFemmeClient implements ClientModInitializer {
 				blinding *= blinding; //it is a more abrupt change; shouldnt really be noticeable at 2, but blacked out at 3
 				
 				//set uniforms
-				List<PostEffectPass> passes = ((PostEffectPassAccessor)currentPostProcessor).breakingfemme$getPasses();
-
 				passes.get(0).getProgram().getUniformByNameOrDummy("EffectStrength").set(0.05f * strength);
 				passes.get(0).getProgram().getUniformByNameOrDummy("Blindness").set(blinding);
 				passes.get(1).getProgram().getUniformByNameOrDummy("BlurStrength").set(16f * strength); //up to 16.0 (other to 32 or 64?)
 				passes.get(2).getProgram().getUniformByNameOrDummy("BlurStrength").set(24f * strength); //more horizontal blur => primitive diplopia emulation
             }
-            
+
+            //TEST
+            passes.get(3).getProgram().getUniformByNameOrDummy("EffectStrength").set((player.getWorld().getTime() % 200) * 0.005f); //cycle every 10 seconds
+
             currentPostProcessor.setupDimensions(mainFramebuffer.textureWidth, mainFramebuffer.textureHeight);
             currentPostProcessor.render(0);
             mainFramebuffer.beginWrite(true);

@@ -1,6 +1,6 @@
 {
     "targets": [
-        "swap", "swap2"
+        "swap"
     ],
     "passes": [
         {
@@ -21,7 +21,7 @@
         {
             "name": "breakingfemme_blur",
             "intarget": "swap",
-            "outtarget": "swap2",
+            "outtarget": "minecraft:main",
             "uniforms": [
                 {
                     "name": "Direction",
@@ -35,8 +35,8 @@
         },
         {
             "name": "breakingfemme_blur",
-            "intarget": "swap2",
-            "outtarget": "minecraft:main",
+            "intarget": "minecraft:main",
+            "outtarget": "swap",
             "uniforms": [
                 {
                     "name": "Direction",
@@ -45,6 +45,17 @@
                 {
                     "name": "BlurStrength",
                     "values": [ 0.0 ]
+                }
+            ]
+        },
+        {
+            "name": "breakingfemme_chaos",
+            "intarget": "swap",
+            "outtarget": "minecraft:main",
+            "uniforms": [
+                {
+                    "name": "EffectStrength",
+                    "values": [ 1.0 ]
                 }
             ]
         }
