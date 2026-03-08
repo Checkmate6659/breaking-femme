@@ -9,6 +9,7 @@ in vec2 oneTexel; //size of a single pixel in UV coordinates
 
 //TODO: figure out why Time and GameTime are NOT WORKING
 uniform float Timer; //from 0 to 1, modulo 2^16 ticks
+uniform float Saturation; //from -1 to 1, where -1 is completely black and white (C = 0) and 1 is completely saturated (C = 1)
 uniform float WarpStrength; //from 0 to 1
 uniform float GlitchStrength; //from 0 to 1
 
@@ -18,6 +19,67 @@ out vec4 fragColor;
 float getRandom(float t)
 {
     return fract(sin(t * 528.98) * 674.2069);
+}
+
+
+//OKLab implementation: https://bottosson.github.io/posts/oklab/
+float cbrt(float x)
+{
+    return pow(x, 1./3.);
+}
+
+vec3 linear_srgb_to_oklab(vec3 c) 
+{
+    float l = 0.4122214708 * c.r + 0.5363325363 * c.g + 0.0514459929 * c.b;
+	float m = 0.2119034982 * c.r + 0.6806995451 * c.g + 0.1073969566 * c.b;
+	float s = 0.0883024619 * c.r + 0.2817188376 * c.g + 0.6299787005 * c.b;
+
+    float l_ = cbrt(l);
+    float m_ = cbrt(m);
+    float s_ = cbrt(s);
+
+    return vec3(
+        0.2104542553*l_ + 0.7936177850*m_ - 0.0040720468*s_,
+        1.9779984951*l_ - 2.4285922050*m_ + 0.4505937099*s_,
+        0.0259040371*l_ + 0.7827717662*m_ - 0.8086757660*s_
+    );
+}
+
+vec3 oklab_to_linear_srgb(vec3 c) 
+{
+    float l_ = c.x + 0.3963377774 * c.y + 0.2158037573 * c.z;
+    float m_ = c.x - 0.1055613458 * c.y - 0.0638541728 * c.z;
+    float s_ = c.x - 0.0894841775 * c.y - 1.2914855480 * c.z;
+
+    float l = l_*l_*l_;
+    float m = m_*m_*m_;
+    float s = s_*s_*s_;
+
+    return vec3(
+		 4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s,
+		-1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s,
+		-0.0041960863 * l - 0.7034186147 * m + 1.7076147010 * s
+    );
+}
+
+//calculate saturation in OKLab coordinates
+vec3 saturate_lab(vec3 c)
+{
+    float old_chroma = length(c.yz);
+    float new_chroma = pow(old_chroma, exp(atanh(-Saturation)));
+    return vec3(c.x, c.yz * new_chroma / old_chroma);
+}
+
+vec3 saturate_rgb(vec3 c)
+{
+    c = linear_srgb_to_oklab(c);
+    c = saturate_lab(c);
+    return oklab_to_linear_srgb(c);
+}
+
+vec3 getSaturatedColorAt(vec2 pos)
+{
+    return saturate_rgb(texture(DiffuseSampler, pos).xyz);
 }
 
 
@@ -72,6 +134,8 @@ vec2 computeWarping(vec2 pos, float t, float chard, float warp)
     return pos * oneTexel * chard; //return to regular UV coordinates
 }
 
+
+
 //these 2 functions are for dithering
 float getBayesMask2(ivec2 coord)
 {
@@ -94,6 +158,8 @@ float getBayesMask4(ivec2 coord)
     return val / 16. + 1. / 32.;
 }
 
+
+
 void main() {
     vec2 coord = texCoord;
 
@@ -102,7 +168,7 @@ void main() {
 
     if(GlitchStrength == 0.0) //be able to disable glitch
     {
-        fragColor.xyz = texture(DiffuseSampler, coord).xyz;
+        fragColor.xyz = getSaturatedColorAt(coord);
     }
     else
     {
@@ -139,9 +205,9 @@ void main() {
         float i = (coord.y > getRandom(Timer - 1.0) * 4.0 / GlitchStrength) ? 3.0 : 0.0; //screen torn at random y level, more probability of there being a cut with higher strength, at most 1/4
         coord = vec2(coord.x * (1. + delta), coord.y); //do a tiny stretch
         vec3 col = vec3(
-            texture(DiffuseSampler, coord - vec2(getRandom(Timer + i - 5.0) * delta, 0.0)).x,
-            texture(DiffuseSampler, coord - vec2(getRandom(Timer + i - 6.0) * delta, 0.0)).y,
-            texture(DiffuseSampler, coord - vec2(getRandom(Timer + i - 7.0) * delta, 0.0)).z
+            getSaturatedColorAt(coord - vec2(getRandom(Timer + i - 5.0) * delta, 0.0)).x,
+            getSaturatedColorAt(coord - vec2(getRandom(Timer + i - 6.0) * delta, 0.0)).y,
+            getSaturatedColorAt(coord - vec2(getRandom(Timer + i - 7.0) * delta, 0.0)).z
         );
 
         if(GlitchStrength >= 0.25)
