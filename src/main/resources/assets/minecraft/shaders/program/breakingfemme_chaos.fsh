@@ -57,21 +57,25 @@ void main() {
         //we could do this too: https://www.shadertoy.com/view/lsfGD2
 
         vec2 coord = texCoord;
-        if(getRandom(Timer + 3.0) < EffectStrength) //should there be a glitch? more strength => more glitchy
-        {
-            float y = getRandom(Timer);
-            float dy = oneTexel.y;
-            if(EffectStrength >= 0.75) //do a 4 pixel block if downscaled (strength >= 0.75)
+
+        float strength4 = EffectStrength * EffectStrength;
+        strength4 *= strength4;
+        for(float i = 0.0; i < 95.0; i += 6.0) //do 16 lines at most a time
+            if(getRandom(Timer + i + 3.0) < strength4) //should there be a glitch? more strength => more glitchy
             {
-                dy *= 4.0;
-                y -= mod(y, dy);
+                float y = getRandom(Timer + i);
+                float dy = oneTexel.y;
+                if(EffectStrength >= 0.75) //do a 4 pixel block if downscaled (strength >= 0.75)
+                {
+                    dy *= 4.0;
+                    y -= mod(y, dy);
+                }
+                float x1 = getRandom(Timer + i + 1.0) * 1.25 - 0.25; //these scalings make full glitch lines possible
+                float x2 = getRandom(Timer + i + 2.0) * 1.25;
+                float align = (coord.x - x1) / (x2 - x1);
+                if(align > 0 && align < 1 && coord.y > y && coord.y < y + dy) //glitch line: 1 pixel tall
+                    coord = vec2(mod(coord.x + getRandom(Timer + i + 4.0), 1.0), mod(coord.y + getRandom(Timer + i + 5.0), 1.0));
             }
-            float x1 = getRandom(Timer + 1.0) * 1.25 - 0.25; //these scalings make full glitch lines possible
-            float x2 = getRandom(Timer + 2.0) * 1.25;
-            float align = (coord.x - x1) / (x2 - x1);
-            if(align > 0 && align < 1 && coord.y > y && coord.y < y + dy) //glitch line: 1 pixel tall
-                coord = vec2(mod(coord.x + getRandom(Timer - 1.0), 1.0), mod(coord.y + getRandom(Timer - 2.0), 1.0));
-        }
 
         vec3 col = texture(DiffuseSampler, coord).xyz;
 
