@@ -76,18 +76,14 @@ public class BreakingFemmeClient implements ClientModInitializer {
 				passes.get(2).getProgram().getUniformByNameOrDummy("BlurStrength").set(24f * strength); //more horizontal blur => primitive diplopia emulation
             }
 
-            //TEST
-            float time = (player.getWorld().getTime() % 65536) + context.tickDelta(); //repeats about every (real) hour
-            passes.get(3).getProgram().getUniformByNameOrDummy("Timer").set(time / 65536f);
-            passes.get(3).getProgram().getUniformByNameOrDummy("Rotation").set((player.getWorld().getTime() % 1600) / 1600.0f); //cycle every 40 seconds; sneaky float conversion
-            passes.get(3).getProgram().getUniformByNameOrDummy("Saturation").set(0.5f);
-            passes.get(3).getProgram().getUniformByNameOrDummy("WarpStrength").set(0.0625f);
+            passes.get(3).getProgram().getUniformByNameOrDummy("Timer").set((player.getWorld().getTime() % 65536 + context.tickDelta()) / 65536f); //repeats almost every (real) hour
+            passes.get(3).getProgram().getUniformByNameOrDummy("Rotation").set(0.0f); //up to 1 is good
+            passes.get(3).getProgram().getUniformByNameOrDummy("Saturation").set(0.0f); //0.5 is quite good
+            passes.get(3).getProgram().getUniformByNameOrDummy("WarpStrength").set(0.0f); //0.0625 is quite good
             passes.get(3).getProgram().getUniformByNameOrDummy("GlitchStrength").set(0.0f); //just turn that off for now
 
-            /*float sat = (player.getWorld().getTime() % 1600) / 1600.0f * 1.125f - 0.0625f; //40s period
-            if(sat < 0f) sat = 0f; //good testing for extreme values
-            if(sat > 1f) sat = 1f;
-            passes.get(3).getProgram().getUniformByNameOrDummy("Saturation").set(sat * 2.0f - 1.0f); //to make it between -1 and 1*/
+            //NOTE TO SELF: the player's position updates sub-tick here!!
+            //BreakingFemme.LOGGER.info("xpos: " + player.getX());
 
             currentPostProcessor.setupDimensions(mainFramebuffer.textureWidth, mainFramebuffer.textureHeight);
             currentPostProcessor.render(0);
