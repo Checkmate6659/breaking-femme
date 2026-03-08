@@ -79,11 +79,12 @@ void main() {
 
         //move r, g and b around by a random amount
         float delta = EffectStrength * EffectStrength * 0.015625;
+        float i = (coord.y > getRandom(Timer - 1.0) * 4.0 / EffectStrength) ? 3.0 : 0.0; //screen torn at random y level, more probability of there being a cut with higher strength, at most 1/4
         coord = vec2(coord.x * (1. + delta), coord.y); //do a tiny stretch
         vec3 col = vec3(
-            texture(DiffuseSampler, coord - vec2(getRandom(Timer - 1.0) * delta, 0.0)).x,
-            texture(DiffuseSampler, coord - vec2(getRandom(Timer - 2.0) * delta, 0.0)).y,
-            texture(DiffuseSampler, coord - vec2(getRandom(Timer - 3.0) * delta, 0.0)).z
+            texture(DiffuseSampler, coord - vec2(getRandom(Timer + i - 5.0) * delta, 0.0)).x,
+            texture(DiffuseSampler, coord - vec2(getRandom(Timer + i - 6.0) * delta, 0.0)).y,
+            texture(DiffuseSampler, coord - vec2(getRandom(Timer + i - 7.0) * delta, 0.0)).z
         );
 
         if(EffectStrength >= 0.25)
