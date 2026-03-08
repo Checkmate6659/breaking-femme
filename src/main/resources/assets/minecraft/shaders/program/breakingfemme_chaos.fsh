@@ -10,6 +10,7 @@ in vec2 oneTexel; //size of a single pixel in UV coordinates
 //TODO: figure out why Time and GameTime are NOT WORKING
 uniform float Timer; //from 0 to 1, modulo 2^16 ticks
 uniform float Saturation; //from -1 to 1, where -1 is completely black and white (C = 0) and 1 is completely saturated (C = 1)
+uniform float Rotation; //from 0 to 1, where 0 is no color rotation effect and 1 is full effect (0.5 periodically goes through the center spot, i.e. desaturation)
 uniform float WarpStrength; //from 0 to 1
 uniform float GlitchStrength; //from 0 to 1
 
@@ -70,16 +71,19 @@ vec3 saturate_lab(vec3 c)
     return vec3(c.x, c.yz * new_chroma / old_chroma);
 }
 
-vec3 saturate_rgb(vec3 c)
+vec3 modify_rgb(vec3 c)
 {
     c = linear_srgb_to_oklab(c);
     c = saturate_lab(c);
-    return oklab_to_linear_srgb(c);
+    //rotate color according to time, and blend it
+    float angle = 6.283185307179586 * Timer * 205.; //about 1 full rotation every 16 seconds
+    vec3 new_c = vec3(c.x, c.y * cos(angle) + c.z * sin(angle), c.y * -sin(angle) + c.z * cos(angle));
+    return oklab_to_linear_srgb(c * (1. - Rotation) + new_c * Rotation);
 }
 
-vec3 getSaturatedColorAt(vec2 pos)
+vec3 getModifiedColorAt(vec2 pos)
 {
-    return saturate_rgb(texture(DiffuseSampler, pos).xyz);
+    return modify_rgb(texture(DiffuseSampler, pos).xyz);
 }
 
 
@@ -168,19 +172,10 @@ void main() {
 
     if(GlitchStrength == 0.0) //be able to disable glitch
     {
-        fragColor.xyz = getSaturatedColorAt(coord);
+        fragColor.xyz = getModifiedColorAt(coord);
     }
     else
     {
-        //TODO: use ascii characters or sth if GlitchStrength > 0.75
-        //https://prominentpainting.com/drawing-with-text-characters/
-        //for that we need to declare a custom sampler (could it work with loads of regular uniforms? idk)
-        //cuz declaring a massive array at the start of the shader is SLOW! every entry is an instruction: put 0 or 1 into this mem value
-        //solution: you can FAKE IT! https://www.shadertoy.com/view/XljBW3
-
-        //TODO: color rotation?
-        //we could do this too: https://www.shadertoy.com/view/lsfGD2
-
         float strength4 = GlitchStrength * GlitchStrength;
         strength4 *= strength4;
         for(float i = 0.0; i < 95.0; i += 6.0) //do 16 lines at most a time
@@ -205,9 +200,9 @@ void main() {
         float i = (coord.y > getRandom(Timer - 1.0) * 4.0 / GlitchStrength) ? 3.0 : 0.0; //screen torn at random y level, more probability of there being a cut with higher strength, at most 1/4
         coord = vec2(coord.x * (1. + delta), coord.y); //do a tiny stretch
         vec3 col = vec3(
-            getSaturatedColorAt(coord - vec2(getRandom(Timer + i - 5.0) * delta, 0.0)).x,
-            getSaturatedColorAt(coord - vec2(getRandom(Timer + i - 6.0) * delta, 0.0)).y,
-            getSaturatedColorAt(coord - vec2(getRandom(Timer + i - 7.0) * delta, 0.0)).z
+            getModifiedColorAt(coord - vec2(getRandom(Timer + i - 5.0) * delta, 0.0)).x,
+            getModifiedColorAt(coord - vec2(getRandom(Timer + i - 6.0) * delta, 0.0)).y,
+            getModifiedColorAt(coord - vec2(getRandom(Timer + i - 7.0) * delta, 0.0)).z
         );
 
         if(GlitchStrength >= 0.25)

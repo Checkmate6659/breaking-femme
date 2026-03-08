@@ -58,6 +58,14 @@
                     "values": [ 0.0 ]
                 },
                 {
+                    "name": "Saturation",
+                    "values": [ 0.0 ]
+                },
+                {
+                    "name": "Rotation",
+                    "values": [ 0.0 ]
+                },
+                {
                     "name": "WarpStrength",
                     "values": [ 0.0 ]
                 },
