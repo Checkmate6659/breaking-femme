@@ -54,8 +54,12 @@
             "outtarget": "minecraft:main",
             "uniforms": [
                 {
+                    "name": "Timer",
+                    "values": [ 0.0 ]
+                },
+                {
                     "name": "EffectStrength",
-                    "values": [ 1.0 ]
+                    "values": [ 0.0 ]
                 }
             ]
         }

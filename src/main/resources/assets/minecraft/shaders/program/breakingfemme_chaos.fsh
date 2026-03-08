@@ -8,11 +8,16 @@ in vec2 texCoord;
 in vec2 oneTexel; //size of a single pixel in UV coordinates
 
 //TODO: figure out why Time and GameTime are NOT WORKING
-//uniform float Time; //from 0 to 1, modulo seconds (or days? idk.)
-//uniform float GameTime; //from 0 to 24000, modulo mc days (24000t), but only core shaders?
+uniform float Timer; //from 0 to 1, modulo 2^16 ticks
 uniform float EffectStrength; //from 0 to 1
 
 out vec4 fragColor;
+
+//pseudo-random hash of t, between 0 and 1
+float getRandom(float t)
+{
+    return fract(sin(t * 528.98) * 674.2069);
+}
 
 float getBayesMask2(ivec2 coord)
 {
@@ -37,27 +42,54 @@ float getBayesMask4(ivec2 coord)
 
 void main() {
     if(EffectStrength == 0.0) //be able to disable shader
+    {
         fragColor.xyz = texture(DiffuseSampler, texCoord).xyz;
+    }
     else
     {
-        //TODO: get my hands on time and add glitch effects
         //TODO: use ascii characters or sth if EffectStrength > 0.75
         //https://prominentpainting.com/drawing-with-text-characters/
         //for that we need to declare a custom sampler (could it work with loads of regular uniforms? idk)
         //cuz declaring a massive array at the start of the shader is SLOW! every entry is an instruction: put 0 or 1 into this mem value
+        //solution: you can FAKE IT! https://www.shadertoy.com/view/XljBW3
 
         //TODO: color rotation?
+        //we could do this too: https://www.shadertoy.com/view/lsfGD2
 
-        ivec2 mask_coord;
-        if(EffectStrength < 0.25)
-            mask_coord = ivec2(mod(texCoord / oneTexel, 4.0));
-        else
-            mask_coord = ivec2(mod(0.5 * texCoord / oneTexel, 4.0)); //half resolution
+        vec2 coord = texCoord;
+        if(getRandom(Timer + 3.0) < EffectStrength) //should there be a glitch? more strength => more glitchy
+        {
+            float y = getRandom(Timer);
+            float dy = oneTexel.y;
+            if(EffectStrength >= 0.75) //do a 4 pixel block if downscaled (strength >= 0.75)
+            {
+                dy *= 4.0;
+                y -= mod(y, dy);
+            }
+            float x1 = getRandom(Timer + 1.0) * 1.25 - 0.25; //these scalings make full glitch lines possible
+            float x2 = getRandom(Timer + 2.0) * 1.25;
+            float align = (coord.x - x1) / (x2 - x1);
+            if(align > 0 && align < 1 && coord.y > y && coord.y < y + dy) //glitch line: 1 pixel tall
+                coord = vec2(mod(coord.x + getRandom(Timer - 1.0), 1.0), mod(coord.y + getRandom(Timer - 2.0), 1.0));
+        }
 
-        if(EffectStrength < 0.5)
-            fragColor.xyz = step(getBayesMask4(mask_coord), texture(DiffuseSampler, texCoord).xyz);
-        else
-            fragColor.xyz = step(getBayesMask2(mask_coord), texture(DiffuseSampler, texCoord).xyz); //worse dithering
+        vec3 col = texture(DiffuseSampler, coord).xyz;
+
+        if(EffectStrength >= 0.25)
+        {
+            ivec2 mask_coord;
+            if(EffectStrength < 0.5)
+                mask_coord = ivec2(mod(texCoord / oneTexel, 4.0)); //we need the real texCoord here, otherwise dithering gets distorted
+            else
+                mask_coord = ivec2(mod(0.5 * texCoord / oneTexel, 4.0)); //half resolution
+
+            if(EffectStrength < 0.75)
+                col = step(getBayesMask4(mask_coord), texture(DiffuseSampler, coord).xyz);
+            else
+                col = step(getBayesMask2(mask_coord), texture(DiffuseSampler, coord).xyz); //worse dithering
+        }
+
+        fragColor.xyz = col;
     }
 
     fragColor.a = 1.0;
