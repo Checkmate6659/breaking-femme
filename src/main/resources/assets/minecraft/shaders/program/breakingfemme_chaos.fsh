@@ -77,7 +77,14 @@ void main() {
                     coord = vec2(mod(coord.x + getRandom(Timer + i + 4.0), 1.0), mod(coord.y + getRandom(Timer + i + 5.0), 1.0));
             }
 
-        vec3 col = texture(DiffuseSampler, coord).xyz;
+        //move r, g and b around by a random amount
+        float delta = EffectStrength * EffectStrength * 0.015625;
+        coord = vec2(coord.x * (1. + delta), coord.y); //do a tiny stretch
+        vec3 col = vec3(
+            texture(DiffuseSampler, coord - vec2(getRandom(Timer - 1.0) * delta, 0.0)).x,
+            texture(DiffuseSampler, coord - vec2(getRandom(Timer - 2.0) * delta, 0.0)).y,
+            texture(DiffuseSampler, coord - vec2(getRandom(Timer - 3.0) * delta, 0.0)).z
+        );
 
         if(EffectStrength >= 0.25)
         {
@@ -88,9 +95,9 @@ void main() {
                 mask_coord = ivec2(mod(0.5 * texCoord / oneTexel, 4.0)); //half resolution
 
             if(EffectStrength < 0.75)
-                col = step(getBayesMask4(mask_coord), texture(DiffuseSampler, coord).xyz);
+                col = step(getBayesMask4(mask_coord), col);
             else
-                col = step(getBayesMask2(mask_coord), texture(DiffuseSampler, coord).xyz); //worse dithering
+                col = step(getBayesMask2(mask_coord), col); //worse dithering
         }
 
         fragColor.xyz = col;
