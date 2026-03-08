@@ -90,9 +90,9 @@ vec2 gradient(vec2 intPos, float t) {
     float rand = fract(sin(dot(intPos, vec2(12.9898, 78.233))) * 43758.5453);;
     float rand2 = fract(sin(69.420 + dot(intPos, vec2(129.898, 78.233))) * 43758.5453);;
     
-    //rotate gradient: random starting rotation, random rotation rate
-    //float angle = 6.283185 * rand + 8.0 * t * (rand2 - 0.5); //would be this if t was in SECONDS. and didnt need looping.
-    float angle = 6.283185 * rand + 26214.4 * t * (rand2 - 0.5); //would be this if t didnt need looping.
+    //rotate gradient: random starting rotation, random rotation rate, but always one that loops properly!
+    float speed = (rand2 - 0.5) * 4172.151340188181; //setting maximum rotation speed (depends on timescale)
+    float angle = 6.283185307179586 * (rand + t * floor(speed) + 0.5 * sign(speed) + 0.5); //needs to be a non-zero integer
     return vec2(cos(angle), sin(angle));
 }
 
