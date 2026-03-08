@@ -79,8 +79,8 @@ public class BreakingFemmeClient implements ClientModInitializer {
             //TEST
             float time = (player.getWorld().getTime() % 65536) + context.tickDelta(); //repeats about every (real) hour
             passes.get(3).getProgram().getUniformByNameOrDummy("Timer").set(time / 65536f);
-            passes.get(3).getProgram().getUniformByNameOrDummy("EffectStrength").set((player.getWorld().getTime() % 1600) / 1600.0f); //cycle every 40 seconds; sneaky float conversion
-            //passes.get(3).getProgram().getUniformByNameOrDummy("EffectStrength").set(0.24f); //cycle every 40 seconds; sneaky float conversion
+            passes.get(3).getProgram().getUniformByNameOrDummy("WarpStrength").set((player.getWorld().getTime() % 1600) / 1600.0f); //cycle every 40 seconds; sneaky float conversion
+            passes.get(3).getProgram().getUniformByNameOrDummy("GlitchStrength").set(0.0f); //just turn that off for now
 
             currentPostProcessor.setupDimensions(mainFramebuffer.textureWidth, mainFramebuffer.textureHeight);
             currentPostProcessor.render(0);

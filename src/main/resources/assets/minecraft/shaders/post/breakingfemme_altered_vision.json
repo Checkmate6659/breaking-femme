@@ -58,7 +58,11 @@
                     "values": [ 0.0 ]
                 },
                 {
-                    "name": "EffectStrength",
+                    "name": "WarpStrength",
+                    "values": [ 0.0 ]
+                },
+                {
+                    "name": "GlitchStrength",
                     "values": [ 0.0 ]
                 }
             ]
