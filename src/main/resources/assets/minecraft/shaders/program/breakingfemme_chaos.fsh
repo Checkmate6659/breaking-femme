@@ -68,7 +68,7 @@ vec3 saturate_lab(vec3 c)
 {
     float old_chroma = length(c.yz);
     float new_chroma = pow(old_chroma, exp(atanh(-Saturation)));
-    return vec3(c.x, c.yz * new_chroma / old_chroma);
+    return vec3(c.x, c.yz * (new_chroma + 2.3283064365386963e-10) / (old_chroma + 2.3283064365386963e-10));
 }
 
 vec3 modify_rgb(vec3 c)
