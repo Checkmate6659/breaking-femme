@@ -1,0 +1,11 @@
+{
+    "type": "breakingfemme:grinding",
+    "input":
+    {
+        "item": "breakingfemme:chili_pepper"
+    },
+    "output":
+    {
+        "item": "breakingfemme:ground_chili_pepper"
+    }
+}

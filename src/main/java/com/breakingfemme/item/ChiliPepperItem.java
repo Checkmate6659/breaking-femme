@@ -22,8 +22,10 @@ import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
 
 public class ChiliPepperItem extends Item {
-    public ChiliPepperItem(Item.Settings settings) {
+    private final boolean HAS_TOOLTIP;
+    public ChiliPepperItem(Item.Settings settings, boolean has_tooltip) {
         super(settings);
+        HAS_TOOLTIP = has_tooltip;
     }
 
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
@@ -41,7 +43,8 @@ public class ChiliPepperItem extends Item {
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(Text.translatable("item.breakingfemme.chili_pepper.tooltip"));
+        if(HAS_TOOLTIP)
+            tooltip.add(Text.translatable("item.breakingfemme.ground_chili_pepper.tooltip"));
 	}
 
     public UseAction getUseAction(ItemStack stack) {
