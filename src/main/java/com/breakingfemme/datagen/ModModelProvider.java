@@ -33,6 +33,7 @@ public class ModModelProvider extends FabricModelProvider {
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
         //regular items
         itemModelGenerator.register(ModItems.ACT_RIGHT_MUSIC_DISC, Models.GENERATED);
+        itemModelGenerator.register(ModItems.CHILI_PEPPER, Models.GENERATED);
         itemModelGenerator.register(ModItems.RAW_NICKEL, Models.GENERATED);
         itemModelGenerator.register(ModItems.NICKEL_INGOT, Models.GENERATED);
         itemModelGenerator.register(ModItems.PULVERIZED_COPPER, Models.GENERATED);

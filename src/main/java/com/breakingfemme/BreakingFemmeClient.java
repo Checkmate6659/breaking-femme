@@ -85,6 +85,9 @@ public class BreakingFemmeClient implements ClientModInitializer {
             //NOTE TO SELF: the player's position updates sub-tick here!!
             //BreakingFemme.LOGGER.info("xpos: " + player.getX());
 
+            //TODO: mixin to WorldRenderer.renderSky to make the sky/sun/moon/stars red when youre getting way too little estrogen
+            //or green. yeah actually make everything green. (the nether stays red tho.)
+
             currentPostProcessor.setupDimensions(mainFramebuffer.textureWidth, mainFramebuffer.textureHeight);
             currentPostProcessor.render(0);
             mainFramebuffer.beginWrite(true);
