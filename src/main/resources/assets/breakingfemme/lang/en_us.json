@@ -1,6 +1,4 @@
 {
-    "book.breakingfemme.name": "DIY HRT For Dummies",
-    "book.breakingfemme.subtitle": "A guide for the rest of us",
     "advancement.breakingfemme.root.title": "Breaking Femme",
     "advancement.breakingfemme.root.description": "Jesse I'm trans! We gotta cook estrogen!",
     "advancement.breakingfemme.milk.title": "Mooooo!",
@@ -123,5 +121,8 @@
     "command.breakingfemme.kinetics.buffered_ethanol": "Ethanol (buffered)",
     "command.breakingfemme.kinetics.ethanol": "Ethanol",
     "command.breakingfemme.kinetics.acetaldehyde": "Acetaldehyde",
-    "itemgroup.breakingfemme": "Breaking Femme"
+    "itemgroup.breakingfemme": "Breaking Femme",
+    "book.breakingfemme.name": "DIY HRT For Dummies",
+    "book.breakingfemme.subtitle": "A guide for the rest of us",
+    "book.breakingfemme.landing": "Welcome to the wild world of cooking estrogen! :3"
 }

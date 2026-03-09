@@ -1,6 +1,6 @@
 {
     "name": "book.breakingfemme.name",
-    "landing_text": "Welcome to the wild world of cooking estrogen! :3",
+    "landing_text": "book.breakingfemme.landing",
     "creative_tab": "breakingfemme:breakingfemme",
     "model": "breakingfemme:guide",
     "book_texture": "breakingfemme:textures/gui/guide.png",
