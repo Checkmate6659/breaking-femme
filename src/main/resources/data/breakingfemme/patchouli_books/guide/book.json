@@ -2,7 +2,7 @@
     "name": "DIY HRT For Dummies",
     "landing_text": "Welcome to the wild world of cooking estrogen! :3",
     "creative_tab": "breakingfemme:breakingfemme",
-    "model": "patchouli:book_green",
-    "book_texture": "patchouli:textures/gui/book_green.png",
+    "model": "breakingfemme:guide",
+    "book_texture": "breakingfemme:textures/gui/guide.png",
     "use_resource_pack": true
 }
