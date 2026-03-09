@@ -37,7 +37,10 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	//Patchouli for instruction book
-	modImplementation "vazkii.patchouli:Patchouli:1.20.1-85-FABRIC"
+	//modApi "vazkii.patchouli:Patchouli:1.20.1-85-FABRIC" //i can access its classes (wait why does this not work)
+	//include "vazkii.patchouli:Patchouli:1.20.1-85-FABRIC" //its actually in the final build
+	modImplementation "vazkii.patchouli:Patchouli:1.20.1-85-FABRIC" //if i cant mixin im staying with this.
+	//also, mb no jar-in-jar. cuz this mod is used in other mods as well
 
 	//https://github.com/Fabricators-of-Create/create-fabric-addon-template/blob/1.20.1/build.gradle
 	// Create - dependencies are added transitively
