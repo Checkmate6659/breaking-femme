@@ -1,8 +1,10 @@
 {
-    "name": "DIY HRT For Dummies",
+    "name": "book.breakingfemme.name",
     "landing_text": "Welcome to the wild world of cooking estrogen! :3",
     "creative_tab": "breakingfemme:breakingfemme",
     "model": "breakingfemme:guide",
     "book_texture": "breakingfemme:textures/gui/guide.png",
+    "subtitle": "book.breakingfemme.subtitle",
+    "use_blocky_font": true,
     "use_resource_pack": true
 }
