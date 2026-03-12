@@ -25,6 +25,9 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         BlockStatePropertyLootCondition.Builder soy_condition = BlockStatePropertyLootCondition.builder(ModBlocks.SOY_CROP)
             .properties(StatePredicate.Builder.create().exactMatch(SoyCropBlock.AGE, SoyCropBlock.MAX_AGE));
         addDrop(ModBlocks.SOY_CROP, cropDrops(ModBlocks.SOY_CROP, ModItems.SOYBEANS, ModItems.SOYBEANS, soy_condition));
+        BlockStatePropertyLootCondition.Builder chili_condition = BlockStatePropertyLootCondition.builder(ModBlocks.CHILI_CROP)
+            .properties(StatePredicate.Builder.create().exactMatch(SoyCropBlock.AGE, SoyCropBlock.MAX_AGE));
+        addDrop(ModBlocks.CHILI_CROP, cropDrops(ModBlocks.CHILI_CROP, ModItems.CHILI_PEPPER, ModItems.CHILI_PEPPER, chili_condition));
 
         //Cauldron blocks where we should just pick up the cauldron
         //Where we need an extra item too we must do it by hand

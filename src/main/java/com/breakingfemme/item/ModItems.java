@@ -27,9 +27,9 @@ public class ModItems {
     public static final Item ACT_RIGHT_MUSIC_DISC = registerItem("music_disc_act_right", new MusicDiscItem(15, ModSounds.ACT_RIGHT, new FabricItemSettings().maxCount(1), 144));
 
     //Chili pepper, a nice additive to your products (TODO: crop!)
-    public static final Item CHILI_PEPPER = registerItem("chili_pepper", new ChiliPepperItem(new FabricItemSettings().food(new FoodComponent.Builder().hunger(6).saturationModifier(4f).alwaysEdible().build()), false));
-    public static final Item DRIED_CHILI_PEPPER = registerItem("dried_chili_pepper", new ChiliPepperItem(new FabricItemSettings().food(new FoodComponent.Builder().hunger(6).saturationModifier(4f).alwaysEdible().build()), false));
-    public static final Item GROUND_CHILI_PEPPER = registerItem("ground_chili_pepper", new ChiliPepperItem(new FabricItemSettings().food(new FoodComponent.Builder().hunger(6).saturationModifier(4f).alwaysEdible().build()), true));
+    public static final Item CHILI_PEPPER = registerItem("chili_pepper", new ChiliPepperItem(new FabricItemSettings().food(new FoodComponent.Builder().hunger(6).saturationModifier(4f).alwaysEdible().build()), false, true));
+    public static final Item DRIED_CHILI_PEPPER = registerItem("dried_chili_pepper", new ChiliPepperItem(new FabricItemSettings().food(new FoodComponent.Builder().hunger(6).saturationModifier(4f).alwaysEdible().build()), false, false));
+    public static final Item GROUND_CHILI_PEPPER = registerItem("ground_chili_pepper", new ChiliPepperItem(new FabricItemSettings().food(new FoodComponent.Builder().hunger(6).saturationModifier(4f).alwaysEdible().build()), true, false));
 
     //Soybeans as a sterol source
     public static final Item SOYBEANS = registerItem("soybeans", new AliasedBlockItem(ModBlocks.SOY_CROP,

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/crop",
+  "textures": {
+    "crop": "breakingfemme:block/chili_pepper_stage2"
+  }
+}

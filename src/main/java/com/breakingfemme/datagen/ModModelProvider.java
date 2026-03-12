@@ -20,6 +20,7 @@ public class ModModelProvider extends FabricModelProvider {
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
         blockStateModelGenerator.registerCrop(ModBlocks.SOY_CROP, SoyCropBlock.AGE, 0, 1, 2, 3);
+        blockStateModelGenerator.registerCrop(ModBlocks.CHILI_CROP, SoyCropBlock.AGE, 0, 1, 2, 3);
 
         blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.NICKEL_BLOCK);
         blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.NICKEL_ORE);
