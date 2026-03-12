@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "cookingtime": 200,
+  "experience": 0.15,
+  "group": "dried_chili_pepper_smelt",
+  "ingredient": {
+    "item": "breakingfemme:chili_pepper"
+  },
+  "result": "breakingfemme:dried_chili_pepper"
+}

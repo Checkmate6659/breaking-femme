@@ -16,6 +16,7 @@ import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
+import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.tag.ItemTags;
 
@@ -69,5 +70,10 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         //distiller parts
         offer2x2CompactingRecipe(exporter, RecipeCategory.MISC, ModBlocks.DISTILLER_COLUMN, ModItems.NICKEL_PIPE);
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.DISTILLER_TOP).input('S', ModItemTagProvider.NICKEL_INGOT).input('H', ModBlocks.DISTILLER_COLUMN).input('E', ModItems.NICKEL_PIPE).pattern("S").pattern("H").pattern("E").group("distiller_top").criterion(hasItem(Items.IRON_INGOT), conditionsFromItem(ModItems.NICKEL_PIPE)).offerTo(exporter);
+
+        //chili pepper (can be cooked on a campfire and smoked to be dried, not just smelted) (sun drying would be cool too)
+        offerSmelting(exporter, ImmutableList.of(ModItems.CHILI_PEPPER), RecipeCategory.FOOD, ModItems.DRIED_CHILI_PEPPER, 0.15f, 200, "dried_chili_pepper_smelt");
+        offerFoodCookingRecipe(exporter, "smoking", RecipeSerializer.SMOKING, 100, ModItems.CHILI_PEPPER, ModItems.DRIED_CHILI_PEPPER, 0.15F);
+        offerFoodCookingRecipe(exporter, "campfire_cooking", RecipeSerializer.CAMPFIRE_COOKING, 600, ModItems.CHILI_PEPPER, ModItems.DRIED_CHILI_PEPPER, 0.15F);
     }
 }
