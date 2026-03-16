@@ -11,12 +11,16 @@ import net.minecraft.util.Identifier;
 
 @Mixin(GuiBookLanding.class)
 public class GuideBookMixin {
-    @ModifyArg(method = "init", at = @At(value = "INVOKE", target = "translatable"))
-    private String breakingfemme$hijack(String original)
+    @ModifyArg(method = "<init>", at = @At(value = "INVOKE", target = "translatable"))
+    private static String breakingfemme$hijack(String original)
     {
-        BreakingFemme.LOGGER.warn("HIJACK? " + original);
+        BreakingFemme.LOGGER.error("HIJACK? " + original);
         //fuck, this hits book.breakingfemme.landing instead. dammit.
-        if(original.equals("book.breakingfemme.name")) return ""; //show no name
+        if(original.contentEquals("book.breakingfemme.name"))
+        {
+            BreakingFemme.LOGGER.error("GOTCHA");
+            return "EEEEE"; //show no name
+        }
         return original;
     }
 }
