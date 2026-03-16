@@ -4,6 +4,7 @@
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
 		"CustomFluidTagsMixin",
+		"GuideBookMixin",
 		"KineticsMixin",
 		"MetalPipeClangMixin",
 		"ServerWorldPlaySoundMixin",
