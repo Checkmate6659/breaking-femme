@@ -36,7 +36,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.ACT_RIGHT_MUSIC_DISC, Models.GENERATED);
         itemModelGenerator.register(ModItems.CHILI_PEPPER, Models.GENERATED);
         itemModelGenerator.register(ModItems.DRIED_CHILI_PEPPER, Models.GENERATED);
-        itemModelGenerator.register(ModItems.GROUND_CHILI_PEPPER, Models.GENERATED);
+        //itemModelGenerator.register(ModItems.GROUND_CHILI_PEPPER, Models.GENERATED); //this should NOT work. how.
         itemModelGenerator.register(ModItems.RAW_NICKEL, Models.GENERATED);
         itemModelGenerator.register(ModItems.NICKEL_INGOT, Models.GENERATED);
         itemModelGenerator.register(ModItems.PULVERIZED_COPPER, Models.GENERATED);
