@@ -14,6 +14,7 @@ import net.minecraft.data.server.recipe.CookingRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.RecipeSerializer;
@@ -34,6 +35,14 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
         //mortar and pestle
         ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, ModItems.MORTAR_PESTLE).input('#', ModItemTagProvider.STONES).input('|', ModItemTagProvider.IRON_INGOT).pattern(" | ").pattern("#|#").pattern("###").group("mortar_pestle").criterion(hasItem(Blocks.STONE), conditionsFromTag(ItemTags.STONE_CRAFTING_MATERIALS)).offerTo(exporter);
+
+        //bread dough
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.FOOD, Items.BREAD, 32)
+            .input(ModItemTagProvider.YEAST)
+            .input(ModItemTagProvider.FLOUR)
+            .group("bread_with_yeast")
+            .criterion(hasItem(ModItems.YEAST), conditionsFromItem(ModItems.YEAST))
+            .offerTo(exporter, "bread_with_yeast");
 
         //re-casting pulverized copper/nickel (can't just use offerSmelting because it doesn't behave well with tags)
         CookingRecipeJsonBuilder.createSmelting(Ingredient.fromTag(ModItemTagProvider.PULVERIZED_COPPER), RecipeCategory.MISC, Items.COPPER_INGOT, 0, 200).criterion(hasItem(ModItems.PULVERIZED_COPPER), conditionsFromTag(ModItemTagProvider.PULVERIZED_COPPER)).offerTo(exporter, "copper_ingot_from_remelting");

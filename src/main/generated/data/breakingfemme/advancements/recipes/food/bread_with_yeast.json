@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:bread_with_yeast"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_yeast": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "breakingfemme:yeast"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_yeast",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:bread_with_yeast"
+    ]
+  },
+  "sends_telemetry_event": false
+}

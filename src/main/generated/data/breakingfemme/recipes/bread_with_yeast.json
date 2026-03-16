@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "bread_with_yeast",
+  "ingredients": [
+    {
+      "tag": "c:yeast"
+    },
+    {
+      "tag": "c:flours"
+    }
+  ],
+  "result": {
+    "count": 32,
+    "item": "minecraft:bread"
+  }
+}
