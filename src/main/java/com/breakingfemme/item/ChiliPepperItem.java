@@ -49,6 +49,7 @@ public class ChiliPepperItem extends AliasedBlockItem {
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+		super.appendTooltip(stack, world, tooltip, context);
         if(HAS_TOOLTIP)
             tooltip.add(Text.translatable("item.breakingfemme.ground_chili_pepper.tooltip"));
 	}
