@@ -12,7 +12,7 @@ import net.minecraft.util.Identifier;
 
 @Mixin(GuiBookLanding.class)
 public class GuideBookMixin {
-    @Inject(method = "drawHeader", at = @At(value = "HEAD", target = "drawString"), cancellable = true)
+    @Inject(method = "drawHeader", at = @At(value = "INVOKE", target = "drawText"), cancellable = true)
     private void breakingfemme$hijack(CallbackInfo ci)
     {
         String name = ((GuiBookLanding)(Object)this).book.name;
