@@ -10,17 +10,13 @@ import com.breakingfemme.BreakingFemme;
 import vazkii.patchouli.client.book.gui.GuiBookLanding;
 import net.minecraft.util.Identifier;
 
+//https://github.com/VazkiiMods/Patchouli/blob/1.21.x/Xplat/src/main/java/vazkii/patchouli/client/book/gui/GuiBookLanding.java
 @Mixin(GuiBookLanding.class)
 public class GuideBookMixin {
     @Inject(method = "drawHeader", at = @At(value = "INVOKE", target = "drawText"), cancellable = true)
     private void breakingfemme$hijack(CallbackInfo ci)
     {
-        String name = ((GuiBookLanding)(Object)this).book.name;
-        BreakingFemme.LOGGER.error("HIJACK? " + name);
-        if(name.contentEquals("book.breakingfemme.name"))
-        {
-            BreakingFemme.LOGGER.error("GOTCHA");
+        if(((GuiBookLanding)(Object)this).book.name.contentEquals("book.breakingfemme.name"))
             ci.cancel();
-        }
     }
 }
