@@ -14,7 +14,6 @@ import net.minecraft.data.server.recipe.CookingRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.RecipeSerializer;
@@ -36,13 +35,16 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         //mortar and pestle
         ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, ModItems.MORTAR_PESTLE).input('#', ModItemTagProvider.STONES).input('|', ModItemTagProvider.IRON_INGOT).pattern(" | ").pattern("#|#").pattern("###").group("mortar_pestle").criterion(hasItem(Blocks.STONE), conditionsFromTag(ItemTags.STONE_CRAFTING_MATERIALS)).offerTo(exporter);
 
-        //bread dough
-        ShapelessRecipeJsonBuilder.create(RecipeCategory.FOOD, Items.BREAD, 32)
+        //bread dough, and cooking it to get bread
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.FOOD, ModItems.DOUGH, 2)
             .input(ModItemTagProvider.YEAST)
             .input(ModItemTagProvider.FLOUR)
-            .group("bread_with_yeast")
+            .group("dough_with_yeast")
             .criterion(hasItem(ModItems.YEAST), conditionsFromItem(ModItems.YEAST))
-            .offerTo(exporter, "bread_with_yeast");
+            .offerTo(exporter, "dough_with_yeast");
+        offerSmelting(exporter, ImmutableList.of(ModItems.DOUGH), RecipeCategory.FOOD, Items.BREAD, 0.15f, 200, "bread_smelt");
+        offerFoodCookingRecipe(exporter, "smoking", RecipeSerializer.SMOKING, 100, ModItems.DOUGH, Items.BREAD, 0.15F);
+        offerFoodCookingRecipe(exporter, "campfire_cooking", RecipeSerializer.CAMPFIRE_COOKING, 600, ModItems.DOUGH, Items.BREAD, 0.15F);
 
         //re-casting pulverized copper/nickel (can't just use offerSmelting because it doesn't behave well with tags)
         CookingRecipeJsonBuilder.createSmelting(Ingredient.fromTag(ModItemTagProvider.PULVERIZED_COPPER), RecipeCategory.MISC, Items.COPPER_INGOT, 0, 200).criterion(hasItem(ModItems.PULVERIZED_COPPER), conditionsFromTag(ModItemTagProvider.PULVERIZED_COPPER)).offerTo(exporter, "copper_ingot_from_remelting");

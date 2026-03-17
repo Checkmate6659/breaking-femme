@@ -57,6 +57,7 @@ public class ModItems {
     //Flour and yeast, to make bread and beer
     public static final Item FLOUR = registerItem("wheat_flour", new Item(new FabricItemSettings().food(new FoodComponent.Builder().hunger(1).saturationModifier(0.5f).statusEffect(new StatusEffectInstance(StatusEffects.POISON, 100, 0), 0.0625F).build()))); //1/16 chance only to have problems (probably not realistic)
     public static final Item YEAST = registerItem("yeast", new Item(new FabricItemSettings().food(new FoodComponent.Builder().hunger(2).saturationModifier(1f).build())));
+    public static final Item DOUGH = registerItem("wheat_dough", new Item(new FabricItemSettings().food(new FoodComponent.Builder().hunger(3).saturationModifier(1f).build())));
 
     //Bottles of alcoholic "beverages"
     //TODO: add drunkenness status effect and shader, of course using real research because that's the whole point of this mod.
@@ -105,6 +106,7 @@ public class ModItems {
             entries.add(ModFluids.NICKEL_SULFATE_BUCKET);
             entries.add(FLOUR);
             entries.add(YEAST);
+            entries.add(DOUGH);
             entries.add(ModFluids.BEER_BUCKET);
             entries.add(BEER_BOTTLE);
             entries.add(ModFluids.NETHER_BEER_BUCKET);

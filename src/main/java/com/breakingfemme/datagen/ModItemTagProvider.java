@@ -39,6 +39,18 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
     public static final TagKey<Item> FLOUR = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "flours"));
     public static final TagKey<Item> FLOUR_WHEAT = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "flours/wheat"));
     public static final TagKey<Item> YEAST = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "yeast")); //non-conventional
+    public static final TagKey<Item> DOUGH1 = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "dough"));
+    public static final TagKey<Item> DOUGH2 = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "doughs"));
+    public static final TagKey<Item> DOUGH_WHEAT = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "doughs/wheat"));
+    public static final TagKey<Item> FOODS = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "foods"));
+    public static final TagKey<Item> FOODS_DOUGH = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "foods/dough"));
+    public static final TagKey<Item> CROPS = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "crops"));
+    public static final TagKey<Item> FRUIT1 = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "foods/fruit"));
+    public static final TagKey<Item> FRUIT2 = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "foods/fruits"));
+    public static final TagKey<Item> FRUIT3 = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "fruits"));
+    public static final TagKey<Item> VEGETABLE1 = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "foods/vegetable"));
+    public static final TagKey<Item> VEGETABLE2 = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "foods/vegetables"));
+    public static final TagKey<Item> VEGETABLE3 = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "vegetables"));
     public static final TagKey<Item> DRINK_BOTTLES = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "drink_containing/bottle"));
     public static final TagKey<Item> DRINKS = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "drinks"));
     public static final TagKey<Item> MILK = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "milk"));
@@ -78,5 +90,31 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
         getOrCreateTagBuilder(FLOUR).add(ModItems.FLOUR);
         getOrCreateTagBuilder(FLOUR_WHEAT).add(ModItems.FLOUR);
         getOrCreateTagBuilder(YEAST).add(ModItems.YEAST);
+        getOrCreateTagBuilder(DOUGH1).add(ModItems.DOUGH);
+        getOrCreateTagBuilder(DOUGH2).add(ModItems.DOUGH);
+        getOrCreateTagBuilder(DOUGH_WHEAT).add(ModItems.DOUGH);
+        getOrCreateTagBuilder(FOODS).add(ModItems.DOUGH);
+        getOrCreateTagBuilder(FOODS_DOUGH).add(ModItems.DOUGH);
+        getOrCreateTagBuilder(CROPS).add(ModItems.SOYBEANS);
+        getOrCreateTagBuilder(CROPS).add(ModItems.CHILI_PEPPER);
+        getOrCreateTagBuilder(FOODS).add(ModItems.SOYBEANS);
+        getOrCreateTagBuilder(FRUIT1).add(ModItems.CHILI_PEPPER); //in cooking peppers are referred to as vegetables, but botanically theyre fruits
+        getOrCreateTagBuilder(FRUIT1).add(ModItems.DRIED_CHILI_PEPPER);
+        getOrCreateTagBuilder(FRUIT1).add(ModItems.GROUND_CHILI_PEPPER);
+        getOrCreateTagBuilder(FRUIT2).add(ModItems.CHILI_PEPPER);
+        getOrCreateTagBuilder(FRUIT2).add(ModItems.DRIED_CHILI_PEPPER);
+        getOrCreateTagBuilder(FRUIT2).add(ModItems.GROUND_CHILI_PEPPER);
+        getOrCreateTagBuilder(FRUIT3).add(ModItems.CHILI_PEPPER);
+        getOrCreateTagBuilder(FRUIT3).add(ModItems.DRIED_CHILI_PEPPER);
+        getOrCreateTagBuilder(FRUIT3).add(ModItems.GROUND_CHILI_PEPPER);
+        getOrCreateTagBuilder(VEGETABLE1).add(ModItems.CHILI_PEPPER); //but im gonna add it as a vegetable anyway
+        getOrCreateTagBuilder(VEGETABLE1).add(ModItems.DRIED_CHILI_PEPPER);
+        getOrCreateTagBuilder(VEGETABLE1).add(ModItems.GROUND_CHILI_PEPPER);
+        getOrCreateTagBuilder(VEGETABLE2).add(ModItems.CHILI_PEPPER);
+        getOrCreateTagBuilder(VEGETABLE2).add(ModItems.DRIED_CHILI_PEPPER);
+        getOrCreateTagBuilder(VEGETABLE2).add(ModItems.GROUND_CHILI_PEPPER);
+        getOrCreateTagBuilder(VEGETABLE3).add(ModItems.CHILI_PEPPER);
+        getOrCreateTagBuilder(VEGETABLE3).add(ModItems.DRIED_CHILI_PEPPER);
+        getOrCreateTagBuilder(VEGETABLE3).add(ModItems.GROUND_CHILI_PEPPER);
     }
 }

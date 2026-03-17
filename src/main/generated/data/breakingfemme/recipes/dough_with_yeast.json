@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
-  "group": "bread_with_yeast",
+  "group": "dough_with_yeast",
   "ingredients": [
     {
       "tag": "c:yeast"
@@ -11,7 +11,7 @@
     }
   ],
   "result": {
-    "count": 32,
-    "item": "minecraft:bread"
+    "count": 2,
+    "item": "breakingfemme:wheat_dough"
   }
 }

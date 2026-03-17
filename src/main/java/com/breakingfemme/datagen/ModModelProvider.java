@@ -65,6 +65,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.MORTAR_PESTLE, Models.GENERATED);
         itemModelGenerator.register(ModItems.FLOUR, Models.GENERATED);
         itemModelGenerator.register(ModItems.YEAST, Models.GENERATED);
+        itemModelGenerator.register(ModItems.DOUGH, Models.GENERATED);
         itemModelGenerator.register(ModItems.TAR, Models.GENERATED);
 
         //buckets

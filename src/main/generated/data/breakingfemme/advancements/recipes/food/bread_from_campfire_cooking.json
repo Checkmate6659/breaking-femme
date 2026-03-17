@@ -3,16 +3,16 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:bread_with_yeast"
+        "recipe": "minecraft:bread_from_campfire_cooking"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
-    "has_yeast": {
+    "has_wheat_dough": {
       "conditions": {
         "items": [
           {
             "items": [
-              "breakingfemme:yeast"
+              "breakingfemme:wheat_dough"
             ]
           }
         ]
@@ -22,13 +22,13 @@
   },
   "requirements": [
     [
-      "has_yeast",
+      "has_wheat_dough",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:bread_with_yeast"
+      "minecraft:bread_from_campfire_cooking"
     ]
   },
   "sends_telemetry_event": false

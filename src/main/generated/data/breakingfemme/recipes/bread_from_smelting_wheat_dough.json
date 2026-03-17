@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "cookingtime": 200,
+  "experience": 0.15,
+  "group": "bread_smelt",
+  "ingredient": {
+    "item": "breakingfemme:wheat_dough"
+  },
+  "result": "minecraft:bread"
+}
