@@ -31,6 +31,8 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
 
         //Cauldron blocks where we should just pick up the cauldron
         //Where we need an extra item too we must do it by hand
+        //TODO: for yeast cauldron, different amount for if breeding/1 high/2 high
+        addDrop(ModFluids.THICK_POTION_CAULDRON, Blocks.CAULDRON); //this cauldron-only loot table im not doing by hand tho, it just drops the cauldron
         addDrop(ModFluids.COPPER_SULFATE_CAULDRON, Blocks.CAULDRON);
         addDrop(ModFluids.NICKEL_SULFATE_CAULDRON, Blocks.CAULDRON);
         addDrop(ModFluids.ET32_CAULDRON, Blocks.CAULDRON);
