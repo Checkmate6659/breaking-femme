@@ -73,7 +73,7 @@ public class BeerCauldronBlock extends AbstractCauldronBlock {
                 player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, new ItemStack(Items.GLASS_BOTTLE)));
                 player.incrementStat(Stats.USE_CAULDRON);
                 player.incrementStat(Stats.USED.getOrCreateStat(item));
-                world.setBlockState(pos, ModFluids.BEER_CAULDRON.getDefaultState());
+                world.setBlockState(pos, ModFluids.BEER_CAULDRON.getDefaultState().with(LEVEL, 1));
                 world.playSound((PlayerEntity)null, pos, SoundEvents.ITEM_BOTTLE_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 world.emitGameEvent((Entity)null, GameEvent.FLUID_PLACE, pos);
             }
