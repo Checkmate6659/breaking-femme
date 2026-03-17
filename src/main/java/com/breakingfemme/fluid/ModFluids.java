@@ -19,6 +19,7 @@ import com.breakingfemme.cauldron.RedoxReactionCauldronBlock;
 import com.breakingfemme.cauldron.AndrostadienedioneCauldronBlock;
 import com.breakingfemme.cauldron.AndrostadienedioneExtractionCauldronBlock;
 import com.breakingfemme.cauldron.TarCauldronBlock;
+import com.breakingfemme.cauldron.ThickPotionCauldronBlock;
 import com.breakingfemme.cauldron.YeastCauldronBlock;
 import com.breakingfemme.cauldron.YeastStarterCauldronBlock;
 import com.breakingfemme.cauldron.BeerCauldronBlock;
@@ -53,6 +54,7 @@ public class ModFluids {
     public static Block ANDROSTADIENEDIONE_EXTRACTION_CAULDRON;
     public static Block YEAST_STARTER_CAULDRON;
     public static Block YEAST_CAULDRON;
+    public static Block THICK_POTION_CAULDRON;
 
     //Copper sulfate solution
     public static FlowableFluid STILL_COPPER_SULFATE;
@@ -278,6 +280,8 @@ public static void registerModFluids()
         ANDROSTADIENEDIONE_EXTRACTION_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "androstadienedione_extraction_cauldron"), new AndrostadienedioneExtractionCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
         YEAST_STARTER_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "yeast_starter_cauldron"), new YeastStarterCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
         YEAST_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "yeast_cauldron"), new YeastCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
+        THICK_POTION_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "thick_potion_cauldron"), new ThickPotionCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
+        //TODO: use FabricLoader.getInstance().isModLoaded to bind it to Create mod's "thick potion" fluid
         //for the fluids that go in cauldrons, instead of cauldron alone
         COPPER_SULFATE_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "copper_sulfate_cauldron"), new CopperSulfateCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
         CauldronFluidContent.registerCauldron(COPPER_SULFATE_CAULDRON, STILL_COPPER_SULFATE, FluidConstants.BUCKET, null);

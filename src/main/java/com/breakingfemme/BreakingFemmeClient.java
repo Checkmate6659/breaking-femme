@@ -106,6 +106,7 @@ public class BreakingFemmeClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.FERMENTER_AIRLOCK, RenderLayer.getCutout()); //can we do something to make block not see through itself??
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.DISTILLER_BASE, RenderLayer.getCutout());
 
+        //fermenter airlock
         ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
             if (i == 0)
                 return 0x803F76E4; //default water color
@@ -147,6 +148,13 @@ public class BreakingFemmeClient implements ClientModInitializer {
                 return 0xFFEEEEAA; //same as yeast starter... but a bit darker
             return -1;
         }, ModFluids.YEAST_CAULDRON);
+
+        //thick potion (cauldron only)
+        ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
+            if (i == 0)
+                return 0x803F76E4; //default water color
+            return -1;
+        }, ModFluids.THICK_POTION_CAULDRON);
 
         //copper sulfate
         FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.STILL_COPPER_SULFATE, ModFluids.FLOWING_COPPER_SULFATE,
