@@ -50,6 +50,22 @@ public class YeastStarterCauldronBlock extends AbstractCauldronBlock {
             }
             return ActionResult.success(world.isClient);
         });
+
+        //adding yeast to yeast starter to make yeast breed
+        BEHAVIOR.put(ModItems.YEAST, (state, world, pos, player, hand, stack) -> {
+            if (stack.getCount() < 16) { //only able to do this if at level 1, and need 16 yeast
+                return ActionResult.PASS;
+            } else if (!world.isClient) {
+                Item item = stack.getItem();
+                player.getStackInHand(hand).decrement(16); //consume 16 yeast
+                player.incrementStat(Stats.USE_CAULDRON);
+                player.incrementStat(Stats.USED.getOrCreateStat(item));
+                world.setBlockState(pos, ModFluids.YEAST_CAULDRON.getDefaultState().with(YeastCauldronBlock.LEVEL, 3));
+                world.playSound((PlayerEntity)null, pos, SoundEvents.ITEM_INK_SAC_USE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                world.emitGameEvent((Entity)null, GameEvent.FLUID_PLACE, pos);
+            }
+            return ActionResult.success(world.isClient);
+        });
     }
 
     public YeastStarterCauldronBlock(AbstractBlock.Settings settings) {
