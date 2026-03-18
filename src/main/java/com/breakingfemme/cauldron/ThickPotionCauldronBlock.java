@@ -111,7 +111,7 @@ public class ThickPotionCauldronBlock extends AbstractCauldronBlock {
                 player.incrementStat(Stats.USE_CAULDRON);
                 player.incrementStat(Stats.USED.getOrCreateStat(item));
                 world.setBlockState(pos, ModFluids.EGEL_CAULDRON.getDefaultState().with(LEVEL, 3));
-                world.playSound((PlayerEntity)null, pos, SoundEvents.ENTITY_CAT_PURREOW, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                world.playSound((PlayerEntity)null, pos, SoundEvents.ENTITY_CAT_AMBIENT, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 world.emitGameEvent((Entity)null, GameEvent.FLUID_PLACE, pos);
             }
             return ActionResult.success(world.isClient);
