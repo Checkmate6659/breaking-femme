@@ -20,6 +20,7 @@ import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.gl.PostEffectPass;
 import net.minecraft.client.gl.PostEffectProcessor;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
@@ -29,6 +30,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 
 public class BreakingFemmeClient implements ClientModInitializer {
+    static double timer = 0; //subtick-precise time
+
     @Override
     public void onInitializeClient() {
         //example repo: https://github.com/CelDaemon/post-process-example/blob/main/src/client/java/net/voidgroup/postProcessExample/client/PostProcessExampleClient.java
@@ -93,6 +96,13 @@ public class BreakingFemmeClient implements ClientModInitializer {
             mainFramebuffer.beginWrite(true);
         });
 
+        //get out subtick-precise time
+        WorldRenderEvents.START.register(context -> {
+            timer = context.world().getTime() % 65536 + context.tickDelta();
+            //BreakingFemme.LOGGER.info("timer: " + timer);
+            BreakingFemme.LOGGER.info("colvar: " + ((int)timer) % 64);
+        });
+
         //:3 particle
         ParticleFactoryRegistry.getInstance().register(BreakingFemme.COLON_THREE_PARTICLE, HeartFactory::new);
 
@@ -114,6 +124,20 @@ public class BreakingFemmeClient implements ClientModInitializer {
         }, ModBlocks.FERMENTER_AIRLOCK);
 
         //fluids
+        //egel (cauldron only, a bit special compared to the other ones)
+        //TODO: figure out why it doesnt update properly like redstone wire does
+        ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
+                if (i == 0) //fluid
+                return 0x80A0BBF2; //same color as et64
+            else if(i == 1) //spiral
+            {
+                int red = ((int)timer) % 64;
+                return 0x80000000 + 0x40000 * red;
+            }
+            return -1;
+        }, ModFluids.EGEL_CAULDRON);
+        BlockRenderLayerMap.INSTANCE.putBlock(ModFluids.EGEL_CAULDRON, RenderLayer.getCutout());
+
         //macerating soy (cauldron only)
         ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
             if (i == 0)
