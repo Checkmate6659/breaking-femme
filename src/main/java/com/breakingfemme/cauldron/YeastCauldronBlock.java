@@ -85,7 +85,7 @@ public class YeastCauldronBlock extends AbstractCauldronBlock {
 
     //die (ie turn into empty cauldron) after on average 1/2 mc day i.e. 10 real minutes, i.e. 12k ticks
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if(random.nextInt(9) == 0) //every time theres a 1 in 9 chance of dying, to make the expected time about 1 hour
+        if(random.nextInt(9) == 0) //every time theres a 1 in 9 chance of dying, to make the expected time about 1/2 mc day (10 real minutes)
             decrementFluidLevel(state, world, pos); //if level is 3, then finish breeding. otherwise, some/all the yeast dies.
     }
 
