@@ -81,6 +81,9 @@ public class ModItems {
     public static final Item PURE_ESTRADIOL_CRYSTALS = registerItem("pure_estradiol_crystals", new Item(new FabricItemSettings()));
     public static final Item PURE_ESTRADIOL_POWDER = registerItem("pure_estradiol_powder", new Item(new FabricItemSettings()));
 
+    //Estrogens
+    public static final Item EGEL_BOTTLE = registerItem("egel_bottle", new EgelItem(new FabricItemSettings().maxDamage(64)));
+
     private static Item registerItem(String name, Item item)
     {
         return Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, name), item);
@@ -156,6 +159,9 @@ public class ModItems {
             entries.add(CHILI_PEPPER);
             entries.add(DRIED_CHILI_PEPPER);
             entries.add(GROUND_CHILI_PEPPER);
+
+            entries.add(EGEL_BOTTLE);
+
             entries.add(ACT_RIGHT_MUSIC_DISC);
     }).build());
 

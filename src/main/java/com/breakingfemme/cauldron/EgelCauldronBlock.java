@@ -2,6 +2,7 @@ package com.breakingfemme.cauldron;
 
 import java.util.Map;
 
+import com.breakingfemme.fluid.ModFluids;
 import com.breakingfemme.item.ModItems;
 
 import net.minecraft.block.AbstractBlock;
@@ -45,7 +46,7 @@ public class EgelCauldronBlock extends AbstractCauldronBlock {
         BEHAVIOR.put(Items.GLASS_BOTTLE, (state, world, pos, player, hand, stack) -> {
             if (!world.isClient) {
                 Item item = stack.getItem();
-                player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, new ItemStack(ModItems.BEER_BOTTLE)));
+                player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, new ItemStack(ModItems.EGEL_BOTTLE)));
                 player.incrementStat(Stats.USE_CAULDRON);
                 player.incrementStat(Stats.USED.getOrCreateStat(item));
                 decrementFluidLevel(state, world, pos);
@@ -56,21 +57,21 @@ public class EgelCauldronBlock extends AbstractCauldronBlock {
         });
 
         //add bottle to empty cauldron
-        /*CauldronBehavior.EMPTY_CAULDRON_BEHAVIOR.put(ModItems.BEER_BOTTLE, (state, world, pos, player, hand, stack) -> {
+        CauldronBehavior.EMPTY_CAULDRON_BEHAVIOR.put(ModItems.EGEL_BOTTLE, (state, world, pos, player, hand, stack) -> {
             if (!world.isClient) {
                 Item item = stack.getItem();
                 player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, new ItemStack(Items.GLASS_BOTTLE)));
                 player.incrementStat(Stats.USE_CAULDRON);
                 player.incrementStat(Stats.USED.getOrCreateStat(item));
-                world.setBlockState(pos, ModFluids.BEER_CAULDRON.getDefaultState().with(LEVEL, 1));
+                world.setBlockState(pos, ModFluids.EGEL_CAULDRON.getDefaultState());
                 world.playSound((PlayerEntity)null, pos, SoundEvents.ITEM_BOTTLE_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 world.emitGameEvent((Entity)null, GameEvent.FLUID_PLACE, pos);
             }
             return ActionResult.success(world.isClient);
-        });*/
+        });
 
         //add bottle to partially full cauldron
-        BEHAVIOR.put(ModItems.BEER_BOTTLE, (state, world, pos, player, hand, stack) -> {
+        BEHAVIOR.put(ModItems.EGEL_BOTTLE, (state, world, pos, player, hand, stack) -> {
             if (state.get(LEVEL) == 3) {
                 return ActionResult.PASS;
             } else if (!world.isClient) {

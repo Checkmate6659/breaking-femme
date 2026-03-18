@@ -80,15 +80,15 @@ public class VillagerAttachments {
     public static boolean isEstrogen(Item item)
     {
         //TODO: mb move to another method, mb use estrogenTime instead
-        return item.equals(ModItems.PURE_ESTRADIOL_POWDER);
+        return item.equals(ModItems.EGEL_BOTTLE); //TODO: check if bottle is full! we don't buy used bottles
     }
 
     //time of activity of an estrogen
     public static int estrogenTime(Item item)
     {
         //TODO: change! mb move to another method
-        if(item.equals(ModItems.PURE_ESTRADIOL_POWDER))
-            return 100; //just 5 seconds; TODO: change!! and add more different estrogens!
+        if(item.equals(ModItems.EGEL_BOTTLE))
+            return 24000; //1 mc day (yeah it goes quicker than irl)
 
         return 0;
     }
@@ -97,7 +97,7 @@ public class VillagerAttachments {
     public static int getValue(Item item)
     {
         //TODO: change! mb move to another method
-        if(item.equals(ModItems.PURE_ESTRADIOL_POWDER))
+        if(item.equals(ModItems.EGEL_BOTTLE))
             return 1;
 
         return 0;
