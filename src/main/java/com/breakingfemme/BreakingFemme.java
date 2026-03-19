@@ -30,6 +30,7 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.village.TradeOffer;
 import net.minecraft.village.VillagerProfession;
 import net.minecraft.world.World;
@@ -149,6 +150,13 @@ public class BreakingFemme implements ModInitializer {
 	{
 		//first, set the center block state
 		world.setBlockState(pos, fluid.getFlowing().getDefaultState().with(FlowableFluid.LEVEL, level).getBlockState());
+
+		for(int i = 0; i < 4; i++) //add level 1 to neighbors if there isnt already sth there
+		{
+			BlockPos target = pos.offset(Direction.fromHorizontal(i));
+			if(world.getRandom().nextInt(4) != 0 && world.isAir(target)) //theres some randomness added... why? idk.
+				world.setBlockState(target, fluid.getFlowing().getDefaultState().with(FlowableFluid.LEVEL, world.getRandom().nextBoolean() ? level : 8).getBlockState());
+		}
 	}
 
 	//basically, is the block in the hot category or is it a lit furnace
