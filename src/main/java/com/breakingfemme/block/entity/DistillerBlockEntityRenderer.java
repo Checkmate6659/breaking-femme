@@ -7,6 +7,8 @@ import net.minecraft.client.texture.Sprite;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 
+import com.breakingfemme.BreakingFemme;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandler;
@@ -16,6 +18,7 @@ import net.minecraft.client.render.RenderLayers;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -44,6 +47,7 @@ public class DistillerBlockEntityRenderer implements BlockEntityRenderer<Distill
         float maxV = sprite.getMaxV();
 
         int col = handler.getFluidColor(world, pos, blockEntity.fluid.getDefaultState());
+        if(col < 0x1000000) col |= 0xFF000000; //if fluid would be completely invisible (alpha = 0), set its alpha to 1
 
         Matrix4f pos_matrix = matrices.peek().getPositionMatrix();
         Matrix3f normal_matrix = matrices.peek().getNormalMatrix();
