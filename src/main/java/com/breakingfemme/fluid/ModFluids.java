@@ -143,6 +143,10 @@ public class ModFluids {
     public static Block COAL_OIL_FLUID_BLOCK;
     public static Item COAL_OIL_BUCKET;
     public static Block COAL_OIL_CAULDRON;
+    
+    public static FlowableFluid STILL_SPILLAGE;
+    public static FlowableFluid FLOWING_SPILLAGE;
+    public static Block SPILLAGE_FLUID_BLOCK;
     //AUTOGENERATION LABEL DO NOT TOUCH
 
 public static void registerModFluids()
@@ -271,6 +275,13 @@ public static void registerModFluids()
             new FlammableFluidBlock(STILL_COAL_OIL, FabricBlockSettings.copyOf(Blocks.WATER)){});
         COAL_OIL_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "coal_oil_bucket"),
             new FlammableBucketItem(STILL_COAL_OIL, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
+
+        STILL_SPILLAGE = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "spillage"),
+            new SpillageFluid.Still());
+        FLOWING_SPILLAGE = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_spillage"),
+            new SpillageFluid.Flowing());
+        SPILLAGE_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "spillage_block"),
+            new FluidBlock(STILL_SPILLAGE, FabricBlockSettings.copyOf(Blocks.WATER)){});
 
         //AUTOGENERATION LABEL DO NOT TOUCH
 
