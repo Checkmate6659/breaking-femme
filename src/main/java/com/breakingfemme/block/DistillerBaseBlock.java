@@ -14,6 +14,8 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.ai.pathing.NavigationType;
+import net.minecraft.fluid.FlowableFluid;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
@@ -55,8 +57,12 @@ public class DistillerBaseBlock extends BlockWithEntity {
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof DistillerBlockEntity) {
-                //TODO: spill fluid
+            if (blockEntity instanceof DistillerBlockEntity distiller) {
+                //spill fluid if not empty (TODO: figure out why it doesnt spread when i do that!!)
+                if(distiller.level > 0)
+                    world.setBlockState(pos, distiller.fluid.getFlowing().getDefaultState().with(FlowableFluid.LEVEL, 8 - (distiller.level * 8) / 81000).getBlockState());
+
+                //reset comparator output
                 world.updateComparators(pos,this);
             }
             super.onStateReplaced(state, world, pos, newState, moved);
@@ -69,7 +75,13 @@ public class DistillerBaseBlock extends BlockWithEntity {
     }
 
     public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
-        return 7;
+        if(world.getBlockEntity(pos) instanceof DistillerBlockEntity blockEntity)
+        {
+            if(blockEntity.level == 0) //completely empty => don't send out anything.
+                return 0;
+            return 1 + (blockEntity.level * 14) / 81000;
+        }
+        return 0; //fallback (should never be reached)
     }
 
     @Nullable
