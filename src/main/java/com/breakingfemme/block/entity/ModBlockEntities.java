@@ -14,6 +14,10 @@ public class ModBlockEntities {
         Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(BreakingFemme.MOD_ID, "fermenter_be"),
         FabricBlockEntityTypeBuilder.create(FermenterBlockEntity::new, ModBlocks.FERMENTER_CONTROLLER).build());
 
+    public static final BlockEntityType<DistillerBlockEntity> DISTILLER_BLOCK_ENTITY =
+        Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(BreakingFemme.MOD_ID, "distiller_be"),
+        FabricBlockEntityTypeBuilder.create(DistillerBlockEntity::new, ModBlocks.DISTILLER_BASE).build());
+
     public static void registerBlockEntities() {
         //
     }
