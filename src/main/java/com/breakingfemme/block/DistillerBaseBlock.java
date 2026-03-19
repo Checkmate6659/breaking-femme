@@ -10,15 +10,12 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.FlowableFluid;
-import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
@@ -58,14 +55,6 @@ public class DistillerBaseBlock extends BlockWithEntity {
 
     //what to do when block broken: spill fluid inside; place down a full block if full
     @Override
-    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
-        if (state.getBlock() != newState.getBlock()) {
-            //reset comparator output... and that's it.
-            super.onStateReplaced(state, world, pos, newState, moved);
-        }
-    }
-
-    @Override
 	public void afterBreak(World world, PlayerEntity player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack tool) {
 		super.afterBreak(world, player, pos, state, blockEntity, tool);
 
@@ -77,7 +66,7 @@ public class DistillerBaseBlock extends BlockWithEntity {
             //reset comparator output
             world.updateComparators(pos,this);
         }
-}
+    }
 
     //comparator output (from furnace)
     public boolean hasComparatorOutput(BlockState state) {
