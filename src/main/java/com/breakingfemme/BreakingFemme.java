@@ -12,6 +12,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.damage.DamageType;
+import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.loot.LootPool;
@@ -142,6 +143,12 @@ public class BreakingFemme implements ModInitializer {
         FuelRegistry.INSTANCE.add(ModFluids.TAR_BUCKET, 6400); //1 bucket of tar can cook 32 items
         FuelRegistry.INSTANCE.add(ModItems.TAR, 800); //and a ball of tar is 4 items (worse than coal, so dont use tar for fuel)
         FuelRegistry.INSTANCE.add(ModFluids.COAL_OIL_BUCKET, 12800); //you can use coal oil tho. its not gasoline but it does cook a stack of items.
+	}
+
+	public static void spillFluid(World world, BlockPos pos, FlowableFluid fluid, int level)
+	{
+		//first, set the center block state
+		world.setBlockState(pos, fluid.getFlowing().getDefaultState().with(FlowableFluid.LEVEL, level).getBlockState());
 	}
 
 	//basically, is the block in the hot category or is it a lit furnace

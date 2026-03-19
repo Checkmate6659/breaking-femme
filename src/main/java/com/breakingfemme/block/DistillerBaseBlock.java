@@ -2,6 +2,7 @@ package com.breakingfemme.block;
 
 import org.jetbrains.annotations.Nullable;
 
+import com.breakingfemme.BreakingFemme;
 import com.breakingfemme.block.entity.DistillerBlockEntity;
 import com.breakingfemme.block.entity.ModBlockEntities;
 
@@ -9,13 +10,16 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.ai.pathing.NavigationType;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.fluid.Fluid;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
@@ -52,22 +56,28 @@ public class DistillerBaseBlock extends BlockWithEntity {
         return new DistillerBlockEntity(pos, state);
     }
 
-    //what to do when block broken: spill fluid inside
+    //what to do when block broken: spill fluid inside; place down a full block if full
     @Override
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if (state.getBlock() != newState.getBlock()) {
-            BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof DistillerBlockEntity distiller) {
-                //spill fluid if not empty (TODO: figure out why it doesnt spread when i do that!!)
-                if(distiller.level > 0)
-                    world.setBlockState(pos, distiller.fluid.getFlowing().getDefaultState().with(FlowableFluid.LEVEL, 8 - (distiller.level * 8) / 81000).getBlockState());
-
-                //reset comparator output
-                world.updateComparators(pos,this);
-            }
+            //reset comparator output... and that's it.
             super.onStateReplaced(state, world, pos, newState, moved);
         }
     }
+
+    @Override
+	public void afterBreak(World world, PlayerEntity player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack tool) {
+		super.afterBreak(world, player, pos, state, blockEntity, tool);
+
+        if (blockEntity instanceof DistillerBlockEntity distiller) {
+            //spill fluid if not empty
+            if(distiller.level > 0)
+                BreakingFemme.spillFluid(world, pos, distiller.fluid, 8 - (distiller.level * 8) / 81000);
+
+            //reset comparator output
+            world.updateComparators(pos,this);
+        }
+}
 
     //comparator output (from furnace)
     public boolean hasComparatorOutput(BlockState state) {
