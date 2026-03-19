@@ -6,6 +6,8 @@ import java.util.List;
 import org.apache.commons.lang3.mutable.MutableObject;
 
 import com.breakingfemme.block.ModBlocks;
+import com.breakingfemme.block.entity.DistillerBlockEntityRenderer;
+import com.breakingfemme.block.entity.ModBlockEntities;
 import com.breakingfemme.fluid.ModFluids;
 import com.breakingfemme.mixin.PostEffectPassAccessor;
 import com.breakingfemme.screen.FermenterScreen;
@@ -25,6 +27,7 @@ import net.minecraft.client.gl.PostEffectProcessor;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.particle.EmotionParticle.HeartFactory;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 
@@ -105,6 +108,9 @@ public class BreakingFemmeClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.MILK_SEPARATOR, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.FERMENTER_AIRLOCK, RenderLayer.getCutout()); //can we do something to make block not see through itself??
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.DISTILLER_BASE, RenderLayer.getCutout());
+
+        //block entity renderers
+        BlockEntityRendererFactories.register(ModBlockEntities.DISTILLER_BLOCK_ENTITY, DistillerBlockEntityRenderer::new);
 
         //fermenter airlock
         ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
