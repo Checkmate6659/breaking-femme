@@ -149,7 +149,8 @@ public class BreakingFemme implements ModInitializer {
 	public static void spillFluid(World world, BlockPos pos, FlowableFluid fluid, int level)
 	{
 		//first, set the center block state
-		world.setBlockState(pos, fluid.getFlowing().getDefaultState().with(FlowableFluid.LEVEL, level).getBlockState());
+		if(world.isAir(pos))
+			world.setBlockState(pos, fluid.getFlowing().getDefaultState().with(FlowableFluid.LEVEL, level).getBlockState());
 
 		for(int i = 0; i < 4; i++) //add level 1 to neighbors if there isnt already sth there
 		{

@@ -46,9 +46,9 @@ public class ModItems {
     //milk processing items
     public static final Item INGOT_MOLD = registerItem("ingot_mold", new Item(new FabricItemSettings()));
     public static final Item SKIMMED_MILK_BUCKET = registerItem("skimmed_milk_bucket", new MilkBucketItem(new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
-    public static final Item MILKGOT_MOLD = registerItem("milkgot_mold", new Item(new FabricItemSettings()));
+    public static final Item MILKGOT_MOLD = registerItem("milkgot_mold", new FullMoldItem(new FabricItemSettings()));
     public static final Item MILKGOT = registerItem("milkgot", new Item(new FabricItemSettings()));
-    public static final Item CREAMGOT_MOLD = registerItem("creamgot_mold", new Item(new FabricItemSettings()));
+    public static final Item CREAMGOT_MOLD = registerItem("creamgot_mold", new FullMoldItem(new FabricItemSettings()));
     public static final Item CREAMGOT = registerItem("creamgot", new Item(new FabricItemSettings()));
 
     //mortar and pestle items
