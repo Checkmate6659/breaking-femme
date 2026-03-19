@@ -7,8 +7,6 @@ import net.minecraft.client.texture.Sprite;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 
-import com.breakingfemme.BreakingFemme;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandler;
@@ -18,7 +16,6 @@ import net.minecraft.client.render.RenderLayers;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.fluid.Fluids;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
