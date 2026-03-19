@@ -37,7 +37,7 @@ public class DistillerBlockEntityRenderer implements BlockEntityRenderer<Distill
     @Override
     public void render(DistillerBlockEntity blockEntity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
         matrices.push(); //we need to do this when doing rendering... otherwise the matrices are gonna get fucked after this is rendered
-        matrices.translate(0, 2.0, 0); //a bit outside the box for now, we'll put it inside later! and level depends on block entity
+        matrices.translate(0, 0.9375, 0); //a bit outside the box for now, we'll put it inside later! and level depends on block entity
 
         BlockPos pos = blockEntity.getPos();
         World world = blockEntity.getWorld();
@@ -45,16 +45,7 @@ public class DistillerBlockEntityRenderer implements BlockEntityRenderer<Distill
         FluidRenderHandler handler = FluidRenderHandlerRegistry.INSTANCE.get(ModFluids.STILL_SLUDGE);
         Sprite sprite = handler.getFluidSprites(world, pos, ModFluids.STILL_SLUDGE.getDefaultState())[0]; //0 is still (in atlas), 1 is flowing
 
-        //BreakingFemme.LOGGER.info("uv on atlas: u: " + sprite.getMinU() + " to " + sprite.getMaxU() + "; v: " + sprite.getMinV() + " to " + sprite.getMaxV());
-
-        //we need to recompute the vertex data here, in order not to get the entire atlas but just the texture we want
-        /*float delta = (sprite.getMaxU() - sprite.getMinU()) * 0.125f; //to not have a tiny bit of fluid poking out on the side
-        float minU = sprite.getMinU() + delta;
-        float minV = sprite.getMinV() + delta;
-        float maxU = minU + 1 - delta - delta;
-        float maxV = minV + 1 - delta - delta;*/
-
-        float minU = sprite.getMinU(); //test to make sure nothing goes wrong
+        float minU = sprite.getMinU();
         float minV = sprite.getMinV();
         float maxU = sprite.getMaxU();
         float maxV = sprite.getMaxV();
@@ -73,7 +64,7 @@ public class DistillerBlockEntityRenderer implements BlockEntityRenderer<Distill
 
         vc.vertex(pos_matrix, 0, 0, 1)
             .color(col)
-            .texture(maxU, minV)
+            .texture(minU, maxV)
             .light(light)
             .overlay(OverlayTexture.DEFAULT_UV)
             .normal(normal_matrix, 0, 0, 1)
@@ -89,13 +80,11 @@ public class DistillerBlockEntityRenderer implements BlockEntityRenderer<Distill
 
         vc.vertex(pos_matrix, 1, 0, 0)
             .color(col)
-            .texture(minU, maxV)
+            .texture(maxU, minV)
             .light(light)
             .overlay(OverlayTexture.DEFAULT_UV)
             .normal(normal_matrix, 1, 0, 0)
             .next();
-
-        //MinecraftClient.getInstance().getBlockRenderManager().renderFluid(pos.add(1, 1, 1), world, vc, Blocks.AIR.getDefaultState(), Fluids.WATER.getDefaultState());
 
         matrices.pop(); //get the old matrices back
     }
