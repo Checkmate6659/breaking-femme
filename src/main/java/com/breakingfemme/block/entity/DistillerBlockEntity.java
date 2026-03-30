@@ -1,8 +1,12 @@
 package com.breakingfemme.block.entity;
 
+import java.util.Optional;
+
 import org.jetbrains.annotations.Nullable;
 
 import com.breakingfemme.BreakingFemme;
+import com.breakingfemme.recipe.DistillingRecipe;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.fluid.FlowableFluid;
@@ -76,6 +80,10 @@ public class DistillerBlockEntity extends BlockEntity implements FluidInventory 
         //TODO: bucket interaction (in the actual block ig?)
         //TODO: detecting top, we can check every tick if its still there or not, thats fine
         //TODO: distilling
+        //TODO: this https://wiki.fabricmc.net/tutorial:transfer-api
+
+        //Optional<DistillingRecipe> match = world.getRecipeManager()
+        //    .getFirstMatch(DistillingRecipe.Type.INSTANCE, this, world);
 
         /*long a = world.getTime() % 100;
         if(a < 20)
