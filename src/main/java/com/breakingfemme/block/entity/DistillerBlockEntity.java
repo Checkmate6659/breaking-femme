@@ -12,7 +12,6 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
-import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -30,7 +29,7 @@ public class DistillerBlockEntity extends BlockEntity implements EmptyInventory 
     protected void writeNbt(NbtCompound nbt) //saving data from ingame to save
     {
         super.writeNbt(nbt);
-        nbt.putString("content", Registries.FLUID.getId(fluid).toString());
+        nbt.putString("content", BreakingFemme.nameOfFluid(fluid));
         nbt.putInt("level", level);
         nbt.putFloat("temperature", temperature);
     }
@@ -39,7 +38,7 @@ public class DistillerBlockEntity extends BlockEntity implements EmptyInventory 
     public void readNbt(NbtCompound nbt) //loading data from save to ingame
     {
         super.readNbt(nbt);
-        fluid = (FlowableFluid)Registries.FLUID.get(new Identifier(nbt.getString("content")));
+        fluid = BreakingFemme.fluidFromName(nbt.getString("content"));
         level = nbt.getInt("level");
         temperature = nbt.getFloat("temperature");
     }

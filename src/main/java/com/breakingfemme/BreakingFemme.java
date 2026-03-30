@@ -146,6 +146,18 @@ public class BreakingFemme implements ModInitializer {
         FuelRegistry.INSTANCE.add(ModFluids.COAL_OIL_BUCKET, 12800); //you can use coal oil tho. its not gasoline but it does cook a stack of items.
 	}
 
+
+	//======================== UTILITY FUNCTIONS ========================
+	public static String nameOfFluid(FlowableFluid fluid)
+	{
+		return Registries.FLUID.getId(fluid).toString();
+	}
+
+	public static FlowableFluid fluidFromName(String name)
+	{
+		return (FlowableFluid)Registries.FLUID.get(new Identifier(name));
+	}
+
 	public static void spillFluid(World world, BlockPos pos, FlowableFluid fluid, int level)
 	{
 		//first, set the center block state
