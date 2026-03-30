@@ -32,6 +32,7 @@ public class DistillerTopBlockEntity extends BlockEntity implements FluidInvento
     //https://wiki.fabricmc.net/tutorial:transfer-api
     //TODO: figure out why this doesnt just work
     //TODO: check this out https://github.com/Fabricators-of-Create/Create/blob/mc1.20.1/fabric/dev/src/main/java/com/simibubi/create/content/fluids/tank/FluidTankBlockEntity.java
+    //or this rather https://github.com/Fabricators-of-Create/Create/blob/mc1.20.1/fabric/dev/src/main/java/com/simibubi/create/content/fluids/drain/ItemDrainBlockEntity.java
     public final SingleVariantStorage<FluidVariant> fluidStorage = new SingleVariantStorage<FluidVariant>() {
         @Override
 		protected FluidVariant getBlankVariant() {
