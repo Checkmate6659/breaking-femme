@@ -70,8 +70,8 @@ public class DistillerBlockEntity extends BlockEntity implements FluidInventory 
         if(temperature == -69420.0f) //temperature uninitialized
             temperature = FermenterBlockEntity.environment_temperature(world, pos); //initialize to base temperature
 
-        if(world.getTime() % 20 == 0) //TODO: heating etc
-            getFluid(0).setRight(69420);
+        //if(world.getTime() % 20 == 0) //TODO: heating etc
+        //    getFluid(0).setRight(69420);
 
         //TODO: bucket interaction (in the actual block ig?)
         //TODO: detecting top, we can check every tick if its still there or not, thats fine
@@ -91,7 +91,8 @@ public class DistillerBlockEntity extends BlockEntity implements FluidInventory 
 
         level = (int)a * 810;*/
 
-        markDirty(world, pos, state);
-        world.updateListeners(pos, state, state, 0);
+        //markDirty(world, pos, state);
+        //world.updateListeners(pos, state, state, 0); //not calling that on every tick, since that makes running 32k distillers without a job in parallel unbearably laggy, while this much is fine
+        //TODO: call it when necessary. just not always at the same time.
     }
 }
