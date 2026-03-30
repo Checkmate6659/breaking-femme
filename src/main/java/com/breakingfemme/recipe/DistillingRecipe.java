@@ -1,7 +1,7 @@
 package com.breakingfemme.recipe;
 
 import com.breakingfemme.BreakingFemme;
-import com.breakingfemme.block.entity.EmptyInventory;
+import com.breakingfemme.block.entity.FluidInventory;
 import com.google.gson.JsonObject;
 
 import net.minecraft.fluid.FlowableFluid;
@@ -13,37 +13,50 @@ import net.minecraft.recipe.RecipeType;
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
+import net.minecraft.util.Pair;
 import net.minecraft.world.World;
 
-//EmptyInventory because its only fluids!
-public class DistillingRecipe implements Recipe<EmptyInventory> {
+//recipe is for putting fluid in first slot into fluid in the last slot
+//TODO: real distillations actually have more than one output, do this here too?
+public class DistillingRecipe implements Recipe<FluidInventory> {
     private final Identifier id;
     private final FlowableFluid input, output;
+    private final int inputq, outputq;
 
-    public DistillingRecipe(Identifier id, FlowableFluid input, FlowableFluid output)
+    public DistillingRecipe(Identifier id, FlowableFluid input, int input_quantity, FlowableFluid output, int output_quantity)
     {
         this.id = id;
         this.input = input;
         this.output = output;
+        this.inputq = input_quantity;
+        this.outputq = output_quantity;
     }
 
-    public FlowableFluid getInput()
+    public Pair<FlowableFluid, Integer> getInput()
     {
-        return this.input;
+        return new Pair<FlowableFluid, Integer>(this.input, this.inputq);
     }
 
-    public FlowableFluid getOutput()
+    public Pair<FlowableFluid, Integer> getOutput()
     {
-        return this.output;
+        return new Pair<FlowableFluid, Integer>(this.output, this.outputq);
     }
 
     @Override
-    public boolean matches(EmptyInventory inventory, World world) {
-        return true; //TODO: real check??
+    public boolean matches(FluidInventory inventory, World world) {
+        if (inventory.size() < 2) return false;
+
+        Pair<FlowableFluid, Integer> fluid1 = inventory.getFluid(0);
+        if(fluid1.getRight() < inputq || !fluid1.getLeft().equals(input)) return false;
+
+        Pair<FlowableFluid, Integer> fluid2 = inventory.getFluid(inventory.size() - 1);
+        if(fluid2.getRight() < outputq || !fluid2.getLeft().equals(output)) return false;
+
+        return true;
     }
     
     @Override
-    public ItemStack craft(EmptyInventory inventory, DynamicRegistryManager registryManager) {
+    public ItemStack craft(FluidInventory inventory, DynamicRegistryManager registryManager) {
         return ItemStack.EMPTY;
     }
 
@@ -91,7 +104,9 @@ public class DistillingRecipe implements Recipe<EmptyInventory> {
         {
             return new DistillingRecipe(id,
                 BreakingFemme.fluidFromName(JsonHelper.getString(json, "input")),
-                BreakingFemme.fluidFromName(JsonHelper.getString(json, "output"))
+                JsonHelper.getInt(json, "input_quantity"),
+                BreakingFemme.fluidFromName(JsonHelper.getString(json, "output")),
+                JsonHelper.getInt(json, "output_quantity")
             );
         }
 
@@ -100,8 +115,10 @@ public class DistillingRecipe implements Recipe<EmptyInventory> {
         {
             FlowableFluid input =  BreakingFemme.fluidFromName(buf.readString());
             FlowableFluid output = BreakingFemme.fluidFromName(buf.readString());
+            int inputq =  buf.readInt();
+            int outputq = buf.readInt();
 
-            return new DistillingRecipe(id, input, output);
+            return new DistillingRecipe(id, input, inputq, output, outputq);
         }
 
         @Override
@@ -109,6 +126,8 @@ public class DistillingRecipe implements Recipe<EmptyInventory> {
         {
             buf.writeString(BreakingFemme.nameOfFluid(recipe.input));
             buf.writeString(BreakingFemme.nameOfFluid(recipe.output));
+            buf.writeInt(recipe.inputq);
+            buf.writeInt(recipe.outputq);
         }
     }
 }

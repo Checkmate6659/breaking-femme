@@ -214,13 +214,13 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
     //also, day temp higher than night temp... except if doing this in a cave/basement/cellar
     //that actually is a real thing, fermenting beer and wine in a cellar to stabilize the temperature
     //it turns out that the cool and stable temperatures from a cellar are perfect for making beer
-    //TODO: come back when multiblock logic done
+    //TODO: come back
     public static float environment_temperature(World world, BlockPos pos)
     {
         DimensionType dimension = world.getDimension();
         Biome biome = world.getBiome(pos).value();
 
-        float temperature = biome.getTemperature();
+        float temperature = biome.getTemperature(); //TODO: this is not smooth by default. we should smooth it out a bit.
         temperature -= 0.00166667 * (pos.getY() - world.getSeaLevel()); //altitude decrease
         temperature = (temperature - 0.15f) * 20; //convert to celsius
 

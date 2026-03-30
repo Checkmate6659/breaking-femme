@@ -16,7 +16,9 @@ import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Pair;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
@@ -60,8 +62,10 @@ public class DistillerBaseBlock extends BlockWithEntity {
 
         if (blockEntity instanceof DistillerBlockEntity distiller) {
             //spill fluid if not empty
-            if(distiller.level > 0)
-                BreakingFemme.spillFluid(world, pos, distiller.fluid, 8 - (distiller.level * 8) / 81000);
+            Pair<FlowableFluid, Integer> fluid = distiller.getFluid(0);
+            int level = fluid.getRight();
+            if(level > 0)
+                BreakingFemme.spillFluid(world, pos, fluid.getLeft(), 8 - (level * 8) / 81000);
 
             //reset comparator output
             world.updateComparators(pos,this);
@@ -76,9 +80,10 @@ public class DistillerBaseBlock extends BlockWithEntity {
     public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
         if(world.getBlockEntity(pos) instanceof DistillerBlockEntity blockEntity)
         {
-            if(blockEntity.level == 0) //completely empty => don't send out anything.
+            int level = blockEntity.getFluid(0).getRight();
+            if(level == 0) //completely empty => don't send out anything.
                 return 0;
-            return 1 + (blockEntity.level * 14) / 81000;
+            return 1 + (level * 14) / 81000;
         }
         return 0; //fallback (should never be reached)
     }

@@ -16,6 +16,8 @@ import net.minecraft.client.render.RenderLayers;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.fluid.FlowableFluid;
+import net.minecraft.util.Pair;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -25,25 +27,29 @@ public class DistillerBlockEntityRenderer implements BlockEntityRenderer<Distill
 
     @Override
     public void render(DistillerBlockEntity blockEntity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
-        if(blockEntity.level == 0) //empty => do nothing special
+        Pair<FlowableFluid, Integer> fluid_pair = blockEntity.getFluid(0);
+        FlowableFluid fluid = fluid_pair.getLeft();
+        int level = fluid_pair.getRight();
+
+        if(level == 0) //empty => do nothing special
             return;
 
         matrices.push(); //we need to do this when doing rendering... otherwise the matrices are gonna get fucked after this is rendered
-        double height = 0.125 + blockEntity.level * 1.0030864197530864e-05; //top out at 0.9375 when full (at 81000)
+        double height = 0.125 + level * 1.0030864197530864e-05; //top out at 0.9375 when full (at 81000)
         matrices.translate(0, height, 0); //a bit outside the box for now, we'll put it inside later! and level depends on block entity
 
         BlockPos pos = blockEntity.getPos();
         World world = blockEntity.getWorld();
-        VertexConsumer vc = vertexConsumers.getBuffer(RenderLayers.getFluidLayer(blockEntity.fluid.getStill(false)));
-        FluidRenderHandler handler = FluidRenderHandlerRegistry.INSTANCE.get(blockEntity.fluid);
-        Sprite sprite = handler.getFluidSprites(world, pos, blockEntity.fluid.getDefaultState())[0]; //0 is still (in atlas), 1 is flowing
+        VertexConsumer vc = vertexConsumers.getBuffer(RenderLayers.getFluidLayer(fluid.getStill(false)));
+        FluidRenderHandler handler = FluidRenderHandlerRegistry.INSTANCE.get(fluid);
+        Sprite sprite = handler.getFluidSprites(world, pos, fluid.getDefaultState())[0]; //0 is still (in atlas), 1 is flowing
 
         float minU = sprite.getMinU();
         float minV = sprite.getMinV();
         float maxU = sprite.getMaxU();
         float maxV = sprite.getMaxV();
 
-        int col = handler.getFluidColor(world, pos, blockEntity.fluid.getDefaultState());
+        int col = handler.getFluidColor(world, pos, fluid.getDefaultState());
         if(col < 0x1000000) col |= 0xFF000000; //if fluid would be completely invisible (alpha = 0), set its alpha to 1
 
         Matrix4f pos_matrix = matrices.peek().getPositionMatrix();
