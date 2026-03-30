@@ -17,7 +17,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class DistillerBlockEntity extends BlockEntity { //this one doesn't have an inventory (just fluids), and doesn't have a screen
+public class DistillerBlockEntity extends BlockEntity implements EmptyInventory { //this one doesn't have an inventory (just fluids), and doesn't have a screen
     public FlowableFluid fluid = Fluids.LAVA;
     public int level = 81000; //goes from 0 (empty) to 81000 (full, 1 bucket); its measured in droplets (TODO: implement disasters if necessary)
     public float temperature = 20.0f; //temperature in °C (TODO: move temperature function to dedicated thermal utils class)
