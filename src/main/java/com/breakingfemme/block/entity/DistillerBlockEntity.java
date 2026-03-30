@@ -32,6 +32,7 @@ public class DistillerBlockEntity extends BlockEntity implements FluidInventory 
     public DefaultedList<Pair<FlowableFluid, Integer>> getFluids() {
         return fluids;
     }
+    
     @Override
     protected void writeNbt(NbtCompound nbt) //saving data from ingame to save
     {
