@@ -102,6 +102,6 @@ public class DistillerBlockEntity extends BlockEntity implements FluidInventory 
 
         //markDirty(world, pos, state);
         //world.updateListeners(pos, state, state, 0); //not calling that on every tick, since that makes running 32k distillers without a job in parallel unbearably laggy, while this much is fine
-        //TODO: call it when necessary. just not always at the same time.
+        //TODO: call it when necessary. just not always at the same time. cuz this is what sends clients the data actually.
     }
 }
