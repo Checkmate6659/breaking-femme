@@ -2,15 +2,11 @@ package com.breakingfemme.block.entity;
 
 import org.jetbrains.annotations.Nullable;
 
-import com.breakingfemme.BreakingFemme;
-
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.fluid.base.SingleFluidStorage;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SidedStorageBlockEntity;
-import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.NbtCompound;
@@ -29,16 +25,27 @@ public class DistillerTopBlockEntity extends BlockEntity implements SidedStorage
     //or this rather https://github.com/Fabricators-of-Create/Create/blob/mc1.20.1/fabric/dev/src/main/java/com/simibubi/create/content/fluids/drain/ItemDrainBlockEntity.java
     //1.21 yt tutorial: https://www.youtube.com/watch?v=RCMkl3mJ55w
     //TODO: we could use SingleVariantStorage, or just not use withFixedCapacity mb, to be unable to insert, only extract
-    public final SingleFluidStorage fluidStorage = SingleFluidStorage.withFixedCapacity(FluidConstants.BUCKET,
-        () -> {
-            markDirty();
-            //can send C2S packets here, if we were to do rendering, with updateListeners
+    public final SingleFluidStorage fluidStorage = new SingleFluidStorage() {
+        @Override
+        protected long getCapacity(FluidVariant variant) {
+            return FluidConstants.BUCKET;
         }
-    );
+
+        @Override
+        public boolean canInsert(FluidVariant variant)
+        {
+            return false;
+        }
+
+        @Override
+        protected void onFinalCommit() {
+            markDirty();
+            //can send C2S packets here
+        }
+    };
 
     public Storage<FluidVariant> getFluidStorage(@Nullable Direction face)
     {
-        BreakingFemme.LOGGER.info("getting fluid storage! " + fluidStorage);
         return fluidStorage;
     }
 
@@ -62,8 +69,6 @@ public class DistillerTopBlockEntity extends BlockEntity implements SidedStorage
     public void tick(World world, BlockPos pos, BlockState state)
     {
         if(world.isClient()) return;
-
-        BreakingFemme.LOGGER.info("storage find result " + FluidStorage.SIDED.find(world, pos, Direction.UP));
 
         //does anything need to be done here??
 
