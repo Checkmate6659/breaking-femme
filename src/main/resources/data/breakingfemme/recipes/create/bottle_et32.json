@@ -1,0 +1,17 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "minecraft:glass_bottle"
+    },
+    {
+      "amount": 27000,
+      "fluid": "breakingfemme:ethanol32"
+    }
+  ],
+  "results": [
+    {
+      "item": "breakingfemme:ethanol32_bottle"
+    }
+  ]
+}
