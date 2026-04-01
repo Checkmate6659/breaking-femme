@@ -1,0 +1,17 @@
+{
+  "type": "create:emptying",
+  "ingredients": [
+    {
+      "item": "breakingfemme:tar"
+    }
+  ],
+  "results": [
+    {
+      "item": "minecraft:air"
+    },
+    {
+      "amount": 10125,
+      "fluid": "breakingfemme:tar"
+    }
+  ]
+}
