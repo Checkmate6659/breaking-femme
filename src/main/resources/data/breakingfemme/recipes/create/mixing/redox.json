@@ -1,0 +1,27 @@
+{
+  "type": "create:mixing",
+  "heatRequirement": "heated",
+  "ingredients": [
+    {
+      "item": "breakingfemme:pulverized_nickel"
+    },
+    {
+      "amount": 810,
+      "fluid": "breakingfemme:copper_sulfate_solution"
+    }
+  ],
+  "results": [
+    {
+      "amount": 810,
+      "fluid": "breakingfemme:nickel_sulfate_solution"
+    },
+    {
+      "item": "breakingfemme:pulverized_copper",
+      "chance": 0.010000001
+    },
+    {
+      "item": "breakingfemme:pulverized_nickel",
+      "chance": 0.99
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "type": "create:milling",
+  "ingredients": [
+    {
+      "item": "breakingfemme:dried_chili_pepper"
+    }
+  ],
+  "processingTime": 70,
+  "results": [
+    {
+      "item": "breakingfemme:ground_chili_pepper"
+    },
+    {
+      "chance": 0.125,
+      "item": "breakingfemme:ground_chili_pepper"
+    }
+  ]
+}

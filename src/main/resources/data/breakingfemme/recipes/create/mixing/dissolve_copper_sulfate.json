@@ -1,0 +1,18 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "breakingfemme:copper_sulfate"
+    },
+    {
+      "amount": 81000,
+      "fluid": "minecraft:water"
+    }
+  ],
+  "results": [
+    {
+      "amount": 81000,
+      "fluid": "breakingfemme:copper_sulfate_solution"
+    }
+  ]
+}

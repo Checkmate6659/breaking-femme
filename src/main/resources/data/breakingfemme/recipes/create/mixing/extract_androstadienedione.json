@@ -1,0 +1,23 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "amount": 20250,
+      "fluid": "breakingfemme:androstadienedione_solution"
+    },
+    {
+      "amount": 10125,
+      "fluid": "breakingfemme:coal_oil"
+    }
+  ],
+  "results": [
+    {
+      "amount": 20250,
+      "fluid": "breakingfemme:sludge"
+    },
+    {
+      "amount": 10125,
+      "fluid": "breakingfemme:androstadienedione_oil_solution"
+    }
+  ]
+}
