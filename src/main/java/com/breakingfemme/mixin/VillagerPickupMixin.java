@@ -1,17 +1,13 @@
 package com.breakingfemme.mixin;
 
-import java.util.Set;
-
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import com.breakingfemme.BreakingFemme;
 import com.breakingfemme.VillagerAttachments;
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.passive.VillagerEntity;
@@ -27,11 +23,14 @@ import net.minecraft.world.World;
 
 @Mixin(VillagerEntity.class)
 public class VillagerPickupMixin {
-    @WrapOperation(at = @At(value = "INVOKE:FIRST", target = "contains"), method = "canGather")
-	private boolean breakingfemme$canGrabGirlPotionOrNameTag(Set<Item> set, Object item, Operation<Boolean> operation) {
+    @Inject(at = @At("HEAD"), method = "canGather", cancellable = true)
+	private void breakingfemme$canGrabGirlPotionOrNameTag(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
         VillagerEntity villager = (VillagerEntity)(Object)this;
-        return (VillagerAttachments.isTransfem(villager) && (VillagerAttachments.isEstrogen((Item)item) || (!VillagerAttachments.hasName(villager) && Items.NAME_TAG.equals((Item)item))))
-            || operation.call(set, item);
+        Item item = stack.getItem();
+        if(VillagerAttachments.isTransfem(villager) && (
+            (VillagerAttachments.isEstrogen((Item)item) && !stack.isDamaged()) //accept estrogens, but NOT if they're used!
+            || (!VillagerAttachments.hasName(villager) && Items.NAME_TAG.equals((Item)item)))) //accept name tags
+            cir.setReturnValue(true);
     }
 
     //at what velocity should an item be dropped to land at the player's position? offset is player pos - villager pos

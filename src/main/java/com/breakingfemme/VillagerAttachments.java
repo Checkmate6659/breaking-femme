@@ -80,7 +80,7 @@ public class VillagerAttachments {
     public static boolean isEstrogen(Item item)
     {
         //TODO: mb move to another method, mb use estrogenTime instead
-        return item.equals(ModItems.EGEL_BOTTLE); //TODO: check if bottle is full! we don't buy used bottles
+        return item.equals(ModItems.EGEL_BOTTLE);
     }
 
     //time of activity of an estrogen
