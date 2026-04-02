@@ -58,12 +58,20 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
     //TODO: do we accept bottles? if yes, how do we add farmersdelight:milk_bottles? its registered as c:foods/milk, alongside minecraft milk buckets, in common tags
     public static final TagKey<Item> MILK_BOTTLE = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "milk_bottles")); //counts as 1/3 bucket; usefulfood:milkbottle
 
+    //armor tags
+    //TODO: reimpl this https://github.com/MayaqqDev/Estrogen/blob/kotlin/src/main/java/dev/mayaqq/estrogen/mixin/client/PlayerModelMixin.java
+    //and mb fix some stuff, theres some dodgy texture grabbing going on at the end of this
+    public static final TagKey<Item> CANNOT_GET_FLEXIBLE = TagKey.of(RegistryKeys.ITEM, new Identifier("breakingfemme", "not_flexible"));
+    public static final TagKey<Item> ALREADY_FLEXIBLE = TagKey.of(RegistryKeys.ITEM, new Identifier("breakingfemme", "already_flexible"));
+    public static final TagKey<Item> FREE_CHEST = TagKey.of(RegistryKeys.ITEM, new Identifier("breakingfemme", "free_chest"));
+
     public ModItemTagProvider(FabricDataOutput output, CompletableFuture<WrapperLookup> completableFuture) {
         super(output, completableFuture);
     }
 
     @Override
     protected void configure(WrapperLookup arg) {
+        //item tags
         getOrCreateTagBuilder(ItemTags.MUSIC_DISCS).add(ModItems.ACT_RIGHT_MUSIC_DISC);
         getOrCreateTagBuilder(METAL_PIPE).add(ModItems.NICKEL_PIPE);
         getOrCreateTagBuilder(STONES).add(Blocks.STONE.asItem());
@@ -116,5 +124,13 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
         getOrCreateTagBuilder(VEGETABLE3).add(ModItems.CHILI_PEPPER);
         getOrCreateTagBuilder(VEGETABLE3).add(ModItems.DRIED_CHILI_PEPPER);
         getOrCreateTagBuilder(VEGETABLE3).add(ModItems.GROUND_CHILI_PEPPER);
+
+        //armor tags
+        getOrCreateTagBuilder(CANNOT_GET_FLEXIBLE).addTag(ALREADY_FLEXIBLE);
+        getOrCreateTagBuilder(CANNOT_GET_FLEXIBLE).addTag(FREE_CHEST);
+        getOrCreateTagBuilder(ALREADY_FLEXIBLE).add(Items.LEATHER_CHESTPLATE);
+        getOrCreateTagBuilder(ALREADY_FLEXIBLE).add(Items.CHAINMAIL_CHESTPLATE);
+        getOrCreateTagBuilder(FREE_CHEST).add(Items.ELYTRA);
+        //getOrCreateTagBuilder(FREE_CHEST).add(Identifier.of("sophisticatedbackpacks", "backpack")); //no. this doesnt allow me to add stuff without having the mod as a compile time dependency.
     }
 }

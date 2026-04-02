@@ -10,7 +10,9 @@ import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.Enchantments;
+import net.minecraft.enchantment.Enchantment.Rarity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.damage.DamageType;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.item.ItemStack;
@@ -84,6 +86,9 @@ public class BreakingFemme implements ModInitializer {
 		VillagerAttachments.registerAttachments();
 		ModNetworking.registerC2SPackets();
 		ModNetworking.registerS2CPackets();
+		
+		//add flexibility enchantment
+		Registry.register(Registries.ENCHANTMENT, new Identifier(BreakingFemme.MOD_ID, "flexibility"), new FlexibilityEnchantment(Rarity.UNCOMMON, EquipmentSlot.CHEST));
 
 		//Register kinetics command (shows levels of different chemicals in the player)
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> KineticsCommand.register(dispatcher));
