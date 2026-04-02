@@ -27,7 +27,7 @@ public class VillagerAttachments {
  
     public static final AttachmentType<String> NAME = AttachmentRegistry.createPersistent( //custom name of the villager (if it doesnt exist, it doesnt have one)
         Identifier.of(BreakingFemme.MOD_ID, "name"), Codec.STRING);
-    public static final int MAX_ESTRO_PROGRESS = 288000; //this really is the amount of time the villager needs to transition: about 3h 40min irl
+    public static final int MAX_ESTRO_PROGRESS = 1728000; //this really is the amount of time the villager needs to transition: 1 irl day, i.e. ... 72 mc days. oh yeah that's quick!
     public static final AttachmentType<Integer> ESTRO_PROGRESS = AttachmentRegistry.createPersistent( //basically like number of doses of estrogen
         Identifier.of(BreakingFemme.MOD_ID, "estro_progress"), Codec.intRange(0, MAX_ESTRO_PROGRESS));
     public static final AttachmentType<Long> ESTRO_NEED_TIME = AttachmentRegistry.createPersistent( //age when needing estrogen again
