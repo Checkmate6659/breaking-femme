@@ -58,7 +58,9 @@ public class EgelCauldronBlock extends AbstractCauldronBlock {
 
         //add bottle to empty cauldron
         CauldronBehavior.EMPTY_CAULDRON_BEHAVIOR.put(ModItems.EGEL_BOTTLE, (state, world, pos, player, hand, stack) -> {
-            if (!world.isClient) {
+            if(stack.isDamaged())
+                return ActionResult.PASS;
+            else if (!world.isClient) {
                 Item item = stack.getItem();
                 player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, new ItemStack(Items.GLASS_BOTTLE)));
                 player.incrementStat(Stats.USE_CAULDRON);
@@ -72,7 +74,7 @@ public class EgelCauldronBlock extends AbstractCauldronBlock {
 
         //add bottle to partially full cauldron
         BEHAVIOR.put(ModItems.EGEL_BOTTLE, (state, world, pos, player, hand, stack) -> {
-            if (state.get(LEVEL) == 3) {
+            if (state.get(LEVEL) == 3 || stack.isDamaged()) {
                 return ActionResult.PASS;
             } else if (!world.isClient) {
                 Item item = stack.getItem();
