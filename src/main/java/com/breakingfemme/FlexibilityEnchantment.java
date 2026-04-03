@@ -30,6 +30,6 @@ public class FlexibilityEnchantment extends Enchantment {
 
 	@Override
 	public boolean isAcceptableItem(ItemStack stack) {
-		return !stack.isIn(ModItemTagProvider.CANNOT_GET_FLEXIBLE) && super.isAcceptableItem(stack);
+		return !stack.isIn(ModItemTagProvider.ALREADY_FLEXIBLE) && super.isAcceptableItem(stack);
 	}
 }

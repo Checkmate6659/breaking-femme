@@ -61,7 +61,6 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
     //armor tags
     //TODO: reimpl this https://github.com/MayaqqDev/Estrogen/blob/kotlin/src/main/java/dev/mayaqq/estrogen/mixin/client/PlayerModelMixin.java
     //and mb fix some stuff, theres some dodgy texture grabbing going on at the end of this
-    public static final TagKey<Item> CANNOT_GET_FLEXIBLE = TagKey.of(RegistryKeys.ITEM, new Identifier("breakingfemme", "not_flexible"));
     public static final TagKey<Item> ALREADY_FLEXIBLE = TagKey.of(RegistryKeys.ITEM, new Identifier("breakingfemme", "already_flexible"));
     public static final TagKey<Item> FREE_CHEST = TagKey.of(RegistryKeys.ITEM, new Identifier("breakingfemme", "free_chest"));
 
@@ -126,8 +125,7 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
         getOrCreateTagBuilder(VEGETABLE3).add(ModItems.GROUND_CHILI_PEPPER);
 
         //armor tags
-        getOrCreateTagBuilder(CANNOT_GET_FLEXIBLE).addTag(ALREADY_FLEXIBLE);
-        getOrCreateTagBuilder(CANNOT_GET_FLEXIBLE).addTag(FREE_CHEST);
+        getOrCreateTagBuilder(ALREADY_FLEXIBLE).addTag(FREE_CHEST);
         getOrCreateTagBuilder(ALREADY_FLEXIBLE).add(Items.LEATHER_CHESTPLATE);
         getOrCreateTagBuilder(ALREADY_FLEXIBLE).add(Items.CHAINMAIL_CHESTPLATE);
         getOrCreateTagBuilder(FREE_CHEST).add(Items.ELYTRA);
