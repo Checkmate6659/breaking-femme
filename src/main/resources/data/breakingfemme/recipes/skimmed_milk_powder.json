@@ -1,0 +1,11 @@
+{
+    "type": "breakingfemme:grinding",
+    "input":
+    {
+        "item": "breakingfemme:milkgot"
+    },
+    "output":
+    {
+        "item": "breakingfemme:skimmed_milk_powder"
+    }
+}

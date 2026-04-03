@@ -1,0 +1,14 @@
+{
+  "type": "create:milling",
+  "ingredients": [
+    {
+      "item": "breakingfemme:milkgot"
+    }
+  ],
+  "processingTime": 120,
+  "results": [
+    {
+      "item": "breakingfemme:skimmed_milk_powder"
+    }
+  ]
+}

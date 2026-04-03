@@ -48,6 +48,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.PURE_ESTRONE, Models.GENERATED);
         itemModelGenerator.register(ModItems.PURE_ESTRADIOL_CRYSTALS, Models.GENERATED);
         itemModelGenerator.register(ModItems.PURE_ESTRADIOL_POWDER, Models.GENERATED);
+        itemModelGenerator.register(ModItems.HORSE_JUICE, Models.GENERATED);
         itemModelGenerator.register(ModItems.BEER_BOTTLE, Models.GENERATED);
         itemModelGenerator.register(ModItems.NETHER_BEER_BOTTLE, Models.GENERATED);
         itemModelGenerator.register(ModItems.ET32_BOTTLE, Models.GENERATED);
@@ -60,6 +61,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.SKIMMED_MILK_BUCKET, Models.GENERATED);
         itemModelGenerator.register(ModItems.MILKGOT_MOLD, Models.GENERATED);
         itemModelGenerator.register(ModItems.MILKGOT, Models.GENERATED);
+        itemModelGenerator.register(ModItems.SMP, Models.GENERATED);
         itemModelGenerator.register(ModItems.CREAMGOT_MOLD, Models.GENERATED);
         itemModelGenerator.register(ModItems.CREAMGOT, Models.GENERATED);
         itemModelGenerator.register(ModItems.MORTAR_PESTLE, Models.GENERATED);

@@ -48,6 +48,7 @@ public class ModItems {
     public static final Item SKIMMED_MILK_BUCKET = registerItem("skimmed_milk_bucket", new MilkBucketItem(new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
     public static final Item MILKGOT_MOLD = registerItem("milkgot_mold", new FullMoldItem(new FabricItemSettings()));
     public static final Item MILKGOT = registerItem("milkgot", new Item(new FabricItemSettings()));
+    public static final Item SMP = registerItem("skimmed_milk_powder", new Item(new FabricItemSettings()));
     public static final Item CREAMGOT_MOLD = registerItem("creamgot_mold", new FullMoldItem(new FabricItemSettings()));
     public static final Item CREAMGOT = registerItem("creamgot", new Item(new FabricItemSettings()));
 
@@ -80,6 +81,7 @@ public class ModItems {
     public static final Item PURE_ESTRONE = registerItem("pure_estrone", new Item(new FabricItemSettings()));
     public static final Item PURE_ESTRADIOL_CRYSTALS = registerItem("pure_estradiol_crystals", new Item(new FabricItemSettings()));
     public static final Item PURE_ESTRADIOL_POWDER = registerItem("pure_estradiol_powder", new Item(new FabricItemSettings()));
+    public static final Item HORSE_JUICE = registerItem("conjugated_equine_estrogens", new Item(new FabricItemSettings()));
 
     //Estrogens
     public static final Item EGEL_BOTTLE = registerItem("egel_bottle", new EgelItem(new FabricItemSettings().maxDamage(64)));
@@ -129,6 +131,7 @@ public class ModItems {
             entries.add(INGOT_MOLD);
             entries.add(MILKGOT_MOLD);
             entries.add(MILKGOT);
+            entries.add(SMP);
             entries.add(CREAMGOT_MOLD);
             entries.add(CREAMGOT);
             entries.add(ModFluids.COAL_OIL_BUCKET);
@@ -141,6 +144,7 @@ public class ModItems {
             entries.add(PURE_ESTRONE);
             entries.add(PURE_ESTRADIOL_CRYSTALS);
             entries.add(PURE_ESTRADIOL_POWDER);
+            entries.add(HORSE_JUICE);
             entries.add(ModBlocks.FERMENTER_CONTROLLER);
             entries.add(ModBlocks.FERMENTER_PANEL);
             entries.add(ModBlocks.FERMENTER_TOP);

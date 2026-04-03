@@ -102,7 +102,7 @@ public class ThickPotionCauldronBlock extends AbstractCauldronBlock {
         });
 
         //convert to egel when adding e to a full cauldron
-        BEHAVIOR.put(ModItems.PURE_ESTRADIOL_POWDER, (state, world, pos, player, hand, stack) -> {
+        CauldronBehavior convert_to_e = (state, world, pos, player, hand, stack) -> {
             if (state.get(LEVEL) != 3) {
                 return ActionResult.PASS;
             } else if (!world.isClient) {
@@ -115,7 +115,10 @@ public class ThickPotionCauldronBlock extends AbstractCauldronBlock {
                 world.emitGameEvent((Entity)null, GameEvent.FLUID_PLACE, pos);
             }
             return ActionResult.success(world.isClient);
-        });
+        };
+
+        BEHAVIOR.put(ModItems.PURE_ESTRADIOL_POWDER, convert_to_e); //made with this mod
+        BEHAVIOR.put(ModItems.HORSE_JUICE, convert_to_e); //compat with Mayaqq's Estrogen mod
     }
 
     public ThickPotionCauldronBlock(AbstractBlock.Settings settings) {

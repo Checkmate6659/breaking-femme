@@ -81,6 +81,7 @@
     "item.breakingfemme.unstable.tooltip": "§8Unstable",
     "item.breakingfemme.milkgot_mold": "Milkgot Mold",
     "item.breakingfemme.milkgot": "Milkgot",
+    "item.breakingfemme.skimmed_milk_powder": "Skimmed Milk Powder",
     "item.breakingfemme.creamgot_mold": "Creamgot Mold",
     "item.breakingfemme.creamgot": "Creamgot",
     "item.breakingfemme.coal_oil_bucket": "Coal Oil Bucket",
@@ -100,6 +101,7 @@
     "item.breakingfemme.pure_estradiol_crystals": "Pure Estradiol Crystals",
     "item.breakingfemme.pure_estradiol_powder": "Pure Estradiol Powder",
     "item.breakingfemme.raw_nickel": "Raw Nickel",
+    "item.breakingfemme.conjugated_equine_estrogens": "Conjugated Equine Estrogens",
 
     "block.breakingfemme.milk_separator": "Milk Separator",
     "block.breakingfemme.nickel_ore": "Nickel Ore",
