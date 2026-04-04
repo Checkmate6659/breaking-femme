@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.jetbrains.annotations.Nullable;
 
+import net.minecraft.block.AzaleaBlock;
+import net.minecraft.block.Block;
 import net.minecraft.block.SaplingBlock;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.BoneMealItem;
@@ -31,8 +33,13 @@ public class CopperSulfateItem extends BoneMealItem {
         return ActionResult.PASS;
 	}
 
+	private static boolean isTree(Block block)
+	{
+		return (block instanceof SaplingBlock) || (block instanceof AzaleaBlock);
+	}
+
 	public static boolean useOnFertilizable(ItemStack stack, World world, BlockPos pos) {
-		if (!(world.getBlockState(pos).getBlock() instanceof SaplingBlock))
+		if (!isTree(world.getBlockState(pos).getBlock()))
             return false;
         return BoneMealItem.useOnFertilizable(stack, world, pos);
 	}
