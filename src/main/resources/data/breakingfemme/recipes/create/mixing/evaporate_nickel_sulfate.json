@@ -1,0 +1,16 @@
+{
+  "type": "create:mixing",
+  "heatRequirement": "heated",
+  "ingredients": [
+    {
+      "amount": 1215,
+      "fluid": "breakingfemme:nickel_sulfate_solution"
+    }
+  ],
+  "results": [
+    {
+      "chance": 0.010000001,
+      "item": "breakingfemme:nickel_sulfate"
+    }
+  ]
+}

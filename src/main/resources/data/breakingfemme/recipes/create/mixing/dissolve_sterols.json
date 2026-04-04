@@ -1,0 +1,18 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "breakingfemme:sterols"
+    },
+    {
+      "amount": 81000,
+      "fluid": "breakingfemme:ethanol64"
+    }
+  ],
+  "results": [
+    {
+      "amount": 81000,
+      "fluid": "breakingfemme:sterol_solution"
+    }
+  ]
+}

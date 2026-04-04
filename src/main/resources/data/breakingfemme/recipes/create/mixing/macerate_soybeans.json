@@ -1,0 +1,23 @@
+{
+  "type": "create:mixing",
+  "heatRequirement": "heated",
+  "ingredients": [
+    {
+      "item": "breakingfemme:soybeans"
+    },
+    {
+      "amount": 810,
+      "fluid": "breakingfemme:ethanol64"
+    }
+  ],
+  "results": [
+    {
+      "amount": 810,
+      "fluid": "breakingfemme:sterol_solution"
+    },
+    {
+      "chance": 0.99,
+      "item": "breakingfemme:soybeans"
+    }
+  ]
+}

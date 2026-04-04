@@ -1,0 +1,15 @@
+{
+  "type": "create:mixing",
+  "heatRequirement": "superheated",
+  "ingredients": [
+    {
+      "amount": 81000,
+      "fluid": "breakingfemme:sterol_solution"
+    }
+  ],
+  "results": [
+    {
+      "item": "breakingfemme:sterols"
+    }
+  ]
+}

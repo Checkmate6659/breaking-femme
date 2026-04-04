@@ -1,0 +1,15 @@
+{
+  "type": "create:mixing",
+  "heatRequirement": "superheated",
+  "ingredients": [
+    {
+      "amount": 81000,
+      "fluid": "breakingfemme:nickel_sulfate_solution"
+    }
+  ],
+  "results": [
+    {
+      "item": "breakingfemme:nickel_sulfate"
+    }
+  ]
+}
