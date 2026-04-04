@@ -19,6 +19,9 @@ repositories {
 
 	//Patchouli for instruction book
 	maven { url 'https://maven.blamejared.com' }
+
+	//REI for... REI compatibility
+    maven { url "https://maven.shedaniel.me" }
 }
 
 fabricApi {
@@ -41,6 +44,9 @@ dependencies {
 	//include "vazkii.patchouli:Patchouli:1.20.1-85-FABRIC" //its actually in the final build
 	modImplementation "vazkii.patchouli:Patchouli:1.20.1-85-FABRIC" //if i cant mixin im staying with this.
 	//also, mb no jar-in-jar. cuz this mod is used in other mods as well
+
+	//REI: available versions here https://maven.shedaniel.me/me/shedaniel/RoughlyEnoughItems-api-fabric/
+	modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:12.1.785" //latest of version 12, hope its gonna be fine if users just install random versions of rei...
 
 	//https://github.com/Fabricators-of-Create/create-fabric-addon-template/blob/1.20.1/build.gradle
 	// Create - dependencies are added transitively
