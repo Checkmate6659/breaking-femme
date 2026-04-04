@@ -151,6 +151,10 @@ public class BreakingFemme implements ModInitializer {
         FuelRegistry.INSTANCE.add(ModFluids.TAR_BUCKET, 6400); //1 bucket of tar can cook 32 items
         FuelRegistry.INSTANCE.add(ModItems.TAR, 800); //and a ball of tar is 4 items (worse than coal, so dont use tar for fuel)
         FuelRegistry.INSTANCE.add(ModFluids.COAL_OIL_BUCKET, 12800); //you can use coal oil tho. its not gasoline but it does cook a stack of items.
+
+		//TODO: add create mod blaze burner fuels!! (with regular create its just items, not fluids tho)
+		//sample code: https://github.com/mrh0/createaddition/blob/1.20.1/src/main/java/com/mrh0/createaddition/CreateAddition.java#L128
+		//it would be funny to give chili peppers to blaze burners too
 	}
 
 
