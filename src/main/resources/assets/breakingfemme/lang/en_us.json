@@ -60,6 +60,7 @@
     "item.breakingfemme.pulverized_copper": "Pulverized Copper",
     "item.breakingfemme.pulverized_nickel": "Pulverized Nickel",
     "item.breakingfemme.copper_sulfate": "Copper Sulfate",
+    "item.breakingfemme.copper_sulfate.tooltip": "§8Apply to saplings to help them grow",
     "item.breakingfemme.nickel_sulfate": "Nickel Sulfate",
     "item.breakingfemme.copper_sulfate_solution_bucket": "Copper Sulfate Solution Bucket",
     "item.breakingfemme.nickel_sulfate_solution_bucket": "Nickel Sulfate Solution Bucket",
