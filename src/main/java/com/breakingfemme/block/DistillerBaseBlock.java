@@ -6,6 +6,7 @@ import com.breakingfemme.BreakingFemme;
 import com.breakingfemme.block.entity.DistillerBlockEntity;
 import com.breakingfemme.block.entity.ModBlockEntities;
 
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -62,10 +63,10 @@ public class DistillerBaseBlock extends BlockWithEntity {
 
         if (blockEntity instanceof DistillerBlockEntity distiller) {
             //spill fluid if not empty
-            Pair<FlowableFluid, Integer> fluid = distiller.getFluid(0);
-            int level = fluid.getRight();
-            if(level > 0)
-                BreakingFemme.spillFluid(world, pos, fluid.getLeft(), 8 - (level * 8) / 81000);
+            Pair<FluidVariant, Integer> fluid_pair = distiller.getFluid(0);
+            int level = fluid_pair.getRight();
+            if(fluid_pair.getLeft().getObject() instanceof FlowableFluid ffluid && level > 0)
+                BreakingFemme.spillFluid(world, pos, ffluid, 8 - (level * 8) / 81000);
 
             //reset comparator output
             world.updateComparators(pos,this);

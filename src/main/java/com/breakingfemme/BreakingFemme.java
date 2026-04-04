@@ -8,6 +8,7 @@ import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.enchantment.Enchantment.Rarity;
@@ -24,6 +25,7 @@ import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.function.ApplyBonusLootFunction;
 import net.minecraft.loot.function.SetCountLootFunction;
 import net.minecraft.loot.provider.number.BinomialLootNumberProvider;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -153,14 +155,14 @@ public class BreakingFemme implements ModInitializer {
 
 
 	//======================== UTILITY FUNCTIONS ========================
-	public static String nameOfFluid(FlowableFluid fluid)
+	public static NbtCompound nbtOfFluid(FluidVariant fluid)
 	{
-		return Registries.FLUID.getId(fluid).toString();
+		return fluid.toNbt();
 	}
 
-	public static FlowableFluid fluidFromName(String name)
+	public static FluidVariant fluidFromNbt(NbtCompound nbt)
 	{
-		return (FlowableFluid)Registries.FLUID.get(new Identifier(name));
+		return FluidVariant.fromNbt(nbt);
 	}
 
 	public static void spillFluid(World world, BlockPos pos, FlowableFluid fluid, int level)

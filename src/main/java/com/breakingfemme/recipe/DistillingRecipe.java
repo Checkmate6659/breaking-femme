@@ -3,9 +3,12 @@ package com.breakingfemme.recipe;
 import com.breakingfemme.BreakingFemme;
 import com.breakingfemme.block.entity.FluidInventory;
 import com.google.gson.JsonObject;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 
-import net.minecraft.fluid.FlowableFluid;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.StringNbtReader;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeSerializer;
@@ -20,10 +23,10 @@ import net.minecraft.world.World;
 //TODO: real distillations actually have more than one output, do this here too?
 public class DistillingRecipe implements Recipe<FluidInventory> {
     private final Identifier id;
-    private final FlowableFluid input, output;
+    private final FluidVariant input, output;
     private final int inputq, outputq;
 
-    public DistillingRecipe(Identifier id, FlowableFluid input, int input_quantity, FlowableFluid output, int output_quantity)
+    public DistillingRecipe(Identifier id, FluidVariant input, int input_quantity, FluidVariant output, int output_quantity)
     {
         this.id = id;
         this.input = input;
@@ -32,24 +35,24 @@ public class DistillingRecipe implements Recipe<FluidInventory> {
         this.outputq = output_quantity;
     }
 
-    public Pair<FlowableFluid, Integer> getInput()
+    public Pair<FluidVariant, Integer> getInput()
     {
-        return new Pair<FlowableFluid, Integer>(this.input, this.inputq);
+        return new Pair<FluidVariant, Integer>(this.input, this.inputq);
     }
 
-    public Pair<FlowableFluid, Integer> getOutput()
+    public Pair<FluidVariant, Integer> getOutput()
     {
-        return new Pair<FlowableFluid, Integer>(this.output, this.outputq);
+        return new Pair<FluidVariant, Integer>(this.output, this.outputq);
     }
 
     @Override
     public boolean matches(FluidInventory inventory, World world) {
         if (inventory.size() < 2) return false;
 
-        Pair<FlowableFluid, Integer> fluid1 = inventory.getFluid(0);
+        Pair<FluidVariant, Integer> fluid1 = inventory.getFluid(0);
         if(fluid1.getRight() < inputq || !fluid1.getLeft().equals(input)) return false;
 
-        Pair<FlowableFluid, Integer> fluid2 = inventory.getFluid(inventory.size() - 1);
+        Pair<FluidVariant, Integer> fluid2 = inventory.getFluid(inventory.size() - 1);
         if(fluid2.getRight() < outputq || !fluid2.getLeft().equals(output)) return false;
 
         return true;
@@ -102,19 +105,26 @@ public class DistillingRecipe implements Recipe<FluidInventory> {
         @Override
         public DistillingRecipe read(Identifier id, JsonObject json)
         {
+            NbtCompound nbt;
+            try { //TODO: less janky way to do this shit!
+                nbt = StringNbtReader.parse(json.toString());
+            } catch (CommandSyntaxException e) {
+                BreakingFemme.LOGGER.error("Invalid recipe encountered in " + id.toString());
+                nbt = new NbtCompound(); //the reading will crash after this btw, just print an extra error message to help debug.
+            }
             return new DistillingRecipe(id,
-                BreakingFemme.fluidFromName(JsonHelper.getString(json, "input")),
-                JsonHelper.getInt(json, "input_quantity"),
-                BreakingFemme.fluidFromName(JsonHelper.getString(json, "output")),
-                JsonHelper.getInt(json, "output_quantity")
+                BreakingFemme.fluidFromNbt(nbt.getCompound("input")),
+                JsonHelper.getInt(JsonHelper.getObject(json, "input"), "quantity"),
+                BreakingFemme.fluidFromNbt(nbt.getCompound("output")),
+                JsonHelper.getInt(JsonHelper.getObject(json, "output"), "quantity")
             );
         }
 
         @Override
         public DistillingRecipe read(Identifier id, PacketByteBuf buf)
         {
-            FlowableFluid input =  BreakingFemme.fluidFromName(buf.readString());
-            FlowableFluid output = BreakingFemme.fluidFromName(buf.readString());
+            FluidVariant input =  FluidVariant.fromPacket(buf);
+            FluidVariant output = FluidVariant.fromPacket(buf);
             int inputq =  buf.readInt();
             int outputq = buf.readInt();
 
@@ -124,8 +134,8 @@ public class DistillingRecipe implements Recipe<FluidInventory> {
         @Override
         public void write(PacketByteBuf buf, DistillingRecipe recipe)
         {
-            buf.writeString(BreakingFemme.nameOfFluid(recipe.input));
-            buf.writeString(BreakingFemme.nameOfFluid(recipe.output));
+            recipe.input.toPacket(buf);
+            recipe.output.toPacket(buf);
             buf.writeInt(recipe.inputq);
             buf.writeInt(recipe.outputq);
         }

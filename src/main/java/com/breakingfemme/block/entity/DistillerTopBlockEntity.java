@@ -19,12 +19,8 @@ public class DistillerTopBlockEntity extends BlockEntity implements SidedStorage
         super(ModBlockEntities.DISTILLER_TOP_BLOCK_ENTITY, pos, state);
     }
 
+    //Fluid variant storage
     //https://wiki.fabricmc.net/tutorial:transfer-api
-    //TODO: figure out why this doesnt just work
-    //TODO: check this out https://github.com/Fabricators-of-Create/Create/blob/mc1.20.1/fabric/dev/src/main/java/com/simibubi/create/content/fluids/tank/FluidTankBlockEntity.java
-    //or this rather https://github.com/Fabricators-of-Create/Create/blob/mc1.20.1/fabric/dev/src/main/java/com/simibubi/create/content/fluids/drain/ItemDrainBlockEntity.java
-    //1.21 yt tutorial: https://www.youtube.com/watch?v=RCMkl3mJ55w
-    //TODO: we could use SingleVariantStorage, or just not use withFixedCapacity mb, to be unable to insert, only extract
     public final SingleFluidStorage fluidStorage = new SingleFluidStorage() {
         @Override
         protected long getCapacity(FluidVariant variant) {

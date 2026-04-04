@@ -1,7 +1,7 @@
 package com.breakingfemme.block.entity;
 
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Pair;
@@ -10,7 +10,7 @@ import net.minecraft.util.collection.DefaultedList;
 //TODO: check out net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage, for mod compat
 @FunctionalInterface
 public interface FluidInventory extends Inventory {
-	DefaultedList<Pair<FlowableFluid, Integer>> getFluids();
+	DefaultedList<Pair<FluidVariant, Integer>> getFluids();
 
 	@Override
 	default public int size() {
@@ -19,7 +19,7 @@ public interface FluidInventory extends Inventory {
 
 	@Override
 	default public boolean isEmpty() {
-		for(Pair<FlowableFluid, Integer> fluid : getFluids())
+		for(Pair<FluidVariant, Integer> fluid : getFluids())
 			if(fluid.getRight() > 0)
 				return false;
 		return true;
@@ -33,7 +33,7 @@ public interface FluidInventory extends Inventory {
 		getFluids().clear();
 	}
 
-	default public Pair<FlowableFluid, Integer> getFluid(int i)
+	default public Pair<FluidVariant, Integer> getFluid(int i)
 	{
 		return getFluids().get(i);
 	}

@@ -24,6 +24,7 @@ public class ModBlockEntities {
         FabricBlockEntityTypeBuilder.create(DistillerTopBlockEntity::new, ModBlocks.DISTILLER_TOP).build());
 
     public static void registerBlockEntities() {
+        FluidStorage.SIDED.registerForBlockEntity(DistillerBlockEntity::getFluidStorage, DISTILLER_BLOCK_ENTITY);
         FluidStorage.SIDED.registerForBlockEntity(DistillerTopBlockEntity::getFluidStorage, DISTILLER_TOP_BLOCK_ENTITY);
     }
 }

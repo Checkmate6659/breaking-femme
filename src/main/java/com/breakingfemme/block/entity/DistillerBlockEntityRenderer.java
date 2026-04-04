@@ -11,12 +11,14 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandler;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayers;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.fluid.FlowableFluid;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.util.Pair;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -27,8 +29,11 @@ public class DistillerBlockEntityRenderer implements BlockEntityRenderer<Distill
 
     @Override
     public void render(DistillerBlockEntity blockEntity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
-        Pair<FlowableFluid, Integer> fluid_pair = blockEntity.getFluid(0);
-        FlowableFluid fluid = fluid_pair.getLeft();
+        Pair<FluidVariant, Integer> fluid_pair = blockEntity.getFluid(0);
+        FluidVariant fluidv = fluid_pair.getLeft();
+        Fluid fluid = fluidv.getObject();
+        if(!(fluid instanceof FlowableFluid)) return; //TODO: be able to render non-flowable fluids too (look at create mod ig, with sth like milk)
+        FlowableFluid ffluid = (FlowableFluid)fluid;
         int level = fluid_pair.getRight();
 
         if(level == 0) //empty => do nothing special
@@ -40,16 +45,16 @@ public class DistillerBlockEntityRenderer implements BlockEntityRenderer<Distill
 
         BlockPos pos = blockEntity.getPos();
         World world = blockEntity.getWorld();
-        VertexConsumer vc = vertexConsumers.getBuffer(RenderLayers.getFluidLayer(fluid.getStill(false)));
-        FluidRenderHandler handler = FluidRenderHandlerRegistry.INSTANCE.get(fluid);
-        Sprite sprite = handler.getFluidSprites(world, pos, fluid.getDefaultState())[0]; //0 is still (in atlas), 1 is flowing
+        VertexConsumer vc = vertexConsumers.getBuffer(RenderLayers.getFluidLayer(ffluid.getStill(false)));
+        FluidRenderHandler handler = FluidRenderHandlerRegistry.INSTANCE.get(ffluid);
+        Sprite sprite = handler.getFluidSprites(world, pos, ffluid.getDefaultState())[0]; //0 is still (in atlas), 1 is flowing
 
         float minU = sprite.getMinU();
         float minV = sprite.getMinV();
         float maxU = sprite.getMaxU();
         float maxV = sprite.getMaxV();
 
-        int col = handler.getFluidColor(world, pos, fluid.getDefaultState());
+        int col = handler.getFluidColor(world, pos, ffluid.getDefaultState());
         if(col < 0x1000000) col |= 0xFF000000; //if fluid would be completely invisible (alpha = 0), set its alpha to 1
 
         Matrix4f pos_matrix = matrices.peek().getPositionMatrix();
