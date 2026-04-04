@@ -102,7 +102,7 @@ public class VillagerPickupMixin {
         {
             //compute amount of emeralds to pay: check how many items can be inserted
             int value = 4; //number of insertable stacks
-            if(!stack.isOf(Items.NAME_TAG)) value = 4; //1 name tag -> 4 emeralds
+            if(!stack.isOf(Items.NAME_TAG)) //1 name tag -> 4 emeralds
             {
                 Item item = stack.getItem();
                 int init_count = stack.getCount();
