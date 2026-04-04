@@ -1,0 +1,11 @@
+{
+    "type": "breakingfemme:distilling",
+    "input": {
+        "fluid": "breakingfemme:ethanol64",
+        "quantity": 3
+    },
+    "output": {
+        "fluid": "breakingfemme:ethanol95",
+        "quantity": 2
+    }
+}
