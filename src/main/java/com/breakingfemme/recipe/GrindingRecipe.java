@@ -3,6 +3,7 @@ package com.breakingfemme.recipe;
 import com.google.gson.JsonObject;
 
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.Ingredient;
@@ -49,6 +50,16 @@ public class GrindingRecipe implements Recipe<PlayerInventory> {
     @Override
     public Identifier getId() {
         return id;
+    }
+
+    public Item getInputForDisplay() {
+        long time = System.currentTimeMillis();
+        ItemStack[] stacks = input.getMatchingStacks();
+        return stacks[(int)((time / 1000) % stacks.length)].getItem();
+    }
+
+    public Item getOutputItem() {
+        return output.getItem();
     }
 
     @Override

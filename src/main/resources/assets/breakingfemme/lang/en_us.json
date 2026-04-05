@@ -142,6 +142,8 @@
     "death.attack.breakingfemme.distraction": "%1$s got distracted from her main purpose in this game",
     "death.attack.breakingfemme.headache": "%1$s got overpowered by her hair ache",
 
+    "recipe.breakingfemme.grinding": "Manual Grinding",
+
     "enchantment.breakingfemme.flexibility": "Flexibility",
 
     "command.breakingfemme.kinetics.summary": "Kinetics data of %1$s:",

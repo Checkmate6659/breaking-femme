@@ -1,28 +1,34 @@
 package com.breakingfemme.compat;
 
+import com.breakingfemme.item.ModItems;
+import com.breakingfemme.recipe.GrindingRecipe;
+import com.breakingfemme.screen.FermenterScreen;
+
+import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
 import me.shedaniel.rei.api.client.registry.category.CategoryRegistry;
 import me.shedaniel.rei.api.client.registry.display.DisplayRegistry;
 import me.shedaniel.rei.api.client.registry.screen.ScreenRegistry;
+import me.shedaniel.rei.api.common.util.EntryStacks;
 
-//https://www.youtube.com/watch?v=HbZ6ocABo-M
-//3:26
 public class BreakingFemmeREICompatPlugin implements REIClientPlugin {
     @Override
     public void registerCategories(CategoryRegistry registry)
     {
-        REIClientPlugin.super.registerCategories(registry);
+        registry.add(new GrindingCategory());
+        registry.addWorkstations(GrindingCategory.GRINDING, EntryStacks.of(ModItems.MORTAR_PESTLE));
     }
 
     @Override
     public void registerDisplays(DisplayRegistry registry)
     {
-        REIClientPlugin.super.registerDisplays(registry);
+        registry.registerRecipeFiller(GrindingRecipe.class, GrindingRecipe.Type.INSTANCE, GrindingDisplay::new);
     }
 
     @Override
     public void registerScreens(ScreenRegistry registry)
     {
-        REIClientPlugin.super.registerScreens(registry);
+        //TODO: make a custom screen for the grinding, just for the REI compatibility! ... if we need it ig
+        registry.registerClickArea(screen -> new Rectangle(75, 30, 20, 30), FermenterScreen.class, GrindingCategory.GRINDING);
     }
 }
