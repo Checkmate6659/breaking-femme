@@ -52,9 +52,8 @@ public class GrindingRecipe implements Recipe<PlayerInventory> {
         return id;
     }
 
-    public Item getInputForDisplay() {
-        ItemStack[] stacks = input.getMatchingStacks();
-        return stacks[0].getItem();
+    public Ingredient getInputIngredient() {
+        return input;
     }
 
     public Item getOutputItem() {

@@ -26,7 +26,6 @@ public class GrindingDisplay extends BasicDisplay {
 
     public GrindingDisplay(GrindingRecipe recipe)
     {
-        //TODO: find a way to make this like switch between items that match the given ingredient, like when we do tags
-        super(List.of(EntryIngredients.of(recipe.getInputForDisplay())), List.of(EntryIngredients.of(recipe.getOutputItem())));
+        super(List.of(EntryIngredients.ofIngredient(recipe.getInputIngredient())), List.of(EntryIngredients.of(recipe.getOutputItem())));
     }
 }
