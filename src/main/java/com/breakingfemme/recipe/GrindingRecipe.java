@@ -53,9 +53,8 @@ public class GrindingRecipe implements Recipe<PlayerInventory> {
     }
 
     public Item getInputForDisplay() {
-        long time = System.currentTimeMillis();
         ItemStack[] stacks = input.getMatchingStacks();
-        return stacks[(int)((time / 1000) % stacks.length)].getItem();
+        return stacks[0].getItem();
     }
 
     public Item getOutputItem() {

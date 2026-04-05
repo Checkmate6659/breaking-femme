@@ -19,13 +19,14 @@ public class GrindingDisplay extends BasicDisplay {
     }
 
     @Override
-    public CategoryIdentifier<?> getCategoryIdentifier() //wtf this SHOULD override the method in https://github.com/shedaniel/RoughlyEnoughItems/blob/12.x-1.20/api/src/main/java/me/shedaniel/rei/api/common/display/Display.java
+    public CategoryIdentifier<?> getCategoryIdentifier()
     {
         return GrindingCategory.GRINDING;
     }
 
     public GrindingDisplay(GrindingRecipe recipe)
     {
+        //TODO: find a way to make this like switch between items that match the given ingredient, like when we do tags
         super(List.of(EntryIngredients.of(recipe.getInputForDisplay())), List.of(EntryIngredients.of(recipe.getOutputItem())));
     }
 }
