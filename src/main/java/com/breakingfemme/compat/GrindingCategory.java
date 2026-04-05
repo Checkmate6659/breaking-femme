@@ -51,10 +51,10 @@ public class GrindingCategory implements DisplayCategory<BasicDisplay> {
         List<Widget> widgets = new LinkedList<>(); //why a linked list??
         widgets.add(Widgets.createTexturedWidget(TEXTURE, new Rectangle(startPoint.x, startPoint.y, 175, 82)));
 
-        widgets.add(Widgets.createSlot(new Point(startPoint.x + 23, startPoint.y + 42))
+        widgets.add(Widgets.createSlot(new Point(startPoint.x + 23, startPoint.y + 33))
             .entries(display.getInputEntries().get(0)) //ingredient 0 is input
         );
-        widgets.add(Widgets.createSlot(new Point(startPoint.x + 137, startPoint.y + 42))
+        widgets.add(Widgets.createSlot(new Point(startPoint.x + 137, startPoint.y + 33))
             .entries(display.getOutputEntries().get(0)) //output 0 is... output. well yeah.
         );
 
