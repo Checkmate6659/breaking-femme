@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.jetbrains.annotations.Nullable;
 
 import com.breakingfemme.BreakingFemme;
+import com.breakingfemme.block.ModBlocks;
 import com.breakingfemme.recipe.DistillingRecipe;
 
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
@@ -13,6 +14,7 @@ import net.fabricmc.fabric.api.transfer.v1.fluid.base.SingleFluidStorage;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
@@ -26,6 +28,7 @@ import net.minecraft.world.World;
 public class DistillerBlockEntity extends BlockEntity implements FluidInventory { //this one doesn't have an inventory (just fluids), and doesn't have a screen
     private DefaultedList<Pair<FluidVariant, Integer>> fluids = DefaultedList.ofSize(2, new Pair<FluidVariant, Integer>(FluidVariant.blank(), Integer.valueOf(0)));
     public float temperature = -69420.0f; //temperature in °C (TODO: move temperature function to dedicated thermal utils class)
+    //TODO: actually... you know... DO SOMETHING with the temperature. add multiple stages to the distillation?
 
     public DistillerBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.DISTILLER_BLOCK_ENTITY, pos, state);
@@ -43,12 +46,6 @@ public class DistillerBlockEntity extends BlockEntity implements FluidInventory 
         @Override
         protected long getCapacity(FluidVariant variant) {
             return FluidConstants.BUCKET;
-        }
-
-        @Override
-        public boolean canInsert(FluidVariant variant)
-        {
-            return false;
         }
 
         @Override
@@ -98,40 +95,130 @@ public class DistillerBlockEntity extends BlockEntity implements FluidInventory 
         return createNbt();
     }
 
+    private void combine_fluids(int slot, Pair<FluidVariant, Integer> fluid, boolean remove)
+    {
+        Pair<FluidVariant, Integer> orig = fluids.get(slot);
+        FluidVariant orig_fluid = orig.getLeft();
+        int orig_amount = orig.getRight();
+        FluidVariant added_fluid = fluid.getLeft();
+        int added_amount = fluid.getRight();
+        if(remove && orig_amount < added_amount)
+        {
+            BreakingFemme.LOGGER.error("Tried removing more fluid than what is possible, at DistillerBlockEntity at " + this.pos);
+        }
+        if(!remove && orig_amount > 0 && !orig_fluid.equals(added_fluid))
+        {
+            BreakingFemme.LOGGER.error("Tried combining different fluids, at DistillerBlockEntity at " + this.pos);
+        }
+
+        int new_amount = orig_amount;
+        if(remove) new_amount -= added_amount;
+        else new_amount += added_amount;
+
+        fluids.set(slot, new Pair<FluidVariant, Integer>(added_fluid, new_amount)); //added_fluid will always be the correct fluid, if there is no error
+    }
+
     public void tick(World world, BlockPos pos, BlockState state)
     {
         if(world.isClient()) return;
 
+        if(world.getTime() % 4 != 0) return; //don't always check for stuff and do distilling (lag reduction mostly)
+
         if(temperature == -69420.0f) //temperature uninitialized
             temperature = FermenterBlockEntity.environment_temperature(world, pos); //initialize to base temperature
 
-        //if(world.getTime() % 20 == 0) //TODO: heating etc
-        //    getFluid(0).setRight(69420);
+        //TODO: calculate heating, don't actually cook until hot enough!
+        if(!BreakingFemme.isBlockHot(world, pos.down()))
+            return;
 
         //TODO: bucket interaction (in the actual block ig?)
         //TODO: detecting top, we can check every tick if its still there or not, thats fine
         //TODO: distilling
         //TODO: this https://wiki.fabricmc.net/tutorial:transfer-api
 
-        //Optional<DistillingRecipe> match = world.getRecipeManager()
-        //    .getFirstMatch(DistillingRecipe.Type.INSTANCE, this, world);
+        //copy internal fluid storage into inventory
+        fluids.set(0, new Pair<FluidVariant, Integer>(this.fluidStorage.variant, (int)this.fluidStorage.amount));
 
-        /*long a = world.getTime() % 100;
-        if(a < 20)
-            fluid = Fluids.LAVA;
-        else if(a < 40)
-            fluid = Fluids.WATER;
-        else if(a < 60)
-            fluid = ModFluids.STILL_BEER;
-        else if(a < 80)
-            fluid = ModFluids.STILL_TAR;
+        //find the distiller top block
+        BlockPos top_pos = pos.up();
+        boolean invalid = false;
+        while(true) //TODO: decide and add a limit to how tall the distiller can be
+        {
+            BlockState column_state = world.getBlockState(top_pos);
+            if(column_state.isOf(ModBlocks.DISTILLER_COLUMN))
+            {
+                //check if full of gravel for efficiency? mb. what would that change? speed? fluid efficiency? idk.
+            }
+            else if(column_state.isOf(ModBlocks.DISTILLER_TOP))
+            {
+                //copy the fluid storage from the distiller top block
+                if(world.getBlockEntity(top_pos) instanceof DistillerTopBlockEntity top_be)
+                    fluids.set(1, new Pair<FluidVariant, Integer>(top_be.fluidStorage.variant, (int)top_be.fluidStorage.amount));
+                else
+                {
+                    BreakingFemme.LOGGER.error("Distiller Top block entity not found at " + top_pos);
+                    fluids.set(1, new Pair<FluidVariant, Integer>(FluidVariant.of(Fluids.WATER), 0));
+                }
+
+                //we found the top. that's great. now we keep going with the calculations.
+                //also this is the only way to exit without setting invalid to true
+                break;
+            }
+            else //invalid block state!! => invalid column
+            {
+                invalid = true;
+                break;
+            }
+
+            top_pos = top_pos.up(); //next block!
+        }
+
+        //TODO: void slot 1 content before... any return. or just don't do it at all.
+
+        if(invalid)
+        {
+            //TODO: mb do some stuff like fluid evaporation: the vapors just goes out in the air like that
+            //and do a bunch of particles for *pollution*, mb bad potion effects (weakness, slowness, poison) when getting too close
+            //but only if its out in the open
+            return;
+        }
+
+        //get a matching recipe
+        Optional<DistillingRecipe> match = world.getRecipeManager()
+            .getFirstMatch(DistillingRecipe.Type.INSTANCE, this, world);
+
+        if(!match.isPresent()) return; //we don't have a recipe
+        DistillingRecipe recipe = match.get();
+
+        //actually do a distilling step
+        //TODO: *maybe* we could use fabric transactions to do this instead.
+        //however if we want incompatible fluids in the distiller top to combine into making sludge, we need to do that by hand.
+        Pair<FluidVariant, Integer> input = recipe.getInput();
+        Pair<FluidVariant, Integer> output = recipe.getOutput();
+        combine_fluids(0, input, true);
+        combine_fluids(1, output, false);
+
+        //update the distiller base (inventory -> fluid storage)
+        this.fluidStorage.variant = fluids.get(0).getLeft();
+        this.fluidStorage.amount = fluids.get(0).getRight();
+
+        //update the distiller top
+        if(world.getBlockEntity(top_pos) instanceof DistillerTopBlockEntity top_be)
+        {
+            top_be.fluidStorage.variant = fluids.get(1).getLeft();
+            top_be.fluidStorage.amount = fluids.get(1).getRight();
+        }
         else
-            fluid = ModFluids.STILL_ANDROSTADIENEDIONE_OIL_SOLUTION;
+        {
+            BreakingFemme.LOGGER.error("Distiller Top block entity not found at " + top_pos);
+        }
 
-        level = (int)a * 810;*/
+        //this... might not be needed. but mb other mods would be like hey theres fluid here lets grab it. so just in case i void slot 1.
+        //fluids.set(1, new Pair<FluidVariant, Integer>(FluidVariant.of(Fluids.WATER), 0));
 
-        //markDirty(world, pos, state);
-        //world.updateListeners(pos, state, state, 0); //not calling that on every tick, since that makes running 32k distillers without a job in parallel unbearably laggy, while this much is fine
+        markDirty(world, pos, state);
+        world.updateListeners(pos, state, state, 0); //not calling that on every tick, since that makes running 32k distillers without a job in parallel unbearably laggy, while this much is fine
         //TODO: call it when necessary. just not always at the same time. cuz this is what sends clients the data actually.
+        //mb we *could* do something kinda dirty like only save once every 4 or 5 ticks, could do very slow and inefficient dupes ig... but meh.
     }
 }

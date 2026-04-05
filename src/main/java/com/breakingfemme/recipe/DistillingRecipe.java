@@ -5,6 +5,7 @@ import com.breakingfemme.block.entity.FluidInventory;
 import com.google.gson.JsonObject;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
@@ -53,7 +54,7 @@ public class DistillingRecipe implements Recipe<FluidInventory> {
         if(fluid1.getRight() < inputq || !fluid1.getLeft().equals(input)) return false;
 
         Pair<FluidVariant, Integer> fluid2 = inventory.getFluid(inventory.size() - 1);
-        if(fluid2.getRight() < outputq || !fluid2.getLeft().equals(output)) return false;
+        if(fluid2.getRight() + outputq > FluidConstants.BUCKET || (fluid2.getRight() > 0 && !fluid2.getLeft().equals(output))) return false; //TODO: less jank way, not to rely on fixed capacity!
 
         return true;
     }
