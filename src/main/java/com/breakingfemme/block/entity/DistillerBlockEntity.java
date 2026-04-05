@@ -64,10 +64,8 @@ public class DistillerBlockEntity extends BlockEntity implements FluidInventory 
     protected void writeNbt(NbtCompound nbt) //saving data from ingame to save
     {
         super.writeNbt(nbt);
-        nbt.put("base_content", BreakingFemme.nbtOfFluid(fluids.get(0).getLeft()));
-        nbt.putInt("base_level", fluids.get(0).getRight());
-        nbt.put("top_content", BreakingFemme.nbtOfFluid(fluids.get(1).getLeft()));
-        nbt.putInt("top_level", fluids.get(1).getRight());
+        nbt.put("fluidVariant", fluidStorage.variant.toNbt());
+        nbt.putLong("amount", fluidStorage.amount);
         nbt.putFloat("temperature", temperature);
     }
 
@@ -75,10 +73,8 @@ public class DistillerBlockEntity extends BlockEntity implements FluidInventory 
     public void readNbt(NbtCompound nbt) //loading data from save to ingame
     {
         super.readNbt(nbt);
-        fluids.get(0).setLeft(BreakingFemme.fluidFromNbt(nbt.getCompound("base_content")));
-        fluids.get(0).setRight(nbt.getInt("base_level"));
-        fluids.get(1).setLeft(BreakingFemme.fluidFromNbt(nbt.getCompound("top_content")));
-        fluids.get(1).setRight(nbt.getInt("top_level"));
+        fluidStorage.variant = FluidVariant.fromNbt(nbt.getCompound("fluidVariant"));
+		fluidStorage.amount = nbt.getLong("amount");
         temperature = nbt.getFloat("temperature");
     }
 
@@ -216,7 +212,7 @@ public class DistillerBlockEntity extends BlockEntity implements FluidInventory 
         //this... might not be needed. but mb other mods would be like hey theres fluid here lets grab it. so just in case i void slot 1.
         //fluids.set(1, new Pair<FluidVariant, Integer>(FluidVariant.of(Fluids.WATER), 0));
 
-        markDirty(world, pos, state);
+        markDirty(); //still need to call this. we're not saving the inv, but we just changed the nbt.
         world.updateListeners(pos, state, state, 0); //not calling that on every tick, since that makes running 32k distillers without a job in parallel unbearably laggy, while this much is fine
         //TODO: call it when necessary. just not always at the same time. cuz this is what sends clients the data actually.
         //mb we *could* do something kinda dirty like only save once every 4 or 5 ticks, could do very slow and inefficient dupes ig... but meh.

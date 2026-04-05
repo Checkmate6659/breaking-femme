@@ -49,7 +49,6 @@ public class DistillerTopBlockEntity extends BlockEntity implements SidedStorage
     protected void writeNbt(NbtCompound nbt) //saving data from ingame to save
     {
         super.writeNbt(nbt);
-        //fluidStorage.writeNbt(nbt); //there is no corresponding readNbt method...
         nbt.put("fluidVariant", fluidStorage.variant.toNbt());
         nbt.putLong("amount", fluidStorage.amount);
     }
