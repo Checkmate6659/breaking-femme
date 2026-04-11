@@ -140,6 +140,7 @@ public class ModItems {
             entries.add(ANDROSTADIENEDIONE_BOTTLE);
             entries.add(ModFluids.ANDROSTADIENEDIONE_OIL_SOLUTION_BUCKET);
             entries.add(ANDROSTADIENEDIONE_OIL_BOTTLE);
+            entries.add(ModFluids.ESTRONE_OIL_SOLUTION_BUCKET);
             entries.add(CRUDE_ESTRONE);
             entries.add(PURE_ESTRONE);
             entries.add(PURE_ESTRADIOL_CRYSTALS);
@@ -157,7 +158,6 @@ public class ModItems {
             entries.add(ModBlocks.DISTILLER_BASE);
             entries.add(ModBlocks.DISTILLER_COLUMN);
             entries.add(ModBlocks.DISTILLER_TOP);
-                        entries.add(ModFluids.ESTRONE_OIL_SOLUTION_BUCKET);
             //AUTOGENERATION LABEL DO NOT TOUCH
 
 

@@ -1,0 +1,12 @@
+{
+    "type": "breakingfemme:distilling",
+    "gravel": 4,
+    "input": {
+        "fluid": "breakingfemme:androstadienedione_oil_solution",
+        "quantity": 32
+    },
+    "output": {
+        "fluid": "breakingfemme:estrone_oil_solution",
+        "quantity": 1
+    }
+}
