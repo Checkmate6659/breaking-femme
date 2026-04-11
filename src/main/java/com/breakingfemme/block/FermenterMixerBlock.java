@@ -16,7 +16,6 @@ import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
@@ -92,7 +91,7 @@ public class FermenterMixerBlock extends Block implements Waterloggable {
     @Override
     public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
         if (!entity.bypassesSteppingEffects() && state.get(POWERED) && entity instanceof LivingEntity) {
-            entity.setYaw(MathHelper.wrapDegrees(entity.getYaw() - 15));
+            entity.setYaw(entity.getYaw() - 15); //slight problem: if you spin around a few hundred thousand times, your motion and rotation gets floated.
         }
 
         super.onSteppedOn(world, pos, state, entity);
