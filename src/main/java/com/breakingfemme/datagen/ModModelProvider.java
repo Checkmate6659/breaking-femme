@@ -85,6 +85,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModFluids.SLUDGE_BUCKET, Models.GENERATED);
         itemModelGenerator.register(ModFluids.ANDROSTADIENEDIONE_OIL_SOLUTION_BUCKET, Models.GENERATED);
         itemModelGenerator.register(ModFluids.COAL_OIL_BUCKET, Models.GENERATED);
+        itemModelGenerator.register(ModFluids.ESTRONE_OIL_SOLUTION_BUCKET, Models.GENERATED);
         //AUTOGENERATION LABEL DO NOT TOUCH
 
 

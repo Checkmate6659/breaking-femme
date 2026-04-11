@@ -48,10 +48,8 @@ public class ModFluidTagProvider extends FabricTagProvider.FluidTagProvider {
         getOrCreateTagBuilder(FLAMMABLE).add(ModFluids.FLOWING_ANDROSTADIENEDIONE_OIL_SOLUTION);
         getOrCreateTagBuilder(FLAMMABLE).add(ModFluids.STILL_COAL_OIL);
         getOrCreateTagBuilder(FLAMMABLE).add(ModFluids.FLOWING_COAL_OIL);
-        //TODO: make entities NOT extinguished by flammable fluids... or if touching flammable fluids
-        //so investigate/mixin Entity.getWaterState. with a new "flammable" tag potentially
-        //or... make this fluid have the lava tag, and mixin other methods?
-        //or actually, updateMovementInFluid doesn't depend too much on the tag, just need to move the entity around, alongside calls with water and lava tags
+        getOrCreateTagBuilder(FLAMMABLE).add(ModFluids.STILL_ESTRONE_OIL_SOLUTION);
+        getOrCreateTagBuilder(FLAMMABLE).add(ModFluids.FLOWING_ESTRONE_OIL_SOLUTION);
         //AUTOGENERATION LABEL DO NOT TOUCH
 
         //NOTE: tar does NOT behave like water. it doesn't make bubbles. its much more viscous than water. and you cant just see if youre submerged in tar.

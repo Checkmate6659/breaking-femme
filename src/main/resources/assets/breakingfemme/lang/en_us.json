@@ -91,6 +91,7 @@
     "item.breakingfemme.coal_oil_bottle": "Coal Oil Bottle",
     "item.breakingfemme.androstadienedione_solution_bottle": "Androstadienedione Solution Bottle",
     "item.breakingfemme.androstadienedione_oil_solution_bottle": "Androstadienedione Oil Solution Bottle",
+    "item.breakingfemme.estrone_oil_solution_bucket": "Estrone Oil Solution Bucket",
     "item.breakingfemme.mortar_pestle": "Mortar and Pestle",
     "item.breakingfemme.wheat_flour": "Wheat Flour",
     "item.breakingfemme.yeast": "Yeast",
@@ -133,6 +134,7 @@
     "block.breakingfemme.androstadienedione_solution_block": "Androstadienedione Solution",
     "block.breakingfemme.androstadienedione_oil_solution_block": "Androstadienedione Oil Solution",
     "block.breakingfemme.sludge_block": "Sludge",
+    "block.breakingfemme.estrone_oil_solution_block": "Estrone Oil Solution",
 
     "sound.breakingfemme.grinding": "Grinding",
     "sound.breakingfemme.crank": "Crank turns",

@@ -28,6 +28,7 @@ import com.breakingfemme.cauldron.NetherBeerCauldronBlock;
 import com.breakingfemme.cauldron.SludgeCauldronBlock;
 import com.breakingfemme.cauldron.AndrostadienedioneOilSolutionCauldronBlock;
 import com.breakingfemme.cauldron.CoalOilCauldronBlock;
+import com.breakingfemme.cauldron.EstroneOilSolutionCauldronBlock;
 //AUTOGENERATION LABEL DO NOT TOUCH
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -151,6 +152,12 @@ public class ModFluids {
     public static FlowableFluid STILL_SPILLAGE;
     public static FlowableFluid FLOWING_SPILLAGE;
     public static Block SPILLAGE_FLUID_BLOCK;
+    
+    public static FlowableFluid STILL_ESTRONE_OIL_SOLUTION;
+    public static FlowableFluid FLOWING_ESTRONE_OIL_SOLUTION;
+    public static Block ESTRONE_OIL_SOLUTION_FLUID_BLOCK;
+    public static Item ESTRONE_OIL_SOLUTION_BUCKET;
+    public static Block ESTRONE_OIL_SOLUTION_CAULDRON;
     //AUTOGENERATION LABEL DO NOT TOUCH
 
 public static void registerModFluids()
@@ -287,6 +294,15 @@ public static void registerModFluids()
         SPILLAGE_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "spillage_block"),
             new FluidBlock(STILL_SPILLAGE, FabricBlockSettings.copyOf(Blocks.WATER)){});
 
+        STILL_ESTRONE_OIL_SOLUTION = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "estrone_oil_solution"),
+            new EstroneOilSolutionFluid.Still());
+        FLOWING_ESTRONE_OIL_SOLUTION = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_estrone_oil_solution"),
+            new EstroneOilSolutionFluid.Flowing());
+        ESTRONE_OIL_SOLUTION_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "estrone_oil_solution_block"),
+            new FlammableFluidBlock(STILL_ESTRONE_OIL_SOLUTION, FabricBlockSettings.copyOf(Blocks.WATER)){}); //TODO: make custom class that increases your estrone level
+        ESTRONE_OIL_SOLUTION_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "estrone_oil_solution_bucket"),
+            new BucketItem(STILL_ESTRONE_OIL_SOLUTION, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
+
         //AUTOGENERATION LABEL DO NOT TOUCH
 
 
@@ -327,6 +343,8 @@ public static void registerModFluids()
         CauldronFluidContent.registerCauldron(ANDROSTADIENEDIONE_OIL_SOLUTION_CAULDRON, STILL_ANDROSTADIENEDIONE_OIL_SOLUTION, FluidConstants.BOTTLE, AndrostadienedioneOilSolutionCauldronBlock.LEVEL);
         COAL_OIL_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "coal_oil_cauldron"), new CoalOilCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
         CauldronFluidContent.registerCauldron(COAL_OIL_CAULDRON, STILL_COAL_OIL, FluidConstants.BOTTLE, CoalOilCauldronBlock.LEVEL);
+        ESTRONE_OIL_SOLUTION_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "estrone_oil_solution_cauldron"), new EstroneOilSolutionCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
+        CauldronFluidContent.registerCauldron(ESTRONE_OIL_SOLUTION_CAULDRON, STILL_ESTRONE_OIL_SOLUTION, FluidConstants.BUCKET, null);
         //AUTOGENERATION LABEL DO NOT TOUCH
 
 
