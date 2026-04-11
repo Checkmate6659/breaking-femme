@@ -1,12 +1,12 @@
 {
     "type": "breakingfemme:distilling",
-    "gravel": 1,
+    "gravel": 3,
     "input": {
-        "fluid": "breakingfemme:ethanol32",
+        "fluid": "breakingfemme:tar",
         "quantity": 3
     },
     "output": {
-        "fluid": "breakingfemme:ethanol95",
+        "fluid": "breakingfemme:coal_oil",
         "quantity": 1
     }
 }

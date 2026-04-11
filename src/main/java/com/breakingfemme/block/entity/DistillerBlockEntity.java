@@ -5,7 +5,9 @@ import java.util.Optional;
 import org.jetbrains.annotations.Nullable;
 
 import com.breakingfemme.BreakingFemme;
+import com.breakingfemme.block.DistillerColumnBlock;
 import com.breakingfemme.block.ModBlocks;
+import com.breakingfemme.fluid.ModFluids;
 import com.breakingfemme.recipe.DistillingRecipe;
 
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
@@ -101,10 +103,11 @@ public class DistillerBlockEntity extends BlockEntity implements FluidInventory 
         if(remove && orig_amount < added_amount)
         {
             BreakingFemme.LOGGER.error("Tried removing more fluid than what is possible, at DistillerBlockEntity at " + this.pos);
+            added_amount = orig_amount; //try to stop having negative numbers as the quantity
         }
-        if(!remove && orig_amount > 0 && !orig_fluid.equals(added_fluid))
+        if(!remove && orig_amount > 0 && !orig_fluid.equals(added_fluid)) //trying to combine different fluids: this is normal operation actually. it should just make sludge.
         {
-            BreakingFemme.LOGGER.error("Tried combining different fluids, at DistillerBlockEntity at " + this.pos);
+            added_fluid = FluidVariant.of(ModFluids.STILL_SLUDGE);
         }
 
         int new_amount = orig_amount;
@@ -138,12 +141,15 @@ public class DistillerBlockEntity extends BlockEntity implements FluidInventory 
         //find the distiller top block
         BlockPos top_pos = pos.up();
         boolean invalid = false;
+        int gravel_height = 0;
         while(true) //TODO: decide and add a limit to how tall the distiller can be
         {
             BlockState column_state = world.getBlockState(top_pos);
             if(column_state.isOf(ModBlocks.DISTILLER_COLUMN))
             {
-                //check if full of gravel for efficiency? mb. what would that change? speed? fluid efficiency? idk.
+                //check if full of gravel for requirement
+                if(column_state.get(DistillerColumnBlock.FULL))
+                    gravel_height++;
             }
             else if(column_state.isOf(ModBlocks.DISTILLER_TOP))
             {
@@ -191,6 +197,9 @@ public class DistillerBlockEntity extends BlockEntity implements FluidInventory 
         //however if we want incompatible fluids in the distiller top to combine into making sludge, we need to do that by hand.
         Pair<FluidVariant, Integer> input = recipe.getInput();
         Pair<FluidVariant, Integer> output = recipe.getOutput();
+        if(recipe.getMinimumGravelHeight() > gravel_height) //if not enough gravel in the column it should make sludge
+            output.setLeft(FluidVariant.of(ModFluids.STILL_SLUDGE));
+
         combine_fluids(0, input, true);
         combine_fluids(1, output, false);
 

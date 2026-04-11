@@ -26,14 +26,16 @@ public class DistillingRecipe implements Recipe<FluidInventory> {
     private final Identifier id;
     private final FluidVariant input, output;
     private final int inputq, outputq;
+    private final int gravel; //necessary gravel height in distillation column
 
-    public DistillingRecipe(Identifier id, FluidVariant input, int input_quantity, FluidVariant output, int output_quantity)
+    public DistillingRecipe(Identifier id, FluidVariant input, int input_quantity, FluidVariant output, int output_quantity, int gravel)
     {
         this.id = id;
         this.input = input;
         this.output = output;
         this.inputq = input_quantity;
         this.outputq = output_quantity;
+        this.gravel = gravel;
     }
 
     public Pair<FluidVariant, Integer> getInput()
@@ -44,6 +46,11 @@ public class DistillingRecipe implements Recipe<FluidInventory> {
     public Pair<FluidVariant, Integer> getOutput()
     {
         return new Pair<FluidVariant, Integer>(this.output, this.outputq);
+    }
+
+    public int getMinimumGravelHeight()
+    {
+        return gravel;
     }
 
     @Override
@@ -117,7 +124,8 @@ public class DistillingRecipe implements Recipe<FluidInventory> {
                 BreakingFemme.fluidFromNbt(nbt.getCompound("input")),
                 JsonHelper.getInt(JsonHelper.getObject(json, "input"), "quantity"),
                 BreakingFemme.fluidFromNbt(nbt.getCompound("output")),
-                JsonHelper.getInt(JsonHelper.getObject(json, "output"), "quantity")
+                JsonHelper.getInt(JsonHelper.getObject(json, "output"), "quantity"),
+                JsonHelper.getInt(json, "gravel")
             );
         }
 
@@ -128,8 +136,9 @@ public class DistillingRecipe implements Recipe<FluidInventory> {
             FluidVariant output = FluidVariant.fromPacket(buf);
             int inputq =  buf.readInt();
             int outputq = buf.readInt();
+            int gravel = buf.readInt();
 
-            return new DistillingRecipe(id, input, inputq, output, outputq);
+            return new DistillingRecipe(id, input, inputq, output, outputq, gravel);
         }
 
         @Override
@@ -139,6 +148,7 @@ public class DistillingRecipe implements Recipe<FluidInventory> {
             recipe.output.toPacket(buf);
             buf.writeInt(recipe.inputq);
             buf.writeInt(recipe.outputq);
+            buf.writeInt(recipe.gravel);
         }
     }
 }

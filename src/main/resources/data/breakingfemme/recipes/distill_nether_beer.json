@@ -1,5 +1,6 @@
 {
     "type": "breakingfemme:distilling",
+    "gravel": 2,
     "input": {
         "fluid": "breakingfemme:nether_beer",
         "quantity": 3
