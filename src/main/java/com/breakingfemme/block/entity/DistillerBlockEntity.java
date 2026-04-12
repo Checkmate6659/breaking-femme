@@ -65,8 +65,8 @@ public class DistillerBlockEntity extends BlockEntity implements FluidInventory 
             markDirty();
             //can send C2S packets here
             fluids.set(0, new Pair<FluidVariant, Integer>(fluidStorage.variant, (int)fluidStorage.amount));
-            //BlockState state = world.getBlockState(pos);
-            //world.updateListeners(pos, state, state, 0);
+            BlockState state = world.getBlockState(pos);
+            world.updateListeners(pos, state, state, 0);
         }
     };
 
