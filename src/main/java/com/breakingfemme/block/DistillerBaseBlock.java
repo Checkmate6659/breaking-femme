@@ -9,6 +9,7 @@ import com.breakingfemme.block.entity.ModBlockEntities;
 import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariantAttributes;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.block.Block;
@@ -23,6 +24,8 @@ import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.item.ItemStack;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Pair;
@@ -70,8 +73,6 @@ public class DistillerBaseBlock extends BlockWithEntity {
     {
         ItemStack stack = player.getStackInHand(hand);
 
-        BreakingFemme.LOGGER.info("====== Trying to use base block ======");
-
         Storage<FluidVariant> storage = FluidStorage.ITEM.find(stack, ContainerItemContext.ofPlayerHand(player, hand));
         if(storage == null) return ActionResult.PASS; //idk if the != null is necessary
 
@@ -80,14 +81,8 @@ public class DistillerBaseBlock extends BlockWithEntity {
         if(!(be instanceof DistillerBlockEntity)) return ActionResult.FAIL; //same here
         DistillerBlockEntity distiller = (DistillerBlockEntity)be;
 
-        BreakingFemme.LOGGER.info("First checks passed");
-        BreakingFemme.LOGGER.info(storage.getClass().getName());
-        BreakingFemme.LOGGER.info(storage.toString());
-
         if(storage.supportsExtraction())
         {
-            BreakingFemme.LOGGER.info("Extractible storage found");
-
             //we could use an exception to get out of this, but idk
             done = false; //need to reset done here because it needs to be... static. fucking java. why.
             storage.nonEmptyIterator().forEachRemaining(part -> {
@@ -105,9 +100,9 @@ public class DistillerBaseBlock extends BlockWithEntity {
                     {
                         transaction.commit();
                         done = true;
-                        BreakingFemme.LOGGER.info("Transaction succeeded");
 
-                        //TODO: play a sound effect! can/should it be item-dependent?
+                        //play a sound effect! can/should it be item-dependent? like for bottles make it different
+                        world.playSoundAtBlockCenter(pos, FluidVariantAttributes.getEmptySound(fluid), SoundCategory.BLOCKS, 1.0f, 1.0f, true);
                     }
                 }
             });
@@ -116,24 +111,17 @@ public class DistillerBaseBlock extends BlockWithEntity {
         }
         else if(storage.supportsInsertion())
         {
-            BreakingFemme.LOGGER.info("Insertable storage found");
-
             try(Transaction transaction = Transaction.openOuter())
             {
                 FluidVariant fluid = distiller.fluidStorage.variant;
                 long transferred_amount = storage.insert(fluid, distiller.fluidStorage.amount, transaction);
                 distiller.fluidStorage.extract(fluid, transferred_amount, transaction);
                 transaction.commit();
-                BreakingFemme.LOGGER.info("Transaction succeeded");
 
-                //why do filling bottles with beer not work??
-
-                //TODO: play a sound effect! can/should it be item-dependent?
+                //play a sound effect! can/should it be item-dependent? like for bottles make it different
+                world.playSoundAtBlockCenter(pos, FluidVariantAttributes.getFillSound(fluid), SoundCategory.BLOCKS, 1.0f, 1.0f, true);
             }
-            catch (Exception e)
-            {
-                BreakingFemme.LOGGER.warn("Transaction error " + e);
-            }
+            catch (Exception e) {}
 
             return ActionResult.SUCCESS;
         }
