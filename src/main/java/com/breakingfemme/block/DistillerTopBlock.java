@@ -83,8 +83,6 @@ public class DistillerTopBlock extends BlockWithEntity {
                 transaction.commit();
 
                 //play a sound effect! can/should it be item-dependent? like for bottles make it different
-                //again... the plague of minecraft sound effects. why is the sound not playing...
-                //world.playSound(pos.getX() + 0.5, pos.getY() + 1.125, pos.getZ() + 0.5, FluidVariantAttributes.getFillSound(fluid), SoundCategory.BLOCKS, 1.0f, 1.0f, true);
                 world.playSoundFromEntity(null, player, FluidVariantAttributes.getFillSound(fluid), SoundCategory.BLOCKS, 1.0f, 1.0f);
             }
             catch (Exception e) {}
