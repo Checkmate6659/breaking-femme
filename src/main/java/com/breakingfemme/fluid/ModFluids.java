@@ -360,29 +360,50 @@ public static void registerModFluids()
         FluidStorage.combinedItemApiProvider(ModItems.NETHER_BEER_BOTTLE).register(context ->
             new FullItemFluidStorage(context, bottle -> ItemVariant.of(Items.GLASS_BOTTLE), FluidVariant.of(STILL_NETHER_BEER), FluidConstants.BOTTLE)
         );
+        FluidStorage.combinedItemApiProvider(Items.GLASS_BOTTLE).register(context ->
+            new EmptyItemFluidStorage(context, ModItems.NETHER_BEER_BOTTLE, STILL_NETHER_BEER, FluidConstants.BOTTLE)
+        );
 
         FluidStorage.combinedItemApiProvider(ModItems.ET32_BOTTLE).register(context ->
             new FullItemFluidStorage(context, bottle -> ItemVariant.of(Items.GLASS_BOTTLE), FluidVariant.of(STILL_ET32), FluidConstants.BOTTLE)
+        );
+        FluidStorage.combinedItemApiProvider(Items.GLASS_BOTTLE).register(context ->
+            new EmptyItemFluidStorage(context, ModItems.ET32_BOTTLE, STILL_ET32, FluidConstants.BOTTLE)
         );
 
         FluidStorage.combinedItemApiProvider(ModItems.ET64_BOTTLE).register(context ->
             new FullItemFluidStorage(context, bottle -> ItemVariant.of(Items.GLASS_BOTTLE), FluidVariant.of(STILL_ET64), FluidConstants.BOTTLE)
         );
+        FluidStorage.combinedItemApiProvider(Items.GLASS_BOTTLE).register(context ->
+            new EmptyItemFluidStorage(context, ModItems.ET64_BOTTLE, STILL_ET64, FluidConstants.BOTTLE)
+        );
 
         FluidStorage.combinedItemApiProvider(ModItems.ET95_BOTTLE).register(context ->
             new FullItemFluidStorage(context, bottle -> ItemVariant.of(Items.GLASS_BOTTLE), FluidVariant.of(STILL_ET95), FluidConstants.BOTTLE)
+        );
+        FluidStorage.combinedItemApiProvider(Items.GLASS_BOTTLE).register(context ->
+            new EmptyItemFluidStorage(context, ModItems.ET95_BOTTLE, STILL_ET95, FluidConstants.BOTTLE)
         );
 
         FluidStorage.combinedItemApiProvider(ModItems.COAL_OIL_BOTTLE).register(context ->
             new FullItemFluidStorage(context, bottle -> ItemVariant.of(Items.GLASS_BOTTLE), FluidVariant.of(STILL_COAL_OIL), FluidConstants.BOTTLE)
         );
+        FluidStorage.combinedItemApiProvider(Items.GLASS_BOTTLE).register(context ->
+            new EmptyItemFluidStorage(context, ModItems.COAL_OIL_BOTTLE, STILL_COAL_OIL, FluidConstants.BOTTLE)
+        );
 
         FluidStorage.combinedItemApiProvider(ModItems.ANDROSTADIENEDIONE_BOTTLE).register(context ->
             new FullItemFluidStorage(context, bottle -> ItemVariant.of(Items.GLASS_BOTTLE), FluidVariant.of(STILL_ANDROSTADIENEDIONE), FluidConstants.BOTTLE)
         );
+        FluidStorage.combinedItemApiProvider(Items.GLASS_BOTTLE).register(context ->
+            new EmptyItemFluidStorage(context, ModItems.ANDROSTADIENEDIONE_BOTTLE, STILL_ANDROSTADIENEDIONE, FluidConstants.BOTTLE)
+        );
 
         FluidStorage.combinedItemApiProvider(ModItems.ANDROSTADIENEDIONE_OIL_BOTTLE).register(context ->
             new FullItemFluidStorage(context, bottle -> ItemVariant.of(Items.GLASS_BOTTLE), FluidVariant.of(STILL_ANDROSTADIENEDIONE_OIL_SOLUTION), FluidConstants.BOTTLE)
+        );
+        FluidStorage.combinedItemApiProvider(Items.GLASS_BOTTLE).register(context ->
+            new EmptyItemFluidStorage(context, ModItems.ANDROSTADIENEDIONE_OIL_BOTTLE, STILL_ANDROSTADIENEDIONE_OIL_SOLUTION, FluidConstants.BOTTLE)
         );
     }
 }
