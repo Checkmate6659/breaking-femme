@@ -29,7 +29,7 @@ public class DistillerBlockEntityRenderer implements BlockEntityRenderer<Distill
 
     @Override
     public void render(DistillerBlockEntity blockEntity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
-        Pair<FluidVariant, Integer> fluid_pair = blockEntity.getFluid(0);
+        Pair<FluidVariant, Integer> fluid_pair = blockEntity.getFluid(0); //really i should use the internal fluid storage instead.
         FluidVariant fluidv = fluid_pair.getLeft();
         Fluid fluid = fluidv.getObject();
         if(!(fluid instanceof FlowableFluid)) return; //TODO: be able to render non-flowable fluids too (look at create mod ig, with sth like milk)

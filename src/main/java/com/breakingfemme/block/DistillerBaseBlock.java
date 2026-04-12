@@ -6,7 +6,11 @@ import com.breakingfemme.BreakingFemme;
 import com.breakingfemme.block.entity.DistillerBlockEntity;
 import com.breakingfemme.block.entity.ModBlockEntities;
 
+import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
+import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -19,7 +23,10 @@ import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.util.Pair;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
@@ -54,6 +61,84 @@ public class DistillerBaseBlock extends BlockWithEntity {
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state)
     {
         return new DistillerBlockEntity(pos, state);
+    }
+
+    static boolean done = false; //not thread-safe! but it should be fine ig...
+    //still why does a fucking loop breaking variable have to be static, fuck java
+    //also for now this is done on client AND server. didnt find better way to do it...
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit)
+    {
+        ItemStack stack = player.getStackInHand(hand);
+
+        BreakingFemme.LOGGER.info("====== Trying to use base block ======");
+
+        Storage<FluidVariant> storage = FluidStorage.ITEM.find(stack, ContainerItemContext.ofPlayerHand(player, hand));
+        if(storage == null) return ActionResult.PASS; //idk if the != null is necessary
+
+        BlockEntity be = world.getBlockEntity(pos);
+        if(be == null) return ActionResult.FAIL; //the storage is valid, but for some reason the block entity isnt. so dont spill everywhere.
+        if(!(be instanceof DistillerBlockEntity)) return ActionResult.FAIL; //same here
+        DistillerBlockEntity distiller = (DistillerBlockEntity)be;
+
+        BreakingFemme.LOGGER.info("First checks passed");
+        BreakingFemme.LOGGER.info(storage.getClass().getName());
+        BreakingFemme.LOGGER.info(storage.toString());
+
+        if(storage.supportsExtraction())
+        {
+            BreakingFemme.LOGGER.info("Extractible storage found");
+
+            //we could use an exception to get out of this, but idk
+            done = false; //need to reset done here because it needs to be... static. fucking java. why.
+            storage.nonEmptyIterator().forEachRemaining(part -> {
+                if(done) return; //just skip over all the elements
+                FluidVariant fluid = part.getResource();
+
+                try(Transaction transaction = Transaction.openOuter()) //try to extract some fluid from the item
+                {
+                    long initial_amount = part.getAmount();
+                    long transferred_amount = distiller.fluidStorage.insert(fluid, part.getAmount(), transaction);
+                    transferred_amount = part.extract(fluid, transferred_amount, transaction);
+                    if(transferred_amount != initial_amount) //we need to transfer all the fluid!
+                        transaction.abort();
+                    else
+                    {
+                        transaction.commit();
+                        done = true;
+                        BreakingFemme.LOGGER.info("Transaction succeeded");
+
+                        //TODO: play a sound effect! can/should it be item-dependent?
+                    }
+                }
+            });
+
+            return ActionResult.SUCCESS; //swing hand, even if cannot insert
+        }
+        else if(storage.supportsInsertion())
+        {
+            BreakingFemme.LOGGER.info("Insertable storage found");
+
+            try(Transaction transaction = Transaction.openOuter())
+            {
+                FluidVariant fluid = distiller.fluidStorage.variant;
+                long transferred_amount = storage.insert(fluid, distiller.fluidStorage.amount, transaction);
+                distiller.fluidStorage.extract(fluid, transferred_amount, transaction);
+                transaction.commit();
+                BreakingFemme.LOGGER.info("Transaction succeeded");
+
+                //why do filling bottles with beer not work??
+
+                //TODO: play a sound effect! can/should it be item-dependent?
+            }
+            catch (Exception e)
+            {
+                BreakingFemme.LOGGER.warn("Transaction error " + e);
+            }
+
+            return ActionResult.SUCCESS;
+        }
+
+        return ActionResult.PASS;
     }
 
     //what to do when block broken: spill fluid inside; place down a full block if full

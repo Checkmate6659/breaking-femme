@@ -14,6 +14,7 @@ import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.fluid.base.SingleFluidStorage;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
+import net.fabricmc.fabric.api.transfer.v1.transaction.TransactionContext;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.fluid.Fluids;
@@ -51,9 +52,21 @@ public class DistillerBlockEntity extends BlockEntity implements FluidInventory 
         }
 
         @Override
+        public long insert(FluidVariant fluid, long amount, TransactionContext context)
+        {
+            //TODO: check if we can have a blank variant and override extract instead
+            if(this.amount == 0) //allow to insert anything into (anything, 0) storage
+                this.variant = fluid;
+            return super.insert(fluid, amount, context);
+        }
+
+        @Override
         protected void onFinalCommit() {
             markDirty();
             //can send C2S packets here
+            fluids.set(0, new Pair<FluidVariant, Integer>(fluidStorage.variant, (int)fluidStorage.amount));
+            //BlockState state = world.getBlockState(pos);
+            //world.updateListeners(pos, state, state, 0);
         }
     };
 
@@ -78,6 +91,8 @@ public class DistillerBlockEntity extends BlockEntity implements FluidInventory 
         fluidStorage.variant = FluidVariant.fromNbt(nbt.getCompound("fluidVariant"));
 		fluidStorage.amount = nbt.getLong("amount");
         temperature = nbt.getFloat("temperature");
+        //for rendering
+        fluids.set(0, new Pair<FluidVariant, Integer>(fluidStorage.variant, (int)fluidStorage.amount));
     }
 
     //these next 2 methods sync the data between client and server
@@ -121,10 +136,13 @@ public class DistillerBlockEntity extends BlockEntity implements FluidInventory 
     {
         if(world.isClient()) return;
 
-        if(world.getTime() % 4 != 0) return; //don't always check for stuff and do distilling (lag reduction mostly)
-
-        if(temperature == -69420.0f) //temperature uninitialized
+        if(temperature == -69420.0f) //uninitialized temperature
+        {
+            //initialize temperature
             temperature = FermenterBlockEntity.environment_temperature(world, pos); //initialize to base temperature
+        }
+
+        if(world.getTime() % 4 != 0) return; //don't always check for stuff and do distilling (lag reduction mostly)
 
         //TODO: calculate heating, don't actually cook until hot enough!
         if(!BreakingFemme.isBlockHot(world, pos.down()))

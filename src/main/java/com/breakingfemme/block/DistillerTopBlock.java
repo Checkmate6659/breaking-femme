@@ -2,9 +2,18 @@ package com.breakingfemme.block;
 
 import org.jetbrains.annotations.Nullable;
 
+import com.breakingfemme.block.entity.DistillerBlockEntity;
 import com.breakingfemme.block.entity.DistillerTopBlockEntity;
 import com.breakingfemme.block.entity.ModBlockEntities;
 
+import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorageUtil;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.fabricmc.fabric.api.transfer.v1.fluid.base.EmptyItemFluidStorage;
+import net.fabricmc.fabric.api.transfer.v1.fluid.base.FullItemFluidStorage;
+import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
+import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -15,6 +24,7 @@ import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -53,8 +63,48 @@ public class DistillerTopBlock extends BlockWithEntity {
         return false;
     }
 
+    //TODO: change the code to do DistillerTopBlock instead of DistillerBaseBlock LOL
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit)
     {
+        ItemStack stack = player.getStackInHand(hand);
+        //TODO: empty the stack into the distiller (if compatible) using the Fabric transaction system
+
+        Storage<FluidVariant> storage = FluidStorage.ITEM.find(stack, ContainerItemContext.ofPlayerHand(player, hand));
+        if(storage == null) return ActionResult.PASS; //idk if the != null is necessary
+
+        BlockEntity be = world.getBlockEntity(pos);
+        if(be == null) return ActionResult.FAIL; //the storage is valid, but for some reason the block entity isnt. so dont spill everywhere.
+        if(!(be instanceof DistillerBlockEntity)) return ActionResult.FAIL; //same here
+        DistillerBlockEntity distiller = (DistillerBlockEntity)be;
+
+        if(storage instanceof FullItemFluidStorage fstorage)
+        {
+            if(fstorage.isResourceBlank())
+                return ActionResult.PASS;
+
+            try(Transaction transaction = Transaction.openOuter())
+            {
+                FluidVariant fluid = fstorage.getResource();
+                distiller.fluidStorage.insert(fluid, fstorage.getAmount(), transaction);
+                fstorage.extract(fluid, fstorage.getAmount(), transaction);
+                transaction.commit();
+            }
+
+            return ActionResult.SUCCESS; //swing hand, even if cannot insert
+        }
+        else if(storage instanceof EmptyItemFluidStorage estorage)
+        {
+            try(Transaction transaction = Transaction.openOuter())
+            {
+                FluidVariant fluid = distiller.fluidStorage.variant;
+                estorage.insert(fluid, distiller.fluidStorage.amount, transaction);
+                distiller.fluidStorage.extract(fluid, distiller.fluidStorage.amount, transaction);
+                transaction.commit();
+            }
+
+            return ActionResult.SUCCESS;
+        }
+
         return ActionResult.PASS;
     }
 
