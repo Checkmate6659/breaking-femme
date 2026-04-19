@@ -182,12 +182,4 @@ public class BreakingFemme implements ModInitializer {
 				world.setBlockState(target, fluid.getFlowing().getDefaultState().with(FlowableFluid.LEVEL, world.getRandom().nextBoolean() ? level : 8).getBlockState());
 		}
 	}
-
-	//basically, is the block in the hot category or is it a lit furnace
-	public static boolean isBlockHot(World world, BlockPos pos)
-	{
-		BlockState state = world.getBlockState(pos);
-		return state.isIn(ModBlockTagProvider.HOT) || state.isIn(ModBlockTagProvider.CREATE_HOT) ||
-			(state.isIn(ModBlockTagProvider.FURNACE) && state.get(Properties.LIT));
-	}
 }

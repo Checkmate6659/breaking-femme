@@ -7,7 +7,6 @@ import com.breakingfemme.fluid.ModFluids;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.AbstractCauldronBlock;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.cauldron.CauldronBehavior;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
@@ -16,8 +15,6 @@ import net.minecraft.item.Items;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.event.GameEvent;
-import net.minecraft.world.event.GameEvent.Emitter;
 
 public class EstroneOilSolutionCauldronBlock extends AbstractCauldronBlock {
     //custom cauldron behavior
@@ -60,4 +57,6 @@ public class EstroneOilSolutionCauldronBlock extends AbstractCauldronBlock {
     public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
         return 3;
     }
+
+    //TODO: how do we recover estrone??
 }

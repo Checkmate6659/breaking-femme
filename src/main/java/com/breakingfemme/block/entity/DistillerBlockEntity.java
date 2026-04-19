@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.jetbrains.annotations.Nullable;
 
 import com.breakingfemme.BreakingFemme;
+import com.breakingfemme.ThermalUtil;
 import com.breakingfemme.block.DistillerColumnBlock;
 import com.breakingfemme.block.ModBlocks;
 import com.breakingfemme.fluid.ModFluids;
@@ -139,20 +140,15 @@ public class DistillerBlockEntity extends BlockEntity implements FluidInventory 
         if(temperature == -69420.0f) //uninitialized temperature
         {
             //initialize temperature
-            temperature = FermenterBlockEntity.environment_temperature(world, pos); //initialize to base temperature
+            temperature = ThermalUtil.environment_temperature(world, pos); //initialize to base temperature
         }
 
         if(world.getTime() % 4 != 0) return; //don't always check for stuff and do distilling (lag reduction mostly)
 
         //TODO: calculate heating, don't actually cook until hot enough!
-        if(!BreakingFemme.isBlockHot(world, pos.down()))
+        if(!ThermalUtil.isBlockHot(world, pos.down()))
             return;
-
-        //TODO: bucket interaction (in the actual block ig?)
-        //TODO: detecting top, we can check every tick if its still there or not, thats fine
-        //TODO: distilling
-        //TODO: this https://wiki.fabricmc.net/tutorial:transfer-api
-
+        
         //copy internal fluid storage into inventory
         fluids.set(0, new Pair<FluidVariant, Integer>(this.fluidStorage.variant, (int)this.fluidStorage.amount));
 

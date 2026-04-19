@@ -2,7 +2,7 @@ package com.breakingfemme.cauldron;
 
 import java.util.Map;
 
-import com.breakingfemme.BreakingFemme;
+import com.breakingfemme.ThermalUtil;
 import com.breakingfemme.fluid.ModFluids;
 import com.breakingfemme.item.ModItems;
 
@@ -80,13 +80,13 @@ public class MaceratingSoyCauldronBlock extends AbstractCauldronBlock {
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         //theres a 2/3 chance of succeeding, which makes the expected value close to 100s at random tick speed 3
         //can only cook if the block is hot tho (or if its in the nether, free heating lol)
-        if(random.nextInt(3) != 0 && (world.getDimension().ultrawarm() || BreakingFemme.isBlockHot(world, pos.down())))
+        if(random.nextInt(3) != 0 && (world.getDimension().ultrawarm() || ThermalUtil.isBlockHot(world, pos.down())))
             world.setBlockState(pos, ModFluids.STEROL_SOLUTION_CAULDRON.getDefaultState());
     }
 
     //doing boiling effect when its hot
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-        if (world.getDimension().ultrawarm() || BreakingFemme.isBlockHot(world, pos.down())) {
+        if (world.getDimension().ultrawarm() || ThermalUtil.isBlockHot(world, pos.down())) {
             if(random.nextInt(3) == 0)
                 world.playSound((double)pos.getX() + 0.5, (double)pos.getY() + 0.5, (double)pos.getZ() + 0.75, SoundEvents.BLOCK_BUBBLE_COLUMN_UPWARDS_AMBIENT, SoundCategory.BLOCKS, 192F + random.nextFloat() * 128F, random.nextFloat() * 0.7F + 0.6F, false);
 

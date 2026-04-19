@@ -3,6 +3,7 @@ package com.breakingfemme.block.entity;
 import java.util.Optional;
 
 import com.breakingfemme.BreakingFemme;
+import com.breakingfemme.ThermalUtil;
 import com.breakingfemme.block.FermenterControllerBlock;
 import com.breakingfemme.block.FermenterHeaterBlock;
 import com.breakingfemme.block.FermenterMixerBlock;
@@ -35,8 +36,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Direction.Axis;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.dimension.DimensionType;
 
 public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory, ImplementedInventory { //could be transitioned to SimpleInventory for less hassle/not have an extra class?
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(8, ItemStack.EMPTY);
@@ -206,31 +205,6 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
         buf.writeBlockPos(pos);
     }
 
-
-    //measure environment temperature
-    //NOTE: doesn't take into account hot/cold blocks nearby, or if some panels are waterlogged
-    //we should be able to waterlog panels to cool down the fermenter... but that should really be heat transfer
-    //but it should be in here too: air temp is usually higher than water temp
-    //also, day temp higher than night temp... except if doing this in a cave/basement/cellar
-    //that actually is a real thing, fermenting beer and wine in a cellar to stabilize the temperature
-    //it turns out that the cool and stable temperatures from a cellar are perfect for making beer
-    //TODO: come back
-    public static float environment_temperature(World world, BlockPos pos)
-    {
-        DimensionType dimension = world.getDimension();
-        Biome biome = world.getBiome(pos).value();
-
-        float temperature = biome.getTemperature(); //TODO: this is not smooth by default. we should smooth it out a bit.
-        temperature -= 0.00166667 * (pos.getY() - world.getSeaLevel()); //altitude decrease
-        temperature = (temperature - 0.15f) * 20; //convert to celsius
-
-        if(dimension.ultrawarm()) //Nether (and other modded "hot" dimensions)
-        {
-            temperature += 342; //would be quite a bit hot... probably not amazing to ferment stuff...
-        }
-
-        return temperature;
-    }
     
     //returns true as a default, if the property doesn't exist (we wouldn't want to add mixers and heaters that are just fancy bottom panels)
     private boolean safeGetBooleanProperty(BlockState state, Property<Boolean> prop)
@@ -260,7 +234,7 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
         int surface_area = 24; //number of panels the barrel is made out of (for a 2*2*2 barrel its 24)
         is_mixing = false; //are there any powered mixers on the bottom (just 1 is enough)
         n_heaters = 0; //number of active heaters
-        outside_temp = environment_temperature(world, pos); //measure this anyway (TODO: setting to do a measurement without knowing multiblock size)
+        outside_temp = ThermalUtil.environment_temperature(world, pos); //measure this anyway for temperature display GUI (TODO: setting to do a measurement without knowing multiblock size)
 
         //NOTE: here we are assuming that the multiblock is valid. an inconsistency would prove that it isn't, and we will need to check that an invalid multiblock is always inconsistent
         //step 1: get block behind controller (1 block in the opposite direction of the controller's facing)
