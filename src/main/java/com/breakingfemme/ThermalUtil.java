@@ -18,6 +18,24 @@ public class ThermalUtil {
 			(state.isIn(ModBlockTagProvider.FURNACE) && state.get(Properties.LIT));
 	}
 
+    public static boolean isCauldronCold(World world, BlockPos pos)
+    {
+        if(world.getDimension().ultrawarm() || ThermalUtil.isBlockHot(world, pos.down())) //its literally heated. cant be cold like that.
+            return false;
+
+        //count up cold blocks around/below the cauldron
+        //TODO: count water/waterlogged blocks in cold biome, if cold biome then lower threshold
+        //TODO: make any neighboring hot blocks make the cauldron not cold (mb corners ok tho idk)
+        int cold_count = 0;
+        for(int i = -1; i < 2; i++)
+            for(int j = -1; j < 1; j++) //only count up to level of the cauldron, not blocks above
+                for(int k = -1; k < 2; k++)
+                    if(world.getBlockState(pos.add(i, j, k)).isIn(ModBlockTagProvider.COLD))
+                        cold_count += 1 << (i*i + j*j + k*k - 1); //4 for neighbors, 2 for touching edge, 1 for touching corner
+
+        return cold_count > 11; //TODO: change threshold based on biome coldness; mb even more or less effective cooling blocks
+    }
+
     //measure environment temperature
     //NOTE: doesn't take into account hot/cold blocks nearby, or if some panels of a fermenter are waterlogged
     //we should be able to waterlog panels to cool down the fermenter... but that should really be heat transfer idk...

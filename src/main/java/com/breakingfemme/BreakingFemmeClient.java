@@ -155,6 +155,13 @@ public class BreakingFemmeClient implements ClientModInitializer {
             return -1;
         }, ModFluids.YEAST_CAULDRON);
 
+        //estrone recrystallization in 95% ethanol (cauldron only)
+        ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
+            if (i == 0)
+                return 0xA0D0DEF9; //same as 95% ethanol
+            return -1;
+        }, ModFluids.ESTRONE_RECRYSTALLIZATION_CAULDRON);
+
         //thick potion (cauldron only)
         ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
             if (i == 0)

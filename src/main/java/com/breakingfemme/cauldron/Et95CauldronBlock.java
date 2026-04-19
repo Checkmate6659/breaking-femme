@@ -178,6 +178,22 @@ public class Et95CauldronBlock extends AbstractCauldronBlock {
             }
             return ActionResult.success(world.isClient);
         });
+        
+        //recrystallize estrone in hot ethanol. emphasis on *hot*.
+        BEHAVIOR.put(ModItems.CRUDE_ESTRONE, (state, world, pos, player, hand, stack) -> {
+            if (state.get(LEVEL) != 3 || !ThermalUtil.isBlockHot(world, pos.down())) { //only able to do this if full, and if the ethanol is HOT
+                return ActionResult.PASS;
+            } else if (!world.isClient) {
+                Item item = stack.getItem();
+                player.getStackInHand(hand).decrement(1); //consume 1 crude estrone
+                player.incrementStat(Stats.USE_CAULDRON);
+                player.incrementStat(Stats.USED.getOrCreateStat(item));
+                world.setBlockState(pos, ModFluids.ESTRONE_RECRYSTALLIZATION_CAULDRON.getDefaultState());
+                world.playSound((PlayerEntity)null, pos, SoundEvents.ITEM_INK_SAC_USE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                world.emitGameEvent((Entity)null, GameEvent.FLUID_PLACE, pos);
+            }
+            return ActionResult.success(world.isClient);
+        });
     }
 
     public Et95CauldronBlock(AbstractBlock.Settings settings) {

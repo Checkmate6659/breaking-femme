@@ -22,6 +22,7 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
     public static final TagKey<Block> FURNACE = TagKey.of(RegistryKeys.BLOCK, new Identifier("c", "furnaces"));
     //trying to make something compatible with blaze burners/low heaters etc (create & addons)
     public static final TagKey<Block> CREATE_HOT = TagKey.of(RegistryKeys.BLOCK, new Identifier("create", "passive_boiler_heaters"));
+    public static final TagKey<Block> COLD = TagKey.of(RegistryKeys.BLOCK, new Identifier("c", "cold"));
 
     public static final TagKey<Block> NICKEL_ORES = TagKey.of(RegistryKeys.BLOCK, new Identifier("c", "ores/nickel"));
     public static final TagKey<Block> ORES_STONE = TagKey.of(RegistryKeys.BLOCK, new Identifier("c", "ores_in_ground/stone"));
@@ -76,6 +77,7 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModFluids.ANDROSTADIENEDIONE_OIL_SOLUTION_CAULDRON);
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModFluids.COAL_OIL_CAULDRON);
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModFluids.ESTRONE_OIL_SOLUTION_CAULDRON);
+        getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModFluids.ESTRONE_RECRYSTALLIZATION_CAULDRON);
         //AUTOGENERATION LABEL DO NOT TOUCH
 
         //fermenter tags
@@ -114,5 +116,10 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(FURNACE).add(Blocks.BLAST_FURNACE);
         getOrCreateTagBuilder(FURNACE).add(Blocks.CAMPFIRE);
         getOrCreateTagBuilder(FURNACE).add(Blocks.SOUL_CAMPFIRE);
+        getOrCreateTagBuilder(COLD).add(Blocks.ICE);
+        getOrCreateTagBuilder(COLD).add(Blocks.PACKED_ICE);
+        getOrCreateTagBuilder(COLD).add(Blocks.BLUE_ICE);
+        getOrCreateTagBuilder(COLD).add(Blocks.FROSTED_ICE);
+        getOrCreateTagBuilder(COLD).add(Blocks.SNOW_BLOCK);
     }
 }
