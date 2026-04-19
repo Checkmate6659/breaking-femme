@@ -344,7 +344,7 @@ public static void registerModFluids()
         CauldronFluidContent.registerCauldron(ANDROSTADIENEDIONE_OIL_SOLUTION_CAULDRON, STILL_ANDROSTADIENEDIONE_OIL_SOLUTION, FluidConstants.BOTTLE, AndrostadienedioneOilSolutionCauldronBlock.LEVEL);
         COAL_OIL_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "coal_oil_cauldron"), new CoalOilCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
         CauldronFluidContent.registerCauldron(COAL_OIL_CAULDRON, STILL_COAL_OIL, FluidConstants.BOTTLE, CoalOilCauldronBlock.LEVEL);
-        ESTRONE_OIL_SOLUTION_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "estrone_oil_solution_cauldron"), new EstroneOilSolutionCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
+        ESTRONE_OIL_SOLUTION_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "estrone_oil_solution_cauldron"), new EstroneOilSolutionCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
         CauldronFluidContent.registerCauldron(ESTRONE_OIL_SOLUTION_CAULDRON, STILL_ESTRONE_OIL_SOLUTION, FluidConstants.BUCKET, null);
         //AUTOGENERATION LABEL DO NOT TOUCH
 

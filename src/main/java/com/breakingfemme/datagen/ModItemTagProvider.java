@@ -57,6 +57,7 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
     public static final TagKey<Item> MILK_BUCKET = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "buckets/milk"));
     //TODO: do we accept bottles? if yes, how do we add farmersdelight:milk_bottles? its registered as c:foods/milk, alongside minecraft milk buckets, in common tags
     public static final TagKey<Item> MILK_BOTTLE = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "milk_bottles")); //counts as 1/3 bucket; usefulfood:milkbottle
+    public static final TagKey<Item> FILTER_PAPER = TagKey.of(RegistryKeys.ITEM, new Identifier(BreakingFemme.MOD_ID, "filter_paper"));
 
     //armor tags
     //TODO: reimpl this https://github.com/MayaqqDev/Estrogen/blob/kotlin/src/main/java/dev/mayaqq/estrogen/mixin/client/PlayerModelMixin.java
@@ -123,6 +124,11 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
         getOrCreateTagBuilder(VEGETABLE3).add(ModItems.CHILI_PEPPER);
         getOrCreateTagBuilder(VEGETABLE3).add(ModItems.DRIED_CHILI_PEPPER);
         getOrCreateTagBuilder(VEGETABLE3).add(ModItems.GROUND_CHILI_PEPPER);
+        getOrCreateTagBuilder(FILTER_PAPER).add(Items.PAPER);
+        //TODO: add create list filters into filter paper tag!
+        //getOrCreateTagBuilder(FILTER_PAPER).add(Identifier.of("create", "filter"));
+        //getOrCreateTagBuilder(FILTER_PAPER).add(Identifier.of("create", "attribute_filter"));
+        //getOrCreateTagBuilder(FILTER_PAPER).add(Identifier.of("create", "package_filter"));
 
         //armor tags
         getOrCreateTagBuilder(ALREADY_FLEXIBLE).addTag(FREE_CHEST);
