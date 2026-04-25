@@ -3,6 +3,8 @@ package com.breakingfemme;
 import com.breakingfemme.datagen.ModBlockTagProvider;
 import com.breakingfemme.mixin.BiomeAccessor;
 
+import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.tag.BiomeTags;
 import net.minecraft.block.BlockState;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.Pair;
@@ -41,20 +43,35 @@ public class ThermalUtil {
     //Non-smooth function that calculates day and night temperature based on biome
     private static Pair<Float, Float> biomeTemperature(World world, BlockPos pos)
     {
-        Biome biome = world.getBiome(pos).value();
+        RegistryEntry<Biome> biomeEntry = world.getBiome(pos);
+        Biome biome = biomeEntry.value();
         float temperature = ((BiomeAccessor)biome).breakingfemme$getTemperature(pos);
 
         temperature -= 0.00166667 * (pos.getY() - world.getSeaLevel()); //altitude decrease
         temperature = (temperature - 0.15f) * 20; //convert to celsius
 
+        //calculate surface altitude and dryness, from 0 to 1 both
+        float surface_altitude = world.getTopY(Type.MOTION_BLOCKING_NO_LEAVES, pos.getX(), pos.getZ()); //how high the biome is
+        if(surface_altitude > pos.getY()) surface_altitude = pos.getY();
+        surface_altitude -= world.getSeaLevel();
+        surface_altitude *= 0.015625f; // *= 1/64
+        if(surface_altitude < 0) surface_altitude = 0;
+        if(surface_altitude > 1) surface_altitude = 1;
+
+        float dryness = 0; //dryness is from 0 on 1
+        if(!biomeEntry.isIn(BiomeTags.IS_OCEAN) && !biomeEntry.isIn(BiomeTags.IS_RIVER)) //water biomes!
+            dryness = 1 - ((BiomeAccessor)biome).breakingfemme$getWeather().downfall();
+        
+        dryness = (float)Math.sqrt(dryness); //higher increase when dry, so for instance temp doesnt go <0 in plains
+        surface_altitude *= 1 - ((1 - surface_altitude) * (1.25f - dryness) * 0.8f); //if very dry, "continental biome": as if altitude was higher
+        surface_altitude = (float)Math.sqrt(surface_altitude); //higher increase at the bottom
+        
         //diurnal temperature variation is greater at high altitude and in hotter and drier areas
         //high deserts have the most variation, while shores (low down, highest wetness) have the least
         //irl the stabilizing effects of an ocean on the weather can reach up to 100-200km... but we cant really do that here.
-        int surface_altitude = world.getTopY(Type.WORLD_SURFACE, pos.getX(), pos.getZ()); //how high the biome is
-        float downfall = ((BiomeAccessor)biome).breakingfemme$getWeather().downfall();
-        //TODO: implement!!
-
-        return new Pair<Float,Float>(temperature, temperature);
+        float night_temperature = temperature - (surface_altitude + 0.5f) * (dryness + 0.125f) * 20;
+        
+        return new Pair<Float,Float>(temperature, night_temperature);
     }
 
     //measure environment temperature
@@ -64,7 +81,6 @@ public class ThermalUtil {
     //also, day temp higher than night temp... except if doing this in a cave/basement/cellar
     //that actually is a real thing, fermenting beer and wine in a cellar to stabilize the temperature
     //it turns out that the cool and stable temperatures from a cellar are perfect for making beer
-    //TODO: come back
     public static float environment_temperature(World world, BlockPos pos)
     {
         Pair<Float, Float> day_night_temp = biomeTemperature(world, pos); //FIXME: not smooth!!
@@ -95,9 +111,9 @@ public class ThermalUtil {
 
         //calculate daytime, theres an extra 3 hour tick delay to mimic air thermal inertia
         day_coef *= Math.sin(((world.getTimeOfDay() + 3000) % 24000) * 0.0002617993877991494); //-1 to 1
-        day_coef = (day_coef + 1) * 0.5f; //from 0 to 1
+        day_coef = (day_coef + 1) * 0.125f; //from 0 to 0.25
+        day_coef *= 4 - world.getRainGradient(1); //effect of precipitation: slightly closer to night temp; now from 0 to 1
         float temperature = day_night_temp.getLeft() * day_coef + day_night_temp.getRight() * (1 - day_coef);
-        //TODO: affect coef based on precipitation: rain/snow or thunderstorm
 
         //temperature increase at lower depth while in a cave; irl its 25-30°C/km, here we do 1°C every 8 blocks lol
         if(pos.getY() < world.getSeaLevel())
