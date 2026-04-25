@@ -14,6 +14,16 @@ import net.minecraft.world.Heightmap.Type;
 import net.minecraft.world.biome.Biome;
 
 public class ThermalUtil {
+    /*private static final Long2FloatLinkedOpenHashMap biomeTempCacheDay, biomeTempCacheNight;
+
+    static {
+        biomeTempCacheDay = new Long2FloatLinkedOpenHashMap(256, 0.75F);
+        biomeTempCacheDay.defaultReturnValue(Float.NaN);
+
+        biomeTempCacheNight = new Long2FloatLinkedOpenHashMap(256, 0.75F);
+        biomeTempCacheNight.defaultReturnValue(Float.NaN);
+    }*/
+
     //basically, is the block in the hot category or is it a lit furnace
 	public static boolean isBlockHot(World world, BlockPos pos)
 	{
@@ -43,6 +53,12 @@ public class ThermalUtil {
     //Non-smooth function that calculates day and night temperature based on biome
     private static Pair<Float, Float> biomeTemperature(World world, BlockPos pos)
     {
+        //TODO: find way to turn world into a long, to not have problems with different dimensions
+        /*if(biomeTempCacheDay.containsKey(pos.asLong()))
+        {
+            //
+        }*/
+
         RegistryEntry<Biome> biomeEntry = world.getBiome(pos);
         Biome biome = biomeEntry.value();
         float temperature = ((BiomeAccessor)biome).breakingfemme$getTemperature(pos);
@@ -81,8 +97,11 @@ public class ThermalUtil {
     //also, day temp higher than night temp... except if doing this in a cave/basement/cellar
     //that actually is a real thing, fermenting beer and wine in a cellar to stabilize the temperature
     //it turns out that the cool and stable temperatures from a cellar are perfect for making beer
-    public static float environment_temperature(World world, BlockPos pos)
+    public static float environmentTemperature(World world, BlockPos pos)
     {
+        //TODO: find good data structure for a CACHE! with aging, and bounded size
+        //probably some kind of tree
+
         Pair<Float, Float> day_night_temp = biomeTemperature(world, pos); //FIXME: not smooth!!
 
         //take depth into account

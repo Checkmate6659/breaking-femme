@@ -140,7 +140,7 @@ public class DistillerBlockEntity extends BlockEntity implements FluidInventory 
         if(temperature == -69420.0f) //uninitialized temperature
         {
             //initialize temperature
-            temperature = ThermalUtil.environment_temperature(world, pos); //initialize to base temperature
+            temperature = ThermalUtil.environmentTemperature(world, pos); //initialize to base temperature
         }
 
         if(world.getTime() % 4 != 0) return; //don't always check for stuff and do distilling (lag reduction mostly)

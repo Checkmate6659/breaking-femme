@@ -234,7 +234,7 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
         int surface_area = 24; //number of panels the barrel is made out of (for a 2*2*2 barrel its 24)
         is_mixing = false; //are there any powered mixers on the bottom (just 1 is enough)
         n_heaters = 0; //number of active heaters
-        outside_temp = ThermalUtil.environment_temperature(world, pos); //measure this anyway for temperature display GUI (TODO: setting to do a measurement without knowing multiblock size)
+        outside_temp = ThermalUtil.environmentTemperature(world, pos); //measure this anyway for temperature display GUI (TODO: setting to do a measurement without knowing multiblock size)
 
         //NOTE: here we are assuming that the multiblock is valid. an inconsistency would prove that it isn't, and we will need to check that an invalid multiblock is always inconsistent
         //step 1: get block behind controller (1 block in the opposite direction of the controller's facing)
