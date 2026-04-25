@@ -24,6 +24,7 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
     public static final TagKey<Block> CREATE_HOT = TagKey.of(RegistryKeys.BLOCK, new Identifier("create", "passive_boiler_heaters"));
     public static final TagKey<Block> COLD = TagKey.of(RegistryKeys.BLOCK, new Identifier("c", "cold"));
 
+    public static final TagKey<Block> STONES = TagKey.of(RegistryKeys.BLOCK, new Identifier("c", "stones"));
     public static final TagKey<Block> NICKEL_ORES = TagKey.of(RegistryKeys.BLOCK, new Identifier("c", "ores/nickel"));
     public static final TagKey<Block> ORES_STONE = TagKey.of(RegistryKeys.BLOCK, new Identifier("c", "ores_in_ground/stone"));
     public static final TagKey<Block> ORES_DEEPSLATE = TagKey.of(RegistryKeys.BLOCK, new Identifier("c", "ores_in_ground/deepslate"));
@@ -43,6 +44,14 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
     @Override
     protected void configure(WrapperLookup arg) {
+        //stone tag
+        getOrCreateTagBuilder(STONES).add(Blocks.STONE);
+        getOrCreateTagBuilder(STONES).add(Blocks.DEEPSLATE);
+        getOrCreateTagBuilder(STONES).add(Blocks.GRANITE);
+        getOrCreateTagBuilder(STONES).add(Blocks.DIORITE);
+        getOrCreateTagBuilder(STONES).add(Blocks.ANDESITE);
+        getOrCreateTagBuilder(STONES).add(Blocks.TUFF);
+
         //nickel tags
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModBlocks.NICKEL_BLOCK);
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModBlocks.NICKEL_ORE);
