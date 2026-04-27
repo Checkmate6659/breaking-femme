@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "breakingfemme:kelp_ash_block"
+    "breakingfemme:kelp_ash_block",
+    "breakingfemme:kelp_ash_mud_block"
   ]
 }

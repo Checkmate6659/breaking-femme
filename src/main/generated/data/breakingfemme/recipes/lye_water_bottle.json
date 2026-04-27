@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "lye_water_bottle",
+  "ingredients": [
+    {
+      "item": "breakingfemme:kelp_ash_mud_block"
+    },
+    {
+      "item": "minecraft:glass_bottle"
+    },
+    {
+      "tag": "minecraft:wool_carpets"
+    },
+    {
+      "item": "minecraft:stick"
+    }
+  ],
+  "result": {
+    "item": "breakingfemme:lye_water_bottle"
+  }
+}
