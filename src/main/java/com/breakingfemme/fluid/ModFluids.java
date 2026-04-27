@@ -428,5 +428,12 @@ public static void registerModFluids()
         FluidStorage.combinedItemApiProvider(Items.GLASS_BOTTLE).register(context ->
             new EmptyItemFluidStorage(context, ModItems.ANDROSTADIENEDIONE_OIL_BOTTLE, STILL_ANDROSTADIENEDIONE_OIL_SOLUTION, FluidConstants.BOTTLE)
         );
+
+        FluidStorage.combinedItemApiProvider(ModItems.LYE_WATER_BOTTLE).register(context ->
+            new FullItemFluidStorage(context, bottle -> ItemVariant.of(Items.GLASS_BOTTLE), FluidVariant.of(STILL_LYE_WATER), FluidConstants.BOTTLE)
+        );
+        FluidStorage.combinedItemApiProvider(Items.GLASS_BOTTLE).register(context ->
+            new EmptyItemFluidStorage(context, ModItems.LYE_WATER_BOTTLE, STILL_LYE_WATER, FluidConstants.BOTTLE)
+        );
     }
 }
