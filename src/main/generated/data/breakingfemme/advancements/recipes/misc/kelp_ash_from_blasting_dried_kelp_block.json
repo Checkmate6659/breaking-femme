@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_dried_kelp": {
+    "has_dried_kelp_block": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:dried_kelp"
+              "minecraft:dried_kelp_block"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:kelp_ash_from_blasting_dried_kelp"
+        "recipe": "minecraft:kelp_ash_from_blasting_dried_kelp_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_dried_kelp",
+      "has_dried_kelp_block",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:kelp_ash_from_blasting_dried_kelp"
+      "minecraft:kelp_ash_from_blasting_dried_kelp_block"
     ]
   },
   "sends_telemetry_event": false

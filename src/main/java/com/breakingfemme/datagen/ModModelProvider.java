@@ -70,9 +70,6 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.DOUGH, Models.GENERATED);
         itemModelGenerator.register(ModItems.TAR, Models.GENERATED);
         itemModelGenerator.register(ModItems.KELP_ASH, Models.GENERATED);
-        itemModelGenerator.register(ModItems.GLASSWORT_ASH, Models.GENERATED);
-        itemModelGenerator.register(ModItems.LOW_GRADE_BARILLA, Models.GENERATED);
-        itemModelGenerator.register(ModItems.BARILLA, Models.GENERATED);
         itemModelGenerator.register(ModItems.EGEL_BOTTLE, Models.GENERATED);
 
         //buckets
