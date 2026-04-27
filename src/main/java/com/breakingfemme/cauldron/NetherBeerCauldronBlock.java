@@ -48,7 +48,7 @@ public class NetherBeerCauldronBlock extends AbstractCauldronBlock {
         CauldronBehavior.registerBucketBehavior(BEHAVIOR);
         BEHAVIOR.put(Items.BUCKET, (state, world, pos, player, hand, stack) -> {
             return CauldronBehavior.emptyCauldron(state, world, pos, player, hand, stack, new ItemStack(ModFluids.NETHER_BEER_BUCKET), (statex) -> {
-                return true;
+                return state.get(LEVEL) == 3;
             }, SoundEvents.ITEM_BUCKET_FILL);
         });
 

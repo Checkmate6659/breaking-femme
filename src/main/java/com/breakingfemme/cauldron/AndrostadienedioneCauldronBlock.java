@@ -53,7 +53,7 @@ public class AndrostadienedioneCauldronBlock extends AbstractCauldronBlock {
         CauldronBehavior.registerBucketBehavior(BEHAVIOR);
         BEHAVIOR.put(Items.BUCKET, (state, world, pos, player, hand, stack) -> {
             return CauldronBehavior.emptyCauldron(state, world, pos, player, hand, stack, new ItemStack(ModFluids.ANDROSTADIENEDIONE_BUCKET), (statex) -> {
-                return true;
+                return state.get(LEVEL) == 3;
             }, SoundEvents.ITEM_BUCKET_FILL);
         });
 

@@ -41,15 +41,8 @@ public class ThickPotionCauldronBlock extends AbstractCauldronBlock {
     //custom cauldron behavior
     public static Map<Item, CauldronBehavior> BEHAVIOR = CauldronBehavior.createMap();
     static {
-        CauldronBehavior FILL = (state, world, pos, player, hand, stack) -> {
-            return CauldronBehavior.fillCauldron(world, pos, player, hand, stack, ModFluids.NETHER_BEER_CAULDRON.getDefaultState(), SoundEvents.ITEM_BUCKET_EMPTY);
-        };
-
-        //vanilla fluids
-        CauldronBehavior.EMPTY_CAULDRON_BEHAVIOR.put(ModFluids.NETHER_BEER_BUCKET, FILL);
-        CauldronBehavior.WATER_CAULDRON_BEHAVIOR.put(ModFluids.NETHER_BEER_BUCKET, FILL);
-        CauldronBehavior.LAVA_CAULDRON_BEHAVIOR.put(ModFluids.NETHER_BEER_BUCKET, FILL);
         CauldronBehavior.registerBucketBehavior(BEHAVIOR);
+        //no bucket behavior, as theres no thick potion bucket
 
         //scoop up bottle
         BEHAVIOR.put(Items.GLASS_BOTTLE, (state, world, pos, player, hand, stack) -> {

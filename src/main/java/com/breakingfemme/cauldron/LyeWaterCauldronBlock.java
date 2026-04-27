@@ -52,7 +52,7 @@ public class LyeWaterCauldronBlock extends AbstractCauldronBlock {
         CauldronBehavior.registerBucketBehavior(BEHAVIOR);
         BEHAVIOR.put(Items.BUCKET, (state, world, pos, player, hand, stack) -> {
             return CauldronBehavior.emptyCauldron(state, world, pos, player, hand, stack, new ItemStack(ModFluids.LYE_WATER_BUCKET), (statex) -> {
-                return true;
+                return state.get(LEVEL) == 3;
             }, SoundEvents.ITEM_BUCKET_FILL);
         });
 

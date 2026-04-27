@@ -55,10 +55,8 @@ public class Et32CauldronBlock extends AbstractCauldronBlock {
         CauldronBehavior.LAVA_CAULDRON_BEHAVIOR.put(ModFluids.ET32_BUCKET, FILL);
         CauldronBehavior.registerBucketBehavior(BEHAVIOR);
         BEHAVIOR.put(Items.BUCKET, (state, world, pos, player, hand, stack) -> {
-            if(state.get(LEVEL) != 3) //only allow bucketing if cauldron is full
-                return ActionResult.PASS;
             return CauldronBehavior.emptyCauldron(state, world, pos, player, hand, stack, new ItemStack(ModFluids.ET32_BUCKET), (statex) -> {
-                return true;
+                return state.get(LEVEL) == 3;
             }, SoundEvents.ITEM_BUCKET_FILL);
         });
 
