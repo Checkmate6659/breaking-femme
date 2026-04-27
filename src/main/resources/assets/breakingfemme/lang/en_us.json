@@ -105,6 +105,7 @@
     "item.breakingfemme.raw_nickel": "Raw Nickel",
     "item.breakingfemme.conjugated_equine_estrogens": "Conjugated Equine Estrogens",
     "item.breakingfemme.kelp_ash": "Kelp Ash",
+    "item.breakingfemme.lye_water_bucket": "Lye Water Bucket",
 
     "block.breakingfemme.milk_separator": "Milk Separator",
     "block.breakingfemme.nickel_ore": "Nickel Ore",
@@ -136,12 +137,14 @@
     "block.breakingfemme.androstadienedione_solution_block": "Androstadienedione Solution",
     "block.breakingfemme.androstadienedione_oil_solution_block": "Androstadienedione Oil Solution",
     "block.breakingfemme.sludge_block": "Sludge",
+    "block.breakingfemme.lye_water_block": "Lye Water",
     "block.breakingfemme.estrone_oil_solution_block": "Estrone Oil Solution",
 
     "sound.breakingfemme.grinding": "Grinding",
     "sound.breakingfemme.crank": "Crank turns",
     "sound.breakingfemme.metal_pipe": "Metal pipe clangs",
 
+    "death.attack.breakingfemme.sodium": "%1$s has been sacrificed to the sodium god",
     "death.attack.breakingfemme.novikov": "%1$s tried to violate the Novikov self-consistency principle",
     "death.attack.breakingfemme.distraction": "%1$s got distracted from her main purpose in this game",
     "death.attack.breakingfemme.headache": "%1$s got overpowered by her hair ache",

@@ -2,6 +2,7 @@ package com.breakingfemme.fluid;
 
 import com.breakingfemme.BreakingFemme;
 import com.breakingfemme.block.AndrostadienedioneBlock;
+import com.breakingfemme.block.CausticFluidBlock;
 import com.breakingfemme.block.FlammableFluidBlock;
 import com.breakingfemme.block.PoisonousFluidBlock;
 import com.breakingfemme.block.TarBlock;
@@ -29,8 +30,9 @@ import com.breakingfemme.cauldron.SludgeCauldronBlock;
 import com.breakingfemme.cauldron.AndrostadienedioneOilSolutionCauldronBlock;
 import com.breakingfemme.cauldron.CoalOilCauldronBlock;
 import com.breakingfemme.cauldron.EstroneOilSolutionCauldronBlock;
-//AUTOGENERATION LABEL DO NOT TOUCH
 import com.breakingfemme.cauldron.EstroneRecrystallizationCauldronBlock;
+import com.breakingfemme.cauldron.LyeWaterCauldronBlock;
+//AUTOGENERATION LABEL DO NOT TOUCH
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -161,6 +163,12 @@ public class ModFluids {
     public static Block ESTRONE_OIL_SOLUTION_FLUID_BLOCK;
     public static Item ESTRONE_OIL_SOLUTION_BUCKET;
     public static Block ESTRONE_OIL_SOLUTION_CAULDRON;
+    
+    public static FlowableFluid STILL_LYE_WATER;
+    public static FlowableFluid FLOWING_LYE_WATER;
+    public static Block LYE_WATER_FLUID_BLOCK;
+    public static Item LYE_WATER_BUCKET;
+    public static Block LYE_WATER_CAULDRON;
     //AUTOGENERATION LABEL DO NOT TOUCH
 
 public static void registerModFluids()
@@ -306,6 +314,15 @@ public static void registerModFluids()
         ESTRONE_OIL_SOLUTION_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "estrone_oil_solution_bucket"),
             new BucketItem(STILL_ESTRONE_OIL_SOLUTION, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
+        STILL_LYE_WATER = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "lye_water"),
+            new LyeWaterFluid.Still());
+        FLOWING_LYE_WATER = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_lye_water"),
+            new LyeWaterFluid.Flowing());
+        LYE_WATER_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "lye_water_block"),
+            new CausticFluidBlock(STILL_LYE_WATER, FabricBlockSettings.copyOf(Blocks.WATER)){});
+        LYE_WATER_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "lye_water_bucket"),
+            new BucketItem(STILL_LYE_WATER, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
+
         //AUTOGENERATION LABEL DO NOT TOUCH
 
 
@@ -350,6 +367,8 @@ public static void registerModFluids()
         CauldronFluidContent.registerCauldron(COAL_OIL_CAULDRON, STILL_COAL_OIL, FluidConstants.BOTTLE, CoalOilCauldronBlock.LEVEL);
         ESTRONE_OIL_SOLUTION_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "estrone_oil_solution_cauldron"), new EstroneOilSolutionCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
         CauldronFluidContent.registerCauldron(ESTRONE_OIL_SOLUTION_CAULDRON, STILL_ESTRONE_OIL_SOLUTION, FluidConstants.BUCKET, null);
+        LYE_WATER_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "lye_water_cauldron"), new LyeWaterCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
+        CauldronFluidContent.registerCauldron(LYE_WATER_CAULDRON, STILL_LYE_WATER, FluidConstants.BUCKET, null);
         //AUTOGENERATION LABEL DO NOT TOUCH
 
 

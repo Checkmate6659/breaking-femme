@@ -1,6 +1,7 @@
 {
     "replace": false,
     "values": [
+        "breakingfemme:sodium",
         "breakingfemme:distraction",
         "breakingfemme:headache",
         "breakingfemme:novikov"

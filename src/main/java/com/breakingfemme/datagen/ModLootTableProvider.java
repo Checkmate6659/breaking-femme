@@ -13,7 +13,6 @@ import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.condition.BlockStatePropertyLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
-import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
 import net.minecraft.predicate.StatePredicate;
 
 public class ModLootTableProvider extends FabricBlockLootTableProvider {
@@ -50,6 +49,7 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModFluids.COAL_OIL_CAULDRON, Blocks.CAULDRON);
         addDrop(ModFluids.ESTRONE_OIL_SOLUTION_CAULDRON, Blocks.CAULDRON);
         addDrop(ModFluids.ESTRONE_RECRYSTALLIZATION_CAULDRON, Blocks.CAULDRON);
+        addDrop(ModFluids.LYE_WATER_CAULDRON, Blocks.CAULDRON);
         //AUTOGENERATION LABEL DO NOT TOUCH
 
         addDrop(ModBlocks.NICKEL_BLOCK);
