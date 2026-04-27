@@ -16,6 +16,7 @@
 		"AdvancementTabMixin",
 		"GuideBookMixin",
 		"PostEffectPassAccessor",
+		"ScreenShakeMixin",
 		"StaggeringMixin",
 		"StaggeringSneakMixin"
 	],
