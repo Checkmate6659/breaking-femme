@@ -81,7 +81,15 @@ public class ModItems {
     public static final Item PURE_ESTRONE = registerItem("pure_estrone", new Item(new FabricItemSettings()));
     public static final Item PURE_ESTRADIOL_CRYSTALS = registerItem("pure_estradiol_crystals", new Item(new FabricItemSettings()));
     public static final Item PURE_ESTRADIOL_POWDER = registerItem("pure_estradiol_powder", new Item(new FabricItemSettings()));
-    public static final Item HORSE_JUICE = registerItem("conjugated_equine_estrogens", new Item(new FabricItemSettings()));
+    public static final Item HORSE_JUICE = registerItem("conjugated_equine_estrogens", new Item(new FabricItemSettings())); //compat with Mayaqq's Estrogen (if i can make that work)
+
+    //Soda ash processing line
+    //TODO: glasswort plant/crop, wild variant grows on beaches, needs to be in an ocean or beach biome to grow
+    //TODO: cauldron for leaching, separating out the crap
+    public static final Item KELP_ASH = registerItem("kelp_ash", new Item(new FabricItemSettings()));
+    public static final Item GLASSWORT_ASH = registerItem("glasswort_ash", new Item(new FabricItemSettings()));
+    public static final Item LOW_GRADE_BARILLA = registerItem("low_grade_barilla", new Item(new FabricItemSettings())); //only 2-3% soda ash, made from kelp.
+    public static final Item BARILLA = registerItem("barilla", new Item(new FabricItemSettings())); //up to 30% soda ash! made from glasswort.
 
     //Estrogens
     public static final Item EGEL_BOTTLE = registerItem("egel_bottle", new EgelItem(new FabricItemSettings().maxDamage(64)));
@@ -143,6 +151,10 @@ public class ModItems {
             entries.add(ModFluids.ESTRONE_OIL_SOLUTION_BUCKET);
             entries.add(CRUDE_ESTRONE);
             entries.add(PURE_ESTRONE);
+            entries.add(KELP_ASH);
+            entries.add(GLASSWORT_ASH);
+            entries.add(LOW_GRADE_BARILLA);
+            entries.add(BARILLA);
             entries.add(PURE_ESTRADIOL_CRYSTALS);
             entries.add(PURE_ESTRADIOL_POWDER);
             entries.add(HORSE_JUICE);

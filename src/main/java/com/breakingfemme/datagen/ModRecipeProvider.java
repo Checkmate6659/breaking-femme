@@ -86,5 +86,9 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         offerSmelting(exporter, ImmutableList.of(ModItems.CHILI_PEPPER), RecipeCategory.FOOD, ModItems.DRIED_CHILI_PEPPER, 0.15f, 200, "dried_chili_pepper_smelt");
         offerFoodCookingRecipe(exporter, "smoking", RecipeSerializer.SMOKING, 100, ModItems.CHILI_PEPPER, ModItems.DRIED_CHILI_PEPPER, 0.15F);
         offerFoodCookingRecipe(exporter, "campfire_cooking", RecipeSerializer.CAMPFIRE_COOKING, 600, ModItems.CHILI_PEPPER, ModItems.DRIED_CHILI_PEPPER, 0.15F);
+
+        //kelp ash. you can blast kelp directly into kelp ash (not the same as cooking to dry it), or smelt/blast dried kelp (less efficient)
+        offerSmelting(exporter, ImmutableList.of(Items.DRIED_KELP), RecipeCategory.MISC, ModItems.KELP_ASH, 0.0f, 200, "kelp_ash_smelt");
+        offerBlasting(exporter, ImmutableList.of(Items.SEAGRASS, Items.KELP, Items.DRIED_KELP), RecipeCategory.MISC, ModItems.KELP_ASH, 0.0f, 200, "kelp_ash_blast");
     }
 }
