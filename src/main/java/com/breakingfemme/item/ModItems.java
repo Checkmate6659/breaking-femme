@@ -147,6 +147,7 @@ public class ModItems {
             entries.add(CRUDE_ESTRONE);
             entries.add(PURE_ESTRONE);
             entries.add(KELP_ASH);
+            entries.add(ModBlocks.KELP_ASH_BLOCK);
             entries.add(PURE_ESTRADIOL_CRYSTALS);
             entries.add(PURE_ESTRADIOL_POWDER);
             entries.add(HORSE_JUICE);

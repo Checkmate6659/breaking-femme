@@ -44,6 +44,8 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
     @Override
     protected void configure(WrapperLookup arg) {
+        getOrCreateTagBuilder(BlockTags.SHOVEL_MINEABLE).add(ModBlocks.KELP_ASH_BLOCK);
+
         //stone tag
         getOrCreateTagBuilder(STONES).add(Blocks.STONE);
         getOrCreateTagBuilder(STONES).add(Blocks.DEEPSLATE);

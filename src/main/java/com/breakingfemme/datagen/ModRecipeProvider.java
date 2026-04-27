@@ -87,8 +87,9 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         offerFoodCookingRecipe(exporter, "smoking", RecipeSerializer.SMOKING, 100, ModItems.CHILI_PEPPER, ModItems.DRIED_CHILI_PEPPER, 0.15F);
         offerFoodCookingRecipe(exporter, "campfire_cooking", RecipeSerializer.CAMPFIRE_COOKING, 600, ModItems.CHILI_PEPPER, ModItems.DRIED_CHILI_PEPPER, 0.15F);
 
-        //kelp ash. you can smelt/blast dried kelp blocks into kelp ash
+        //kelp ash. you can smelt/blast dried kelp blocks into kelp ash; also featuring kelp ash blocks!
         offerSmelting(exporter, ImmutableList.of(Items.DRIED_KELP_BLOCK), RecipeCategory.MISC, ModItems.KELP_ASH, 0.0f, 200, "kelp_ash_smelt");
         offerBlasting(exporter, ImmutableList.of(Items.DRIED_KELP_BLOCK), RecipeCategory.MISC, ModItems.KELP_ASH, 0.0f, 100, "kelp_ash_blast");
+        offerReversibleCompactingRecipes(exporter, RecipeCategory.MISC, ModItems.KELP_ASH, RecipeCategory.BUILDING_BLOCKS, ModBlocks.KELP_ASH_BLOCK);
     }
 }

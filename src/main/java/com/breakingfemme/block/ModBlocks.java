@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.SandBlock;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.item.BlockItem;
 import net.minecraft.registry.Registries;
@@ -19,6 +20,7 @@ public class ModBlocks {
     public static final Block SOY_CROP = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "soy"), new SoyCropBlock(FabricBlockSettings.copyOf(Blocks.WHEAT)));
     public static final Block CHILI_CROP = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "chili_pepper"), new ChiliCropBlock(FabricBlockSettings.copyOf(Blocks.WHEAT)));
     public static final Block MILK_SEPARATOR = registerBlock("milk_separator", new MilkSeparatorBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).pistonBehavior(PistonBehavior.BLOCK).ticksRandomly()));
+    public static final Block KELP_ASH_BLOCK = registerBlock("kelp_ash_block", new SandBlock(5131854, FabricBlockSettings.copyOf(Blocks.SAND))); //a non-black falling block. and shut up i dont wanna make a new class for it. SandBlock is good enough.
 
     //fermenter blocks
     public static final Block FERMENTER_CONTROLLER = registerBlock("fermenter_controller", new FermenterControllerBlock(FabricBlockSettings.copyOf(Blocks.SPRUCE_PLANKS))); //block entity already cannot be pushed
