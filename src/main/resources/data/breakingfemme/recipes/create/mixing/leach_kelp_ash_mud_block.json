@@ -3,11 +3,7 @@
   "ingredients": [
     {
       "item":
-        "breakingfemme:kelp_ash_block"
-    },
-    {
-      "amount": 27000,
-      "fluid": "minecraft:water"
+        "breakingfemme:kelp_ash_mud_block"
     }
   ],
   "results": [

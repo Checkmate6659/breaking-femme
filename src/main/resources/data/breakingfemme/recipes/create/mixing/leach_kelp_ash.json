@@ -5,13 +5,13 @@
       "item": "breakingfemme:kelp_ash"
     },
     {
-      "amount": 810,
+      "amount": 3000,
       "fluid": "minecraft:water"
     }
   ],
   "results": [
     {
-      "amount": 810,
+      "amount": 3000,
       "fluid": "breakingfemme:lye_water"
     }
   ]

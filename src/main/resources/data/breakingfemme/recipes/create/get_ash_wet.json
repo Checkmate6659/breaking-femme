@@ -1,0 +1,17 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "breakingfemme:kelp_ash_block"
+    },
+    {
+      "amount": 27000,
+      "fluid": "minecraft:water"
+    }
+  ],
+  "results": [
+    {
+      "item": "breakingfemme:kelp_ash_mud_block"
+    }
+  ]
+}
