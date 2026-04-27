@@ -1,0 +1,18 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "breakingfemme:kelp_ash"
+    },
+    {
+      "amount": 810,
+      "fluid": "minecraft:water"
+    }
+  ],
+  "results": [
+    {
+      "amount": 810,
+      "fluid": "breakingfemme:lye_water"
+    }
+  ]
+}
