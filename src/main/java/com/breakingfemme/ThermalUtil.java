@@ -143,11 +143,6 @@ public class ThermalUtil {
 
         //TODO: hot/cold blocks
 
-        //debug!!
-        BreakingFemme.LOGGER.info("coverage " + coverage);
-        BreakingFemme.LOGGER.info("day " + day_night_temp.getLeft() + " night " + day_night_temp.getRight());
-        BreakingFemme.LOGGER.info("temperature " + temperature);
-
         return temperature;
     }
 }
