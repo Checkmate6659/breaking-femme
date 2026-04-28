@@ -41,7 +41,8 @@ public class LethalDrinkItem extends Item {
 
         //need to kill player AFTER stack has been "consumed", otherwise... problems.
         if (user instanceof ServerPlayerEntity player) { //only do it on the server
-            player.getInventory().removeOne(stack); //we need to remove the item by hand still. otherwise not gonna happen after the player dies.
+            if(!((PlayerEntity)user).getAbilities().creativeMode)
+                player.getInventory().removeOne(stack); //we need to remove the item by hand still. otherwise not gonna happen after the player dies.
             Criteria.CONSUME_ITEM.trigger(player, stack);
             player.incrementStat(Stats.USED.getOrCreateStat(this));
 
