@@ -1,0 +1,14 @@
+{
+  "type": "create:milling",
+  "ingredients": [
+    {
+      "item": "create:limestone"
+    }
+  ],
+  "processingTime": 250,
+  "results": [
+    {
+      "item": "breakingfemme:limestone_chunks"
+    }
+  ]
+}

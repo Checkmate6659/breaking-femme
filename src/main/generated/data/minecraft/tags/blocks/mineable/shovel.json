@@ -2,6 +2,9 @@
   "replace": false,
   "values": [
     "breakingfemme:kelp_ash_block",
-    "breakingfemme:kelp_ash_mud_block"
+    "breakingfemme:kelp_ash_mud_block",
+    "breakingfemme:limestone_chunks",
+    "breakingfemme:quicklime",
+    "breakingfemme:slaked_lime"
   ]
 }

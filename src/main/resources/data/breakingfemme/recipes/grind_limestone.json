@@ -1,0 +1,11 @@
+{
+    "type": "breakingfemme:grinding",
+    "input":
+    {
+        "item": "create:limestone"
+    },
+    "output":
+    {
+        "item": "breakingfemme:limestone_chunks"
+    }
+}

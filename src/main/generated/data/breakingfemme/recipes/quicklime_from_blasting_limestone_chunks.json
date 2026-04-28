@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:blasting",
+  "category": "blocks",
+  "cookingtime": 100,
+  "experience": 0.0,
+  "group": "lime_blast",
+  "ingredient": {
+    "item": "breakingfemme:limestone_chunks"
+  },
+  "result": "breakingfemme:quicklime"
+}

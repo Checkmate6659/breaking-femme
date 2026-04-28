@@ -86,6 +86,8 @@ public class ModItems {
     //Soda ash processing line
     public static final Item KELP_ASH = registerItem("kelp_ash", new Item(new FabricItemSettings()));
     public static final Item LYE_WATER_BOTTLE = registerItem("lye_water_bottle", new LyeWaterBottleItem(new FabricItemSettings().maxCount(1).recipeRemainder(Items.GLASS_BOTTLE).food(new FoodComponent.Builder().hunger(0).saturationModifier(0f).alwaysEdible().build())));
+    //TODO: add slaked lime to make caustic lye water
+    //which can then be used to make raney nickel when using it with a 1:1 Ni-Al alloy
 
     //Estrogens
     public static final Item EGEL_BOTTLE = registerItem("egel_bottle", new EgelItem(new FabricItemSettings().maxDamage(64)));
@@ -152,6 +154,9 @@ public class ModItems {
             entries.add(ModBlocks.KELP_ASH_MUD_BLOCK);
             entries.add(ModFluids.LYE_WATER_BUCKET);
             entries.add(LYE_WATER_BOTTLE);
+            entries.add(ModBlocks.LIMESTONE_CHUNKS);
+            entries.add(ModBlocks.QUICKLIME);
+            entries.add(ModBlocks.SLAKED_LIME);
             entries.add(PURE_ESTRADIOL_CRYSTALS);
             entries.add(PURE_ESTRADIOL_POWDER);
             entries.add(HORSE_JUICE);

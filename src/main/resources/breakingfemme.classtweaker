@@ -3,3 +3,4 @@ classTweaker v1 named
 #to allow to get a biome's weather (used in ThermalUtil)
 extendable class net/minecraft/world/biome/Biome
 accessible class net/minecraft/world/biome/Biome$Weather
+#extendable method net/minecraft/block/ConcretePowderBlock hardensIn

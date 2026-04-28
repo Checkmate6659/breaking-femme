@@ -101,5 +101,9 @@ public class ModRecipeProvider extends FabricRecipeProvider {
             .group("lye_water_bottle")
             .criterion(hasItem(ModBlocks.KELP_ASH_MUD_BLOCK), conditionsFromItem(ModBlocks.KELP_ASH_MUD_BLOCK))
             .offerTo(exporter, "lye_water_bottle");
+        
+        //lime calcination
+        offerSmelting(exporter, ImmutableList.of(ModBlocks.LIMESTONE_CHUNKS), RecipeCategory.MISC, ModBlocks.QUICKLIME, 0.0f, 200, "lime_smelt");
+        offerBlasting(exporter, ImmutableList.of(ModBlocks.LIMESTONE_CHUNKS), RecipeCategory.MISC, ModBlocks.QUICKLIME, 0.0f, 100, "lime_blast");
     }
 }

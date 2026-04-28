@@ -57,6 +57,9 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.DEEPSLATE_NICKEL_ORE, oreDrops(ModBlocks.DEEPSLATE_NICKEL_ORE, ModItems.RAW_NICKEL));
         addDrop(ModBlocks.KELP_ASH_BLOCK);
         addDrop(ModBlocks.KELP_ASH_MUD_BLOCK);
+        addDrop(ModBlocks.LIMESTONE_CHUNKS);
+        addDrop(ModBlocks.QUICKLIME);
+        addDrop(ModBlocks.SLAKED_LIME);
 
         //fermenter
         addDrop(ModBlocks.FERMENTER_PANEL);

@@ -1,0 +1,11 @@
+{
+    "type": "breakingfemme:grinding",
+    "input":
+    {
+        "item": "minecraft:calcite"
+    },
+    "output":
+    {
+        "item": "breakingfemme:limestone_chunks"
+    }
+}
