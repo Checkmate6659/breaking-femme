@@ -9,6 +9,7 @@ import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.enchantment.Enchantment.Rarity;
 import net.minecraft.entity.EntityType;
@@ -112,8 +113,33 @@ public class BreakingFemme implements ModInitializer {
 				1, 10, 0.05f
 			));
 		});
-		//TODO: make it that a few (not many) villagers buy estrogen in exchange for loads of emeralds
-		//or a mixin that makes them pick up and consume the estrogen when thrown
+
+		//Masons will sell calcite at level 3 (same as when selling polished rocks)
+		TradeOfferHelper.registerVillagerOffers(VillagerProfession.MASON, 3, factories -> {
+			factories.add((entity, random) -> new TradeOffer(
+				new ItemStack(Items.EMERALD, 1),
+				new ItemStack(Blocks.CALCITE, 4),
+				10, 10, 0.05f
+			));
+		});
+		//and will slake your lime at level 5 (master)
+		TradeOfferHelper.registerVillagerOffers(VillagerProfession.MASON, 5, factories -> {
+			factories.add((entity, random) -> new TradeOffer(
+				new ItemStack(ModBlocks.LIMESTONE_CHUNKS, 6),
+				new ItemStack(Items.EMERALD, 1),
+				new ItemStack(ModBlocks.SLAKED_LIME, 6),
+				10, 10, 0.05f
+			));
+		});
+		
+		//Wandering traders will rip you off for some chili pepper: 4 emeralds for just one!!
+		TradeOfferHelper.registerWanderingTraderOffers(1, factories -> {
+			factories.add((entity, random) -> new TradeOffer(
+				new ItemStack(Items.EMERALD, 4),
+				new ItemStack(ModItems.CHILI_PEPPER, 1),
+				10, 1, 0.0f
+			));
+		});
 
 		//generate nickel in the overworld
 		BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES, NICKEL_ORE_PLACED_FEATURE);
