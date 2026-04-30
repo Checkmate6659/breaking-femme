@@ -105,8 +105,8 @@
     "item.breakingfemme.raw_nickel": "Raw Nickel",
     "item.breakingfemme.conjugated_equine_estrogens": "Conjugated Equine Estrogens",
     "item.breakingfemme.kelp_ash": "Kelp Ash",
-    "item.breakingfemme.lye_water_bucket": "Lye Water Bucket",
-    "item.breakingfemme.lye_water_bottle": "Lye Water Bottle",
+    "item.breakingfemme.lye_water_bucket": "Soda Lye Water Bucket",
+    "item.breakingfemme.lye_water_bottle": "Soda Lye Water Bottle",
 
     "block.breakingfemme.milk_separator": "Milk Separator",
     "block.breakingfemme.nickel_ore": "Nickel Ore",
@@ -142,7 +142,7 @@
     "block.breakingfemme.androstadienedione_solution_block": "Androstadienedione Solution",
     "block.breakingfemme.androstadienedione_oil_solution_block": "Androstadienedione Oil Solution",
     "block.breakingfemme.sludge_block": "Sludge",
-    "block.breakingfemme.lye_water_block": "Lye Water",
+    "block.breakingfemme.lye_water_block": "Soda Lye Water",
     "block.breakingfemme.estrone_oil_solution_block": "Estrone Oil Solution",
 
     "sound.breakingfemme.grinding": "Grinding",
