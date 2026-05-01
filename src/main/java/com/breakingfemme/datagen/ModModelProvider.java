@@ -26,6 +26,7 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.NICKEL_ORE);
         blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.DEEPSLATE_NICKEL_ORE);
         blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.RUBY_BLOCK);
+        blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.PARTIALLY_REDUCED_RUBY_BLOCK);
         blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.RUBY_ORE);
         blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.DEEPSLATE_RUBY_ORE);
 
@@ -51,6 +52,8 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.NICKEL_INGOT, Models.GENERATED);
         itemModelGenerator.register(ModItems.PULVERIZED_COPPER, Models.GENERATED);
         itemModelGenerator.register(ModItems.PULVERIZED_NICKEL, Models.GENERATED);
+        itemModelGenerator.register(ModItems.PULVERIZED_ALUMINUM, Models.GENERATED);
+        itemModelGenerator.register(ModItems.ALUMINUM_SCRAP, Models.GENERATED);
         itemModelGenerator.register(ModItems.COPPER_SULFATE, Models.GENERATED);
         itemModelGenerator.register(ModItems.NICKEL_SULFATE, Models.GENERATED);
         itemModelGenerator.register(ModItems.STEROLS, Models.GENERATED);

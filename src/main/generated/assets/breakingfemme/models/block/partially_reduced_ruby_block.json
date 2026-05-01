@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "breakingfemme:block/partially_reduced_ruby_block"
+  }
+}

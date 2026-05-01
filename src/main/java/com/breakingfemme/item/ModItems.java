@@ -44,6 +44,10 @@ public class ModItems {
     public static final Item COPPER_SULFATE = registerItem("copper_sulfate", new CopperSulfateItem(new FabricItemSettings()));
     public static final Item NICKEL_SULFATE = registerItem("nickel_sulfate", new Item(new FabricItemSettings()));
 
+    //Aluminum
+    public static final Item ALUMINUM_SCRAP = registerItem("aluminum_scrap", new Item(new FabricItemSettings()));
+    public static final Item PULVERIZED_ALUMINUM = registerItem("pulverized_aluminum", new Item(new FabricItemSettings()));
+
     //milk processing items
     public static final Item INGOT_MOLD = registerItem("ingot_mold", new Item(new FabricItemSettings()));
     public static final Item SKIMMED_MILK_BUCKET = registerItem("skimmed_milk_bucket", new MilkBucketItem(new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
@@ -53,7 +57,7 @@ public class ModItems {
     public static final Item CREAMGOT_MOLD = registerItem("creamgot_mold", new FullMoldItem(new FabricItemSettings()));
     public static final Item CREAMGOT = registerItem("creamgot", new Item(new FabricItemSettings()));
 
-    //mortar and pestle items
+    //mortar and pestle
     public static final Item MORTAR_PESTLE = registerItem("mortar_pestle", new MortarPestleItem(new FabricItemSettings().maxDamage(64)));
 
     //Flour and yeast, to make bread and beer
@@ -110,12 +114,14 @@ public class ModItems {
             entries.add(ModBlocks.NICKEL_BLOCK);
             entries.add(PULVERIZED_COPPER);
             entries.add(PULVERIZED_NICKEL);
-            entries.add(COPPER_SULFATE);
-            entries.add(NICKEL_SULFATE);
             entries.add(ModBlocks.RUBY_ORE);
             entries.add(ModBlocks.DEEPSLATE_RUBY_ORE);
             entries.add(RUBY);
             entries.add(ModBlocks.RUBY_BLOCK);
+            entries.add(ALUMINUM_SCRAP);
+            entries.add(PULVERIZED_ALUMINUM);
+            entries.add(COPPER_SULFATE);
+            entries.add(NICKEL_SULFATE);
             entries.add(ModFluids.COPPER_SULFATE_BUCKET);
             entries.add(ModFluids.NICKEL_SULFATE_BUCKET);
             entries.add(FLOUR);

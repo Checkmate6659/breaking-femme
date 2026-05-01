@@ -1,0 +1,18 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "breakingfemme:aluminum_scrap"
+    }
+  ],
+  "processingTime": 400,
+  "results": [
+    {
+      "item": "breakingfemme:pulverized_aluminum"
+    },
+    {
+      "chance": 0.125,
+      "item": "breakingfemme:pulverized_aluminum"
+    }
+  ]
+}

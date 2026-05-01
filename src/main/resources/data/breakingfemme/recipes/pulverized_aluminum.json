@@ -1,0 +1,11 @@
+{
+    "type": "breakingfemme:grinding",
+    "input":
+    {
+        "item": "breakingfemme:aluminum_scrap"
+    },
+    "output":
+    {
+        "item": "breakingfemme:pulverized_aluminum"
+    }
+}

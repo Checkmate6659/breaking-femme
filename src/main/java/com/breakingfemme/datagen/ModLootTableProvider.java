@@ -13,6 +13,7 @@ import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.condition.BlockStatePropertyLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
+import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
 import net.minecraft.predicate.StatePredicate;
 
 public class ModLootTableProvider extends FabricBlockLootTableProvider {
@@ -58,6 +59,10 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.RUBY_BLOCK);
         addDrop(ModBlocks.RUBY_ORE, oreDrops(ModBlocks.RUBY_ORE, ModItems.RUBY));
         addDrop(ModBlocks.DEEPSLATE_RUBY_ORE, oreDrops(ModBlocks.DEEPSLATE_RUBY_ORE, ModItems.RUBY));
+        addDrop(ModBlocks.PARTIALLY_REDUCED_RUBY_BLOCK, applyExplosionDecay(ModBlocks.PARTIALLY_REDUCED_RUBY_BLOCK, LootTable.builder()
+            .pool(LootPool.builder().with(ItemEntry.builder(ModItems.ALUMINUM_SCRAP))) //drop 1 aluminum scrap and 8 rubies
+            .pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(8.0f)).with(ItemEntry.builder(ModItems.RUBY)))
+        ));
 
         addDrop(ModBlocks.KELP_ASH_BLOCK);
         addDrop(ModBlocks.KELP_ASH_MUD_BLOCK);
