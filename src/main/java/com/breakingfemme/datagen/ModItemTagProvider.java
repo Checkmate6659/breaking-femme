@@ -26,10 +26,13 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
     //https://github.com/MehVahdJukaar/Supplementaries/wiki/Mod-Integration
     public static final TagKey<Item> STONES = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "stones"));
     public static final TagKey<Item> NICKEL_ORES = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "ores/nickel")); //non-conventional
+    public static final TagKey<Item> RUBY_ORES = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "ores/ruby"));
     public static final TagKey<Item> ORES_STONE = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "ores_in_ground/stone"));
     public static final TagKey<Item> ORES_DEEPSLATE = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "ores_in_ground/deepslate"));
     public static final TagKey<Item> NICKEL_BLOCK = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "storage_blocks/nickel")); //non-conventional
+    public static final TagKey<Item> RUBY_BLOCK = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "storage_blocks/ruby"));
     public static final TagKey<Item> RAW_NICKEL = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "raw_materials/nickel")); //non-conventional
+    public static final TagKey<Item> RUBY_GEM = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "gems/ruby"));
     public static final TagKey<Item> IRON_INGOT = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "ingots/iron"));
     public static final TagKey<Item> COPPER_INGOT = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "ingots/copper"));
     public static final TagKey<Item> NICKEL_INGOT = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "ingots/nickel"));
@@ -85,6 +88,11 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
         getOrCreateTagBuilder(NICKEL_ORES).add(ModBlocks.DEEPSLATE_NICKEL_ORE.asItem());
         getOrCreateTagBuilder(ORES_STONE).add(ModBlocks.NICKEL_ORE.asItem());
         getOrCreateTagBuilder(ORES_DEEPSLATE).add(ModBlocks.DEEPSLATE_NICKEL_ORE.asItem());
+        getOrCreateTagBuilder(RUBY_BLOCK).add(ModBlocks.RUBY_BLOCK.asItem());
+        getOrCreateTagBuilder(RUBY_ORES).add(ModBlocks.RUBY_ORE.asItem());
+        getOrCreateTagBuilder(RUBY_ORES).add(ModBlocks.DEEPSLATE_RUBY_ORE.asItem());
+        getOrCreateTagBuilder(ORES_STONE).add(ModBlocks.RUBY_ORE.asItem());
+        getOrCreateTagBuilder(ORES_DEEPSLATE).add(ModBlocks.DEEPSLATE_RUBY_ORE.asItem());
         getOrCreateTagBuilder(RAW_NICKEL).add(ModItems.RAW_NICKEL);
         getOrCreateTagBuilder(IRON_INGOT).add(Items.IRON_INGOT);
         getOrCreateTagBuilder(COPPER_INGOT).add(Items.COPPER_INGOT);

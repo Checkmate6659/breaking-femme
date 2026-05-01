@@ -25,10 +25,12 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
     public static final TagKey<Block> COLD = TagKey.of(RegistryKeys.BLOCK, new Identifier("c", "cold"));
 
     public static final TagKey<Block> STONES = TagKey.of(RegistryKeys.BLOCK, new Identifier("c", "stones"));
-    public static final TagKey<Block> NICKEL_ORES = TagKey.of(RegistryKeys.BLOCK, new Identifier("c", "ores/nickel"));
     public static final TagKey<Block> ORES_STONE = TagKey.of(RegistryKeys.BLOCK, new Identifier("c", "ores_in_ground/stone"));
     public static final TagKey<Block> ORES_DEEPSLATE = TagKey.of(RegistryKeys.BLOCK, new Identifier("c", "ores_in_ground/deepslate"));
+    public static final TagKey<Block> NICKEL_ORES = TagKey.of(RegistryKeys.BLOCK, new Identifier("c", "ores/nickel"));
     public static final TagKey<Block> NICKEL_BLOCK = TagKey.of(RegistryKeys.BLOCK, new Identifier("c", "storage_blocks/nickel"));
+    public static final TagKey<Block> RUBY_ORES = TagKey.of(RegistryKeys.BLOCK, new Identifier("c", "ores/ruby"));
+    public static final TagKey<Block> RUBY_BLOCK = TagKey.of(RegistryKeys.BLOCK, new Identifier("c", "storage_blocks/ruby"));
 
     //fermenter panel tags (addition of modded panels?)
     public static final TagKey<Block> FERMENTER_SIDE_PANEL = TagKey.of(RegistryKeys.BLOCK, new Identifier(BreakingFemme.MOD_ID, "fermenter_side_panel"));
@@ -71,6 +73,19 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(NICKEL_ORES).add(ModBlocks.DEEPSLATE_NICKEL_ORE);
         getOrCreateTagBuilder(ORES_STONE).add(ModBlocks.NICKEL_ORE);
         getOrCreateTagBuilder(ORES_DEEPSLATE).add(ModBlocks.DEEPSLATE_NICKEL_ORE);
+
+        //ruby tags
+        getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModBlocks.RUBY_BLOCK);
+        getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModBlocks.RUBY_ORE);
+        getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModBlocks.DEEPSLATE_RUBY_ORE);
+        getOrCreateTagBuilder(BlockTags.NEEDS_IRON_TOOL).add(ModBlocks.RUBY_BLOCK);
+        getOrCreateTagBuilder(BlockTags.NEEDS_IRON_TOOL).add(ModBlocks.RUBY_ORE);
+        getOrCreateTagBuilder(BlockTags.NEEDS_IRON_TOOL).add(ModBlocks.DEEPSLATE_RUBY_ORE);
+        getOrCreateTagBuilder(RUBY_BLOCK).add(ModBlocks.RUBY_BLOCK);
+        getOrCreateTagBuilder(RUBY_ORES).add(ModBlocks.RUBY_ORE);
+        getOrCreateTagBuilder(RUBY_ORES).add(ModBlocks.DEEPSLATE_RUBY_ORE);
+        getOrCreateTagBuilder(ORES_STONE).add(ModBlocks.RUBY_ORE);
+        getOrCreateTagBuilder(ORES_DEEPSLATE).add(ModBlocks.DEEPSLATE_RUBY_ORE);
 
         //all the cauldrons, vanilla tags
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModFluids.MACERATING_SOY_CAULDRON);

@@ -35,9 +35,10 @@ public class ModItems {
     public static final Item SOYBEANS = registerItem("soybeans", new AliasedBlockItem(ModBlocks.SOY_CROP,
         new FabricItemSettings().food(new FoodComponent.Builder().hunger(2).saturationModifier(0.25f).build())));
 
-    //Copper, Nickel
+    //Copper, Nickel, Ruby
     public static final Item RAW_NICKEL = registerItem("raw_nickel", new Item(new FabricItemSettings()));
     public static final Item NICKEL_INGOT = registerItem("nickel_ingot", new Item(new FabricItemSettings()));
+    public static final Item RUBY = registerItem("ruby", new Item(new FabricItemSettings()));
     public static final Item PULVERIZED_COPPER = registerItem("pulverized_copper", new Item(new FabricItemSettings()));
     public static final Item PULVERIZED_NICKEL = registerItem("pulverized_nickel", new Item(new FabricItemSettings()));
     public static final Item COPPER_SULFATE = registerItem("copper_sulfate", new CopperSulfateItem(new FabricItemSettings()));
@@ -61,7 +62,6 @@ public class ModItems {
     public static final Item DOUGH = registerItem("wheat_dough", new Item(new FabricItemSettings().food(new FoodComponent.Builder().hunger(3).saturationModifier(1f).build())));
 
     //Bottles of alcoholic "beverages"
-    //TODO: add drunkenness status effect and shader, of course using real research because that's the whole point of this mod.
     public static final Item BEER_BOTTLE = registerItem("beer_bottle", new AlcoholDrinkItem(new FabricItemSettings().maxCount(1).recipeRemainder(Items.GLASS_BOTTLE).food(new FoodComponent.Builder().hunger(0).saturationModifier(0f).alwaysEdible().build()), 0));
     public static final Item NETHER_BEER_BOTTLE = registerItem("nether_beer_bottle", new AlcoholDrinkItem(new FabricItemSettings().maxCount(1).recipeRemainder(Items.GLASS_BOTTLE).food(new FoodComponent.Builder().hunger(0).saturationModifier(0f).alwaysEdible().build()), 1));
     public static final Item ET32_BOTTLE = registerItem("ethanol32_bottle", new AlcoholDrinkItem(new FabricItemSettings().maxCount(1).recipeRemainder(Items.GLASS_BOTTLE).food(new FoodComponent.Builder().hunger(0).saturationModifier(0f).alwaysEdible().build()), 1));
@@ -86,8 +86,7 @@ public class ModItems {
     //Soda ash processing line
     public static final Item KELP_ASH = registerItem("kelp_ash", new Item(new FabricItemSettings()));
     public static final Item LYE_WATER_BOTTLE = registerItem("lye_water_bottle", new LyeWaterBottleItem(new FabricItemSettings().maxCount(1).recipeRemainder(Items.GLASS_BOTTLE).food(new FoodComponent.Builder().hunger(0).saturationModifier(0f).alwaysEdible().build())));
-    //TODO: add slaked lime to make caustic lye water
-    //which can then be used to make raney nickel when using it with a 1:1 Ni-Al alloy
+    //TODO: caustic soda from soda lye and slaked lime (OR one-pot recipe with the raney nickel? no cuz slaked lime not very soluble.)
 
     //Estrogens
     public static final Item EGEL_BOTTLE = registerItem("egel_bottle", new EgelItem(new FabricItemSettings().maxDamage(64)));
@@ -113,6 +112,10 @@ public class ModItems {
             entries.add(PULVERIZED_NICKEL);
             entries.add(COPPER_SULFATE);
             entries.add(NICKEL_SULFATE);
+            entries.add(ModBlocks.RUBY_ORE);
+            entries.add(ModBlocks.DEEPSLATE_RUBY_ORE);
+            entries.add(RUBY);
+            entries.add(ModBlocks.RUBY_BLOCK);
             entries.add(ModFluids.COPPER_SULFATE_BUCKET);
             entries.add(ModFluids.NICKEL_SULFATE_BUCKET);
             entries.add(FLOUR);

@@ -25,6 +25,9 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.NICKEL_BLOCK);
         blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.NICKEL_ORE);
         blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.DEEPSLATE_NICKEL_ORE);
+        blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.RUBY_BLOCK);
+        blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.RUBY_ORE);
+        blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.DEEPSLATE_RUBY_ORE);
 
         blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.KELP_ASH_BLOCK);
         blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.KELP_ASH_MUD_BLOCK);
@@ -43,6 +46,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.CHILI_PEPPER, Models.GENERATED);
         itemModelGenerator.register(ModItems.DRIED_CHILI_PEPPER, Models.GENERATED);
         //itemModelGenerator.register(ModItems.GROUND_CHILI_PEPPER, Models.GENERATED); //this should NOT work. how.
+        itemModelGenerator.register(ModItems.RUBY, Models.GENERATED);
         itemModelGenerator.register(ModItems.RAW_NICKEL, Models.GENERATED);
         itemModelGenerator.register(ModItems.NICKEL_INGOT, Models.GENERATED);
         itemModelGenerator.register(ModItems.PULVERIZED_COPPER, Models.GENERATED);

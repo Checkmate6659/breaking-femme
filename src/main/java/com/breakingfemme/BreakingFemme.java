@@ -55,8 +55,9 @@ public class BreakingFemme implements ModInitializer {
 	public static final String MOD_ID = "breakingfemme";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
-	//register nickel ore generation
+	//register nickel and ruby ore generation
 	public static final RegistryKey<PlacedFeature> NICKEL_ORE_PLACED_FEATURE = RegistryKey.of(RegistryKeys.PLACED_FEATURE, Identifier.of(MOD_ID, "ore_nickel"));
+	public static final RegistryKey<PlacedFeature> RUBY_ORE_PLACED_FEATURE = RegistryKey.of(RegistryKeys.PLACED_FEATURE, Identifier.of(MOD_ID, "ore_ruby"));
 
 	//register damage types
 	public static final RegistryKey<DamageType> NOVIKOV = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, new Identifier(BreakingFemme.MOD_ID, "novikov"));
@@ -141,8 +142,9 @@ public class BreakingFemme implements ModInitializer {
 			));
 		});
 
-		//generate nickel in the overworld
+		//generate nickel and rubies in the overworld
 		BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES, NICKEL_ORE_PLACED_FEATURE);
+		BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES, RUBY_ORE_PLACED_FEATURE);
 
 		//add (rare) nickel ingot drop to drowned, (8 times) more common when doing it by hand
 		Identifier LOOT_TABLE_ID = EntityType.DROWNED.getLootTableId();
