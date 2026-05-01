@@ -40,6 +40,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.PlacedFeature;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -183,15 +185,13 @@ public class BreakingFemme implements ModInitializer {
 		//it would be funny to give chili peppers to blaze burners too
 	}
 
-	//TODO: when lightning strikes somewhere, look in a 7*7*7 cube, and if a ruby block:
-	//-is next to a granit block not touching water but touching a coal block, and such that all touching coal blocks do not touch water
-	//-is next to a coal block touching water
-	//-the order of the blocks in euclidean distance from the strike is, in order: (coal < granit < ruby < coal < water)
-	//then theres a probability (depends on distance of first coal block to lightning) that the ruby turns into aluminum block
-	//or mb just that an aluminum scrap item spawns, and a (lower) chance that the ruby block is gone
-	//the way to do this i think is mixin into LightningEntity.tick, right before/after cleanOxidation is called
 
 	//======================== UTILITY FUNCTIONS ========================
+	public static List<BlockPos> getNeighbors(BlockPos pos)
+	{
+		return List.of(pos.up(), pos.down(), pos.north(), pos.east(), pos.south(), pos.west());
+	}
+
 	public static NbtCompound nbtOfFluid(FluidVariant fluid)
 	{
 		return fluid.toNbt();
