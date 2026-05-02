@@ -1,0 +1,18 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "breakingfemme:nickel_aluminum_alloy_ingot"
+    }
+  ],
+  "processingTime": 400,
+  "results": [
+    {
+      "item": "breakingfemme:pulverized_nickel_aluminum_alloy"
+    },
+    {
+      "chance": 0.125,
+      "item": "breakingfemme:pulverized_nickel_aluminum_alloy"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 1.0,
+  "group": "nickel_aluminum_ingot_blasting",
+  "ingredient": {
+    "item": "breakingfemme:nickel_aluminum_blend"
+  },
+  "result": "breakingfemme:nickel_aluminum_alloy_ingot"
+}

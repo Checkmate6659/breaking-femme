@@ -33,9 +33,19 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         offerReversibleCompactingRecipes(exporter, RecipeCategory.MISC, ModItems.NICKEL_INGOT, RecipeCategory.BUILDING_BLOCKS, ModBlocks.NICKEL_BLOCK);
 
         //same for ruby
-        offerSmelting(exporter, ImmutableList.of(ModItems.RUBY, ModBlocks.RUBY_ORE, ModBlocks.DEEPSLATE_RUBY_ORE), RecipeCategory.MISC, ModItems.RUBY, 1.0f, 200, "ruby");
-        offerBlasting(exporter, ImmutableList.of(ModItems.RUBY, ModBlocks.RUBY_ORE, ModBlocks.DEEPSLATE_RUBY_ORE), RecipeCategory.MISC, ModItems.RUBY, 1.0f, 100, "ruby_blasting");
+        offerSmelting(exporter, ImmutableList.of(ModBlocks.RUBY_ORE, ModBlocks.DEEPSLATE_RUBY_ORE), RecipeCategory.MISC, ModItems.RUBY, 1.0f, 200, "ruby");
+        offerBlasting(exporter, ImmutableList.of(ModBlocks.RUBY_ORE, ModBlocks.DEEPSLATE_RUBY_ORE), RecipeCategory.MISC, ModItems.RUBY, 1.0f, 100, "ruby_blasting");
         offerReversibleCompactingRecipes(exporter, RecipeCategory.MISC, ModItems.RUBY, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUBY_BLOCK);
+
+        //nickel-aluminum alloy stuff
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.NI_AL_BLEND, 2)
+            .input(ModItemTagProvider.PULVERIZED_NICKEL)
+            .input(ModItemTagProvider.PULVERIZED_ALUMINUM)
+            .group("nickel_aluminum_blend")
+            .criterion(hasItem(ModItems.PULVERIZED_ALUMINUM), conditionsFromItem(ModItems.PULVERIZED_ALUMINUM))
+            .offerTo(exporter, "nickel_aluminum_blend");
+        offerSmelting(exporter, ImmutableList.of(ModItems.PULVERIZED_NI_AL, ModItems.NI_AL_BLEND), RecipeCategory.MISC, ModItems.NI_AL_INGOT, 1.0f, 200, "nickel_aluminum_ingot");
+        offerBlasting(exporter, ImmutableList.of(ModItems.PULVERIZED_NI_AL, ModItems.NI_AL_BLEND), RecipeCategory.MISC, ModItems.NI_AL_INGOT, 1.0f, 100, "nickel_aluminum_ingot_blasting");
 
         //mortar and pestle
         ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, ModItems.MORTAR_PESTLE).input('#', ModItemTagProvider.STONES).input('|', ModItemTagProvider.IRON_INGOT).pattern(" | ").pattern("#|#").pattern("###").group("mortar_pestle").criterion(hasItem(Blocks.STONE), conditionsFromTag(ItemTags.STONE_CRAFTING_MATERIALS)).offerTo(exporter);

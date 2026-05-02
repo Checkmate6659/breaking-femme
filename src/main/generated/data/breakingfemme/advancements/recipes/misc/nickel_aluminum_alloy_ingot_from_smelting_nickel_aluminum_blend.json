@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_ruby": {
+    "has_nickel_aluminum_blend": {
       "conditions": {
         "items": [
           {
             "items": [
-              "breakingfemme:ruby"
+              "breakingfemme:nickel_aluminum_blend"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:ruby_from_blasting_ruby"
+        "recipe": "minecraft:nickel_aluminum_alloy_ingot_from_smelting_nickel_aluminum_blend"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_ruby",
+      "has_nickel_aluminum_blend",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:ruby_from_blasting_ruby"
+      "minecraft:nickel_aluminum_alloy_ingot_from_smelting_nickel_aluminum_blend"
     ]
   },
   "sends_telemetry_event": false

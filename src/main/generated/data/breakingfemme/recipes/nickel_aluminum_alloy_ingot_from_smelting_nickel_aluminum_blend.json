@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 1.0,
+  "group": "nickel_aluminum_ingot",
+  "ingredient": {
+    "item": "breakingfemme:nickel_aluminum_blend"
+  },
+  "result": "breakingfemme:nickel_aluminum_alloy_ingot"
+}

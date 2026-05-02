@@ -1,0 +1,11 @@
+{
+    "type": "breakingfemme:grinding",
+    "input":
+    {
+        "item": "breakingfemme:nickel_aluminum_alloy_ingot"
+    },
+    "output":
+    {
+        "item": "breakingfemme:pulverized_nickel_aluminum_alloy"
+    }
+}

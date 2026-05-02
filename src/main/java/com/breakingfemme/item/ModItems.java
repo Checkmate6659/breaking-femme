@@ -44,9 +44,12 @@ public class ModItems {
     public static final Item COPPER_SULFATE = registerItem("copper_sulfate", new CopperSulfateItem(new FabricItemSettings()));
     public static final Item NICKEL_SULFATE = registerItem("nickel_sulfate", new Item(new FabricItemSettings()));
 
-    //Aluminum
+    //Aluminum and Raney nickel stuff
     public static final Item ALUMINUM_SCRAP = registerItem("aluminum_scrap", new Item(new FabricItemSettings()));
     public static final Item PULVERIZED_ALUMINUM = registerItem("pulverized_aluminum", new Item(new FabricItemSettings()));
+    public static final Item NI_AL_BLEND = registerItem("nickel_aluminum_blend", new Item(new FabricItemSettings()));
+    public static final Item NI_AL_INGOT = registerItem("nickel_aluminum_alloy_ingot", new Item(new FabricItemSettings()));
+    public static final Item PULVERIZED_NI_AL = registerItem("pulverized_nickel_aluminum_alloy", new Item(new FabricItemSettings()));
 
     //milk processing items
     public static final Item INGOT_MOLD = registerItem("ingot_mold", new Item(new FabricItemSettings()));
@@ -120,6 +123,9 @@ public class ModItems {
             entries.add(ModBlocks.RUBY_BLOCK);
             entries.add(ALUMINUM_SCRAP);
             entries.add(PULVERIZED_ALUMINUM);
+            entries.add(NI_AL_BLEND);
+            entries.add(NI_AL_INGOT);
+            entries.add(PULVERIZED_NI_AL);
             entries.add(COPPER_SULFATE);
             entries.add(NICKEL_SULFATE);
             entries.add(ModFluids.COPPER_SULFATE_BUCKET);
