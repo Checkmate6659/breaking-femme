@@ -4,6 +4,7 @@ import java.util.concurrent.CompletableFuture;
 
 import com.breakingfemme.BreakingFemme;
 import com.breakingfemme.block.ModBlocks;
+import com.breakingfemme.fluid.ModFluids;
 import com.breakingfemme.item.ModItems;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -62,12 +63,14 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
     //TODO: do we accept bottles? if yes, how do we add farmersdelight:milk_bottles? its registered as c:foods/milk, alongside minecraft milk buckets, in common tags
     public static final TagKey<Item> MILK_BOTTLE = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "milk_bottles")); //counts as 1/3 bucket; usefulfood:milkbottle
     public static final TagKey<Item> FILTER_PAPER = TagKey.of(RegistryKeys.ITEM, new Identifier(BreakingFemme.MOD_ID, "filter_paper"));
-
+    public static final TagKey<Item> BLAZE_BURNER_FUEL = TagKey.of(RegistryKeys.ITEM, new Identifier("create", "blaze_burner_fuel/regular")); //regular fuel (estrone and estradiol, and chili)
+    public static final TagKey<Item> BLAZE_BURNER_SUPER = TagKey.of(RegistryKeys.ITEM, new Identifier("create", "blaze_burner_fuel/special")); //superheating fuel (chili estradiol)
+    
     //armor tags
     //TODO: reimpl this https://github.com/MayaqqDev/Estrogen/blob/kotlin/src/main/java/dev/mayaqq/estrogen/mixin/client/PlayerModelMixin.java
     //and mb fix some stuff, theres some dodgy texture grabbing going on at the end of this
-    public static final TagKey<Item> ALREADY_FLEXIBLE = TagKey.of(RegistryKeys.ITEM, new Identifier("breakingfemme", "already_flexible"));
-    public static final TagKey<Item> FREE_CHEST = TagKey.of(RegistryKeys.ITEM, new Identifier("breakingfemme", "free_chest"));
+    public static final TagKey<Item> ALREADY_FLEXIBLE = TagKey.of(RegistryKeys.ITEM, new Identifier(BreakingFemme.MOD_ID, "already_flexible"));
+    public static final TagKey<Item> FREE_CHEST = TagKey.of(RegistryKeys.ITEM, new Identifier(BreakingFemme.MOD_ID, "free_chest"));
 
     public ModItemTagProvider(FabricDataOutput output, CompletableFuture<WrapperLookup> completableFuture) {
         super(output, completableFuture);
@@ -139,6 +142,18 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
         //getOrCreateTagBuilder(FILTER_PAPER).add(Identifier.of("create", "filter"));
         //getOrCreateTagBuilder(FILTER_PAPER).add(Identifier.of("create", "attribute_filter"));
         //getOrCreateTagBuilder(FILTER_PAPER).add(Identifier.of("create", "package_filter"));
+
+        //blaze burner fuels
+        getOrCreateTagBuilder(BLAZE_BURNER_FUEL).add(ModItems.CRUDE_ESTRONE); //4800
+        getOrCreateTagBuilder(BLAZE_BURNER_FUEL).add(ModItems.PURE_ESTRONE); //6400
+        getOrCreateTagBuilder(BLAZE_BURNER_FUEL).add(ModFluids.ESTRONE_OIL_SOLUTION_BUCKET); //16000
+        getOrCreateTagBuilder(BLAZE_BURNER_FUEL).add(ModItems.PURE_ESTRADIOL_CRYSTALS); //32000
+        getOrCreateTagBuilder(BLAZE_BURNER_FUEL).add(ModItems.PURE_ESTRADIOL_POWDER); //32000
+        getOrCreateTagBuilder(BLAZE_BURNER_FUEL).add(ModItems.EGEL_BOTTLE); //12000
+        getOrCreateTagBuilder(BLAZE_BURNER_FUEL).add(ModItems.CHILI_PEPPER); //same as coal: 1600
+        getOrCreateTagBuilder(BLAZE_BURNER_FUEL).add(ModItems.DRIED_CHILI_PEPPER);
+        getOrCreateTagBuilder(BLAZE_BURNER_FUEL).add(ModItems.GROUND_CHILI_PEPPER);
+        //TODO: chili estrogen superheats! (TODO: override superheating to superheat longer than for 3200t i.e. 160s)
 
         //armor tags
         getOrCreateTagBuilder(ALREADY_FLEXIBLE).addTag(FREE_CHEST);
