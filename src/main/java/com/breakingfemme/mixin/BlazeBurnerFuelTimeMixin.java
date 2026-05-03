@@ -14,6 +14,9 @@ import net.minecraft.item.ItemStack;
 
 //if create mod is not loaded, just fail harmlessly
 //btw using IMixinConfigPlugin does NOT work. it will try to locate the class anyway and fail the same way.
+//example for that btw:
+//https://www.reddit.com/r/fabricmc/comments/tzz59c/conditionally_apply_mixin_if_another_mod_is/
+//https://github.com/Juuxel/Adorn/blob/bd70a2955640897bc68ff1f4f201fe5e6c10bc32/fabric/src/main/java/juuxel/adorn/AdornMixinPlugin.java
 @Mixin(BlazeBurnerBlockEntity.class)
 public class BlazeBurnerFuelTimeMixin {
     @ModifyConstant(method = "tryUpdateFuel", constant = @Constant(intValue = 1600))
