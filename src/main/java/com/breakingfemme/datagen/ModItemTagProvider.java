@@ -65,6 +65,7 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
     public static final TagKey<Item> FILTER_PAPER = TagKey.of(RegistryKeys.ITEM, new Identifier(BreakingFemme.MOD_ID, "filter_paper"));
     public static final TagKey<Item> BLAZE_BURNER_FUEL = TagKey.of(RegistryKeys.ITEM, new Identifier("create", "blaze_burner_fuel/regular")); //regular fuel (estrone and estradiol, and chili)
     public static final TagKey<Item> BLAZE_BURNER_SUPER = TagKey.of(RegistryKeys.ITEM, new Identifier("create", "blaze_burner_fuel/special")); //superheating fuel (chili estradiol)
+    public static final TagKey<Item> BLAZE_BURNER_FUEL_CUSTOM = TagKey.of(RegistryKeys.ITEM, new Identifier(BreakingFemme.MOD_ID, "blaze_burner_custom_duration")); //custom fuel duration (set in BlazeBurnerFuelTimeMixin)
     
     //armor tags
     //TODO: reimpl this https://github.com/MayaqqDev/Estrogen/blob/kotlin/src/main/java/dev/mayaqq/estrogen/mixin/client/PlayerModelMixin.java
@@ -144,12 +145,13 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
         //getOrCreateTagBuilder(FILTER_PAPER).add(Identifier.of("create", "package_filter"));
 
         //blaze burner fuels
-        getOrCreateTagBuilder(BLAZE_BURNER_FUEL).add(ModItems.CRUDE_ESTRONE); //4800
-        getOrCreateTagBuilder(BLAZE_BURNER_FUEL).add(ModItems.PURE_ESTRONE); //6400
-        getOrCreateTagBuilder(BLAZE_BURNER_FUEL).add(ModFluids.ESTRONE_OIL_SOLUTION_BUCKET); //16000
-        getOrCreateTagBuilder(BLAZE_BURNER_FUEL).add(ModItems.PURE_ESTRADIOL_CRYSTALS); //32000
-        getOrCreateTagBuilder(BLAZE_BURNER_FUEL).add(ModItems.PURE_ESTRADIOL_POWDER); //32000
-        getOrCreateTagBuilder(BLAZE_BURNER_FUEL).add(ModItems.EGEL_BOTTLE); //12000
+        getOrCreateTagBuilder(BLAZE_BURNER_FUEL).addTag(BLAZE_BURNER_FUEL_CUSTOM); //for custom duration fuels
+        getOrCreateTagBuilder(BLAZE_BURNER_FUEL_CUSTOM).add(ModItems.CRUDE_ESTRONE); //4800
+        getOrCreateTagBuilder(BLAZE_BURNER_FUEL_CUSTOM).add(ModItems.PURE_ESTRONE); //6400
+        getOrCreateTagBuilder(BLAZE_BURNER_FUEL_CUSTOM).add(ModFluids.ESTRONE_OIL_SOLUTION_BUCKET); //16000
+        getOrCreateTagBuilder(BLAZE_BURNER_FUEL_CUSTOM).add(ModItems.PURE_ESTRADIOL_CRYSTALS); //32000
+        getOrCreateTagBuilder(BLAZE_BURNER_FUEL_CUSTOM).add(ModItems.PURE_ESTRADIOL_POWDER); //32000
+        getOrCreateTagBuilder(BLAZE_BURNER_FUEL_CUSTOM).add(ModItems.EGEL_BOTTLE); //12000
         getOrCreateTagBuilder(BLAZE_BURNER_FUEL).add(ModItems.CHILI_PEPPER); //same as coal: 1600
         getOrCreateTagBuilder(BLAZE_BURNER_FUEL).add(ModItems.DRIED_CHILI_PEPPER);
         getOrCreateTagBuilder(BLAZE_BURNER_FUEL).add(ModItems.GROUND_CHILI_PEPPER);

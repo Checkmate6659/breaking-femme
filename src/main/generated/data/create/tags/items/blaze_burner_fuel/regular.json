@@ -1,12 +1,7 @@
 {
   "replace": false,
   "values": [
-    "breakingfemme:crude_estrone",
-    "breakingfemme:pure_estrone",
-    "breakingfemme:estrone_oil_solution_bucket",
-    "breakingfemme:pure_estradiol_crystals",
-    "breakingfemme:pure_estradiol_powder",
-    "breakingfemme:egel_bottle",
+    "#breakingfemme:blaze_burner_custom_duration",
     "breakingfemme:chili_pepper",
     "breakingfemme:dried_chili_pepper",
     "breakingfemme:ground_chili_pepper"
