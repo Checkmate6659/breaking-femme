@@ -15,5 +15,13 @@
       "amount": 40500,
       "fluid": "breakingfemme:ethanol64"
     }
+  ],
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "create"
+      ]
+    }
   ]
 }

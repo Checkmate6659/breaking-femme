@@ -14,5 +14,13 @@
       "chance": 0.125,
       "item": "breakingfemme:pulverized_copper"
     }
+  ],
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "create"
+      ]
+    }
   ]
 }

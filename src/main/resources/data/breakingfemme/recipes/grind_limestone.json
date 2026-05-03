@@ -7,5 +7,13 @@
     "output":
     {
         "item": "breakingfemme:limestone_chunks"
-    }
+    },
+    "fabric:load_conditions": [
+      {
+        "condition": "fabric:all_mods_loaded",
+        "values": [
+          "create"
+        ]
+      }
+    ]
 }
