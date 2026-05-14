@@ -1,0 +1,10 @@
+tiny    2    0    official    intermediary    named
+
+/* c    dev/mayaqq/cynosure/particles/CynosureParticleType    net/minecraft/class_2396    dev/mayaqq/cynosure/particles/CynosureParticleType
+    m    ()Lcom/mojang/serialization/Codec    getCodec    method_29138    getCodec57276295*/
+
+/* NOTE: sth in this is fucked up and idk why
+and the error reporting is the worst possible
+the error i need to fix btw: METHODs dev/mayaqq/cynosure/particles/CynosureParticleType/[getCodec, net/minecraft/class_2396/method_29138]()Lcom/mojang/serialization/Codec; -> getCodec */
+
+/* also if the file only has the header its still fucked somehow?? */
