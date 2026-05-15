@@ -83,7 +83,7 @@ public class EstroneOilSolutionCauldronBlock extends AbstractCauldronBlock {
         if(hopperq.isEmpty()) return;
         HopperBlockEntity hopper = hopperq.get();
 
-        //place estrone in non-full slot which already has estrone
+        //place estrone in non-full slot which already has estrone, or in a new empty slot
         int idx_empty = -1;
         int idx_filter = -1;
         int idx_estrone = -1;
@@ -94,18 +94,23 @@ public class EstroneOilSolutionCauldronBlock extends AbstractCauldronBlock {
                 idx_empty = i;
             else if(idx_estrone == -1 && stk.getCount() < 64 && stk.isOf(ModItems.CRUDE_ESTRONE))
                 idx_estrone = i;
-            else if(idx_filter == -1 && stk.isIn(ModItemTagProvider.FILTER))
+            else if(idx_filter == -1 && stk.isIn(ModItemTagProvider.FILTER)) //flimsy filters are fine here
                 idx_filter = i;
         }
         if(idx_estrone == -1) idx_estrone = idx_empty;
         if(idx_estrone == -1 || idx_filter == -1) return; //no slot to consume filter from or deposit estrone onto
 
-        //filter estrone out of the solution: use filter paper, replace with crude estrone
-        hopper.getStack(idx_filter).decrement(1); //consume a piece of filter paper
-        if(idx_empty != idx_estrone)
-            hopper.getStack(idx_estrone).increment(1);
+        //filter estrone out of the solution: use up or damage filter, replace with crude estrone
+        ItemStack filter = hopper.getStack(idx_filter);
+        if(filter.isDamageable()) //does filter have durability
+            filter.damage(1, world.random, null); //just use one bit of durability
         else
-            hopper.setStack(idx_estrone, new ItemStack(ModItems.CRUDE_ESTRONE));
+            filter.decrement(1); //consume a piece of filter
+
+        if(idx_empty != idx_estrone)
+            hopper.getStack(idx_estrone).increment(1); //just add one bit of estrone
+        else
+            hopper.setStack(idx_estrone, new ItemStack(ModItems.CRUDE_ESTRONE)); //new slot!
 
         //replace block states
         world.setBlockState(low_cauldron_pos, ModFluids.ANDROSTADIENEDIONE_OIL_SOLUTION_CAULDRON.getDefaultState().with(AndrostadienedioneOilSolutionCauldronBlock.LEVEL, 3));

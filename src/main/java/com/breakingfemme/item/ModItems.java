@@ -90,6 +90,11 @@ public class ModItems {
     public static final Item PURE_ESTRADIOL_POWDER = registerItem("pure_estradiol_powder", new Item(new FabricItemSettings()));
     public static final Item HORSE_JUICE = registerItem("conjugated_equine_estrogens", new Item(new FabricItemSettings())); //compat with Mayaqq's Estrogen (if i can make that work)
 
+    //Ceramic filters for filtering harsh chemicals
+    public static final Item SAWDUST = registerItem("sawdust", new Item(new FabricItemSettings()));
+    public static final Item UNFIRED_CERAMIC_FILTER = registerItem("unfired_ceramic_filter", new Item(new FabricItemSettings()));
+    public static final Item CERAMIC_FILTER = registerItem("ceramic_filter", new Item(new FabricItemSettings().maxDamage(256)));
+
     //Soda ash processing line
     public static final Item KELP_ASH = registerItem("kelp_ash", new Item(new FabricItemSettings()));
     public static final Item LYE_WATER_BOTTLE = registerItem("lye_water_bottle", new LyeWaterBottleItem(new FabricItemSettings().maxCount(1).recipeRemainder(Items.GLASS_BOTTLE).food(new FoodComponent.Builder().hunger(0).saturationModifier(0f).alwaysEdible().build())));
@@ -109,6 +114,9 @@ public class ModItems {
         FabricItemGroup.builder().displayName(Text.translatable("itemgroup.breakingfemme"))
         .icon(() -> new ItemStack(ModItems.PURE_ESTRADIOL_CRYSTALS)).entries((displayContext, entries) -> {
             entries.add(MORTAR_PESTLE);
+            entries.add(UNFIRED_CERAMIC_FILTER);
+            entries.add(CERAMIC_FILTER);
+            entries.add(SAWDUST);
             entries.add(SOYBEANS);
             entries.add(ModBlocks.NICKEL_ORE);
             entries.add(ModBlocks.DEEPSLATE_NICKEL_ORE);

@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:ceramic_filter_from_smelting_unfired_ceramic_filter"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_unfired_ceramic_filter": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "breakingfemme:unfired_ceramic_filter"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_unfired_ceramic_filter",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:ceramic_filter_from_smelting_unfired_ceramic_filter"
+    ]
+  },
+  "sends_telemetry_event": false
+}

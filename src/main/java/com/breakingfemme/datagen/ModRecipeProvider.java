@@ -1,6 +1,7 @@
 package com.breakingfemme.datagen;
 
 import java.util.function.Consumer;
+import java.util.stream.Stream;
 
 import com.breakingfemme.block.ModBlocks;
 import com.breakingfemme.fluid.ModFluids;
@@ -25,6 +26,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         super(output);
     }
 
+    @SuppressWarnings("null")
     @Override
     public void generate(Consumer<RecipeJsonProvider> exporter) {
         //nickel ore smelting/blasting, nickel ingot compactification
@@ -49,6 +51,11 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
         //mortar and pestle
         ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, ModItems.MORTAR_PESTLE).input('#', ModItemTagProvider.STONES).input('|', ModItemTagProvider.IRON_INGOT).pattern(" | ").pattern("#|#").pattern("###").group("mortar_pestle").criterion(hasItem(Blocks.STONE), conditionsFromTag(ItemTags.STONE_CRAFTING_MATERIALS)).offerTo(exporter);
+
+        //ceramic filter
+        Ingredient SAWDUST_INGREDIENT = Ingredient.ofEntries(Stream.of(new Ingredient.TagEntry(ModItemTagProvider.SAWDUST1), new Ingredient.TagEntry(ModItemTagProvider.SAWDUST2)));
+        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, ModItems.UNFIRED_CERAMIC_FILTER).input('U', Items.CLAY_BALL).input('w', SAWDUST_INGREDIENT).pattern("UwU").pattern(" U ").group("unfired_ceramic_filter").criterion(hasItem(Items.CLAY), conditionsFromItem(Items.CLAY)).offerTo(exporter);
+        offerSmelting(exporter, ImmutableList.of(ModItems.UNFIRED_CERAMIC_FILTER), RecipeCategory.TOOLS, ModItems.CERAMIC_FILTER, 0, 200, "ceramic_filter_fire");
 
         //bread dough, and cooking it to get bread
         ShapelessRecipeJsonBuilder.create(RecipeCategory.FOOD, ModItems.DOUGH, 2)

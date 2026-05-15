@@ -1,0 +1,11 @@
+{
+    "type": "breakingfemme:grinding",
+    "input":
+    {
+        "item": "minecraft:stick"
+    },
+    "output":
+    {
+        "item": "breakingfemme:sawdust"
+    }
+}
