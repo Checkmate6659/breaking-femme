@@ -94,7 +94,7 @@ public class EstroneOilSolutionCauldronBlock extends AbstractCauldronBlock {
                 idx_empty = i;
             else if(idx_estrone == -1 && stk.getCount() < 64 && stk.isOf(ModItems.CRUDE_ESTRONE))
                 idx_estrone = i;
-            else if(idx_filter == -1 && stk.isIn(ModItemTagProvider.FILTER_PAPER))
+            else if(idx_filter == -1 && stk.isIn(ModItemTagProvider.FILTER))
                 idx_filter = i;
         }
         if(idx_estrone == -1) idx_estrone = idx_empty;

@@ -62,7 +62,8 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
     public static final TagKey<Item> MILK_BUCKET = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "buckets/milk"));
     //TODO: do we accept bottles? if yes, how do we add farmersdelight:milk_bottles? its registered as c:foods/milk, alongside minecraft milk buckets, in common tags
     public static final TagKey<Item> MILK_BOTTLE = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "milk_bottles")); //counts as 1/3 bucket; usefulfood:milkbottle
-    public static final TagKey<Item> FILTER_PAPER = TagKey.of(RegistryKeys.ITEM, new Identifier(BreakingFemme.MOD_ID, "filter_paper"));
+    public static final TagKey<Item> FILTER = TagKey.of(RegistryKeys.ITEM, new Identifier(BreakingFemme.MOD_ID, "filter"));
+    public static final TagKey<Item> RESISTANT_FILTER = TagKey.of(RegistryKeys.ITEM, new Identifier(BreakingFemme.MOD_ID, "resistant_filter"));
     public static final TagKey<Item> BLAZE_BURNER_FUEL = TagKey.of(RegistryKeys.ITEM, new Identifier("create", "blaze_burner_fuel/regular")); //regular fuel (estrone and estradiol, and chili)
     public static final TagKey<Item> BLAZE_BURNER_SUPER = TagKey.of(RegistryKeys.ITEM, new Identifier("create", "blaze_burner_fuel/special")); //superheating fuel (chili estradiol)
     public static final TagKey<Item> BLAZE_BURNER_FUEL_CUSTOM = TagKey.of(RegistryKeys.ITEM, new Identifier(BreakingFemme.MOD_ID, "blaze_burner_custom_duration")); //custom fuel duration (set in BlazeBurnerFuelTimeMixin)
@@ -138,11 +139,12 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
         getOrCreateTagBuilder(VEGETABLE3).add(ModItems.CHILI_PEPPER);
         getOrCreateTagBuilder(VEGETABLE3).add(ModItems.DRIED_CHILI_PEPPER);
         getOrCreateTagBuilder(VEGETABLE3).add(ModItems.GROUND_CHILI_PEPPER);
-        getOrCreateTagBuilder(FILTER_PAPER).add(Items.PAPER);
+        getOrCreateTagBuilder(FILTER).addTag(RESISTANT_FILTER);
+        getOrCreateTagBuilder(FILTER).add(Items.PAPER);
         //TODO: add create list filters into filter paper tag!
-        //getOrCreateTagBuilder(FILTER_PAPER).add(Identifier.of("create", "filter"));
-        //getOrCreateTagBuilder(FILTER_PAPER).add(Identifier.of("create", "attribute_filter"));
-        //getOrCreateTagBuilder(FILTER_PAPER).add(Identifier.of("create", "package_filter"));
+        //getOrCreateTagBuilder(FILTER).add(Identifier.of("create", "filter"));
+        //getOrCreateTagBuilder(FILTER).add(Identifier.of("create", "attribute_filter"));
+        //getOrCreateTagBuilder(FILTER).add(Identifier.of("create", "package_filter"));
 
         //blaze burner fuels
         getOrCreateTagBuilder(BLAZE_BURNER_FUEL).addTag(BLAZE_BURNER_FUEL_CUSTOM); //for custom duration fuels
