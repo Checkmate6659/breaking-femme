@@ -57,6 +57,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.NI_AL_BLEND, Models.GENERATED);
         itemModelGenerator.register(ModItems.NI_AL_INGOT, Models.GENERATED);
         itemModelGenerator.register(ModItems.PULVERIZED_NI_AL, Models.GENERATED);
+        itemModelGenerator.register(ModItems.RANEY_NICKEL, Models.GENERATED);
         itemModelGenerator.register(ModItems.COPPER_SULFATE, Models.GENERATED);
         itemModelGenerator.register(ModItems.NICKEL_SULFATE, Models.GENERATED);
         itemModelGenerator.register(ModItems.STEROLS, Models.GENERATED);

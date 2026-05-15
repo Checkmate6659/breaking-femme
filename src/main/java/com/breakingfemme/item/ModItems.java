@@ -50,6 +50,8 @@ public class ModItems {
     public static final Item NI_AL_BLEND = registerItem("nickel_aluminum_blend", new Item(new FabricItemSettings()));
     public static final Item NI_AL_INGOT = registerItem("nickel_aluminum_alloy_ingot", new Item(new FabricItemSettings()));
     public static final Item PULVERIZED_NI_AL = registerItem("pulverized_nickel_aluminum_alloy", new Item(new FabricItemSettings()));
+    public static final Item RANEY_NICKEL = registerItem("raney_nickel", new Item(new FabricItemSettings()));
+    //TODO: shove pulverized nickel aluminum alloy in caustic soda solution to make raney nickel
 
     //milk processing items
     public static final Item INGOT_MOLD = registerItem("ingot_mold", new Item(new FabricItemSettings()));
@@ -98,7 +100,6 @@ public class ModItems {
     //Soda ash processing line
     public static final Item KELP_ASH = registerItem("kelp_ash", new Item(new FabricItemSettings()));
     public static final Item LYE_WATER_BOTTLE = registerItem("lye_water_bottle", new LyeWaterBottleItem(new FabricItemSettings().maxCount(1).recipeRemainder(Items.GLASS_BOTTLE).food(new FoodComponent.Builder().hunger(0).saturationModifier(0f).alwaysEdible().build())));
-    //TODO: caustic soda from soda lye and slaked lime (OR one-pot recipe with the raney nickel? no cuz slaked lime not very soluble.)
 
     //Estrogens
     public static final Item EGEL_BOTTLE = registerItem("egel_bottle", new EgelItem(new FabricItemSettings().maxDamage(64)));
@@ -134,6 +135,7 @@ public class ModItems {
             entries.add(NI_AL_BLEND);
             entries.add(NI_AL_INGOT);
             entries.add(PULVERIZED_NI_AL);
+            entries.add(RANEY_NICKEL);
             entries.add(COPPER_SULFATE);
             entries.add(NICKEL_SULFATE);
             entries.add(ModFluids.COPPER_SULFATE_BUCKET);
