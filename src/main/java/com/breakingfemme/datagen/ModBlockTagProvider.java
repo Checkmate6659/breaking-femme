@@ -92,6 +92,7 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         //all the cauldrons, vanilla tags
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModFluids.MACERATING_SOY_CAULDRON);
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModFluids.REDOX_REACTION_CAULDRON);
+        getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModFluids.CAUSTIFICATION_CAULDRON);
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModFluids.YEAST_STARTER_CAULDRON);
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModFluids.YEAST_CAULDRON);
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModFluids.THICK_POTION_CAULDRON);

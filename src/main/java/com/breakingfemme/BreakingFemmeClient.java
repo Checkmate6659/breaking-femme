@@ -134,6 +134,13 @@ public class BreakingFemmeClient implements ClientModInitializer {
             return -1;
         }, ModFluids.REDOX_REACTION_CAULDRON);
 
+        //caustification (cauldron only)
+        ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
+            if (i == 0)
+                return 0xD089827F; //literally the average of lye water and caustic soda colors. so its like gray ish.
+            return -1;
+        }, ModFluids.CAUSTIFICATION_CAULDRON);
+
         //extractiong androstadienedione into oil (cauldron only)
         ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
             if (i == 0)

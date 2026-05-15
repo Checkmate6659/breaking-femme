@@ -8,7 +8,6 @@ import com.breakingfemme.fluid.ModFluids;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.AbstractCauldronBlock;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.cauldron.CauldronBehavior;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.damage.DamageSource;
@@ -19,8 +18,6 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.event.GameEvent;
-import net.minecraft.world.event.GameEvent.Emitter;
 
 public class CausticSodaSolutionCauldronBlock extends AbstractCauldronBlock {
     //custom cauldron behavior
@@ -57,24 +54,26 @@ public class CausticSodaSolutionCauldronBlock extends AbstractCauldronBlock {
                 world.getRegistryManager().get(RegistryKeys.DAMAGE_TYPE).entryOf(BreakingFemme.SODIUM)), 2.0f
             );
             
-            //its still water, so extinguish if on fire
-            if(entity.isOnFire())
+            //its still water, so do fire stuff. but keep burning.
+            //only if we do sodium hydroxide extraction tho.
+            /*if(entity.isOnFire())
             {
-                entity.extinguish();
                 if (entity.canModifyAt(world, pos)) {
                     this.onFireCollision(state, world, pos);
                 }
-            }
+            }*/
         }
     }
 
     //sth that *may be* done in the future: extracting the crystals this way. but doesnt seem necessary.
-    protected void onFireCollision(BlockState state, World world, BlockPos pos) {
+    /*protected void onFireCollision(BlockState state, World world, BlockPos pos) {
         BlockState blockState = Blocks.CAULDRON.getDefaultState();
         world.setBlockState(pos, blockState);
         world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, Emitter.of(blockState));
         //world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5f, pos.getY() + 0.125f, pos.getZ() + 0.5f, new ItemStack(ModItems.CAUSTIC_SODA)));
-    }
+    }*/
+    
+    //in case we decide to do that, also impl it by evaporation.
 
     public boolean isFull(BlockState state) {
         return true;
