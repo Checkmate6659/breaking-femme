@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "breakingfemme:item/caustic_soda_solution_bucket"
+  }
+}

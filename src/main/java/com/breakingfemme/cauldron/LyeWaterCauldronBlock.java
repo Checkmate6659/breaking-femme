@@ -137,7 +137,7 @@ public class LyeWaterCauldronBlock extends AbstractCauldronBlock {
         }
     }
 
-    protected void onFireCollision(BlockState state, World world, BlockPos pos) { //if on fire, consume fluid from the cauldron, and grab dust
+    protected void onFireCollision(BlockState state, World world, BlockPos pos) {
         BlockState blockState = Blocks.CAULDRON.getDefaultState();
         world.setBlockState(pos, blockState);
         world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, Emitter.of(blockState));

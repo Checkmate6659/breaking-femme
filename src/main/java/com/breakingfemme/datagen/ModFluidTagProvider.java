@@ -15,6 +15,7 @@ import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 
 public class ModFluidTagProvider extends FabricTagProvider.FluidTagProvider {
+    public static final TagKey<Fluid> WATER_LIKE = TagKey.of(RegistryKeys.FLUID, new Identifier(BreakingFemme.MOD_ID, "flammable"));
     public static final TagKey<Fluid> FLAMMABLE = TagKey.of(RegistryKeys.FLUID, new Identifier(BreakingFemme.MOD_ID, "flammable"));
 
     public ModFluidTagProvider(FabricDataOutput output, CompletableFuture<WrapperLookup> completableFuture) {
@@ -52,7 +53,11 @@ public class ModFluidTagProvider extends FabricTagProvider.FluidTagProvider {
         getOrCreateTagBuilder(FLAMMABLE).add(ModFluids.FLOWING_ESTRONE_OIL_SOLUTION);
         getOrCreateTagBuilder(FluidTags.WATER).add(ModFluids.STILL_LYE_WATER);
         getOrCreateTagBuilder(FluidTags.WATER).add(ModFluids.FLOWING_LYE_WATER);
+        getOrCreateTagBuilder(WATER_LIKE).add(ModFluids.STILL_CAUSTIC_SODA_SOLUTION);
+        getOrCreateTagBuilder(WATER_LIKE).add(ModFluids.FLOWING_CAUSTIC_SODA_SOLUTION);
         //AUTOGENERATION LABEL DO NOT TOUCH
+
+        getOrCreateTagBuilder(WATER_LIKE).addTag(FLAMMABLE);
 
         //NOTE: tar does NOT behave like water. it doesn't make bubbles. its much more viscous than water. and you cant just see if youre submerged in tar.
         //so it doesn't get the water tag.

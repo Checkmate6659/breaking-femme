@@ -116,6 +116,7 @@
     "item.breakingfemme.kelp_ash": "Kelp Ash",
     "item.breakingfemme.lye_water_bucket": "Soda Lye Water Bucket",
     "item.breakingfemme.lye_water_bottle": "Soda Lye Water Bottle",
+    "item.breakingfemme.caustic_soda_solution_bucket": "Caustic Soda Solution Bucket",
 
     "block.breakingfemme.milk_separator": "Milk Separator",
     "block.breakingfemme.nickel_ore": "Nickel Ore",
@@ -157,6 +158,7 @@
     "block.breakingfemme.sludge_block": "Sludge",
     "block.breakingfemme.lye_water_block": "Soda Lye Water",
     "block.breakingfemme.estrone_oil_solution_block": "Estrone Oil Solution",
+    "block.breakingfemme.caustic_soda_solution_block": "Caustic Soda Solution",
 
     "sound.breakingfemme.grinding": "Grinding",
     "sound.breakingfemme.crank": "Crank turns",

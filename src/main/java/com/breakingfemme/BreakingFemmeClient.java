@@ -383,6 +383,19 @@ public class BreakingFemmeClient implements ClientModInitializer {
             return -1;
         }, ModFluids.LYE_WATER_CAULDRON);
 
+        FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.STILL_CAUSTIC_SODA_SOLUTION, ModFluids.FLOWING_CAUSTIC_SODA_SOLUTION,
+            new SimpleFluidRenderHandler(
+                new Identifier("minecraft:block/water_still"),
+                new Identifier("minecraft:block/water_flow"),
+                0xC0D0E0F0)
+        );
+        BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.STILL_CAUSTIC_SODA_SOLUTION, ModFluids.FLOWING_CAUSTIC_SODA_SOLUTION);
+        ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
+            if (i == 0)
+                return 0xC0D0E0F0;
+            return -1;
+        }, ModFluids.CAUSTIC_SODA_SOLUTION_CAULDRON);
+
         //AUTOGENERATION LABEL DO NOT TOUCH
     }
 }

@@ -12,6 +12,9 @@
     "breakingfemme:coal_oil",
     "breakingfemme:flowing_coal_oil",
     "breakingfemme:estrone_oil_solution",
-    "breakingfemme:flowing_estrone_oil_solution"
+    "breakingfemme:flowing_estrone_oil_solution",
+    "breakingfemme:caustic_soda_solution",
+    "breakingfemme:flowing_caustic_soda_solution",
+    "#breakingfemme:flammable"
   ]
 }

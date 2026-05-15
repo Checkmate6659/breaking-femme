@@ -16,6 +16,6 @@ public class CustomFluidTagsMixin {
     private void breakingfemme$addCustomFluidMovement(CallbackInfoReturnable<Boolean> cir)
     {
         if(!cir.getReturnValue())
-            cir.setReturnValue(((Entity)(Object)this).updateMovementInFluid(ModFluidTagProvider.FLAMMABLE, 0.014)); //same speed as water
+            cir.setReturnValue(((Entity)(Object)this).updateMovementInFluid(ModFluidTagProvider.WATER_LIKE, 0.014)); //same speed as water
     }
 }
