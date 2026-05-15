@@ -139,12 +139,14 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
         getOrCreateTagBuilder(VEGETABLE3).add(ModItems.CHILI_PEPPER);
         getOrCreateTagBuilder(VEGETABLE3).add(ModItems.DRIED_CHILI_PEPPER);
         getOrCreateTagBuilder(VEGETABLE3).add(ModItems.GROUND_CHILI_PEPPER);
-        getOrCreateTagBuilder(FILTER).addTag(RESISTANT_FILTER);
         getOrCreateTagBuilder(FILTER).add(Items.PAPER);
         //TODO: add create list filters into filter paper tag!
         //getOrCreateTagBuilder(FILTER).add(Identifier.of("create", "filter"));
         //getOrCreateTagBuilder(FILTER).add(Identifier.of("create", "attribute_filter"));
         //getOrCreateTagBuilder(FILTER).add(Identifier.of("create", "package_filter"));
+        //ceramic filter
+        getOrCreateTagBuilder(RESISTANT_FILTER);
+        getOrCreateTagBuilder(FILTER).addTag(RESISTANT_FILTER); //need to add this after resistant_filter has been created
 
         //blaze burner fuels
         getOrCreateTagBuilder(BLAZE_BURNER_FUEL).addTag(BLAZE_BURNER_FUEL_CUSTOM); //for custom duration fuels
