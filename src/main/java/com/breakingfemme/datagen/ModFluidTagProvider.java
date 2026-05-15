@@ -15,7 +15,7 @@ import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 
 public class ModFluidTagProvider extends FabricTagProvider.FluidTagProvider {
-    public static final TagKey<Fluid> WATER_LIKE = TagKey.of(RegistryKeys.FLUID, new Identifier(BreakingFemme.MOD_ID, "flammable"));
+    public static final TagKey<Fluid> WATER_LIKE = TagKey.of(RegistryKeys.FLUID, new Identifier(BreakingFemme.MOD_ID, "water_like")); //basically water, but without the interaction or the fire extinguishing
     public static final TagKey<Fluid> FLAMMABLE = TagKey.of(RegistryKeys.FLUID, new Identifier(BreakingFemme.MOD_ID, "flammable"));
 
     public ModFluidTagProvider(FabricDataOutput output, CompletableFuture<WrapperLookup> completableFuture) {
@@ -24,6 +24,7 @@ public class ModFluidTagProvider extends FabricTagProvider.FluidTagProvider {
 
     @Override
     protected void configure(WrapperLookup arg) {
+        getOrCreateTagBuilder(WATER_LIKE).addTag(FluidTags.WATER);
         getOrCreateTagBuilder(FluidTags.WATER).add(ModFluids.STILL_COPPER_SULFATE);
         getOrCreateTagBuilder(FluidTags.WATER).add(ModFluids.FLOWING_COPPER_SULFATE);
         getOrCreateTagBuilder(FluidTags.WATER).add(ModFluids.STILL_NICKEL_SULFATE);

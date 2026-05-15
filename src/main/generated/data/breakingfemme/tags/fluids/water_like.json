@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:water",
+    "breakingfemme:caustic_soda_solution",
+    "breakingfemme:flowing_caustic_soda_solution",
+    "#breakingfemme:flammable"
+  ]
+}
