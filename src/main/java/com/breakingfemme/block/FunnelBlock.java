@@ -2,43 +2,29 @@ package com.breakingfemme.block;
 
 import org.jetbrains.annotations.Nullable;
 
-import com.breakingfemme.block.entity.FermenterBlockEntity;
 import com.breakingfemme.block.entity.FunnelBlockEntity;
 import com.breakingfemme.block.entity.ModBlockEntities;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.ShapeContext;
-import net.minecraft.block.Waterloggable;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.screen.NamedScreenHandlerFactory;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.DirectionProperty;
-import net.minecraft.state.property.Properties;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.BlockMirror;
-import net.minecraft.util.BlockRotation;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
 
 //block entity tutorial
 //https://www.youtube.com/watch?v=Y4dK9ETdZCQ
@@ -83,20 +69,36 @@ public class FunnelBlock extends BlockWithEntity {
         }
     }
 
-    //might actually not use a screen for the filter, just plop the filter in there!
-    //need to do that interaction tho
-    /*@Override
+    @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (!world.isClient) {
-            NamedScreenHandlerFactory screenHandlerFactory = ((FermenterBlockEntity)world.getBlockEntity(pos));
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        if (blockEntity instanceof FunnelBlockEntity funnel) {
+            ItemStack stack = player.getStackInHand(hand);
+            if(stack.isEmpty()) //clicking with an empty hand
+            {
+                //pick up a stack from the funnel: output if it exists, otherwise filter
+                ItemStack removed = funnel.removeStack(0); //remove output
+                if(removed.isEmpty()) //no output :(
+                    removed = funnel.removeStack(1); //remove the filter
+                
+                player.setStackInHand(hand, removed);
 
-            if (screenHandlerFactory != null) {
-                player.openHandledScreen(screenHandlerFactory);
+                return ActionResult.SUCCESS;
             }
+            else if(funnel.canInsert(1, stack, hit.getSide())) //if we can insert item (ie if its a filter)
+            {
+                //insert the item into the funnel: swap funnel inventory with hand inventory
+                player.setStackInHand(hand, funnel.removeStack(1));
+                funnel.setStack(1, stack);
+
+                return ActionResult.SUCCESS;
+            }
+            
+            world.updateComparators(pos,this);
         }
 
-        return ActionResult.SUCCESS;
-    }*/
+        return ActionResult.PASS;
+    }
 
     @Nullable
     @Override
