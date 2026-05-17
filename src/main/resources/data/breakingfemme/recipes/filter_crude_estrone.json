@@ -1,0 +1,15 @@
+{
+    "type": "breakingfemme:filtering",
+    "input": {
+        "fluid": "breakingfemme:estrone_oil_solution",
+        "quantity": 81
+    },
+    "output": {
+        "fluid": "breakingfemme:androstadienedione_oil_solution",
+        "quantity": 81
+    },
+    "item_output":
+    {
+        "item": "breakingfemme:crude_estrone"
+    }
+}

@@ -21,5 +21,9 @@ public class ModRecipes {
         //distilling
         Registry.register(Registries.RECIPE_SERIALIZER, new Identifier(BreakingFemme.MOD_ID, DistillingRecipe.Serializer.ID), DistillingRecipe.Serializer.INSTANCE);
         Registry.register(Registries.RECIPE_TYPE, new Identifier(BreakingFemme.MOD_ID, DistillingRecipe.Type.ID), DistillingRecipe.Type.INSTANCE);
+
+        //filtering
+        Registry.register(Registries.RECIPE_SERIALIZER, new Identifier(BreakingFemme.MOD_ID, FilteringRecipe.Serializer.ID), FilteringRecipe.Serializer.INSTANCE);
+        Registry.register(Registries.RECIPE_TYPE, new Identifier(BreakingFemme.MOD_ID, FilteringRecipe.Type.ID), FilteringRecipe.Type.INSTANCE);
     }
 }
