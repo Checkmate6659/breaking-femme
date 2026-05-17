@@ -71,17 +71,17 @@ public class FunnelBlock extends BlockWithEntity {
     }
 
     //what to do when block broken: just drop all items inside the block entity's inventory
-    /*@Override
+    @Override
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof FermenterBlockEntity) {
-                ItemScatterer.spawn(world, pos, (FermenterBlockEntity)blockEntity);
+            if (blockEntity instanceof FunnelBlockEntity) {
+                ItemScatterer.spawn(world, pos, (FunnelBlockEntity)blockEntity);
                 world.updateComparators(pos,this);
             }
             super.onStateReplaced(state, world, pos, newState, moved);
         }
-    }*/
+    }
 
     //might actually not use a screen for the filter, just plop the filter in there!
     //need to do that interaction tho
