@@ -19,7 +19,7 @@ public class FunnelBlockEntity extends BlockEntity implements ImplementedInvento
     public final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(2, ItemStack.EMPTY);
 
     public FunnelBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntities.DISTILLER_TOP_BLOCK_ENTITY, pos, state);
+        super(ModBlockEntities.FUNNEL_BLOCK_ENTITY, pos, state);
     }
 
     @Override
