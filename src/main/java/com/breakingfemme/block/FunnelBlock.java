@@ -3,6 +3,7 @@ package com.breakingfemme.block;
 import org.jetbrains.annotations.Nullable;
 
 import com.breakingfemme.block.entity.FermenterBlockEntity;
+import com.breakingfemme.block.entity.FunnelBlockEntity;
 import com.breakingfemme.block.entity.ModBlockEntities;
 
 import net.minecraft.block.Block;
@@ -41,7 +42,7 @@ import net.minecraft.world.WorldAccess;
 
 //block entity tutorial
 //https://www.youtube.com/watch?v=Y4dK9ETdZCQ
-public class FunnelBlock extends /*BlockWithEntity*/ Block {
+public class FunnelBlock extends BlockWithEntity {
     protected static final VoxelShape SHAPE;
 
     public FunnelBlock(Settings settings) {
@@ -57,7 +58,7 @@ public class FunnelBlock extends /*BlockWithEntity*/ Block {
     }
 
     //Block entity code
-    /*@Override
+    @Override
     public BlockRenderType getRenderType(BlockState state)
     {
         return BlockRenderType.MODEL;
@@ -67,7 +68,7 @@ public class FunnelBlock extends /*BlockWithEntity*/ Block {
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state)
     {
         return new FunnelBlockEntity(pos, state);
-    }*/
+    }
 
     //what to do when block broken: just drop all items inside the block entity's inventory
     /*@Override
@@ -83,6 +84,7 @@ public class FunnelBlock extends /*BlockWithEntity*/ Block {
     }*/
 
     //might actually not use a screen for the filter, just plop the filter in there!
+    //need to do that interaction tho
     /*@Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {
@@ -96,16 +98,11 @@ public class FunnelBlock extends /*BlockWithEntity*/ Block {
         return ActionResult.SUCCESS;
     }*/
 
-    //how is the validateTicker method not existing
-    //i need to implement a custom class extending BlockEntityTicker?
-    //default mc block entities dont even have that lol, they have this checkType shit but idk
-    //theres FurnaceBlock.getTicker -> AbstractFurnaceBlock.checkType -> BlockWithEntity.checkType
-    //so ig validateTicker got replaced by checkType
-    /*@Nullable
+    @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return checkType(type, ModBlockEntities.FERMENTER_BLOCK_ENTITY, (world1, pos, state1, blockEntity) -> blockEntity.tick(world1, pos, state1));
-    }*/
+        return checkType(type, ModBlockEntities.FUNNEL_BLOCK_ENTITY, (world1, pos, state1, blockEntity) -> blockEntity.tick(world1, pos, state1));
+    }
     
     static {
         //quite a complex shape

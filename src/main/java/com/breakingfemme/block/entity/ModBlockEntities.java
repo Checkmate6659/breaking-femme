@@ -23,6 +23,10 @@ public class ModBlockEntities {
         Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(BreakingFemme.MOD_ID, "distiller_top_be"),
         FabricBlockEntityTypeBuilder.create(DistillerTopBlockEntity::new, ModBlocks.DISTILLER_TOP).build());
 
+    public static final BlockEntityType<FunnelBlockEntity> FUNNEL_BLOCK_ENTITY =
+        Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(BreakingFemme.MOD_ID, "funnel_be"),
+        FabricBlockEntityTypeBuilder.create(FunnelBlockEntity::new, ModBlocks.FUNNEL).build());
+
     public static void registerBlockEntities() {
         FluidStorage.SIDED.registerForBlockEntity(DistillerBlockEntity::getFluidStorage, DISTILLER_BLOCK_ENTITY);
         FluidStorage.SIDED.registerForBlockEntity(DistillerTopBlockEntity::getFluidStorage, DISTILLER_TOP_BLOCK_ENTITY);
