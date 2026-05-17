@@ -198,6 +198,7 @@ public class ModItems {
             entries.add(ModBlocks.DISTILLER_BASE);
             entries.add(ModBlocks.DISTILLER_COLUMN);
             entries.add(ModBlocks.DISTILLER_TOP);
+            entries.add(ModBlocks.FUNNEL);
             //AUTOGENERATION LABEL DO NOT TOUCH
 
 

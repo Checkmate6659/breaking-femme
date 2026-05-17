@@ -52,6 +52,9 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         //mortar and pestle
         ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, ModItems.MORTAR_PESTLE).input('#', ModItemTagProvider.STONES).input('|', ModItemTagProvider.IRON_INGOT).pattern(" | ").pattern("#|#").pattern("###").group("mortar_pestle").criterion(hasItem(Blocks.STONE), conditionsFromTag(ItemTags.STONE_CRAFTING_MATERIALS)).offerTo(exporter);
 
+        //funnel
+        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, ModBlocks.FUNNEL).input('#', ModItemTagProvider.IRON_INGOT).pattern("# #").pattern("# #").pattern(" # ").group("funnel").criterion(hasItem(Items.IRON_INGOT), conditionsFromTag(ModItemTagProvider.IRON_INGOT)).offerTo(exporter);
+
         //ceramic filter
         Ingredient SAWDUST_INGREDIENT = Ingredient.ofEntries(Stream.of(new Ingredient.TagEntry(ModItemTagProvider.SAWDUST1), new Ingredient.TagEntry(ModItemTagProvider.SAWDUST2)));
         ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, ModItems.UNFIRED_CERAMIC_FILTER).input('U', Items.CLAY_BALL).input('w', SAWDUST_INGREDIENT).pattern("UwU").pattern(" U ").group("unfired_ceramic_filter").criterion(hasItem(Items.CLAY), conditionsFromItem(Items.CLAY)).offerTo(exporter);

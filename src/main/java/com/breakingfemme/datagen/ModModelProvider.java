@@ -113,11 +113,12 @@ public class ModModelProvider extends FabricModelProvider {
         //AUTOGENERATION LABEL DO NOT TOUCH
 
 
-        //fermenter
+        //fermenter and funnel
         itemModelGenerator.register(ModBlocks.FERMENTER_PANEL.asItem(), Models.GENERATED);
         itemModelGenerator.register(ModBlocks.FERMENTER_TOP.asItem(), Models.GENERATED);
         itemModelGenerator.register(ModBlocks.FERMENTER_BOTTOM.asItem(), Models.GENERATED);
         itemModelGenerator.register(ModBlocks.FERMENTER_CONTROLLER.asItem(), Models.GENERATED);
         itemModelGenerator.register(ModBlocks.FERMENTER_AIRLOCK.asItem(), Models.GENERATED);
+        itemModelGenerator.register(ModBlocks.FUNNEL.asItem(), Models.GENERATED);
     }
 }

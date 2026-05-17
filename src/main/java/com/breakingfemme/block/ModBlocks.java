@@ -42,8 +42,11 @@ public class ModBlocks {
 
     //distiller blocks
     public static final Block DISTILLER_BASE = registerBlock("distiller_base", new DistillerBaseBlock(FabricBlockSettings.copyOf(Blocks.IRON_TRAPDOOR))); //block entity already cannot be pushed
-    public static final Block DISTILLER_TOP = registerBlock("distiller_top", new DistillerTopBlock(FabricBlockSettings.copyOf(Blocks.IRON_TRAPDOOR).pistonBehavior(PistonBehavior.BLOCK)));
+    public static final Block DISTILLER_TOP = registerBlock("distiller_top", new DistillerTopBlock(FabricBlockSettings.copyOf(Blocks.IRON_TRAPDOOR)));
     public static final Block DISTILLER_COLUMN = registerBlock("distiller_column", new DistillerColumnBlock(FabricBlockSettings.copyOf(Blocks.IRON_TRAPDOOR).pistonBehavior(PistonBehavior.BLOCK)));
+
+    //funnel block
+    public static final Block FUNNEL = registerBlock("funnel", new FunnelBlock(FabricBlockSettings.copyOf(Blocks.HOPPER)));
 
     //register block and item
     private static final Block registerBlock(String name, Block block)
