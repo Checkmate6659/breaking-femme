@@ -1,6 +1,5 @@
 {
     "type": "breakingfemme:filtering",
-    "harsh": false,
     "droplets_per_filter": 810000,
     "droplets_per_item": 6750,
     "input": {
