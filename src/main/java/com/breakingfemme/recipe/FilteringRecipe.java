@@ -35,8 +35,10 @@ public class FilteringRecipe implements Recipe<FunnelBlockEntity> {
     private final FluidVariant input, output;
     private final int inputq, outputq;
     private final ItemStack item_output; //we can change the type to make loot tables; could look at Block#getDroppedStacks
+    private final boolean harsh;
+    private final int droplets_per_filter, droplets_per_item;
 
-    public FilteringRecipe(Identifier id, FluidVariant input, int input_quantity, FluidVariant output, int output_quantity, ItemStack item_output)
+    public FilteringRecipe(Identifier id, FluidVariant input, int input_quantity, FluidVariant output, int output_quantity, ItemStack item_output, boolean harsh, int droplets_per_filter, int droplets_per_item)
     {
         this.id = id;
         this.input = input;
@@ -44,6 +46,24 @@ public class FilteringRecipe implements Recipe<FunnelBlockEntity> {
         this.inputq = input_quantity;
         this.outputq = output_quantity;
         this.item_output = item_output;
+        this.harsh = harsh;
+        this.droplets_per_filter = droplets_per_filter;
+        this.droplets_per_item = droplets_per_item;
+    }
+
+    public boolean isHarsh()
+    {
+        return harsh; //harsh recipe: requires resilient filter, destroys flimsy filters
+    }
+
+    public int dropletsPerFilter()
+    {
+        return droplets_per_filter; //how many droplets of this recipe destroy/damage a filter (first droplet damages, then wait this many, of the same recipe)
+    }
+
+    public int dropletsPerItem()
+    {
+        return droplets_per_item; //how many droplets yield 1 item (need this many, from the same recipe, to add to output. no freebies!)
     }
 
     //TODO: cache the results of these functions, and reset it when the blocks get updated :3
@@ -247,7 +267,10 @@ public class FilteringRecipe implements Recipe<FunnelBlockEntity> {
                 JsonHelper.getInt(JsonHelper.getObject(json, "input"), "quantity"),
                 BreakingFemme.fluidFromNbt(nbt.getCompound("output")),
                 JsonHelper.getInt(JsonHelper.getObject(json, "output"), "quantity"),
-                ShapedRecipe.outputFromJson(JsonHelper.getObject(json, "item_output"))
+                ShapedRecipe.outputFromJson(JsonHelper.getObject(json, "item_output")),
+                JsonHelper.getBoolean(json, "harsh"),
+                JsonHelper.getInt(json, "droplets_per_filter"),
+                JsonHelper.getInt(json, "droplets_per_item")
             );
         }
 
@@ -259,8 +282,11 @@ public class FilteringRecipe implements Recipe<FunnelBlockEntity> {
             int inputq =  buf.readInt();
             int outputq = buf.readInt();
             ItemStack item_output = buf.readItemStack();
+            boolean harsh = buf.readBoolean();
+            int droplets_per_filter = buf.readInt();
+            int droplets_per_item   = buf.readInt();
 
-            return new FilteringRecipe(id, input, inputq, output, outputq, item_output);
+            return new FilteringRecipe(id, input, inputq, output, outputq, item_output, harsh, droplets_per_filter, droplets_per_item);
         }
 
         @Override
@@ -271,6 +297,9 @@ public class FilteringRecipe implements Recipe<FunnelBlockEntity> {
             buf.writeInt(recipe.inputq);
             buf.writeInt(recipe.outputq);
             buf.writeItemStack(recipe.item_output);
+            buf.writeBoolean(recipe.harsh);
+            buf.writeInt(recipe.droplets_per_filter);
+            buf.writeInt(recipe.droplets_per_item);
         }
     }
 }
