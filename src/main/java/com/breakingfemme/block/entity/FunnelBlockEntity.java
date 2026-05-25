@@ -122,6 +122,8 @@ public class FunnelBlockEntity extends BlockEntity implements ImplementedInvento
             cur_recipe = matched_recipe;
             if(cur_recipe.isPresent() && !cur_recipe.get().getId().toString().equals(last_valid_recipe))
             {
+                last_valid_recipe = cur_recipe.get().getId().toString();
+
                 item_counter = 0; //no freebies!
                 filter_counter = -Long.MAX_VALUE / 2; //in case filter is partially used. then next inputted fluid will use it on first filtering step.
 
@@ -193,7 +195,7 @@ public class FunnelBlockEntity extends BlockEntity implements ImplementedInvento
                 outputStack.increment(ntimes * count); //outputStack is a reference!
             }
 
-            item_counter -= droplets_per_item;
+            item_counter -= droplets_per_item * ntimes;
         }
 
         //this is a TEST!!
