@@ -177,12 +177,23 @@ public class FunnelBlockEntity extends BlockEntity implements ImplementedInvento
         //output item; we know at this point that we can output the item.
         if(item_counter >= droplets_per_item)
         {
-            item_counter -= droplets_per_item;
+            int ntimes = (int)(item_counter / droplets_per_item);
+            ItemStack stack = recipe.getOutput(world.getRegistryManager());
+            int count = stack.getCount();
 
             if(outputStack.isEmpty())
-                setStack(0, recipe.getOutput(world.getRegistryManager()));
+            {
+                if(ntimes * count > 64) ntimes = 64 / count; //don't make more than a stack
+                setStack(0, stack.copyWithCount(ntimes * count));
+            }
             else
-                outputStack.increment(1); //outputStack is a reference!
+            {
+                int space_left = 64 - outputStack.getCount();
+                if(ntimes * count > space_left) ntimes = space_left / count;
+                outputStack.increment(ntimes * count); //outputStack is a reference!
+            }
+
+            item_counter -= droplets_per_item;
         }
 
         //this is a TEST!!

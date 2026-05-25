@@ -5,15 +5,11 @@ import com.breakingfemme.block.entity.FunnelBlockEntity;
 import com.google.gson.JsonObject;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 
-import net.fabricmc.fabric.api.transfer.v1.fluid.CauldronFluidContent;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.fabricmc.fabric.api.transfer.v1.storage.StorageUtil;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
@@ -64,28 +60,39 @@ public class FilteringRecipe implements Recipe<FunnelBlockEntity> {
     //or when they're part of a transaction (hmmm how are we gonna do that?)
     //if we have a funnel, a tank above, and the fluid get pumped out, we need that to wipe the cache
 
-    //get max amount of fluid that can be extracted from the top; at most inputq if storage, otherwise cauldron level amount.
+    //get max amount of fluid that can be extracted from the top; return smallest possible step that's above inputq; if no such step exists return 0
     public long extractibleFromTop(BlockPos top_pos, World world)
     {
         Storage<FluidVariant> top_storage = FluidStorage.SIDED.find(world, top_pos, Direction.DOWN);
-        if(top_storage != null) //storage was not null (so not a cauldron for instance)
+
+        if(top_storage == null) return 0;
+
+        long max_amount = StorageUtil.simulateExtract(top_storage, input, Long.MAX_VALUE / 256, null);
+        if(max_amount <= inputq) //cannot extract more than inputq: either its identical to inputq or its 0; need to recheck to get max amount
             return StorageUtil.simulateExtract(top_storage, input, inputq, null);
 
-        BlockState state = world.getBlockState(top_pos);
-        CauldronFluidContent cfc = CauldronFluidContent.getForBlock(state.getBlock());
-        if(cfc == null) //that is NOT a cauldron!
-            return 0;
-        if(!input.isOf(cfc.fluid)) //incorrect fluid (this is the top! we can't use an empty cauldron. empty cauldron is Fluids.EMPTY btw.)
-            return 0;
+        //TODO: custom check for CauldronStorage to bypass potentially quite expensive checks
 
-        return cfc.amountPerLevel;
+        //find smallest amount that's ok to extract
+        long simq = StorageUtil.simulateExtract(top_storage, input, inputq, null);
+        if(simq > 0) //no annoying shit! YES!
+            return simq;
+        
+        long curq = inputq;
+        while(simq == 0 && curq > 0) //assuming the steps are all the same size, we can just double the amount until we get >0 and that's it. the other condition is anti-overflow.
+        {
+            simq = StorageUtil.simulateExtract(top_storage, input, curq, null);
+            curq += curq;
+        }
+
+        return simq;
     }
 
     //actually (try to) extract a certain amount of fluid. return the amount of fluid actually extracted.
     public long extractFromTop(BlockPos top_pos, World world, long amount)
     {
         Storage<FluidVariant> top_storage = FluidStorage.SIDED.find(world, top_pos, Direction.DOWN);
-        if(top_storage != null) //storage was not null (so not a cauldron for instance)
+        if(top_storage != null) //storage was not null
         {
             try(Transaction trans = Transaction.openOuter())
             {
@@ -98,55 +105,42 @@ public class FilteringRecipe implements Recipe<FunnelBlockEntity> {
                 return 0;
             }
         }
-        else
-        {
-            BlockState state = world.getBlockState(top_pos);
-            CauldronFluidContent cfc = CauldronFluidContent.getForBlock(state.getBlock());
-            if(cfc == null) //that is NOT a cauldron!
-                return 0;
-            if(!input.isOf(cfc.fluid)) //incorrect fluid (this is the top! we can't use an empty cauldron. empty cauldron is Fluids.EMPTY btw.)
-                return 0;
 
-            //decrement level of fluid
-            int level = cfc.currentLevel(state);
-            if(level == 1) //we just sucked the cauldron dry => empty cauldron
-                world.setBlockState(top_pos, Blocks.CAULDRON.getDefaultState());
-            else //theres still fluid left: decrement level property but same block; in this case levelProperty cannot be null, otherwise we get level = 1.
-                world.setBlockState(top_pos, state.with(cfc.levelProperty, level - 1));
-
-            return cfc.amountPerLevel;
-        }
+        return 0;
     }
 
-    //get max amount of fluid that can be inserted into the bottom; at most outputq if storage, otherwise cauldron level amount.
+    //get max amount of fluid that can be inserted into the bottom; return smallest possible step that's above outputq; if no such step exists return 0
     public long insertibleIntoBottom(BlockPos bottom_pos, World world)
     {
         Storage<FluidVariant> bottom_storage = FluidStorage.SIDED.find(world, bottom_pos, Direction.UP);
-        if(bottom_storage != null) //storage was not null (so not a cauldron for instance)
+        if(bottom_storage == null) return 0;
+
+        long max_amount = StorageUtil.simulateInsert(bottom_storage, output, Long.MAX_VALUE / 256, null);
+        if(max_amount <= outputq) //cannot insert more than outputq: either its identical to outputq or its 0; need to recheck to get max amount
             return StorageUtil.simulateInsert(bottom_storage, output, outputq, null);
 
-        BlockState state = world.getBlockState(bottom_pos);
-        CauldronFluidContent cfc = CauldronFluidContent.getForBlock(state.getBlock());
-        CauldronFluidContent cfc_f = CauldronFluidContent.getForFluid(output.getFluid());
-        if(cfc == null) //that is NOT a cauldron!
-            return 0;
-        if(cfc_f == null)
-            return 0; //an appropriate fluid containing cauldron does not exist => cant insert even into empty cauldron.
-        if(cfc.fluid.equals(Fluids.EMPTY)) //empty cauldron => fits 1 bucket
-            return cfc_f.amountPerLevel; //but really we're just adding 1 level. lol
-        if(!input.isOf(cfc.fluid)) //incorrect fluid already inside, and its not empty.
-            return 0;
-        if(cfc.maxLevel == cfc.currentLevel(state)) //the bottom cauldron is full
-            return 0;
+        //TODO: custom check for CauldronStorage to bypass potentially quite expensive checks
 
-        return cfc.amountPerLevel;
+        //find smallest amount that's ok to extract
+        long simq = StorageUtil.simulateInsert(bottom_storage, output, outputq, null);
+        if(simq > 0) //no annoying shit! YES!
+            return simq;
+        
+        long curq = outputq;
+        while(simq == 0 && curq > 0) //assuming the steps are all the same size, we can just double the amount until we get >0 and that's it. the other condition is anti-overflow.
+        {
+            simq = StorageUtil.simulateInsert(bottom_storage, output, curq, null);
+            curq += curq;
+        }
+
+        return simq;
     }
 
     //insert at most a certain amount of fluid into the bottom. return the amount of fluid actually inserted.
     public long insertIntoBottom(BlockPos bottom_pos, World world, long amount)
     {
         Storage<FluidVariant> bottom_storage = FluidStorage.SIDED.find(world, bottom_pos, Direction.UP);
-        if(bottom_storage != null) //storage was not null (so not a cauldron for instance)
+        if(bottom_storage != null) //storage was not null
         {
             try(Transaction trans = Transaction.openOuter())
             {
@@ -159,31 +153,8 @@ public class FilteringRecipe implements Recipe<FunnelBlockEntity> {
                 return 0;
             }
         }
-        else
-        {
-            BlockState state = world.getBlockState(bottom_pos);
-            CauldronFluidContent cfc = CauldronFluidContent.getForBlock(state.getBlock());
-            CauldronFluidContent cfc_f = CauldronFluidContent.getForFluid(output.getFluid());
-            if(cfc == null) //that is NOT a cauldron!
-                return 0;
-            if(cfc_f == null)
-                return 0; //an appropriate fluid containing cauldron does not exist => cant insert even into empty cauldron.
-            if(cfc.fluid.equals(Fluids.EMPTY)) //empty cauldron => fits 1 bucket
-            {
-                if(cfc.levelProperty == null) //we need a disjunction here, otherwise null won't get handled properly.
-                    world.setBlockState(bottom_pos, cfc_f.block.getDefaultState());
-                else
-                    world.setBlockState(bottom_pos, cfc_f.block.getDefaultState().with(cfc.levelProperty, cfc.maxLevel));
-                return cfc_f.amountPerLevel;
-            }
-            if(!input.isOf(cfc.fluid)) //incorrect fluid already inside, and its not empty.
-                return 0;
-            if(cfc.maxLevel == cfc.currentLevel(state)) //the bottom cauldron is full; this always happens if cfc.levelProperty is null.
-                return 0;
-
-            world.setBlockState(bottom_pos, state.cycle(cfc.levelProperty)); //cfc.levelProperty cannot be null here.
-            return cfc.amountPerLevel;
-        }
+        
+        return 0;
     }
 
     //the time (in ticks) the recipe should take
