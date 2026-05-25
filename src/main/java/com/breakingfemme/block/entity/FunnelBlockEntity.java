@@ -27,7 +27,7 @@ public class FunnelBlockEntity extends BlockEntity implements ImplementedInvento
     private int timer = 0; //recipe takes time!
     private long initial_topq = 0; //at the beginning of the time, this value will be set to currently extractible fluid from the top storage. no more than this can get processed.
     private long item_counter = 0; //counter for giving less than 1 item/droplet
-    private long filter_counter = Long.MAX_VALUE / 2; //counter for using less than 1 filter/droplet; start at this value to make filter use an extra durability when new fluid inputted
+    private long filter_counter = -Long.MAX_VALUE / 2; //counter for using less than 1 filter/droplet; start at this value to make filter use an extra durability when new fluid inputted
 
     public FunnelBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.FUNNEL_BLOCK_ENTITY, pos, state);
@@ -83,17 +83,22 @@ public class FunnelBlockEntity extends BlockEntity implements ImplementedInvento
         }
     }
 
-    public void consumeFilter(int damage)
+    //try to consume a bit of filter.
+    //return false if the filter slot was empty (and so it failed), true otherwise.
+    public boolean consumeFilter(int damage)
     {
-        BreakingFemme.LOGGER.info("consumeFilter " + damage);
+        //BreakingFemme.LOGGER.info("consumeFilter " + damage);
 
         ItemStack filter = getStack(1);
+        if(filter.isEmpty()) return false;
+
         if(filter.isDamageable() && filter.getDamage() + damage <= filter.getMaxDamage())
             filter.damage(damage, world.random, null);
         else
             filter.decrement(damage);
 
         markDirty();
+        return true;
     }
 
     public void tick(World world, BlockPos pos, BlockState state)
@@ -101,8 +106,9 @@ public class FunnelBlockEntity extends BlockEntity implements ImplementedInvento
         if(world.isClient()) return;
 
         //TODO: check if harsh fluid & flimsy filter. if yes, destroy it and make fluid go straight through!
+        //does not count if theres a filter durability thats currently getting used up.
         ItemStack filterStack = getStack(1);
-        if(filterStack.isEmpty())
+        if(filter_counter < 0 && filterStack.isEmpty())
         {
             consumeFilter(16); //damage filter very quickly
 
@@ -135,7 +141,7 @@ public class FunnelBlockEntity extends BlockEntity implements ImplementedInvento
         {
             cur_recipe = matched_recipe;
             item_counter = 0; //no freebies!
-            filter_counter = Long.MAX_VALUE / 2; //in case filter is partially used. then next inputted fluid will use it on first filtering step.
+            filter_counter = -Long.MAX_VALUE / 2; //in case filter is partially used. then next inputted fluid will use it on first filtering step.
             if(cur_recipe.isPresent())
             {
                 FilteringRecipe recipe = cur_recipe.get();
@@ -172,15 +178,17 @@ public class FunnelBlockEntity extends BlockEntity implements ImplementedInvento
             long actualq = recipe.insertIntoBottom(pos.down(), world, bottomq);
 
             //damage filter
-            filter_counter += actualq;
+            filter_counter -= actualq;
             item_counter += actualq; //update the item counter here too
-            if(filter_counter >= droplets_per_filter)
+            if(filter_counter < 0)
             {
-                consumeFilter(1);
-                BreakingFemme.LOGGER.info("damaged! " + filter_counter + " " + (Long.MAX_VALUE / 4));
-                if(filter_counter > Long.MAX_VALUE / 4) filter_counter = droplets_per_filter; //"initialization"
-                filter_counter -= droplets_per_filter;
-                BreakingFemme.LOGGER.info("final counter " + filter_counter);
+                if(consumeFilter(1))
+                {
+                    //BreakingFemme.LOGGER.info("damaged! " + filter_counter + " " + (Long.MAX_VALUE / 4));
+                    if(filter_counter < -Long.MAX_VALUE / 4) filter_counter = 0; //"initialization"
+                    filter_counter += droplets_per_filter;
+                    //BreakingFemme.LOGGER.info("final counter " + filter_counter);
+                }
             }
 
             //reset variables
