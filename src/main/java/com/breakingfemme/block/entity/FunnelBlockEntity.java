@@ -98,6 +98,7 @@ public class FunnelBlockEntity extends BlockEntity implements ImplementedInvento
             filter.decrement(damage);
 
         markDirty();
+        world.updateListeners(pos, world.getBlockState(pos), world.getBlockState(pos), 0);
         return true;
     }
 
@@ -108,7 +109,7 @@ public class FunnelBlockEntity extends BlockEntity implements ImplementedInvento
         //TODO: check if harsh fluid & flimsy filter. if yes, destroy it and make fluid go straight through!
         //does not count if theres a filter durability thats currently getting used up.
         ItemStack filterStack = getStack(1);
-        if(filter_counter < 0 && filterStack.isEmpty())
+        if(filter_counter <= 0 && (filterStack.isEmpty() || false))
         {
             consumeFilter(16); //damage filter very quickly
 
@@ -180,12 +181,12 @@ public class FunnelBlockEntity extends BlockEntity implements ImplementedInvento
             //damage filter
             filter_counter -= actualq;
             item_counter += actualq; //update the item counter here too
-            if(filter_counter < 0)
+            if(filter_counter <= 0)
             {
                 if(consumeFilter(1))
                 {
                     //BreakingFemme.LOGGER.info("damaged! " + filter_counter + " " + (Long.MAX_VALUE / 4));
-                    if(filter_counter < -Long.MAX_VALUE / 4) filter_counter = 0; //"initialization"
+                    if(filter_counter < -Long.MAX_VALUE / 4) filter_counter = -actualq; //"initialization"
                     filter_counter += droplets_per_filter;
                     //BreakingFemme.LOGGER.info("final counter " + filter_counter);
                 }

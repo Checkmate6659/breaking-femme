@@ -71,6 +71,8 @@ public class FunnelBlock extends BlockWithEntity {
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        if(world.isClient()) return ActionResult.SUCCESS;
+
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof FunnelBlockEntity funnel) {
             ItemStack stack = player.getStackInHand(hand);
