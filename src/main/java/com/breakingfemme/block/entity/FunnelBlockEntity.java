@@ -87,8 +87,6 @@ public class FunnelBlockEntity extends BlockEntity implements ImplementedInvento
     //return false if the filter slot was empty (and so it failed), true otherwise.
     public boolean consumeFilter(int damage)
     {
-        //BreakingFemme.LOGGER.info("consumeFilter " + damage);
-
         ItemStack filter = getStack(1);
         if(filter.isEmpty()) return false;
 
@@ -126,12 +124,9 @@ public class FunnelBlockEntity extends BlockEntity implements ImplementedInvento
         }
 
         //there actually is an acceptable filter!
-        //BreakingFemme.LOGGER.info("stage 1");
 
         ItemStack outputStack = getStack(0);
         if(outputStack.getCount() == outputStack.getMaxCount()) return; //filter is clogged!
-
-        //BreakingFemme.LOGGER.info("stage 2");
 
         //TODO: do static method in FilteringRecipe to check if it is even possible to get a match (are there fluid invs/cauldrons above/below)
 
@@ -154,16 +149,12 @@ public class FunnelBlockEntity extends BlockEntity implements ImplementedInvento
         //TODO: if cannot run recipe (like theres no recipe), then just fucking pass the fluid through slowly but without changing it and damaging the filter pretty slowly. except if harsh fluid ofc...
         if(cur_recipe.isEmpty()) return; //no recipe to run :(
 
-        //BreakingFemme.LOGGER.info("stage 3");
-
         FilteringRecipe recipe = cur_recipe.get();
         long droplets_per_item = recipe.dropletsPerItem();
         long droplets_per_filter = recipe.dropletsPerFilter();
 
         //output clogged by some other item => no.
         if(!outputStack.isEmpty() && !ItemStack.canCombine(outputStack, recipe.getOutput(world.getRegistryManager()))) return;
-
-        //BreakingFemme.LOGGER.info("stage 4");
 
         //funny idea: could supply the system with "low pressure air" fluid to do vacuum filtration
         //but you would need a bit of a setup for that
@@ -185,10 +176,8 @@ public class FunnelBlockEntity extends BlockEntity implements ImplementedInvento
             {
                 if(consumeFilter(1))
                 {
-                    //BreakingFemme.LOGGER.info("damaged! " + filter_counter + " " + (Long.MAX_VALUE / 4));
                     if(filter_counter < -Long.MAX_VALUE / 4) filter_counter = -actualq; //"initialization"
                     filter_counter += droplets_per_filter;
-                    //BreakingFemme.LOGGER.info("final counter " + filter_counter);
                 }
             }
 
@@ -199,8 +188,6 @@ public class FunnelBlockEntity extends BlockEntity implements ImplementedInvento
             //TODO: play some kinda sound effect
         }
         timer--; //don't forget that!!
-
-        //BreakingFemme.LOGGER.info("timer " + timer);
 
         //output item; we know at this point that we can output the item.
         if(item_counter >= droplets_per_item)
