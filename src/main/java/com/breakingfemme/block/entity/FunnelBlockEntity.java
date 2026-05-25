@@ -4,7 +4,6 @@ import java.util.Optional;
 
 import org.jetbrains.annotations.Nullable;
 
-import com.breakingfemme.BreakingFemme;
 import com.breakingfemme.datagen.ModItemTagProvider;
 import com.breakingfemme.recipe.FilteringRecipe;
 
@@ -13,7 +12,6 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -23,6 +21,7 @@ public class FunnelBlockEntity extends BlockEntity implements ImplementedInvento
     //need a 2 slot inventory: first slot is output, second slot is filter
     public final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(2, ItemStack.EMPTY);
     private Optional<FilteringRecipe> cur_recipe = Optional.empty();
+    private String last_valid_recipe = "";
 
     private int timer = 0; //recipe takes time!
     private long initial_topq = 0; //at the beginning of the time, this value will be set to currently extractible fluid from the top storage. no more than this can get processed.
@@ -53,14 +52,9 @@ public class FunnelBlockEntity extends BlockEntity implements ImplementedInvento
         nbt.putLong("initial_topq", initial_topq);
         nbt.putLong("item_counter", item_counter);
         nbt.putLong("filter_counter", filter_counter);
-
-        if(cur_recipe.isPresent())
-            nbt.putString("recipe", cur_recipe.get().getId().toString());
-        else
-            nbt.remove("recipe"); //no recipe key <=> no recipe.
+        nbt.putString("recipe", last_valid_recipe);
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public void readNbt(NbtCompound nbt) //loading data from save to ingame
     {
@@ -70,17 +64,7 @@ public class FunnelBlockEntity extends BlockEntity implements ImplementedInvento
         initial_topq = nbt.getLong("initial_topq");
         item_counter = nbt.getLong("item_counter");
         filter_counter = nbt.getLong("filter_counter");
-
-        cur_recipe = Optional.empty();
-        if(nbt.contains("recipe"))
-        {
-            try {
-                cur_recipe = (Optional<FilteringRecipe>)getWorld().getRecipeManager().get(new Identifier(nbt.getString("recipe")));
-            } catch(Exception e) {
-                BreakingFemme.LOGGER.error("Error when loading recipe " + nbt.getString("recipe") + ":");
-                BreakingFemme.LOGGER.error(e.toString());
-            }
-        }
+        last_valid_recipe = nbt.getString("recipe");
     }
 
     //try to consume a bit of filter.
@@ -136,10 +120,11 @@ public class FunnelBlockEntity extends BlockEntity implements ImplementedInvento
         if(!matched_recipe.equals(cur_recipe)) //changed recipe
         {
             cur_recipe = matched_recipe;
-            item_counter = 0; //no freebies!
-            filter_counter = -Long.MAX_VALUE / 2; //in case filter is partially used. then next inputted fluid will use it on first filtering step.
-            if(cur_recipe.isPresent())
+            if(cur_recipe.isPresent() && !cur_recipe.get().getId().toString().equals(last_valid_recipe))
             {
+                item_counter = 0; //no freebies!
+                filter_counter = -Long.MAX_VALUE / 2; //in case filter is partially used. then next inputted fluid will use it on first filtering step.
+
                 FilteringRecipe recipe = cur_recipe.get();
                 timer = recipe.getTime(this, world);
                 initial_topq = recipe.extractibleFromTop(pos.up(), world);
