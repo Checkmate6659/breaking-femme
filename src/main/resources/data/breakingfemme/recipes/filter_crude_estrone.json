@@ -1,6 +1,6 @@
 {
     "type": "breakingfemme:filtering",
-    "droplets_per_filter": 810000,
+    "droplets_per_filter": 162000,
     "droplets_per_item": 6750,
     "input": {
         "fluid": "breakingfemme:estrone_oil_solution",

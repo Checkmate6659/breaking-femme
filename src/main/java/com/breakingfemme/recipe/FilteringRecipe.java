@@ -14,6 +14,7 @@ import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.StringNbtReader;
@@ -33,11 +34,11 @@ public class FilteringRecipe implements Recipe<FunnelBlockEntity> {
     //if we want to make grinding take variable time/hunger, need to do it here
     private final Identifier id;
     private final FluidVariant input, output;
-    private final int inputq, outputq;
-    private final ItemStack item_output; //we can change the type to make loot tables; could look at Block#getDroppedStacks
-    private final int droplets_per_filter, droplets_per_item;
+    public final int inputq, outputq;
+    private final Item item_output; //we can change the type to make loot tables; could look at Block#getDroppedStacks
+    private final int droplets_per_filter, droplets_per_item; //TODO: turn those into longs
 
-    public FilteringRecipe(Identifier id, FluidVariant input, int input_quantity, FluidVariant output, int output_quantity, ItemStack item_output, int droplets_per_filter, int droplets_per_item)
+    public FilteringRecipe(Identifier id, FluidVariant input, int input_quantity, FluidVariant output, int output_quantity, Item item_output, int droplets_per_filter, int droplets_per_item)
     {
         this.id = id;
         this.input = input;
@@ -203,7 +204,7 @@ public class FilteringRecipe implements Recipe<FunnelBlockEntity> {
     
     @Override
     public ItemStack craft(FunnelBlockEntity inventory, DynamicRegistryManager registryManager) {
-        return item_output;
+        return new ItemStack(item_output);
     }
 
     @Override
@@ -220,7 +221,7 @@ public class FilteringRecipe implements Recipe<FunnelBlockEntity> {
 
     @Override
     public ItemStack getOutput(DynamicRegistryManager registryManager) {
-        return item_output.copy();
+        return new ItemStack(item_output);
     }
 
     @Override
@@ -260,7 +261,7 @@ public class FilteringRecipe implements Recipe<FunnelBlockEntity> {
                 JsonHelper.getInt(JsonHelper.getObject(json, "input"), "quantity"),
                 BreakingFemme.fluidFromNbt(nbt.getCompound("output")),
                 JsonHelper.getInt(JsonHelper.getObject(json, "output"), "quantity"),
-                ShapedRecipe.outputFromJson(JsonHelper.getObject(json, "item_output")),
+                ShapedRecipe.getItem(JsonHelper.getObject(json, "item_output")),
                 JsonHelper.getInt(json, "droplets_per_filter"),
                 JsonHelper.getInt(json, "droplets_per_item")
             );
@@ -277,7 +278,7 @@ public class FilteringRecipe implements Recipe<FunnelBlockEntity> {
             int droplets_per_filter = buf.readInt();
             int droplets_per_item   = buf.readInt();
 
-            return new FilteringRecipe(id, input, inputq, output, outputq, item_output, droplets_per_filter, droplets_per_item);
+            return new FilteringRecipe(id, input, inputq, output, outputq, item_output.getItem(), droplets_per_filter, droplets_per_item);
         }
 
         @Override
@@ -287,7 +288,7 @@ public class FilteringRecipe implements Recipe<FunnelBlockEntity> {
             recipe.output.toPacket(buf);
             buf.writeInt(recipe.inputq);
             buf.writeInt(recipe.outputq);
-            buf.writeItemStack(recipe.item_output);
+            buf.writeItemStack(new ItemStack(recipe.item_output)); //cant write an item directly to a buffer, kinda hacky approach
             buf.writeInt(recipe.droplets_per_filter);
             buf.writeInt(recipe.droplets_per_item);
         }
