@@ -10,10 +10,12 @@ import com.breakingfemme.datagen.ModFluidTagProvider;
 import com.breakingfemme.datagen.ModItemTagProvider;
 import com.breakingfemme.recipe.FilteringRecipe;
 
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.fabricmc.fabric.api.transfer.v1.storage.StorageView;
+import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.inventory.Inventories;
@@ -88,6 +90,30 @@ public class FunnelBlockEntity extends BlockEntity implements ImplementedInvento
         return false;
     }
 
+    private long amount_left_ceTq1cfHjnyWO34l; //worst fucking bypass for "local variable defined in an enclosing scope must be final or effectively final"; also just "amount_left" is too common of a name, need mangling
+    private long passFluidThrough(long max_amount) //pass at most max_amount fluid straight through the funnel. no filter. return amount of fluid actually passed through.
+    {
+        Storage<FluidVariant> top_storage = FluidStorage.SIDED.find(world, pos.up(), Direction.DOWN);
+        if(top_storage == null) return 0;
+        Storage<FluidVariant> bottom_storage = FluidStorage.SIDED.find(world, pos.down(), Direction.UP);
+        if(bottom_storage == null) return 0;
+
+        //send all fluid straight through, at a max rate of 1 bucket/tick
+        amount_left_ceTq1cfHjnyWO34l = max_amount;
+        top_storage.nonEmptyIterator().forEachRemaining(view -> {
+            FluidVariant var = view.getResource();
+            try(Transaction trans = Transaction.openOuter())
+            {
+                long amount = view.extract(var, amount_left_ceTq1cfHjnyWO34l, trans);
+                bottom_storage.insert(var, amount, trans); //can lose some fluid. this is a disaster for a reason. this *does* make a funnel a trash can tho.
+                amount_left_ceTq1cfHjnyWO34l -= amount;
+                trans.commit();
+            }
+        });
+
+        return max_amount - amount_left_ceTq1cfHjnyWO34l;
+    }
+
     //try to consume a bit of filter.
     //return false if the filter slot was empty (and so it failed), true otherwise.
     public boolean consumeFilter(int damage)
@@ -119,7 +145,12 @@ public class FunnelBlockEntity extends BlockEntity implements ImplementedInvento
             //the funnel got no filter left. literally.
             if(filterStack.isEmpty())
             {
-                //send all fluid straight through, at a max rate of 1 bucket/tick
+                long amount = passFluidThrough(FluidConstants.BUCKET); //max 1 bucket/tick
+
+                //TODO: better sfx system!!!
+                if(world.getRandom().nextInt((int)FluidConstants.BUCKET) < 12 * amount) //make splash sfx: on avg 12 splashes per bucket; guaranteed if a bucket goes straight through.
+                    world.playSound(null, pos, SoundEvents.ENTITY_GENERIC_SPLASH, SoundCategory.BLOCKS);
+
                 return;
             }
 
@@ -127,7 +158,7 @@ public class FunnelBlockEntity extends BlockEntity implements ImplementedInvento
             if(top_storage != null && !filterStack.isIn(ModItemTagProvider.RESISTANT_FILTER) && isFluidHarshOnFilter(top_storage)) //filter gets destroyed
             {
                 consumeFilter(1); //damage filter very quickly: a stack of paper gone in like 3 seconds
-                if(world.getRandom().nextInt(6) == 0) //TODO: better sound effect than this crap
+                if(world.getRandom().nextInt(6) == 0) //TODO: rename sound effect (with same sounds, they're *fine*)
                     world.playSound(null, pos, SoundEvents.BLOCK_REDSTONE_TORCH_BURNOUT, SoundCategory.BLOCKS);
 
                 return; //don't do any real filtering after that...
@@ -165,7 +196,8 @@ public class FunnelBlockEntity extends BlockEntity implements ImplementedInvento
         }
 
         //TODO: if cannot run recipe (like theres no recipe), then just fucking pass the fluid through slowly but without changing it and damaging the filter pretty slowly. except if harsh fluid ofc...
-        if(cur_recipe.isEmpty()) return; //no recipe to run :(
+        if(cur_recipe.isEmpty())
+            return; //no recipe to run :(
 
         FilteringRecipe recipe = cur_recipe.get();
         long droplets_per_item = recipe.dropletsPerItem();
