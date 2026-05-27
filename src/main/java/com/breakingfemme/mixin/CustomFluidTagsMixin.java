@@ -1,5 +1,6 @@
 package com.breakingfemme.mixin;
 
+import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -19,9 +20,10 @@ import net.minecraft.fluid.FluidState;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.registry.tag.TagKey;
 
+@Debug(export = true)
 @Mixin(Entity.class)
 public class CustomFluidTagsMixin {
-    @Inject(at = @At("RETURN"), method = "updateWaterState", cancellable = true)
+    @Inject(at = @At("RETURN"), method = "Lnet/minecraft/entity/Entity;updateWaterState()Z", cancellable = true)
     private void breakingfemme$addCustomFluidMovement(CallbackInfoReturnable<Boolean> cir)
     {
         if(!cir.getReturnValue())
@@ -29,20 +31,20 @@ public class CustomFluidTagsMixin {
     }
 
     //this one does the flowing!!
-    @WrapOperation(method = "getVelocityMultiplier", at = @At(value = "INVOKE", target = "isOf"))
+    @WrapOperation(method = "Lnet/minecraft/entity/Entity;getVelocityMultiplier()F", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/AbstractBlock$AbstractBlockState;isOf(Lnet/minecraft/block/Block;)Z"))
     private boolean breakingfemme$isWaterLikeVSM(BlockState state, Block block, Operation<Boolean> original)
     {
         return state.getFluidState().isIn(ModFluidTagProvider.WATER_LIKE) || original.call(state, block);
     }
 
-    @WrapOperation(method = "updateSwimming", at = @At(value = "INVOKE", target = "isIn"))
+    @WrapOperation(method = "Lnet/minecraft/entity/Entity;updateSwimming()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/fluid/FluidState;isIn(Lnet/minecraft/registry/tag/TagKey;)Z"))
     private boolean breakingfemme$isWaterLikeSwim(FluidState state, TagKey<Fluid> tag, Operation<Boolean> original)
     {
         return state.isIn(ModFluidTagProvider.WATER_LIKE) || original.call(state, tag);
     }
 
     //this method would put out fires, so we need another mixin
-    @WrapOperation(method = "checkWaterState", at = @At(value = "INVOKE", target = "updateMovementInFluid"))
+    @WrapOperation(method = "Lnet/minecraft/entity/Entity;checkWaterState()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;updateMovementInFluid(Lnet/minecraft/registry/tag/TagKey;D)Z"))
     private boolean breakingfemme$isWaterLikeWSt(Entity entity, TagKey<Fluid> tag, double d, Operation<Boolean> original)
     {
         //this way, if the original call would have interacted with a fluid, it doesn't process WATER_LIKE
@@ -50,7 +52,7 @@ public class CustomFluidTagsMixin {
     }
 
     //introducing
-    @Inject(method = "checkWaterState", at = @At(value = "INVOKE", target = "extinguish"), cancellable = true)
+    @Inject(method = "Lnet/minecraft/entity/Entity;checkWaterState()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;extinguish()V"), cancellable = true)
     private void breakingfemme$stayOnFire(CallbackInfo ci) //not "returnable" since its void. lol.
     {
         //you want to get extinguished? *don't.*
@@ -58,7 +60,7 @@ public class CustomFluidTagsMixin {
     }
 
     //and its older sister
-    @ModifyExpressionValue(method = "isWet", at = @At(value = "INVOKE", target = "isTouchingWater"))
+    @ModifyExpressionValue(method = "Lnet/minecraft/entity/Entity;isWet()Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;isTouchingWater()Z"))
     private boolean breakingfemme$isTouchingREALWater(boolean original)
     {
         //check if its actually water. not just water-like. those dont get you wet, or extinguish fires for that matter.
@@ -66,7 +68,7 @@ public class CustomFluidTagsMixin {
         return original && entity.getFluidHeight(FluidTags.WATER) > 0;
     }
 
-    @WrapOperation(method = "updateSubmergedInWaterState", at = @At(value = "INVOKE", target = "isSubmergedIn"))
+    @WrapOperation(method = "Lnet/minecraft/entity/Entity;updateSubmergedInWaterState()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;isSubmergedIn(Lnet/minecraft/registry/tag/TagKey;)Z"))
     private boolean breakingfemme$isWaterLikeSub(Entity entity, TagKey<Fluid> tag, Operation<Boolean> original)
     {
         //this way, if the original call would have detected submerged in a fluid (water, or not if other mods installed), it still works

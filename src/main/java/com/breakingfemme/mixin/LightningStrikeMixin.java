@@ -25,7 +25,7 @@ import net.minecraft.world.World;
 
 @Mixin(LightningEntity.class)
 public class LightningStrikeMixin {
-    @Inject(method = "tick", at = @At(value = "INVOKE", target = "emitGameEvent"))
+    @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;emitGameEvent(Lnet/minecraft/world/event/GameEvent;)V"))
     private void breakingfemme$smeltRubies(CallbackInfo ci)
     {
         LightningEntity lightning = (LightningEntity)(Object)this;
