@@ -120,6 +120,7 @@ public class FunnelBlockEntity extends BlockEntity implements ImplementedInvento
         if(outputStack.getCount() == outputStack.getMaxCount()) return; //filter is clogged!
 
         //TODO: do static method in FilteringRecipe to check if it is even possible to get a match (are there fluid invs/cauldrons above/below)
+        if(FilteringRecipe.storagesMissing(pos, world)) return;
 
         //TODO: do this wayyyyyyyyyy less often!!! like just try{keep going} catch(what) {check new recipe; ...}
         Optional<FilteringRecipe> matched_recipe = world.getRecipeManager().getFirstMatch(FilteringRecipe.Type.INSTANCE, this, world);

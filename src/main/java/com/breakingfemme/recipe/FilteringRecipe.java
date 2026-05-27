@@ -60,6 +60,15 @@ public class FilteringRecipe implements Recipe<FunnelBlockEntity> {
     //or when they're part of a transaction (hmmm how are we gonna do that?)
     //if we have a funnel, a tank above, and the fluid get pumped out, we need that to wipe the cache
 
+    //slight optimization
+    public static boolean storagesMissing(BlockPos pos, World world)
+    {
+        if(FluidStorage.SIDED.find(world, pos.up(), Direction.DOWN) == null) return true; //top storage missing
+        if(FluidStorage.SIDED.find(world, pos.down(), Direction.UP) == null) return true; //bottom storage missing
+
+        return false;
+    }
+
     //get max amount of fluid that can be extracted from the top; return smallest possible step that's above inputq; if no such step exists return 0
     public long extractibleFromTop(BlockPos top_pos, World world)
     {
