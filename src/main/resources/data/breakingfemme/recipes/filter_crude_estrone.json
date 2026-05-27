@@ -4,11 +4,11 @@
     "droplets_per_item": 6750,
     "input": {
         "fluid": "breakingfemme:estrone_oil_solution",
-        "quantity": 81
+        "quantity": 100
     },
     "output": {
         "fluid": "breakingfemme:androstadienedione_oil_solution",
-        "quantity": 81
+        "quantity": 100
     },
     "item_output":
     {

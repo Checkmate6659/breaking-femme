@@ -139,7 +139,9 @@ public class FunnelBlockEntity extends BlockEntity implements ImplementedInvento
                 long packed = recipe.getTimeAndInitialTopq(this, world);
                 timer = (int)(packed >> 32);
                 initial_topq = (int)(packed & 4294967295L);
-                }
+            }
+            else
+                initial_topq = 0; //how does this fix anything really? it shouldnt
         }
 
         //TODO: if cannot run recipe (like theres no recipe), then just fucking pass the fluid through slowly but without changing it and damaging the filter pretty slowly. except if harsh fluid ofc...
