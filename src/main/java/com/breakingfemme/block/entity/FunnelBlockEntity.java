@@ -1,19 +1,26 @@
 package com.breakingfemme.block.entity;
 
+import java.util.Iterator;
 import java.util.Optional;
 
 import org.jetbrains.annotations.Nullable;
 
 import com.breakingfemme.ModSounds;
+import com.breakingfemme.datagen.ModFluidTagProvider;
 import com.breakingfemme.datagen.ModItemTagProvider;
 import com.breakingfemme.recipe.FilteringRecipe;
 
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
+import net.fabricmc.fabric.api.transfer.v1.storage.StorageView;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -72,6 +79,15 @@ public class FunnelBlockEntity extends BlockEntity implements ImplementedInvento
         last_valid_recipe = nbt.getString("recipe");
     }
 
+    private boolean isFluidHarshOnFilter(Storage<FluidVariant> storage)
+    {
+        Iterator<StorageView<FluidVariant>> iter = storage.nonEmptyIterator(); //skip over empties by default
+        while(iter.hasNext())
+            if(iter.next().getResource().getFluid().isIn(ModFluidTagProvider.HARSH_ON_FILTERS))
+                return true; //exception-free/extra variable-free way to get out of the loop: throwing exceptions is costly (building stack trace), especially when done often
+        return false;
+    }
+
     //try to consume a bit of filter.
     //return false if the filter slot was empty (and so it failed), true otherwise.
     public boolean consumeFilter(int damage)
@@ -98,20 +114,24 @@ public class FunnelBlockEntity extends BlockEntity implements ImplementedInvento
         //TODO: check if harsh fluid & flimsy filter. if yes, destroy it and make fluid go straight through!
         //does not count if theres a filter durability thats currently getting used up.
         ItemStack filterStack = getStack(1);
-        if(filter_counter <= 0 && (filterStack.isEmpty() || false))
+        if(filter_counter <= 0)
         {
-            consumeFilter(16); //damage filter very quickly
-
-            //send all fluid straight through
-            //TODO: support cauldrons!!! and turn bottom cauldron into sludge if mixed with other fluid
-
-            /*try(Transaction trans = Transaction.openOuter())
+            //the funnel got no filter left. literally.
+            if(filterStack.isEmpty())
             {
-                Storage<FluidVariant> bottom_storage = FluidStorage.SIDED.find(world, bottom_pos, Direction.UP);
-                StorageUtil.simulateInsert(bottom_storage, output, outputq, null);
-            }*/
+                //send all fluid straight through, at a max rate of 1 bucket/tick
+                return;
+            }
 
-            return;
+            Storage<FluidVariant> top_storage = FluidStorage.SIDED.find(world, pos.up(), Direction.DOWN);
+            if(top_storage != null && !filterStack.isIn(ModItemTagProvider.RESISTANT_FILTER) && isFluidHarshOnFilter(top_storage)) //filter gets destroyed
+            {
+                consumeFilter(1); //damage filter very quickly: a stack of paper gone in like 3 seconds
+                if(world.getRandom().nextInt(6) == 0) //TODO: better sound effect than this crap
+                    world.playSound(null, pos, SoundEvents.BLOCK_REDSTONE_TORCH_BURNOUT, SoundCategory.BLOCKS);
+
+                return; //don't do any real filtering after that...
+            }
         }
 
         //there actually is an acceptable filter!
@@ -141,7 +161,7 @@ public class FunnelBlockEntity extends BlockEntity implements ImplementedInvento
                 initial_topq = (int)(packed & 4294967295L);
             }
             else
-                initial_topq = 0; //how does this fix anything really? it shouldnt
+                initial_topq = 0; //how does this fix anything really? it shouldnt. but it DOES. so lets keep it.
         }
 
         //TODO: if cannot run recipe (like theres no recipe), then just fucking pass the fluid through slowly but without changing it and damaging the filter pretty slowly. except if harsh fluid ofc...

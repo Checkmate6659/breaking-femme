@@ -17,6 +17,7 @@ import net.minecraft.util.Identifier;
 public class ModFluidTagProvider extends FabricTagProvider.FluidTagProvider {
     public static final TagKey<Fluid> WATER_LIKE = TagKey.of(RegistryKeys.FLUID, new Identifier(BreakingFemme.MOD_ID, "water_like")); //basically water, but without the interaction or the fire extinguishing
     public static final TagKey<Fluid> FLAMMABLE = TagKey.of(RegistryKeys.FLUID, new Identifier(BreakingFemme.MOD_ID, "flammable"));
+    public static final TagKey<Fluid> HARSH_ON_FILTERS = TagKey.of(RegistryKeys.FLUID, new Identifier(BreakingFemme.MOD_ID, "filter/harsh"));
 
     public ModFluidTagProvider(FabricDataOutput output, CompletableFuture<WrapperLookup> completableFuture) {
         super(output, completableFuture);
@@ -45,6 +46,8 @@ public class ModFluidTagProvider extends FabricTagProvider.FluidTagProvider {
         getOrCreateTagBuilder(FluidTags.WATER).add(ModFluids.FLOWING_NETHER_BEER);
         getOrCreateTagBuilder(FluidTags.WATER).add(ModFluids.STILL_SLUDGE);
         getOrCreateTagBuilder(FluidTags.WATER).add(ModFluids.FLOWING_SLUDGE);
+        getOrCreateTagBuilder(HARSH_ON_FILTERS).add(ModFluids.STILL_SLUDGE);
+        getOrCreateTagBuilder(HARSH_ON_FILTERS).add(ModFluids.FLOWING_SLUDGE);
         getOrCreateTagBuilder(FluidTags.WATER).add(ModFluids.FLOWING_SPILLAGE);
         getOrCreateTagBuilder(FLAMMABLE).add(ModFluids.STILL_ANDROSTADIENEDIONE_OIL_SOLUTION);
         getOrCreateTagBuilder(FLAMMABLE).add(ModFluids.FLOWING_ANDROSTADIENEDIONE_OIL_SOLUTION);
@@ -54,8 +57,12 @@ public class ModFluidTagProvider extends FabricTagProvider.FluidTagProvider {
         getOrCreateTagBuilder(FLAMMABLE).add(ModFluids.FLOWING_ESTRONE_OIL_SOLUTION);
         getOrCreateTagBuilder(FluidTags.WATER).add(ModFluids.STILL_LYE_WATER);
         getOrCreateTagBuilder(FluidTags.WATER).add(ModFluids.FLOWING_LYE_WATER);
+        getOrCreateTagBuilder(HARSH_ON_FILTERS).add(ModFluids.STILL_LYE_WATER);
+        getOrCreateTagBuilder(HARSH_ON_FILTERS).add(ModFluids.FLOWING_LYE_WATER);
         getOrCreateTagBuilder(WATER_LIKE).add(ModFluids.STILL_CAUSTIC_SODA_SOLUTION);
         getOrCreateTagBuilder(WATER_LIKE).add(ModFluids.FLOWING_CAUSTIC_SODA_SOLUTION);
+        getOrCreateTagBuilder(HARSH_ON_FILTERS).add(ModFluids.STILL_CAUSTIC_SODA_SOLUTION);
+        getOrCreateTagBuilder(HARSH_ON_FILTERS).add(ModFluids.FLOWING_CAUSTIC_SODA_SOLUTION);
         //AUTOGENERATION LABEL DO NOT TOUCH
 
         getOrCreateTagBuilder(WATER_LIKE).addTag(FLAMMABLE);
