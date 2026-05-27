@@ -1,0 +1,25 @@
+{
+    "type": "breakingfemme:filtering",
+    "droplets_per_filter": 162000,
+    "droplets_per_item": 2147483647,
+    "input": {
+        "fluid": "estrogen:horse_urine",
+        "quantity": 100
+    },
+    "output": {
+        "fluid": "estrogen:filtrated_horse_urine",
+        "quantity": 100
+    },
+    "item_output":
+    {
+        "item": "minecraft:dirt"
+    },
+    "fabric:load_conditions": [
+        {
+          "condition": "fabric:all_mods_loaded",
+          "values": [
+            "estrogen"
+          ]
+        }
+    ]
+}

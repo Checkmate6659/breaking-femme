@@ -221,7 +221,7 @@ public class FunnelBlockEntity extends BlockEntity implements ImplementedInvento
 
             //damage filter
             filter_counter -= actualq;
-            item_counter += actualq; //update the item counter here too
+            if(droplets_per_item != 2147483647) item_counter += actualq; //update the item counter here too; 2147483647 means the recipe outputs no items.
             if(filter_counter <= 0)
             {
                 if(consumeFilter(1))
