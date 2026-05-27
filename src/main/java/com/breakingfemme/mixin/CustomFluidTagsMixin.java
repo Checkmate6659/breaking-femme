@@ -3,11 +3,11 @@ package com.breakingfemme.mixin;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import com.breakingfemme.datagen.ModFluidTagProvider;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
@@ -58,11 +58,12 @@ public class CustomFluidTagsMixin {
     }
 
     //and its older sister
-    @Redirect(method = "isWet", at = @At(value = "INVOKE", target = "isTouchingWater"))
-    private boolean breakingfemme$isTouchingREALWater(Entity entity)
+    @ModifyExpressionValue(method = "isWet", at = @At(value = "INVOKE", target = "isTouchingWater"))
+    private boolean breakingfemme$isTouchingREALWater(boolean original)
     {
         //check if its actually water. not just water-like. those dont get you wet, or extinguish fires for that matter.
-        return entity.getFluidHeight(FluidTags.WATER) > 0;
+        Entity entity = (Entity)(Object)this;
+        return original && entity.getFluidHeight(FluidTags.WATER) > 0;
     }
 
     @WrapOperation(method = "updateSubmergedInWaterState", at = @At(value = "INVOKE", target = "isSubmergedIn"))
