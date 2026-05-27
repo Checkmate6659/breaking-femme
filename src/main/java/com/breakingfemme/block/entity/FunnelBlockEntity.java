@@ -136,9 +136,10 @@ public class FunnelBlockEntity extends BlockEntity implements ImplementedInvento
                 filter_counter = -Long.MAX_VALUE / 2; //in case filter is partially used. then next inputted fluid will use it on first filtering step.
 
                 FilteringRecipe recipe = cur_recipe.get();
-                timer = recipe.getTime(this, world);
-                initial_topq = recipe.extractibleFromTop(pos.up(), world);
-            }
+                long packed = recipe.getTimeAndInitialTopq(this, world);
+                timer = (int)(packed >> 32);
+                initial_topq = (int)(packed & 4294967295L);
+                }
         }
 
         //TODO: if cannot run recipe (like theres no recipe), then just fucking pass the fluid through slowly but without changing it and damaging the filter pretty slowly. except if harsh fluid ofc...
@@ -177,8 +178,9 @@ public class FunnelBlockEntity extends BlockEntity implements ImplementedInvento
             }
 
             //reset variables
-            timer = recipe.getTime(this, world);
-            initial_topq = recipe.extractibleFromTop(pos.up(), world);
+            long packed = recipe.getTimeAndInitialTopq(this, world);
+            timer = (int)(packed >> 32);
+            initial_topq = (int)(packed & 4294967295L);
 
             markDirty();
             world.updateListeners(pos, state, state, 0);
@@ -212,7 +214,6 @@ public class FunnelBlockEntity extends BlockEntity implements ImplementedInvento
 
         //play sound effect while filtering
         if(world.getTime() % SOUND_LENGTH == sound_modulus)
-            //world.playSound(null, pos.down(), ModSounds.FILTER, SoundCategory.BLOCKS);
             world.playSound(null, pos, ModSounds.FILTER, SoundCategory.BLOCKS);
     }
 }

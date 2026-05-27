@@ -166,14 +166,17 @@ public class FilteringRecipe implements Recipe<FunnelBlockEntity> {
         return 0;
     }
 
-    //the time (in ticks) the recipe should take
+    //the time (in ticks) the recipe should take (higher 32 bits)
+    //and the value for initial_topq (lower 32 bits)
     //inputq and outputq are speed parameters. if they're both 1, a bucket is gonna be filtered in about 3 days and 9 hours (mc time).
-    public int getTime(FunnelBlockEntity funnel, World world)
+    public long getTimeAndInitialTopq(FunnelBlockEntity funnel, World world)
     {
         BlockPos pos = funnel.getPos();
         int insertable = (int)insertibleIntoBottom(pos.down(), world);
         int extractible = (int)extractibleFromTop(pos.up(), world);
-        return Math.max((insertable + inputq - 1) / inputq, (extractible + outputq - 1) / outputq); //we can get ceil(division as rationals) this way
+        return
+            ((long)Math.max((insertable + outputq - 1) / outputq, (extractible + inputq - 1) / inputq) << 32) | //we can get ceil(division as rationals) this way
+            (long)Math.max(insertable * outputq / inputq, extractible);
     }
 
     @Override
