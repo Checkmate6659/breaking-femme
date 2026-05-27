@@ -4,6 +4,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import com.breakingfemme.datagen.ModFluidTagProvider;
@@ -49,11 +50,11 @@ public class CustomFluidTagsMixin {
     }
 
     //introducing
-    @Redirect(method = "checkWaterState", at = @At(value = "INVOKE", target = "extinguish"))
-    private void breakingfemme$stayOnFire(Entity entity)
+    @Inject(method = "checkWaterState", at = @At(value = "INVOKE", target = "extinguish"), cancellable = true)
+    private void breakingfemme$stayOnFire(CallbackInfo ci) //not "returnable" since its void. lol.
     {
         //you want to get extinguished? *don't.*
-        return;
+        ci.cancel();
     }
 
     //and its older sister
