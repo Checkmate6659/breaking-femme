@@ -95,7 +95,7 @@ public class ModItems {
     //Ceramic filters for filtering harsh chemicals
     public static final Item SAWDUST = registerItem("sawdust", new Item(new FabricItemSettings()));
     public static final Item UNFIRED_CERAMIC_FILTER = registerItem("unfired_ceramic_filter", new Item(new FabricItemSettings()));
-    public static final Item CERAMIC_FILTER = registerItem("ceramic_filter", new Item(new FabricItemSettings().maxDamage(256)));
+    public static final Item CERAMIC_FILTER = registerItem("ceramic_filter", new Item(new FabricItemSettings().maxDamage(32)));
 
     //Soda ash processing line
     public static final Item KELP_ASH = registerItem("kelp_ash", new Item(new FabricItemSettings()));
