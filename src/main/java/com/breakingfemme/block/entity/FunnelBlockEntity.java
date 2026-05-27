@@ -173,6 +173,9 @@ public class FunnelBlockEntity extends BlockEntity implements ImplementedInvento
             initial_topq = recipe.extractibleFromTop(pos.up(), world);
 
             //TODO: play some kinda sound effect
+
+            markDirty();
+            world.updateListeners(pos, state, state, 0);
         }
         timer--; //don't forget that!!
 
@@ -196,10 +199,9 @@ public class FunnelBlockEntity extends BlockEntity implements ImplementedInvento
             }
 
             item_counter -= droplets_per_item * ntimes;
-        }
 
-        //this is a TEST!!
-        markDirty();
-        world.updateListeners(pos, state, state, 0); //WARNING: LAGGY!!!!!!
+            markDirty();
+            world.updateListeners(pos, state, state, 0);
+        }
     }
 }
