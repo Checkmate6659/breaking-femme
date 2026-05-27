@@ -14,6 +14,7 @@ public class ModSounds {
 	public static final SoundEvent GRINDING = registerSound("grinding");
 	public static final SoundEvent CRANK = registerSound("crank");
 	public static final SoundEvent METAL_PIPE = registerSound("metal_pipe");
+	public static final SoundEvent FILTER = registerSound("filtering");
 
 	public static final SoundEvent ACT_RIGHT = registerSound("act_right");
 

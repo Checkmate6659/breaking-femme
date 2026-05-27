@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.jetbrains.annotations.Nullable;
 
+import com.breakingfemme.ModSounds;
 import com.breakingfemme.datagen.ModItemTagProvider;
 import com.breakingfemme.recipe.FilteringRecipe;
 
@@ -12,6 +13,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -27,6 +29,9 @@ public class FunnelBlockEntity extends BlockEntity implements ImplementedInvento
     private long initial_topq = 0; //at the beginning of the time, this value will be set to currently extractible fluid from the top storage. no more than this can get processed.
     private long item_counter = 0; //counter for giving less than 1 item/droplet
     private long filter_counter = -Long.MAX_VALUE / 2; //counter for using less than 1 filter/droplet; start at this value to make filter use an extra durability when new fluid inputted
+
+    private static final int SOUND_LENGTH = 18; //sound should be played every 18 ticks
+    private long sound_modulus = -1;
 
     public FunnelBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.FUNNEL_BLOCK_ENTITY, pos, state);
@@ -87,6 +92,8 @@ public class FunnelBlockEntity extends BlockEntity implements ImplementedInvento
     public void tick(World world, BlockPos pos, BlockState state)
     {
         if(world.isClient()) return;
+
+        if(sound_modulus == -1) sound_modulus = world.random.nextInt(SOUND_LENGTH); //initialization: shift stuff not to make jarring repetition when there are multiple filters
 
         //TODO: check if harsh fluid & flimsy filter. if yes, destroy it and make fluid go straight through!
         //does not count if theres a filter durability thats currently getting used up.
@@ -172,8 +179,6 @@ public class FunnelBlockEntity extends BlockEntity implements ImplementedInvento
             timer = recipe.getTime(this, world);
             initial_topq = recipe.extractibleFromTop(pos.up(), world);
 
-            //TODO: play some kinda sound effect
-
             markDirty();
             world.updateListeners(pos, state, state, 0);
         }
@@ -203,5 +208,10 @@ public class FunnelBlockEntity extends BlockEntity implements ImplementedInvento
             markDirty();
             world.updateListeners(pos, state, state, 0);
         }
+
+        //play sound effect while filtering
+        if(world.getTime() % SOUND_LENGTH == sound_modulus)
+            //world.playSound(null, pos.down(), ModSounds.FILTER, SoundCategory.BLOCKS);
+            world.playSound(null, pos, ModSounds.FILTER, SoundCategory.BLOCKS);
     }
 }

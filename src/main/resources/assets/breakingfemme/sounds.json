@@ -3,6 +3,10 @@
     "subtitle": "sound.breakingfemme.crank",
     "sounds": ["breakingfemme:crank1","breakingfemme:crank2","breakingfemme:crank3","breakingfemme:crank4","breakingfemme:crank5","breakingfemme:crank6"]
   },
+  "filtering": {
+    "subtitle": "sound.breakingfemme.filtering",
+    "sounds": ["breakingfemme:filter1","breakingfemme:filter2","breakingfemme:filter3","breakingfemme:filter4","breakingfemme:filter5","breakingfemme:filter6","breakingfemme:filter7","breakingfemme:filter8"]
+  },
   "grinding": {
     "subtitle": "sound.breakingfemme.grinding",
     "sounds": ["breakingfemme:grind1","breakingfemme:grind2","breakingfemme:grind3","breakingfemme:grind4","breakingfemme:grind5","breakingfemme:grind6","breakingfemme:grind7","breakingfemme:grind8","breakingfemme:grind9","breakingfemme:grind10"]

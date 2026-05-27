@@ -165,6 +165,7 @@
     "sound.breakingfemme.grinding": "Grinding",
     "sound.breakingfemme.crank": "Crank turns",
     "sound.breakingfemme.metal_pipe": "Metal pipe clangs",
+    "sound.breakingfemme.filtering": "Filtering",
 
     "death.attack.breakingfemme.sodium": "%1$s has been sacrificed to the sodium god",
     "death.attack.breakingfemme.novikov": "%1$s tried to violate the Novikov self-consistency principle",
