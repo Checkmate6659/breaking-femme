@@ -352,7 +352,7 @@ public static void registerModFluids()
         FLOWING_CAUSTIC_SODA_CAKE = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_caustic_soda_cake"),
             new CausticSodaCakeFluid.Flowing());
         CAUSTIC_SODA_CAKE_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "caustic_soda_cake_block"),
-            new FluidBlock(STILL_CAUSTIC_SODA_CAKE, FabricBlockSettings.copyOf(Blocks.WATER)){});
+            new CausticFluidBlock(STILL_CAUSTIC_SODA_CAKE, FabricBlockSettings.copyOf(Blocks.WATER), 4.5f){});
         CAUSTIC_SODA_CAKE_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "caustic_soda_cake_bucket"),
             new BucketItem(STILL_CAUSTIC_SODA_CAKE, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
