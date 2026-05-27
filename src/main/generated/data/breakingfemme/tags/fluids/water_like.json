@@ -4,6 +4,8 @@
     "#minecraft:water",
     "breakingfemme:caustic_soda_solution",
     "breakingfemme:flowing_caustic_soda_solution",
+    "breakingfemme:caustic_soda_cake",
+    "breakingfemme:flowing_caustic_soda_cake",
     "#breakingfemme:flammable"
   ]
 }

@@ -134,13 +134,6 @@ public class BreakingFemmeClient implements ClientModInitializer {
             return -1;
         }, ModFluids.REDOX_REACTION_CAULDRON);
 
-        //caustification (cauldron only)
-        ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
-            if (i == 0)
-                return 0xD089827F; //literally the average of lye water and caustic soda colors. so its like gray ish.
-            return -1;
-        }, ModFluids.CAUSTIFICATION_CAULDRON);
-
         //extractiong androstadienedione into oil (cauldron only)
         ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
             if (i == 0)
@@ -402,6 +395,19 @@ public class BreakingFemmeClient implements ClientModInitializer {
                 return 0xC0D0E0F0;
             return -1;
         }, ModFluids.CAUSTIC_SODA_SOLUTION_CAULDRON);
+
+        FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.STILL_CAUSTIC_SODA_CAKE, ModFluids.FLOWING_CAUSTIC_SODA_CAKE,
+            new SimpleFluidRenderHandler(
+                new Identifier("minecraft:block/water_still"),
+                new Identifier("minecraft:block/water_flow"),
+                0xD089827F)
+        );
+        BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.STILL_CAUSTIC_SODA_CAKE, ModFluids.FLOWING_CAUSTIC_SODA_CAKE);
+        ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
+            if (i == 0)
+                return 0xD089827F;
+            return -1;
+        }, ModFluids.CAUSTIC_SODA_CAKE_CAULDRON);
 
         //AUTOGENERATION LABEL DO NOT TOUCH
     }

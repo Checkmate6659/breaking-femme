@@ -179,6 +179,7 @@ public class ModItems {
             entries.add(ModBlocks.KELP_ASH_MUD_BLOCK);
             entries.add(ModFluids.LYE_WATER_BUCKET);
             entries.add(LYE_WATER_BOTTLE);
+            entries.add(ModFluids.CAUSTIC_SODA_CAKE_BUCKET);
             entries.add(ModFluids.CAUSTIC_SODA_SOLUTION_BUCKET);
             entries.add(ModBlocks.LIMESTONE_CHUNKS);
             entries.add(ModBlocks.QUICKLIME);

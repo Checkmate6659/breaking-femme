@@ -1,0 +1,17 @@
+{
+    "type": "breakingfemme:filtering",
+    "droplets_per_filter": 20250,
+    "droplets_per_item": 108000,
+    "input": {
+        "fluid": "breakingfemme:caustic_soda_cake",
+        "quantity": 30
+    },
+    "output": {
+        "fluid": "breakingfemme:caustic_soda_solution",
+        "quantity": 30
+    },
+    "item_output":
+    {
+        "item": "breakingfemme:limestone_chunks"
+    }
+}

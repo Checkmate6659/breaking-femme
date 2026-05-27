@@ -33,8 +33,8 @@ import com.breakingfemme.cauldron.EstroneOilSolutionCauldronBlock;
 import com.breakingfemme.cauldron.EstroneRecrystallizationCauldronBlock;
 import com.breakingfemme.cauldron.LyeWaterCauldronBlock;
 import com.breakingfemme.cauldron.CausticSodaSolutionCauldronBlock;
+import com.breakingfemme.cauldron.CausticSodaCakeCauldronBlock;
 //AUTOGENERATION LABEL DO NOT TOUCH
-import com.breakingfemme.cauldron.CaustificationCauldronBlock;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -63,7 +63,6 @@ public class ModFluids {
     //Reaction cauldrons
     public static Block MACERATING_SOY_CAULDRON;
     public static Block REDOX_REACTION_CAULDRON;
-    public static Block CAUSTIFICATION_CAULDRON;
     public static Block ANDROSTADIENEDIONE_EXTRACTION_CAULDRON;
     public static Block YEAST_STARTER_CAULDRON;
     public static Block YEAST_CAULDRON;
@@ -178,7 +177,14 @@ public class ModFluids {
     public static Block CAUSTIC_SODA_SOLUTION_FLUID_BLOCK;
     public static Item CAUSTIC_SODA_SOLUTION_BUCKET;
     public static Block CAUSTIC_SODA_SOLUTION_CAULDRON;
+    
+    public static FlowableFluid STILL_CAUSTIC_SODA_CAKE;
+    public static FlowableFluid FLOWING_CAUSTIC_SODA_CAKE;
+    public static Block CAUSTIC_SODA_CAKE_FLUID_BLOCK;
+    public static Item CAUSTIC_SODA_CAKE_BUCKET;
+    public static Block CAUSTIC_SODA_CAKE_CAULDRON;
     //AUTOGENERATION LABEL DO NOT TOUCH
+
 
 public static void registerModFluids()
     {
@@ -341,14 +347,23 @@ public static void registerModFluids()
         CAUSTIC_SODA_SOLUTION_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "caustic_soda_solution_bucket"),
             new BucketItem(STILL_CAUSTIC_SODA_SOLUTION, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
+        STILL_CAUSTIC_SODA_CAKE = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "caustic_soda_cake"),
+            new CausticSodaCakeFluid.Still());
+        FLOWING_CAUSTIC_SODA_CAKE = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_caustic_soda_cake"),
+            new CausticSodaCakeFluid.Flowing());
+        CAUSTIC_SODA_CAKE_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "caustic_soda_cake_block"),
+            new FluidBlock(STILL_CAUSTIC_SODA_CAKE, FabricBlockSettings.copyOf(Blocks.WATER)){});
+        CAUSTIC_SODA_CAKE_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "caustic_soda_cake_bucket"),
+            new BucketItem(STILL_CAUSTIC_SODA_CAKE, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
+
         //AUTOGENERATION LABEL DO NOT TOUCH
+
 
 
         //cauldron fluid content registrations (need to be done after everything else fluid-related)
         //https://maven.fabricmc.net/docs/fabric-api-0.88.2+1.20.2/net/fabricmc/fabric/api/transfer/v1/fluid/CauldronFluidContent.html
         MACERATING_SOY_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "macerating_soy_cauldron"), new MaceratingSoyCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
         REDOX_REACTION_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "redox_reaction_cauldron"), new RedoxReactionCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
-        CAUSTIFICATION_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "caustification_cauldron"), new CaustificationCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
         ANDROSTADIENEDIONE_EXTRACTION_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "androstadienedione_extraction_cauldron"), new AndrostadienedioneExtractionCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
         YEAST_STARTER_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "yeast_starter_cauldron"), new YeastStarterCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
         YEAST_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "yeast_cauldron"), new YeastCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
@@ -384,12 +399,14 @@ public static void registerModFluids()
         CauldronFluidContent.registerCauldron(ANDROSTADIENEDIONE_OIL_SOLUTION_CAULDRON, STILL_ANDROSTADIENEDIONE_OIL_SOLUTION, FluidConstants.BOTTLE, AndrostadienedioneOilSolutionCauldronBlock.LEVEL);
         COAL_OIL_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "coal_oil_cauldron"), new CoalOilCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
         CauldronFluidContent.registerCauldron(COAL_OIL_CAULDRON, STILL_COAL_OIL, FluidConstants.BOTTLE, CoalOilCauldronBlock.LEVEL);
-        ESTRONE_OIL_SOLUTION_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "estrone_oil_solution_cauldron"), new EstroneOilSolutionCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
+        ESTRONE_OIL_SOLUTION_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "estrone_oil_solution_cauldron"), new EstroneOilSolutionCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
         CauldronFluidContent.registerCauldron(ESTRONE_OIL_SOLUTION_CAULDRON, STILL_ESTRONE_OIL_SOLUTION, FluidConstants.BUCKET, null);
         LYE_WATER_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "lye_water_cauldron"), new LyeWaterCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
         CauldronFluidContent.registerCauldron(LYE_WATER_CAULDRON, STILL_LYE_WATER, FluidConstants.BUCKET, null);
         CAUSTIC_SODA_SOLUTION_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "caustic_soda_solution_cauldron"), new CausticSodaSolutionCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
         CauldronFluidContent.registerCauldron(CAUSTIC_SODA_SOLUTION_CAULDRON, STILL_CAUSTIC_SODA_SOLUTION, FluidConstants.BUCKET, null);
+        CAUSTIC_SODA_CAKE_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "caustic_soda_cake_cauldron"), new CausticSodaCakeCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
+        CauldronFluidContent.registerCauldron(CAUSTIC_SODA_CAKE_CAULDRON, STILL_CAUSTIC_SODA_CAKE, FluidConstants.BUCKET, null);
         //AUTOGENERATION LABEL DO NOT TOUCH
 
 

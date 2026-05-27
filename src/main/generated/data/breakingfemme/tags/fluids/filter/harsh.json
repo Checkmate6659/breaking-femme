@@ -2,7 +2,10 @@
   "replace": false,
   "values": [
     "breakingfemme:sludge",
+    "breakingfemme:flowing_sludge",
     "breakingfemme:lye_water",
-    "breakingfemme:caustic_soda_solution"
+    "breakingfemme:flowing_lye_water",
+    "breakingfemme:caustic_soda_solution",
+    "breakingfemme:flowing_caustic_soda_solution"
   ]
 }
