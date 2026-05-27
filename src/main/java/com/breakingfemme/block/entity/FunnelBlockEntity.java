@@ -228,6 +228,8 @@ public class FunnelBlockEntity extends BlockEntity implements ImplementedInvento
                 {
                     if(filter_counter < -Long.MAX_VALUE / 4) filter_counter = -actualq; //"initialization"
                     filter_counter += droplets_per_filter;
+                    while(filter_counter <= 0 && consumeFilter(1))
+                        filter_counter += droplets_per_filter; //don't let it stay negative!!
                 }
             }
 
