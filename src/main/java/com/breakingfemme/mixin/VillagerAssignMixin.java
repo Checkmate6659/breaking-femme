@@ -21,7 +21,7 @@ import net.minecraft.world.World;
 
 @Mixin(NameTagItem.class)
 public class VillagerAssignMixin {
-    @Inject(method = "useOnEntity", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;setCustomName(Lnet/minecraft/text/Text;)V"))
+    @Inject(method = "useOnEntity", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;setCustomName(Lnet/minecraft/text/Text;)V"))
     private void breakingfemme$getVillagerAngry(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand, CallbackInfoReturnable<ActionResult> cir)
     {
         World world = entity.getWorld();

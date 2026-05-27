@@ -1,6 +1,5 @@
 package com.breakingfemme.mixin;
 
-import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -20,7 +19,6 @@ import net.minecraft.fluid.FluidState;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.registry.tag.TagKey;
 
-@Debug(export = true)
 @Mixin(Entity.class)
 public class CustomFluidTagsMixin {
     @Inject(at = @At("RETURN"), method = "Lnet/minecraft/entity/Entity;updateWaterState()Z", cancellable = true)
@@ -31,7 +29,7 @@ public class CustomFluidTagsMixin {
     }
 
     //this one does the flowing!!
-    @WrapOperation(method = "Lnet/minecraft/entity/Entity;getVelocityMultiplier()F", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/AbstractBlock$AbstractBlockState;isOf(Lnet/minecraft/block/Block;)Z"))
+    @WrapOperation(method = "getVelocityMultiplier", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/BlockState;isOf(Lnet/minecraft/block/Block;)Z"))
     private boolean breakingfemme$isWaterLikeVSM(BlockState state, Block block, Operation<Boolean> original)
     {
         return state.getFluidState().isIn(ModFluidTagProvider.WATER_LIKE) || original.call(state, block);
