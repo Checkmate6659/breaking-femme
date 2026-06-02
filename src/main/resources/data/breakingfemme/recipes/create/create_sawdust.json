@@ -1,0 +1,23 @@
+{
+  "type": "create:cutting",
+  "ingredients": [
+    {
+      "item": "minecraft:stick"
+    }
+  ],
+  "processingTime": 40,
+  "results": [
+    {
+      "count": 2,
+      "item": "breakingfemme:sawdust"
+    }
+  ],
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "create"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+    "type": "createestrogen:centrifuging",
+    "ingredients": [
+        {
+            "amount_per_tick": 81,
+            "fluid": "breakingfemme:caustic_soda_cake"
+        }
+    ],
+    "result": {
+        "amount_per_tick": 108,
+        "fluid": "breakingfemme:caustic_soda_solution"
+    },
+    "fabric:load_conditions": [
+        {
+            "condition": "fabric:all_mods_loaded",
+            "values": [
+                "createestrogen"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,18 @@
+{
+    "damage": 4,
+    "items": "breakingfemme:chili_pepper",
+    "knockback": 1.5,
+    "pre_entity_hit": {
+        "type": "create:set_on_fire",
+        "ticks": 160
+    },
+    "on_block_hit": {
+        "type": "create:plant_crop",
+        "block": "breakingfemme:chili_pepper"
+    },
+    "reload_ticks": 10,
+    "render_mode": {
+        "type": "create:tumble"
+    },
+    "velocity_multiplier": 1.5
+}
