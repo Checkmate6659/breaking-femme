@@ -424,7 +424,7 @@ public static void registerModFluids()
         CAUSTIC_SODA_CAKE_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "caustic_soda_cake_cauldron"), new CausticSodaCakeCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
         CauldronFluidContent.registerCauldron(CAUSTIC_SODA_CAKE_CAULDRON, STILL_CAUSTIC_SODA_CAKE, FluidConstants.BUCKET, null);
         CONCENTRATED_CAUSTIC_SODA_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "concentrated_caustic_soda_solution_cauldron"), new ConcentratedCausticSodaCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
-        CauldronFluidContent.registerCauldron(CONCENTRATED_CAUSTIC_SODA_CAULDRON, STILL_CONCENTRATED_CAUSTIC_SODA, FluidConstants.BUCKET, null);
+        CauldronFluidContent.registerCauldron(CONCENTRATED_CAUSTIC_SODA_CAULDRON, STILL_CONCENTRATED_CAUSTIC_SODA, FluidConstants.BOTTLE, ConcentratedCausticSodaCauldronBlock.LEVEL);
         //AUTOGENERATION LABEL DO NOT TOUCH
 
 
