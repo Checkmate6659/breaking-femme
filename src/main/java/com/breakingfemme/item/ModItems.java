@@ -100,6 +100,7 @@ public class ModItems {
     //Soda ash processing line
     public static final Item KELP_ASH = registerItem("kelp_ash", new Item(new FabricItemSettings()));
     public static final Item LYE_WATER_BOTTLE = registerItem("lye_water_bottle", new LyeWaterBottleItem(new FabricItemSettings().maxCount(1).recipeRemainder(Items.GLASS_BOTTLE).food(new FoodComponent.Builder().hunger(0).saturationModifier(0f).alwaysEdible().build())));
+    public static final Item CONCENTRATED_CAUSTIC_SODA_BOTTLE = registerItem("concentrated_caustic_soda_solution_bottle", new ConcentratedCausticSodaBottleItem(new FabricItemSettings().maxCount(1).recipeRemainder(Items.GLASS_BOTTLE).food(new FoodComponent.Builder().hunger(0).saturationModifier(0f).alwaysEdible().build())));
 
     //Estrogens
     public static final Item EGEL_BOTTLE = registerItem("egel_bottle", new EgelItem(new FabricItemSettings().maxDamage(64)));

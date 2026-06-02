@@ -419,7 +419,7 @@ public static void registerModFluids()
         CauldronFluidContent.registerCauldron(ESTRONE_OIL_SOLUTION_CAULDRON, STILL_ESTRONE_OIL_SOLUTION, FluidConstants.BUCKET, null);
         LYE_WATER_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "lye_water_cauldron"), new LyeWaterCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
         CauldronFluidContent.registerCauldron(LYE_WATER_CAULDRON, STILL_LYE_WATER, FluidConstants.BUCKET, null);
-        CAUSTIC_SODA_SOLUTION_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "caustic_soda_solution_cauldron"), new CausticSodaSolutionCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
+        CAUSTIC_SODA_SOLUTION_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "caustic_soda_solution_cauldron"), new CausticSodaSolutionCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
         CauldronFluidContent.registerCauldron(CAUSTIC_SODA_SOLUTION_CAULDRON, STILL_CAUSTIC_SODA_SOLUTION, FluidConstants.BUCKET, null);
         CAUSTIC_SODA_CAKE_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "caustic_soda_cake_cauldron"), new CausticSodaCakeCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
         CauldronFluidContent.registerCauldron(CAUSTIC_SODA_CAKE_CAULDRON, STILL_CAUSTIC_SODA_CAKE, FluidConstants.BUCKET, null);
@@ -490,6 +490,13 @@ public static void registerModFluids()
         );
         FluidStorage.combinedItemApiProvider(Items.GLASS_BOTTLE).register(context ->
             new EmptyItemFluidStorage(context, ModItems.LYE_WATER_BOTTLE, STILL_LYE_WATER, FluidConstants.BOTTLE)
+        );
+
+        FluidStorage.combinedItemApiProvider(ModItems.CONCENTRATED_CAUSTIC_SODA_BOTTLE).register(context ->
+            new FullItemFluidStorage(context, bottle -> ItemVariant.of(Items.GLASS_BOTTLE), FluidVariant.of(STILL_CONCENTRATED_CAUSTIC_SODA), FluidConstants.BOTTLE)
+        );
+        FluidStorage.combinedItemApiProvider(Items.GLASS_BOTTLE).register(context ->
+            new EmptyItemFluidStorage(context, ModItems.CONCENTRATED_CAUSTIC_SODA_BOTTLE, STILL_CONCENTRATED_CAUSTIC_SODA, FluidConstants.BOTTLE)
         );
     }
 }

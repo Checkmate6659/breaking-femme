@@ -3,6 +3,7 @@ package com.breakingfemme.cauldron;
 import java.util.Map;
 
 import com.breakingfemme.BreakingFemme;
+import com.breakingfemme.ThermalUtil;
 import com.breakingfemme.fluid.ModFluids;
 
 import net.minecraft.block.AbstractBlock;
@@ -14,9 +15,13 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 
 public class CausticSodaSolutionCauldronBlock extends AbstractCauldronBlock {
@@ -65,15 +70,12 @@ public class CausticSodaSolutionCauldronBlock extends AbstractCauldronBlock {
         }
     }
 
-    //sth that *may be* done in the future: extracting the crystals this way. but doesnt seem necessary.
-    /*protected void onFireCollision(BlockState state, World world, BlockPos pos) {
-        BlockState blockState = Blocks.CAULDRON.getDefaultState();
-        world.setBlockState(pos, blockState);
-        world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, Emitter.of(blockState));
-        //world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5f, pos.getY() + 0.125f, pos.getZ() + 0.5f, new ItemStack(ModItems.CAUSTIC_SODA)));
-    }*/
-    
-    //in case we decide to do that, also impl it by evaporation.
+    //boil off water to concentrate the solution :3
+    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+        //can only boil if the block is hot (or if its in the nether, free heating lol)
+        if(world.getDimension().ultrawarm() || ThermalUtil.isBlockHot(world, pos.down()))
+            world.setBlockState(pos, ModFluids.CONCENTRATED_CAUSTIC_SODA_CAULDRON.getDefaultState());
+    }
 
     public boolean isFull(BlockState state) {
         return true;
@@ -81,5 +83,17 @@ public class CausticSodaSolutionCauldronBlock extends AbstractCauldronBlock {
 
     public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
         return 3;
+    }
+
+    //doing boiling effect when its hot
+    public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
+        if (world.getDimension().ultrawarm() || ThermalUtil.isBlockHot(world, pos.down())) {
+            if(random.nextInt(3) == 0)
+                world.playSound((double)pos.getX() + 0.5, (double)pos.getY() + 0.5, (double)pos.getZ() + 0.75, SoundEvents.BLOCK_BUBBLE_COLUMN_UPWARDS_AMBIENT, SoundCategory.BLOCKS, 192F + random.nextFloat() * 128F, random.nextFloat() * 0.7F + 0.6F, false);
+
+            for(int i = 0; i < random.nextInt(1) + 1; ++i) {
+                world.addParticle(ParticleTypes.BUBBLE_POP, (double)pos.getX() + 0.25F + random.nextFloat() * 0.5F, (double)pos.getY() + 0.9375, (double)pos.getZ() + 0.25F + random.nextFloat() * 0.5F, 0, 0.015625, 0);
+            }
+        }
     }
 }
