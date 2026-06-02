@@ -34,6 +34,7 @@ import com.breakingfemme.cauldron.EstroneRecrystallizationCauldronBlock;
 import com.breakingfemme.cauldron.LyeWaterCauldronBlock;
 import com.breakingfemme.cauldron.CausticSodaSolutionCauldronBlock;
 import com.breakingfemme.cauldron.CausticSodaCakeCauldronBlock;
+import com.breakingfemme.cauldron.ConcentratedCausticSodaCauldronBlock;
 //AUTOGENERATION LABEL DO NOT TOUCH
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -183,6 +184,12 @@ public class ModFluids {
     public static Block CAUSTIC_SODA_CAKE_FLUID_BLOCK;
     public static Item CAUSTIC_SODA_CAKE_BUCKET;
     public static Block CAUSTIC_SODA_CAKE_CAULDRON;
+    
+    public static FlowableFluid STILL_CONCENTRATED_CAUSTIC_SODA;
+    public static FlowableFluid FLOWING_CONCENTRATED_CAUSTIC_SODA;
+    public static Block CONCENTRATED_CAUSTIC_SODA_FLUID_BLOCK;
+    public static Item CONCENTRATED_CAUSTIC_SODA_BUCKET;
+    public static Block CONCENTRATED_CAUSTIC_SODA_CAULDRON;
     //AUTOGENERATION LABEL DO NOT TOUCH
 
 
@@ -356,6 +363,15 @@ public static void registerModFluids()
         CAUSTIC_SODA_CAKE_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "caustic_soda_cake_bucket"),
             new BucketItem(STILL_CAUSTIC_SODA_CAKE, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
+        STILL_CONCENTRATED_CAUSTIC_SODA = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "concentrated_caustic_soda_solution"),
+            new ConcentratedCausticSodaFluid.Still());
+        FLOWING_CONCENTRATED_CAUSTIC_SODA = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_concentrated_caustic_soda_solution"),
+            new ConcentratedCausticSodaFluid.Flowing());
+        CONCENTRATED_CAUSTIC_SODA_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "concentrated_caustic_soda_solution_block"),
+            new CausticFluidBlock(STILL_CONCENTRATED_CAUSTIC_SODA, FabricBlockSettings.copyOf(Blocks.WATER), 9.5f){});
+        CONCENTRATED_CAUSTIC_SODA_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "concentrated_caustic_soda_solution_bucket"),
+            new BucketItem(STILL_CONCENTRATED_CAUSTIC_SODA, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
+
         //AUTOGENERATION LABEL DO NOT TOUCH
 
 
@@ -407,6 +423,8 @@ public static void registerModFluids()
         CauldronFluidContent.registerCauldron(CAUSTIC_SODA_SOLUTION_CAULDRON, STILL_CAUSTIC_SODA_SOLUTION, FluidConstants.BUCKET, null);
         CAUSTIC_SODA_CAKE_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "caustic_soda_cake_cauldron"), new CausticSodaCakeCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
         CauldronFluidContent.registerCauldron(CAUSTIC_SODA_CAKE_CAULDRON, STILL_CAUSTIC_SODA_CAKE, FluidConstants.BUCKET, null);
+        CONCENTRATED_CAUSTIC_SODA_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "concentrated_caustic_soda_solution_cauldron"), new ConcentratedCausticSodaCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
+        CauldronFluidContent.registerCauldron(CONCENTRATED_CAUSTIC_SODA_CAULDRON, STILL_CONCENTRATED_CAUSTIC_SODA, FluidConstants.BUCKET, null);
         //AUTOGENERATION LABEL DO NOT TOUCH
 
 

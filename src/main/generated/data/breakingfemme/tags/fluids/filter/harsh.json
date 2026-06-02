@@ -1,11 +1,15 @@
 {
   "replace": false,
   "values": [
+    "minecraft:lava",
+    "minecraft:flowing_lava",
     "breakingfemme:sludge",
     "breakingfemme:flowing_sludge",
     "breakingfemme:lye_water",
     "breakingfemme:flowing_lye_water",
     "breakingfemme:caustic_soda_solution",
-    "breakingfemme:flowing_caustic_soda_solution"
+    "breakingfemme:flowing_caustic_soda_solution",
+    "breakingfemme:concentrated_caustic_soda_solution",
+    "breakingfemme:flowing_concentrated_caustic_soda_solution"
   ]
 }

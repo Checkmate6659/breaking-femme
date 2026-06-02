@@ -118,6 +118,7 @@
     "item.breakingfemme.lye_water_bucket": "Soda Lye Water Bucket",
     "item.breakingfemme.lye_water_bottle": "Soda Lye Water Bottle",
     "item.breakingfemme.caustic_soda_solution_bucket": "Caustic Soda Solution Bucket",
+    "item.breakingfemme.concentrated_caustic_soda_solution_bucket": "Concentrated Caustic Soda Solution Bucket",
     "item.breakingfemme.caustic_soda_cake_bucket": "Caustic Soda Cake Bucket",
 
     "block.breakingfemme.milk_separator": "Milk Separator",
@@ -162,6 +163,7 @@
     "block.breakingfemme.lye_water_block": "Soda Lye Water",
     "block.breakingfemme.estrone_oil_solution_block": "Estrone Oil Solution",
     "block.breakingfemme.caustic_soda_solution_block": "Caustic Soda Solution",
+    "block.breakingfemme.concentrated_caustic_soda_solution_block": "Concentrated Caustic Soda Solution",
     "block.breakingfemme.caustic_soda_cake_block": "Caustic Soda Cake",
 
     "sound.breakingfemme.grinding": "Grinding",
