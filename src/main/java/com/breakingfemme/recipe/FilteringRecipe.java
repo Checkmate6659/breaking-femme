@@ -29,9 +29,9 @@ import net.minecraft.world.World;
 public class FilteringRecipe implements Recipe<FunnelBlockEntity> {
     //if we want to make grinding take variable time/hunger, need to do it here
     private final Identifier id;
-    private final FluidVariant input, output;
+    public final FluidVariant input, output;
     public final int inputq, outputq;
-    private final Item item_output; //we can change the type to make loot tables; could look at Block#getDroppedStacks
+    public final Item item_output; //we can change the type to make loot tables; could look at Block#getDroppedStacks
     private final int droplets_per_filter, droplets_per_item; //TODO: turn those into longs
 
     public FilteringRecipe(Identifier id, FluidVariant input, int input_quantity, FluidVariant output, int output_quantity, Item item_output, int droplets_per_filter, int droplets_per_item)

@@ -184,6 +184,19 @@ public class BreakingFemme implements ModInitializer {
 
 
 	//======================== UTILITY FUNCTIONS ========================
+	public static long gcd(long a, long b)
+	{
+		//yes. there is in fact no default gcd function in java. so i need to do it myself.
+		long t;
+		while(b != 0)
+		{
+			t = b;
+			b = a % b;
+			a = t;
+		}
+		return a;
+	}
+
 	public static List<BlockPos> getNeighbors(BlockPos pos)
 	{
 		return List.of(pos.up(), pos.down(), pos.north(), pos.east(), pos.south(), pos.west());

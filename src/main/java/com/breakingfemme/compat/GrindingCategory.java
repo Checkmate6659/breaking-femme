@@ -64,6 +64,6 @@ public class GrindingCategory implements DisplayCategory<BasicDisplay> {
     @Override
     public int getDisplayHeight()
     {
-        return 90; //TODO: adjust!
+        return 98; //height (82) + 16
     }
 }
