@@ -2,6 +2,18 @@
   "replace": false,
   "values": [
     "minecraft:paper",
+    {
+      "id": "create:filter",
+      "required": false
+    },
+    {
+      "id": "create:attribute_filter",
+      "required": false
+    },
+    {
+      "id": "create:package_filter",
+      "required": false
+    },
     "#breakingfemme:resistant_filter"
   ]
 }

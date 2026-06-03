@@ -141,16 +141,17 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
         getOrCreateTagBuilder(VEGETABLE3).add(ModItems.CHILI_PEPPER);
         getOrCreateTagBuilder(VEGETABLE3).add(ModItems.DRIED_CHILI_PEPPER);
         getOrCreateTagBuilder(VEGETABLE3).add(ModItems.GROUND_CHILI_PEPPER);
+        getOrCreateTagBuilder(SAWDUST1).add(ModItems.SAWDUST);
+        getOrCreateTagBuilder(SAWDUST2).add(ModItems.SAWDUST);
+
         getOrCreateTagBuilder(FILTER).add(Items.PAPER);
-        //TODO: add create list filters into filter paper tag!
-        //getOrCreateTagBuilder(FILTER).add(Identifier.of("create", "filter"));
-        //getOrCreateTagBuilder(FILTER).add(Identifier.of("create", "attribute_filter"));
-        //getOrCreateTagBuilder(FILTER).add(Identifier.of("create", "package_filter"));
+        //add create list filters into filter tag; using addOptional for when the mod isn't a dependency or sth
+        getOrCreateTagBuilder(FILTER).addOptional(Identifier.of("create", "filter"));
+        getOrCreateTagBuilder(FILTER).addOptional(Identifier.of("create", "attribute_filter"));
+        getOrCreateTagBuilder(FILTER).addOptional(Identifier.of("create", "package_filter"));
         //ceramic filter
         getOrCreateTagBuilder(RESISTANT_FILTER).add(ModItems.CERAMIC_FILTER);
         getOrCreateTagBuilder(FILTER).addTag(RESISTANT_FILTER); //need to add this after resistant_filter has been created
-        getOrCreateTagBuilder(SAWDUST1).add(ModItems.SAWDUST);
-        getOrCreateTagBuilder(SAWDUST2).add(ModItems.SAWDUST);
 
         //blaze burner fuels
         getOrCreateTagBuilder(BLAZE_BURNER_FUEL).addTag(BLAZE_BURNER_FUEL_CUSTOM); //for custom duration fuels
@@ -170,7 +171,7 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
         getOrCreateTagBuilder(ALREADY_FLEXIBLE).add(Items.LEATHER_CHESTPLATE);
         getOrCreateTagBuilder(ALREADY_FLEXIBLE).add(Items.CHAINMAIL_CHESTPLATE);
         getOrCreateTagBuilder(FREE_CHEST).add(Items.ELYTRA);
-        //getOrCreateTagBuilder(FREE_CHEST).add(Identifier.of("sophisticatedbackpacks", "backpack")); //no. this doesnt allow me to add stuff without having the mod as a compile time dependency.
-        //TODO: add estrogen's rosy maple elytra (again if i can do it)
+        getOrCreateTagBuilder(FREE_CHEST).addOptional(Identifier.of("sophisticatedbackpacks", "backpack"));
+        getOrCreateTagBuilder(FREE_CHEST).addOptional(Identifier.of("estrogen", "moth_elytra"));
     }
 }
