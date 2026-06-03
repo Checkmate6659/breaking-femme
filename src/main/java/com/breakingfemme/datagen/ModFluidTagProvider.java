@@ -78,6 +78,8 @@ public class ModFluidTagProvider extends FabricTagProvider.FluidTagProvider {
         getOrCreateTagBuilder(HARSH_ON_FILTERS).add(ModFluids.FLOWING_LYE_WATER);
         getOrCreateTagBuilder(HARSH_ON_FILTERS).add(ModFluids.STILL_CAUSTIC_SODA_SOLUTION);
         getOrCreateTagBuilder(HARSH_ON_FILTERS).add(ModFluids.FLOWING_CAUSTIC_SODA_SOLUTION);
+        getOrCreateTagBuilder(HARSH_ON_FILTERS).add(ModFluids.STILL_CAUSTIC_SODA_CAKE);
+        getOrCreateTagBuilder(HARSH_ON_FILTERS).add(ModFluids.FLOWING_CAUSTIC_SODA_CAKE);
         getOrCreateTagBuilder(HARSH_ON_FILTERS).add(ModFluids.STILL_CONCENTRATED_CAUSTIC_SODA);
         getOrCreateTagBuilder(HARSH_ON_FILTERS).add(ModFluids.FLOWING_CONCENTRATED_CAUSTIC_SODA);
     }
