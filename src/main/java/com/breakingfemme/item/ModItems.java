@@ -183,6 +183,7 @@ public class ModItems {
             entries.add(ModFluids.CAUSTIC_SODA_CAKE_BUCKET);
             entries.add(ModFluids.CAUSTIC_SODA_SOLUTION_BUCKET);
             entries.add(ModFluids.CONCENTRATED_CAUSTIC_SODA_BUCKET);
+            entries.add(CONCENTRATED_CAUSTIC_SODA_BOTTLE);
             entries.add(ModBlocks.LIMESTONE_CHUNKS);
             entries.add(ModBlocks.QUICKLIME);
             entries.add(ModBlocks.SLAKED_LIME);
@@ -211,6 +212,7 @@ public class ModItems {
             entries.add(DRIED_CHILI_PEPPER);
             entries.add(GROUND_CHILI_PEPPER);
 
+            //TODO: add other estrogens
             entries.add(EGEL_BOTTLE);
 
             entries.add(ACT_RIGHT_MUSIC_DISC);
