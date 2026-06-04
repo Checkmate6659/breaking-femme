@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "iron_blaze_powder_blend",
+  "ingredients": [
+    {
+      "tag": "c:ingots/iron"
+    },
+    {
+      "item": "minecraft:blaze_powder"
+    }
+  ],
+  "result": {
+    "count": 2,
+    "item": "breakingfemme:iron_blaze_powder_blend"
+  }
+}

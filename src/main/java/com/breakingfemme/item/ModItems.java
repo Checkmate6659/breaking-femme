@@ -35,14 +35,20 @@ public class ModItems {
     public static final Item SOYBEANS = registerItem("soybeans", new AliasedBlockItem(ModBlocks.SOY_CROP,
         new FabricItemSettings().food(new FoodComponent.Builder().hunger(2).saturationModifier(0.25f).build())));
 
-    //Copper, Nickel, Ruby
+    //Iron, Copper, Nickel, Ruby
     public static final Item RAW_NICKEL = registerItem("raw_nickel", new Item(new FabricItemSettings()));
     public static final Item NICKEL_INGOT = registerItem("nickel_ingot", new Item(new FabricItemSettings()));
     public static final Item RUBY = registerItem("ruby", new Item(new FabricItemSettings()));
+    public static final Item PULVERIZED_IRON = registerItem("pulverized_iron", new Item(new FabricItemSettings()));
     public static final Item PULVERIZED_COPPER = registerItem("pulverized_copper", new Item(new FabricItemSettings()));
     public static final Item PULVERIZED_NICKEL = registerItem("pulverized_nickel", new Item(new FabricItemSettings()));
     public static final Item COPPER_SULFATE = registerItem("copper_sulfate", new CopperSulfateItem(new FabricItemSettings()));
     public static final Item NICKEL_SULFATE = registerItem("nickel_sulfate", new Item(new FabricItemSettings()));
+
+    //Sulfuric acid and hydrochloric acid stuff
+    public static final Item IRON_BP_BLEND = registerItem("iron_blaze_powder_blend", new Item(new FabricItemSettings()));
+    public static final Item IRON_SULFIDE = registerItem("iron_sulfide", new Item(new FabricItemSettings()));
+    public static final Item ROCK_SALT = registerItem("rock_salt", new Item(new FabricItemSettings()));
 
     //Aluminum and Raney nickel stuff
     public static final Item ALUMINUM_SCRAP = registerItem("aluminum_scrap", new Item(new FabricItemSettings()));
@@ -137,10 +143,16 @@ public class ModItems {
             entries.add(NI_AL_INGOT);
             entries.add(PULVERIZED_NI_AL);
             entries.add(RANEY_NICKEL);
+            entries.add(PULVERIZED_IRON);
+            entries.add(IRON_BP_BLEND);
+            entries.add(IRON_SULFIDE);
+            //TODO: sulfuric acid
             entries.add(COPPER_SULFATE);
             entries.add(NICKEL_SULFATE);
             entries.add(ModFluids.COPPER_SULFATE_BUCKET);
             entries.add(ModFluids.NICKEL_SULFATE_BUCKET);
+            entries.add(ROCK_SALT);
+            //TODO: hydrochloric acid
             entries.add(FLOUR);
             entries.add(YEAST);
             entries.add(DOUGH);

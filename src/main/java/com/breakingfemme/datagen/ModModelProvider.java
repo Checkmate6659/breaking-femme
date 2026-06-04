@@ -50,6 +50,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.RUBY, Models.GENERATED);
         itemModelGenerator.register(ModItems.RAW_NICKEL, Models.GENERATED);
         itemModelGenerator.register(ModItems.NICKEL_INGOT, Models.GENERATED);
+        itemModelGenerator.register(ModItems.PULVERIZED_IRON, Models.GENERATED);
         itemModelGenerator.register(ModItems.PULVERIZED_COPPER, Models.GENERATED);
         itemModelGenerator.register(ModItems.PULVERIZED_NICKEL, Models.GENERATED);
         itemModelGenerator.register(ModItems.PULVERIZED_ALUMINUM, Models.GENERATED);
@@ -74,6 +75,9 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.COAL_OIL_BOTTLE, Models.GENERATED);
         itemModelGenerator.register(ModItems.ANDROSTADIENEDIONE_BOTTLE, Models.GENERATED);
         itemModelGenerator.register(ModItems.ANDROSTADIENEDIONE_OIL_BOTTLE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.IRON_BP_BLEND, Models.GENERATED);
+        itemModelGenerator.register(ModItems.IRON_SULFIDE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.ROCK_SALT, Models.GENERATED);
         itemModelGenerator.register(ModItems.INGOT_MOLD, Models.GENERATED);
         itemModelGenerator.register(ModItems.SKIMMED_MILK_BUCKET, Models.GENERATED);
         itemModelGenerator.register(ModItems.MILKGOT_MOLD, Models.GENERATED);

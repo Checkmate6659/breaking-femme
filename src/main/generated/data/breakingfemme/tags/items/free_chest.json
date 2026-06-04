@@ -1,6 +1,14 @@
 {
   "replace": false,
   "values": [
-    "minecraft:elytra"
+    "minecraft:elytra",
+    {
+      "id": "sophisticatedbackpacks:backpack",
+      "required": false
+    },
+    {
+      "id": "estrogen:moth_elytra",
+      "required": false
+    }
   ]
 }

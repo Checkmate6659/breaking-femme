@@ -38,6 +38,7 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
     public static final TagKey<Item> COPPER_INGOT = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "ingots/copper"));
     public static final TagKey<Item> NICKEL_INGOT = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "ingots/nickel"));
     public static final TagKey<Item> METAL_PIPE = TagKey.of(RegistryKeys.ITEM, new Identifier(BreakingFemme.MOD_ID, "metal_pipe"));
+    public static final TagKey<Item> PULVERIZED_IRON = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "dusts/iron"));
     public static final TagKey<Item> PULVERIZED_COPPER = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "dusts/copper"));
     public static final TagKey<Item> PULVERIZED_NICKEL = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "dusts/nickel"));
     public static final TagKey<Item> PULVERIZED_ALUMINUM = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "dusts/aluminum"));
@@ -105,6 +106,7 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
         getOrCreateTagBuilder(IRON_INGOT).add(Items.IRON_INGOT);
         getOrCreateTagBuilder(COPPER_INGOT).add(Items.COPPER_INGOT);
         getOrCreateTagBuilder(NICKEL_INGOT).add(ModItems.NICKEL_INGOT);
+        getOrCreateTagBuilder(PULVERIZED_IRON).add(ModItems.PULVERIZED_IRON);
         getOrCreateTagBuilder(PULVERIZED_COPPER).add(ModItems.PULVERIZED_COPPER);
         getOrCreateTagBuilder(PULVERIZED_NICKEL).add(ModItems.PULVERIZED_NICKEL);
         getOrCreateTagBuilder(PULVERIZED_ALUMINUM).add(ModItems.PULVERIZED_ALUMINUM);
