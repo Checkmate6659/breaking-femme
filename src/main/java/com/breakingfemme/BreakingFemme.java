@@ -31,6 +31,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.BiomeTags;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -60,6 +61,7 @@ public class BreakingFemme implements ModInitializer {
 	//register nickel and ruby ore generation
 	public static final RegistryKey<PlacedFeature> NICKEL_ORE_PLACED_FEATURE = RegistryKey.of(RegistryKeys.PLACED_FEATURE, Identifier.of(MOD_ID, "ore_nickel"));
 	public static final RegistryKey<PlacedFeature> RUBY_ORE_PLACED_FEATURE = RegistryKey.of(RegistryKeys.PLACED_FEATURE, Identifier.of(MOD_ID, "ore_ruby"));
+	public static final RegistryKey<PlacedFeature> ROCK_SALT_PLACED_FEATURE = RegistryKey.of(RegistryKeys.PLACED_FEATURE, Identifier.of(MOD_ID, "ore_rock_salt"));
 
 	//register damage types
 	public static final RegistryKey<DamageType> NOVIKOV = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, new Identifier(BreakingFemme.MOD_ID, "novikov"));
@@ -144,9 +146,10 @@ public class BreakingFemme implements ModInitializer {
 			));
 		});
 
-		//generate nickel and rubies in the overworld
+		//generate nickel, rubies and rock salt in the overworld
 		BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES, NICKEL_ORE_PLACED_FEATURE);
 		BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES, RUBY_ORE_PLACED_FEATURE);
+		BiomeModifications.addFeature(BiomeSelectors.tag(BiomeTags.IS_OCEAN), GenerationStep.Feature.UNDERGROUND_ORES, ROCK_SALT_PLACED_FEATURE);
 
 		//add (rare) nickel ingot drop to drowned, (8 times) more common when doing it by hand
 		Identifier LOOT_TABLE_ID = EntityType.DROWNED.getLootTableId();

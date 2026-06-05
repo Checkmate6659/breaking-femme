@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:ore",
+    "config": {
+      "targets": [
+        {
+          "target": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "state": {
+            "Name": "breakingfemme:rock_salt_block"
+          }
+        }
+      ],
+      "size": 16,
+      "discard_chance_on_air_exposure": 1
+    }
+}
