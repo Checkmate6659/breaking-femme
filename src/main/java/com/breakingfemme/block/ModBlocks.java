@@ -22,6 +22,7 @@ public class ModBlocks {
     public static final Block DEEPSLATE_RUBY_ORE = registerBlock("deepslate_ruby_ore", new Block(FabricBlockSettings.copyOf(Blocks.DEEPSLATE_EMERALD_ORE)));
     public static final Block RUBY_BLOCK = registerBlock("ruby_block", new Block(FabricBlockSettings.copyOf(Blocks.EMERALD_BLOCK)));
     public static final Block PARTIALLY_REDUCED_RUBY_BLOCK = registerBlock("partially_reduced_ruby_block", new Block(FabricBlockSettings.copyOf(Blocks.EMERALD_BLOCK)));
+    public static final Block ROCK_SALT_BLOCK = registerBlock("rock_salt_block", new Block(FabricBlockSettings.copyOf(Blocks.CALCITE)));
     public static final Block SOY_CROP = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "soy"), new SoyCropBlock(FabricBlockSettings.copyOf(Blocks.WHEAT)));
     public static final Block CHILI_CROP = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "chili_pepper"), new ChiliCropBlock(FabricBlockSettings.copyOf(Blocks.WHEAT)));
     public static final Block MILK_SEPARATOR = registerBlock("milk_separator", new MilkSeparatorBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).pistonBehavior(PistonBehavior.BLOCK).ticksRandomly()));

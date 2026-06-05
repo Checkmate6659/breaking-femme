@@ -89,6 +89,9 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(ORES_STONE).add(ModBlocks.RUBY_ORE);
         getOrCreateTagBuilder(ORES_DEEPSLATE).add(ModBlocks.DEEPSLATE_RUBY_ORE);
 
+        //rock salt block
+        getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModBlocks.ROCK_SALT_BLOCK);
+
         //all the cauldrons, vanilla tags
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModFluids.MACERATING_SOY_CAULDRON);
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModFluids.REDOX_REACTION_CAULDRON);

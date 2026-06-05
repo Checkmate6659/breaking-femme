@@ -35,6 +35,7 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.LIMESTONE_CHUNKS);
         blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.QUICKLIME);
         blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.SLAKED_LIME);
+        blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.ROCK_SALT_BLOCK);
 
         //registering fermenter panels by hand, because they are unlike any vanilla blocks
         //cauldrons need to be handmade apparently

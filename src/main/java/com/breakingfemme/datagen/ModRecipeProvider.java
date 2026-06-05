@@ -39,6 +39,11 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         offerBlasting(exporter, ImmutableList.of(ModBlocks.RUBY_ORE, ModBlocks.DEEPSLATE_RUBY_ORE), RecipeCategory.MISC, ModItems.RUBY, 1.0f, 100, "ruby_blasting");
         offerReversibleCompactingRecipes(exporter, RecipeCategory.MISC, ModItems.RUBY, RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUBY_BLOCK);
 
+        //rock salt
+        //TODO: use a tag so that salts from other mods can be converted to rock salt this way
+        //or better yet make a util function to map a tag to a cauldron behavior
+        offerReversibleCompactingRecipes(exporter, RecipeCategory.MISC, ModItems.ROCK_SALT, RecipeCategory.BUILDING_BLOCKS, ModBlocks.ROCK_SALT_BLOCK);
+
         //nickel-aluminum alloy stuff
         ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.NI_AL_BLEND, 2)
             .input(ModItemTagProvider.PULVERIZED_NICKEL)

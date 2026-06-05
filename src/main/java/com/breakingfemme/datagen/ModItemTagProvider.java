@@ -42,6 +42,7 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
     public static final TagKey<Item> PULVERIZED_COPPER = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "dusts/copper"));
     public static final TagKey<Item> PULVERIZED_NICKEL = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "dusts/nickel"));
     public static final TagKey<Item> PULVERIZED_ALUMINUM = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "dusts/aluminum"));
+    public static final TagKey<Item> SALT = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "dusts/salt"));
     public static final TagKey<Item> FLOUR = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "flours"));
     public static final TagKey<Item> FLOUR_WHEAT = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "flours/wheat"));
     public static final TagKey<Item> YEAST = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "yeast")); //non-conventional
@@ -125,6 +126,10 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
         getOrCreateTagBuilder(CROPS).add(ModItems.SOYBEANS);
         getOrCreateTagBuilder(CROPS).add(ModItems.CHILI_PEPPER);
         getOrCreateTagBuilder(FOODS).add(ModItems.SOYBEANS);
+        getOrCreateTagBuilder(SALT).add(ModItems.ROCK_SALT);
+        getOrCreateTagBuilder(FOODS).add(ModItems.CHILI_PEPPER);
+        getOrCreateTagBuilder(FOODS).add(ModItems.DRIED_CHILI_PEPPER);
+        getOrCreateTagBuilder(FOODS).add(ModItems.GROUND_CHILI_PEPPER);
         getOrCreateTagBuilder(FRUIT1).add(ModItems.CHILI_PEPPER); //in cooking peppers are referred to as vegetables, but botanically theyre fruits
         getOrCreateTagBuilder(FRUIT1).add(ModItems.DRIED_CHILI_PEPPER);
         getOrCreateTagBuilder(FRUIT1).add(ModItems.GROUND_CHILI_PEPPER);

@@ -72,6 +72,7 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.LIMESTONE_CHUNKS);
         addDrop(ModBlocks.QUICKLIME);
         addDrop(ModBlocks.SLAKED_LIME);
+        addDrop(ModBlocks.ROCK_SALT_BLOCK);
 
         //fermenter
         addDrop(ModBlocks.FERMENTER_PANEL);
@@ -82,7 +83,7 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.FERMENTER_CONTROLLER);
         addDrop(ModBlocks.FERMENTER_AIRLOCK, dropsWithSilkTouch(ModBlocks.FERMENTER_AIRLOCK));
 
-        //distiller
+        //distiller: drop gravel inside distiller column... if there is any.
         BlockStatePropertyLootCondition.Builder distiller_gravel_condition = BlockStatePropertyLootCondition.builder(ModBlocks.DISTILLER_COLUMN)
             .properties(StatePredicate.Builder.create().exactMatch(DistillerColumnBlock.FULL, true));
         addDrop(ModBlocks.DISTILLER_COLUMN, applyExplosionDecay(ModBlocks.DISTILLER_COLUMN, LootTable.builder()

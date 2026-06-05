@@ -152,6 +152,7 @@ public class ModItems {
             entries.add(ModFluids.COPPER_SULFATE_BUCKET);
             entries.add(ModFluids.NICKEL_SULFATE_BUCKET);
             entries.add(ROCK_SALT);
+            entries.add(ModBlocks.ROCK_SALT_BLOCK);
             //TODO: hydrochloric acid
             entries.add(FLOUR);
             entries.add(YEAST);

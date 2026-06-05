@@ -4,7 +4,7 @@
   "group": "iron_blaze_powder_blend",
   "ingredients": [
     {
-      "tag": "c:ingots/iron"
+      "tag": "c:dusts/iron"
     },
     {
       "item": "minecraft:blaze_powder"
