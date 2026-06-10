@@ -116,6 +116,22 @@ public class ConcentratedCausticSodaCauldronBlock extends AbstractCauldronBlock 
             }
             return ActionResult.success(world.isClient);
         });
+
+        //add NiAl alloy dust (TODO: later we will need to filter the suspension and shit, but thats for later)
+        //for now it's just replacing 1 NiAl dust with 1 Raney nickel, exposed to air, in the player's bare hand. yeah realism!
+        //but i mean gregtech has the player hold asbestos in their bare hands too. at least that stuff's not supposed to catch fire when exposed to air.
+        BEHAVIOR.put(ModItems.PULVERIZED_NI_AL, (state, world, pos, player, hand, stack) -> {
+            if (!world.isClient) {
+                Item item = stack.getItem();
+                player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, new ItemStack(ModItems.RANEY_NICKEL)));
+                player.incrementStat(Stats.USE_CAULDRON);
+                player.incrementStat(Stats.USED.getOrCreateStat(item));
+                decrementFluidLevel(state, world, pos);
+                world.playSound((PlayerEntity)null, pos, SoundEvents.ENTITY_GENERIC_SPLASH, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                world.emitGameEvent((Entity)null, GameEvent.FLUID_PLACE, pos);
+            }
+            return ActionResult.success(world.isClient);
+        });
     }
 
     public ConcentratedCausticSodaCauldronBlock(AbstractBlock.Settings settings) {
