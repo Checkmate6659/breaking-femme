@@ -127,6 +127,7 @@
     "item.breakingfemme.caustic_soda_cake_bucket": "Caustic Soda Cake Bucket",
     "item.breakingfemme.sulfuric_acid_bucket": "Sulfuric Acid Bucket",
     "item.breakingfemme.impure_dilute_sulfuric_acid_bucket": "Impure Dilute Sulfuric Acid Bucket",
+    "item.breakingfemme.hydrochloric_acid_bucket": "Hydrochloric Acid Bucket",
 
     "block.breakingfemme.milk_separator": "Milk Separator",
     "block.breakingfemme.nickel_ore": "Nickel Ore",
@@ -175,6 +176,7 @@
     "block.breakingfemme.caustic_soda_cake_block": "Caustic Soda Cake",
     "block.breakingfemme.sulfuric_acid_block": "Sulfuric Acid",
     "block.breakingfemme.impure_dilute_sulfuric_acid_block": "Impure Dilute Sulfuric Acid",
+    "block.breakingfemme.hydrochloric_acid_block": "Hydrochloric Acid",
 
     "sound.breakingfemme.grinding": "Grinding",
     "sound.breakingfemme.crank": "Crank turns",

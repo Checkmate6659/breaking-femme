@@ -37,6 +37,7 @@ import com.breakingfemme.cauldron.CausticSodaCakeCauldronBlock;
 import com.breakingfemme.cauldron.ConcentratedCausticSodaCauldronBlock;
 import com.breakingfemme.cauldron.SulfuricAcidCauldronBlock;
 import com.breakingfemme.cauldron.ImpureDiluteSulfuricAcidCauldronBlock;
+import com.breakingfemme.cauldron.HydrochloricAcidCauldronBlock;
 //AUTOGENERATION LABEL DO NOT TOUCH
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -204,6 +205,12 @@ public class ModFluids {
     public static Block IMPURE_DILUTE_SULFURIC_ACID_FLUID_BLOCK;
     public static Item IMPURE_DILUTE_SULFURIC_ACID_BUCKET;
     public static Block IMPURE_DILUTE_SULFURIC_ACID_CAULDRON;
+    
+    public static FlowableFluid STILL_HYDROCHLORIC_ACID;
+    public static FlowableFluid FLOWING_HYDROCHLORIC_ACID;
+    public static Block HYDROCHLORIC_ACID_FLUID_BLOCK;
+    public static Item HYDROCHLORIC_ACID_BUCKET;
+    public static Block HYDROCHLORIC_ACID_CAULDRON;
     //AUTOGENERATION LABEL DO NOT TOUCH
 
 
@@ -404,6 +411,15 @@ public static void registerModFluids()
         IMPURE_DILUTE_SULFURIC_ACID_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "impure_dilute_sulfuric_acid_bucket"),
             new BucketItem(STILL_IMPURE_DILUTE_SULFURIC_ACID, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
+        STILL_HYDROCHLORIC_ACID = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "hydrochloric_acid"),
+            new HydrochloricAcidFluid.Still());
+        FLOWING_HYDROCHLORIC_ACID = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_hydrochloric_acid"),
+            new HydrochloricAcidFluid.Flowing());
+        HYDROCHLORIC_ACID_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "hydrochloric_acid_block"),
+            new CorrosiveFluidBlock(STILL_HYDROCHLORIC_ACID, FabricBlockSettings.copyOf(Blocks.WATER), 6.0f){});
+        HYDROCHLORIC_ACID_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "hydrochloric_acid_bucket"),
+            new BucketItem(STILL_HYDROCHLORIC_ACID, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
+
         //AUTOGENERATION LABEL DO NOT TOUCH
 
 
@@ -461,6 +477,8 @@ public static void registerModFluids()
         CauldronFluidContent.registerCauldron(SULFURIC_ACID_CAULDRON, STILL_SULFURIC_ACID, FluidConstants.BUCKET, null);
         IMPURE_DILUTE_SULFURIC_ACID_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "impure_dilute_sulfuric_acid_cauldron"), new ImpureDiluteSulfuricAcidCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
         CauldronFluidContent.registerCauldron(IMPURE_DILUTE_SULFURIC_ACID_CAULDRON, STILL_IMPURE_DILUTE_SULFURIC_ACID, FluidConstants.BUCKET, null);
+        HYDROCHLORIC_ACID_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "hydrochloric_acid_cauldron"), new HydrochloricAcidCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
+        CauldronFluidContent.registerCauldron(HYDROCHLORIC_ACID_CAULDRON, STILL_HYDROCHLORIC_ACID, FluidConstants.BUCKET, null);
         //AUTOGENERATION LABEL DO NOT TOUCH
 
 

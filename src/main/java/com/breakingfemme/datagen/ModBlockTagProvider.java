@@ -120,6 +120,7 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModFluids.CONCENTRATED_CAUSTIC_SODA_CAULDRON);
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModFluids.SULFURIC_ACID_CAULDRON);
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModFluids.IMPURE_DILUTE_SULFURIC_ACID_CAULDRON);
+        getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModFluids.HYDROCHLORIC_ACID_CAULDRON);
         //AUTOGENERATION LABEL DO NOT TOUCH
 
         //fermenter tags

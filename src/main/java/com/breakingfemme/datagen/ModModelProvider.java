@@ -120,6 +120,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModFluids.CONCENTRATED_CAUSTIC_SODA_BUCKET, Models.GENERATED);
         itemModelGenerator.register(ModFluids.SULFURIC_ACID_BUCKET, Models.GENERATED);
         itemModelGenerator.register(ModFluids.IMPURE_DILUTE_SULFURIC_ACID_BUCKET, Models.GENERATED);
+        itemModelGenerator.register(ModFluids.HYDROCHLORIC_ACID_BUCKET, Models.GENERATED);
         //AUTOGENERATION LABEL DO NOT TOUCH
 
 

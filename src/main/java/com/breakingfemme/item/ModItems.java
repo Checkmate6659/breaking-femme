@@ -201,6 +201,7 @@ public class ModItems {
             entries.add(ModBlocks.LIMESTONE_CHUNKS);
             entries.add(ModBlocks.QUICKLIME);
             entries.add(ModBlocks.SLAKED_LIME);
+            entries.add(ModFluids.HYDROCHLORIC_ACID_BUCKET);
             entries.add(PURE_ESTRADIOL_CRYSTALS);
             entries.add(PURE_ESTRADIOL_POWDER);
             entries.add(HORSE_JUICE);
