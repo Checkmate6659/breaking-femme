@@ -9,6 +9,7 @@ import com.breakingfemme.block.TarBlock;
 import com.breakingfemme.item.FlammableBucketItem;
 import com.breakingfemme.item.ModItems;
 import com.breakingfemme.item.SolutionBucketItem;
+import com.simibubi.create.AllFluids;
 import com.breakingfemme.cauldron.SterolSolutionCauldronBlock;
 import com.breakingfemme.cauldron.CopperSulfateCauldronBlock;
 import com.breakingfemme.cauldron.EgelCauldronBlock;
@@ -31,6 +32,7 @@ import com.breakingfemme.cauldron.AndrostadienedioneOilSolutionCauldronBlock;
 import com.breakingfemme.cauldron.CoalOilCauldronBlock;
 import com.breakingfemme.cauldron.EstroneOilSolutionCauldronBlock;
 import com.breakingfemme.cauldron.EstroneRecrystallizationCauldronBlock;
+import com.breakingfemme.cauldron.EstroneReductionCauldronBlock;
 import com.breakingfemme.cauldron.LyeWaterCauldronBlock;
 import com.breakingfemme.cauldron.CausticSodaSolutionCauldronBlock;
 import com.breakingfemme.cauldron.CausticSodaCakeCauldronBlock;
@@ -49,6 +51,7 @@ import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.fluid.base.EmptyItemFluidStorage;
 import net.fabricmc.fabric.api.transfer.v1.fluid.base.FullItemFluidStorage;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FluidBlock;
@@ -71,6 +74,7 @@ public class ModFluids {
     public static Block YEAST_STARTER_CAULDRON;
     public static Block YEAST_CAULDRON;
     public static Block ESTRONE_RECRYSTALLIZATION_CAULDRON;
+    public static Block ESTRONE_REDUCTION_CAULDRON;
     public static Block THICK_POTION_CAULDRON;
     public static Block EGEL_CAULDRON;
 
@@ -432,9 +436,11 @@ public static void registerModFluids()
         YEAST_STARTER_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "yeast_starter_cauldron"), new YeastStarterCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
         YEAST_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "yeast_cauldron"), new YeastCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
         ESTRONE_RECRYSTALLIZATION_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "estrone_recrystallization_cauldron"), new EstroneRecrystallizationCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
-        //TODO: use FabricLoader.getInstance().isModLoaded to bind it to Create mod's "thick potion" fluid
-        THICK_POTION_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "thick_potion_cauldron"), new ThickPotionCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
+        ESTRONE_REDUCTION_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "estrone_reduction_cauldron"), new EstroneReductionCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
         EGEL_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "egel_cauldron"), new EgelCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
+        THICK_POTION_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "thick_potion_cauldron"), new ThickPotionCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
+        //TODO: find a way to make it bind to create's thick potion fluid *variant*. it's NOT a fluid. it's a VARIANT. and that makes it annoying.
+        //that would call for ditching CauldronFluidContent entirely. since it only supports fluids.
 
         //for the fluids that go in cauldrons, instead of cauldron alone
         COPPER_SULFATE_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "copper_sulfate_cauldron"), new CopperSulfateCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));

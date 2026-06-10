@@ -50,6 +50,7 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModFluids.COAL_OIL_CAULDRON, Blocks.CAULDRON);
         addDrop(ModFluids.ESTRONE_OIL_SOLUTION_CAULDRON, Blocks.CAULDRON);
         addDrop(ModFluids.ESTRONE_RECRYSTALLIZATION_CAULDRON, Blocks.CAULDRON);
+        addDrop(ModFluids.ESTRONE_REDUCTION_CAULDRON, Blocks.CAULDRON);
         addDrop(ModFluids.LYE_WATER_CAULDRON, Blocks.CAULDRON);
         addDrop(ModFluids.CAUSTIC_SODA_SOLUTION_CAULDRON, Blocks.CAULDRON);
         addDrop(ModFluids.CAUSTIC_SODA_CAKE_CAULDRON, Blocks.CAULDRON);
