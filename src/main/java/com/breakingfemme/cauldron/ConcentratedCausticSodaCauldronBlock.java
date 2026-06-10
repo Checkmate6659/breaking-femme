@@ -42,7 +42,7 @@ public class ConcentratedCausticSodaCauldronBlock extends AbstractCauldronBlock 
     public static Map<Item, CauldronBehavior> BEHAVIOR = CauldronBehavior.createMap();
     static {
         CauldronBehavior FILL = (state, world, pos, player, hand, stack) -> {
-            return CauldronBehavior.fillCauldron(world, pos, player, hand, stack, ModFluids.CONCENTRATED_CAUSTIC_SODA_CAULDRON.getDefaultState(), SoundEvents.ITEM_BUCKET_EMPTY);
+            return CauldronBehavior.fillCauldron(world, pos, player, hand, stack, ModFluids.CONCENTRATED_CAUSTIC_SODA_CAULDRON.getDefaultState().with(LEVEL, 3), SoundEvents.ITEM_BUCKET_EMPTY);
         };
 
         //vanilla fluids
