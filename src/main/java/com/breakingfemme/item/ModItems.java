@@ -57,7 +57,6 @@ public class ModItems {
     public static final Item NI_AL_INGOT = registerItem("nickel_aluminum_alloy_ingot", new Item(new FabricItemSettings()));
     public static final Item PULVERIZED_NI_AL = registerItem("pulverized_nickel_aluminum_alloy", new Item(new FabricItemSettings()));
     public static final Item RANEY_NICKEL = registerItem("raney_nickel", new Item(new FabricItemSettings()));
-    //TODO: shove pulverized nickel aluminum alloy in caustic soda solution to make raney nickel
 
     //milk processing items
     public static final Item INGOT_MOLD = registerItem("ingot_mold", new Item(new FabricItemSettings()));
@@ -154,7 +153,7 @@ public class ModItems {
             entries.add(ModFluids.NICKEL_SULFATE_BUCKET);
             entries.add(ROCK_SALT);
             entries.add(ModBlocks.ROCK_SALT_BLOCK);
-            //TODO: hydrochloric acid
+            entries.add(ModFluids.HYDROCHLORIC_ACID_BUCKET);
             entries.add(FLOUR);
             entries.add(YEAST);
             entries.add(DOUGH);
@@ -201,7 +200,6 @@ public class ModItems {
             entries.add(ModBlocks.LIMESTONE_CHUNKS);
             entries.add(ModBlocks.QUICKLIME);
             entries.add(ModBlocks.SLAKED_LIME);
-            entries.add(ModFluids.HYDROCHLORIC_ACID_BUCKET);
             entries.add(PURE_ESTRADIOL_CRYSTALS);
             entries.add(PURE_ESTRADIOL_POWDER);
             entries.add(HORSE_JUICE);
