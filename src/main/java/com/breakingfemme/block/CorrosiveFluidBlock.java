@@ -13,10 +13,10 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class CausticFluidBlock extends FluidBlock {
+public class CorrosiveFluidBlock extends FluidBlock {
     final float DAMAGE;
 
-    public CausticFluidBlock(FlowableFluid fluid, AbstractBlock.Settings settings, float damage) {
+    public CorrosiveFluidBlock(FlowableFluid fluid, AbstractBlock.Settings settings, float damage) {
         super(fluid, settings);
         DAMAGE = damage;
     }
@@ -28,7 +28,7 @@ public class CausticFluidBlock extends FluidBlock {
         if(entity.isLiving() && entity.getY() < pos.getY() + height) { //check if touching fluid
             entity.setOnFireFor(10); //10 seconds of fire! (except if fluid has the water tag)
             entity.damage(new DamageSource(
-                world.getRegistryManager().get(RegistryKeys.DAMAGE_TYPE).entryOf(BreakingFemme.SODIUM)), DAMAGE
+                world.getRegistryManager().get(RegistryKeys.DAMAGE_TYPE).entryOf(BreakingFemme.CORROSION)), DAMAGE
             );
         }
 

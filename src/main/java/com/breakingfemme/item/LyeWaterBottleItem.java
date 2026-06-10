@@ -49,7 +49,7 @@ public class LyeWaterBottleItem extends Item {
             player.incrementStat(Stats.USED.getOrCreateStat(this));
 
             //damage player
-            player.damage(new DamageSource(world.getRegistryManager().get(RegistryKeys.DAMAGE_TYPE).entryOf(BreakingFemme.SODIUM)), 4.0f);
+            player.damage(new DamageSource(world.getRegistryManager().get(RegistryKeys.DAMAGE_TYPE).entryOf(BreakingFemme.CORROSION)), 4.0f);
             player.setStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 200, 2), player);
         }
 

@@ -56,7 +56,7 @@ public class CausticSodaSolutionCauldronBlock extends AbstractCauldronBlock {
         if (!world.isClient && this.isEntityTouchingFluid(state, pos, entity)) {
             //caustic fluid => damage entity
             entity.damage(new DamageSource(
-                world.getRegistryManager().get(RegistryKeys.DAMAGE_TYPE).entryOf(BreakingFemme.SODIUM)), 4.0f
+                world.getRegistryManager().get(RegistryKeys.DAMAGE_TYPE).entryOf(BreakingFemme.CORROSION)), 4.0f
             );
             
             //its still water, so do fire stuff. but keep burning.

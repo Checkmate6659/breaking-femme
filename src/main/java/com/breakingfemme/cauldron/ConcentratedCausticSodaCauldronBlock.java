@@ -139,7 +139,7 @@ public class ConcentratedCausticSodaCauldronBlock extends AbstractCauldronBlock 
         if (!world.isClient && this.isEntityTouchingFluid(state, pos, entity)) {
             //caustic fluid => damage entity
             entity.damage(new DamageSource(
-                world.getRegistryManager().get(RegistryKeys.DAMAGE_TYPE).entryOf(BreakingFemme.SODIUM)), 9.5f
+                world.getRegistryManager().get(RegistryKeys.DAMAGE_TYPE).entryOf(BreakingFemme.CORROSION)), 9.5f
             );
         }
     }

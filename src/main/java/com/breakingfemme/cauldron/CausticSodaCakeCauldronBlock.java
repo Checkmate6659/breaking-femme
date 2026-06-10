@@ -63,7 +63,7 @@ public class CausticSodaCakeCauldronBlock extends AbstractCauldronBlock {
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         if (!world.isClient && this.isEntityTouchingFluid(state, pos, entity)) {
             entity.damage(new DamageSource(
-                world.getRegistryManager().get(RegistryKeys.DAMAGE_TYPE).entryOf(BreakingFemme.SODIUM)), 4.5f //intermediate damage + slaked lime damage
+                world.getRegistryManager().get(RegistryKeys.DAMAGE_TYPE).entryOf(BreakingFemme.CORROSION)), 4.5f //intermediate damage + slaked lime damage
             );
         }
     }

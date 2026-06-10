@@ -181,7 +181,7 @@
     "sound.breakingfemme.metal_pipe": "Metal pipe clangs",
     "sound.breakingfemme.filtering": "Filtering",
 
-    "death.attack.breakingfemme.sodium": "%1$s has been sacrificed to the sodium god",
+    "death.attack.breakingfemme.corrosion": "%1$s experienced molecular disassembly",
     "death.attack.breakingfemme.novikov": "%1$s tried to violate the Novikov self-consistency principle",
     "death.attack.breakingfemme.distraction": "%1$s got distracted from her main purpose in this game",
     "death.attack.breakingfemme.headache": "%1$s got overpowered by her hair ache",

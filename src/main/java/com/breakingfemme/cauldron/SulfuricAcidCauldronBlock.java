@@ -96,7 +96,7 @@ public class SulfuricAcidCauldronBlock extends AbstractCauldronBlock {
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         if (!world.isClient && this.isEntityTouchingFluid(state, pos, entity)) {
             entity.damage(new DamageSource(
-                world.getRegistryManager().get(RegistryKeys.DAMAGE_TYPE).entryOf(BreakingFemme.SODIUM)), 16.0f
+                world.getRegistryManager().get(RegistryKeys.DAMAGE_TYPE).entryOf(BreakingFemme.CORROSION)), 16.0f
             );
         }
     }

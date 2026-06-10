@@ -50,7 +50,7 @@ public class ConcentratedCausticSodaBottleItem extends Item {
             player.incrementStat(Stats.USED.getOrCreateStat(this));
 
             //damage player
-            player.damage(new DamageSource(world.getRegistryManager().get(RegistryKeys.DAMAGE_TYPE).entryOf(BreakingFemme.SODIUM)), 16.0f);
+            player.damage(new DamageSource(world.getRegistryManager().get(RegistryKeys.DAMAGE_TYPE).entryOf(BreakingFemme.CORROSION)), 16.0f);
             player.setStatusEffect(new StatusEffectInstance(StatusEffects.WITHER, 200, 4), player);
         }
 

@@ -2,7 +2,7 @@ package com.breakingfemme.fluid;
 
 import com.breakingfemme.BreakingFemme;
 import com.breakingfemme.block.AndrostadienedioneBlock;
-import com.breakingfemme.block.CausticFluidBlock;
+import com.breakingfemme.block.CorrosiveFluidBlock;
 import com.breakingfemme.block.FlammableFluidBlock;
 import com.breakingfemme.block.PoisonousFluidBlock;
 import com.breakingfemme.block.TarBlock;
@@ -355,7 +355,7 @@ public static void registerModFluids()
         FLOWING_LYE_WATER = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_lye_water"),
             new LyeWaterFluid.Flowing());
         LYE_WATER_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "lye_water_block"),
-            new CausticFluidBlock(STILL_LYE_WATER, FabricBlockSettings.copyOf(Blocks.WATER), 2.0f){});
+            new CorrosiveFluidBlock(STILL_LYE_WATER, FabricBlockSettings.copyOf(Blocks.WATER), 2.0f){});
         LYE_WATER_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "lye_water_bucket"),
             new BucketItem(STILL_LYE_WATER, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
@@ -364,7 +364,7 @@ public static void registerModFluids()
         FLOWING_CAUSTIC_SODA_SOLUTION = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_caustic_soda_solution"),
             new CausticSodaSolutionFluid.Flowing());
         CAUSTIC_SODA_SOLUTION_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "caustic_soda_solution_block"),
-            new CausticFluidBlock(STILL_CAUSTIC_SODA_SOLUTION, FabricBlockSettings.copyOf(Blocks.WATER), 4.0f){});
+            new CorrosiveFluidBlock(STILL_CAUSTIC_SODA_SOLUTION, FabricBlockSettings.copyOf(Blocks.WATER), 4.0f){});
         CAUSTIC_SODA_SOLUTION_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "caustic_soda_solution_bucket"),
             new BucketItem(STILL_CAUSTIC_SODA_SOLUTION, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
@@ -373,7 +373,7 @@ public static void registerModFluids()
         FLOWING_CAUSTIC_SODA_CAKE = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_caustic_soda_cake"),
             new CausticSodaCakeFluid.Flowing());
         CAUSTIC_SODA_CAKE_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "caustic_soda_cake_block"),
-            new CausticFluidBlock(STILL_CAUSTIC_SODA_CAKE, FabricBlockSettings.copyOf(Blocks.WATER), 4.5f){});
+            new CorrosiveFluidBlock(STILL_CAUSTIC_SODA_CAKE, FabricBlockSettings.copyOf(Blocks.WATER), 4.5f){});
         CAUSTIC_SODA_CAKE_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "caustic_soda_cake_bucket"),
             new BucketItem(STILL_CAUSTIC_SODA_CAKE, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
@@ -382,7 +382,7 @@ public static void registerModFluids()
         FLOWING_CONCENTRATED_CAUSTIC_SODA = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_concentrated_caustic_soda_solution"),
             new ConcentratedCausticSodaFluid.Flowing());
         CONCENTRATED_CAUSTIC_SODA_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "concentrated_caustic_soda_solution_block"),
-            new CausticFluidBlock(STILL_CONCENTRATED_CAUSTIC_SODA, FabricBlockSettings.copyOf(Blocks.WATER), 9.5f){});
+            new CorrosiveFluidBlock(STILL_CONCENTRATED_CAUSTIC_SODA, FabricBlockSettings.copyOf(Blocks.WATER), 9.5f){});
         CONCENTRATED_CAUSTIC_SODA_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "concentrated_caustic_soda_solution_bucket"),
             new BucketItem(STILL_CONCENTRATED_CAUSTIC_SODA, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
@@ -391,7 +391,7 @@ public static void registerModFluids()
         FLOWING_SULFURIC_ACID = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_sulfuric_acid"),
             new SulfuricAcidFluid.Flowing());
         SULFURIC_ACID_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "sulfuric_acid_block"),
-            new CausticFluidBlock(STILL_SULFURIC_ACID, FabricBlockSettings.copyOf(Blocks.WATER), 16.0f){});
+            new CorrosiveFluidBlock(STILL_SULFURIC_ACID, FabricBlockSettings.copyOf(Blocks.WATER), 16.0f){});
         SULFURIC_ACID_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "sulfuric_acid_bucket"),
             new BucketItem(STILL_SULFURIC_ACID, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
@@ -400,7 +400,7 @@ public static void registerModFluids()
         FLOWING_IMPURE_DILUTE_SULFURIC_ACID = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_impure_dilute_sulfuric_acid"),
             new ImpureDiluteSulfuricAcidFluid.Flowing());
         IMPURE_DILUTE_SULFURIC_ACID_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "impure_dilute_sulfuric_acid_block"),
-            new CausticFluidBlock(STILL_IMPURE_DILUTE_SULFURIC_ACID, FabricBlockSettings.copyOf(Blocks.WATER), 9.0f){});
+            new CorrosiveFluidBlock(STILL_IMPURE_DILUTE_SULFURIC_ACID, FabricBlockSettings.copyOf(Blocks.WATER), 9.0f){});
         IMPURE_DILUTE_SULFURIC_ACID_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "impure_dilute_sulfuric_acid_bucket"),
             new BucketItem(STILL_IMPURE_DILUTE_SULFURIC_ACID, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 

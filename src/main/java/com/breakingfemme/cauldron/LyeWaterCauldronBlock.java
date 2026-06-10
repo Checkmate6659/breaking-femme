@@ -123,7 +123,7 @@ public class LyeWaterCauldronBlock extends AbstractCauldronBlock {
         if (!world.isClient && this.isEntityTouchingFluid(state, pos, entity)) {
             //caustic fluid => damage entity
             entity.damage(new DamageSource(
-                world.getRegistryManager().get(RegistryKeys.DAMAGE_TYPE).entryOf(BreakingFemme.SODIUM)), 2.0f
+                world.getRegistryManager().get(RegistryKeys.DAMAGE_TYPE).entryOf(BreakingFemme.CORROSION)), 2.0f
             );
             
             //its still water, so extinguish if on fire
