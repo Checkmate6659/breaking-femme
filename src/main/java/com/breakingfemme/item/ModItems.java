@@ -146,7 +146,8 @@ public class ModItems {
             entries.add(PULVERIZED_IRON);
             entries.add(IRON_BP_BLEND);
             entries.add(IRON_SULFIDE);
-            //TODO: sulfuric acid
+            entries.add(ModFluids.IMPURE_DILUTE_SULFURIC_ACID_BUCKET);
+            entries.add(ModFluids.SULFURIC_ACID_BUCKET);
             entries.add(COPPER_SULFATE);
             entries.add(NICKEL_SULFATE);
             entries.add(ModFluids.COPPER_SULFATE_BUCKET);

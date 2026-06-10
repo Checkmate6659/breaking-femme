@@ -8,6 +8,10 @@
     "breakingfemme:flowing_caustic_soda_cake",
     "breakingfemme:concentrated_caustic_soda_solution",
     "breakingfemme:flowing_concentrated_caustic_soda_solution",
+    "breakingfemme:sulfuric_acid",
+    "breakingfemme:flowing_sulfuric_acid",
+    "breakingfemme:impure_dilute_sulfuric_acid",
+    "breakingfemme:flowing_impure_dilute_sulfuric_acid",
     "#breakingfemme:flammable"
   ]
 }

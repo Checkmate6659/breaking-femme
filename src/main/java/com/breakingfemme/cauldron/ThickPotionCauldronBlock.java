@@ -59,6 +59,7 @@ public class ThickPotionCauldronBlock extends AbstractCauldronBlock {
         });
 
         //add bottle to empty cauldron (WARNING: now we fucked up the regular water cauldron! so we need to reimpl it here)
+        //TODO: we should get the method that does the original and call it. so that we aren't so incompatible with other mods that change that behavior.
         CauldronBehavior.EMPTY_CAULDRON_BEHAVIOR.put(Items.POTION, (state, world, pos, player, hand, stack) -> {
             Potion potion = PotionUtil.getPotion(stack);
             if(potion != Potions.WATER && potion != Potions.THICK) //we need to handle the regular water cauldron here too! (well fuck)

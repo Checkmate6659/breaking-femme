@@ -35,6 +35,8 @@ import com.breakingfemme.cauldron.LyeWaterCauldronBlock;
 import com.breakingfemme.cauldron.CausticSodaSolutionCauldronBlock;
 import com.breakingfemme.cauldron.CausticSodaCakeCauldronBlock;
 import com.breakingfemme.cauldron.ConcentratedCausticSodaCauldronBlock;
+import com.breakingfemme.cauldron.SulfuricAcidCauldronBlock;
+import com.breakingfemme.cauldron.ImpureDiluteSulfuricAcidCauldronBlock;
 //AUTOGENERATION LABEL DO NOT TOUCH
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -190,6 +192,18 @@ public class ModFluids {
     public static Block CONCENTRATED_CAUSTIC_SODA_FLUID_BLOCK;
     public static Item CONCENTRATED_CAUSTIC_SODA_BUCKET;
     public static Block CONCENTRATED_CAUSTIC_SODA_CAULDRON;
+    
+    public static FlowableFluid STILL_SULFURIC_ACID;
+    public static FlowableFluid FLOWING_SULFURIC_ACID;
+    public static Block SULFURIC_ACID_FLUID_BLOCK;
+    public static Item SULFURIC_ACID_BUCKET;
+    public static Block SULFURIC_ACID_CAULDRON;
+    
+    public static FlowableFluid STILL_IMPURE_DILUTE_SULFURIC_ACID;
+    public static FlowableFluid FLOWING_IMPURE_DILUTE_SULFURIC_ACID;
+    public static Block IMPURE_DILUTE_SULFURIC_ACID_FLUID_BLOCK;
+    public static Item IMPURE_DILUTE_SULFURIC_ACID_BUCKET;
+    public static Block IMPURE_DILUTE_SULFURIC_ACID_CAULDRON;
     //AUTOGENERATION LABEL DO NOT TOUCH
 
 
@@ -372,6 +386,24 @@ public static void registerModFluids()
         CONCENTRATED_CAUSTIC_SODA_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "concentrated_caustic_soda_solution_bucket"),
             new BucketItem(STILL_CONCENTRATED_CAUSTIC_SODA, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
+        STILL_SULFURIC_ACID = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "sulfuric_acid"),
+            new SulfuricAcidFluid.Still());
+        FLOWING_SULFURIC_ACID = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_sulfuric_acid"),
+            new SulfuricAcidFluid.Flowing());
+        SULFURIC_ACID_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "sulfuric_acid_block"),
+            new CausticFluidBlock(STILL_SULFURIC_ACID, FabricBlockSettings.copyOf(Blocks.WATER), 16.0f){});
+        SULFURIC_ACID_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "sulfuric_acid_bucket"),
+            new BucketItem(STILL_SULFURIC_ACID, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
+
+        STILL_IMPURE_DILUTE_SULFURIC_ACID = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "impure_dilute_sulfuric_acid"),
+            new ImpureDiluteSulfuricAcidFluid.Still());
+        FLOWING_IMPURE_DILUTE_SULFURIC_ACID = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_impure_dilute_sulfuric_acid"),
+            new ImpureDiluteSulfuricAcidFluid.Flowing());
+        IMPURE_DILUTE_SULFURIC_ACID_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "impure_dilute_sulfuric_acid_block"),
+            new CausticFluidBlock(STILL_IMPURE_DILUTE_SULFURIC_ACID, FabricBlockSettings.copyOf(Blocks.WATER), 9.0f){});
+        IMPURE_DILUTE_SULFURIC_ACID_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "impure_dilute_sulfuric_acid_bucket"),
+            new BucketItem(STILL_IMPURE_DILUTE_SULFURIC_ACID, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
+
         //AUTOGENERATION LABEL DO NOT TOUCH
 
 
@@ -425,6 +457,10 @@ public static void registerModFluids()
         CauldronFluidContent.registerCauldron(CAUSTIC_SODA_CAKE_CAULDRON, STILL_CAUSTIC_SODA_CAKE, FluidConstants.BUCKET, null);
         CONCENTRATED_CAUSTIC_SODA_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "concentrated_caustic_soda_solution_cauldron"), new ConcentratedCausticSodaCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
         CauldronFluidContent.registerCauldron(CONCENTRATED_CAUSTIC_SODA_CAULDRON, STILL_CONCENTRATED_CAUSTIC_SODA, FluidConstants.BOTTLE, ConcentratedCausticSodaCauldronBlock.LEVEL);
+        SULFURIC_ACID_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "sulfuric_acid_cauldron"), new SulfuricAcidCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
+        CauldronFluidContent.registerCauldron(SULFURIC_ACID_CAULDRON, STILL_SULFURIC_ACID, FluidConstants.BUCKET, null);
+        IMPURE_DILUTE_SULFURIC_ACID_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "impure_dilute_sulfuric_acid_cauldron"), new ImpureDiluteSulfuricAcidCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
+        CauldronFluidContent.registerCauldron(IMPURE_DILUTE_SULFURIC_ACID_CAULDRON, STILL_IMPURE_DILUTE_SULFURIC_ACID, FluidConstants.BUCKET, null);
         //AUTOGENERATION LABEL DO NOT TOUCH
 
 

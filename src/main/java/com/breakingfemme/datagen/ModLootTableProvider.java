@@ -54,6 +54,8 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModFluids.CAUSTIC_SODA_SOLUTION_CAULDRON, Blocks.CAULDRON);
         addDrop(ModFluids.CAUSTIC_SODA_CAKE_CAULDRON, Blocks.CAULDRON);
         addDrop(ModFluids.CONCENTRATED_CAUSTIC_SODA_CAULDRON, Blocks.CAULDRON);
+        addDrop(ModFluids.SULFURIC_ACID_CAULDRON, Blocks.CAULDRON);
+        addDrop(ModFluids.IMPURE_DILUTE_SULFURIC_ACID_CAULDRON, Blocks.CAULDRON);
         //AUTOGENERATION LABEL DO NOT TOUCH
 
         addDrop(ModBlocks.NICKEL_BLOCK);

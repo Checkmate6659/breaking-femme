@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "breakingfemme:item/impure_dilute_sulfuric_acid_bucket"
+  }
+}

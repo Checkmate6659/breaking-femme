@@ -422,6 +422,32 @@ public class BreakingFemmeClient implements ClientModInitializer {
             return -1;
         }, ModFluids.CONCENTRATED_CAUSTIC_SODA_CAULDRON);
 
+        FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.STILL_SULFURIC_ACID, ModFluids.FLOWING_SULFURIC_ACID,
+            new SimpleFluidRenderHandler(
+                new Identifier("minecraft:block/water_still"),
+                new Identifier("minecraft:block/water_flow"),
+                0xC0FFF100)
+        );
+        BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.STILL_SULFURIC_ACID, ModFluids.FLOWING_SULFURIC_ACID);
+        ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
+            if (i == 0)
+                return 0xC0FFF100;
+            return -1;
+        }, ModFluids.SULFURIC_ACID_CAULDRON);
+
+        FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.STILL_IMPURE_DILUTE_SULFURIC_ACID, ModFluids.FLOWING_IMPURE_DILUTE_SULFURIC_ACID,
+            new SimpleFluidRenderHandler(
+                new Identifier("minecraft:block/water_still"),
+                new Identifier("minecraft:block/water_flow"),
+                0xC0D7E270)
+        );
+        BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.STILL_IMPURE_DILUTE_SULFURIC_ACID, ModFluids.FLOWING_IMPURE_DILUTE_SULFURIC_ACID);
+        ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
+            if (i == 0)
+                return 0xC0D7E270;
+            return -1;
+        }, ModFluids.IMPURE_DILUTE_SULFURIC_ACID_CAULDRON);
+
         //AUTOGENERATION LABEL DO NOT TOUCH
     }
 }

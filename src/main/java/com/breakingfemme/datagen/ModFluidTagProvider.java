@@ -62,6 +62,10 @@ public class ModFluidTagProvider extends FabricTagProvider.FluidTagProvider {
         getOrCreateTagBuilder(WATER_LIKE).add(ModFluids.FLOWING_CAUSTIC_SODA_CAKE);
         getOrCreateTagBuilder(WATER_LIKE).add(ModFluids.STILL_CONCENTRATED_CAUSTIC_SODA);
         getOrCreateTagBuilder(WATER_LIKE).add(ModFluids.FLOWING_CONCENTRATED_CAUSTIC_SODA);
+        getOrCreateTagBuilder(WATER_LIKE).add(ModFluids.STILL_SULFURIC_ACID);
+        getOrCreateTagBuilder(WATER_LIKE).add(ModFluids.FLOWING_SULFURIC_ACID);
+        getOrCreateTagBuilder(WATER_LIKE).add(ModFluids.STILL_IMPURE_DILUTE_SULFURIC_ACID);
+        getOrCreateTagBuilder(WATER_LIKE).add(ModFluids.FLOWING_IMPURE_DILUTE_SULFURIC_ACID);
         //AUTOGENERATION LABEL DO NOT TOUCH
 
         getOrCreateTagBuilder(WATER_LIKE).addTag(FLAMMABLE);

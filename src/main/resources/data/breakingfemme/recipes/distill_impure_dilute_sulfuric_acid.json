@@ -1,0 +1,12 @@
+{
+    "type": "breakingfemme:distilling",
+    "gravel": 1,
+    "input": {
+        "fluid": "breakingfemme:impure_dilute_sulfuric_acid",
+        "quantity": 4
+    },
+    "output": {
+        "fluid": "breakingfemme:sulfuric_acid",
+        "quantity": 1
+    }
+}
