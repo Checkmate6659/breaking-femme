@@ -2,6 +2,7 @@ package com.breakingfemme.cauldron;
 
 import java.util.Map;
 
+import com.breakingfemme.BreakingFemme;
 import com.breakingfemme.ThermalUtil;
 import com.breakingfemme.fluid.ModFluids;
 import com.breakingfemme.item.ModItems;
@@ -10,15 +11,13 @@ import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.AbstractCauldronBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.cauldron.CauldronBehavior;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.ItemEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.server.world.ServerWorld;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
@@ -28,7 +27,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
-import net.minecraft.world.event.GameEvent.Emitter;
 
 //https://maven.fabricmc.net/docs/fabric-api-0.88.2+1.20.2/net/fabricmc/fabric/api/transfer/v1/fluid/CauldronFluidContent.html
 public class EstroneReductionCauldronBlock extends AbstractCauldronBlock {
@@ -106,21 +104,13 @@ public class EstroneReductionCauldronBlock extends AbstractCauldronBlock {
         return 0.9375;
     }
 
-    //TODO: make it give crude estradiol and need cold (if hot it might just give you low quality estrogen)
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        if (!world.isClient && entity.isOnFire() && this.isEntityTouchingFluid(state, pos, entity)) {
-            entity.extinguish();
-            if (entity.canModifyAt(world, pos)) {
-                this.onFireCollision(state, world, pos);
-            }
+        if (!world.isClient && this.isEntityTouchingFluid(state, pos, entity)) {
+            //caustic fluid => damage entity
+            entity.damage(new DamageSource(
+                world.getRegistryManager().get(RegistryKeys.DAMAGE_TYPE).entryOf(BreakingFemme.CORROSION)), 9.5f
+            );
         }
-    }
-
-    protected void onFireCollision(BlockState state, World world, BlockPos pos) { //if on fire, consume fluid from the cauldron, and grab dust
-        BlockState blockState = Blocks.CAULDRON.getDefaultState();
-        world.setBlockState(pos, blockState);
-        world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, Emitter.of(blockState));
-        world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5f, pos.getY() + 0.125f, pos.getZ() + 0.5f, new ItemStack(ModItems.SOYBEANS)));
     }
 
     public boolean isFull(BlockState state) {
@@ -131,7 +121,9 @@ public class EstroneReductionCauldronBlock extends AbstractCauldronBlock {
         return 3;
     }
 
-    //turn into sterol solution after a little while (random ticks, mb IntProperty for maceration start time)
+    //TODO: make it give crude estradiol and need cold (if too warm it might just give you low quality estrogen)
+
+    /*//turn into sterol solution after a little while (random ticks, mb IntProperty for maceration start time)
     //optimal parameters for real sterol extraction from soybean: https://www.sciencedirect.com/science/article/pii/S2667010021002511
     //the real process takes about 2 hours, so here it should be 100 seconds, ie 2k ticks
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
@@ -139,7 +131,7 @@ public class EstroneReductionCauldronBlock extends AbstractCauldronBlock {
         //can only cook if the block is hot tho (or if its in the nether, free heating lol)
         if(random.nextInt(3) != 0 && (world.getDimension().ultrawarm() || ThermalUtil.isBlockHot(world, pos.down())))
             world.setBlockState(pos, ModFluids.STEROL_SOLUTION_CAULDRON.getDefaultState());
-    }
+    }*/
 
     //doing boiling effect when its hot
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
