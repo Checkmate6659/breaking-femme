@@ -13,11 +13,16 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.cauldron.CauldronBehavior;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemUsage;
+import net.minecraft.item.Items;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
@@ -32,16 +37,32 @@ import net.minecraft.world.event.GameEvent;
 public class EstroneReductionCauldronBlock extends AbstractCauldronBlock {
     public static final BooleanProperty HAS_ESTRONE = BooleanProperty.of("has_estrone");
     public static final BooleanProperty HAS_RNICKEL = BooleanProperty.of("has_raney_nickel");
+    public static final BooleanProperty IS_DONE = BooleanProperty.of("done");
 
     //custom cauldron behavior
     public static Map<Item, CauldronBehavior> BEHAVIOR = CauldronBehavior.createMap();
     static {
         //vanilla fluids can replace this if needed
         CauldronBehavior.registerBucketBehavior(BEHAVIOR);
+        
+        //final estradiol precipitation using hydrochloric acid
+        BEHAVIOR.put(ModFluids.HYDROCHLORIC_ACID_BUCKET, (state, world, pos, player, hand, stack) -> {
+            if(!state.get(IS_DONE))
+                return ActionResult.PASS;
+            if(!world.isClient)
+            {
+                player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, new ItemStack(Items.BUCKET)));
+                world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5f, pos.getY() + 0.125f, pos.getZ() + 0.5f, new ItemStack(ModItems.PURE_ESTRADIOL_POWDER))); //FIXME: crude estradiol! then recrystallize
+                world.setBlockState(pos, ModFluids.SLUDGE_CAULDRON.getDefaultState());
+                world.playSound((PlayerEntity)null, pos, SoundEvents.ENTITY_GENERIC_SPLASH, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                world.emitGameEvent((Entity)null, GameEvent.FLUID_PLACE, pos);
+            }
+            return ActionResult.success(world.isClient);
+        });
 
         //adding pure estrone (if the cauldron doesn't already have estrone)
         BEHAVIOR.put(ModItems.PURE_ESTRONE, (state, world, pos, player, hand, stack) -> {
-            if(state.get(HAS_ESTRONE))
+            if(state.get(HAS_ESTRONE) || state.get(IS_DONE))
                 return ActionResult.PASS;
             if(!world.isClient)
             {
@@ -55,7 +76,7 @@ public class EstroneReductionCauldronBlock extends AbstractCauldronBlock {
 
         //same with raney nickel
         BEHAVIOR.put(ModItems.RANEY_NICKEL, (state, world, pos, player, hand, stack) -> {
-            if(state.get(HAS_RNICKEL))
+            if(state.get(HAS_RNICKEL) || state.get(IS_DONE))
                 return ActionResult.PASS;
             if(!world.isClient)
             {
@@ -93,11 +114,11 @@ public class EstroneReductionCauldronBlock extends AbstractCauldronBlock {
 
     public EstroneReductionCauldronBlock(AbstractBlock.Settings settings) {
         super(settings, BEHAVIOR);
-        this.setDefaultState(this.stateManager.getDefaultState().with(HAS_ESTRONE, false).with(HAS_RNICKEL, false));
+        this.setDefaultState(this.stateManager.getDefaultState().with(HAS_ESTRONE, false).with(HAS_RNICKEL, false).with(IS_DONE, false));
     }
 
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(HAS_ESTRONE, HAS_RNICKEL);
+        builder.add(HAS_ESTRONE, HAS_RNICKEL, IS_DONE);
     }
 
     protected double getFluidHeight(BlockState state) {
@@ -121,17 +142,17 @@ public class EstroneReductionCauldronBlock extends AbstractCauldronBlock {
         return 3;
     }
 
-    //TODO: make it give crude estradiol and need cold (if too warm it might just give you low quality estrogen)
-
-    /*//turn into sterol solution after a little while (random ticks, mb IntProperty for maceration start time)
-    //optimal parameters for real sterol extraction from soybean: https://www.sciencedirect.com/science/article/pii/S2667010021002511
-    //the real process takes about 2 hours, so here it should be 100 seconds, ie 2k ticks
+    //turn into "done" state if you cool it and let it sit for 2 mc hours ie have a 2/3 chance of triggering on a random tick
+    //and turn into sludge if you heat it
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        //theres a 2/3 chance of succeeding, which makes the expected value close to 100s at random tick speed 3
-        //can only cook if the block is hot tho (or if its in the nether, free heating lol)
-        if(random.nextInt(3) != 0 && (world.getDimension().ultrawarm() || ThermalUtil.isBlockHot(world, pos.down())))
-            world.setBlockState(pos, ModFluids.STEROL_SOLUTION_CAULDRON.getDefaultState());
-    }*/
+        //failure condition
+        if(world.getDimension().ultrawarm() || ThermalUtil.isBlockHot(world, pos.down()))
+            world.setBlockState(pos, ModFluids.SLUDGE_CAULDRON.getDefaultState());
+
+        //success condition
+        if(random.nextInt(3) != 0 && ThermalUtil.isCauldronCold(world, pos))
+            world.setBlockState(pos, ModFluids.ESTRONE_REDUCTION_CAULDRON.getDefaultState().with(IS_DONE, true));
+    }
 
     //doing boiling effect when its hot
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {

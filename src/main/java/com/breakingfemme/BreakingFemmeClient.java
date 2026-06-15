@@ -167,6 +167,8 @@ public class BreakingFemmeClient implements ClientModInitializer {
         ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
             if (i == 0)
             {
+                if(blockState.get(EstroneReductionCauldronBlock.IS_DONE))
+                    return 0xA0BCEFF8; //slightly blue solution :3 :3
                 if(blockState.get(EstroneReductionCauldronBlock.HAS_ESTRONE))
                     return 0xA0F9F9DE; //slightly yellow solution :3
                 return 0xA0D0DEF9; //same as 95% ethanol
