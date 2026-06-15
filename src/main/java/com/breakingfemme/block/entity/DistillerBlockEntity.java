@@ -31,8 +31,6 @@ import net.minecraft.world.World;
 
 public class DistillerBlockEntity extends BlockEntity implements FluidInventory { //this one doesn't have an inventory (just fluids), and doesn't have a screen
     private DefaultedList<Pair<FluidVariant, Integer>> fluids = DefaultedList.ofSize(2, new Pair<FluidVariant, Integer>(FluidVariant.blank(), Integer.valueOf(0)));
-    public float temperature = -69420.0f; //temperature in °C (TODO: move temperature function to dedicated thermal utils class)
-    //TODO: actually... you know... DO SOMETHING with the temperature. add multiple stages to the distillation?
 
     public DistillerBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.DISTILLER_BLOCK_ENTITY, pos, state);
@@ -82,7 +80,6 @@ public class DistillerBlockEntity extends BlockEntity implements FluidInventory 
         super.writeNbt(nbt);
         nbt.put("fluidVariant", fluidStorage.variant.toNbt());
         nbt.putLong("amount", fluidStorage.amount);
-        nbt.putFloat("temperature", temperature);
     }
 
     @Override
@@ -91,7 +88,6 @@ public class DistillerBlockEntity extends BlockEntity implements FluidInventory 
         super.readNbt(nbt);
         fluidStorage.variant = FluidVariant.fromNbt(nbt.getCompound("fluidVariant"));
 		fluidStorage.amount = nbt.getLong("amount");
-        temperature = nbt.getFloat("temperature");
         //for rendering
         fluids.set(0, new Pair<FluidVariant, Integer>(fluidStorage.variant, (int)fluidStorage.amount));
     }
@@ -136,12 +132,6 @@ public class DistillerBlockEntity extends BlockEntity implements FluidInventory 
     public void tick(World world, BlockPos pos, BlockState state)
     {
         if(world.isClient()) return;
-
-        if(temperature == -69420.0f) //uninitialized temperature
-        {
-            //initialize temperature
-            temperature = ThermalUtil.environmentTemperature(world, pos); //initialize to base temperature
-        }
 
         if(world.getTime() % 4 != 0) return; //don't always check for stuff and do distilling (lag reduction mostly)
 

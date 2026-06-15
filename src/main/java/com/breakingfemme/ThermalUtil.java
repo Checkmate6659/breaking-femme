@@ -1,10 +1,10 @@
 package com.breakingfemme;
 
 import com.breakingfemme.datagen.ModBlockTagProvider;
-import com.breakingfemme.mixin.BiomeAccessor;
 
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.BiomeTags;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.fluid.Fluids;
@@ -14,6 +14,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.Heightmap.Type;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.densityfunction.DensityFunction;
 
 public class ThermalUtil {
     /*private static final Long2FloatLinkedOpenHashMap biomeTempCacheDay, biomeTempCacheNight;
@@ -26,6 +27,19 @@ public class ThermalUtil {
         biomeTempCacheNight.defaultReturnValue(Float.NaN);
     }*/
 
+    //a nice and smooth temperature sampling function
+    //TODO: get this back to the same range as the biomes
+    public static double getTemperature(ServerWorld world, BlockPos pos)
+    {
+        return world.getChunkManager().getNoiseConfig().getMultiNoiseSampler().temperature().sample(new DensityFunction.UnblendedNoisePos(pos.getX(), pos.getY(), pos.getZ()));
+    }
+
+    //same for downfall (its humidity here)
+    public static double getDownfall(ServerWorld world, BlockPos pos)
+    {
+        return world.getChunkManager().getNoiseConfig().getMultiNoiseSampler().humidity().sample(new DensityFunction.UnblendedNoisePos(pos.getX(), pos.getY(), pos.getZ()));
+    }
+    
     public static boolean isBlockHot(BlockState state)
     {
 		return state.isIn(ModBlockTagProvider.HOT) || state.isIn(ModBlockTagProvider.CREATE_HOT) ||
@@ -38,16 +52,15 @@ public class ThermalUtil {
 		return isBlockHot(world.getBlockState(pos));
 	}
 
-    public static boolean isCauldronCold(World world, BlockPos pos)
+    public static boolean isCauldronCold(ServerWorld world, BlockPos pos)
     {
         if(world.getDimension().ultrawarm()) //its literally in an ultrawarm dimension. cant be cold like that.
             return false;
 
         //count up cold blocks around/below the cauldron
         //there's at most 40 points btw. mb threshold should be increased in hotter biomes like desert? with explicit temperature instead of 2 values
-        Biome biome = world.getBiome(pos).value();
-        double temperature = biome.getTemperature();
-        boolean cold_biome = biome.isCold(pos);
+        double temperature = getTemperature(world, pos);
+        boolean cold_biome = world.getBiome(pos).value().isCold(pos);
 
         //change threshold based on biome coldness
         //temperature still jumps abruptly at biome boundaries tho :(
@@ -77,21 +90,22 @@ public class ThermalUtil {
         return false;
     }
 
-    //Non-smooth function that calculates day and night temperature based on biome
-    private static Pair<Float, Float> biomeTemperature(World world, BlockPos pos)
+    //Function that calculates day and night temperature
+    private static Pair<Float, Float> dayNightTemperature(ServerWorld world, BlockPos pos)
     {
-        //TODO: find way to turn world into a long, to not have problems with different dimensions
+        //TODO: find way to get a world id, to not have problems with different dimensions
         /*if(biomeTempCacheDay.containsKey(pos.asLong()))
         {
             //
         }*/
 
         RegistryEntry<Biome> biomeEntry = world.getBiome(pos);
-        Biome biome = biomeEntry.value();
-        float temperature = ((BiomeAccessor)biome).breakingfemme$getTemperature(pos);
+        //Biome biome = biomeEntry.value();
+        //float temperature = ((BiomeAccessor)biome).breakingfemme$getTemperature(pos);
+        float temperature = (float)getTemperature(world, pos);
 
         temperature -= 0.00166667 * (pos.getY() - world.getSeaLevel()); //altitude decrease
-        temperature = (temperature - 0.15f) * 20; //convert to celsius
+        temperature = temperature * 100 - 4; //convert to celsius (these coefs are kinda vibes based)
 
         //calculate surface altitude and dryness, from 0 to 1 both
         float surface_altitude = world.getTopY(Type.MOTION_BLOCKING_NO_LEAVES, pos.getX(), pos.getZ()); //how high the biome is
@@ -103,7 +117,8 @@ public class ThermalUtil {
 
         float dryness = 0; //dryness is from 0 on 1
         if(!biomeEntry.isIn(BiomeTags.IS_OCEAN) && !biomeEntry.isIn(BiomeTags.IS_RIVER)) //water biomes!
-            dryness = 1 - ((BiomeAccessor)biome).breakingfemme$getWeather().downfall();
+            //dryness = 1 - ((BiomeAccessor)biome).breakingfemme$getWeather().downfall();
+            dryness = 1 - (float)getDownfall(world, pos);
         
         dryness = (float)Math.sqrt(dryness); //higher increase when dry, so for instance temp doesnt go <0 in plains
         surface_altitude *= 1 - ((1 - surface_altitude) * (1.25f - dryness) * 0.8f); //if very dry, "continental biome": as if altitude was higher
@@ -112,6 +127,7 @@ public class ThermalUtil {
         //diurnal temperature variation is greater at high altitude and in hotter and drier areas
         //high deserts have the most variation, while shores (low down, highest wetness) have the least
         //irl the stabilizing effects of an ocean on the weather can reach up to 100-200km... but we cant really do that here.
+        //TODO: use "continentalness" value instead of just this
         float night_temperature = temperature - (surface_altitude + 0.5f) * (dryness + 0.125f) * 20;
         
         return new Pair<Float,Float>(temperature, night_temperature);
@@ -124,12 +140,12 @@ public class ThermalUtil {
     //also, day temp higher than night temp... except if doing this in a cave/basement/cellar
     //that actually is a real thing, fermenting beer and wine in a cellar to stabilize the temperature
     //it turns out that the cool and stable temperatures from a cellar are perfect for making beer
-    public static float environmentTemperature(World world, BlockPos pos)
+    public static float environmentTemperature(ServerWorld world, BlockPos pos)
     {
         //TODO: find good data structure for a CACHE! with aging, and bounded size
         //probably some kind of tree
 
-        Pair<Float, Float> day_night_temp = biomeTemperature(world, pos); //FIXME: not smooth!!
+        Pair<Float, Float> day_night_temp = dayNightTemperature(world, pos); //FIXME: not smooth!!
 
         //take depth into account
         int coverage = 20; //above this much coverage, kinda useless
@@ -156,7 +172,7 @@ public class ThermalUtil {
         float day_coef = 1.0f - coverage * 0.05f; //from 0 to 1 (for now this is just the instability)
 
         //calculate daytime, theres an extra 3 hour tick delay to mimic air thermal inertia
-        day_coef *= Math.sin(((world.getTimeOfDay() + 3000) % 24000) * 0.0002617993877991494); //-1 to 1
+        day_coef *= Math.sin(((world.getTimeOfDay() - 3000) % 24000) * 0.0002617993877991494); //-1 to 1
         day_coef = (day_coef + 1) * 0.125f; //from 0 to 0.25
         day_coef *= 4 - world.getRainGradient(1); //effect of precipitation: slightly closer to night temp; now from 0 to 1
         float temperature = day_night_temp.getLeft() * day_coef + day_night_temp.getRight() * (1 - day_coef);

@@ -6,7 +6,6 @@ import com.breakingfemme.block.entity.FermenterBlockEntity;
 import com.breakingfemme.block.entity.ModBlockEntities;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;

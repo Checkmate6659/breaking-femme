@@ -63,7 +63,7 @@ public class EstroneRecrystallizationCauldronBlock extends AbstractCauldronBlock
         if(isFaceFullSquare(world.getBlockState(pos.up()).getCollisionShape(world, pos), Direction.DOWN))
             return;
         
-        if ((world.getDimension().ultrawarm() || ThermalUtil.isBlockHot(world, pos.down())) && !ThermalUtil.isCauldronCold(world, pos)) {
+        if (world.getDimension().ultrawarm() || ThermalUtil.isBlockHot(world, pos.down())) {
             if(random.nextInt(3) == 0)
                 world.playSound((double)pos.getX() + 0.5, (double)pos.getY() + 0.5, (double)pos.getZ() + 0.75, SoundEvents.BLOCK_BUBBLE_COLUMN_UPWARDS_AMBIENT, SoundCategory.BLOCKS, 192F + random.nextFloat() * 128F, random.nextFloat() * 0.7F + 0.6F, false);
 
