@@ -6,7 +6,7 @@
         "items": [
           {
             "items": [
-              "breakingfemme:nickel_pipe"
+              "breakingfemme:nickel_ingot"
             ]
           }
         ]
@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "breakingfemme:distiller_top"
+        "recipe": "breakingfemme:nickel_pipe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "breakingfemme:distiller_top"
+      "breakingfemme:nickel_pipe"
     ]
   },
   "sends_telemetry_event": false

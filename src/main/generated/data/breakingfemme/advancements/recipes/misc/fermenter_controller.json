@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_nickel_ingot": {
+    "has_magma_block": {
       "conditions": {
         "items": [
           {
             "items": [
-              "breakingfemme:nickel_pipe"
+              "minecraft:magma_block"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "breakingfemme:distiller_top"
+        "recipe": "breakingfemme:fermenter_controller"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_nickel_ingot",
+      "has_magma_block",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "breakingfemme:distiller_top"
+      "breakingfemme:fermenter_controller"
     ]
   },
   "sends_telemetry_event": false

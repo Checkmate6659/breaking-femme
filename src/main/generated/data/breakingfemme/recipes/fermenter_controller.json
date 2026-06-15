@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "fermenter_controller",
+  "key": {
+    "-": {
+      "item": "minecraft:chest"
+    },
+    "O": {
+      "item": "breakingfemme:fermenter_panel"
+    },
+    "^": {
+      "item": "minecraft:iron_ingot"
+    },
+    "w": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "pattern": [
+    "OwO",
+    "^-^",
+    "OwO"
+  ],
+  "result": {
+    "item": "breakingfemme:fermenter_controller"
+  },
+  "show_notification": true
+}

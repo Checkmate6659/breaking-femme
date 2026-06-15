@@ -1,23 +1,21 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "misc",
-  "group": "fermenter_panel",
   "key": {
     "#": {
-      "tag": "minecraft:planks"
+      "item": "breakingfemme:nickel_ingot"
     },
     "-": {
       "item": "minecraft:iron_bars"
     }
   },
   "pattern": [
-    "###",
-    "---",
+    "#-#",
+    "# #",
     "###"
   ],
   "result": {
-    "count": 8,
-    "item": "breakingfemme:fermenter_panel"
+    "item": "breakingfemme:distiller_base"
   },
   "show_notification": true
 }
