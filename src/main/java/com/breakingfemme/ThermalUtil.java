@@ -43,8 +43,17 @@ public class ThermalUtil {
             return false;
 
         //count up cold blocks around/below the cauldron
-        boolean cold_biome = world.getBiome(pos).value().isCold(pos);
-        int cold_count = cold_biome ? 8 : 16; //change threshold based on biome coldness
+        //there's at most 40 points btw. mb threshold should be increased in hotter biomes like desert? with explicit temperature instead of 2 values
+        Biome biome = world.getBiome(pos).value();
+        double temperature = biome.getTemperature();
+        boolean cold_biome = biome.isCold(pos);
+
+        //change threshold based on biome coldness
+        //temperature still jumps abruptly at biome boundaries tho :(
+        int cold_count = 8 + (int)Math.ceil(temperature * 32); //36 for temperature 1, 8 for temperature 0
+        if(cold_count < 8) cold_count = 8; //don't make it trivial. ever.
+        else if(cold_count > 40) cold_count = 40; //modded biomes with temperatures outside of [-1; 1]
+
         for(int i = -1; i < 2; i++)
             for(int j = -1; j < 2; j++)
                 for(int k = -1; k < 2; k++)
