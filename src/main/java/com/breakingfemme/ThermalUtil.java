@@ -6,6 +6,7 @@ import com.breakingfemme.mixin.BiomeAccessor;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.BiomeTags;
 import net.minecraft.block.BlockState;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.Pair;
 import net.minecraft.util.math.BlockPos;
@@ -24,30 +25,44 @@ public class ThermalUtil {
         biomeTempCacheNight.defaultReturnValue(Float.NaN);
     }*/
 
+    public static boolean isBlockHot(BlockState state)
+    {
+		return state.isIn(ModBlockTagProvider.HOT) || state.isIn(ModBlockTagProvider.CREATE_HOT) ||
+			(state.isIn(ModBlockTagProvider.FURNACE) && state.get(Properties.LIT));
+    }
+
     //basically, is the block in the hot category or is it a lit furnace
 	public static boolean isBlockHot(World world, BlockPos pos)
 	{
-		BlockState state = world.getBlockState(pos);
-		return state.isIn(ModBlockTagProvider.HOT) || state.isIn(ModBlockTagProvider.CREATE_HOT) ||
-			(state.isIn(ModBlockTagProvider.FURNACE) && state.get(Properties.LIT));
+		return isBlockHot(world.getBlockState(pos));
 	}
 
     public static boolean isCauldronCold(World world, BlockPos pos)
     {
-        if(world.getDimension().ultrawarm() || ThermalUtil.isBlockHot(world, pos.down())) //its literally heated. cant be cold like that.
+        if(world.getDimension().ultrawarm()) //its literally in an ultrawarm dimension. cant be cold like that.
             return false;
 
         //count up cold blocks around/below the cauldron
-        //TODO: count water/waterlogged blocks in cold biome, if cold biome then lower threshold
-        //TODO: make any neighboring hot blocks make the cauldron not cold (mb corners ok tho idk)
-        int cold_count = 0;
+        boolean cold_biome = world.getBiome(pos).value().isCold(pos);
+        int cold_count = cold_biome ? 8 : 16; //change threshold based on biome coldness
         for(int i = -1; i < 2; i++)
-            for(int j = -1; j < 1; j++) //only count up to level of the cauldron, not blocks above
+            for(int j = -1; j < 2; j++)
                 for(int k = -1; k < 2; k++)
-                    if(world.getBlockState(pos.add(i, j, k)).isIn(ModBlockTagProvider.COLD))
-                        cold_count += 1 << (i*i + j*j + k*k - 1); //4 for neighbors, 2 for touching edge, 1 for touching corner
+                {
+                    BlockState nstate = world.getBlockState(pos.add(i, j, k));
+                    if(isBlockHot(nstate)) return false; //neighboring hot block => not cold!
 
-        return cold_count > 11; //TODO: change threshold based on biome coldness; mb even more or less effective cooling blocks
+                    if(j > 0) continue;  //only count cold up to level of the cauldron, not blocks above
+
+                    if(nstate.isIn(ModBlockTagProvider.COLD)) //cold blocks
+                        cold_count -= 8 >> (i*i + j*j + k*k); //4 for neighbors, 2 for touching edge, 1 for touching corner
+                    else if(cold_biome && nstate.getFluidState().isOf(Fluids.WATER)) //water or waterlogged
+                        cold_count -= 3 - (i*i + j*j + k*k); //2 for neighbors, 1 for edges, 0 for corners (don't count)
+                    
+                    if(cold_count <= 0) return true; //interrupt loops and don't go to the end!!
+                }
+
+        return false;
     }
 
     //Non-smooth function that calculates day and night temperature based on biome
