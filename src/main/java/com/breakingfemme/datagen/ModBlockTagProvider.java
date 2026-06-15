@@ -165,5 +165,7 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(COLD).add(Blocks.BLUE_ICE);
         getOrCreateTagBuilder(COLD).add(Blocks.FROSTED_ICE);
         getOrCreateTagBuilder(COLD).add(Blocks.SNOW_BLOCK);
+        getOrCreateTagBuilder(COLD).add(Blocks.POWDER_SNOW);
+        getOrCreateTagBuilder(COLD).add(Blocks.POWDER_SNOW_CAULDRON);
     }
 }

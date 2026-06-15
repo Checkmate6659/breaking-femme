@@ -6,6 +6,7 @@ import com.breakingfemme.mixin.BiomeAccessor;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.BiomeTags;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.Pair;
@@ -65,7 +66,9 @@ public class ThermalUtil {
 
                     if(nstate.isIn(ModBlockTagProvider.COLD)) //cold blocks
                         cold_count -= 8 >> (i*i + j*j + k*k); //4 for neighbors, 2 for touching edge, 1 for touching corner
-                    else if(cold_biome && nstate.getFluidState().isOf(Fluids.WATER)) //water or waterlogged
+                    else if(cold_biome && (nstate.getFluidState().isOf(Fluids.WATER) ||
+                        (nstate.isOf(Blocks.WATER_CAULDRON) && (j != -1 || !isBlockHot(world, pos.add(i, j-1, k)))) //j != -1 because otherwise the previous check would catch the hot block.
+                        )) //water or waterlogged, or non-heated water cauldron
                         cold_count -= 3 - (i*i + j*j + k*k); //2 for neighbors, 1 for edges, 0 for corners (don't count)
                     
                     if(cold_count <= 0) return true; //interrupt loops and don't go to the end!!
