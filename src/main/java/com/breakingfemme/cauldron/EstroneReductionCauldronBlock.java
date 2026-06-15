@@ -8,18 +8,22 @@ import com.breakingfemme.item.ModItems;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.AbstractCauldronBlock;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.cauldron.CauldronBehavior;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.state.StateManager;
+import net.minecraft.state.property.BooleanProperty;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
@@ -28,28 +32,81 @@ import net.minecraft.world.event.GameEvent.Emitter;
 
 //https://maven.fabricmc.net/docs/fabric-api-0.88.2+1.20.2/net/fabricmc/fabric/api/transfer/v1/fluid/CauldronFluidContent.html
 public class EstroneReductionCauldronBlock extends AbstractCauldronBlock {
+    public static final BooleanProperty HAS_ESTRONE = BooleanProperty.of("has_estrone");
+    public static final BooleanProperty HAS_RNICKEL = BooleanProperty.of("has_raney_nickel");
+
     //custom cauldron behavior
     public static Map<Item, CauldronBehavior> BEHAVIOR = CauldronBehavior.createMap();
     static {
         //vanilla fluids can replace this if needed
         CauldronBehavior.registerBucketBehavior(BEHAVIOR);
-        BEHAVIOR.put(Items.BUCKET, (state, world, pos, player, hand, stack) -> {
-            if(world.isClient) //if bucketing out, recover the 64% ethanol and the soybeans
-                world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5f, pos.getY() + 0.125f, pos.getZ() + 0.5f, new ItemStack(ModItems.SOYBEANS)));
-            return CauldronBehavior.emptyCauldron(state, world, pos, player, hand, stack, new ItemStack(ModFluids.ET64_BUCKET), (statex) -> {
-                return true;
-            }, SoundEvents.ITEM_BUCKET_FILL);
+
+        //adding pure estrone (if the cauldron doesn't already have estrone)
+        BEHAVIOR.put(ModItems.PURE_ESTRONE, (state, world, pos, player, hand, stack) -> {
+            if(state.get(HAS_ESTRONE))
+                return ActionResult.PASS;
+            if(!world.isClient)
+            {
+                player.getStackInHand(hand).decrement(1);
+                world.setBlockState(pos, state.with(HAS_ESTRONE, true));
+                world.playSound((PlayerEntity)null, pos, SoundEvents.ITEM_INK_SAC_USE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                world.emitGameEvent((Entity)null, GameEvent.FLUID_PLACE, pos);
+            }
+            return ActionResult.success(world.isClient);
+        });
+
+        //same with raney nickel
+        BEHAVIOR.put(ModItems.RANEY_NICKEL, (state, world, pos, player, hand, stack) -> {
+            if(state.get(HAS_RNICKEL))
+                return ActionResult.PASS;
+            if(!world.isClient)
+            {
+                player.getStackInHand(hand).decrement(1);
+                world.setBlockState(pos, state.with(HAS_RNICKEL, true));
+                world.playSound((PlayerEntity)null, pos, SoundEvents.ITEM_INK_SAC_USE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                world.emitGameEvent((Entity)null, GameEvent.FLUID_PLACE, pos);
+            }
+            return ActionResult.success(world.isClient);
+        });
+
+        //we need to add both these methods for the concentrated caustic soda cauldron too
+        //ideally it would be ethanol + caustic soda, may need to impl that later with the (false, false) state
+        ConcentratedCausticSodaCauldronBlock.BEHAVIOR.put(ModItems.PURE_ESTRONE, (state, world, pos, player, hand, stack) -> {
+            if(!world.isClient)
+            {
+                player.getStackInHand(hand).decrement(1);
+                world.setBlockState(pos, ModFluids.ESTRONE_REDUCTION_CAULDRON.getDefaultState().with(HAS_ESTRONE, true));
+                world.playSound((PlayerEntity)null, pos, SoundEvents.ITEM_INK_SAC_USE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                world.emitGameEvent((Entity)null, GameEvent.FLUID_PLACE, pos);
+            }
+            return ActionResult.success(world.isClient);
+        });
+        ConcentratedCausticSodaCauldronBlock.BEHAVIOR.put(ModItems.RANEY_NICKEL, (state, world, pos, player, hand, stack) -> {
+            if(!world.isClient)
+            {
+                player.getStackInHand(hand).decrement(1);
+                world.setBlockState(pos, ModFluids.ESTRONE_REDUCTION_CAULDRON.getDefaultState().with(HAS_RNICKEL, true));
+                world.playSound((PlayerEntity)null, pos, SoundEvents.ITEM_INK_SAC_USE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                world.emitGameEvent((Entity)null, GameEvent.FLUID_PLACE, pos);
+            }
+            return ActionResult.success(world.isClient);
         });
     }
 
     public EstroneReductionCauldronBlock(AbstractBlock.Settings settings) {
         super(settings, BEHAVIOR);
+        this.setDefaultState(this.stateManager.getDefaultState().with(HAS_ESTRONE, false).with(HAS_RNICKEL, false));
+    }
+
+    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+        builder.add(HAS_ESTRONE, HAS_RNICKEL);
     }
 
     protected double getFluidHeight(BlockState state) {
         return 0.9375;
     }
 
+    //TODO: make it give crude estradiol and need cold (if hot it might just give you low quality estrogen)
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         if (!world.isClient && entity.isOnFire() && this.isEntityTouchingFluid(state, pos, entity)) {
             entity.extinguish();

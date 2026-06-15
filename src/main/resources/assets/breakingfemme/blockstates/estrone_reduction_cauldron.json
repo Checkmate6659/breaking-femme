@@ -1,6 +1,15 @@
 {
   "variants": {
-    "": {
+    "has_estrone=false,has_raney_nickel=false": {
+      "model": "minecraft:block/water_cauldron_full"
+    },
+    "has_estrone=true,has_raney_nickel=false": {
+      "model": "minecraft:block/water_cauldron_full"
+    },
+    "has_estrone=false,has_raney_nickel=true": {
+      "model": "breakingfemme:block/estrone_reduction_cauldron"
+    },
+    "has_estrone=true,has_raney_nickel=true": {
       "model": "breakingfemme:block/estrone_reduction_cauldron"
     }
   }

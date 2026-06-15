@@ -12,7 +12,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.cauldron.CauldronBehavior;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -44,13 +43,6 @@ public class AndrostadienedioneExtractionCauldronBlock extends AbstractCauldronB
     static {
         //vanilla fluids can replace this if needed
         CauldronBehavior.registerBucketBehavior(BEHAVIOR);
-        BEHAVIOR.put(Items.BUCKET, (state, world, pos, player, hand, stack) -> {
-            if(world.isClient) //if bucketing out, recover the copper sulfate and the pulverized nickel
-                world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5f, pos.getY() + 0.125f, pos.getZ() + 0.5f, new ItemStack(ModItems.PULVERIZED_NICKEL)));
-            return CauldronBehavior.emptyCauldron(state, world, pos, player, hand, stack, new ItemStack(ModFluids.COPPER_SULFATE_BUCKET), (statex) -> {
-                return true;
-            }, SoundEvents.ITEM_BUCKET_FILL);
-        });
 
         //mix it around with a stick (kind of an issue that we cant use a tag; i could have added tag containing stick, end rod, shovels and metal pipes)
         BEHAVIOR.put(Items.STICK, (state, world, pos, player, hand, stack) -> {

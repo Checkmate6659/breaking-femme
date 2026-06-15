@@ -13,7 +13,6 @@ import net.minecraft.block.cauldron.CauldronBehavior;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -30,13 +29,6 @@ public class EstroneRecrystallizationCauldronBlock extends AbstractCauldronBlock
     static {
         //vanilla fluids can replace this if needed
         CauldronBehavior.registerBucketBehavior(BEHAVIOR);
-        BEHAVIOR.put(Items.BUCKET, (state, world, pos, player, hand, stack) -> {
-            if(world.isClient) //if bucketing out, recover the 64% ethanol and the soybeans
-                world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5f, pos.getY() + 0.125f, pos.getZ() + 0.5f, new ItemStack(ModItems.SOYBEANS)));
-            return CauldronBehavior.emptyCauldron(state, world, pos, player, hand, stack, new ItemStack(ModFluids.ET64_BUCKET), (statex) -> {
-                return true;
-            }, SoundEvents.ITEM_BUCKET_FILL);
-        });
     }
 
     public EstroneRecrystallizationCauldronBlock(AbstractBlock.Settings settings) {

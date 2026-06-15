@@ -8,6 +8,7 @@ import org.apache.commons.lang3.mutable.MutableObject;
 import com.breakingfemme.block.ModBlocks;
 import com.breakingfemme.block.entity.DistillerBlockEntityRenderer;
 import com.breakingfemme.block.entity.ModBlockEntities;
+import com.breakingfemme.cauldron.EstroneReductionCauldronBlock;
 import com.breakingfemme.fluid.ModFluids;
 import com.breakingfemme.mixin.PostEffectPassAccessor;
 import com.breakingfemme.screen.FermenterScreen;
@@ -165,7 +166,11 @@ public class BreakingFemmeClient implements ClientModInitializer {
         //estrone reduction in 95% ethanol (cauldron only)
         ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
             if (i == 0)
+            {
+                if(blockState.get(EstroneReductionCauldronBlock.HAS_ESTRONE))
+                    return 0xA0F9F9DE; //slightly yellow solution :3
                 return 0xA0D0DEF9; //same as 95% ethanol
+            }
             return -1;
         }, ModFluids.ESTRONE_REDUCTION_CAULDRON);
 
