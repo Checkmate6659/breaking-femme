@@ -65,7 +65,7 @@ public class KelpAshBlock extends FallingBlock {
         return ActionResult.PASS;
     }
 
-    //same code as crying obsidian, for wet kelp ash block
+    //same code as crying obsidian, for wet kelp ash block, and with water droplets
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
         if (IS_WET && random.nextInt(5) == 0) {
             Direction direction = Direction.random(random);
@@ -77,7 +77,7 @@ public class KelpAshBlock extends FallingBlock {
                 double e = direction.getOffsetY() == 0 ? random.nextDouble() : (double)0.5F + (double)direction.getOffsetY() * 0.6;
                 double f = direction.getOffsetZ() == 0 ? random.nextDouble() : (double)0.5F + (double)direction.getOffsetZ() * 0.6;
                 //TODO: make a custom particle, that is the same, but BROWN.
-                world.addParticle(ParticleTypes.DRIPPING_OBSIDIAN_TEAR, (double)pos.getX() + d, (double)pos.getY() + e, (double)pos.getZ() + f, (double)0.0F, (double)0.0F, (double)0.0F);
+                world.addParticle(ParticleTypes.DRIPPING_WATER, (double)pos.getX() + d, (double)pos.getY() + e, (double)pos.getZ() + f, (double)0.0F, (double)0.0F, (double)0.0F);
                 }
             }
         }

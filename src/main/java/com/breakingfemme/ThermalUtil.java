@@ -58,7 +58,7 @@ public class ThermalUtil {
             return false;
 
         //count up cold blocks around/below the cauldron
-        //there's at most 40 points btw. mb threshold should be increased in hotter biomes like desert? with explicit temperature instead of 2 values
+        //there's at most 40 cold points that we can get btw
         double temperature = getTemperature(world, pos);
         boolean cold_biome = world.getBiome(pos).value().isCold(pos);
 

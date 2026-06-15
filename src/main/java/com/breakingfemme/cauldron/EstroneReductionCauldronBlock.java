@@ -154,7 +154,7 @@ public class EstroneReductionCauldronBlock extends AbstractCauldronBlock {
             world.setBlockState(pos, ModFluids.ESTRONE_REDUCTION_CAULDRON.getDefaultState().with(IS_DONE, true));
     }
 
-    //doing boiling effect when its hot
+    //doing boiling effect when its hot, and TODO: condensation (dripping) effect when its cold
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
         if (world.getDimension().ultrawarm() || ThermalUtil.isBlockHot(world, pos.down())) {
             if(random.nextInt(3) == 0)
@@ -164,5 +164,20 @@ public class EstroneReductionCauldronBlock extends AbstractCauldronBlock {
                 world.addParticle(ParticleTypes.BUBBLE_POP, (double)pos.getX() + 0.25F + random.nextFloat() * 0.5F, (double)pos.getY() + 0.9375, (double)pos.getZ() + 0.25F + random.nextFloat() * 0.5F, 0, 0.015625, 0);
             }
         }
+
+        //TODO: mb make this method send a packet to check if the cauldron is cold or not
+        /*else if (ThermalUtil.isCauldronCold(world, pos) && random.nextInt(5) == 0) {
+            Direction direction = Direction.random(random);
+            if (direction != Direction.UP) {
+                BlockPos blockPos = pos.offset(direction);
+                BlockState blockState = world.getBlockState(blockPos);
+                if (!state.isOpaque() || !blockState.isSideSolidFullSquare(world, blockPos, direction.getOpposite())) {
+                double d = direction.getOffsetX() == 0 ? random.nextDouble() : (double)0.5F + (double)direction.getOffsetX() * 0.6;
+                double e = direction.getOffsetY() == 0 ? random.nextDouble() : (double)0.5F + (double)direction.getOffsetY() * 0.6;
+                double f = direction.getOffsetZ() == 0 ? random.nextDouble() : (double)0.5F + (double)direction.getOffsetZ() * 0.6;
+                world.addParticle(ParticleTypes.DRIPPING_WATER, (double)pos.getX() + d, (double)pos.getY() + e, (double)pos.getZ() + f, (double)0.0F, (double)0.0F, (double)0.0F);
+                }
+            }
+        }*/
     }
 }
