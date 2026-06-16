@@ -18,6 +18,7 @@
 	"client": [
 		"AdvancementTabMixin",
 		"GuideBookMixin",
+		"JustShutUpMixin",
 		"PostEffectPassAccessor",
 		"ScreenShakeMixin",
 		"StaggeringMixin",

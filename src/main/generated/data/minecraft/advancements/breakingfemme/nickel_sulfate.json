@@ -34,5 +34,5 @@
       "made_nickel_sulfate"
     ]
   ],
-  "sends_telemetry_event": true
+  "sends_telemetry_event": false
 }

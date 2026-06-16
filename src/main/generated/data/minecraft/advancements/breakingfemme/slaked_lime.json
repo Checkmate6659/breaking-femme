@@ -34,5 +34,5 @@
       "got_slaked_lime"
     ]
   ],
-  "sends_telemetry_event": true
+  "sends_telemetry_event": false
 }

@@ -26,7 +26,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
     @Override
     public void generateAdvancement(Consumer<Advancement> consumer) {
         //Branches are registered here from bottom to top... if not already existing when running datagen... wait what? i dont understand the system
-        Advancement root = Advancement.Builder.create()
+        Advancement root = Advancement.Builder.createUntelemetered()
             .display(
                     ModItems.MORTAR_PESTLE, // The display icon
                     Text.translatable("advancement.breakingfemme.root.title"), // The title
@@ -42,7 +42,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
             .build(consumer, BreakingFemme.MOD_ID + "/root");
         
         //nickel sulfate branch
-        Advancement pulverized_nickel = Advancement.Builder.create().parent(root)
+        Advancement pulverized_nickel = Advancement.Builder.createUntelemetered().parent(root)
             .display(
                     ModItems.PULVERIZED_NICKEL,
                     Text.translatable("advancement.breakingfemme.pulverized_nickel.title"),
@@ -56,7 +56,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
             .criterion("got_pulverized_nickel", InventoryChangedCriterion.Conditions.items(ModItems.PULVERIZED_NICKEL))
             .build(consumer, BreakingFemme.MOD_ID + "/pulverized_nickel");
 
-        Advancement rubies = Advancement.Builder.create().parent(pulverized_nickel)
+        Advancement rubies = Advancement.Builder.createUntelemetered().parent(pulverized_nickel)
             .display(
                     ModItems.RUBY,
                     Text.translatable("advancement.breakingfemme.ruby.title"),
@@ -70,7 +70,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
             .criterion("got_ruby", InventoryChangedCriterion.Conditions.items(ModItems.RUBY))
             .build(consumer, BreakingFemme.MOD_ID + "/ruby");
 
-        Advancement aluminum = Advancement.Builder.create().parent(rubies)
+        Advancement aluminum = Advancement.Builder.createUntelemetered().parent(rubies)
             .display(
                     ModItems.ALUMINUM_SCRAP,
                     Text.translatable("advancement.breakingfemme.aluminum.title"),
@@ -84,7 +84,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
             .criterion("got_aluminum", InventoryChangedCriterion.Conditions.items(ModItems.ALUMINUM_SCRAP))
             .build(consumer, BreakingFemme.MOD_ID + "/aluminum");
 
-        Advancement raney = Advancement.Builder.create().parent(aluminum)
+        Advancement raney = Advancement.Builder.createUntelemetered().parent(aluminum)
             .display(
                     ModItems.RANEY_NICKEL,
                     Text.translatable("advancement.breakingfemme.raney_nickel.title"),
@@ -98,7 +98,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
             .criterion("got_raney_nickel", InventoryChangedCriterion.Conditions.items(ModItems.RANEY_NICKEL))
             .build(consumer, BreakingFemme.MOD_ID + "/raney_nickel");
 
-        Advancement copper_sulfate = Advancement.Builder.create().parent(pulverized_nickel)
+        Advancement copper_sulfate = Advancement.Builder.createUntelemetered().parent(pulverized_nickel)
             .display(
                     ModItems.COPPER_SULFATE,
                     Text.translatable("advancement.breakingfemme.copper_sulfate.title"),
@@ -112,7 +112,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
             .criterion("bought_copper_sulfate", InventoryChangedCriterion.Conditions.items(ModItems.COPPER_SULFATE))
             .build(consumer, BreakingFemme.MOD_ID + "/copper_sulfate");
 
-        Advancement nickel_sulfate = Advancement.Builder.create().parent(copper_sulfate)
+        Advancement nickel_sulfate = Advancement.Builder.createUntelemetered().parent(copper_sulfate)
             .display(
                     ModItems.NICKEL_SULFATE,
                     Text.translatable("advancement.breakingfemme.nickel_sulfate.title"),
@@ -127,7 +127,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
             .build(consumer, BreakingFemme.MOD_ID + "/nickel_sulfate");
 
         //soybean (main) branch
-        Advancement soybeans = Advancement.Builder.create().parent(root)
+        Advancement soybeans = Advancement.Builder.createUntelemetered().parent(root)
             .display(
                     ModItems.SOYBEANS,
                     Text.translatable("advancement.breakingfemme.soybeans.title"),
@@ -141,7 +141,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
             .criterion("bought_soybeans", InventoryChangedCriterion.Conditions.items(ModItems.SOYBEANS))
             .build(consumer, BreakingFemme.MOD_ID + "/soybeans");
 
-        Advancement sterols = Advancement.Builder.create().parent(soybeans)
+        Advancement sterols = Advancement.Builder.createUntelemetered().parent(soybeans)
             .display(
                     ModItems.STEROLS,
                     Text.translatable("advancement.breakingfemme.sterols.title"),
@@ -156,7 +156,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
             .criterion("made_sterols", InventoryChangedCriterion.Conditions.items(ModItems.STEROLS))
             .build(consumer, BreakingFemme.MOD_ID + "/sterols");
 
-        Advancement androstadienedione = Advancement.Builder.create().parent(sterols)
+        Advancement androstadienedione = Advancement.Builder.createUntelemetered().parent(sterols)
             .display(
                     ModFluids.ANDROSTADIENEDIONE_BUCKET,
                     Text.translatable("advancement.breakingfemme.androstadienedione.title"),
@@ -171,7 +171,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
             .criterion("made_androstadienedione", InventoryChangedCriterion.Conditions.items(ModFluids.ANDROSTADIENEDIONE_BUCKET))
             .build(consumer, BreakingFemme.MOD_ID + "/androstadienedione");
 
-        Advancement crude_estrone = Advancement.Builder.create().parent(androstadienedione)
+        Advancement crude_estrone = Advancement.Builder.createUntelemetered().parent(androstadienedione)
             .display(
                     ModItems.CRUDE_ESTRONE,
                     Text.translatable("advancement.breakingfemme.crude_estrone.title"),
@@ -186,7 +186,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
             .criterion("made_crude_estrone", InventoryChangedCriterion.Conditions.items(ModItems.CRUDE_ESTRONE))
             .build(consumer, BreakingFemme.MOD_ID + "/crude_estrone");
 
-        Advancement pure_estrone = Advancement.Builder.create().parent(crude_estrone)
+        Advancement pure_estrone = Advancement.Builder.createUntelemetered().parent(crude_estrone)
             .display(
                     ModItems.PURE_ESTRONE,
                     Text.translatable("advancement.breakingfemme.pure_estrone.title"),
@@ -201,7 +201,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
             .criterion("made_pure_estrone", InventoryChangedCriterion.Conditions.items(ModItems.PURE_ESTRONE))
             .build(consumer, BreakingFemme.MOD_ID + "/pure_estrone");
 
-        Advancement pure_estradiol = Advancement.Builder.create().parent(pure_estrone)
+        Advancement pure_estradiol = Advancement.Builder.createUntelemetered().parent(pure_estrone)
             .display(
                     ModItems.PURE_ESTRADIOL_CRYSTALS,
                     Text.translatable("advancement.breakingfemme.pure_estradiol.title"),
@@ -217,7 +217,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
             .build(consumer, BreakingFemme.MOD_ID + "/pure_estradiol");
 
         //fermenting and distilling branch
-        Advancement fermenter = Advancement.Builder.create().parent(root)
+        Advancement fermenter = Advancement.Builder.createUntelemetered().parent(root)
             .display(
                     Blocks.BARREL,
                     Text.translatable("advancement.breakingfemme.fermenter.title"),
@@ -232,7 +232,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
             .criterion("made_fermenter", InventoryChangedCriterion.Conditions.items(ModBlocks.FERMENTER_CONTROLLER))
             .build(consumer, BreakingFemme.MOD_ID + "/fermenter");
         
-        Advancement yeast = Advancement.Builder.create().parent(fermenter)
+        Advancement yeast = Advancement.Builder.createUntelemetered().parent(fermenter)
             .display(
                     ModItems.YEAST,
                     Text.translatable("advancement.breakingfemme.yeast.title"),
@@ -247,7 +247,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
             .criterion("got_yeast", InventoryChangedCriterion.Conditions.items(ModItems.YEAST))
             .build(consumer, BreakingFemme.MOD_ID + "/yeast");
         
-        Advancement beer = Advancement.Builder.create().parent(yeast)
+        Advancement beer = Advancement.Builder.createUntelemetered().parent(yeast)
             .display(
                     ModItems.BEER_BOTTLE,
                     Text.translatable("advancement.breakingfemme.beer.title"),
@@ -262,7 +262,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
             .criterion("made_beer", InventoryChangedCriterion.Conditions.items(ModFluids.BEER_BUCKET))
             .build(consumer, BreakingFemme.MOD_ID + "/beer");
         
-        Advancement ethanol = Advancement.Builder.create().parent(beer)
+        Advancement ethanol = Advancement.Builder.createUntelemetered().parent(beer)
             .display(
                     ModFluids.ET95_BUCKET,
                     Text.translatable("advancement.breakingfemme.et95.title"),
@@ -277,7 +277,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
             .criterion("made_et95", InventoryChangedCriterion.Conditions.items(ModFluids.ET95_BUCKET))
             .build(consumer, BreakingFemme.MOD_ID + "/et95");
         
-        Advancement nether_beer = Advancement.Builder.create().parent(ethanol)
+        Advancement nether_beer = Advancement.Builder.createUntelemetered().parent(ethanol)
             .display(
                     ModItems.NETHER_BEER_BOTTLE,
                     Text.translatable("advancement.breakingfemme.nether_beer.title"),
@@ -292,7 +292,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
             .criterion("made_nether_beer", InventoryChangedCriterion.Conditions.items(ModFluids.NETHER_BEER_BUCKET))
             .build(consumer, BreakingFemme.MOD_ID + "/nether_beer");
         
-        Advancement coal_tar = Advancement.Builder.create().parent(ethanol)
+        Advancement coal_tar = Advancement.Builder.createUntelemetered().parent(ethanol)
             .display(
                     ModFluids.TAR_BUCKET,
                     Text.translatable("advancement.breakingfemme.tar.title"),
@@ -306,7 +306,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
             .criterion("made_tar", InventoryChangedCriterion.Conditions.items(ModItems.TAR))
             .build(consumer, BreakingFemme.MOD_ID + "/tar");
         
-        Advancement coal_oil = Advancement.Builder.create().parent(coal_tar)
+        Advancement coal_oil = Advancement.Builder.createUntelemetered().parent(coal_tar)
             .display(
                     ModFluids.COAL_OIL_BUCKET,
                     Text.translatable("advancement.breakingfemme.oil.title"),
@@ -321,7 +321,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
             .build(consumer, BreakingFemme.MOD_ID + "/oil");
         
         //milk processing branch
-        Advancement milk = Advancement.Builder.create().parent(root)
+        Advancement milk = Advancement.Builder.createUntelemetered().parent(root)
             .display(
                     Items.MILK_BUCKET,
                     Text.translatable("advancement.breakingfemme.milk.title"),
@@ -335,7 +335,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
             .criterion("milked_cow", InventoryChangedCriterion.Conditions.items(Items.MILK_BUCKET))
             .build(consumer, BreakingFemme.MOD_ID + "/milk");
 
-        Advancement ingot_mold = Advancement.Builder.create().parent(milk)
+        Advancement ingot_mold = Advancement.Builder.createUntelemetered().parent(milk)
             .display(
                     ModItems.INGOT_MOLD,
                     Text.translatable("advancement.breakingfemme.ingot_mold.title"),
@@ -349,7 +349,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
             .criterion("made_ingot_mold", InventoryChangedCriterion.Conditions.items(ModItems.INGOT_MOLD))
             .build(consumer, BreakingFemme.MOD_ID + "/ingot_mold");
 
-        Advancement separate = Advancement.Builder.create().parent(ingot_mold)
+        Advancement separate = Advancement.Builder.createUntelemetered().parent(ingot_mold)
             .display(
                     ModBlocks.MILK_SEPARATOR,
                     Text.translatable("advancement.breakingfemme.milk_separator.title"),
@@ -363,7 +363,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
             .criterion("made_milk_separator", InventoryChangedCriterion.Conditions.items(ModBlocks.MILK_SEPARATOR))
             .build(consumer, BreakingFemme.MOD_ID + "/milk_separator");
 
-        Advancement cream = Advancement.Builder.create().parent(separate)
+        Advancement cream = Advancement.Builder.createUntelemetered().parent(separate)
             .display(
                     ModItems.CREAMGOT,
                     Text.translatable("advancement.breakingfemme.creamgot.title"),
@@ -378,7 +378,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
             .criterion("made_creamgot", InventoryChangedCriterion.Conditions.items(ModItems.CREAMGOT))
             .build(consumer, BreakingFemme.MOD_ID + "/creamgot");
 
-        Advancement skimmed_milk = Advancement.Builder.create().parent(separate)
+        Advancement skimmed_milk = Advancement.Builder.createUntelemetered().parent(separate)
             .display(
                     ModItems.SKIMMED_MILK_BUCKET,
                     Text.translatable("advancement.breakingfemme.skimmed_milk.title"),
@@ -393,7 +393,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
             .criterion("made_skimmed_milk", InventoryChangedCriterion.Conditions.items(ModItems.SKIMMED_MILK_BUCKET))
             .build(consumer, BreakingFemme.MOD_ID + "/skimmed_milk");
 
-        Advancement milkgot = Advancement.Builder.create().parent(skimmed_milk)
+        Advancement milkgot = Advancement.Builder.createUntelemetered().parent(skimmed_milk)
             .display(
                     ModItems.MILKGOT,
                     Text.translatable("advancement.breakingfemme.milkgot.title"),
@@ -408,7 +408,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
             .build(consumer, BreakingFemme.MOD_ID + "/milkgot");
         
         //lime and lye branch
-        Advancement limestone_chunks = Advancement.Builder.create().parent(root)
+        Advancement limestone_chunks = Advancement.Builder.createUntelemetered().parent(root)
             .display(
                     ModBlocks.LIMESTONE_CHUNKS,
                     Text.translatable("advancement.breakingfemme.limestone_chunks.title"),
@@ -422,7 +422,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
             .criterion("got_limestone_chunks", InventoryChangedCriterion.Conditions.items(ModBlocks.LIMESTONE_CHUNKS))
             .build(consumer, BreakingFemme.MOD_ID + "/limestone_chunks");
         
-        Advancement slaked_lime = Advancement.Builder.create().parent(limestone_chunks)
+        Advancement slaked_lime = Advancement.Builder.createUntelemetered().parent(limestone_chunks)
             .display(
                     ModBlocks.SLAKED_LIME,
                     Text.translatable("advancement.breakingfemme.slaked_lime.title"),
@@ -436,7 +436,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
             .criterion("got_slaked_lime", InventoryChangedCriterion.Conditions.items(ModBlocks.SLAKED_LIME))
             .build(consumer, BreakingFemme.MOD_ID + "/slaked_lime");
         
-        Advancement lye_water = Advancement.Builder.create().parent(slaked_lime)
+        Advancement lye_water = Advancement.Builder.createUntelemetered().parent(slaked_lime)
             .display(
                     ModFluids.LYE_WATER_BUCKET,
                     Text.translatable("advancement.breakingfemme.lye_water.title"),
@@ -450,7 +450,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
             .criterion("got_lye_water", InventoryChangedCriterion.Conditions.items(ModFluids.LYE_WATER_BUCKET))
             .build(consumer, BreakingFemme.MOD_ID + "/lye_water");
         
-        Advancement concentrated_caustic_soda = Advancement.Builder.create().parent(lye_water)
+        Advancement concentrated_caustic_soda = Advancement.Builder.createUntelemetered().parent(lye_water)
             .display(
                     ModFluids.CONCENTRATED_CAUSTIC_SODA_BUCKET,
                     Text.translatable("advancement.breakingfemme.concentrated_caustic_soda.title"),
