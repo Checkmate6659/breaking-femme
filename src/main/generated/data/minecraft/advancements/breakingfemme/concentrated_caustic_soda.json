@@ -1,0 +1,38 @@
+{
+  "parent": "minecraft:breakingfemme/lye_water",
+  "criteria": {
+    "got_concentrated_caustic_soda": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "breakingfemme:concentrated_caustic_soda_solution_bucket"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.breakingfemme.concentrated_caustic_soda.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "breakingfemme:lye_water_bucket"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.breakingfemme.concentrated_caustic_soda.title"
+    }
+  },
+  "requirements": [
+    [
+      "got_concentrated_caustic_soda"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

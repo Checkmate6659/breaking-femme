@@ -1,0 +1,38 @@
+{
+  "parent": "minecraft:breakingfemme/aluminum",
+  "criteria": {
+    "got_raney_nickel": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "breakingfemme:raney_nickel"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.breakingfemme.raney_nickel.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "breakingfemme:aluminum_scrap"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.breakingfemme.raney_nickel.title"
+    }
+  },
+  "requirements": [
+    [
+      "got_raney_nickel"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

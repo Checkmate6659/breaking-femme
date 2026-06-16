@@ -1,0 +1,38 @@
+{
+  "parent": "minecraft:breakingfemme/limestone_chunks",
+  "criteria": {
+    "got_slaked_lime": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "breakingfemme:slaked_lime"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.breakingfemme.slaked_lime.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "breakingfemme:slaked_lime"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.breakingfemme.slaked_lime.title"
+    }
+  },
+  "requirements": [
+    [
+      "got_slaked_lime"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

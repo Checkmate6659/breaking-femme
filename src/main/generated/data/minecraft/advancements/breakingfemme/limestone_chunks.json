@@ -1,0 +1,38 @@
+{
+  "parent": "minecraft:breakingfemme/root",
+  "criteria": {
+    "got_limestone_chunks": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "breakingfemme:limestone_chunks"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.breakingfemme.limestone_chunks.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "breakingfemme:limestone_chunks"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.breakingfemme.limestone_chunks.title"
+    }
+  },
+  "requirements": [
+    [
+      "got_limestone_chunks"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

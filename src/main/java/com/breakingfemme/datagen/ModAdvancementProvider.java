@@ -33,7 +33,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                     Text.translatable("advancement.breakingfemme.root.description"), // The description
                     new Identifier(BreakingFemme.MOD_ID, "textures/gui/advancements.png"), // Background image used (for the advancements tab)
                     AdvancementFrame.TASK, // Options: TASK, CHALLENGE, GOAL
-                    true, // Show toast top right
+                    false, // Show toast top right
                     false, // Announce to chat
                     false // Hidden in the advancement tab
             )
@@ -56,7 +56,48 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
             .criterion("got_pulverized_nickel", InventoryChangedCriterion.Conditions.items(ModItems.PULVERIZED_NICKEL))
             .build(consumer, BreakingFemme.MOD_ID + "/pulverized_nickel");
 
-        //nickel sulfate branch
+        Advancement rubies = Advancement.Builder.create().parent(pulverized_nickel)
+            .display(
+                    ModItems.RUBY,
+                    Text.translatable("advancement.breakingfemme.ruby.title"),
+                    Text.translatable("advancement.breakingfemme.ruby.description"),
+                    null, // children to parent advancements don't need a background set
+                    AdvancementFrame.TASK,
+                    true,
+                    true,
+                    false
+            )
+            .criterion("got_ruby", InventoryChangedCriterion.Conditions.items(ModItems.RUBY))
+            .build(consumer, BreakingFemme.MOD_ID + "/ruby");
+
+        Advancement aluminum = Advancement.Builder.create().parent(rubies)
+            .display(
+                    ModItems.ALUMINUM_SCRAP,
+                    Text.translatable("advancement.breakingfemme.aluminum.title"),
+                    Text.translatable("advancement.breakingfemme.aluminum.description"),
+                    null, // children to parent advancements don't need a background set
+                    AdvancementFrame.TASK,
+                    true,
+                    true,
+                    false
+            )
+            .criterion("got_aluminum", InventoryChangedCriterion.Conditions.items(ModItems.ALUMINUM_SCRAP))
+            .build(consumer, BreakingFemme.MOD_ID + "/aluminum");
+
+        Advancement raney = Advancement.Builder.create().parent(aluminum)
+            .display(
+                    ModItems.RANEY_NICKEL,
+                    Text.translatable("advancement.breakingfemme.raney_nickel.title"),
+                    Text.translatable("advancement.breakingfemme.raney_nickel.description"),
+                    null, // children to parent advancements don't need a background set
+                    AdvancementFrame.TASK,
+                    true,
+                    true,
+                    false
+            )
+            .criterion("got_raney_nickel", InventoryChangedCriterion.Conditions.items(ModItems.RANEY_NICKEL))
+            .build(consumer, BreakingFemme.MOD_ID + "/raney_nickel");
+
         Advancement copper_sulfate = Advancement.Builder.create().parent(pulverized_nickel)
             .display(
                     ModItems.COPPER_SULFATE,
@@ -84,8 +125,6 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
             )
             .criterion("made_nickel_sulfate", InventoryChangedCriterion.Conditions.items(ModItems.NICKEL_SULFATE))
             .build(consumer, BreakingFemme.MOD_ID + "/nickel_sulfate");
-
-        //TODO: implement sulfuric acid, and make nickel sulfate with it, and make that a challenge
 
         //soybean (main) branch
         Advancement soybeans = Advancement.Builder.create().parent(root)
@@ -367,5 +406,62 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
             )
             .criterion("made_milkgot", InventoryChangedCriterion.Conditions.items(ModItems.MILKGOT))
             .build(consumer, BreakingFemme.MOD_ID + "/milkgot");
+        
+        //lime and lye branch
+        Advancement limestone_chunks = Advancement.Builder.create().parent(root)
+            .display(
+                    ModBlocks.LIMESTONE_CHUNKS,
+                    Text.translatable("advancement.breakingfemme.limestone_chunks.title"),
+                    Text.translatable("advancement.breakingfemme.limestone_chunks.description"),
+                    null, // children to parent advancements don't need a background set
+                    AdvancementFrame.TASK,
+                    true,
+                    true,
+                    false
+            )
+            .criterion("got_limestone_chunks", InventoryChangedCriterion.Conditions.items(ModBlocks.LIMESTONE_CHUNKS))
+            .build(consumer, BreakingFemme.MOD_ID + "/limestone_chunks");
+        
+        Advancement slaked_lime = Advancement.Builder.create().parent(limestone_chunks)
+            .display(
+                    ModBlocks.SLAKED_LIME,
+                    Text.translatable("advancement.breakingfemme.slaked_lime.title"),
+                    Text.translatable("advancement.breakingfemme.slaked_lime.description"),
+                    null, // children to parent advancements don't need a background set
+                    AdvancementFrame.TASK,
+                    true,
+                    true,
+                    false
+            )
+            .criterion("got_slaked_lime", InventoryChangedCriterion.Conditions.items(ModBlocks.SLAKED_LIME))
+            .build(consumer, BreakingFemme.MOD_ID + "/slaked_lime");
+        
+        Advancement lye_water = Advancement.Builder.create().parent(slaked_lime)
+            .display(
+                    ModFluids.LYE_WATER_BUCKET,
+                    Text.translatable("advancement.breakingfemme.lye_water.title"),
+                    Text.translatable("advancement.breakingfemme.lye_water.description"),
+                    null, // children to parent advancements don't need a background set
+                    AdvancementFrame.TASK,
+                    true,
+                    true,
+                    false
+            )
+            .criterion("got_lye_water", InventoryChangedCriterion.Conditions.items(ModFluids.LYE_WATER_BUCKET))
+            .build(consumer, BreakingFemme.MOD_ID + "/lye_water");
+        
+        Advancement concentrated_caustic_soda = Advancement.Builder.create().parent(lye_water)
+            .display(
+                    ModFluids.CONCENTRATED_CAUSTIC_SODA_BUCKET,
+                    Text.translatable("advancement.breakingfemme.concentrated_caustic_soda.title"),
+                    Text.translatable("advancement.breakingfemme.concentrated_caustic_soda.description"),
+                    null, // children to parent advancements don't need a background set
+                    AdvancementFrame.TASK,
+                    true,
+                    true,
+                    false
+            )
+            .criterion("got_concentrated_caustic_soda", InventoryChangedCriterion.Conditions.items(ModFluids.CONCENTRATED_CAUSTIC_SODA_BUCKET))
+        .build(consumer, BreakingFemme.MOD_ID + "/concentrated_caustic_soda");
     }
 }
