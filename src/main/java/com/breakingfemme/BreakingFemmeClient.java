@@ -163,7 +163,7 @@ public class BreakingFemmeClient implements ClientModInitializer {
             return -1;
         }, ModFluids.ESTRONE_RECRYSTALLIZATION_CAULDRON);
 
-        //estrone reduction in 95% ethanol (cauldron only)
+        //estrone reduction in caustic soda solution (cauldron only)
         ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
             if (i == 0)
             {
@@ -171,10 +171,17 @@ public class BreakingFemmeClient implements ClientModInitializer {
                     return 0xA0BCEFF8; //slightly blue solution :3 :3
                 if(blockState.get(EstroneReductionCauldronBlock.HAS_ESTRONE))
                     return 0xA0F9F9DE; //slightly yellow solution :3
-                return 0xA0D0DEF9; //same as 95% ethanol
+                return 0xEEDCE8F3; //same as concentrated caustic soda solution
             }
             return -1;
         }, ModFluids.ESTRONE_REDUCTION_CAULDRON);
+
+        //estradiol recrystallization in 95% ethanol (cauldron only)
+        ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
+            if (i == 0)
+                return 0xA0D0DEF9; //same as 95% ethanol
+            return -1;
+        }, ModFluids.ESTRONE_RECRYSTALLIZATION_CAULDRON);
 
         //thick potion (cauldron only)
         ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {

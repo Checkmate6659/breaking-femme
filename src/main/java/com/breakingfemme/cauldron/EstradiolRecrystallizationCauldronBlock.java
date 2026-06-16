@@ -23,7 +23,7 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 
 //https://maven.fabricmc.net/docs/fabric-api-0.88.2+1.20.2/net/fabricmc/fabric/api/transfer/v1/fluid/CauldronFluidContent.html
-public class EstroneRecrystallizationCauldronBlock extends AbstractCauldronBlock {
+public class EstradiolRecrystallizationCauldronBlock extends AbstractCauldronBlock {
     //custom cauldron behavior
     public static Map<Item, CauldronBehavior> BEHAVIOR = CauldronBehavior.createMap();
     static {
@@ -31,7 +31,7 @@ public class EstroneRecrystallizationCauldronBlock extends AbstractCauldronBlock
         CauldronBehavior.registerBucketBehavior(BEHAVIOR);
     }
 
-    public EstroneRecrystallizationCauldronBlock(AbstractBlock.Settings settings) {
+    public EstradiolRecrystallizationCauldronBlock(AbstractBlock.Settings settings) {
         super(settings, BEHAVIOR);
     }
 
@@ -47,13 +47,13 @@ public class EstroneRecrystallizationCauldronBlock extends AbstractCauldronBlock
         return 3;
     }
 
-    //if cooled down, pop those estrone crystals off :3
+    //if cooled down, pop those estradiol crystals off :3 :3
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         //this is supposed to take some time. but less if its COLD.
         if(ThermalUtil.isCauldronCold(world, pos) || (random.nextInt(3) == 0 && !(world.getDimension().ultrawarm() || ThermalUtil.isBlockHot(world, pos.down()))))
         {
             world.setBlockState(pos, ModFluids.SLUDGE_CAULDRON.getDefaultState()); //dirty ethanol -> sludge
-            world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5f, pos.getY() + 0.125f, pos.getZ() + 0.5f, new ItemStack(ModItems.PURE_ESTRONE)));
+            world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5f, pos.getY() + 0.125f, pos.getZ() + 0.5f, new ItemStack(ModItems.PURE_ESTRADIOL_CRYSTALS)));
         }
     }
 

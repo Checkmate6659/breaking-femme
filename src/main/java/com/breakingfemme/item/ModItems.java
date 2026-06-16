@@ -93,6 +93,7 @@ public class ModItems {
     public static final Item STEROLS = registerItem("sterols", new Item(new FabricItemSettings()));
     public static final Item CRUDE_ESTRONE = registerItem("crude_estrone", new Item(new FabricItemSettings()));
     public static final Item PURE_ESTRONE = registerItem("pure_estrone", new Item(new FabricItemSettings()));
+    public static final Item CRUDE_ESTRADIOL = registerItem("crude_estradiol", new Item(new FabricItemSettings()));
     public static final Item PURE_ESTRADIOL_CRYSTALS = registerItem("pure_estradiol_crystals", new Item(new FabricItemSettings()));
     public static final Item PURE_ESTRADIOL_POWDER = registerItem("pure_estradiol_powder", new Item(new FabricItemSettings()));
     public static final Item HORSE_JUICE = registerItem("conjugated_equine_estrogens", new Item(new FabricItemSettings())); //compat with Mayaqq's Estrogen (if i can make that work)
@@ -200,6 +201,7 @@ public class ModItems {
             entries.add(ModBlocks.LIMESTONE_CHUNKS);
             entries.add(ModBlocks.QUICKLIME);
             entries.add(ModBlocks.SLAKED_LIME);
+            entries.add(CRUDE_ESTRADIOL);
             entries.add(PURE_ESTRADIOL_CRYSTALS);
             entries.add(PURE_ESTRADIOL_POWDER);
             entries.add(HORSE_JUICE);

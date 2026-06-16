@@ -1,0 +1,22 @@
+{
+  "type": "create:milling",
+  "ingredients": [
+    {
+      "item": "breakingfemme:pure_estradiol_crystals"
+    }
+  ],
+  "processingTime": 192,
+  "results": [
+    {
+      "item": "breakingfemme:pure_estradiol_powder"
+    }
+  ],
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "create"
+      ]
+    }
+  ]
+}

@@ -65,6 +65,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.STEROLS, Models.GENERATED);
         itemModelGenerator.register(ModItems.CRUDE_ESTRONE, Models.GENERATED);
         itemModelGenerator.register(ModItems.PURE_ESTRONE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.CRUDE_ESTRADIOL, Models.GENERATED);
         itemModelGenerator.register(ModItems.PURE_ESTRADIOL_CRYSTALS, Models.GENERATED);
         itemModelGenerator.register(ModItems.PURE_ESTRADIOL_POWDER, Models.GENERATED);
         itemModelGenerator.register(ModItems.HORSE_JUICE, Models.GENERATED);

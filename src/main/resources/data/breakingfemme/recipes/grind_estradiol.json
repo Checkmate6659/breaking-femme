@@ -1,0 +1,11 @@
+{
+    "type": "breakingfemme:grinding",
+    "input":
+    {
+        "item": "breakingfemme:pure_estradiol_crystals"
+    },
+    "output":
+    {
+        "item": "breakingfemme:pure_estradiol_powder"
+    }
+}

@@ -52,7 +52,7 @@ public class EstroneReductionCauldronBlock extends AbstractCauldronBlock {
             if(!world.isClient)
             {
                 player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, new ItemStack(Items.BUCKET)));
-                world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5f, pos.getY() + 0.125f, pos.getZ() + 0.5f, new ItemStack(ModItems.PURE_ESTRADIOL_POWDER))); //FIXME: crude estradiol! then recrystallize
+                world.spawnEntity(new ItemEntity(world, pos.getX() + 0.5f, pos.getY() + 0.125f, pos.getZ() + 0.5f, new ItemStack(ModItems.CRUDE_ESTRADIOL)));
                 world.setBlockState(pos, ModFluids.SLUDGE_CAULDRON.getDefaultState());
                 world.playSound((PlayerEntity)null, pos, SoundEvents.ENTITY_GENERIC_SPLASH, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 world.emitGameEvent((Entity)null, GameEvent.FLUID_PLACE, pos);

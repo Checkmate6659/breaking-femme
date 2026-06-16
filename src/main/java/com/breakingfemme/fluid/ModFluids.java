@@ -12,6 +12,7 @@ import com.breakingfemme.item.SolutionBucketItem;
 import com.breakingfemme.cauldron.SterolSolutionCauldronBlock;
 import com.breakingfemme.cauldron.CopperSulfateCauldronBlock;
 import com.breakingfemme.cauldron.EgelCauldronBlock;
+import com.breakingfemme.cauldron.EstradiolRecrystallizationCauldronBlock;
 import com.breakingfemme.cauldron.Et32CauldronBlock;
 import com.breakingfemme.cauldron.Et64CauldronBlock;
 import com.breakingfemme.cauldron.Et95CauldronBlock;
@@ -73,6 +74,7 @@ public class ModFluids {
     public static Block YEAST_CAULDRON;
     public static Block ESTRONE_RECRYSTALLIZATION_CAULDRON;
     public static Block ESTRONE_REDUCTION_CAULDRON;
+    public static Block ESTRADIOL_RECRYSTALLIZATION_CAULDRON;
     public static Block THICK_POTION_CAULDRON;
     public static Block EGEL_CAULDRON;
 
@@ -435,6 +437,7 @@ public static void registerModFluids()
         YEAST_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "yeast_cauldron"), new YeastCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
         ESTRONE_RECRYSTALLIZATION_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "estrone_recrystallization_cauldron"), new EstroneRecrystallizationCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
         ESTRONE_REDUCTION_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "estrone_reduction_cauldron"), new EstroneReductionCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
+        ESTRADIOL_RECRYSTALLIZATION_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "estradiol_recrystallization_cauldron"), new EstradiolRecrystallizationCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
         EGEL_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "egel_cauldron"), new EgelCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
         THICK_POTION_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "thick_potion_cauldron"), new ThickPotionCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
         //TODO: find a way to make it bind to create's thick potion fluid *variant*. it's NOT a fluid. it's a VARIANT. and that makes it annoying.
