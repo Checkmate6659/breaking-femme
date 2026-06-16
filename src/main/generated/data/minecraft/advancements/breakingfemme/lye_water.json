@@ -1,0 +1,38 @@
+{
+  "parent": "minecraft:breakingfemme/slaked_lime",
+  "criteria": {
+    "got_lye_water": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "breakingfemme:lye_water_bucket"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.breakingfemme.lye_water.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "breakingfemme:lye_water_bucket"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.breakingfemme.lye_water.title"
+    }
+  },
+  "requirements": [
+    [
+      "got_lye_water"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

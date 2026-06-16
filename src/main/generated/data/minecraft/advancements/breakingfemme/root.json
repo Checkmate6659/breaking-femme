@@ -25,7 +25,7 @@
       "item": "breakingfemme:mortar_pestle",
       "nbt": "{Damage:0}"
     },
-    "show_toast": true,
+    "show_toast": false,
     "title": {
       "translate": "advancement.breakingfemme.root.title"
     }

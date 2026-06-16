@@ -1,0 +1,38 @@
+{
+  "parent": "minecraft:breakingfemme/pulverized_nickel",
+  "criteria": {
+    "got_ruby": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "breakingfemme:ruby"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.breakingfemme.ruby.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "breakingfemme:ruby"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.breakingfemme.ruby.title"
+    }
+  },
+  "requirements": [
+    [
+      "got_ruby"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
