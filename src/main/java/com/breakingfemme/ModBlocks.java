@@ -1,6 +1,21 @@
-package com.breakingfemme.block;
+package com.breakingfemme;
 
-import com.breakingfemme.BreakingFemme;
+import com.breakingfemme.block.ChiliCropBlock;
+import com.breakingfemme.block.DistillerBaseBlock;
+import com.breakingfemme.block.DistillerColumnBlock;
+import com.breakingfemme.block.DistillerTopBlock;
+import com.breakingfemme.block.FermenterAirlockBlock;
+import com.breakingfemme.block.FermenterBottomBlock;
+import com.breakingfemme.block.FermenterControllerBlock;
+import com.breakingfemme.block.FermenterHeaterBlock;
+import com.breakingfemme.block.FermenterMixerBlock;
+import com.breakingfemme.block.FermenterPanelBlock;
+import com.breakingfemme.block.FermenterTopBlock;
+import com.breakingfemme.block.FunnelBlock;
+import com.breakingfemme.block.KelpAshBlock;
+import com.breakingfemme.block.MilkSeparatorBlock;
+import com.breakingfemme.block.QuicklimeBlock;
+import com.breakingfemme.block.SoyCropBlock;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;

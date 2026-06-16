@@ -1,5 +1,6 @@
 package com.breakingfemme.screen;
 
+import com.breakingfemme.ModScreenHandlers;
 import com.breakingfemme.block.entity.FermenterBlockEntity;
 
 import net.minecraft.block.entity.BlockEntity;

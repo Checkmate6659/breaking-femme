@@ -5,10 +5,11 @@ import java.util.Optional;
 import org.jetbrains.annotations.Nullable;
 
 import com.breakingfemme.BreakingFemme;
+import com.breakingfemme.ModBlockEntities;
+import com.breakingfemme.ModBlocks;
+import com.breakingfemme.ModFluids;
 import com.breakingfemme.ThermalUtil;
 import com.breakingfemme.block.DistillerColumnBlock;
-import com.breakingfemme.block.ModBlocks;
-import com.breakingfemme.fluid.ModFluids;
 import com.breakingfemme.recipe.DistillingRecipe;
 
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;

@@ -4,7 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.breakingfemme.BreakingFemme;
-import com.breakingfemme.block.ModBlocks;
+import com.breakingfemme.ModBlocks;
+
 import me.shedaniel.rei.api.client.gui.widgets.Widget;
 import me.shedaniel.rei.api.client.gui.widgets.Widgets;
 import me.shedaniel.rei.api.client.gui.Renderer;

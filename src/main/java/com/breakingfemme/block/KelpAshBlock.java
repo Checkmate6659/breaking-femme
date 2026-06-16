@@ -1,5 +1,7 @@
 package com.breakingfemme.block;
 
+import com.breakingfemme.ModBlocks;
+
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FallingBlock;

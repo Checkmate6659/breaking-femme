@@ -46,14 +46,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.breakingfemme.block.ModBlocks;
-import com.breakingfemme.block.entity.ModBlockEntities;
-import com.breakingfemme.fluid.ModFluids;
-import com.breakingfemme.item.ModItems;
-import com.breakingfemme.networking.ModNetworking;
-import com.breakingfemme.recipe.ModRecipes;
-import com.breakingfemme.screen.ModScreenHandlers;
-
 public class BreakingFemme implements ModInitializer {
 	public static final String MOD_ID = "breakingfemme";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);

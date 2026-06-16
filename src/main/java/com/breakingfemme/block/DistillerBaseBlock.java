@@ -3,8 +3,8 @@ package com.breakingfemme.block;
 import org.jetbrains.annotations.Nullable;
 
 import com.breakingfemme.BreakingFemme;
+import com.breakingfemme.ModBlockEntities;
 import com.breakingfemme.block.entity.DistillerBlockEntity;
-import com.breakingfemme.block.entity.ModBlockEntities;
 
 import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;

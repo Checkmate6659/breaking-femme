@@ -3,14 +3,15 @@ package com.breakingfemme.block.entity;
 import java.util.Optional;
 
 import com.breakingfemme.BreakingFemme;
+import com.breakingfemme.ModBlockEntities;
+import com.breakingfemme.ModBlocks;
+import com.breakingfemme.ModFluids;
 import com.breakingfemme.ThermalUtil;
 import com.breakingfemme.block.FermenterControllerBlock;
 import com.breakingfemme.block.FermenterHeaterBlock;
 import com.breakingfemme.block.FermenterMixerBlock;
 import com.breakingfemme.block.FermenterPanelBlock;
-import com.breakingfemme.block.ModBlocks;
 import com.breakingfemme.datagen.ModBlockTagProvider;
-import com.breakingfemme.fluid.ModFluids;
 import com.breakingfemme.recipe.FermentingRecipe;
 import com.breakingfemme.screen.FermenterScreenHandler;
 

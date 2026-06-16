@@ -1,6 +1,6 @@
 package com.breakingfemme.block;
 
-import com.breakingfemme.item.ModItems;
+import com.breakingfemme.ModItems;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

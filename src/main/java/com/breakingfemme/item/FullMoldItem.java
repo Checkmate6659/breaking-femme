@@ -5,8 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.Nullable;
 
 import com.breakingfemme.BreakingFemme;
+import com.breakingfemme.ModFluids;
+import com.breakingfemme.ModItems;
 import com.breakingfemme.SpeedVectorAccessor;
-import com.breakingfemme.fluid.ModFluids;
 
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;

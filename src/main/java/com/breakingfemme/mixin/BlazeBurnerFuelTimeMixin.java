@@ -4,9 +4,9 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
+import com.breakingfemme.ModFluids;
+import com.breakingfemme.ModItems;
 import com.breakingfemme.datagen.ModItemTagProvider;
-import com.breakingfemme.fluid.ModFluids;
-import com.breakingfemme.item.ModItems;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.simibubi.create.content.processing.burner.BlazeBurnerBlockEntity;
 

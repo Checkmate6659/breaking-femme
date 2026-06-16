@@ -1,6 +1,9 @@
-package com.breakingfemme.recipe;
+package com.breakingfemme;
 
-import com.breakingfemme.BreakingFemme;
+import com.breakingfemme.recipe.DistillingRecipe;
+import com.breakingfemme.recipe.FermentingRecipe;
+import com.breakingfemme.recipe.FilteringRecipe;
+import com.breakingfemme.recipe.GrindingRecipe;
 
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;

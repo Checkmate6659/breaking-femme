@@ -2,8 +2,8 @@ package com.breakingfemme.block;
 
 import org.jetbrains.annotations.Nullable;
 
+import com.breakingfemme.ModBlockEntities;
 import com.breakingfemme.block.entity.FermenterBlockEntity;
-import com.breakingfemme.block.entity.ModBlockEntities;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;

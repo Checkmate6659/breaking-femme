@@ -1,7 +1,7 @@
 package com.breakingfemme.compat;
 
-import com.breakingfemme.block.ModBlocks;
-import com.breakingfemme.item.ModItems;
+import com.breakingfemme.ModBlocks;
+import com.breakingfemme.ModItems;
 import com.breakingfemme.recipe.FilteringRecipe;
 import com.breakingfemme.recipe.GrindingRecipe;
 import com.breakingfemme.screen.FermenterScreen;

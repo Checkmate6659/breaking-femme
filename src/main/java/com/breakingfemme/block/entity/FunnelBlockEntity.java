@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.jetbrains.annotations.Nullable;
 
+import com.breakingfemme.ModBlockEntities;
 import com.breakingfemme.ModSounds;
 import com.breakingfemme.datagen.ModFluidTagProvider;
 import com.breakingfemme.datagen.ModItemTagProvider;

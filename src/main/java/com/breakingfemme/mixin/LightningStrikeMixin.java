@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.breakingfemme.BreakingFemme;
-import com.breakingfemme.block.ModBlocks;
+import com.breakingfemme.ModBlocks;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

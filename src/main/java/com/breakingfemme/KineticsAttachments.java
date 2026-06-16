@@ -1,6 +1,5 @@
 package com.breakingfemme;
 
-import com.breakingfemme.networking.ModNetworking;
 import com.mojang.serialization.Codec;
 
 import net.fabricmc.fabric.api.attachment.v1.AttachmentRegistry;

@@ -1,6 +1,6 @@
-package com.breakingfemme.screen;
+package com.breakingfemme;
 
-import com.breakingfemme.BreakingFemme;
+import com.breakingfemme.screen.FermenterScreenHandler;
 
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
 import net.minecraft.registry.Registries;

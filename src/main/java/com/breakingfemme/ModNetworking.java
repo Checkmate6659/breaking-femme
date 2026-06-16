@@ -1,7 +1,4 @@
-package com.breakingfemme.networking;
-
-import com.breakingfemme.BreakingFemme;
-import com.breakingfemme.KineticsAttachments;
+package com.breakingfemme;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.entity.player.PlayerEntity;

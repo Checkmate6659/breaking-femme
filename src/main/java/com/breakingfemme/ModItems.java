@@ -1,9 +1,15 @@
-package com.breakingfemme.item;
+package com.breakingfemme;
 
-import com.breakingfemme.BreakingFemme;
-import com.breakingfemme.ModSounds;
-import com.breakingfemme.block.ModBlocks;
-import com.breakingfemme.fluid.ModFluids;
+import com.breakingfemme.item.AlcoholDrinkItem;
+import com.breakingfemme.item.ChiliPepperItem;
+import com.breakingfemme.item.ConcentratedCausticSodaBottleItem;
+import com.breakingfemme.item.CopperSulfateItem;
+import com.breakingfemme.item.EgelItem;
+import com.breakingfemme.item.FullMoldItem;
+import com.breakingfemme.item.LethalDrinkItem;
+import com.breakingfemme.item.LyeWaterBottleItem;
+import com.breakingfemme.item.MetalPipeItem;
+import com.breakingfemme.item.MortarPestleItem;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;

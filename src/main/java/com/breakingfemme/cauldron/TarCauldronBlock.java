@@ -2,7 +2,7 @@ package com.breakingfemme.cauldron;
 
 import java.util.Map;
 
-import com.breakingfemme.fluid.ModFluids;
+import com.breakingfemme.ModFluids;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.AbstractCauldronBlock;

@@ -3,8 +3,8 @@ package com.breakingfemme.datagen;
 import java.util.concurrent.CompletableFuture;
 
 import com.breakingfemme.BreakingFemme;
-import com.breakingfemme.block.ModBlocks;
-import com.breakingfemme.fluid.ModFluids;
+import com.breakingfemme.ModBlocks;
+import com.breakingfemme.ModFluids;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;

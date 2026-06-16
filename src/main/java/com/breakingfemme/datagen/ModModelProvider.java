@@ -1,9 +1,9 @@
 package com.breakingfemme.datagen;
 
-import com.breakingfemme.block.ModBlocks;
+import com.breakingfemme.ModBlocks;
+import com.breakingfemme.ModFluids;
+import com.breakingfemme.ModItems;
 import com.breakingfemme.block.SoyCropBlock;
-import com.breakingfemme.fluid.ModFluids;
-import com.breakingfemme.item.ModItems;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;

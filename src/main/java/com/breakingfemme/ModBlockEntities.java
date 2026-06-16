@@ -1,7 +1,9 @@
-package com.breakingfemme.block.entity;
+package com.breakingfemme;
 
-import com.breakingfemme.BreakingFemme;
-import com.breakingfemme.block.ModBlocks;
+import com.breakingfemme.block.entity.DistillerBlockEntity;
+import com.breakingfemme.block.entity.DistillerTopBlockEntity;
+import com.breakingfemme.block.entity.FermenterBlockEntity;
+import com.breakingfemme.block.entity.FunnelBlockEntity;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;

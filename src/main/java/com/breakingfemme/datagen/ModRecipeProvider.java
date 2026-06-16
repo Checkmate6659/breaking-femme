@@ -3,9 +3,9 @@ package com.breakingfemme.datagen;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
-import com.breakingfemme.block.ModBlocks;
-import com.breakingfemme.fluid.ModFluids;
-import com.breakingfemme.item.ModItems;
+import com.breakingfemme.ModBlocks;
+import com.breakingfemme.ModFluids;
+import com.breakingfemme.ModItems;
 import com.google.common.collect.ImmutableList;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -86,7 +86,9 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         offerFoodCookingRecipe(exporter, "smoking", RecipeSerializer.SMOKING, 100, ModItems.DOUGH, Items.BREAD, 0.15F);
         offerFoodCookingRecipe(exporter, "campfire_cooking", RecipeSerializer.CAMPFIRE_COOKING, 600, ModItems.DOUGH, Items.BREAD, 0.15F);
 
-        //re-casting pulverized copper/nickel (can't just use offerSmelting because it doesn't behave well with tags)
+        //re-casting pulverized iron/copper/nickel (can't just use offerSmelting because it doesn't behave well with tags)
+        CookingRecipeJsonBuilder.createSmelting(Ingredient.fromTag(ModItemTagProvider.PULVERIZED_IRON), RecipeCategory.MISC, Items.IRON_INGOT, 0, 200).criterion(hasItem(ModItems.PULVERIZED_COPPER), conditionsFromTag(ModItemTagProvider.PULVERIZED_COPPER)).offerTo(exporter, "copper_ingot_from_remelting");
+        CookingRecipeJsonBuilder.createBlasting(Ingredient.fromTag(ModItemTagProvider.PULVERIZED_IRON), RecipeCategory.MISC, Items.IRON_INGOT, 0, 100).criterion(hasItem(ModItems.PULVERIZED_COPPER), conditionsFromTag(ModItemTagProvider.PULVERIZED_COPPER)).offerTo(exporter, "copper_ingot_from_remelting_blasting");
         CookingRecipeJsonBuilder.createSmelting(Ingredient.fromTag(ModItemTagProvider.PULVERIZED_COPPER), RecipeCategory.MISC, Items.COPPER_INGOT, 0, 200).criterion(hasItem(ModItems.PULVERIZED_COPPER), conditionsFromTag(ModItemTagProvider.PULVERIZED_COPPER)).offerTo(exporter, "copper_ingot_from_remelting");
         CookingRecipeJsonBuilder.createBlasting(Ingredient.fromTag(ModItemTagProvider.PULVERIZED_COPPER), RecipeCategory.MISC, Items.COPPER_INGOT, 0, 100).criterion(hasItem(ModItems.PULVERIZED_COPPER), conditionsFromTag(ModItemTagProvider.PULVERIZED_COPPER)).offerTo(exporter, "copper_ingot_from_remelting_blasting");
         CookingRecipeJsonBuilder.createSmelting(Ingredient.fromTag(ModItemTagProvider.PULVERIZED_NICKEL), RecipeCategory.MISC, ModItems.NICKEL_INGOT, 0, 200).criterion(hasItem(ModItems.PULVERIZED_NICKEL), conditionsFromTag(ModItemTagProvider.PULVERIZED_NICKEL)).offerTo(exporter, "nickel_ingot_from_remelting");

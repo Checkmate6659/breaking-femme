@@ -1,7 +1,7 @@
 package com.breakingfemme.block;
 
+import com.breakingfemme.ModItems;
 import com.breakingfemme.ModSounds;
-import com.breakingfemme.item.ModItems;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

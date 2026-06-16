@@ -2,6 +2,8 @@ package com.breakingfemme.block.entity;
 
 import org.jetbrains.annotations.Nullable;
 
+import com.breakingfemme.ModBlockEntities;
+
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.fluid.base.SingleFluidStorage;
