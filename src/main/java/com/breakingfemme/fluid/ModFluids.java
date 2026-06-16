@@ -218,7 +218,7 @@ public class ModFluids {
     //AUTOGENERATION LABEL DO NOT TOUCH
 
 
-public static void registerModFluids()
+    public static void registerModFluids()
     {
         //Copper sulfate solution
         STILL_COPPER_SULFATE = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "copper_sulfate_solution"),
