@@ -120,6 +120,7 @@ public class FermentingRecipe implements Recipe<ImplementedInventory> {
                 stacks.add(stack);
         }
 
+        //why does this shit literally never match????? we'll need to investigate
         if(inputs.size() > stacks.size()) //no shot. every step removes 1 ingredient and 1 stack
             return false;
 
