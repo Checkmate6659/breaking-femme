@@ -61,6 +61,7 @@ import com.breakingfemme.cauldron.SulfuricAcidCauldronBlock;
 import com.breakingfemme.cauldron.ImpureDiluteSulfuricAcidCauldronBlock;
 import com.breakingfemme.cauldron.HydrochloricAcidCauldronBlock;
 //AUTOGENERATION LABEL DO NOT TOUCH
+import com.breakingfemme.cauldron.HydrochloricAcidSynthesisCauldronBlock;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -92,6 +93,7 @@ public class ModFluids {
     public static Block ANDROSTADIENEDIONE_EXTRACTION_CAULDRON;
     public static Block YEAST_STARTER_CAULDRON;
     public static Block YEAST_CAULDRON;
+    public static Block HYDROCHLORIC_ACID_SYNTHESIS_CAULDRON;
     public static Block ESTRONE_RECRYSTALLIZATION_CAULDRON;
     public static Block ESTRONE_REDUCTION_CAULDRON;
     public static Block ESTRADIOL_RECRYSTALLIZATION_CAULDRON;
@@ -455,6 +457,7 @@ public class ModFluids {
         ANDROSTADIENEDIONE_EXTRACTION_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "androstadienedione_extraction_cauldron"), new AndrostadienedioneExtractionCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
         YEAST_STARTER_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "yeast_starter_cauldron"), new YeastStarterCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
         YEAST_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "yeast_cauldron"), new YeastCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
+        HYDROCHLORIC_ACID_SYNTHESIS_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "hydrochloric_acid_synthesis_cauldron"), new HydrochloricAcidSynthesisCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
         ESTRONE_RECRYSTALLIZATION_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "estrone_recrystallization_cauldron"), new EstroneRecrystallizationCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
         ESTRONE_REDUCTION_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "estrone_reduction_cauldron"), new EstroneReductionCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
         ESTRADIOL_RECRYSTALLIZATION_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "estradiol_recrystallization_cauldron"), new EstradiolRecrystallizationCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));

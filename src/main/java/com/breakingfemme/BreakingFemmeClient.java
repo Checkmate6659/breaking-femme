@@ -152,6 +152,12 @@ public class BreakingFemmeClient implements ClientModInitializer {
             return -1;
         }, ModFluids.YEAST_CAULDRON);
 
+        ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
+            if (i == 0)
+                return 0xC0EEE100; //sulfuric acid but slightly darker
+            return -1;
+        }, ModFluids.HYDROCHLORIC_ACID_SYNTHESIS_CAULDRON);
+
         //estrone recrystallization in 95% ethanol (cauldron only)
         ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
             if (i == 0)
