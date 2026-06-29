@@ -69,7 +69,7 @@ public class FermentingRecipe implements Recipe<ImplementedInventory> {
     private boolean assignable(ArrayList<Ingredient> ings, ArrayList<ItemStack> items)
     {
         int size = ings.size();
-        if(size == 0)
+        if(size == 0) //all ingredients assigned properly.
             return true;
 
         ItemStack last_item = items.get(size - 1);
@@ -103,16 +103,25 @@ public class FermentingRecipe implements Recipe<ImplementedInventory> {
             return false;
 
         ArrayList<Ingredient> inputs = new ArrayList<Ingredient>(4);
-        inputs.add(input1);
-        inputs.add(input2);
-        inputs.add(input3);
-        inputs.add(input4);
+        if(!input1.isEmpty())
+            inputs.add(input1);
+        if(!input2.isEmpty())
+            inputs.add(input2);
+        if(!input3.isEmpty())
+            inputs.add(input3);
+        if(!input4.isEmpty())
+            inputs.add(input4);
     
         ArrayList<ItemStack> stacks = new ArrayList<ItemStack>(4);
-        stacks.add(inventory.getStack(0));
-        stacks.add(inventory.getStack(1));
-        stacks.add(inventory.getStack(2));
-        stacks.add(inventory.getStack(3));
+        for(int i = 0; i < 4; i++)
+        {
+            ItemStack stack = inventory.getStack(i);
+            if(!stack.isEmpty())
+                stacks.add(stack);
+        }
+
+        if(inputs.size() > stacks.size()) //no shot. every step removes 1 ingredient and 1 stack
+            return false;
 
         return assignable(inputs, stacks);
     }
