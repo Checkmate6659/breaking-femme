@@ -22,7 +22,7 @@
         {
             "min_time": 3500,
             "max_time": 4500,
-            "min_temperature": 57.0,
+            "min_temperature": 54.0,
             "max_temperature": 64.0,
             "mix": true
         },
@@ -42,7 +42,7 @@
         },
         {
             "min_time": 1,
-            "max_time": 6000,
+            "max_time": 18000,
             "min_temperature": 50.0,
             "max_temperature": 127.0,
             "mix": true
