@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "fire_bricks",
+  "key": {
+    "3": {
+      "tag": "c:buckets/water"
+    },
+    ":": {
+      "tag": "c:bricks/normal"
+    },
+    ">": [
+      {
+        "tag": "c:dusts/clay"
+      },
+      {
+        "item": "minecraft:clay_ball"
+      }
+    ]
+  },
+  "pattern": [
+    ">:>",
+    ":3:",
+    ">:>"
+  ],
+  "result": {
+    "item": "breakingfemme:fire_bricks"
+  },
+  "show_notification": true
+}

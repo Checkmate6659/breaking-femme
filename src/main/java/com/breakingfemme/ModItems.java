@@ -160,6 +160,7 @@ public class ModItems {
             entries.add(ModFluids.NICKEL_SULFATE_BUCKET);
             entries.add(ROCK_SALT);
             entries.add(ModBlocks.ROCK_SALT_BLOCK);
+            entries.add(ModBlocks.FIRE_BRICKS);
             entries.add(ModFluids.HYDROCHLORIC_ACID_BUCKET);
             entries.add(FLOUR);
             entries.add(YEAST);

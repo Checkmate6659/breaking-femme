@@ -66,6 +66,9 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
     public static final TagKey<Item> MILK_BUCKET = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "buckets/milk"));
     //TODO: do we accept bottles? if yes, how do we add farmersdelight:milk_bottles? its registered as c:foods/milk, alongside minecraft milk buckets, in common tags
     public static final TagKey<Item> MILK_BOTTLE = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "milk_bottles")); //counts as 1/3 bucket; usefulfood:milkbottle
+    public static final TagKey<Item> CLAY_DUST = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "dusts/clay"));
+    public static final TagKey<Item> BRICK = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "bricks/normal"));
+    public static final TagKey<Item> WATER_BUCKET = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "buckets/water"));
     public static final TagKey<Item> FILTER = TagKey.of(RegistryKeys.ITEM, new Identifier(BreakingFemme.MOD_ID, "filter"));
     public static final TagKey<Item> RESISTANT_FILTER = TagKey.of(RegistryKeys.ITEM, new Identifier(BreakingFemme.MOD_ID, "resistant_filter"));
     public static final TagKey<Item> BLAZE_BURNER_FUEL = TagKey.of(RegistryKeys.ITEM, new Identifier("create", "blaze_burner_fuel/regular")); //regular fuel (estrone and estradiol, and chili)
@@ -93,6 +96,8 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
         getOrCreateTagBuilder(STONES).add(Blocks.DIORITE.asItem());
         getOrCreateTagBuilder(STONES).add(Blocks.ANDESITE.asItem());
         getOrCreateTagBuilder(STONES).add(Blocks.TUFF.asItem());
+        getOrCreateTagBuilder(BRICK).add(Items.BRICK);
+        getOrCreateTagBuilder(WATER_BUCKET).add(Items.WATER_BUCKET);
         getOrCreateTagBuilder(NICKEL_BLOCK).add(ModBlocks.NICKEL_BLOCK.asItem());
         getOrCreateTagBuilder(NICKEL_ORES).add(ModBlocks.NICKEL_ORE.asItem());
         getOrCreateTagBuilder(NICKEL_ORES).add(ModBlocks.DEEPSLATE_NICKEL_ORE.asItem());

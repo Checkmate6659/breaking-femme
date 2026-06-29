@@ -46,6 +46,7 @@ public class ModBlocks {
     public static final Block LIMESTONE_CHUNKS = registerBlock("limestone_chunks", new SandBlock(MapColor.PALE_YELLOW.color, FabricBlockSettings.copyOf(Blocks.SAND).mapColor(MapColor.PALE_YELLOW)));
     public static final Block SLAKED_LIME = registerBlock("slaked_lime", new Block(FabricBlockSettings.copyOf(Blocks.MUD).mapColor(MapColor.PALE_YELLOW)));
     public static final Block QUICKLIME = registerBlock("quicklime", new QuicklimeBlock(FabricBlockSettings.copyOf(Blocks.SAND).mapColor(MapColor.PALE_YELLOW))); //needs to be registered after slaked lime, since it references ModBlocks.SLAKED_LIME in the QuicklimeBlock class
+    public static final Block FIRE_BRICKS = registerBlockFireproof("fire_bricks", new Block(FabricBlockSettings.copyOf(Blocks.BRICKS)));
 
     //fermenter blocks
     public static final Block FERMENTER_CONTROLLER = registerBlock("fermenter_controller", new FermenterControllerBlock(FabricBlockSettings.copyOf(Blocks.SPRUCE_PLANKS))); //block entity already cannot be pushed
@@ -68,6 +69,13 @@ public class ModBlocks {
     private static final Block registerBlock(String name, Block block)
     {
         Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, name), new BlockItem(block, new FabricItemSettings()));
+        return Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, name), block);
+    }
+
+    //register block and item but the item is fireproof. repeat code but kinda dont want param bloat
+    private static final Block registerBlockFireproof(String name, Block block)
+    {
+        Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, name), new BlockItem(block, new FabricItemSettings().fireproof()));
         return Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, name), block);
     }
 

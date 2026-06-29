@@ -72,12 +72,14 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
             .pool(LootPool.builder().rolls(ConstantLootNumberProvider.create(8.0f)).with(ItemEntry.builder(ModItems.RUBY)))
         ));
 
+        //normal shit
         addDrop(ModBlocks.KELP_ASH_BLOCK);
         addDrop(ModBlocks.KELP_ASH_MUD_BLOCK);
         addDrop(ModBlocks.LIMESTONE_CHUNKS);
         addDrop(ModBlocks.QUICKLIME);
         addDrop(ModBlocks.SLAKED_LIME);
         addDrop(ModBlocks.ROCK_SALT_BLOCK);
+        addDrop(ModBlocks.FIRE_BRICKS);
 
         //fermenter
         addDrop(ModBlocks.FERMENTER_PANEL);
