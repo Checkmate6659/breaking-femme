@@ -105,7 +105,7 @@ public class ThermalUtil {
         float temperature = (float)getTemperature(world, pos);
 
         temperature -= 0.00166667 * (pos.getY() - world.getSeaLevel()); //altitude decrease
-        temperature = temperature * 100 - 4; //convert to celsius (these coefs are kinda vibes based)
+        temperature = temperature * 60 - 15; //convert to celsius (these coefs are kinda vibes based)
 
         //calculate surface altitude and dryness, from 0 to 1 both
         float surface_altitude = world.getTopY(Type.MOTION_BLOCKING_NO_LEAVES, pos.getX(), pos.getZ()); //how high the biome is
