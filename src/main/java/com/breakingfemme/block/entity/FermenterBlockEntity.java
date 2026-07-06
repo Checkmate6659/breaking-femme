@@ -417,6 +417,9 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
         else if(world.getTime() % MULTIBLOCK_CHECK_PERIOD == checking_class) //recheck regularly (every 2 seconds)
             checkMultiblock(pos, state);
 
+        //TODO: somehow also check multiblock if a heater/mixer has been (un)powered
+        //since right now the temperature controls feel choppy and weird
+
         if(capacity == 0 || (capacity != capacity_before_check && capacity_before_check != 0)) //multiblock is INCORRECT or changed capacity (and hasn't just been made ofc)! => do not tick
         {
             //don't just obliterate buckets if currently running a recipe, but put them back (as sludge ofc) where they were in the slots
