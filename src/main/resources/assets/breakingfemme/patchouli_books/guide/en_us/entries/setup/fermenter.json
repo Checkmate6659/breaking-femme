@@ -1,0 +1,63 @@
+{
+    "name": "The Fermenter",
+    "icon": "minecraft:barrel",
+    "category": "breakingfemme:setup",
+    "sortnum": 2,
+    "pages": [
+        {
+            "type": "patchouli:multiblock",
+            "multiblock": {
+                "mapping": {
+                    "0": "breakingfemme:fermenter_controller[facing=south]",
+                    "H": "breakingfemme:fermenter_heater",
+                    "M": "breakingfemme:fermenter_mixer",
+                    "A": "breakingfemme:fermenter_airlock",
+                    "t": "breakingfemme:fermenter_top",
+                    "b": "breakingfemme:fermenter_bottom",
+                    "n": "breakingfemme:fermenter_panel[facing=north]",
+                    "e": "breakingfemme:fermenter_panel[facing=east]",
+                    "s": "breakingfemme:fermenter_panel[facing=south]",
+                    "w": "breakingfemme:fermenter_panel[facing=west]"
+                },
+                "pattern": [
+                    ["____", "____", "__A_", "____"],
+                    ["_ww_", "ntts", "ntts", "_ee_"],
+                    ["_ww_", "nbb0", "nMHs", "_ee_"]
+                ]
+            },
+            "title": "The Fermenter",
+            "text": "A 2x2x2 fermenter."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "The Fermenter is a multiblock that allows you to... well ferment stuff. It can be built from size 1x2x1 all the way up to 3x3x3, and always needs a control panel as well as an airlock. The Fermenter has an internal temperature, which is affected by the environment and powered heaters."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "Some recipes also need mixing, in which case a powered mixer is required.$(br2)A recipe consists of five steps, which have different conditions:$(li)Time spent in this step should be in a given range$(li)Temperature during this step should be in a given range$(li)The brew must, or must not, be mixed during this step"
+        },
+        {
+            "type": "patchouli:text",
+            "text": "Fermenting recipe steps follow two rules:$(li)if the next step's conditions are met and enough time has been spent in this step, complete the current step.$(li)if the current step's conditions are not met, the recipe fails after a grace period.$()"
+        },
+        {
+            "type": "patchouli:crafting",
+            "recipe": "breakingfemme:fermenter_panel",
+            "recipe2": "breakingfemme:fermenter_airlock"
+        },
+        {
+            "type": "patchouli:crafting",
+            "recipe": "breakingfemme:fermenter_top",
+            "recipe2": "breakingfemme:fermenter_bottom"
+        },
+        {
+            "type": "patchouli:crafting",
+            "recipe": "breakingfemme:fermenter_mixer",
+            "recipe2": "breakingfemme:fermenter_heater"
+        },
+        {
+            "type": "patchouli:crafting",
+            "recipe": "breakingfemme:fermenter_controller"
+        }
+    ]
+}

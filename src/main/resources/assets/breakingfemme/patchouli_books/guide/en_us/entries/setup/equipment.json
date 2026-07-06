@@ -13,6 +13,19 @@
             "item": "breakingfemme:nickel_ingot",
             "title": "Obtaining Nickel",
             "text": "Nickel ore is a green ore block relatively common at around y=48 and raw nickel can be smelted.$(br)Alternatively, killing Drowned has a 1% chance of dropping a nickel ingot, which is 8% if a player gets credit for the kill."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "minecraft:cauldron",
+            "title": "Cauldrons",
+            "text": "Cauldrons are the heart of many reactions in Breaking Femme. They can be heated or cooled for certain reactions. They can be sealed by blocking off their top face, for instance using a solid block or a closed trapdoor."
+        },
+        {
+            "type": "patchouli:image",
+            "images": [
+                "breakingfemme:textures/gui/guide/cauldrons.png"
+            ],
+            "title": "Cauldron Examples"
         }
     ]
 }

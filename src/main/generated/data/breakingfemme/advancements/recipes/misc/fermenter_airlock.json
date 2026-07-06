@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_redstone": {
+    "has_glass_pane": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:redstone"
+              "minecraft:glass_pane"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "breakingfemme:fermenter_controller"
+        "recipe": "breakingfemme:fermenter_airlock"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_redstone",
+      "has_glass_pane",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "breakingfemme:fermenter_controller"
+      "breakingfemme:fermenter_airlock"
     ]
   },
   "sends_telemetry_event": false
