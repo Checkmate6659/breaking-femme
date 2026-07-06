@@ -1,0 +1,18 @@
+{
+    "name": "Equipment",
+    "icon": "minecraft:iron_ingot",
+    "category": "breakingfemme:setup",
+    "sortnum": 1,
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Before actually doing any chemistry, you will need some lab equipment. The most commonly required raw materials are wood, iron, nickel and redstone."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "breakingfemme:nickel_ingot",
+            "title": "Obtaining Nickel",
+            "text": "Nickel ore is a green ore block relatively common at around y=48 and raw nickel can be smelted.$(br)Alternatively, killing Drowned has a 1% chance of dropping a nickel ingot, which is 8% if a player gets credit for the kill."
+        }
+    ]
+}

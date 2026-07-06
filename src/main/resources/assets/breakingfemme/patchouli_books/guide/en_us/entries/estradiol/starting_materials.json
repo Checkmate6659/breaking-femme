@@ -1,0 +1,30 @@
+{
+    "name": "Starting Materials",
+    "icon": "breakingfemme:sterols",
+    "category": "breakingfemme:estradiol",
+    "sortnum": 1,
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Estradiol is a steroid, and so it is a somewhat complex molecule. As such, it would be extremely difficult to synthesize from scratch, as well as ensure only the correct enantiomer is created."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "It is for these reasons that we choose a $(o)starting material$() that has a similar chemical structure, and then modify it to create the desired product."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "In the human and animal body, steroidal hormones are created from $(o)sterols$(), which are abundant in our foods, let it be cholesterol from meat or eggs, or phytosterols from plant foods. Sterols thus seem like a practical choice for the synthesis of estradiol."
+        },
+        {
+            "type": "patchouli:image",
+            "images": [
+                "breakingfemme:textures/gui/guide/fig1.png"
+            ]
+        },
+        {
+            "type": "patchouli:text",
+            "text": "Sterols can be extracted from soybeans by maceration in 64% ethanol: place soybeans in a cauldron full of 64% ethanol, bring it to a boil, and wait. The desired sterols will be dissolved in the ethanol and then crash out as crystals."
+        }
+    ]
+}
