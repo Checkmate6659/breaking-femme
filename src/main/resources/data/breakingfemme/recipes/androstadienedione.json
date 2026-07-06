@@ -2,7 +2,7 @@
     "type": "breakingfemme:fermenting",
     "input": [
         {
-            "tag": "minecraft:sugar"
+            "item": "minecraft:sugar"
         },
         {
             "item": "breakingfemme:skimmed_milk_powder"
@@ -11,7 +11,7 @@
             "item": "breakingfemme:sterols"
         },
         {
-            "tag": "breakingfemme:nickel_sulfate"
+            "item": "breakingfemme:nickel_sulfate"
         }
     ],
     "output":
