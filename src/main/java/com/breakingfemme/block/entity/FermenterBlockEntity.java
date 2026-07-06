@@ -440,7 +440,8 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
 
         //update temperature
         //discretized differential equation, but time accelerated by a factor of 72 (number of minecraft days in a real day)
-        temperature += (n_heaters * 1e4 + conductivity * (outside_temp - temperature)) / (volume * 1.16139e6); //4.181e6 * 20 / 72; 4.181e6 is water heat capacity, 20 for ticks to seconds
+        //temperature += (n_heaters * 1e4 + conductivity * (outside_temp - temperature)) / (volume * 1.16139e6); //4.181e6 * 20 / 72; 4.181e6 is water heat capacity, 20 for ticks to seconds
+        temperature += (n_heaters * 1e4 + conductivity * (outside_temp - temperature)) / (volume * 1.16139e4); //made 100 times faster for gameplay reasons. i mean yeah water has LOADS of heat capacity.
 
 
         //this is where the fermenter logic goes
