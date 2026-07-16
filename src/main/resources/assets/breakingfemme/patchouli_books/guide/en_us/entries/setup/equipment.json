@@ -45,13 +45,6 @@
         },
         {
             "type": "breakingfemme:ceramic_filter_page"
-        },
-        {
-            "type": "patchouli:relations",
-            "entries": [
-                "breakingfemme:setup/fermenter",
-                "breakingfemme:setup/distiller"
-            ]
         }
     ]
 }
