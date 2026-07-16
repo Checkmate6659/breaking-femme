@@ -22,14 +22,20 @@
             "title": "Cauldron Examples"
         },
         {
-            "type": "patchouli:crafting",
-            "recipe": "minecraft:cauldron"
-        },
-        {
             "type": "patchouli:spotlight",
             "item": "breakingfemme:funnel",
             "title": "Filtering with Funnels",
             "text": "Funnels, paired with a suitable filter, can be used to filter dirty chemicals or separate out solid material from it. However, filters have to be replaced periodically, and must be adapted to the chemical to filter."
+        },
+        {
+            "type": "patchouli:crafting",
+            "recipe": "minecraft:cauldron",
+            "recipe2": "breakingfemme:funnel"
+        },
+        {
+            "type": "patchouli:crafting",
+            "recipe": "minecraft:paper",
+            "recipe2": "breakingfemme:unfired_ceramic_filter"
         },
         {
             "type": "patchouli:relations",
