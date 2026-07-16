@@ -9,13 +9,23 @@
             }
         },
         {
-            "template": "breakingfemme:firing",
+            "template": "breakingfemme:crafting_replica",
+            "as": "ceramic_filter_crafting",
+            "using": {
+                "item_a": "minecraft:clay_ball",
+                "item_b": "breakingfemme:sawdust",
+                "item_out": "breakingfemme:unfired_ceramic_filter"
+            },
+            "y": 41
+        },
+        {
+            "template": "breakingfemme:smelting_replica",
             "as": "ceramic_filter_firing",
             "using": {
                 "item_in": "breakingfemme:unfired_ceramic_filter",
                 "item_out": "breakingfemme:ceramic_filter"
             },
-            "y": 33
+            "y": 119
         }
     ],
     "components": [

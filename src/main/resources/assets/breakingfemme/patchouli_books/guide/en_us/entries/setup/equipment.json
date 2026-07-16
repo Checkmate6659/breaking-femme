@@ -47,10 +47,6 @@
             "type": "breakingfemme:ceramic_filter_page"
         },
         {
-            "type": "patchouli:crafting",
-            "recipe": "breakingfemme:unfired_ceramic_filter"
-        },
-        {
             "type": "patchouli:relations",
             "entries": [
                 "breakingfemme:setup/fermenter",
