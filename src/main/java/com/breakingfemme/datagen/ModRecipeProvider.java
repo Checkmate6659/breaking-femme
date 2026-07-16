@@ -129,7 +129,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.FERMENTER_AIRLOCK).input('G', Items.GLASS_PANE).input('W', Items.WATER_BUCKET).pattern(" G ").pattern("GWG").pattern(" G ").criterion(hasItem(Blocks.GLASS_PANE), conditionsFromItem(Blocks.GLASS_PANE)).offerTo(exporter);
 
         //distiller parts
-        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.NICKEL_PIPE).input('#', ModItems.NICKEL_INGOT).pattern("# #").pattern("# #").pattern("# #").criterion(hasItem(ModItems.NICKEL_INGOT), conditionsFromItem(ModItems.NICKEL_INGOT)).offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.NICKEL_PIPE, 4).input('#', ModItems.NICKEL_INGOT).pattern("# #").pattern("# #").pattern("# #").criterion(hasItem(ModItems.NICKEL_INGOT), conditionsFromItem(ModItems.NICKEL_INGOT)).offerTo(exporter);
         offer2x2CompactingRecipe(exporter, RecipeCategory.MISC, ModBlocks.DISTILLER_COLUMN, ModItems.NICKEL_PIPE);
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.DISTILLER_TOP).input('S', ModItemTagProvider.NICKEL_INGOT).input('H', ModBlocks.DISTILLER_COLUMN).input('E', ModItems.NICKEL_PIPE).pattern("S").pattern("H").pattern("E").group("distiller_top").criterion(hasItem(ModItems.NICKEL_INGOT), conditionsFromItem(ModItems.NICKEL_PIPE)).offerTo(exporter);
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.DISTILLER_BASE).input('-', Items.IRON_BARS).input('#', ModItems.NICKEL_INGOT).pattern("#-#").pattern("# #").pattern("###").criterion(hasItem(ModItems.NICKEL_INGOT), conditionsFromItem(ModItems.NICKEL_INGOT)).offerTo(exporter);
