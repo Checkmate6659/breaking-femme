@@ -1,0 +1,41 @@
+{
+    "name": "The Distiller",
+    "icon": "breakingfemme:distiller_top",
+    "category": "breakingfemme:setup",
+    "sortnum": 3,
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "The Distiller can purify and concentrate liquids. It can also be used for destructive distillation."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "breakingfemme:nickel_ingot",
+            "title": "Obtaining Nickel",
+            "text": "Nickel ore is a green ore block relatively common at around y=48 and raw nickel can be smelted.$(br)Alternatively, killing Drowned has a 1% chance of dropping a nickel ingot, which is 8% if a player gets credit for the kill."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "minecraft:cauldron",
+            "title": "Using the Distiller",
+            "text": "Place a Distiller Base, Distiller Columns (filled or not with gravel) and a Distiller Top, in a column. Then place a liquid in the base and heat the distiller. The product can then be harvested from the top. However, this process is extremely slow."
+        },
+        {
+            "type": "patchouli:image",
+            "images": [
+                "breakingfemme:textures/gui/guide/distiller.png"
+            ],
+            "text": "Be patient... or build more distillers!"
+        },
+        {
+            "type": "patchouli:crafting",
+            "recipe": "breakingfemme:nickel_pipe",
+            "recipe2": "breakingfemme:distiller_column"
+        },
+        {
+            "type": "patchouli:crafting",
+            "recipe": "breakingfemme:distiller_base",
+            "recipe2": "breakingfemme:distiller_top"
+        }
+    ]
+}

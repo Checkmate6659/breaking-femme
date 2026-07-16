@@ -10,12 +10,6 @@
         },
         {
             "type": "patchouli:spotlight",
-            "item": "breakingfemme:nickel_ingot",
-            "title": "Obtaining Nickel",
-            "text": "Nickel ore is a green ore block relatively common at around y=48 and raw nickel can be smelted.$(br)Alternatively, killing Drowned has a 1% chance of dropping a nickel ingot, which is 8% if a player gets credit for the kill."
-        },
-        {
-            "type": "patchouli:spotlight",
             "item": "minecraft:cauldron",
             "title": "Cauldrons",
             "text": "Cauldrons are the heart of many reactions in Breaking Femme. They can be heated or cooled for certain reactions. They can be sealed by blocking off their top face, for instance using a solid block or a closed trapdoor."
@@ -26,6 +20,23 @@
                 "breakingfemme:textures/gui/guide/cauldrons.png"
             ],
             "title": "Cauldron Examples"
+        },
+        {
+            "type": "patchouli:crafting",
+            "recipe": "minecraft:cauldron"
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "breakingfemme:funnel",
+            "title": "Filtering with Funnels",
+            "text": "Funnels, paired with a suitable filter, can be used to filter dirty chemicals or separate out solid material from it. However, filters have to be replaced periodically, and must be adapted to the chemical to filter."
+        },
+        {
+            "type": "patchouli:relations",
+            "entries": [
+                "breakingfemme:setup/fermenter",
+                "breakingfemme:setup/distiller"
+            ]
         }
     ]
 }
