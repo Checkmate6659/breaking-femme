@@ -32,7 +32,7 @@
         },
         {
             "type": "patchouli:item",
-            "item": "breakingfemme:mortar_pestle",
+            "item": "minecraft:furnace",
             "x": 48,
             "y": 8
         },

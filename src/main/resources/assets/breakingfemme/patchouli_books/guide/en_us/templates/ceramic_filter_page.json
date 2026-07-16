@@ -1,0 +1,21 @@
+{
+    "include": [
+        {
+            "template": "breakingfemme:grinding",
+            "as": "ceramic_filter_grinding",
+            "using": {
+                "item_in": "minecraft:stick",
+                "item_out": "breakingfemme:sawdust"
+            }
+        },
+        {
+            "template": "breakingfemme:firing",
+            "as": "ceramic_filter_firing",
+            "using": {
+                "item_in": "breakingfemme:unfired_ceramic_filter",
+                "item_out": "breakingfemme:ceramic_filter"
+            },
+            "y": 45
+        }
+    ]
+}

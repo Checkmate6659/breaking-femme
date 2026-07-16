@@ -44,9 +44,11 @@
             "recipe2": "minecraft:paper"
         },
         {
-            "type": "breakingfemme:grinding",
-            "item_in": "minecraft:stick",
-            "item_out": "breakingfemme:sawdust"
+            "type": "breakingfemme:ceramic_filter_page"
+        },
+        {
+            "type": "patchouli:crafting",
+            "recipe": "breakingfemme:unfired_ceramic_filter"
         },
         {
             "type": "patchouli:relations",
