@@ -1,0 +1,27 @@
+{
+    "include": [
+        {
+            "template": "breakingfemme:grinding",
+            "as": "ceramic_filter_grinding",
+            "using": {
+                "item_in": "minecraft:wheat",
+                "item_out": "breakingfemme:wheat_flour"
+            },
+            "y": 115
+        }
+    ],
+    "components": [
+        {
+            "type": "patchouli:text",
+            "text": "Obtaining Yeast",
+            "x": 20,
+            "y": 0
+        },
+        {
+            "type": "patchouli:text",
+            "text": "To brew beer, we first need to source some yeast. To obtain yeast, you first have to grind wheat into flour. Then place 16 flour into a cauldron containing a bottle of water to make a yeast starter.",
+            "x": 0,
+            "y": 12
+        }
+    ]
+}

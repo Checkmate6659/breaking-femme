@@ -1,0 +1,26 @@
+{
+    "name": "Ethanol",
+    "icon": "breakingfemme:beer_bottle",
+    "category": "breakingfemme:setup",
+    "sortnum": 4,
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "With a fermenter and a distiller, we can start making some of our basic reagents and solvents, one of which is ethanol. We will need it pure, or diluted with water. It is made by brewing and distilling beer."
+        },
+        {
+            "type": "breakingfemme:yeast_page"
+        },
+        {
+            "type": "patchouli:text",
+            "text": "After waiting for a while, yeast should populate the starter and can be removed from the cauldron. Beware, as it will eventually die if left in a cauldron for too long. It can be bred by adding 16 yeast to a starter and waiting, which should net you 32 yeast."
+        },
+        {
+            "type": "patchouli:relations",
+            "entries": [
+                "breakingfemme:setup/fermenter",
+                "breakingfemme:setup/distiller"
+            ]
+        }
+    ]
+}
