@@ -1,0 +1,47 @@
+{
+    "components": [
+        {
+            "type": "patchouli:image",
+            "image": "patchouli:textures/gui/crafting.png",
+            "x": 8,
+            "y": 12,
+            "width": 64,
+            "height": 32,
+            "texture_width": 128,
+            "texture_height": 256,
+            "u": 11,
+            "v": 71
+        },
+        {
+            "type": "patchouli:image",
+            "image": "patchouli:textures/gui/crafting.png",
+            "x": 72,
+            "y": 12,
+            "width": 32,
+            "height": 32,
+            "texture_width": 128,
+            "texture_height": 256,
+            "u": 75,
+            "v": 71
+        },
+        {
+            "type": "patchouli:item",
+            "item": "#item_in#",
+            "x": 12,
+            "y": 16
+        },
+        {
+            "type": "patchouli:item",
+            "item": "breakingfemme:mortar_pestle",
+            "x": 48,
+            "y": 16
+        },
+        {
+            "type": "patchouli:item",
+            "item": "#item_out#",
+            "recipe_link": true,
+            "x": 84,
+            "y": 16
+        }
+    ]
+}

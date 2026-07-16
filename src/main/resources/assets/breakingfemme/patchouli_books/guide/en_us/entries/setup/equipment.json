@@ -10,6 +10,12 @@
         },
         {
             "type": "patchouli:spotlight",
+            "item": "breakingfemme:mortar_pestle",
+            "title": "The Mortar and Pestle",
+            "text": "This crucial piece of equipment is very useful for grinding down items by hand into small chunks or dusts."
+        },
+        {
+            "type": "patchouli:spotlight",
             "item": "minecraft:cauldron",
             "title": "Cauldrons",
             "text": "Cauldrons are the heart of many reactions in Breaking Femme. They can be heated or cooled for certain reactions. They can be sealed by blocking off their top face, for instance using a solid block or a closed trapdoor."
@@ -29,13 +35,18 @@
         },
         {
             "type": "patchouli:crafting",
-            "recipe": "minecraft:cauldron",
-            "recipe2": "breakingfemme:funnel"
+            "recipe": "breakingfemme:mortar_pestle",
+            "recipe2": "minecraft:cauldron"
         },
         {
             "type": "patchouli:crafting",
-            "recipe": "minecraft:paper",
-            "recipe2": "breakingfemme:unfired_ceramic_filter"
+            "recipe": "breakingfemme:funnel",
+            "recipe2": "minecraft:paper"
+        },
+        {
+            "type": "breakingfemme:grinding",
+            "item_in": "minecraft:stick",
+            "item_out": "breakingfemme:sawdust"
         },
         {
             "type": "patchouli:relations",
