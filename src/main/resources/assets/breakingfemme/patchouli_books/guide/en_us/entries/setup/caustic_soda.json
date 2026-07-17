@@ -1,0 +1,17 @@
+{
+    "name": "Caustic Soda",
+    "icon": "breakingfemme:concentrated_caustic_soda_solution_bucket",
+    "category": "breakingfemme:setup",
+    "sortnum": 5,
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Caustic Soda is a very useful base in laboratory synthesis, and as a drain cleaner."
+        },
+        {
+            "type": "patchouli:text",
+            "title": "Kelp",
+            "text": "Kelp is a halophilic plant, i.e. it grows in environments containing salt, like sea water. Its ashes contain sodium carbonate, which can be extracted from it using water. Click on a kelp ash block with a water bottle to get kelp ash mud."
+        }
+    ]
+}
