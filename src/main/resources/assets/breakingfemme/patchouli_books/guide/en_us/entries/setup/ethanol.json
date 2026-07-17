@@ -23,7 +23,7 @@
         {
             "type": "patchouli:text",
             "title": "Distilling Beer",
-            "text": "To purify your ethanol, you can distill your freshly made beer. For that, you will need a distiller containing at least one gravel-filled column. Beer distills into 32% ethanol, which you can distill again to get 95% ethanol."
+            "text": "To purify your ethanol, you can distill your freshly made beer, or re-distill dilute ethanol. For that, you will need a distiller containing at least one gravel-filled column. Beer distills into 32% ethanol, which you can distill again to get 95% ethanol."
         },
         {
             "type": "patchouli:text",
