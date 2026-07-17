@@ -1,6 +1,6 @@
 {
     "name": "Ethanol",
-    "icon": "breakingfemme:beer_bottle",
+    "icon": "breakingfemme:ethanol95_bucket",
     "category": "breakingfemme:setup",
     "sortnum": 4,
     "pages": [
