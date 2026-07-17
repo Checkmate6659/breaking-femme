@@ -14,6 +14,7 @@
             "using": {
                 "item_a": "minecraft:clay_ball",
                 "item_b": "tag:c:dusts/saw,tag:c:dusts/wood",
+                "item_d": "minecraft:air",
                 "item_out": "breakingfemme:unfired_ceramic_filter"
             },
             "y": 41

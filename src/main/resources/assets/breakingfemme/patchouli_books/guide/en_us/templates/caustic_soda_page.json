@@ -1,0 +1,46 @@
+{
+    "include": [
+        {
+            "template": "breakingfemme:smelting_replica",
+            "as": "kelp_burning",
+            "using": {
+                "item_in": "minecraft:dried_kelp_block",
+                "item_out": "breakingfemme:kelp_ash"
+            }
+        },
+        {
+            "template": "breakingfemme:crafting_replica",
+            "as": "kelp_ash_block_crafting",
+            "using": {
+                "item_a": "breakingfemme:kelp_ash",
+                "item_b": "breakingfemme:kelp_ash",
+                "item_d": "breakingfemme:kelp_ash",
+                "item_out": "breakingfemme:kelp_ash_block"
+            },
+            "y": 35
+        },
+        {
+            "template": "breakingfemme:smelting_replica",
+            "as": "calcination",
+            "using": {
+                "item_in": "breakingfemme:limestone_chunks",
+                "item_out": "breakingfemme:quicklime"
+            },
+            "y": 115
+        }
+    ],
+    "components": [
+        {
+            "type": "patchouli:text",
+            "text": "Kelp Ash",
+            "x": 36,
+            "y": -6
+        },
+        {
+            "type": "patchouli:text",
+            "text": "Quicklime",
+            "x": 37,
+            "y": 107
+        }
+    ]
+}

@@ -10,8 +10,21 @@
         },
         {
             "type": "patchouli:text",
-            "title": "Kelp",
-            "text": "Kelp is a halophilic plant, i.e. it grows in environments containing salt, like sea water. Its ashes contain sodium carbonate, which can be extracted from it using water. Click on a kelp ash block with a water bottle to get kelp ash mud, which can be picked up with a bucket, placed in a cauldron and filtered to get lye water."
+            "title": "Soda Lye",
+            "text": "Kelp ash contains sodium carbonate, which can be extracted from it using water. Click on a kelp ash block with a water bottle to get kelp ash mud, which can be filtered to get lye water. Beware, this fluid is corrosive! Make sure to use a resistant filter, as paper won't stand a chance."
+        },
+        {
+            "type": "patchouli:text",
+            "title": "Slaked Lime",
+            "text": "Slaked lime is a required reagent for the synthesis of caustic soda. To make it, mine natural calcite, then grind it into chunks. Quicklime can be obtained by calcination, and slaked lime by dropping quicklime into water. Beware as this reaction is highly exothermic!"
+        },
+        {
+            "type": "patchouli:text",
+            "title": "Caustication",
+            "text": "To turn the soda lye (sodium carbonate) into caustic soda (sodium hydroxide), add slaked lime to a full cauldron of lye water and filter the resulting soda cake. Heating the resulting solution in a cauldron will allow you to concentrate it. This high concentration will be necessary for certain reactions."
+        },
+        {
+            "type": "breakingfemme:caustic_soda_page"
         }
     ]
 }
