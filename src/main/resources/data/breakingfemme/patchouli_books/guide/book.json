@@ -6,5 +6,6 @@
     "book_texture": "breakingfemme:textures/gui/guide.png",
     "subtitle": "book.breakingfemme.subtitle",
     "use_blocky_font": true,
-    "use_resource_pack": true
+    "use_resource_pack": true,
+    "show_progress": false
 }
