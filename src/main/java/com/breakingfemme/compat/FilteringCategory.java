@@ -24,6 +24,7 @@ import net.minecraft.util.Identifier;
 public class FilteringCategory implements DisplayCategory<BasicDisplay> {
     public static final Identifier TEXTURE = new Identifier(BreakingFemme.MOD_ID, "textures/gui/filtering.png");
     public static final Identifier WARNING_TEXTURE = new Identifier(BreakingFemme.MOD_ID, "textures/gui/filtering_warning.png");
+    public static final Identifier COVER_TEXTURE = new Identifier(BreakingFemme.MOD_ID, "textures/gui/filtering_output_cover.png");
     public static final CategoryIdentifier<GrindingDisplay> FILTERING = CategoryIdentifier.of(BreakingFemme.MOD_ID, "filtering");
 
     @Override
@@ -61,15 +62,22 @@ public class FilteringCategory implements DisplayCategory<BasicDisplay> {
         widgets.add(Widgets.createSlot(new Point(startPoint.x + 104, startPoint.y + 73))
             .entries(display.getOutputEntries().get(0)) //output 0 is fluid output
         );
-        widgets.add(Widgets.createSlot(new Point(startPoint.x + 144, startPoint.y + 27))
-            .entries(display.getOutputEntries().get(1)) //output 1 is item output
-        );
 
-        if(display instanceof FilteringDisplay fdisplay && fdisplay.harsh)
+        if(display instanceof FilteringDisplay fdisplay)
         {
-            widgets.add( //i need to use another texture. cant just cut out a piece of the texture however i want. fuck you rei.
-                Widgets.createTexturedWidget(WARNING_TEXTURE, new Rectangle(startPoint.x + 11, startPoint.y + 52, 39, 35))
-            );
+            if(fdisplay.no_output)
+                widgets.add(
+                    Widgets.createTexturedWidget(COVER_TEXTURE, new Rectangle(startPoint.x + 114, startPoint.y + 26, 47, 18))
+                );
+            else
+                widgets.add(Widgets.createSlot(new Point(startPoint.x + 144, startPoint.y + 27))
+                    .entries(display.getOutputEntries().get(1)) //output 1 is item output
+                );
+
+            if(fdisplay.harsh)
+                widgets.add( //i need to use another texture. cant just cut out a piece of the texture however i want. fuck you rei.
+                    Widgets.createTexturedWidget(WARNING_TEXTURE, new Rectangle(startPoint.x + 11, startPoint.y + 52, 39, 35))
+                );
         }
 
         return widgets;

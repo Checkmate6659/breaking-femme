@@ -11,7 +11,7 @@
         {
             "type": "patchouli:text",
             "title": "Kelp",
-            "text": "Kelp is a halophilic plant, i.e. it grows in environments containing salt, like sea water. Its ashes contain sodium carbonate, which can be extracted from it using water. Click on a kelp ash block with a water bottle to get kelp ash mud."
+            "text": "Kelp is a halophilic plant, i.e. it grows in environments containing salt, like sea water. Its ashes contain sodium carbonate, which can be extracted from it using water. Click on a kelp ash block with a water bottle to get kelp ash mud, which can be picked up with a bucket, placed in a cauldron and filtered to get lye water."
         }
     ]
 }

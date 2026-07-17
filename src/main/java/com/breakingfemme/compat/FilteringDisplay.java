@@ -14,25 +14,34 @@ import me.shedaniel.rei.api.common.display.basic.BasicDisplay;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.entry.EntryStack;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
+import net.minecraft.block.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 
 public class FilteringDisplay extends BasicDisplay {
-    public final boolean harsh;
+    public final boolean harsh, no_output;
     public FilteringDisplay(List<EntryIngredient> inputs, List<EntryIngredient> outputs, Optional<Identifier> identifier)
     {
         super(inputs, outputs, identifier);
 
         boolean harsh_future = false; //avoiding final variable problems
+        boolean has_output_future = false;
         try{ //yeah this is kinda fucked up as well
             @SuppressWarnings("unchecked")
             EntryStack<FluidStack> influid = (EntryStack<FluidStack>) inputs.get(0).get(0);
             harsh_future = influid.getValue().getFluid().isIn(ModFluidTagProvider.HARSH_ON_FILTERS);
+
+            //structure void => no output!!
+            @SuppressWarnings("unchecked")
+            EntryStack<ItemStack> outstack = (EntryStack<ItemStack>) outputs.get(1).get(0);
+            has_output_future = outstack.getValue().getItem().equals(Blocks.STRUCTURE_VOID.asItem());
         } catch (ClassCastException e)
         {
             BreakingFemme.LOGGER.error("Invalid Recipe passed onto FilteringDisplay constructor: FilteringDisplay encountered a first ingredient which is not a fluid.");
         }
 
         harsh = harsh_future;
+        no_output = has_output_future;
     }
 
     @Override
@@ -61,5 +70,6 @@ public class FilteringDisplay extends BasicDisplay {
 
         //tf I NEED TO DO THIS AFTER THE SUPER SO I NEED TO RECHECK
         harsh = recipe.input.getFluid().isIn(ModFluidTagProvider.HARSH_ON_FILTERS);
+        no_output = recipe.item_output.equals(Blocks.STRUCTURE_VOID.asItem());
     }
 }

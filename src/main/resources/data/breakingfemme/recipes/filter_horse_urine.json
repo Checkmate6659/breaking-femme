@@ -12,7 +12,7 @@
     },
     "item_output":
     {
-        "item": "minecraft:dirt"
+        "item": "minecraft:structure_void"
     },
     "fabric:load_conditions": [
         {

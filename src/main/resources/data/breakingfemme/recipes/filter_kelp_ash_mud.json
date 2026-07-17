@@ -8,10 +8,10 @@
     },
     "output": {
         "fluid": "breakingfemme:lye_water",
-        "quantity": 30
+        "quantity": 10
     },
     "item_output":
     {
-        "item": "minecraft:dirt"
+        "item": "minecraft:structure_void"
     }
 }
