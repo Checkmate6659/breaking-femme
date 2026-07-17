@@ -16,6 +16,21 @@
             "text": "After waiting for a while, yeast should populate the starter and can be removed from the cauldron. Beware, as it will eventually die if left in a cauldron for too long. It can be bred by adding 16 yeast to a starter and waiting, which should net you 32 yeast."
         },
         {
+            "type": "patchouli:text",
+            "title": "Brewing Beer",
+            "text": "To brew beer, place wheat, flour, yeast and water in a fermenter, and let the mixture ferment for five days, at a temperature of 17 to 24°C. You can achieve a very stable temperature by doing the fermentation in a cellar or cave."
+        },
+        {
+            "type": "patchouli:text",
+            "title": "Distilling Beer",
+            "text": "To purify your ethanol, you can distill your freshly made beer. For that, you will need a distiller containing at least one gravel-filled column. Beer distills into 32% ethanol, which you can distill again to get 95% ethanol."
+        },
+        {
+            "type": "patchouli:text",
+            "title": "Diluting ethanol",
+            "text": "Ethanol can be diluted in a cauldron with water. To get 64% ethanol, add 1 bottle of water to a cauldron containing 2 bottles of 95% ethanol. However, order matters: whenever you mix ethanol and water in a cauldron, the concentration is always lower than theory. For instance 1bo water and 1bo 95% ethanol mixes into 2bo 33% ethanol."
+        },
+        {
             "type": "patchouli:relations",
             "entries": [
                 "breakingfemme:setup/fermenter",
