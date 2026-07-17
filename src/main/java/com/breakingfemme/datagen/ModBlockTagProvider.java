@@ -48,7 +48,6 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
     protected void configure(WrapperLookup arg) {
         //shovel mineables
         getOrCreateTagBuilder(BlockTags.SHOVEL_MINEABLE).add(ModBlocks.KELP_ASH_BLOCK);
-        getOrCreateTagBuilder(BlockTags.SHOVEL_MINEABLE).add(ModBlocks.KELP_ASH_MUD_BLOCK);
         getOrCreateTagBuilder(BlockTags.SHOVEL_MINEABLE).add(ModBlocks.LIMESTONE_CHUNKS);
         getOrCreateTagBuilder(BlockTags.SHOVEL_MINEABLE).add(ModBlocks.QUICKLIME);
         getOrCreateTagBuilder(BlockTags.SHOVEL_MINEABLE).add(ModBlocks.SLAKED_LIME);
@@ -125,6 +124,7 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModFluids.SULFURIC_ACID_CAULDRON);
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModFluids.IMPURE_DILUTE_SULFURIC_ACID_CAULDRON);
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModFluids.HYDROCHLORIC_ACID_CAULDRON);
+        getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModFluids.KELP_ASH_MUD_CAULDRON);
         //AUTOGENERATION LABEL DO NOT TOUCH
 
         //fermenter tags

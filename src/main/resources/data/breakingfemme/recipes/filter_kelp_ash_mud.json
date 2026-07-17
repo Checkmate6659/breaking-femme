@@ -1,0 +1,17 @@
+{
+    "type": "breakingfemme:filtering",
+    "droplets_per_filter": 40500,
+    "droplets_per_item": 2147483647,
+    "input": {
+        "fluid": "breakingfemme:kelp_ash_mud",
+        "quantity": 30
+    },
+    "output": {
+        "fluid": "breakingfemme:lye_water",
+        "quantity": 30
+    },
+    "item_output":
+    {
+        "item": "minecraft:dirt"
+    }
+}

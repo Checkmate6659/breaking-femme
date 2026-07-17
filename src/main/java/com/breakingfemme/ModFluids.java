@@ -37,6 +37,7 @@ import com.breakingfemme.fluid.Et64Fluid;
 import com.breakingfemme.fluid.Et95Fluid;
 import com.breakingfemme.fluid.HydrochloricAcidFluid;
 import com.breakingfemme.fluid.ImpureDiluteSulfuricAcidFluid;
+import com.breakingfemme.fluid.KelpAshMudFluid;
 import com.breakingfemme.fluid.LyeWaterFluid;
 import com.breakingfemme.fluid.NetherBeerFluid;
 import com.breakingfemme.fluid.NickelSulfateFluid;
@@ -60,6 +61,7 @@ import com.breakingfemme.cauldron.ConcentratedCausticSodaCauldronBlock;
 import com.breakingfemme.cauldron.SulfuricAcidCauldronBlock;
 import com.breakingfemme.cauldron.ImpureDiluteSulfuricAcidCauldronBlock;
 import com.breakingfemme.cauldron.HydrochloricAcidCauldronBlock;
+import com.breakingfemme.cauldron.KelpAshMudCauldronBlock;
 //AUTOGENERATION LABEL DO NOT TOUCH
 import com.breakingfemme.cauldron.HydrochloricAcidSynthesisCauldronBlock;
 
@@ -237,6 +239,12 @@ public class ModFluids {
     public static Block HYDROCHLORIC_ACID_FLUID_BLOCK;
     public static Item HYDROCHLORIC_ACID_BUCKET;
     public static Block HYDROCHLORIC_ACID_CAULDRON;
+    
+    public static FlowableFluid STILL_KELP_ASH_MUD;
+    public static FlowableFluid FLOWING_KELP_ASH_MUD;
+    public static Block KELP_ASH_MUD_FLUID_BLOCK;
+    public static Item KELP_ASH_MUD_BUCKET;
+    public static Block KELP_ASH_MUD_CAULDRON;
     //AUTOGENERATION LABEL DO NOT TOUCH
 
 
@@ -446,6 +454,15 @@ public class ModFluids {
         HYDROCHLORIC_ACID_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "hydrochloric_acid_bucket"),
             new BucketItem(STILL_HYDROCHLORIC_ACID, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
+        STILL_KELP_ASH_MUD = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "kelp_ash_mud"),
+            new KelpAshMudFluid.Still());
+        FLOWING_KELP_ASH_MUD = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_kelp_ash_mud"),
+            new KelpAshMudFluid.Flowing());
+        KELP_ASH_MUD_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "kelp_ash_mud_block"),
+            new CorrosiveFluidBlock(STILL_KELP_ASH_MUD, FabricBlockSettings.copyOf(Blocks.WATER), 1.0f){});
+        KELP_ASH_MUD_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "kelp_ash_mud_bucket"),
+            new BucketItem(STILL_KELP_ASH_MUD, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
+
         //AUTOGENERATION LABEL DO NOT TOUCH
 
 
@@ -509,6 +526,8 @@ public class ModFluids {
         CauldronFluidContent.registerCauldron(IMPURE_DILUTE_SULFURIC_ACID_CAULDRON, STILL_IMPURE_DILUTE_SULFURIC_ACID, FluidConstants.BUCKET, null);
         HYDROCHLORIC_ACID_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "hydrochloric_acid_cauldron"), new HydrochloricAcidCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
         CauldronFluidContent.registerCauldron(HYDROCHLORIC_ACID_CAULDRON, STILL_HYDROCHLORIC_ACID, FluidConstants.BUCKET, null);
+        KELP_ASH_MUD_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "kelp_ash_mud_cauldron"), new KelpAshMudCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
+        CauldronFluidContent.registerCauldron(KELP_ASH_MUD_CAULDRON, STILL_KELP_ASH_MUD, FluidConstants.BUCKET, null);
         //AUTOGENERATION LABEL DO NOT TOUCH
 
 

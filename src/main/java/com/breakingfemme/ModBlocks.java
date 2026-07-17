@@ -41,8 +41,7 @@ public class ModBlocks {
     public static final Block SOY_CROP = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "soy"), new SoyCropBlock(FabricBlockSettings.copyOf(Blocks.WHEAT)));
     public static final Block CHILI_CROP = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "chili_pepper"), new ChiliCropBlock(FabricBlockSettings.copyOf(Blocks.WHEAT)));
     public static final Block MILK_SEPARATOR = registerBlock("milk_separator", new MilkSeparatorBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).pistonBehavior(PistonBehavior.BLOCK).ticksRandomly()));
-    public static final Block KELP_ASH_BLOCK = registerBlock("kelp_ash_block", new KelpAshBlock(FabricBlockSettings.copyOf(Blocks.SAND).mapColor(MapColor.DARK_GREEN), false));
-    public static final Block KELP_ASH_MUD_BLOCK = registerBlock("kelp_ash_mud_block", new KelpAshBlock(FabricBlockSettings.copyOf(Blocks.MUD).strength(0.5F).mapColor(MapColor.DARK_GREEN), true)); //radically different properties (note block instruments etc) but same hardness/resistance as sand
+    public static final Block KELP_ASH_BLOCK = registerBlock("kelp_ash_block", new KelpAshBlock(FabricBlockSettings.copyOf(Blocks.SAND).mapColor(MapColor.DARK_GREEN)));
     public static final Block LIMESTONE_CHUNKS = registerBlock("limestone_chunks", new SandBlock(MapColor.PALE_YELLOW.color, FabricBlockSettings.copyOf(Blocks.SAND).mapColor(MapColor.PALE_YELLOW)));
     public static final Block SLAKED_LIME = registerBlock("slaked_lime", new Block(FabricBlockSettings.copyOf(Blocks.MUD).mapColor(MapColor.PALE_YELLOW)));
     public static final Block QUICKLIME = registerBlock("quicklime", new QuicklimeBlock(FabricBlockSettings.copyOf(Blocks.SAND).mapColor(MapColor.PALE_YELLOW))); //needs to be registered after slaked lime, since it references ModBlocks.SLAKED_LIME in the QuicklimeBlock class

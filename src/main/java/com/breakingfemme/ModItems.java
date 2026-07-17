@@ -198,7 +198,7 @@ public class ModItems {
             entries.add(PURE_ESTRONE);
             entries.add(KELP_ASH);
             entries.add(ModBlocks.KELP_ASH_BLOCK);
-            entries.add(ModBlocks.KELP_ASH_MUD_BLOCK);
+            entries.add(ModFluids.KELP_ASH_MUD_BUCKET);
             entries.add(ModFluids.LYE_WATER_BUCKET);
             entries.add(LYE_WATER_BOTTLE);
             entries.add(ModFluids.CAUSTIC_SODA_CAKE_BUCKET);

@@ -54,6 +54,8 @@ public class ModFluidTagProvider extends FabricTagProvider.FluidTagProvider {
         getOrCreateTagBuilder(FLAMMABLE).add(ModFluids.FLOWING_COAL_OIL);
         getOrCreateTagBuilder(FLAMMABLE).add(ModFluids.STILL_ESTRONE_OIL_SOLUTION);
         getOrCreateTagBuilder(FLAMMABLE).add(ModFluids.FLOWING_ESTRONE_OIL_SOLUTION);
+        getOrCreateTagBuilder(FluidTags.WATER).add(ModFluids.STILL_KELP_ASH_MUD);
+        getOrCreateTagBuilder(FluidTags.WATER).add(ModFluids.FLOWING_KELP_ASH_MUD);
         getOrCreateTagBuilder(FluidTags.WATER).add(ModFluids.STILL_LYE_WATER);
         getOrCreateTagBuilder(FluidTags.WATER).add(ModFluids.FLOWING_LYE_WATER);
         getOrCreateTagBuilder(WATER_LIKE).add(ModFluids.STILL_CAUSTIC_SODA_SOLUTION);
@@ -80,6 +82,8 @@ public class ModFluidTagProvider extends FabricTagProvider.FluidTagProvider {
         getOrCreateTagBuilder(HARSH_ON_FILTERS).add(Fluids.FLOWING_LAVA);
         getOrCreateTagBuilder(HARSH_ON_FILTERS).add(ModFluids.STILL_SLUDGE);
         getOrCreateTagBuilder(HARSH_ON_FILTERS).add(ModFluids.FLOWING_SLUDGE);
+        getOrCreateTagBuilder(HARSH_ON_FILTERS).add(ModFluids.STILL_KELP_ASH_MUD);
+        getOrCreateTagBuilder(HARSH_ON_FILTERS).add(ModFluids.FLOWING_KELP_ASH_MUD);
         getOrCreateTagBuilder(HARSH_ON_FILTERS).add(ModFluids.STILL_LYE_WATER);
         getOrCreateTagBuilder(HARSH_ON_FILTERS).add(ModFluids.FLOWING_LYE_WATER);
         getOrCreateTagBuilder(HARSH_ON_FILTERS).add(ModFluids.STILL_CAUSTIC_SODA_SOLUTION);

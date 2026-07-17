@@ -60,6 +60,7 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModFluids.SULFURIC_ACID_CAULDRON, Blocks.CAULDRON);
         addDrop(ModFluids.IMPURE_DILUTE_SULFURIC_ACID_CAULDRON, Blocks.CAULDRON);
         addDrop(ModFluids.HYDROCHLORIC_ACID_CAULDRON, Blocks.CAULDRON);
+        addDrop(ModFluids.KELP_ASH_MUD_CAULDRON, Blocks.CAULDRON);
         //AUTOGENERATION LABEL DO NOT TOUCH
 
         addDrop(ModBlocks.NICKEL_BLOCK);
@@ -75,7 +76,6 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
 
         //normal shit
         addDrop(ModBlocks.KELP_ASH_BLOCK);
-        addDrop(ModBlocks.KELP_ASH_MUD_BLOCK);
         addDrop(ModBlocks.LIMESTONE_CHUNKS);
         addDrop(ModBlocks.QUICKLIME);
         addDrop(ModBlocks.SLAKED_LIME);

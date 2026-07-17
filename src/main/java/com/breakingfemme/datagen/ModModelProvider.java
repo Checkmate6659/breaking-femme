@@ -31,7 +31,6 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.DEEPSLATE_RUBY_ORE);
 
         blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.KELP_ASH_BLOCK);
-        blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.KELP_ASH_MUD_BLOCK);
         blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.LIMESTONE_CHUNKS);
         blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.QUICKLIME);
         blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.SLAKED_LIME);
@@ -123,6 +122,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModFluids.SULFURIC_ACID_BUCKET, Models.GENERATED);
         itemModelGenerator.register(ModFluids.IMPURE_DILUTE_SULFURIC_ACID_BUCKET, Models.GENERATED);
         itemModelGenerator.register(ModFluids.HYDROCHLORIC_ACID_BUCKET, Models.GENERATED);
+        itemModelGenerator.register(ModFluids.KELP_ASH_MUD_BUCKET, Models.GENERATED);
         //AUTOGENERATION LABEL DO NOT TOUCH
 
 

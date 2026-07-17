@@ -144,16 +144,6 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         offerBlasting(exporter, ImmutableList.of(Items.DRIED_KELP_BLOCK), RecipeCategory.MISC, ModItems.KELP_ASH, 0.0f, 100, "kelp_ash_blast");
         offerReversibleCompactingRecipes(exporter, RecipeCategory.MISC, ModItems.KELP_ASH, RecipeCategory.BUILDING_BLOCKS, ModBlocks.KELP_ASH_BLOCK);
 
-        //lye water recipe in crafting grid
-        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.LYE_WATER_BOTTLE, 1)
-            .input(ModBlocks.KELP_ASH_MUD_BLOCK)
-            .input(Items.GLASS_BOTTLE)
-            .input(ItemTags.WOOL_CARPETS)
-            .input(Items.STICK)
-            .group("lye_water_bottle")
-            .criterion(hasItem(ModBlocks.KELP_ASH_MUD_BLOCK), conditionsFromItem(ModBlocks.KELP_ASH_MUD_BLOCK))
-            .offerTo(exporter, "lye_water_bottle");
-        
         //lime calcination
         offerSmelting(exporter, ImmutableList.of(ModBlocks.LIMESTONE_CHUNKS), RecipeCategory.MISC, ModBlocks.QUICKLIME, 0.0f, 200, "lime_smelt");
         offerBlasting(exporter, ImmutableList.of(ModBlocks.LIMESTONE_CHUNKS), RecipeCategory.MISC, ModBlocks.QUICKLIME, 0.0f, 100, "lime_blast");
