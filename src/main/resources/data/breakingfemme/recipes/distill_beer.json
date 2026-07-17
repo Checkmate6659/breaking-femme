@@ -1,6 +1,6 @@
 {
     "type": "breakingfemme:distilling",
-    "gravel": 0,
+    "gravel": 1,
     "input": {
         "fluid": "breakingfemme:beer",
         "quantity": 6
