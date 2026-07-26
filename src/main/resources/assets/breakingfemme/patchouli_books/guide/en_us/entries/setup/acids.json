@@ -1,0 +1,37 @@
+{
+    "name": "Acids",
+    "icon": "breakingfemme:hydrochloric_acid_bucket",
+    "category": "breakingfemme:setup",
+    "sortnum": 6,
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Acids are a cornerstone of modern chemistry, enabling a wide variety of reactions. Two very important industrial acids are sulfuric acid and hydrochloric acid, which we will both synthesize here."
+        },
+        {
+            "type": "patchouli:text",
+            "title": "Sulfuric Acid",
+            "text": "There are two ways to synthesize sulfuric acid: the iron sulfide process and the contact process [TODO]. The iron sulfide process can be used to get a small amount of sulfuric acid, but is impractical at an industrial scale, unlike the contact process. However that needs sulfuric acid to begin with."
+        },
+        {
+            "type": "patchouli:text",
+            "title": "Iron Sulfide Process",
+            "text": "To make your first batch of sulfuric acid, grind down an iron ingot and blend it with blaze powder. Smelting the blend will yield a clump of dirty iron sulfide, which can be dissolved in water, and the solution can then be distilled to get a little bit of sulfuric acid."
+        },
+        {
+            "type": "patchouli:text",
+            "title": "The Contact Process",
+            "text": "[TODO]"
+        },
+        {
+            "type": "patchouli:text",
+            "title": "Hydrochloric Acid",
+            "text": "Rock salt can be found on the seabed as white patches. Hydrochloric acid can be made from it in a Mannheim kiln [TODO], or, at a smaller scale, in a cauldron: dissolve it in cold sulfuric acid, with a water block above it to catch the HCl gas. Beware, as HCl gas can cause serious chemical burns!"
+        },
+        {
+            "type": "patchouli:text",
+            "title": "[RECIPES HERE]",
+            "text": "[TODO]"
+        }
+    ]
+}
