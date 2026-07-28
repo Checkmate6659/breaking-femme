@@ -30,6 +30,11 @@
         },
         {
             "type": "patchouli:text",
+            "title": "Making Hydrogen",
+            "text": "Hydrogen gas is necessary for hydrogenation reactions. You can obtain hydrogen gas by electrolyzing water [TODO], or, for now, by just tossing an iron ingot in a cauldron of sulfuric acid below the cauldron where the hydrogenation takes place."
+        },
+        {
+            "type": "patchouli:text",
             "title": "[RECIPES HERE]",
             "text": "[TODO]"
         }
