@@ -165,6 +165,13 @@ public class BreakingFemmeClient implements ClientModInitializer {
             return -1;
         }, ModFluids.ESTRONE_RECRYSTALLIZATION_CAULDRON);
 
+        //hydrogen production with iron and sulfuric acid (cauldron only)
+        ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
+            if (i == 0)
+                return 0xC0EBE938; //average between sulfuric acid and impure dilute sulfuric acid
+            return -1;
+        }, ModFluids.IMPURE_DILUTE_SULFURIC_ACID_CAULDRON);
+
         //estrone reduction in caustic soda solution (cauldron only)
         ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
             if (i == 0)

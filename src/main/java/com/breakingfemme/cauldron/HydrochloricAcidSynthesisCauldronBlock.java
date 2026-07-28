@@ -45,7 +45,7 @@ public class HydrochloricAcidSynthesisCauldronBlock extends AbstractCauldronBloc
             {
                 player.getStackInHand(hand).decrement(1);
                 world.setBlockState(pos, ModFluids.HYDROCHLORIC_ACID_SYNTHESIS_CAULDRON.getDefaultState());
-                world.playSound((PlayerEntity)null, pos, SoundEvents.ITEM_INK_SAC_USE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                world.playSound((PlayerEntity)null, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 world.emitGameEvent((Entity)null, GameEvent.FLUID_PLACE, pos);
             }
             return ActionResult.success(world.isClient);

@@ -54,7 +54,7 @@ public class SulfuricAcidCauldronBlock extends AbstractCauldronBlock {
                 player.incrementStat(Stats.USE_CAULDRON);
                 player.incrementStat(Stats.USED.getOrCreateStat(item));
                 world.setBlockState(pos, ModFluids.COPPER_SULFATE_CAULDRON.getDefaultState());
-                world.playSound((PlayerEntity)null, pos, SoundEvents.ITEM_INK_SAC_USE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                world.playSound((PlayerEntity)null, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 world.emitGameEvent((Entity)null, GameEvent.FLUID_PLACE, pos);
             }
             return ActionResult.success(world.isClient);
@@ -73,7 +73,7 @@ public class SulfuricAcidCauldronBlock extends AbstractCauldronBlock {
                 player.incrementStat(Stats.USE_CAULDRON);
                 player.incrementStat(Stats.USED.getOrCreateStat(item));
                 world.setBlockState(pos, ModFluids.COPPER_SULFATE_CAULDRON.getDefaultState());
-                world.playSound((PlayerEntity)null, pos, SoundEvents.ITEM_INK_SAC_USE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                world.playSound((PlayerEntity)null, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 world.emitGameEvent((Entity)null, GameEvent.FLUID_PLACE, pos);
             }
             return ActionResult.success(world.isClient);
@@ -82,7 +82,7 @@ public class SulfuricAcidCauldronBlock extends AbstractCauldronBlock {
         BEHAVIOR.put(ModItems.NICKEL_INGOT, turn_into_nickel_sulfate);
         BEHAVIOR.put(ModItems.PULVERIZED_NICKEL, turn_into_nickel_sulfate);
         if(FabricLoader.getInstance().isModLoaded("create")) //create compat, or rather compat with mods compatible with create that have crushed nickel
-            BEHAVIOR.put(AllItems.CRUSHED_NICKEL.asItem(), turn_into_copper_sulfate);
+            BEHAVIOR.put(AllItems.CRUSHED_NICKEL.asItem(), turn_into_nickel_sulfate);
     }
 
     public SulfuricAcidCauldronBlock(AbstractBlock.Settings settings) {
