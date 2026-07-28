@@ -145,13 +145,21 @@ public class EstroneReductionCauldronBlock extends AbstractCauldronBlock {
     //turn into "done" state if you cool it and let it sit for 2 mc hours ie have a 2/3 chance of triggering on a random tick
     //and turn into sludge if you heat it
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        //failure condition
+        //not ready! so don't do anything
+        if(!state.get(HAS_ESTRONE) || !state.get(HAS_RNICKEL)) return;
+
+        //failure condition: DO NOT HEAT!
         if(world.getDimension().ultrawarm() || ThermalUtil.isBlockHot(world, pos.down()))
             world.setBlockState(pos, ModFluids.SLUDGE_CAULDRON.getDefaultState());
 
-        //success condition
+        //success condition: need cold, hydrogen and time
+        //however exponential probability distribution strikes again and we can't determine how long the H has been there
         if(random.nextInt(3) != 0 && ThermalUtil.isCauldronCold(world, pos))
-            world.setBlockState(pos, ModFluids.ESTRONE_REDUCTION_CAULDRON.getDefaultState().with(IS_DONE, true));
+        {
+            //check for hydrogen generator cauldron underneath
+            if(world.getBlockState(pos.down()).isOf(ModFluids.HYDROGEN_GENERATOR_CAULDRON))
+                world.setBlockState(pos, ModFluids.ESTRONE_REDUCTION_CAULDRON.getDefaultState().with(IS_DONE, true));
+        }
     }
 
     //doing boiling effect when its hot, and TODO: condensation (dripping) effect when its cold
