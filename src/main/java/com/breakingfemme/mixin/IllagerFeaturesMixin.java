@@ -30,12 +30,12 @@ public class IllagerFeaturesMixin {
 		if(root.hasChild("breakingfemme_features"))
 			breakingfemme$features = root.getChild("breakingfemme_features");
 		else
-			BreakingFemme.LOGGER.error("ERROR: Some Breaking Femme features failed to load!");
+			BreakingFemme.LOGGER.error("ERROR: Some Breaking Femme features failed to load! (IllagerFeaturesMixin)");
 
 		if(root.hasChild("breakingfemme_features_jacket"))
 			breakingfemme$features_jacket = root.getChild("breakingfemme_features_jacket");
 		else
-			BreakingFemme.LOGGER.error("ERROR: Some Breaking Femme covered features failed to load!");
+			BreakingFemme.LOGGER.error("ERROR: Some Breaking Femme covered features failed to load! (IllagerFeaturesMixin)");
 	}
 
     @WrapOperation(method = "getTexturedModelData", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/model/TexturedModelData;of(Lnet/minecraft/client/model/ModelData;II)Lnet/minecraft/client/model/TexturedModelData;"))
@@ -45,7 +45,7 @@ public class IllagerFeaturesMixin {
 		//also the body of the illager has an integrated "jacket" for some reason. so we need to add the jacket in.
 		//we could use that kinda stuff for our jacket actually, would simplify things potentially... maybe.
 		data.getRoot().addChild("breakingfemme_features", ModelPartBuilder.create().uv(20, 26).cuboid(-4.0F, -1.0F, -0.875F, 8.0F, 2.0F, 2.0F, new Dilation(-0.00390625F)), ModelTransform.of(0.0F, 2.0F, -2.75F, 1.0F, 0.0F, 0.0F));
-		data.getRoot().addChild("breakingfemme_jacket_features", ModelPartBuilder.create().uv(4, 44).cuboid(-4.0F, -1.0F, -0.875F, 8.0F, 2.0F, 2.0F, new Dilation(0.25F - 0.00390625F)), ModelTransform.of(0.0F, 2.0F, -2.75F, 1.0F, 0.0F, 0.0F));
+		data.getRoot().addChild("breakingfemme_features_jacket", ModelPartBuilder.create().uv(4, 44).cuboid(-4.0F, -1.0F, -0.875F, 8.0F, 2.0F, 2.0F, new Dilation(0.25F - 0.00390625F)), ModelTransform.of(0.0F, 2.0F, -2.75F, 1.0F, 0.0F, 0.0F));
 
 		return original.call(data, w, h);
     }
