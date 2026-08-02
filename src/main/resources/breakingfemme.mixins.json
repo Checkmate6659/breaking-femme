@@ -18,6 +18,7 @@
 	"client": [
 		"AdvancementTabMixin",
 		"BipedFeaturesMixin",
+		"CreeperFeaturesMixin",
 		"GuideBookMixin",
 		"JustShutUpMixin",
 		"PleaseShutUpMixin",
