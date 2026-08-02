@@ -29,7 +29,8 @@
 		"CreeperFeaturesMixin",
 		"EnderwomanFeaturesMixin",
 		"IllagerFeaturesMixin",
-		"VillagerFeaturesMixin"
+		"VillagerFeaturesMixin",
+		"ZombieVillagerFeaturesMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

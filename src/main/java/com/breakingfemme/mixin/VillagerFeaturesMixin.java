@@ -40,7 +40,7 @@ public class VillagerFeaturesMixin {
     private static ModelData breakingfemme$getModelData_features(ModelData data) {
 		ModelPartData mpd = data.getRoot();
 		mpd.addChild("breakingfemme_features", ModelPartBuilder.create().uv(20, 26).cuboid(-4.0F, -1.0F, -0.875F, 8.0F, 2.0F, 2.0F, new Dilation(-0.00390625F)), ModelTransform.of(0.0F, 2.0F, -2.75F, 1.0F, 0.0F, 0.0F));
-		mpd.addChild("breakingfemme_features_jacket", ModelPartBuilder.create().uv(18, 44).cuboid(-4.0F, -1.0F, -0.875F, 8.0F, 2.0F, 2.0F, new Dilation(0.25F - 0.00390625F)), ModelTransform.of(0.0F, 2.0F, -2.75F, 1.0F, 0.0F, 0.0F));
+		mpd.addChild("breakingfemme_features_jacket", ModelPartBuilder.create().uv(4, 42).cuboid(-4.0F, -1.0F, -0.875F, 8.0F, 2.0F, 2.0F, new Dilation(0.25F - 0.00390625F)), ModelTransform.of(0.0F, 2.0F, -2.75F, 1.0F, 0.0F, 0.0F));
 
 		return data;
     }
