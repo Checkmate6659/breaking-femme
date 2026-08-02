@@ -28,7 +28,9 @@ import net.minecraft.util.Identifier;
 public class BipedFeaturesMixin {
 	@Unique
    	public ModelPart breakingfemme$features; //can't be final cuz constructor injector is *not* the constructor
-   	public ModelPart breakingfemme$features_jacket; //jacket layer if it exists (PlayerEntityModel, VillagerResemblingModel...)
+
+	@Unique
+	public ModelPart breakingfemme$features_jacket; //jacket layer if it exists (PlayerEntityModel, VillagerResemblingModel...)
 	//TODO: add features armor layer for vanilla-style armor, compat for vanilla-style armor, and compat mappings
 	//TODO: add mob list (skeletons? theres the whole transparency issue tho...)
 	//for zombie villagers (mb other mobs?) the body's uv is different
