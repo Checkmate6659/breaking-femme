@@ -28,6 +28,7 @@
 		"BipedFeaturesMixin",
 		"CreeperFeaturesMixin",
 		"EnderwomanFeaturesMixin",
+		"IllagerFeaturesMixin",
 		"VillagerFeaturesMixin"
 	],
 	"injectors": {
