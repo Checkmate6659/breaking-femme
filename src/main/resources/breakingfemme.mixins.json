@@ -17,15 +17,17 @@
 	],
 	"client": [
 		"AdvancementTabMixin",
-		"BipedFeaturesMixin",
-		"CreeperFeaturesMixin",
 		"GuideBookMixin",
 		"JustShutUpMixin",
 		"PleaseShutUpMixin",
 		"PostEffectPassAccessor",
 		"ScreenShakeMixin",
 		"StaggeringMixin",
-		"StaggeringSneakMixin"
+		"StaggeringSneakMixin",
+
+		"BipedFeaturesMixin",
+		"CreeperFeaturesMixin",
+		"VillagerFeaturesMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
