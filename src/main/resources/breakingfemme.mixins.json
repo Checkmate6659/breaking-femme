@@ -17,6 +17,7 @@
 	],
 	"client": [
 		"AdvancementTabMixin",
+		"BipedFeaturesMixin",
 		"GuideBookMixin",
 		"JustShutUpMixin",
 		"PleaseShutUpMixin",
