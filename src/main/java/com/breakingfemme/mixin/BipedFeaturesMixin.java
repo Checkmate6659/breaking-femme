@@ -32,17 +32,14 @@ public class BipedFeaturesMixin {
 	@Unique
 	public ModelPart breakingfemme$features_jacket; //jacket layer if it exists (PlayerEntityModel)
 	//TODO: add features armor layer for vanilla-style armor, compat for vanilla-style armor, and compat mappings
-	//TODO: add mob list (skeletons? theres the whole transparency issue tho...)
-	//for zombie villagers (mb other mobs?) the body's uv is different
-	//also for thicker mobs with crossed arms (villagers and evokers) it needs to be more forward and maybe higher up
-	//but those are other classes!
+	//TODO: add compat file and test out a buncha modded entities
 
     @Inject(method = "<init>(Lnet/minecraft/client/model/ModelPart;Ljava/util/function/Function;)V", at = @At("RETURN"))
     private void breakingfemme$constructor_features(ModelPart root, Function<Identifier, RenderLayer> renderLayerFactory, CallbackInfo ci) {
 		if(root.hasChild("breakingfemme_features"))
 			breakingfemme$features = root.getChild("breakingfemme_features");
 		else
-			BreakingFemme.LOGGER.error("ERROR: Some Breaking Femme features failed to load!");
+			BreakingFemme.LOGGER.error("ERROR: Some Breaking Femme features failed to load! (BipedFeaturesMixin)");
 
 		if(root.hasChild("breakingfemme_features_jacket")) //if not the case, it just doesn't exist and that's normal!
 			breakingfemme$features_jacket = root.getChild("breakingfemme_features_jacket");
@@ -50,14 +47,8 @@ public class BipedFeaturesMixin {
 
     @ModifyReturnValue(method = "getModelData", at = @At("RETURN"))
     private static ModelData breakingfemme$getModelData_features(ModelData data, Dilation dilation, float pivotOffsetY) {
-		//i think its radians!
-		//TODO: zombie villager uv is fucked! add compat file and test out a buncha entities
-		//also how do i make villager have them higher up and more forward or sth, to make them actually show
-		//and not have boobs on skeletons
+		//i think its radians! but still kinda weird idk.
 		//to adjust boob height, only change pivot y position! (for some odd reason that works)
-
-		//TODO: IllagerEntityModel! arms or no arms, that is the question
-		//i think its really just gonna be a copy of this class. lol.
 
 		ModelPartData mpd = data.getRoot();
 		mpd.addChild("breakingfemme_features", ModelPartBuilder.create().uv(18, 22).cuboid(-4.0F, -1.0F, -0.875F, 8.0F, 2.0F, 2.0F, dilation.add(-0.00390625F)), ModelTransform.of(0.0F, 3.0F, -1.75F, 1.0F, pivotOffsetY, 0.0F));

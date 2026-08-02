@@ -27,13 +27,12 @@ public class CreeperFeaturesMixin {
 		if(root.hasChild("breakingfemme_features"))
 			breakingfemme$features = root.getChild("breakingfemme_features");
 		else
-			BreakingFemme.LOGGER.error("ERROR: Some Breaking Femme explosive features failed to load!");
+			BreakingFemme.LOGGER.error("ERROR: Some Breaking Femme explosive features failed to load! (CreeperFeaturesMixin)");
 	}
 
     @WrapOperation(method = "getTexturedModelData", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/model/TexturedModelData;of(Lnet/minecraft/client/model/ModelData;II)Lnet/minecraft/client/model/TexturedModelData;"))
     private static TexturedModelData breakingfemme$getTexturedModelData_features(ModelData data, int w, int h, Operation<TexturedModelData> original) {
 		//somehow dilation for exploding already works!
-		//TODO: fix uv potentially!
 		data.getRoot().addChild("breakingfemme_features", ModelPartBuilder.create().uv(18, 22).cuboid(-4.0F, -1.0F, -0.875F, 8.0F, 2.0F, 2.0F, new Dilation(-0.00390625F)), ModelTransform.of(0.0F, 10.0F, -1.75F, 1.0F, 0.0F, 0.0F));
 		return original.call(data, w, h);
     }

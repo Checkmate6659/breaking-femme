@@ -28,12 +28,12 @@ public class VillagerFeaturesMixin {
 		if(root.hasChild("breakingfemme_features"))
 			breakingfemme$features = root.getChild("breakingfemme_features");
 		else
-			BreakingFemme.LOGGER.error("ERROR: Some Breaking Femme features failed to load!");
+			BreakingFemme.LOGGER.error("ERROR: Some Breaking Femme features failed to load! (VillagerFeaturesMixin)");
 
 		if(root.hasChild("breakingfemme_features_jacket"))
 			breakingfemme$features_jacket = root.getChild("breakingfemme_features_jacket");
 		else
-			BreakingFemme.LOGGER.error("ERROR: Some Breaking Femme covered features failed to load!");
+			BreakingFemme.LOGGER.error("ERROR: Some Breaking Femme covered features failed to load! (VillagerFeaturesMixin)");
 	}
 
     @ModifyReturnValue(method = "getModelData", at = @At("RETURN"))
