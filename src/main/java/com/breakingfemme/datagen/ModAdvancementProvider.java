@@ -32,7 +32,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                     ModItems.MORTAR_PESTLE, // The display icon
                     Text.translatable("advancement.breakingfemme.root.title"), // The title
                     Text.translatable("advancement.breakingfemme.root.description"), // The description
-                    new Identifier(BreakingFemme.MOD_ID, "textures/gui/graffiti.png"), // Background image used (for the advancements tab)
+                    new Identifier(BreakingFemme.MOD_ID, "custom_background"), // Normally background image used, here it's a signal for using the custom background renderer
                     AdvancementFrame.TASK, // Options: TASK, CHALLENGE, GOAL
                     false, // Show toast top right
                     false, // Announce to chat

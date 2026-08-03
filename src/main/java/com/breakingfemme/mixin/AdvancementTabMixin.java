@@ -3,14 +3,17 @@ package com.breakingfemme.mixin;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 import com.breakingfemme.BreakingFemme;
 import com.llamalad7.mixinextras.expression.Expression;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.advancement.AdvancementTab;
 import net.minecraft.util.Identifier;
 
@@ -28,7 +31,7 @@ public class AdvancementTabMixin {
     private Identifier breakingfemme$checkIfTargetTab(Identifier id)
     {
         breakingfemme$target_tab = false;
-        if(id.getNamespace().equals(BreakingFemme.MOD_ID)) //if using the only breakingfemme advancement tab (i won't add more than one tab)
+        if(id.getNamespace().equals(BreakingFemme.MOD_ID) && id.getPath().equals("custom_background")) //if custom breakingfemme background selected
         {
             breakingfemme$target_tab = true;
 
@@ -43,7 +46,6 @@ public class AdvancementTabMixin {
     @ModifyExpressionValue(method = "render", at = @At(value = "MIXINEXTRAS:EXPRESSION"))
     private int breakingfemme$parallax(int value)
     {
-        //TODO: grab the values for prng, for mossy/cracked bricks! and differentiating between them
         if(breakingfemme$target_tab)
         {
             value /= 2; //move around slower
@@ -74,12 +76,19 @@ public class AdvancementTabMixin {
 
         //approximately 50% stone bricks, 30% mossy stone bricks, 20% cracked stone bricks
         if(hash >= 0)
-            args.set(0, new Identifier(BreakingFemme.MOD_ID, "textures/gui/adv1.png"));
+            args.set(0, new Identifier(BreakingFemme.MOD_ID, "textures/gui/advancement/brick1.png"));
         else if(hash >= -77)
-            args.set(0, new Identifier(BreakingFemme.MOD_ID, "textures/gui/adv2.png"));
+            args.set(0, new Identifier(BreakingFemme.MOD_ID, "textures/gui/advancement/brick2.png"));
         else
-            args.set(0, new Identifier(BreakingFemme.MOD_ID, "textures/gui/adv3.png"));
+            args.set(0, new Identifier(BreakingFemme.MOD_ID, "textures/gui/advancement/brick3.png"));
     }
 
-    //TODO: draw graffiti on the bricks
+    //draw graffiti on the bricks, right after bricks ie right before drawing the actual advancements
+    @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/advancement/AdvancementWidget;renderLines(Lnet/minecraft/client/gui/DrawContext;IIZ)V"))
+    private void breakingfemme$draw_graffiti(DrawContext context, int x, int y, CallbackInfo info)
+    {
+        //NOTE: this does NOT support transparency!
+        context.drawTexture(new Identifier(BreakingFemme.MOD_ID, "textures/gui/advancement/graffiti.png"),
+            breakingfemme$copy_i, breakingfemme$copy_j, 0, 0, 256, 176);
+    }
 }
