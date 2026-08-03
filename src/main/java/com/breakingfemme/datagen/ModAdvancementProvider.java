@@ -23,6 +23,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
         super(dataGenerator);
     }
 
+    //TODO: BACKGROUND TEXTURE GRAFFITI
     @Override
     public void generateAdvancement(Consumer<Advancement> consumer) {
         //Branches are registered here from bottom to top... if not already existing when running datagen... wait what? i dont understand the system
@@ -31,7 +32,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                     ModItems.MORTAR_PESTLE, // The display icon
                     Text.translatable("advancement.breakingfemme.root.title"), // The title
                     Text.translatable("advancement.breakingfemme.root.description"), // The description
-                    new Identifier(BreakingFemme.MOD_ID, "textures/gui/advancements.png"), // Background image used (for the advancements tab)
+                    new Identifier(BreakingFemme.MOD_ID, "textures/gui/graffiti.png"), // Background image used (for the advancements tab)
                     AdvancementFrame.TASK, // Options: TASK, CHALLENGE, GOAL
                     false, // Show toast top right
                     false, // Announce to chat
@@ -201,7 +202,22 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
             .criterion("made_pure_estrone", InventoryChangedCriterion.Conditions.items(ModItems.PURE_ESTRONE))
             .build(consumer, BreakingFemme.MOD_ID + "/pure_estrone");
 
-        Advancement pure_estradiol = Advancement.Builder.createUntelemetered().parent(pure_estrone)
+        Advancement crude_estradiol = Advancement.Builder.createUntelemetered().parent(pure_estrone)
+            .display(
+                    ModItems.CRUDE_ESTRADIOL,
+                    Text.translatable("advancement.breakingfemme.crude_estradiol.title"),
+                    Text.translatable("advancement.breakingfemme.crude_estradiol.description"),
+                    null, // children to parent advancements don't need a background set
+                    AdvancementFrame.GOAL,
+                    true,
+                    true,
+                    false
+            )
+            .rewards(AdvancementRewards.Builder.experience(12000))
+            .criterion("made_crude_estradiol", InventoryChangedCriterion.Conditions.items(ModItems.CRUDE_ESTRADIOL))
+            .build(consumer, BreakingFemme.MOD_ID + "/crude_estradiol");
+
+        Advancement pure_estradiol = Advancement.Builder.createUntelemetered().parent(crude_estradiol)
             .display(
                     ModItems.PURE_ESTRADIOL_CRYSTALS,
                     Text.translatable("advancement.breakingfemme.pure_estradiol.title"),
@@ -215,6 +231,21 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
             .rewards(AdvancementRewards.Builder.experience(36000))
             .criterion("made_pure_estradiol", InventoryChangedCriterion.Conditions.items(ModItems.PURE_ESTRADIOL_CRYSTALS))
             .build(consumer, BreakingFemme.MOD_ID + "/pure_estradiol");
+
+        Advancement egel = Advancement.Builder.createUntelemetered().parent(pure_estradiol)
+            .display(
+                    ModItems.EGEL_BOTTLE,
+                    Text.translatable("advancement.breakingfemme.egel.title"),
+                    Text.translatable("advancement.breakingfemme.egel.description"),
+                    null, // children to parent advancements don't need a background set
+                    AdvancementFrame.TASK,
+                    true,
+                    true,
+                    false
+            )
+            .rewards(AdvancementRewards.Builder.experience(3000))
+            .criterion("made_egel", InventoryChangedCriterion.Conditions.items(ModItems.EGEL_BOTTLE))
+            .build(consumer, BreakingFemme.MOD_ID + "/egel");
 
         //fermenting and distilling branch
         Advancement fermenter = Advancement.Builder.createUntelemetered().parent(root)

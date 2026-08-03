@@ -1,35 +1,77 @@
 package com.breakingfemme.mixin;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Constant;
-import org.spongepowered.asm.mixin.injection.ModifyConstant;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 import com.breakingfemme.BreakingFemme;
+import com.llamalad7.mixinextras.expression.Expression;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 
 import net.minecraft.client.gui.screen.advancement.AdvancementTab;
 import net.minecraft.util.Identifier;
 
 @Mixin(AdvancementTab.class)
 public class AdvancementTabMixin {
-    private boolean breakingfemme$large_texture = false;
+    @Unique
+    private boolean breakingfemme$target_tab = false;
 
+    @Unique //WARNING: wonky and probably not very well compatible code!! TODO: rewrite if needed!
+    private int breakingfemme$copy_i = -32768, breakingfemme$copy_j = -32768;
+
+    //this is checking if the background image has the breakingfemme namespace
+    //mb a finer check could be better. like checking the actual path.
     @ModifyVariable(method = "render", at = @At(value = "STORE", ordinal = 0))
-    private Identifier breakingfemme$checkIfLargeTexture(Identifier id)
+    private Identifier breakingfemme$checkIfTargetTab(Identifier id)
     {
-        breakingfemme$large_texture = false;
+        breakingfemme$target_tab = false;
         if(id.getNamespace().equals(BreakingFemme.MOD_ID)) //if using the only breakingfemme advancement tab (i won't add more than one tab)
-            breakingfemme$large_texture = true;
+        {
+            breakingfemme$target_tab = true;
+
+            //reset i varable. which is responsible for recognizing if we are targeting i or j in the next mixin.
+            breakingfemme$copy_i = -32768;
+        }
         return id;
     }
 
-    //TODO: more elegant way to do this? this is kinda scuffed, changes every single constant of value 16.
-    //how does this work with other mods?
-    @ModifyConstant(method = "render", constant = @Constant(intValue = 16))
-    private int breakingfemme$change16s(int value)
+    //add parallax effect, and "steal" i and j values for later use
+    @Expression("@(?)%16")
+    @ModifyExpressionValue(method = "render", at = @At(value = "MIXINEXTRAS:EXPRESSION"))
+    private int breakingfemme$parallax(int value)
     {
-        if(breakingfemme$large_texture) return 32; //size of my background texture
-        return value;
+        //TODO: grab the values for prng, for mossy/cracked bricks! and differentiating between them
+        if(breakingfemme$target_tab)
+        {
+            value /= 2; //move around slower
+            if(breakingfemme$copy_i == -32768) //detection of if we are targeting i or j
+                breakingfemme$copy_i = value;
+            else
+            {
+                breakingfemme$copy_j = value;
+                value -= 9; //slight offset, not to have a perfect corner lineup
+            }
+        }
+        return value - 4; //same shit here
     }
+
+    //change the fucking textures to be randomized bricks
+    @ModifyArg(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;drawTexture(Lnet/minecraft/util/Identifier;IIFFIIII)V"))
+    private Identifier breakingfemme$bricks(Identifier orig)
+    {
+        if(!breakingfemme$target_tab) return orig;
+
+        //approximately 50% stone bricks, 30% mossy stone bricks, 20% cracked stone bricks
+        /*byte hash = (byte)((breakingfemme$copy_i * 80085 + breakingfemme$copy_j * 6659 + 6767) >> 8);
+        if(hash > 1)
+            return new Identifier(BreakingFemme.MOD_ID, "textures/gui/adv1.png");
+        if(hash > -78)
+            return new Identifier(BreakingFemme.MOD_ID, "textures/gui/adv2.png");
+        return new Identifier(BreakingFemme.MOD_ID, "textures/gui/adv3.png");*/
+        return new Identifier(BreakingFemme.MOD_ID, "textures/gui/adv1.png");
+    }
+
+    //TODO: draw graffiti
 }

@@ -1,12 +1,12 @@
 {
-  "parent": "minecraft:breakingfemme/crude_estradiol",
+  "parent": "minecraft:breakingfemme/pure_estrone",
   "criteria": {
-    "made_pure_estradiol": {
+    "made_crude_estradiol": {
       "conditions": {
         "items": [
           {
             "items": [
-              "breakingfemme:pure_estradiol_crystals"
+              "breakingfemme:crude_estradiol"
             ]
           }
         ]
@@ -17,25 +17,25 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancement.breakingfemme.pure_estradiol.description"
+      "translate": "advancement.breakingfemme.crude_estradiol.description"
     },
-    "frame": "challenge",
+    "frame": "goal",
     "hidden": false,
     "icon": {
-      "item": "breakingfemme:pure_estradiol_crystals"
+      "item": "breakingfemme:crude_estradiol"
     },
     "show_toast": true,
     "title": {
-      "translate": "advancement.breakingfemme.pure_estradiol.title"
+      "translate": "advancement.breakingfemme.crude_estradiol.title"
     }
   },
   "requirements": [
     [
-      "made_pure_estradiol"
+      "made_crude_estradiol"
     ]
   ],
   "rewards": {
-    "experience": 36000
+    "experience": 12000
   },
   "sends_telemetry_event": false
 }

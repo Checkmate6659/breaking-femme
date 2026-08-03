@@ -15,7 +15,7 @@
   },
   "display": {
     "announce_to_chat": false,
-    "background": "breakingfemme:textures/gui/advancements.png",
+    "background": "breakingfemme:textures/gui/graffiti.png",
     "description": {
       "translate": "advancement.breakingfemme.root.description"
     },
