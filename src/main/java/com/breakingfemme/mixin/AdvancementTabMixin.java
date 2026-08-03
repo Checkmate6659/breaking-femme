@@ -3,8 +3,9 @@ package com.breakingfemme.mixin;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyArg;
+import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
+import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 import com.breakingfemme.BreakingFemme;
 import com.llamalad7.mixinextras.expression.Expression;
@@ -46,32 +47,39 @@ public class AdvancementTabMixin {
         if(breakingfemme$target_tab)
         {
             value /= 2; //move around slower
+            value -= 4; //slight offset, not to have a perfect corner lineup
             if(breakingfemme$copy_i == -32768) //detection of if we are targeting i or j
                 breakingfemme$copy_i = value;
             else
             {
+                value -= 9; //same shit here
                 breakingfemme$copy_j = value;
-                value -= 9; //slight offset, not to have a perfect corner lineup
             }
         }
-        return value - 4; //same shit here
+        return value;
     }
 
-    //change the fucking textures to be randomized bricks
-    @ModifyArg(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;drawTexture(Lnet/minecraft/util/Identifier;IIFFIIII)V"))
-    private Identifier breakingfemme$bricks(Identifier orig)
+    //change the textures to be randomized bricks
+    @ModifyArgs(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;drawTexture(Lnet/minecraft/util/Identifier;IIFFIIII)V"))
+    private void breakingfemme$bricks(Args args)
     {
-        if(!breakingfemme$target_tab) return orig;
+        if(!breakingfemme$target_tab) return; //don't do anything
+
+        //select brick type
+        int x = (breakingfemme$copy_i & -16) - ((int)args.get(1) & -16) + 1024;
+        int y = (breakingfemme$copy_j & -16) - ((int)args.get(2) & -16) + 1024;
+
+        int val = (x >> 4) * 80085 + (y >> 4) * 6659 + 676767;
+        byte hash = (byte)((val * val * val) >> 20); //wait, theres patches of moss or no moss? better hash function? and why is that?
 
         //approximately 50% stone bricks, 30% mossy stone bricks, 20% cracked stone bricks
-        /*byte hash = (byte)((breakingfemme$copy_i * 80085 + breakingfemme$copy_j * 6659 + 6767) >> 8);
-        if(hash > 1)
-            return new Identifier(BreakingFemme.MOD_ID, "textures/gui/adv1.png");
-        if(hash > -78)
-            return new Identifier(BreakingFemme.MOD_ID, "textures/gui/adv2.png");
-        return new Identifier(BreakingFemme.MOD_ID, "textures/gui/adv3.png");*/
-        return new Identifier(BreakingFemme.MOD_ID, "textures/gui/adv1.png");
+        if(hash >= 0)
+            args.set(0, new Identifier(BreakingFemme.MOD_ID, "textures/gui/adv1.png"));
+        else if(hash >= -77)
+            args.set(0, new Identifier(BreakingFemme.MOD_ID, "textures/gui/adv2.png"));
+        else
+            args.set(0, new Identifier(BreakingFemme.MOD_ID, "textures/gui/adv3.png"));
     }
 
-    //TODO: draw graffiti
+    //TODO: draw graffiti on the bricks
 }
