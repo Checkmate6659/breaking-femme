@@ -3,10 +3,10 @@
     "gravel": 4,
     "input": {
         "fluid": "breakingfemme:androstadienedione_oil_solution",
-        "quantity": 32
+        "quantity": 27
     },
     "output": {
         "fluid": "breakingfemme:estrone_oil_solution",
-        "quantity": 1
+        "quantity": 24
     }
 }

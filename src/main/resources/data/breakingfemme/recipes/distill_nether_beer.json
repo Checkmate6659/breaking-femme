@@ -3,10 +3,10 @@
     "gravel": 2,
     "input": {
         "fluid": "breakingfemme:nether_beer",
-        "quantity": 3
+        "quantity": 54
     },
     "output": {
         "fluid": "breakingfemme:ethanol95",
-        "quantity": 1
+        "quantity": 18
     }
 }

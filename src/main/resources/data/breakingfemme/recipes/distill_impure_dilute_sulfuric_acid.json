@@ -3,10 +3,10 @@
     "gravel": 1,
     "input": {
         "fluid": "breakingfemme:impure_dilute_sulfuric_acid",
-        "quantity": 4
+        "quantity": 60
     },
     "output": {
         "fluid": "breakingfemme:sulfuric_acid",
-        "quantity": 1
+        "quantity": 15
     }
 }
