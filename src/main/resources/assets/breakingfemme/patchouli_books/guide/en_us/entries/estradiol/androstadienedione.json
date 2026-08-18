@@ -1,0 +1,40 @@
+{
+    "name": "Androstadienedione",
+    "icon": "breakingfemme:androstadienedione_solution_bucket",
+    "category": "breakingfemme:estradiol",
+    "sortnum": 8,
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "The first intermediate in estradiol production is the androgenic androstadienedione.$(br2)$(4)$(l)WARNING: touching androgens in this mod may or may not disrupt the fabric of spacetime, handle with care!"
+        },
+        {
+            "type": "patchouli:text",
+            "text": "To produce androstadienedione, we need five ingredients: water, sugar, sterols, nickel sulfate, and skimmed milk powder. You should already know how to get the first three at this point.$(br2)NOTE: This mod does not add all the bacteria culturing, and this step is by far the most oversimplified of the entire mod."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "Nickel sulfate can be obtained by reacting powdered nickel metal with sulfuric acid in a cauldron, then evaporating the resulting aqueous nickel sulfate solution.$(br2)To craft skimmed milk powder, spin milk in a separator, cast the skimmed milk and cream into ingots, cook them, put the cream aside for now [TODO] and"
+        },
+        {
+            "type": "patchouli:text",
+            "text": "grind down the skimmed milk into dust.$(br2)$(4)$(l)WARNING: raw ingot casts are extremely unstable, handle them with care if you do not want to risk spilling milk all over your lab!"
+        },
+        {
+            "type": "patchouli:text",
+            "text": "To actually brew the androstadienedione, add all of these ingredients to a fermenter having at least one mixer and heater. The brew must be stirred at all times. Follow the following temperature instructions:"
+        },
+        {
+            "type": "patchouli:text",
+            "text": "Androstadienedione Recipe:$(li)Hold the temperature at around 60°C for approximately 3 real-life minutes$(li)Let the brew ferment between 25°C and 55°C for five Minecraft days.$(li)Bring the mixture up to a boil for two and a half real-life minutes.$(li)Enjoy your (highly impure and mildly carcinogenic) product!"
+        },
+        {
+            "type": "patchouli:crafting",
+            "recipe": "breakingfemme:milk_separator",
+            "recipe2": "breakingfemme:ingot_mold"
+        },
+        {
+            "type": "breakingfemme:milk_page"
+        }
+    ]
+}

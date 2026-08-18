@@ -99,6 +99,9 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         CookingRecipeJsonBuilder.createSmelting(Ingredient.fromTag(ModItemTagProvider.PULVERIZED_NICKEL), RecipeCategory.MISC, ModItems.NICKEL_INGOT, 0, 200).criterion(hasItem(ModItems.PULVERIZED_NICKEL), conditionsFromTag(ModItemTagProvider.PULVERIZED_NICKEL)).offerTo(exporter, "nickel_ingot_from_remelting");
         CookingRecipeJsonBuilder.createBlasting(Ingredient.fromTag(ModItemTagProvider.PULVERIZED_NICKEL), RecipeCategory.MISC, ModItems.NICKEL_INGOT, 0, 100).criterion(hasItem(ModItems.PULVERIZED_NICKEL), conditionsFromTag(ModItemTagProvider.PULVERIZED_NICKEL)).offerTo(exporter, "nickel_ingot_from_remelting_blasting");
 
+        //milk separator
+        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, ModBlocks.MILK_SEPARATOR, 1).input(':', Items.STICK).input('U', ItemTags.PLANKS).input('w', Items.BUCKET).input('u', Items.STRING).input('O', ModItemTagProvider.IRON_INGOT).pattern("OuO").pattern("UwU").pattern(": :").group("milk_separator").criterion(hasItem(Items.BUCKET), conditionsFromItem(Items.BUCKET)).offerTo(exporter);
+
         //clay ingot mold
         ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, ModItems.INGOT_MOLD, 2).input('#', Items.CLAY_BALL).pattern("# #").pattern(" # ").group("ingot_mold").criterion(hasItem(Items.CLAY_BALL), conditionsFromItem(Items.CLAY_BALL)).offerTo(exporter);
 

@@ -2,7 +2,7 @@
     "name": "Starting Materials",
     "icon": "breakingfemme:sterols",
     "category": "breakingfemme:estradiol",
-    "sortnum": 1,
+    "sortnum": 7,
     "pages": [
         {
             "type": "patchouli:text",
@@ -24,7 +24,7 @@
         },
         {
             "type": "patchouli:text",
-            "text": "Sterols can be extracted from soybeans by maceration in 64% ethanol: place soybeans in a cauldron full of 64% ethanol, bring it to a boil, and wait. The desired sterols will be dissolved in the ethanol and then crash out as crystals."
+            "text": "Sterols can be extracted from soybeans bought from farmers by maceration in 64% ethanol: place soybeans in a cauldron full of 64% ethanol, bring it to a boil, and wait. The desired sterols will be dissolved in the ethanol and then crash out as crystals."
         }
     ]
 }

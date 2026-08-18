@@ -1,0 +1,39 @@
+{
+    "include": [
+        {
+            "template": "breakingfemme:crafting_replica2",
+            "as": "milk_casting",
+            "using": {
+                "item_a": "breakingfemme:ingot_mold",
+                "item_b": "breakingfemme:skimmed_milk_bucket",
+                "item_out": "breakingfemme:milkgot_mold#8"
+            }
+        },
+        {
+            "template": "breakingfemme:smelting_replica",
+            "as": "ingot_cast_cooking",
+            "using": {
+                "item_in": "breakingfemme:milkgot_mold",
+                "item_out": "breakingfemme:milkgot"
+            },
+            "y": 78
+        },
+        {
+            "template": "breakingfemme:grinding",
+            "as": "ingot_grinding",
+            "using": {
+                "item_in": "breakingfemme:milkgot",
+                "item_out": "breakingfemme:skimmed_milk_powder"
+            },
+            "y": 119
+        }
+    ],
+    "components": [
+        {
+            "type": "patchouli:text",
+            "text": "Skimmed Milk Powder",
+            "x": 8,
+            "y": -6
+        }
+    ]
+}
