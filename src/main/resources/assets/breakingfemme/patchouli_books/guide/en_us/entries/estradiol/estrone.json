@@ -1,0 +1,19 @@
+{
+    "name": "Estrone",
+    "icon": "breakingfemme:pure_estrone",
+    "category": "breakingfemme:estradiol",
+    "sortnum": 9,
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "To make the estrone, you need to pyrolyze the androstadienedione to remove the methyl group at 10. Ring A should then aromatize without any problem due to the high temperature. However, to be able to do that, the product first needs to be transferred to some kind of mineral oil."
+        },
+        {
+            "type": "patchouli:image",
+            "images": [
+                "breakingfemme:textures/gui/guide/add_to_e1.png"
+            ],
+            "text": "A little cleanup wouldn't hurt either."
+        }
+    ]
+}
