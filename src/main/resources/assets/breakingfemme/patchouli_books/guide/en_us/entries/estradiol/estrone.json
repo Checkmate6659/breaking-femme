@@ -6,7 +6,7 @@
     "pages": [
         {
             "type": "patchouli:text",
-            "text": "To make the estrone, you need to pyrolyze the androstadienedione to remove the methyl group at 10. Ring A should then aromatize without any problem due to the high temperature. However, to be able to do that, the product first needs to be transferred to some kind of mineral oil."
+            "text": "To make estrone, you need to pyrolyze the androstadienedione to remove the methyl group at 10. Ring A should then aromatize without any problem due to the high temperature. However, to be able to do that, the product first needs to be transferred to some kind of mineral oil."
         },
         {
             "type": "patchouli:image",
@@ -14,6 +14,25 @@
                 "breakingfemme:textures/gui/guide/add_to_e1.png"
             ],
             "text": "A little cleanup wouldn't hurt either."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "breakingfemme:coal_oil_bucket",
+            "title": "Coal Oil",
+            "text": "The solvant we will be using is coal oil, which can be obtained by distilling coal tar, using a distiller with a gravel-filled column height of at least three blocks. The distillation is quite slow, so consider building multiple distillation towers."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "To transfer the androstadienedione to the oil, place two bottles of androstadienedione solution and one bottle of coal oil into a cauldron. Mix it around a bit with a stick, then scoop up the androstadienedione-filled coal oil and dispose of the remaining sludge."
+
+        },
+        {
+            "type": "patchouli:text",
+            "text": "The final solution can now be distilled, with a gravel-filled column height of at least four blocks, to get a trickle of estrone suspension, which needs to be filtered to get crude estrone out. The filtrate can then be recycled to get much more estrone out of it."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "To purify this crude estrone, you will need to recrystallize it, but it's pretty simple. Just heat up a cauldron of 95% ethanol, dump your dirty estrone inside, turn off the heat and wait for the cauldron to cool down to room temperature."
         }
     ]
 }
