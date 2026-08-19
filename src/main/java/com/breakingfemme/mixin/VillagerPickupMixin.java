@@ -1,5 +1,6 @@
 package com.breakingfemme.mixin;
 
+import com.breakingfemme.EntityAttachments;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -176,7 +177,7 @@ public class VillagerPickupMixin {
             VillagerAttachments.setNameToChosen(villager);
 
         //take time when using the estrogen
-        if(!VillagerAttachments.needsEstrogen(villager))
+        if(!EntityAttachments.needsEstrogen(villager))
             return;
 
         SimpleInventory inventory = villager.getInventory();
@@ -206,7 +207,7 @@ public class VillagerPickupMixin {
             int estro_time = VillagerAttachments.estrogenTime(stack.getItem());
             stack.decrement(1);
             inventory.setStack(estro_slot, stack);
-            VillagerAttachments.giveEstrogenFor(villager, estro_time);
+            EntityAttachments.giveEstrogenFor(villager, estro_time);
         }
     }
 }

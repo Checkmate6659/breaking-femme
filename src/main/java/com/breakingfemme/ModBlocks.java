@@ -1,21 +1,6 @@
 package com.breakingfemme;
 
-import com.breakingfemme.block.ChiliCropBlock;
-import com.breakingfemme.block.DistillerBaseBlock;
-import com.breakingfemme.block.DistillerColumnBlock;
-import com.breakingfemme.block.DistillerTopBlock;
-import com.breakingfemme.block.FermenterAirlockBlock;
-import com.breakingfemme.block.FermenterBottomBlock;
-import com.breakingfemme.block.FermenterControllerBlock;
-import com.breakingfemme.block.FermenterHeaterBlock;
-import com.breakingfemme.block.FermenterMixerBlock;
-import com.breakingfemme.block.FermenterPanelBlock;
-import com.breakingfemme.block.FermenterTopBlock;
-import com.breakingfemme.block.FunnelBlock;
-import com.breakingfemme.block.KelpAshBlock;
-import com.breakingfemme.block.MilkSeparatorBlock;
-import com.breakingfemme.block.QuicklimeBlock;
-import com.breakingfemme.block.SoyCropBlock;
+import com.breakingfemme.block.*;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -63,6 +48,9 @@ public class ModBlocks {
 
     //funnel block
     public static final Block FUNNEL = registerBlock("funnel", new FunnelBlock(FabricBlockSettings.copyOf(Blocks.HOPPER)));
+
+    //5g tower block
+    public static final Block FIVE_G_TOWER_CONTROLLER = registerBlock("5gtower_controller", new FiveGTowerControllerBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
 
     //register block and item
     private static final Block registerBlock(String name, Block block)
