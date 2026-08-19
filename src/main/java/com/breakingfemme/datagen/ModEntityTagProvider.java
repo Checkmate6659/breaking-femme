@@ -17,6 +17,28 @@ public class ModEntityTagProvider extends FabricTagProvider.EntityTypeTagProvide
     protected void configure(RegistryWrapper.WrapperLookup arg) {
         getOrCreateTagBuilder(EntityAttachments.ESTROGENNABLE)
                 .add(EntityType.VILLAGER)
-                .add(EntityType.PLAYER);
+                .add(EntityType.PLAYER)
+                .add(EntityType.CREEPER)
+                .add(EntityType.BLAZE)
+                .add(EntityType.DROWNED)
+                .add(EntityType.EVOKER)
+                .add(EntityType.SKELETON)
+                .add(EntityType.WARDEN)
+                .add(EntityType.WITCH)
+                .add(EntityType.WITHER_SKELETON)
+                .add(EntityType.ZOMBIE_VILLAGER)
+                .add(EntityType.ZOMBIE)
+                .add(EntityType.ZOMBIFIED_PIGLIN)
+                .add(EntityType.PIGLIN)
+                .add(EntityType.PIGLIN_BRUTE)
+                .add(EntityType.IRON_GOLEM)
+                .add(EntityType.SNOW_GOLEM)
+                .add(EntityType.PILLAGER)
+                .add(EntityType.WANDERING_TRADER)
+                .add(EntityType.HUSK)
+                .add(EntityType.STRAY)
+                .add(EntityType.WITHER /* this is non-negotiable */)
+                .add(EntityType.VINDICATOR)
+                .add(EntityType.ALLAY);
     }
 }
