@@ -39,6 +39,7 @@
 		"fabric-api": "*"
 	},
 	"suggests": {
+		"patchouli": "*",
 		"create": "*",
 		"estrogen": "*",
 		"no-telemetry": "*"
