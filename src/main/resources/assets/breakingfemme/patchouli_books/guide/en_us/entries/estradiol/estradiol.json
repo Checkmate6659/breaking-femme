@@ -1,0 +1,36 @@
+{
+    "name": "Estradiol",
+    "icon": "breakingfemme:pure_estradiol_crystals",
+    "category": "breakingfemme:estradiol",
+    "sortnum": 10,
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "We are finally at the step that will give us estradiol. Estradiol is obtained by reduction of the ketone at 17 into an alcohol, which can be done either with sodium borohydride [TODO] or by hydrogenation using Raney nickel as a catalyst."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "To produce the Raney nickel, mine rubies, then [TODO: better method!] place a ruby block:$(li)is not touching water$(li)next to a granite block not touching water but touching a coal block, and such that all touching coal blocks do not touch water$(li)next to a coal block touching water"
+        },
+        {
+            "type": "patchouli:text",
+            "text": "You can build different such \"ruby chains\" by sharing non-ruby blocks. When a lightning strikes close enough to a ruby block in this configuration, it has a chance of partially reducing to aluminum metal."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "The Al scrap can be smelted into Al ingots, ground and blended with Ni dust, the blend smelted into Ni-Al ingots then ground down, then activated in a cauldron of concentrated caustic soda to get Raney nickel."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "To use the hydrogenation method, place two cauldrons one above the other, and cool the top one sufficiently. In the top one, place your estrone and Raney nickel in a cauldron full of concentrated sodium hydroxide solution, and in the bottom one,"
+        },
+        {
+            "type": "patchouli:text",
+            "text": "place sulfuric acid and an iron ingot, to slowly release hydrogen gas into the top cauldron. When the reduction is done, use a bucket of hydrochloric acid to precipitate out the crude estradiol."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "To purify this crude estradiol, you will need to recrystallize it, the same exact way as the estrone. You can then grind it down into a powder using a mortar and pestle."
+        }
+    ]
+}
