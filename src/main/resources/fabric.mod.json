@@ -11,7 +11,7 @@
 		"homepage": "https://github.com/Checkmate6659/breaking-femme/",
 		"sources": "https://github.com/Checkmate6659/breaking-femme/"
 	},
-	"license": "TODO",
+	"license": "MIT",
 	"icon": "assets/breakingfemme/icon.png",
 	"environment": "*",
 	"entrypoints": {
