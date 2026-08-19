@@ -29,6 +29,7 @@
 		"CreeperFeaturesMixin",
 		"EnderwomanFeaturesMixin",
 		"IllagerFeaturesMixin",
+		"IronGolemFeaturesMixin",
 		"SnowGolemFeaturesMixin",
 		"VillagerFeaturesMixin",
 		"ZombieVillagerFeaturesMixin"
