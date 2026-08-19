@@ -1,9 +1,6 @@
 package com.breakingfemme;
 
-import com.breakingfemme.block.entity.DistillerBlockEntity;
-import com.breakingfemme.block.entity.DistillerTopBlockEntity;
-import com.breakingfemme.block.entity.FermenterBlockEntity;
-import com.breakingfemme.block.entity.FunnelBlockEntity;
+import com.breakingfemme.block.entity.*;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
@@ -13,6 +10,11 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
 public class ModBlockEntities {
+    public static final BlockEntityType<FiveGTowerBlockEntity> FIVE_G_TOWER_BLOCK_ENTITY_BLOCK_ENTITY = Registry.register(
+            Registries.BLOCK_ENTITY_TYPE, new Identifier(BreakingFemme.MOD_ID,"5gtower_be"),
+            FabricBlockEntityTypeBuilder.create(FiveGTowerBlockEntity::new,ModBlocks.FIVE_G_TOWER_CONTROLLER).build()
+    );
+
     public static final BlockEntityType<FermenterBlockEntity> FERMENTER_BLOCK_ENTITY =
         Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(BreakingFemme.MOD_ID, "fermenter_be"),
         FabricBlockEntityTypeBuilder.create(FermenterBlockEntity::new, ModBlocks.FERMENTER_CONTROLLER).build());

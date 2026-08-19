@@ -154,6 +154,10 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModBlocks.DISTILLER_BASE);
         getOrCreateTagBuilder(BlockTags.NEEDS_STONE_TOOL).add(ModBlocks.DISTILLER_BASE);
 
+        //5g tower tags
+        getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModBlocks.FIVE_G_TOWER_CONTROLLER);
+        getOrCreateTagBuilder(BlockTags.NEEDS_IRON_TOOL).add(ModBlocks.FIVE_G_TOWER_CONTROLLER);
+
         //custom block tags
         getOrCreateTagBuilder(HOT).add(Blocks.FIRE);
         getOrCreateTagBuilder(HOT).add(Blocks.SOUL_FIRE);
