@@ -33,6 +33,11 @@ repositories {
 	maven { url "https://maven.createmod.net/" }
 	maven { url "https://raw.githubusercontent.com/Fuzss/modresources/main/maven" }
 	maven { url "https://maven.jamieswhiteshirt.com/libs-release/" }
+
+	maven {
+		url = "https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1"
+		description = "DevAuth"
+	}
 }
 
 fabricApi {
@@ -68,6 +73,9 @@ dependencies {
 	//https://github.com/Fabricators-of-Create/create-fabric-addon-template/blob/1.20.1/build.gradle
 	// Create - dependencies are added transitively
 	modCompileOnly "com.simibubi.create:create-fabric:6.0.8.1+build.1744-mc1.20.1"
+
+	// devauth only for development
+	modLocalRuntime "me.djtheredstoner:DevAuth-fabric:1.2.2"
 }
 
 processResources {

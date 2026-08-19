@@ -14,7 +14,6 @@ import net.minecraft.item.Item;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.minecraft.world.World;
 
 public class VillagerAttachments {
     public static final AttachmentType<Boolean> IS_TRANSFEM = AttachmentRegistry.createPersistent( //is villager transfem?
@@ -26,11 +25,7 @@ public class VillagerAttachments {
  
     public static final AttachmentType<String> NAME = AttachmentRegistry.createPersistent( //custom name of the villager (if it doesnt exist, it doesnt have one)
         Identifier.of(BreakingFemme.MOD_ID, "name"), Codec.STRING);
-    public static final int MAX_ESTRO_PROGRESS = 1728000; //this really is the amount of time the villager needs to transition: 1 irl day, i.e. ... 72 mc days. oh yeah that's quick!
-    public static final AttachmentType<Integer> ESTRO_PROGRESS = AttachmentRegistry.createPersistent( //basically like number of doses of estrogen
-        Identifier.of(BreakingFemme.MOD_ID, "estro_progress"), Codec.intRange(0, MAX_ESTRO_PROGRESS));
-    public static final AttachmentType<Long> ESTRO_NEED_TIME = AttachmentRegistry.createPersistent( //age when needing estrogen again
-        Identifier.of(BreakingFemme.MOD_ID, "estro_need_time"), Codec.LONG);
+
 
     static final Identifier NAMES_PATH = Identifier.of(BreakingFemme.MOD_ID, "names.txt"); //in assets folder
     static ArrayList<String> NAMES;
@@ -147,31 +142,5 @@ public class VillagerAttachments {
             villager.setCustomName(Text.literal(villager.getAttached(NAME)));
     }
 
-    public static int getTransitionTime(VillagerEntity villager)
-    {
-        //ESTRO_PROGRESS: progress after this dose has been consumed
-        //ESTRO_NEED_AGE - age: time until the dose is consumed (is 0 if villager needs estrogen)
-        World world = villager.getWorld();
-        long time_to_next = villager.getAttachedOrSet(ESTRO_NEED_TIME, world.getTime()) - world.getTime(); //should be in int values realistically
-        if(time_to_next < 0) time_to_next = 0;
-        return villager.getAttachedOrSet(ESTRO_PROGRESS, 0) - (int)time_to_next;
-    }
 
-    public static boolean needsEstrogen(VillagerEntity villager)
-    {
-        World world = villager.getWorld();
-        return world.getTime() >= villager.getAttachedOrSet(ESTRO_NEED_TIME, world.getTime());
-    }
-
-    public static void giveEstrogenFor(VillagerEntity villager, int amount)
-    {
-        //add to progress
-        int estro_progress = villager.getAttachedOrElse(ESTRO_PROGRESS, 0);
-        estro_progress += amount;
-        if(estro_progress > MAX_ESTRO_PROGRESS) estro_progress = MAX_ESTRO_PROGRESS;
-        villager.setAttached(ESTRO_PROGRESS, estro_progress);
-
-        //add to time of next dose
-        villager.setAttached(ESTRO_NEED_TIME, villager.getWorld().getTime() + amount);
-    }
 }

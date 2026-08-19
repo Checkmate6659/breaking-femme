@@ -1,12 +1,6 @@
 package com.breakingfemme;
 
-import com.breakingfemme.datagen.ModAdvancementProvider;
-import com.breakingfemme.datagen.ModBlockTagProvider;
-import com.breakingfemme.datagen.ModFluidTagProvider;
-import com.breakingfemme.datagen.ModItemTagProvider;
-import com.breakingfemme.datagen.ModLootTableProvider;
-import com.breakingfemme.datagen.ModModelProvider;
-import com.breakingfemme.datagen.ModRecipeProvider;
+import com.breakingfemme.datagen.*;
 
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
@@ -17,6 +11,7 @@ public class BreakingFemmeDataGenerator implements DataGeneratorEntrypoint {
 	public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
 		FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
 
+		pack.addProvider(ModEntityTagProvider::new);
 		pack.addProvider(ModBlockTagProvider::new);
 		pack.addProvider(ModItemTagProvider::new);
 		pack.addProvider(ModFluidTagProvider::new);
