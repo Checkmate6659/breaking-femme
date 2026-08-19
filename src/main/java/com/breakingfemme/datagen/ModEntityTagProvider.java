@@ -39,6 +39,7 @@ public class ModEntityTagProvider extends FabricTagProvider.EntityTypeTagProvide
                 .add(EntityType.STRAY)
                 .add(EntityType.WITHER /* this is non-negotiable */)
                 .add(EntityType.VINDICATOR)
-                .add(EntityType.ALLAY);
+                .add(EntityType.ALLAY)
+                .add(EntityType.ENDER_DRAGON);
     }
 }

@@ -2,6 +2,29 @@
   "replace": false,
   "values": [
     "minecraft:villager",
-    "minecraft:player"
+    "minecraft:player",
+    "minecraft:creeper",
+    "minecraft:blaze",
+    "minecraft:drowned",
+    "minecraft:evoker",
+    "minecraft:skeleton",
+    "minecraft:warden",
+    "minecraft:witch",
+    "minecraft:wither_skeleton",
+    "minecraft:zombie_villager",
+    "minecraft:zombie",
+    "minecraft:zombified_piglin",
+    "minecraft:piglin",
+    "minecraft:piglin_brute",
+    "minecraft:iron_golem",
+    "minecraft:snow_golem",
+    "minecraft:pillager",
+    "minecraft:wandering_trader",
+    "minecraft:husk",
+    "minecraft:stray",
+    "minecraft:wither",
+    "minecraft:vindicator",
+    "minecraft:allay",
+    "minecraft:ender_dragon"
   ]
 }
