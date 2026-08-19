@@ -8,8 +8,8 @@
 		"Enigma"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://github.com/Checkmate6659/breaking-femme/",
+		"sources": "https://github.com/Checkmate6659/breaking-femme/"
 	},
 	"license": "TODO",
 	"icon": "assets/breakingfemme/icon.png",
@@ -40,6 +40,7 @@
 	},
 	"suggests": {
 		"create": "*",
-		"estrogen": "*"
+		"estrogen": "*",
+		"no-telemetry": "*"
 	}
 }
