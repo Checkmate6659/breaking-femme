@@ -58,24 +58,17 @@ public class IllagerFeaturesMixin extends DummyFeaturesMixin {
 	//because of those all-important feature fields not being the same
 	@Override
     protected void breakingfemme$animateModel(Entity entity, float limbAngle, float limbDistance, float tickDelta, Operation<Void> original) {
-		float advancement = 0; //goes from 0 (no extra features) to 1 (fully developed features)
-
-		//if not estrogenable, don't show anything
-		if(entity.getType().isIn(EntityAttachments.ESTROGENNABLE))
-		{
-			//5 second period. for testing purposes.
-			//TODO: determine advancement based on entity's progress
-			advancement = (entity.getWorld().getTime() % 100) * 0.01F;
-		}
+		//normalized offset goes from 0 (no extra features, or not applicable) to 1 (fully developed features)
+		float normalized_offset = EntityAttachments.getNormalizedFeatureOffset(entity);
 
 		//return prematurely if nothing to show for
-		breakingfemme$features.hidden = (advancement == 0);
+		breakingfemme$features.hidden = (normalized_offset == 0);
 		breakingfemme$features_jacket.hidden = breakingfemme$features.hidden;
-		if(advancement == 0)
+		if(normalized_offset == 0)
 			return;
 
-		breakingfemme$features.setPivot(0.0F, 2.0F, -1.5F - 1.25F * advancement);
-		breakingfemme$features_jacket.setPivot(0.0F, 2.0F, -1.5F - 1.25F * advancement);
+		breakingfemme$features.setPivot(0.0F, 2.0F, -1.5F - 1.25F * normalized_offset);
+		breakingfemme$features_jacket.setPivot(0.0F, 2.0F, -1.5F - 1.25F * normalized_offset);
 
 		//do mod compat thing
         original.call(entity, limbAngle, limbDistance, tickDelta);

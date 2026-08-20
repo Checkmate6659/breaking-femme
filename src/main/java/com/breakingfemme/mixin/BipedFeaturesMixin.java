@@ -89,37 +89,30 @@ public class BipedFeaturesMixin {
 	//public to allow other code to call this! and have less repeat code
 	@Inject(method = "animateModel(Lnet/minecraft/entity/Entity;FFF)V", at = @At("HEAD"))
     public void breakingfemme$position_features(Entity entity, float limbAngle, float limbDistance, float tickDelta, CallbackInfo ci) {
-		float advancement = 0; //goes from 0 (no extra features) to 1 (fully developed features)
-
-		//if not estrogenable, don't show anything
-		if(entity.getType().isIn(EntityAttachments.ESTROGENNABLE))
-		{
-			//5 second period. for testing purposes.
-			//TODO: determine advancement based on entity's progress
-			advancement = (entity.getWorld().getTime() % 100) * 0.01F;
-		}
+		//normalized offset goes from 0 (no extra features, or not applicable) to 1 (fully developed features)
+		float normalized_offset = EntityAttachments.getNormalizedFeatureOffset(entity);
 
 		//return prematurely if nothing to show for
-		breakingfemme$features.hidden = (advancement == 0);
+		breakingfemme$features.hidden = (normalized_offset == 0);
 		if(breakingfemme$features_jacket != null)
 			breakingfemme$features_jacket.hidden = breakingfemme$features.hidden;
-		if(advancement == 0)
+		if(normalized_offset == 0)
 			return;
 
 		//enderwoman and zombie villager fixes
 		EntityType<?> type = entity.getType();
 		float height = 3.0F;
-		float jet = -0.5F;
+		float zero_offset = -0.5F;
 		if(type.equals(EntityType.ENDERMAN))
 			height = -11.0F;
 		else if(type.equals(EntityType.ZOMBIE_VILLAGER))
 		{
 			height = 2.0F;
-			jet = -1.5F;
+			zero_offset = -1.5F;
 		}
 
-		breakingfemme$features.setPivot(0.0F, height, jet - 1.25F * advancement);
+		breakingfemme$features.setPivot(0.0F, height, zero_offset - 1.25F * normalized_offset);
 		if(breakingfemme$features_jacket != null)
-			breakingfemme$features_jacket.setPivot(0.0F, height, jet - 1.25F * advancement);
+			breakingfemme$features_jacket.setPivot(0.0F, height, zero_offset - 1.25F * normalized_offset);
 	}
 }

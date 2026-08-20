@@ -15,7 +15,7 @@ public class ModEntityTagProvider extends FabricTagProvider.EntityTypeTagProvide
 
     @Override
     protected void configure(RegistryWrapper.WrapperLookup arg) {
-        getOrCreateTagBuilder(EntityAttachments.ESTROGENNABLE)
+        getOrCreateTagBuilder(EntityAttachments.ESTROGENABLE)
                 .add(EntityType.VILLAGER)
                 .add(EntityType.PLAYER)
                 .add(EntityType.CREEPER)
@@ -24,7 +24,7 @@ public class ModEntityTagProvider extends FabricTagProvider.EntityTypeTagProvide
                 .add(EntityType.DROWNED)
                 .add(EntityType.EVOKER)
                 .add(EntityType.SKELETON)
-                .add(EntityType.WARDEN)
+                .add(EntityType.WARDEN) //TODO
                 .add(EntityType.WITCH)
                 .add(EntityType.WITHER_SKELETON)
                 .add(EntityType.ZOMBIE_VILLAGER)
