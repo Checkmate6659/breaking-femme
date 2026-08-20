@@ -1,7 +1,6 @@
 package com.breakingfemme.mixin;
 
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -9,6 +8,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import com.breakingfemme.BreakingFemme;
 import com.breakingfemme.EntityAttachments;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+
 import net.minecraft.client.model.Dilation;
 import net.minecraft.client.model.ModelData;
 import net.minecraft.client.model.ModelPart;
@@ -17,10 +17,9 @@ import net.minecraft.client.model.ModelPartData;
 import net.minecraft.client.model.ModelTransform;
 import net.minecraft.client.render.entity.model.VillagerResemblingModel;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
 
 @Mixin(value = VillagerResemblingModel.class)
-public class VillagerFeaturesMixin {
+public class VillagerFeaturesMixin extends DummyFeaturesMixin {
 	@Unique
    	public ModelPart breakingfemme$features; //can't be final cuz constructor injector is *not* the constructor
 
@@ -51,13 +50,9 @@ public class VillagerFeaturesMixin {
 
 	
 	//feature positioning in animateModel function
-	//references BipedFeaturesMixin code. this is only here because it wouldn't be called otherwise.
-	/*@Inject(method = "animateModel(Lnet/minecraft/entity/Entity;FFF)V", at = @At("HEAD"))
-    private void breakingfemme$position_features(Entity entity, float limbAngle, float limbDistance, float tickDelta, CallbackInfo ci) {
-		((BipedFeaturesMixin)(Object)this).breakingfemme$position_features(entity, limbAngle, limbDistance, tickDelta, ci);
-	}*/
-
-    public void animateModel(Entity entity, float limbAngle, float limbDistance, float tickDelta) {
+	//need to extend DummyFeaturesMixin for mod compat... for some odd reason
+	//also it seems zombie villagers strangely only show their features quite late
+    protected void animateModel(Entity entity, float limbAngle, float limbDistance, float tickDelta) {
 		float advancement = 0; //goes from 0 (no extra features) to 1 (fully developed features)
 
 		//if not estrogenable, don't show anything
