@@ -106,9 +106,20 @@ public class BipedFeaturesMixin {
 		if(advancement == 0)
 			return;
 
-		float height = entity.getType().equals(EntityType.ENDERMAN) ? -11.0f : 3.0F; //enderwoman fix
-		breakingfemme$features.setPivot(0.0F, height, -0.5F - 1.25F * advancement);
+		//enderwoman and zombie villager fixes
+		EntityType<?> type = entity.getType();
+		float height = 3.0F;
+		float jet = -0.5F;
+		if(type.equals(EntityType.ENDERMAN))
+			height = -11.0F;
+		else if(type.equals(EntityType.ZOMBIE_VILLAGER))
+		{
+			height = 2.0F;
+			jet = -1.5F;
+		}
+
+		breakingfemme$features.setPivot(0.0F, height, jet - 1.25F * advancement);
 		if(breakingfemme$features_jacket != null)
-			breakingfemme$features_jacket.setPivot(0.0F, height, -0.5F - 1.25F * advancement);
+			breakingfemme$features_jacket.setPivot(0.0F, height, jet - 1.25F * advancement);
 	}
 }
