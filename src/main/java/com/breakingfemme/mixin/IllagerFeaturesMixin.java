@@ -56,7 +56,8 @@ public class IllagerFeaturesMixin extends DummyFeaturesMixin {
 	//feature positioning in animateModel function
 	//literally the same as the villager code. but need to repeat code as we can't just reference that one
 	//because of those all-important feature fields not being the same
-    protected void animateModel(Entity entity, float limbAngle, float limbDistance, float tickDelta) {
+	@Override
+    protected void breakingfemme$animateModel(Entity entity, float limbAngle, float limbDistance, float tickDelta, Operation<Void> original) {
 		float advancement = 0; //goes from 0 (no extra features) to 1 (fully developed features)
 
 		//if not estrogenable, don't show anything
@@ -75,5 +76,8 @@ public class IllagerFeaturesMixin extends DummyFeaturesMixin {
 
 		breakingfemme$features.setPivot(0.0F, 2.0F, -1.5F - 1.25F * advancement);
 		breakingfemme$features_jacket.setPivot(0.0F, 2.0F, -1.5F - 1.25F * advancement);
+
+		//do mod compat thing
+        original.call(entity, limbAngle, limbDistance, tickDelta);
 	}
 }

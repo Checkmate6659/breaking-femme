@@ -8,6 +8,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import com.breakingfemme.BreakingFemme;
 import com.breakingfemme.EntityAttachments;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 
 import net.minecraft.client.model.Dilation;
 import net.minecraft.client.model.ModelData;
@@ -52,7 +53,8 @@ public class VillagerFeaturesMixin extends DummyFeaturesMixin {
 	//feature positioning in animateModel function
 	//need to extend DummyFeaturesMixin for mod compat... for some odd reason
 	//also it seems zombie villagers strangely only show their features quite late
-    protected void animateModel(Entity entity, float limbAngle, float limbDistance, float tickDelta) {
+	@Override
+    protected void breakingfemme$animateModel(Entity entity, float limbAngle, float limbDistance, float tickDelta, Operation<Void> original) {
 		float advancement = 0; //goes from 0 (no extra features) to 1 (fully developed features)
 
 		//if not estrogenable, don't show anything
@@ -72,5 +74,7 @@ public class VillagerFeaturesMixin extends DummyFeaturesMixin {
 		breakingfemme$features.setPivot(0.0F, 2.0F, -1.5F - 1.25F * advancement);
 		breakingfemme$features_jacket.setPivot(0.0F, 2.0F, -1.5F - 1.25F * advancement);
 
+		//do mod compat thing
+        original.call(entity, limbAngle, limbDistance, tickDelta);
 	}
 }

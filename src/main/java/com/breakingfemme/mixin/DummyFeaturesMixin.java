@@ -14,7 +14,7 @@ import net.minecraft.entity.Entity;
 abstract class DummyFeaturesMixin {
     //define a dummy handler in a mixin to the superclass, that does nothing, but is protected
     @WrapMethod(method = "animateModel")
-    protected void breakingfemme$dummy_wrapper(Entity entity, float limbAngle, float limbDistance, float tickDelta, Operation<Void> original) {
+    protected void breakingfemme$animateModel(Entity entity, float limbAngle, float limbDistance, float tickDelta, Operation<Void> original) {
         original.call(entity, limbAngle, limbDistance, tickDelta);
     }
 }
