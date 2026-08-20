@@ -3,6 +3,7 @@ package com.breakingfemme.block;
 import com.breakingfemme.ModBlockEntities;
 import com.breakingfemme.block.entity.FiveGTowerBlockEntity;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.BlockEntity;
@@ -53,6 +54,12 @@ public class FiveGTowerControllerBlock extends BlockWithEntity {
         BlockState blockState = this.getDefaultState();
         blockState = blockState.with(FACING, ctx.getHorizontalPlayerFacing().getOpposite());
         return blockState;
+    }
+
+    @Override
+    public BlockRenderType getRenderType(BlockState state)
+    {
+        return BlockRenderType.MODEL;
     }
 
     @Override

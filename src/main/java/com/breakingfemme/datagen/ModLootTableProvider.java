@@ -101,5 +101,8 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         ));
         addDrop(ModBlocks.DISTILLER_TOP);
         addDrop(ModBlocks.DISTILLER_BASE);
+
+        //5G tower
+        addDrop(ModBlocks.FIVE_G_TOWER_CONTROLLER);
     }
 }
