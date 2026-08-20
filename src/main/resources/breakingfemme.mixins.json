@@ -28,6 +28,7 @@
 		"BipedFeaturesMixin",
 		"CreeperFeaturesMixin",
 		"DummyFeaturesMixin",
+		"DrownedFeaturesMixin",
 		"EnderwomanFeaturesMixin",
 		"IllagerFeaturesMixin",
 		"IronGolemFeaturesMixin",
