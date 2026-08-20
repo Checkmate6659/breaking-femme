@@ -19,7 +19,8 @@ public class ModEntityTagProvider extends FabricTagProvider.EntityTypeTagProvide
                 .add(EntityType.VILLAGER)
                 .add(EntityType.PLAYER)
                 .add(EntityType.CREEPER)
-                .add(EntityType.BLAZE)
+                .add(EntityType.BLAZE) //TODO
+                .add(EntityType.ENDERMAN) //FIXME
                 .add(EntityType.DROWNED)
                 .add(EntityType.EVOKER)
                 .add(EntityType.SKELETON)
@@ -37,9 +38,9 @@ public class ModEntityTagProvider extends FabricTagProvider.EntityTypeTagProvide
                 .add(EntityType.WANDERING_TRADER)
                 .add(EntityType.HUSK)
                 .add(EntityType.STRAY)
-                .add(EntityType.WITHER /* this is non-negotiable */)
+                .add(EntityType.WITHER /* this is non-negotiable */) //TODO
                 .add(EntityType.VINDICATOR)
-                .add(EntityType.ALLAY)
-                .add(EntityType.ENDER_DRAGON);
+                .add(EntityType.ALLAY) //TODO
+                .add(EntityType.ENDER_DRAGON /* this isn't either */); //TODO
     }
 }
