@@ -6,6 +6,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import com.breakingfemme.BreakingFemme;
+import com.breakingfemme.EntityAttachments;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
@@ -16,6 +17,7 @@ import net.minecraft.client.model.ModelPartBuilder;
 import net.minecraft.client.model.ModelTransform;
 import net.minecraft.client.model.TexturedModelData;
 import net.minecraft.client.render.entity.model.IronGolemEntityModel;
+import net.minecraft.entity.Entity;
 
 @Mixin(value = IronGolemEntityModel.class)
 public class IronGolemFeaturesMixin {
@@ -37,5 +39,17 @@ public class IronGolemFeaturesMixin {
     }
 
 	
-	//TODO: feature growth (position and angle) animation shall be done under setAngles
+	//feature positioning in animateModel function
+	@Inject(method = "animateModel(Lnet/minecraft/entity/Entity;FFF)V", at = @At("HEAD"))
+    protected void breakingfemme$animate_features(Entity entity, float limbAngle, float limbDistance, float tickDelta, CallbackInfo ci) {
+		//normalized offset goes from 0 (no extra features, or not applicable) to 1 (fully developed features)
+		float normalized_offset = EntityAttachments.getNormalizedFeatureOffset(entity);
+
+		//return prematurely if nothing to show for
+		breakingfemme$features.hidden = (normalized_offset == 0);
+		if(normalized_offset == 0)
+			return;
+
+		breakingfemme$features.setPivot(0.0F, -4.0F, -4.5F - 1.875F * normalized_offset);
+	}
 }
