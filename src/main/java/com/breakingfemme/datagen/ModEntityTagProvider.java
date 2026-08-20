@@ -20,7 +20,7 @@ public class ModEntityTagProvider extends FabricTagProvider.EntityTypeTagProvide
                 .add(EntityType.PLAYER)
                 .add(EntityType.CREEPER)
                 .add(EntityType.BLAZE) //TODO
-                .add(EntityType.ENDERMAN) //FIXME
+                .add(EntityType.ENDERMAN)
                 .add(EntityType.DROWNED)
                 .add(EntityType.EVOKER)
                 .add(EntityType.SKELETON)

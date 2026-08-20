@@ -30,6 +30,7 @@
 		"EnderwomanFeaturesMixin",
 		"IllagerFeaturesMixin",
 		"IronGolemFeaturesMixin",
+		"SkeletonFeaturesMixin",
 		"SnowGolemFeaturesMixin",
 		"VillagerFeaturesMixin",
 		"ZombieVillagerFeaturesMixin"

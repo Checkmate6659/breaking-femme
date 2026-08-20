@@ -24,6 +24,7 @@ import net.minecraft.client.model.ModelTransform;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.util.Identifier;
 
 @Mixin(value = BipedEntityModel.class)
@@ -85,9 +86,9 @@ public class BipedFeaturesMixin {
     }
 
 	//feature positioning in animateModel function
-	//TODO: fix enderwomen! this thing doesnt put the features at the right spot. need to copy over to enderwoman code.
-	@Inject(method = "animateModel(Lnet/minecraft/entity/Entity;FFF)V", at = @At("RETURN"))
-    private void breakingfemme$position_features(Entity entity, float limbAngle, float limbDistance, float tickDelta, CallbackInfo ci) {
+	//public to allow other code to call this! and have less repeat code
+	@Inject(method = "animateModel(Lnet/minecraft/entity/Entity;FFF)V", at = @At("HEAD"))
+    public void breakingfemme$position_features(Entity entity, float limbAngle, float limbDistance, float tickDelta, CallbackInfo ci) {
 		float advancement = 0; //goes from 0 (no extra features) to 1 (fully developed features)
 
 		//if not estrogenable, don't show anything
@@ -105,8 +106,9 @@ public class BipedFeaturesMixin {
 		if(advancement == 0)
 			return;
 
-		breakingfemme$features.setPivot(0.0F, 3.0F, -0.5F - 1.25F * advancement);
+		float height = entity.getType().equals(EntityType.ENDERMAN) ? -11.0f : 3.0F; //enderwoman fix
+		breakingfemme$features.setPivot(0.0F, height, -0.5F - 1.25F * advancement);
 		if(breakingfemme$features_jacket != null)
-			breakingfemme$features_jacket.setPivot(0.0F, 3.0F, -0.5F - 1.25F * advancement);
+			breakingfemme$features_jacket.setPivot(0.0F, height, -0.5F - 1.25F * advancement);
 	}
 }
