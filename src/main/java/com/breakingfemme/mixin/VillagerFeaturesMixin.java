@@ -1,11 +1,13 @@
 package com.breakingfemme.mixin;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import com.breakingfemme.BreakingFemme;
+import com.breakingfemme.EntityAttachments;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.client.model.Dilation;
 import net.minecraft.client.model.ModelData;
@@ -14,6 +16,8 @@ import net.minecraft.client.model.ModelPartBuilder;
 import net.minecraft.client.model.ModelPartData;
 import net.minecraft.client.model.ModelTransform;
 import net.minecraft.client.render.entity.model.VillagerResemblingModel;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 
 @Mixin(value = VillagerResemblingModel.class)
 public class VillagerFeaturesMixin {
@@ -46,5 +50,32 @@ public class VillagerFeaturesMixin {
     }
 
 	
-	//TODO: feature growth (position and angle) animation shall be done under setAngles
+	//feature positioning in animateModel function
+	//references BipedFeaturesMixin code. this is only here because it wouldn't be called otherwise.
+	/*@Inject(method = "animateModel(Lnet/minecraft/entity/Entity;FFF)V", at = @At("HEAD"))
+    private void breakingfemme$position_features(Entity entity, float limbAngle, float limbDistance, float tickDelta, CallbackInfo ci) {
+		((BipedFeaturesMixin)(Object)this).breakingfemme$position_features(entity, limbAngle, limbDistance, tickDelta, ci);
+	}*/
+
+    public void animateModel(Entity entity, float limbAngle, float limbDistance, float tickDelta) {
+		float advancement = 0; //goes from 0 (no extra features) to 1 (fully developed features)
+
+		//if not estrogenable, don't show anything
+		if(entity.getType().isIn(EntityAttachments.ESTROGENNABLE))
+		{
+			//5 second period. for testing purposes.
+			//TODO: determine advancement based on entity's progress
+			advancement = (entity.getWorld().getTime() % 100) * 0.01F;
+		}
+
+		//return prematurely if nothing to show for
+		breakingfemme$features.hidden = (advancement == 0);
+		breakingfemme$features_jacket.hidden = breakingfemme$features.hidden;
+		if(advancement == 0)
+			return;
+
+		breakingfemme$features.setPivot(0.0F, 2.0F, -1.5F - 1.25F * advancement);
+		breakingfemme$features_jacket.setPivot(0.0F, 2.0F, -1.5F - 1.25F * advancement);
+
+	}
 }
