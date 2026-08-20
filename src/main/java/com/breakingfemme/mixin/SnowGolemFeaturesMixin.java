@@ -24,7 +24,7 @@ public class SnowGolemFeaturesMixin {
 
     @Inject(method = "<init>(Lnet/minecraft/client/model/ModelPart;Ljava/util/function/Function;)V", at = @At("RETURN"))
     private void breakingfemme$constructor_features(ModelPart root, CallbackInfo ci) {
-		if(root.hasChild("breakingfemme_features"))
+		if(root.hasChild("upper_body") && root.getChild("upper_body").hasChild("breakingfemme_features"))
 			breakingfemme$features = root.getChild("upper_body").getChild("breakingfemme_features");
 		else
 			BreakingFemme.LOGGER.error("ERROR: Some Breaking Femme features failed to load! (SnowGolemFeaturesMixin)");
