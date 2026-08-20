@@ -8,6 +8,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import com.breakingfemme.BreakingFemme;
+import com.breakingfemme.EntityAttachments;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
@@ -22,6 +23,7 @@ import net.minecraft.client.model.ModelPartData;
 import net.minecraft.client.model.ModelTransform;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
+import net.minecraft.entity.Entity;
 import net.minecraft.util.Identifier;
 
 @Mixin(value = BipedEntityModel.class)
@@ -53,7 +55,7 @@ public class BipedFeaturesMixin {
 		ModelPartData mpd = data.getRoot();
 		mpd.addChild("breakingfemme_features", ModelPartBuilder.create().uv(18, 22).cuboid(-4.0F, -1.0F, -0.875F, 8.0F, 2.0F, 2.0F, dilation.add(-0.00390625F)), ModelTransform.of(0.0F, 3.0F, -1.75F, 1.0F, pivotOffsetY, 0.0F));
 		if(mpd.getChild("jacket") != null)
-			mpd.addChild("breakingfemme_features_jacket", ModelPartBuilder.create().uv(18, 38).cuboid(-4.0F, -1.0F, -0.875F, 8.0F, 2.0F, 2.0F, dilation.add(0.25F - 0.00390625F)), ModelTransform.of(0.0F, 3.0F, -1.75F, 1.0F, pivotOffsetY, 0.0F));
+			mpd.addChild("breakingfemme_features_jacket", ModelPartBuilder.create().uv(18, 38).cuboid(-4.0F, -1.0F, -0.875F, 8.0F, 2.0F, 2.0F, dilation.add(0.24609375F)), ModelTransform.of(0.0F, 3.0F, -1.75F, 1.0F, pivotOffsetY, 0.0F));
 
 		return data;
     }
@@ -82,6 +84,29 @@ public class BipedFeaturesMixin {
 			model_mixin.breakingfemme$features_jacket.copyTransform(breakingfemme$features_jacket);
     }
 
-	
-	//TODO: feature growth (position and angle) animation shall be done under setAngles
+	//feature positioning in animateModel function
+	//TODO: fix enderwomen! this thing doesnt put the features at the right spot. need to copy over to enderwoman code.
+	@Inject(method = "animateModel(Lnet/minecraft/entity/Entity;FFF)V", at = @At("RETURN"))
+    private void breakingfemme$position_features(Entity entity, float limbAngle, float limbDistance, float tickDelta, CallbackInfo ci) {
+		float advancement = 0; //goes from 0 (no extra features) to 1 (fully developed features)
+
+		//if not estrogenable, don't show anything
+		if(entity.getType().isIn(EntityAttachments.ESTROGENNABLE))
+		{
+			//5 second period. for testing purposes.
+			//TODO: determine advancement based on entity's progress
+			advancement = (entity.getWorld().getTime() % 100) * 0.01F;
+		}
+
+		//return prematurely if nothing to show for
+		breakingfemme$features.hidden = (advancement == 0);
+		if(breakingfemme$features_jacket != null)
+			breakingfemme$features_jacket.hidden = breakingfemme$features.hidden;
+		if(advancement == 0)
+			return;
+
+		breakingfemme$features.setPivot(0.0F, 3.0F, -0.5F - 1.25F * advancement);
+		if(breakingfemme$features_jacket != null)
+			breakingfemme$features_jacket.setPivot(0.0F, 3.0F, -0.5F - 1.25F * advancement);
+	}
 }
