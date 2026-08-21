@@ -7,10 +7,8 @@ import com.breakingfemme.block.FiveGTowerControllerBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.math.BlockBox;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.state.property.Properties;
+import net.minecraft.util.math.*;
 import net.minecraft.world.ServerWorldAccess;
 
 import java.util.ArrayList;
@@ -42,7 +40,16 @@ public class FiveGTowerBlockEntity extends BlockEntity {
     }
 
     private static boolean isValidStructureBlock(BlockState state) {
-        return state.isOf(ModBlocks.FIVE_G_SCAFFOLDING) || state.isOf(ModBlocks.FIVE_G_TOWER_HEAD);
+        return (state.isOf(ModBlocks.FIVE_G_SCAFFOLDING) || state.isOf(ModBlocks.FIVE_G_TOWER_HEAD) && isValidRotation(state));
+    }
+
+    private static boolean isValidRotation(BlockState state) {
+        if (state.contains(Properties.AXIS)) {
+            var axis = state.get(Properties.AXIS);
+            return axis == Direction.Axis.Y;
+        }
+        return false;
+
     }
 
     private void updateValid(ServerWorldAccess server, BlockState state) {
@@ -51,6 +58,10 @@ public class FiveGTowerBlockEntity extends BlockEntity {
         var blockBehindState = server.getBlockState(blockBehind);
         // we check if it is a structural block
         if (!blockBehindState.isOf(ModBlocks.FIVE_G_SCAFFOLDING)) {
+            setInvalid();
+            return;
+        }
+        if (!isValidRotation(blockBehindState)) {
             setInvalid();
             return;
         }
