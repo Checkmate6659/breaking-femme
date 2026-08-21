@@ -1,15 +1,9 @@
 package com.breakingfemme;
 
-import java.io.IOException;
-import java.util.List;
-
-import org.apache.commons.lang3.mutable.MutableObject;
-
 import com.breakingfemme.block.entity.DistillerBlockEntityRenderer;
 import com.breakingfemme.cauldron.EstroneReductionCauldronBlock;
 import com.breakingfemme.mixin.PostEffectPassAccessor;
 import com.breakingfemme.screen.FermenterScreen;
-
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
@@ -27,6 +21,10 @@ import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
+import org.apache.commons.lang3.mutable.MutableObject;
+
+import java.io.IOException;
+import java.util.List;
 
 public class BreakingFemmeClient implements ClientModInitializer {
     @Override
@@ -51,6 +49,7 @@ public class BreakingFemmeClient implements ClientModInitializer {
             final PlayerEntity player = client.getValue().player;
 
             //this is where we set our uniforms and shit
+            assert player != null;
             float etoh = KineticsAttachments.getLevel(player, KineticsAttachments.ETHANOL);
             List<PostEffectPass> passes = ((PostEffectPassAccessor)currentPostProcessor).breakingfemme$getPasses();
             if(etoh <= 1.25f || player.isSpectator()) //no visual effects: set all uniforms to 0
@@ -105,7 +104,7 @@ public class BreakingFemmeClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.MILK_SEPARATOR, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.FERMENTER_AIRLOCK, RenderLayer.getCutout()); //can we do something to make block not see through itself??
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.DISTILLER_BASE, RenderLayer.getCutout());
-
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.FIVE_G_TOWER_HEAD, RenderLayer.getCutout());
         //block entity renderers
         BlockEntityRendererFactories.register(ModBlockEntities.DISTILLER_BLOCK_ENTITY, DistillerBlockEntityRenderer::new);
 

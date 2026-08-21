@@ -1,11 +1,8 @@
 package com.breakingfemme.datagen;
 
-import java.util.concurrent.CompletableFuture;
-
 import com.breakingfemme.BreakingFemme;
 import com.breakingfemme.ModBlocks;
 import com.breakingfemme.ModFluids;
-
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.block.Block;
@@ -15,6 +12,8 @@ import net.minecraft.registry.RegistryWrapper.WrapperLookup;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
+
+import java.util.concurrent.CompletableFuture;
 
 public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
     //custom block tags (NOT in common tags)
@@ -155,8 +154,14 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(BlockTags.NEEDS_STONE_TOOL).add(ModBlocks.DISTILLER_BASE);
 
         //5g tower tags
-        getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(ModBlocks.FIVE_G_TOWER_CONTROLLER);
-        getOrCreateTagBuilder(BlockTags.NEEDS_IRON_TOOL).add(ModBlocks.FIVE_G_TOWER_CONTROLLER);
+        getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE)
+                .add(ModBlocks.FIVE_G_TOWER_CONTROLLER)
+                .add(ModBlocks.FIVE_G_TOWER_HEAD)
+                .add(ModBlocks.FIVE_G_SCAFFOLDING);
+        getOrCreateTagBuilder(BlockTags.NEEDS_IRON_TOOL)
+                .add(ModBlocks.FIVE_G_TOWER_CONTROLLER)
+                .add(ModBlocks.FIVE_G_SCAFFOLDING)
+                .add(ModBlocks.FIVE_G_TOWER_HEAD);
 
         //custom block tags
         getOrCreateTagBuilder(HOT).add(Blocks.FIRE);

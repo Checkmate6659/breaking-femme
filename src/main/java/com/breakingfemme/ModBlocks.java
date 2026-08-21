@@ -52,6 +52,7 @@ public class ModBlocks {
     //5g tower block
     public static final Block FIVE_G_TOWER_CONTROLLER = registerBlock("5gtower_controller", new FiveGTowerControllerBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
     public static final Block FIVE_G_SCAFFOLDING = registerBlock("5gtower_scaffolding", new FiveGTowerScaffolding(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
+    public static final Block FIVE_G_TOWER_HEAD = registerBlock("5gtower_head", new FiveGTowerHead(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
     //register block and item
     private static final Block registerBlock(String name, Block block)
     {

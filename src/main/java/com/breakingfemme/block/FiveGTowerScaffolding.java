@@ -24,19 +24,38 @@ import java.util.stream.Stream;
 public class FiveGTowerScaffolding extends Block implements Waterloggable {
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
     public static final EnumProperty<Direction.Axis> AXIS = Properties.AXIS;
-    private static final VoxelShape OUTLINE_SHAPE = Stream.of(
-            Block.createCuboidShape(0, 0, 13, 3, 16, 16),
-            Block.createCuboidShape(13, 0, 13, 16, 16, 16),
-            Block.createCuboidShape(13, 0, 0, 16, 16, 3),
-            Block.createCuboidShape(0, 0, 0, 3, 16, 3),
+    public static final VoxelShape[] OUTLINE_SHAPES = {
             Stream.of(
+                    Block.createCuboidShape(0, 0, 0, 3, 16, 3),
+                    Block.createCuboidShape(13, 0, 0, 16, 16, 3),
+                    Block.createCuboidShape(0, 0, 13, 3, 16, 16),
+                    Block.createCuboidShape(13, 0, 13, 16, 16, 16),
                     Block.createCuboidShape(3, 3, 1, 13, 14, 2),
                     Block.createCuboidShape(3, 3, 14, 13, 14, 15),
                     Block.createCuboidShape(14, 3, 3, 15, 14, 13),
                     Block.createCuboidShape(1, 3, 3, 2, 14, 13)
+            ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get(),
+            Stream.of(
+                    Block.createCuboidShape(0, 0, 13, 16, 3, 16),
+                    Block.createCuboidShape(0, 13, 13, 16, 16, 16),
+                    Block.createCuboidShape(0, 0, 0, 16, 3, 3),
+                    Block.createCuboidShape(0, 13, 0, 16, 16, 3),
+                    Block.createCuboidShape(3, 3, 14, 14, 13, 15),
+                    Block.createCuboidShape(3, 3, 1, 14, 13, 2),
+                    Block.createCuboidShape(3, 14, 3, 14, 15, 13),
+                    Block.createCuboidShape(3, 1, 3, 14, 2, 13)
+            ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get(),
+            Stream.of(
+                    Block.createCuboidShape(13, 0, 0, 16, 3, 16),
+                    Block.createCuboidShape(13, 13, 0, 16, 16, 16),
+                    Block.createCuboidShape(0, 0, 0, 3, 3, 16),
+                    Block.createCuboidShape(0, 13, 0, 3, 16, 16),
+                    Block.createCuboidShape(14, 3, 2, 15, 13, 13),
+                    Block.createCuboidShape(1, 3, 2, 2, 13, 13),
+                    Block.createCuboidShape(3, 14, 2, 13, 15, 13),
+                    Block.createCuboidShape(3, 1, 2, 13, 2, 13)
             ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get()
-    ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get();
-
+    };
     public FiveGTowerScaffolding(Settings settings) {
         super(settings);
         this.setDefaultState(this.stateManager.getDefaultState().with(WATERLOGGED, false).with(AXIS, Direction.Axis.Y));
@@ -48,12 +67,20 @@ public class FiveGTowerScaffolding extends Block implements Waterloggable {
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return OUTLINE_SHAPE;
+        return getShape(state);
+    }
+
+    private static VoxelShape getShape(BlockState state) {
+        return switch (state.get(AXIS)) {
+            case X -> OUTLINE_SHAPES[1];
+            case Z -> OUTLINE_SHAPES[2];
+            default -> OUTLINE_SHAPES[0];
+        };
     }
 
     @Override
     public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return OUTLINE_SHAPE;
+        return getShape(state);
     }
 
     public BlockState getPlacementState(ItemPlacementContext ctx) {

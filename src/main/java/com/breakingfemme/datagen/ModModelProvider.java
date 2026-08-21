@@ -39,6 +39,7 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.ROCK_SALT_BLOCK);
         blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.FIRE_BRICKS);
 
+        blockStateModelGenerator.registerSimpleState(ModBlocks.FIVE_G_TOWER_HEAD);
         blockStateModelGenerator.registerAxisRotated(ModBlocks.FIVE_G_SCAFFOLDING, Identifier.of(BreakingFemme.MOD_ID, "block/5gtower_scaffolding"));
         blockStateModelGenerator.registerNorthDefaultHorizontalRotation(ModBlocks.FIVE_G_TOWER_CONTROLLER);
         //registering fermenter panels by hand, because they are unlike any vanilla blocks

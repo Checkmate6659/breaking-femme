@@ -47,6 +47,8 @@
     "breakingfemme:distiller_top",
     "breakingfemme:distiller_column",
     "breakingfemme:distiller_base",
-    "breakingfemme:5gtower_controller"
+    "breakingfemme:5gtower_controller",
+    "breakingfemme:5gtower_head",
+    "breakingfemme:5gtower_scaffolding"
   ]
 }
