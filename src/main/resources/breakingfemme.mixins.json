@@ -25,6 +25,7 @@
 		"StaggeringMixin",
 		"StaggeringSneakMixin",
 
+		"AllayFeaturesMixin",
 		"BipedFeaturesMixin",
 		"CreeperFeaturesMixin",
 		"DummyFeaturesMixin",
