@@ -35,6 +35,7 @@
 		"SkeletonFeaturesMixin",
 		"SnowGolemFeaturesMixin",
 		"VillagerFeaturesMixin",
+		"WardenFeaturesMixin",
 		"ZombieVillagerFeaturesMixin"
 	],
 	"injectors": {
