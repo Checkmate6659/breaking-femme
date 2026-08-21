@@ -1,28 +1,11 @@
 package com.breakingfemme;
 
-import com.breakingfemme.item.AlcoholDrinkItem;
-import com.breakingfemme.item.ChiliPepperItem;
-import com.breakingfemme.item.ConcentratedCausticSodaBottleItem;
-import com.breakingfemme.item.CopperSulfateItem;
-import com.breakingfemme.item.EgelItem;
-import com.breakingfemme.item.FullMoldItem;
-import com.breakingfemme.item.LethalDrinkItem;
-import com.breakingfemme.item.LyeWaterBottleItem;
-import com.breakingfemme.item.MetalPipeItem;
-import com.breakingfemme.item.MortarPestleItem;
-
+import com.breakingfemme.item.*;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.item.AliasedBlockItem;
-import net.minecraft.item.FoodComponent;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.MilkBucketItem;
-import net.minecraft.item.MusicDiscItem;
+import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
@@ -225,6 +208,8 @@ public class ModItems {
             entries.add(ModBlocks.DISTILLER_COLUMN);
             entries.add(ModBlocks.DISTILLER_TOP);
             entries.add(ModBlocks.FUNNEL);
+                    entries.add(ModBlocks.FIVE_G_SCAFFOLDING);
+                    entries.add(ModBlocks.FIVE_G_TOWER_CONTROLLER);
             //AUTOGENERATION LABEL DO NOT TOUCH
 
 

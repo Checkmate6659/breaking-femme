@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "breakingfemme:block/5gtower_scaffolding",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "breakingfemme:block/5gtower_scaffolding"
+    },
+    "axis=z": {
+      "model": "breakingfemme:block/5gtower_scaffolding",
+      "x": 90
+    }
+  }
+}

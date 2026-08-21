@@ -1,5 +1,6 @@
 package com.breakingfemme.datagen;
 
+import com.breakingfemme.BreakingFemme;
 import com.breakingfemme.ModBlocks;
 import com.breakingfemme.ModFluids;
 import com.breakingfemme.ModItems;
@@ -10,6 +11,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.ItemModelGenerator;
 import net.minecraft.data.client.Models;
+import net.minecraft.util.Identifier;
 
 public class ModModelProvider extends FabricModelProvider {
 
@@ -37,6 +39,7 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.ROCK_SALT_BLOCK);
         blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.FIRE_BRICKS);
 
+        blockStateModelGenerator.registerAxisRotated(ModBlocks.FIVE_G_SCAFFOLDING, Identifier.of(BreakingFemme.MOD_ID, "block/5gtower_scaffolding"));
         blockStateModelGenerator.registerNorthDefaultHorizontalRotation(ModBlocks.FIVE_G_TOWER_CONTROLLER);
         //registering fermenter panels by hand, because they are unlike any vanilla blocks
         //cauldrons need to be handmade apparently
