@@ -24,7 +24,7 @@ import net.minecraft.client.render.entity.model.WardenEntityModel;
 import net.minecraft.entity.Entity;
 
 @Mixin(value = WardenEntityModel.class)
-public class WardenFeaturesMixin extends DummyFeaturesMixin {
+public class WardenFeaturesMixin {
 	@Unique
    	public ModelPart breakingfemme$features; //can't be final cuz constructor injector is *not* the constructor
 
@@ -53,9 +53,10 @@ public class WardenFeaturesMixin extends DummyFeaturesMixin {
 	}
 
 	
-	//feature positioning in animateModel function
-	@Override
-    protected void breakingfemme$animateModel(Entity entity, float limbAngle, float limbDistance, float tickDelta, Operation<Void> original) {
+	//feature positioning in setAngles function
+	//cant use animateModel. because for some odd reason the warden's setAngles just resets all transforms at the beginning!
+	@Inject(method = "setAngles(Lnet/minecraft/entity/Entity;FFFFF)V", at = @At("TAIL"))
+    protected void breakingfemme$position_features(Entity entity, float f, float g, float h, float i, float j, CallbackInfo ci) {
 		//normalized offset goes from 0 (no extra features, or not applicable) to 1 (fully developed features)
 		float normalized_offset = EntityAttachments.getNormalizedFeatureOffset(entity);
 
@@ -64,10 +65,6 @@ public class WardenFeaturesMixin extends DummyFeaturesMixin {
 		if(normalized_offset == 0)
 			return;
 
-		//WHY DOES THIS DO NOTHING
 		breakingfemme$features.setPivot(0.0F, -4.0F, -2.25F - 2.5F * normalized_offset);
-
-		//do mod compat thing
-        original.call(entity, limbAngle, limbDistance, tickDelta);
 	}
 }
