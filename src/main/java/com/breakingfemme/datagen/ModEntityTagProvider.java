@@ -24,7 +24,7 @@ public class ModEntityTagProvider extends FabricTagProvider.EntityTypeTagProvide
                 .add(EntityType.DROWNED)
                 .add(EntityType.EVOKER)
                 .add(EntityType.SKELETON)
-                .add(EntityType.WARDEN) //TODO
+                .add(EntityType.WARDEN)
                 .add(EntityType.WITCH)
                 .add(EntityType.WITHER_SKELETON)
                 .add(EntityType.ZOMBIE_VILLAGER)
