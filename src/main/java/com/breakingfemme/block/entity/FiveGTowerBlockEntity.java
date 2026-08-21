@@ -48,7 +48,7 @@ public class FiveGTowerBlockEntity extends BlockEntity {
             var axis = state.get(Properties.AXIS);
             return axis == Direction.Axis.Y;
         }
-        return false;
+        return true;
 
     }
 
