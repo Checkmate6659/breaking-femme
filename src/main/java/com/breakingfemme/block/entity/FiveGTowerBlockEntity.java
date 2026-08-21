@@ -17,8 +17,8 @@ import java.util.UUID;
 import java.util.function.Predicate;
 
 public class FiveGTowerBlockEntity extends BlockEntity {
-    BlockPos topPosition;
-    BlockPos bottomPosition;
+    private BlockPos topPosition;
+    private BlockPos bottomPosition;
     protected FiveGTowerBehavior behavior = this.new FiveGTowerBehavior();
     private int transmitter_count = 0;
     private int last_checked = -1;
@@ -28,6 +28,13 @@ public class FiveGTowerBlockEntity extends BlockEntity {
         topPosition = pos;
     }
 
+    public BlockPos getTopPosition() {
+        return topPosition;
+    }
+
+    public BlockPos getBottomPosition() {
+        return bottomPosition;
+    }
 
     private void setInvalid() {
         if (valid) markDirty();
