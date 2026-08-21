@@ -109,6 +109,7 @@ public class FiveGTowerBlockEntity extends BlockEntity {
         protected final List<UUID> entitiesAffectedAlready = new ArrayList<>();
 
         public void tickValid(ServerWorldAccess server) {
+            if (transmitter_count <= 0) return;
             entitiesAffectedAlready.clear();
             // first we estrogen around a tiny area next to us
             estrogenInArea(server, Box.from(new BlockBox(bottomPosition.getX() - 3, bottomPosition.getY() - 3, bottomPosition.getZ() - 3, topPosition.getX() + 3, topPosition.getY() + 3, topPosition.getZ() + 3)));
