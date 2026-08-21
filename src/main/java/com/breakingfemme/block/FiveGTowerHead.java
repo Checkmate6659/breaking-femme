@@ -11,6 +11,7 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.util.BlockRotation;
 import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -60,5 +61,17 @@ public class FiveGTowerHead extends Block implements Waterloggable {
         FluidState fluidState = ctx.getWorld().getFluidState(ctx.getBlockPos());
         return this.getDefaultState().with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER)
                 .with(HORIZONTAL_FACING, Direction.fromHorizontal(ctx.getWorld().random.nextBetween(0, 3)));
+    }
+
+    @Override
+    public BlockState rotate(BlockState state, BlockRotation rotation) {
+        return switch (rotation) {
+            case CLOCKWISE_90 -> state.with(HORIZONTAL_FACING, state.get(HORIZONTAL_FACING).rotateYClockwise());
+
+            case COUNTERCLOCKWISE_90 ->
+                    state.with(HORIZONTAL_FACING, state.get(HORIZONTAL_FACING).rotateYCounterclockwise());
+
+            default -> state;
+        };
     }
 }
