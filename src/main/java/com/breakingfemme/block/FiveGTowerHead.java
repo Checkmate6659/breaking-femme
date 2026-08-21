@@ -9,9 +9,11 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
+import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
@@ -20,6 +22,7 @@ import java.util.stream.Stream;
 
 public class FiveGTowerHead extends Block implements Waterloggable {
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
+    public static final DirectionProperty HORIZONTAL_FACING = Properties.HORIZONTAL_FACING;
     private static final VoxelShape OUTLINE_SHAPE = Stream.of(
             Block.createCuboidShape(0, 0, 13, 3, 16, 16),
             Block.createCuboidShape(13, 0, 13, 16, 16, 16),
@@ -35,11 +38,12 @@ public class FiveGTowerHead extends Block implements Waterloggable {
 
     public FiveGTowerHead(Settings settings) {
         super(settings);
-        this.setDefaultState(this.stateManager.getDefaultState().with(WATERLOGGED, false));
+        this.setDefaultState(this.stateManager.getDefaultState().with(WATERLOGGED, false).with(HORIZONTAL_FACING, Direction.NORTH));
     }
 
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(WATERLOGGED);
+        builder.add(WATERLOGGED)
+                .add(HORIZONTAL_FACING);
     }
 
     @Override
@@ -54,6 +58,7 @@ public class FiveGTowerHead extends Block implements Waterloggable {
 
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         FluidState fluidState = ctx.getWorld().getFluidState(ctx.getBlockPos());
-        return this.getDefaultState().with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
+        return this.getDefaultState().with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER)
+                .with(HORIZONTAL_FACING, Direction.fromHorizontal(ctx.getWorld().random.nextBetween(0, 3)));
     }
 }
