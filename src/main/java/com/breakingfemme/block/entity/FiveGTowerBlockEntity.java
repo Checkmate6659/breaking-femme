@@ -23,7 +23,7 @@ public class FiveGTowerBlockEntity extends BlockEntity {
     BlockPos bottomPosition;
     protected FiveGTowerBehavior behavior = this.new FiveGTowerBehavior();
     private int transmitter_count = 0;
-    private int last_checked = 0;
+    private int last_checked = -1;
     private boolean valid = false;
     public FiveGTowerBlockEntity( BlockPos pos, BlockState state) {
         super(ModBlockEntities.FIVE_G_TOWER_BLOCK_ENTITY_BLOCK_ENTITY, pos, state);
@@ -83,7 +83,7 @@ public class FiveGTowerBlockEntity extends BlockEntity {
 
     public void possiblyValidateMultiblock(ServerWorldAccess access, BlockState state) {
         last_checked++;
-        if (last_checked < 20) return;
+        if (last_checked < 20 && last_checked != -1) return;
         last_checked = 0;
         updateValid(access, state);
     }
