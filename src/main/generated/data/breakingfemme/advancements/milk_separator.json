@@ -1,0 +1,38 @@
+{
+  "parent": "breakingfemme:ingot_mold",
+  "criteria": {
+    "made_milk_separator": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "breakingfemme:milk_separator"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.breakingfemme.milk_separator.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "breakingfemme:milk_separator"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.breakingfemme.milk_separator.title"
+    }
+  },
+  "requirements": [
+    [
+      "made_milk_separator"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

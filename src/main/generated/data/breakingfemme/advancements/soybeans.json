@@ -1,0 +1,38 @@
+{
+  "parent": "breakingfemme:root",
+  "criteria": {
+    "bought_soybeans": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "breakingfemme:soybeans"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.breakingfemme.soybeans.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "breakingfemme:soybeans"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.breakingfemme.soybeans.title"
+    }
+  },
+  "requirements": [
+    [
+      "bought_soybeans"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

@@ -1,0 +1,41 @@
+{
+  "parent": "breakingfemme:pure_estrone",
+  "criteria": {
+    "made_crude_estradiol": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "breakingfemme:crude_estradiol"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.breakingfemme.crude_estradiol.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "breakingfemme:crude_estradiol"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.breakingfemme.crude_estradiol.title"
+    }
+  },
+  "requirements": [
+    [
+      "made_crude_estradiol"
+    ]
+  ],
+  "rewards": {
+    "experience": 12000
+  },
+  "sends_telemetry_event": false
+}

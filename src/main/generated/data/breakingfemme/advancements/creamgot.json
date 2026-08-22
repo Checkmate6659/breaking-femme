@@ -1,0 +1,41 @@
+{
+  "parent": "breakingfemme:milk_separator",
+  "criteria": {
+    "made_creamgot": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "breakingfemme:creamgot"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.breakingfemme.creamgot.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "breakingfemme:creamgot"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.breakingfemme.creamgot.title"
+    }
+  },
+  "requirements": [
+    [
+      "made_creamgot"
+    ]
+  ],
+  "rewards": {
+    "experience": 3000
+  },
+  "sends_telemetry_event": false
+}

@@ -1,0 +1,41 @@
+{
+  "parent": "breakingfemme:milk_separator",
+  "criteria": {
+    "made_skimmed_milk": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "breakingfemme:skimmed_milk_bucket"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.breakingfemme.skimmed_milk.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "breakingfemme:skimmed_milk_bucket"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.breakingfemme.skimmed_milk.title"
+    }
+  },
+  "requirements": [
+    [
+      "made_skimmed_milk"
+    ]
+  ],
+  "rewards": {
+    "experience": 3000
+  },
+  "sends_telemetry_event": false
+}

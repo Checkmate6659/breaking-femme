@@ -1,0 +1,41 @@
+{
+  "parent": "breakingfemme:yeast",
+  "criteria": {
+    "made_beer": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "breakingfemme:beer_bucket"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.breakingfemme.beer.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "breakingfemme:beer_bottle"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.breakingfemme.beer.title"
+    }
+  },
+  "requirements": [
+    [
+      "made_beer"
+    ]
+  ],
+  "rewards": {
+    "experience": 3000
+  },
+  "sends_telemetry_event": false
+}

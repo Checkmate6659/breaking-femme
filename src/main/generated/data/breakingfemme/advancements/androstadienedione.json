@@ -1,0 +1,41 @@
+{
+  "parent": "breakingfemme:sterols",
+  "criteria": {
+    "made_androstadienedione": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "breakingfemme:androstadienedione_solution_bucket"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.breakingfemme.androstadienedione.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "breakingfemme:androstadienedione_solution_bucket"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.breakingfemme.androstadienedione.title"
+    }
+  },
+  "requirements": [
+    [
+      "made_androstadienedione"
+    ]
+  ],
+  "rewards": {
+    "experience": 6000
+  },
+  "sends_telemetry_event": false
+}

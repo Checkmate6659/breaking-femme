@@ -1,0 +1,41 @@
+{
+  "parent": "breakingfemme:androstadienedione",
+  "criteria": {
+    "made_crude_estrone": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "breakingfemme:crude_estrone"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.breakingfemme.crude_estrone.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "breakingfemme:crude_estrone"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.breakingfemme.crude_estrone.title"
+    }
+  },
+  "requirements": [
+    [
+      "made_crude_estrone"
+    ]
+  ],
+  "rewards": {
+    "experience": 12000
+  },
+  "sends_telemetry_event": false
+}

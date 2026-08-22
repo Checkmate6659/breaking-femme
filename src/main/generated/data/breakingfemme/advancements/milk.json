@@ -1,0 +1,38 @@
+{
+  "parent": "breakingfemme:root",
+  "criteria": {
+    "milked_cow": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:milk_bucket"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.breakingfemme.milk.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:milk_bucket"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.breakingfemme.milk.title"
+    }
+  },
+  "requirements": [
+    [
+      "milked_cow"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

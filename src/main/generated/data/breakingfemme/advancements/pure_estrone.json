@@ -1,0 +1,41 @@
+{
+  "parent": "breakingfemme:crude_estrone",
+  "criteria": {
+    "made_pure_estrone": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "breakingfemme:pure_estrone"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.breakingfemme.pure_estrone.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "breakingfemme:pure_estrone"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.breakingfemme.pure_estrone.title"
+    }
+  },
+  "requirements": [
+    [
+      "made_pure_estrone"
+    ]
+  ],
+  "rewards": {
+    "experience": 3000
+  },
+  "sends_telemetry_event": false
+}
