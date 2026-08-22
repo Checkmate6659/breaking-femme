@@ -1,12 +1,10 @@
 package com.breakingfemme.datagen;
 
-import java.util.function.Consumer;
-
 import com.breakingfemme.BreakingFemme;
 import com.breakingfemme.ModBlocks;
 import com.breakingfemme.ModFluids;
 import com.breakingfemme.ModItems;
-
+import com.breakingfemme.criterions.WithinRangeOfFiveGTowerCriterion;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
 import net.minecraft.advancement.Advancement;
@@ -15,8 +13,11 @@ import net.minecraft.advancement.AdvancementRewards;
 import net.minecraft.advancement.criterion.InventoryChangedCriterion;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Items;
+import net.minecraft.predicate.entity.LootContextPredicate;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+
+import java.util.function.Consumer;
 
 public class ModAdvancementProvider extends FabricAdvancementProvider {
     public ModAdvancementProvider(FabricDataOutput dataGenerator) {
@@ -494,5 +495,17 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
             )
             .criterion("got_concentrated_caustic_soda", InventoryChangedCriterion.Conditions.items(ModFluids.CONCENTRATED_CAUSTIC_SODA_BUCKET))
         .build(consumer, BreakingFemme.MOD_ID + "/concentrated_caustic_soda");
+
+        Advancement five_g_affected = Advancement.Builder.createUntelemetered().parent(root)
+                .display(ModBlocks.FIVE_G_TOWER_HEAD,
+                        Text.translatable("advancement.breakingfemme.five_g_affected.title"),
+                        Text.translatable("advancement.breakingfemme.five_g_affected.description"),
+                        null, AdvancementFrame.CHALLENGE,
+                        true,
+                        true,
+                        true
+                )
+                .criterion("got_affected_by_5g_tower", new WithinRangeOfFiveGTowerCriterion.Conditions(LootContextPredicate.EMPTY))
+                .build(consumer, BreakingFemme.MOD_ID + "/five_g_affected");
     }
 }

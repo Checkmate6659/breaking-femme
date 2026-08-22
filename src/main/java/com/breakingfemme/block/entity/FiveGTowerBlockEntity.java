@@ -3,10 +3,12 @@ package com.breakingfemme.block.entity;
 import com.breakingfemme.EntityAttachments;
 import com.breakingfemme.ModBlockEntities;
 import com.breakingfemme.ModBlocks;
+import com.breakingfemme.ModCriterions;
 import com.breakingfemme.block.FiveGTowerControllerBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.*;
 import net.minecraft.world.ServerWorldAccess;
@@ -130,7 +132,7 @@ public class FiveGTowerBlockEntity extends BlockEntity {
                     new EntityAttachments.IsEstrogennablePredicate()
                             .and(new AlreadyEffectedPredicate().negate())); // we need to filter out entities we already
             // did something with
-            for (Entity nearEntity : nearEntities) { // todo: range should be affected by transmitters
+            for (Entity nearEntity : nearEntities) {// todo: range should be affected by transmitters
                 Vec3d delta = nearEntity.getPos().subtract(topPosition.toCenterPos());
                 //for now action zone is a sphere. TODO: anisotropy!! like distance to a circle around the top instead
                 //a bit like this: https://www.geometrictools.com/Documentation/DistanceToCircle3.pdf
@@ -138,6 +140,9 @@ public class FiveGTowerBlockEntity extends BlockEntity {
                 if (dist2 > 16384) continue;
                 EntityAttachments.giveEstrogenFor(nearEntity, 5); //TODO: decay of effectiveness based on distance!
                 entitiesAffectedAlready.add(nearEntity.getUuid());
+                if (nearEntity instanceof ServerPlayerEntity nearPlayer)
+                    ModCriterions.WITHIN_RANGE_OF_FIVE_G_TOWER.trigger(nearPlayer);
+
             }
         }
 

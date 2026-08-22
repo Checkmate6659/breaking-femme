@@ -1,0 +1,30 @@
+{
+  "parent": "minecraft:breakingfemme/root",
+  "criteria": {
+    "got_affected_by_5g_tower": {
+      "conditions": {},
+      "trigger": "breakingfemme:within_range_of_five_g_tower"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.breakingfemme.five_g_affected.description"
+    },
+    "frame": "challenge",
+    "hidden": true,
+    "icon": {
+      "item": "breakingfemme:5gtower_head"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.breakingfemme.five_g_affected.title"
+    }
+  },
+  "requirements": [
+    [
+      "got_affected_by_5g_tower"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

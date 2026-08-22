@@ -10,8 +10,8 @@ import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.minecraft.block.Blocks;
-import net.minecraft.enchantment.Enchantments;
 import net.minecraft.enchantment.Enchantment.Rarity;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.damage.DamageType;
@@ -40,11 +40,10 @@ import net.minecraft.village.VillagerProfession;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.PlacedFeature;
-
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.List;
 
 public class BreakingFemme implements ModInitializer {
 	public static final String MOD_ID = "breakingfemme";
@@ -73,6 +72,7 @@ public class BreakingFemme implements ModInitializer {
 
 		LOGGER.info("Jesse I'm trans! We gotta cook estrogen!");
 
+		ModCriterions.registerAll();
 		ModItems.registerModItems();
 		ModBlocks.registerModBlocks();
 		ModFluids.registerModFluids();
