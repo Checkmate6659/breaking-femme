@@ -1,0 +1,7 @@
+{
+  "parent": "breakingfemme:block/5gtower_controller",
+  "textures": {
+    "0": "breakingfemme:block/5gtower_controller_on",
+    "particle": "block/iron_block"
+  }
+}

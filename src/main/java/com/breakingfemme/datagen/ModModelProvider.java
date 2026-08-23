@@ -4,14 +4,14 @@ import com.breakingfemme.BreakingFemme;
 import com.breakingfemme.ModBlocks;
 import com.breakingfemme.ModFluids;
 import com.breakingfemme.ModItems;
+import com.breakingfemme.block.FiveGTowerControllerBlock;
 import com.breakingfemme.block.SoyCropBlock;
-
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
-import net.minecraft.data.client.BlockStateModelGenerator;
-import net.minecraft.data.client.ItemModelGenerator;
-import net.minecraft.data.client.Models;
+import net.minecraft.data.client.*;
 import net.minecraft.util.Identifier;
+
+import static net.minecraft.data.client.BlockStateModelGenerator.createNorthDefaultHorizontalRotationStates;
 
 public class ModModelProvider extends FabricModelProvider {
 
@@ -41,7 +41,16 @@ public class ModModelProvider extends FabricModelProvider {
 
         blockStateModelGenerator.registerNorthDefaultHorizontalRotation(ModBlocks.FIVE_G_TOWER_HEAD);
         blockStateModelGenerator.registerAxisRotated(ModBlocks.FIVE_G_SCAFFOLDING, Identifier.of(BreakingFemme.MOD_ID, "block/5gtower_scaffolding"));
-        blockStateModelGenerator.registerNorthDefaultHorizontalRotation(ModBlocks.FIVE_G_TOWER_CONTROLLER);
+//        blockStateModelGenerator.registerNorthDefaultHorizontalRotation(ModBlocks.FIVE_G_TOWER_CONTROLLER);
+        blockStateModelGenerator.blockStateCollector.accept(
+                VariantsBlockStateSupplier.create(ModBlocks.FIVE_G_TOWER_CONTROLLER)
+                        .coordinate(BlockStateVariantMap.create(FiveGTowerControllerBlock.WORKING)
+                                .register(false, BlockStateVariant.create().put(VariantSettings.MODEL, ModelIds.getBlockModelId(ModBlocks.FIVE_G_TOWER_CONTROLLER)))
+                                .register(true, BlockStateVariant.create().put(VariantSettings.MODEL, ModelIds.getBlockSubModelId(ModBlocks.FIVE_G_TOWER_CONTROLLER, "_on"))))
+                        .coordinate(createNorthDefaultHorizontalRotationStates())
+
+
+        );
         //registering fermenter panels by hand, because they are unlike any vanilla blocks
         //cauldrons need to be handmade apparently
     }

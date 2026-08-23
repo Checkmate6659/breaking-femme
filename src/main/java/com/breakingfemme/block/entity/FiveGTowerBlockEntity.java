@@ -110,6 +110,9 @@ public class FiveGTowerBlockEntity extends BlockEntity {
 
     public void tick(ServerWorldAccess server, BlockState state) {
         possiblyValidateMultiblock(server, state);
+        if (state.get(FiveGTowerControllerBlock.WORKING) != valid) {
+            server.setBlockState(pos, state.with(FiveGTowerControllerBlock.WORKING, valid), 3);
+        }
         if (valid) behavior.tickValid(server);
 
     }
