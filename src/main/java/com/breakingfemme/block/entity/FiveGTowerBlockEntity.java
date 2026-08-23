@@ -61,6 +61,10 @@ public class FiveGTowerBlockEntity extends BlockEntity {
     private void setValid() {
         if (!valid) markDirty();
         valid = true;
+        triggerValidMultiblockAdvancement();
+    }
+
+    private void triggerValidMultiblockAdvancement() {
         if (world == null) return;
         if (world.isClient) return;
         if (placedBy == null) return;
@@ -69,6 +73,7 @@ public class FiveGTowerBlockEntity extends BlockEntity {
         var serverPlayer = (ServerPlayerEntity) player;
         ModCriterions.FORMED_VALID_MULTIBLOCK.trigger(serverPlayer, getType());
         placedBy = null; // we only care about the first time
+        markDirty();
     }
 
     private static boolean isValidStructureBlock(BlockState state) {
