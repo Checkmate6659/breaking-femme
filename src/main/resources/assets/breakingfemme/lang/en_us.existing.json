@@ -170,7 +170,6 @@
     "block.breakingfemme.distiller_column": "Distiller Column",
     "block.breakingfemme.distiller_base": "Distiller Base",
     "block.breakingfemme.funnel": "Funnel",
-    "block.breakingfemme.5gtower_controller": "5G Tower Controller",
     "block.breakingfemme.kelp_ash_block": "Kelp Ash Block",
     "block.breakingfemme.limestone_chunks": "Limestone Chunks",
     "block.breakingfemme.quicklime": "Quicklime",
@@ -221,7 +220,6 @@
     "command.breakingfemme.kinetics.ethanol": "Ethanol",
     "command.breakingfemme.kinetics.acetaldehyde": "Acetaldehyde",
 
-    "itemgroup.breakingfemme": "Breaking Femme",
     "book.breakingfemme.name": "DIY HRT For Dummies",
     "book.breakingfemme.subtitle": "A guide for the rest of us",
     "book.breakingfemme.landing": "                              This guide should walk you through all the steps of setting up your lab, cooking the greatest molecule known to woman, and maybe even learn a bit of chemistry along the way :3"

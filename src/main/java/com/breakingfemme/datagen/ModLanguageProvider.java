@@ -25,7 +25,7 @@ public class ModLanguageProvider extends FabricLanguageProvider {
             Path existingFilePath = dataOutput.getModContainer().findPath("assets/breakingfemme/lang/en_us.existing.json").orElseThrow();
             translationBuilder.add(existingFilePath);
         } catch (Exception e) {
-//            throw new RuntimeException("Failed to add existing language file!", e);
+            throw new RuntimeException("Failed to add existing language file!", e);
         }
     }
 }
