@@ -1,5 +1,5 @@
 {
-  "parent": "breakingfemme:root",
+  "parent": "breakingfemme:five_g_built",
   "criteria": {
     "got_affected_by_5g_tower": {
       "conditions": {},

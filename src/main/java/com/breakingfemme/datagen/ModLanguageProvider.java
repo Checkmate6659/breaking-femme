@@ -21,6 +21,8 @@ public class ModLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add(Registries.ITEM_GROUP.getKey(ModItems.ITEM_GROUP).orElseThrow(), "Breaking Femme");
         translationBuilder.add("advancement.breakingfemme.five_g_affected.title", "Get 5Ged");
         translationBuilder.add("advancement.breakingfemme.five_g_affected.description", "Get affected by a 5G tower");
+        translationBuilder.add("advancement.breakingfemme.five_g_built.title", "5G Online");
+        translationBuilder.add("advancement.breakingfemme.five_g_built.description", "Build a fully operational 5G tower");
         try {
             Path existingFilePath = dataOutput.getModContainer().findPath("assets/breakingfemme/lang/en_us.existing.json").orElseThrow();
             translationBuilder.add(existingFilePath);

@@ -1,9 +1,7 @@
 package com.breakingfemme.datagen;
 
-import com.breakingfemme.BreakingFemme;
-import com.breakingfemme.ModBlocks;
-import com.breakingfemme.ModFluids;
-import com.breakingfemme.ModItems;
+import com.breakingfemme.*;
+import com.breakingfemme.criterions.FormedValidMultiblockCriterion;
 import com.breakingfemme.criterions.WithinRangeOfFiveGTowerCriterion;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
@@ -496,7 +494,24 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
             .criterion("got_concentrated_caustic_soda", InventoryChangedCriterion.Conditions.items(ModFluids.CONCENTRATED_CAUSTIC_SODA_BUCKET))
                 .build(consumer, Identifier.of(BreakingFemme.MOD_ID, "got_concentrated_caustic_soda").toString());
 
-        Advancement five_g_affected = Advancement.Builder.createUntelemetered().parent(root)
+        Advancement five_g_built_and_working = Advancement.Builder.createUntelemetered()
+                .display(ModBlocks.FIVE_G_TOWER_CONTROLLER,
+                        Text.translatable("advancement.breakingfemme.five_g_built.title"),
+                        Text.translatable("advancement.breakingfemme.five_g_built.description"),
+                        null,
+                        AdvancementFrame.GOAL,
+                        true,
+                        true,
+                        false
+                )
+                .parent(root)
+                .criterion("built_five5_tower",
+                        new FormedValidMultiblockCriterion.Conditions(LootContextPredicate.EMPTY, ModBlockEntities.FIVE_G_TOWER_BLOCK_ENTITY_BLOCK_ENTITY))
+                .build(consumer, Identifier.of(BreakingFemme.MOD_ID, "five_g_built")
+                        .toString());
+
+
+        Advancement five_g_affected = Advancement.Builder.createUntelemetered().parent(five_g_built_and_working)
                 .display(ModBlocks.FIVE_G_TOWER_HEAD,
                         Text.translatable("advancement.breakingfemme.five_g_affected.title"),
                         Text.translatable("advancement.breakingfemme.five_g_affected.description"),
@@ -507,5 +522,6 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                 )
                 .criterion("got_affected_by_5g_tower", new WithinRangeOfFiveGTowerCriterion.Conditions(LootContextPredicate.EMPTY))
                 .build(consumer, Identifier.of(BreakingFemme.MOD_ID, "five_g_affected").toString());
+
     }
 }

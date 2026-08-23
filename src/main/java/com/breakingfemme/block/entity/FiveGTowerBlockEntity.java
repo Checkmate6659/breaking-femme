@@ -8,10 +8,12 @@ import com.breakingfemme.block.FiveGTowerControllerBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.*;
 import net.minecraft.world.ServerWorldAccess;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +23,7 @@ import java.util.function.Predicate;
 public class FiveGTowerBlockEntity extends BlockEntity {
     private BlockPos topPosition;
     private BlockPos bottomPosition;
+    public @Nullable UUID placedBy = null;
     protected FiveGTowerBehavior behavior = this.new FiveGTowerBehavior();
     private int transmitter_count = 0;
     private int last_checked = -1;
@@ -28,6 +31,18 @@ public class FiveGTowerBlockEntity extends BlockEntity {
     public FiveGTowerBlockEntity( BlockPos pos, BlockState state) {
         super(ModBlockEntities.FIVE_G_TOWER_BLOCK_ENTITY_BLOCK_ENTITY, pos, state);
         topPosition = pos;
+    }
+
+    @Override
+    public void readNbt(NbtCompound nbt) {
+        super.readNbt(nbt);
+        if (nbt.containsUuid("placed_by")) placedBy = nbt.getUuid("placed_by");
+    }
+
+    @Override
+    protected void writeNbt(NbtCompound nbt) {
+        super.writeNbt(nbt);
+        if (placedBy != null) nbt.putUuid("placed_by", placedBy);
     }
 
     public BlockPos getTopPosition() {
@@ -46,6 +61,14 @@ public class FiveGTowerBlockEntity extends BlockEntity {
     private void setValid() {
         if (!valid) markDirty();
         valid = true;
+        if (world == null) return;
+        if (world.isClient) return;
+        if (placedBy == null) return;
+        var player = world.getPlayerByUuid(placedBy);
+        if (player == null) return;
+        var serverPlayer = (ServerPlayerEntity) player;
+        ModCriterions.FORMED_VALID_MULTIBLOCK.trigger(serverPlayer, getType());
+        placedBy = null; // we only care about the first time
     }
 
     private static boolean isValidStructureBlock(BlockState state) {

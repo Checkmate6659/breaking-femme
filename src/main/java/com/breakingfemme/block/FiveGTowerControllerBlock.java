@@ -9,7 +9,10 @@ import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.item.ItemStack;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
@@ -54,6 +57,18 @@ public class FiveGTowerControllerBlock extends BlockWithEntity {
         BlockState blockState = this.getDefaultState();
         blockState = blockState.with(FACING, ctx.getHorizontalPlayerFacing().getOpposite());
         return blockState;
+    }
+
+    @Override
+    public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
+        super.onPlaced(world, pos, state, placer, itemStack);
+        if (world.isClient) return;
+        if (placer instanceof ServerPlayerEntity entity) {
+            var potentialBlockEntity = world.getBlockEntity(pos, ModBlockEntities.FIVE_G_TOWER_BLOCK_ENTITY_BLOCK_ENTITY);
+            if (potentialBlockEntity.isEmpty()) return;
+            var blockEntity = potentialBlockEntity.get();
+            blockEntity.placedBy = entity.getUuid();
+        }
     }
 
     @Override

@@ -1,0 +1,32 @@
+{
+  "parent": "breakingfemme:root",
+  "criteria": {
+    "built_five5_tower": {
+      "conditions": {
+        "type": "breakingfemme:5gtower_be"
+      },
+      "trigger": "breakingfemme:formed_valid_multiblock"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.breakingfemme.five_g_built.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "breakingfemme:5gtower_controller"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.breakingfemme.five_g_built.title"
+    }
+  },
+  "requirements": [
+    [
+      "built_five5_tower"
+    ]
+  ],
+  "sends_telemetry_event": false
+}
