@@ -21,9 +21,6 @@
 		"client": [
 			"com.breakingfemme.client.BreakingFemmeClient"
 		],
-		"fabric-datagen": [
-			"com.breakingfemme.datagen.BreakingFemmeDataGenerator"
-		],
 		"rei_client": [
 			"com.breakingfemme.client.compat.rei.BreakingFemmeREICompatPlugin"
 		]

@@ -4,9 +4,12 @@ import com.breakingfemme.ModBlocks;
 import com.breakingfemme.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.registry.Registries;
 
 import java.nio.file.Path;
+
+import static com.breakingfemme.BreakingFemme.MOD_ID;
 
 public class ModLanguageProvider extends FabricLanguageProvider {
     public ModLanguageProvider(FabricDataOutput dataOutput) {
@@ -24,7 +27,7 @@ public class ModLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add("advancement.breakingfemme.five_g_built.title", "5G Online");
         translationBuilder.add("advancement.breakingfemme.five_g_built.description", "Build a fully operational 5G tower");
         try {
-            Path existingFilePath = dataOutput.getModContainer().findPath("assets/breakingfemme/lang/en_us.existing.json").orElseThrow();
+            Path existingFilePath = FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow().findPath("assets/breakingfemme/lang/en_us.existing.json").orElseThrow();
             translationBuilder.add(existingFilePath);
         } catch (Exception e) {
             throw new RuntimeException("Failed to add existing language file!", e);
