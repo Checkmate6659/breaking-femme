@@ -219,8 +219,8 @@ public class ModItems {
             entries.add(DRIED_MASHED_POTATOES);
             entries.add(ROUGH_ESTRO_POTATO_BLEND);
             entries.add(FINE_ESTRO_POTATO_BLEND);
-            entries.add(ModBlocks.FIVE_G_SCAFFOLDING);
             entries.add(ModBlocks.FIVE_G_TOWER_CONTROLLER);
+            entries.add(ModBlocks.FIVE_G_SCAFFOLDING);
             entries.add(ModBlocks.FIVE_G_TOWER_HEAD);
             //AUTOGENERATION LABEL DO NOT TOUCH
 
