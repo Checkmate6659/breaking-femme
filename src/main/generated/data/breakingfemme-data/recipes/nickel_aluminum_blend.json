@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "nickel_aluminum_blend",
+  "ingredients": [
+    {
+      "tag": "c:dusts/nickel"
+    },
+    {
+      "tag": "c:dusts/aluminum"
+    }
+  ],
+  "result": {
+    "count": 2,
+    "item": "breakingfemme:nickel_aluminum_blend"
+  }
+}

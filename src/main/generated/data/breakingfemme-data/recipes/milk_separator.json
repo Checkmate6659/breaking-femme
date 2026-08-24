@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "milk_separator",
+  "key": {
+    ":": {
+      "item": "minecraft:stick"
+    },
+    "O": {
+      "tag": "c:ingots/iron"
+    },
+    "U": {
+      "tag": "minecraft:planks"
+    },
+    "u": {
+      "item": "minecraft:string"
+    },
+    "w": {
+      "item": "minecraft:bucket"
+    }
+  },
+  "pattern": [
+    "OuO",
+    "UwU",
+    ": :"
+  ],
+  "result": {
+    "item": "breakingfemme:milk_separator"
+  },
+  "show_notification": true
+}

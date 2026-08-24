@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.0,
+  "group": "ceramic_filter_fire",
+  "ingredient": {
+    "item": "breakingfemme:unfired_ceramic_filter"
+  },
+  "result": "breakingfemme:ceramic_filter"
+}

@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "unfired_ceramic_filter",
+  "key": {
+    "U": {
+      "item": "minecraft:clay_ball"
+    },
+    "w": [
+      {
+        "tag": "c:dusts/saw"
+      },
+      {
+        "tag": "c:dusts/wood"
+      }
+    ]
+  },
+  "pattern": [
+    "UwU",
+    " U "
+  ],
+  "result": {
+    "item": "breakingfemme:unfired_ceramic_filter"
+  },
+  "show_notification": true
+}

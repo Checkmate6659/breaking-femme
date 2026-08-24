@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "distiller_top",
+  "key": {
+    "E": {
+      "item": "breakingfemme:nickel_pipe"
+    },
+    "H": {
+      "item": "breakingfemme:distiller_column"
+    },
+    "S": {
+      "tag": "c:ingots/nickel"
+    }
+  },
+  "pattern": [
+    "S",
+    "H",
+    "E"
+  ],
+  "result": {
+    "item": "breakingfemme:distiller_top"
+  },
+  "show_notification": true
+}

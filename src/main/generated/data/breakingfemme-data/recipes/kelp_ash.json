@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "breakingfemme:kelp_ash_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "breakingfemme:kelp_ash"
+  }
+}

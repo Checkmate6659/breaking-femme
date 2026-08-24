@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_skimmed_milk_bucket": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "breakingfemme:skimmed_milk_bucket"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "breakingfemme:milkgot_mold"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_skimmed_milk_bucket",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "breakingfemme:milkgot_mold"
+    ]
+  },
+  "sends_telemetry_event": false
+}

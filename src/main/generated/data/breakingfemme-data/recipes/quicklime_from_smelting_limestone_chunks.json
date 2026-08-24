@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "blocks",
+  "cookingtime": 200,
+  "experience": 0.0,
+  "group": "lime_smelt",
+  "ingredient": {
+    "item": "breakingfemme:limestone_chunks"
+  },
+  "result": "breakingfemme:quicklime"
+}

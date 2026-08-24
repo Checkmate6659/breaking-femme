@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "fermenter_bottom_convert",
+  "ingredients": [
+    {
+      "item": "breakingfemme:fermenter_bottom"
+    }
+  ],
+  "result": {
+    "item": "breakingfemme:fermenter_top"
+  }
+}

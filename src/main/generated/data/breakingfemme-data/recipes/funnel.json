@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "funnel",
+  "key": {
+    "#": {
+      "tag": "c:ingots/iron"
+    }
+  },
+  "pattern": [
+    "# #",
+    "# #",
+    " # "
+  ],
+  "result": {
+    "item": "breakingfemme:funnel"
+  },
+  "show_notification": true
+}
