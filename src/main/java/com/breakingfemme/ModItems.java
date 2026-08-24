@@ -9,7 +9,8 @@ import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
+
+import static com.breakingfemme.BreakingFemme.id;
 
 public class ModItems {
     //Music disc (Femtanyl - Act Right) (CC BY-SA license, found here: https://www.newgrounds.com/audio/listen/1265451)
@@ -109,12 +110,12 @@ public class ModItems {
 
     private static Item registerItem(String name, Item item)
     {
-        return Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, name), item);
+        return Registry.register(Registries.ITEM, id(name), item);
     }
 
     //TODO: potentially re-organize this later
     public static final ItemGroup ITEM_GROUP = Registry.register(Registries.ITEM_GROUP,
-        new Identifier(BreakingFemme.MOD_ID, "breakingfemme"),
+            id("breakingfemme"),
         FabricItemGroup.builder().displayName(Text.translatable("itemgroup.breakingfemme"))
         .icon(() -> new ItemStack(ModItems.PURE_ESTRADIOL_CRYSTALS)).entries((displayContext, entries) -> {
             entries.add(MORTAR_PESTLE);

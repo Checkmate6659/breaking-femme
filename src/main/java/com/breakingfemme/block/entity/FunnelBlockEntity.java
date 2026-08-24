@@ -1,16 +1,9 @@
 package com.breakingfemme.block.entity;
 
-import java.util.Iterator;
-import java.util.Optional;
-
-import org.jetbrains.annotations.Nullable;
-
 import com.breakingfemme.ModBlockEntities;
 import com.breakingfemme.ModSounds;
-import com.breakingfemme.datagen.ModFluidTagProvider;
-import com.breakingfemme.datagen.ModItemTagProvider;
+import com.breakingfemme.ModTags;
 import com.breakingfemme.recipe.FilteringRecipe;
-
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
@@ -28,6 +21,10 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Iterator;
+import java.util.Optional;
 
 public class FunnelBlockEntity extends BlockEntity implements ImplementedInventory {
     //need a 2 slot inventory: first slot is output, second slot is filter
@@ -55,7 +52,7 @@ public class FunnelBlockEntity extends BlockEntity implements ImplementedInvento
     @Override
     public boolean canInsert(int slot, ItemStack stack, @Nullable Direction side) {
         //can only insert into second (filter) slot. not the output slot. but you *can* take out the filters. so be careful.
-        return slot == 1 && stack.isIn(ModItemTagProvider.FILTER);
+        return slot == 1 && stack.isIn(ModTags.Item.FILTER);
     }
 
     @Override
@@ -86,7 +83,7 @@ public class FunnelBlockEntity extends BlockEntity implements ImplementedInvento
     {
         Iterator<StorageView<FluidVariant>> iter = storage.nonEmptyIterator(); //skip over empties by default
         while(iter.hasNext())
-            if(iter.next().getResource().getFluid().isIn(ModFluidTagProvider.HARSH_ON_FILTERS))
+            if (iter.next().getResource().getFluid().isIn(ModTags.Fluid.HARSH_ON_FILTERS))
                 return true; //exception-free/extra variable-free way to get out of the loop: throwing exceptions is costly (building stack trace), especially when done often
         return false;
     }
@@ -156,7 +153,7 @@ public class FunnelBlockEntity extends BlockEntity implements ImplementedInvento
             }
 
             Storage<FluidVariant> top_storage = FluidStorage.SIDED.find(world, pos.up(), Direction.DOWN);
-            if(top_storage != null && !filterStack.isIn(ModItemTagProvider.RESISTANT_FILTER) && isFluidHarshOnFilter(top_storage)) //filter gets destroyed
+            if (top_storage != null && !filterStack.isIn(ModTags.Item.RESISTANT_FILTER) && isFluidHarshOnFilter(top_storage)) //filter gets destroyed
             {
                 consumeFilter(1); //damage filter very quickly: a stack of paper gone in like 3 seconds
                 if(world.getRandom().nextInt(6) == 0) //TODO: rename sound effect (with same sounds, they're *fine*)

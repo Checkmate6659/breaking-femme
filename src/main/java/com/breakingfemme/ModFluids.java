@@ -1,71 +1,10 @@
 package com.breakingfemme;
 
-import com.breakingfemme.block.AndrostadienedioneBlock;
-import com.breakingfemme.block.CorrosiveFluidBlock;
-import com.breakingfemme.block.FlammableFluidBlock;
-import com.breakingfemme.block.PoisonousFluidBlock;
-import com.breakingfemme.block.TarBlock;
+import com.breakingfemme.block.*;
+import com.breakingfemme.cauldron.*;
+import com.breakingfemme.fluid.*;
 import com.breakingfemme.item.FlammableBucketItem;
 import com.breakingfemme.item.SolutionBucketItem;
-import com.breakingfemme.cauldron.SterolSolutionCauldronBlock;
-import com.breakingfemme.cauldron.CopperSulfateCauldronBlock;
-import com.breakingfemme.cauldron.EgelCauldronBlock;
-import com.breakingfemme.cauldron.EstradiolRecrystallizationCauldronBlock;
-import com.breakingfemme.cauldron.Et32CauldronBlock;
-import com.breakingfemme.cauldron.Et64CauldronBlock;
-import com.breakingfemme.cauldron.Et95CauldronBlock;
-import com.breakingfemme.cauldron.MaceratingSoyCauldronBlock;
-import com.breakingfemme.cauldron.NickelSulfateCauldronBlock;
-import com.breakingfemme.cauldron.RedoxReactionCauldronBlock;
-import com.breakingfemme.cauldron.AndrostadienedioneCauldronBlock;
-import com.breakingfemme.cauldron.AndrostadienedioneExtractionCauldronBlock;
-import com.breakingfemme.cauldron.TarCauldronBlock;
-import com.breakingfemme.cauldron.ThickPotionCauldronBlock;
-import com.breakingfemme.cauldron.YeastCauldronBlock;
-import com.breakingfemme.cauldron.YeastStarterCauldronBlock;
-import com.breakingfemme.fluid.AndrostadienedioneFluid;
-import com.breakingfemme.fluid.AndrostadienedioneOilSolutionFluid;
-import com.breakingfemme.fluid.BeerFluid;
-import com.breakingfemme.fluid.CausticSodaCakeFluid;
-import com.breakingfemme.fluid.CausticSodaSolutionFluid;
-import com.breakingfemme.fluid.CoalOilFluid;
-import com.breakingfemme.fluid.ConcentratedCausticSodaFluid;
-import com.breakingfemme.fluid.CopperSulfateFluid;
-import com.breakingfemme.fluid.EstroneOilSolutionFluid;
-import com.breakingfemme.fluid.Et32Fluid;
-import com.breakingfemme.fluid.Et64Fluid;
-import com.breakingfemme.fluid.Et95Fluid;
-import com.breakingfemme.fluid.HydrochloricAcidFluid;
-import com.breakingfemme.fluid.ImpureDiluteSulfuricAcidFluid;
-import com.breakingfemme.fluid.KelpAshMudFluid;
-import com.breakingfemme.fluid.LyeWaterFluid;
-import com.breakingfemme.fluid.NetherBeerFluid;
-import com.breakingfemme.fluid.NickelSulfateFluid;
-import com.breakingfemme.fluid.SludgeFluid;
-import com.breakingfemme.fluid.SpillageFluid;
-import com.breakingfemme.fluid.SterolSolutionFluid;
-import com.breakingfemme.fluid.SulfuricAcidFluid;
-import com.breakingfemme.fluid.TarFluid;
-import com.breakingfemme.cauldron.BeerCauldronBlock;
-import com.breakingfemme.cauldron.NetherBeerCauldronBlock;
-import com.breakingfemme.cauldron.SludgeCauldronBlock;
-import com.breakingfemme.cauldron.AndrostadienedioneOilSolutionCauldronBlock;
-import com.breakingfemme.cauldron.CoalOilCauldronBlock;
-import com.breakingfemme.cauldron.EstroneOilSolutionCauldronBlock;
-import com.breakingfemme.cauldron.EstroneRecrystallizationCauldronBlock;
-import com.breakingfemme.cauldron.EstroneReductionCauldronBlock;
-import com.breakingfemme.cauldron.LyeWaterCauldronBlock;
-import com.breakingfemme.cauldron.CausticSodaSolutionCauldronBlock;
-import com.breakingfemme.cauldron.CausticSodaCakeCauldronBlock;
-import com.breakingfemme.cauldron.ConcentratedCausticSodaCauldronBlock;
-import com.breakingfemme.cauldron.SulfuricAcidCauldronBlock;
-import com.breakingfemme.cauldron.ImpureDiluteSulfuricAcidCauldronBlock;
-import com.breakingfemme.cauldron.HydrochloricAcidCauldronBlock;
-import com.breakingfemme.cauldron.KelpAshMudCauldronBlock;
-//AUTOGENERATION LABEL DO NOT TOUCH
-import com.breakingfemme.cauldron.HydrochloricAcidSynthesisCauldronBlock;
-import com.breakingfemme.cauldron.HydrogenGeneratorCauldronBlock;
-
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.transfer.v1.fluid.CauldronFluidContent;
@@ -84,7 +23,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.util.Identifier;
+
+import static com.breakingfemme.BreakingFemme.id;
+
+//AUTOGENERATION LABEL DO NOT TOUCH
 
 public class ModFluids {
     //Milk cauldron
@@ -253,216 +195,216 @@ public class ModFluids {
     public static void registerModFluids()
     {
         //Copper sulfate solution
-        STILL_COPPER_SULFATE = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "copper_sulfate_solution"),
+        STILL_COPPER_SULFATE = Registry.register(Registries.FLUID, id("copper_sulfate_solution"),
             new CopperSulfateFluid.Still());
-        FLOWING_COPPER_SULFATE = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_copper_sulfate_solution"),
+        FLOWING_COPPER_SULFATE = Registry.register(Registries.FLUID, id("flowing_copper_sulfate_solution"),
             new CopperSulfateFluid.Flowing());
-        COPPER_SULFATE_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "copper_sulfate_solution_block"),
+        COPPER_SULFATE_FLUID_BLOCK = Registry.register(Registries.BLOCK, id("copper_sulfate_solution_block"),
             new FluidBlock(STILL_COPPER_SULFATE, FabricBlockSettings.copyOf(Blocks.WATER)){});
-        COPPER_SULFATE_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "copper_sulfate_solution_bucket"),
+        COPPER_SULFATE_BUCKET = Registry.register(Registries.ITEM, id("copper_sulfate_solution_bucket"),
             new SolutionBucketItem(STILL_COPPER_SULFATE, ModItems.COPPER_SULFATE, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
         //Nickel sulfate solution
-        STILL_NICKEL_SULFATE = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "nickel_sulfate_solution"),
+        STILL_NICKEL_SULFATE = Registry.register(Registries.FLUID, id("nickel_sulfate_solution"),
             new NickelSulfateFluid.Still());
-        FLOWING_NICKEL_SULFATE = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_nickel_sulfate_solution"),
+        FLOWING_NICKEL_SULFATE = Registry.register(Registries.FLUID, id("flowing_nickel_sulfate_solution"),
             new NickelSulfateFluid.Flowing());
-        NICKEL_SULFATE_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "nickel_sulfate_solution_block"),
+        NICKEL_SULFATE_FLUID_BLOCK = Registry.register(Registries.BLOCK, id("nickel_sulfate_solution_block"),
             new FluidBlock(STILL_NICKEL_SULFATE, FabricBlockSettings.copyOf(Blocks.WATER)){});
-        NICKEL_SULFATE_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "nickel_sulfate_solution_bucket"),
+        NICKEL_SULFATE_BUCKET = Registry.register(Registries.ITEM, id("nickel_sulfate_solution_bucket"),
             new SolutionBucketItem(STILL_NICKEL_SULFATE, ModItems.NICKEL_SULFATE, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
         //32% ethanol
-        STILL_ET32 = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "ethanol32"),
+        STILL_ET32 = Registry.register(Registries.FLUID, id("ethanol32"),
             new Et32Fluid.Still());
-        FLOWING_ET32 = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_ethanol32"),
+        FLOWING_ET32 = Registry.register(Registries.FLUID, id("flowing_ethanol32"),
             new Et32Fluid.Flowing());
-        ET32_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "ethanol32_block"),
+        ET32_FLUID_BLOCK = Registry.register(Registries.BLOCK, id("ethanol32_block"),
             new FluidBlock(STILL_ET32, FabricBlockSettings.copyOf(Blocks.WATER)){});
-        ET32_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "ethanol32_bucket"),
+        ET32_BUCKET = Registry.register(Registries.ITEM, id("ethanol32_bucket"),
             new BucketItem(STILL_ET32, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
         //64% ethanol
-        STILL_ET64 = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "ethanol64"),
+        STILL_ET64 = Registry.register(Registries.FLUID, id("ethanol64"),
             new Et64Fluid.Still());
-        FLOWING_ET64 = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_ethanol64"),
+        FLOWING_ET64 = Registry.register(Registries.FLUID, id("flowing_ethanol64"),
             new Et64Fluid.Flowing());
-        ET64_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "ethanol64_block"),
+        ET64_FLUID_BLOCK = Registry.register(Registries.BLOCK, id("ethanol64_block"),
             new FlammableFluidBlock(STILL_ET64, FabricBlockSettings.copyOf(Blocks.WATER)){});
-        ET64_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "ethanol64_bucket"),
+        ET64_BUCKET = Registry.register(Registries.ITEM, id("ethanol64_bucket"),
             new FlammableBucketItem(STILL_ET64, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
         //95% ethanol
-        STILL_ET95 = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "ethanol95"),
+        STILL_ET95 = Registry.register(Registries.FLUID, id("ethanol95"),
             new Et95Fluid.Still());
-        FLOWING_ET95 = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_ethanol95"),
+        FLOWING_ET95 = Registry.register(Registries.FLUID, id("flowing_ethanol95"),
             new Et95Fluid.Flowing());
-        ET95_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "ethanol95_block"),
+        ET95_FLUID_BLOCK = Registry.register(Registries.BLOCK, id("ethanol95_block"),
             new FlammableFluidBlock(STILL_ET95, FabricBlockSettings.copyOf(Blocks.WATER)){});
-        ET95_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "ethanol95_bucket"),
+        ET95_BUCKET = Registry.register(Registries.ITEM, id("ethanol95_bucket"),
             new FlammableBucketItem(STILL_ET95, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
         //Sterol solution
-        STILL_STEROL_SOLUTION = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "sterol_solution"),
+        STILL_STEROL_SOLUTION = Registry.register(Registries.FLUID, id("sterol_solution"),
             new SterolSolutionFluid.Still());
-        FLOWING_STEROL_SOLUTION = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_sterol_solution"),
+        FLOWING_STEROL_SOLUTION = Registry.register(Registries.FLUID, id("flowing_sterol_solution"),
             new SterolSolutionFluid.Flowing());
-        STEROL_SOLUTION_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "sterol_solution_block"),
+        STEROL_SOLUTION_FLUID_BLOCK = Registry.register(Registries.BLOCK, id("sterol_solution_block"),
             new FlammableFluidBlock(STILL_STEROL_SOLUTION, FabricBlockSettings.copyOf(Blocks.WATER)){});
-        STEROL_SOLUTION_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "sterol_solution_bucket"),
+        STEROL_SOLUTION_BUCKET = Registry.register(Registries.ITEM, id("sterol_solution_bucket"),
             new FlammableBucketItem(STILL_STEROL_SOLUTION, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
         //Androstadienedione solution
-        STILL_ANDROSTADIENEDIONE = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "androstadienedione_solution"),
+        STILL_ANDROSTADIENEDIONE = Registry.register(Registries.FLUID, id("androstadienedione_solution"),
             new AndrostadienedioneFluid.Still());
-        FLOWING_ANDROSTADIENEDIONE = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_androstadienedione_solution"),
+        FLOWING_ANDROSTADIENEDIONE = Registry.register(Registries.FLUID, id("flowing_androstadienedione_solution"),
             new AndrostadienedioneFluid.Flowing());
-        ANDROSTADIENEDIONE_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "androstadienedione_solution_block"),
+        ANDROSTADIENEDIONE_FLUID_BLOCK = Registry.register(Registries.BLOCK, id("androstadienedione_solution_block"),
             new AndrostadienedioneBlock(STILL_ANDROSTADIENEDIONE, FabricBlockSettings.copyOf(Blocks.WATER)){});
-        ANDROSTADIENEDIONE_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "androstadienedione_solution_bucket"),
+        ANDROSTADIENEDIONE_BUCKET = Registry.register(Registries.ITEM, id("androstadienedione_solution_bucket"),
             new BucketItem(STILL_ANDROSTADIENEDIONE, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
         //Liquid tar
-        STILL_TAR = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "tar"),
+        STILL_TAR = Registry.register(Registries.FLUID, id("tar"),
             new TarFluid.Still());
-        FLOWING_TAR = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_tar"),
+        FLOWING_TAR = Registry.register(Registries.FLUID, id("flowing_tar"),
             new TarFluid.Flowing());
-        TAR_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "tar_block"),
+        TAR_FLUID_BLOCK = Registry.register(Registries.BLOCK, id("tar_block"),
             new TarBlock(STILL_TAR, FabricBlockSettings.copyOf(Blocks.WATER)){});
-        TAR_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "tar_bucket"),
+        TAR_BUCKET = Registry.register(Registries.ITEM, id("tar_bucket"),
             new BucketItem(STILL_TAR, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
-        STILL_BEER = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "beer"),
+        STILL_BEER = Registry.register(Registries.FLUID, id("beer"),
             new BeerFluid.Still());
-        FLOWING_BEER = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_beer"),
+        FLOWING_BEER = Registry.register(Registries.FLUID, id("flowing_beer"),
             new BeerFluid.Flowing());
-        BEER_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "beer_block"),
+        BEER_FLUID_BLOCK = Registry.register(Registries.BLOCK, id("beer_block"),
             new FluidBlock(STILL_BEER, FabricBlockSettings.copyOf(Blocks.WATER)){});
-        BEER_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "beer_bucket"),
+        BEER_BUCKET = Registry.register(Registries.ITEM, id("beer_bucket"),
             new BucketItem(STILL_BEER, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
-        STILL_NETHER_BEER = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "nether_beer"),
+        STILL_NETHER_BEER = Registry.register(Registries.FLUID, id("nether_beer"),
             new NetherBeerFluid.Still());
-        FLOWING_NETHER_BEER = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_nether_beer"),
+        FLOWING_NETHER_BEER = Registry.register(Registries.FLUID, id("flowing_nether_beer"),
             new NetherBeerFluid.Flowing());
-        NETHER_BEER_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "nether_beer_block"),
+        NETHER_BEER_FLUID_BLOCK = Registry.register(Registries.BLOCK, id("nether_beer_block"),
             new FluidBlock(STILL_NETHER_BEER, FabricBlockSettings.copyOf(Blocks.WATER)){});
-        NETHER_BEER_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "nether_beer_bucket"),
+        NETHER_BEER_BUCKET = Registry.register(Registries.ITEM, id("nether_beer_bucket"),
             new BucketItem(STILL_NETHER_BEER, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
-        STILL_SLUDGE = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "sludge"),
+        STILL_SLUDGE = Registry.register(Registries.FLUID, id("sludge"),
             new SludgeFluid.Still());
-        FLOWING_SLUDGE = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_sludge"),
+        FLOWING_SLUDGE = Registry.register(Registries.FLUID, id("flowing_sludge"),
             new SludgeFluid.Flowing());
-        SLUDGE_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "sludge_block"),
+        SLUDGE_FLUID_BLOCK = Registry.register(Registries.BLOCK, id("sludge_block"),
             new PoisonousFluidBlock(STILL_SLUDGE, FabricBlockSettings.copyOf(Blocks.WATER)){});
-        SLUDGE_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "sludge_bucket"),
+        SLUDGE_BUCKET = Registry.register(Registries.ITEM, id("sludge_bucket"),
             new BucketItem(STILL_SLUDGE, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
-        STILL_ANDROSTADIENEDIONE_OIL_SOLUTION = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "androstadienedione_oil_solution"),
+        STILL_ANDROSTADIENEDIONE_OIL_SOLUTION = Registry.register(Registries.FLUID, id("androstadienedione_oil_solution"),
             new AndrostadienedioneOilSolutionFluid.Still());
-        FLOWING_ANDROSTADIENEDIONE_OIL_SOLUTION = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_androstadienedione_oil_solution"),
+        FLOWING_ANDROSTADIENEDIONE_OIL_SOLUTION = Registry.register(Registries.FLUID, id("flowing_androstadienedione_oil_solution"),
             new AndrostadienedioneOilSolutionFluid.Flowing());
-        ANDROSTADIENEDIONE_OIL_SOLUTION_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "androstadienedione_oil_solution_block"),
+        ANDROSTADIENEDIONE_OIL_SOLUTION_FLUID_BLOCK = Registry.register(Registries.BLOCK, id("androstadienedione_oil_solution_block"),
             new AndrostadienedioneBlock(STILL_ANDROSTADIENEDIONE_OIL_SOLUTION, FabricBlockSettings.copyOf(Blocks.WATER)){});
-        ANDROSTADIENEDIONE_OIL_SOLUTION_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "androstadienedione_oil_solution_bucket"),
+        ANDROSTADIENEDIONE_OIL_SOLUTION_BUCKET = Registry.register(Registries.ITEM, id("androstadienedione_oil_solution_bucket"),
             new FlammableBucketItem(STILL_ANDROSTADIENEDIONE_OIL_SOLUTION, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
-        STILL_COAL_OIL = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "coal_oil"),
+        STILL_COAL_OIL = Registry.register(Registries.FLUID, id("coal_oil"),
             new CoalOilFluid.Still());
-        FLOWING_COAL_OIL = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_coal_oil"),
+        FLOWING_COAL_OIL = Registry.register(Registries.FLUID, id("flowing_coal_oil"),
             new CoalOilFluid.Flowing());
-        COAL_OIL_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "coal_oil_block"),
+        COAL_OIL_FLUID_BLOCK = Registry.register(Registries.BLOCK, id("coal_oil_block"),
             new FlammableFluidBlock(STILL_COAL_OIL, FabricBlockSettings.copyOf(Blocks.WATER)){});
-        COAL_OIL_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "coal_oil_bucket"),
+        COAL_OIL_BUCKET = Registry.register(Registries.ITEM, id("coal_oil_bucket"),
             new FlammableBucketItem(STILL_COAL_OIL, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
-        STILL_SPILLAGE = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "spillage"),
+        STILL_SPILLAGE = Registry.register(Registries.FLUID, id("spillage"),
             new SpillageFluid.Still());
-        FLOWING_SPILLAGE = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_spillage"),
+        FLOWING_SPILLAGE = Registry.register(Registries.FLUID, id("flowing_spillage"),
             new SpillageFluid.Flowing());
-        SPILLAGE_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "spillage_block"),
+        SPILLAGE_FLUID_BLOCK = Registry.register(Registries.BLOCK, id("spillage_block"),
             new FluidBlock(STILL_SPILLAGE, FabricBlockSettings.copyOf(Blocks.WATER)){});
 
-        STILL_ESTRONE_OIL_SOLUTION = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "estrone_oil_solution"),
+        STILL_ESTRONE_OIL_SOLUTION = Registry.register(Registries.FLUID, id("estrone_oil_solution"),
             new EstroneOilSolutionFluid.Still());
-        FLOWING_ESTRONE_OIL_SOLUTION = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_estrone_oil_solution"),
+        FLOWING_ESTRONE_OIL_SOLUTION = Registry.register(Registries.FLUID, id("flowing_estrone_oil_solution"),
             new EstroneOilSolutionFluid.Flowing());
-        ESTRONE_OIL_SOLUTION_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "estrone_oil_solution_block"),
+        ESTRONE_OIL_SOLUTION_FLUID_BLOCK = Registry.register(Registries.BLOCK, id("estrone_oil_solution_block"),
             new FlammableFluidBlock(STILL_ESTRONE_OIL_SOLUTION, FabricBlockSettings.copyOf(Blocks.WATER)){}); //TODO: make custom class that increases your estrone level
-        ESTRONE_OIL_SOLUTION_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "estrone_oil_solution_bucket"),
+        ESTRONE_OIL_SOLUTION_BUCKET = Registry.register(Registries.ITEM, id("estrone_oil_solution_bucket"),
             new BucketItem(STILL_ESTRONE_OIL_SOLUTION, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
-        STILL_LYE_WATER = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "lye_water"),
+        STILL_LYE_WATER = Registry.register(Registries.FLUID, id("lye_water"),
             new LyeWaterFluid.Still());
-        FLOWING_LYE_WATER = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_lye_water"),
+        FLOWING_LYE_WATER = Registry.register(Registries.FLUID, id("flowing_lye_water"),
             new LyeWaterFluid.Flowing());
-        LYE_WATER_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "lye_water_block"),
+        LYE_WATER_FLUID_BLOCK = Registry.register(Registries.BLOCK, id("lye_water_block"),
             new CorrosiveFluidBlock(STILL_LYE_WATER, FabricBlockSettings.copyOf(Blocks.WATER), 2.0f){});
-        LYE_WATER_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "lye_water_bucket"),
+        LYE_WATER_BUCKET = Registry.register(Registries.ITEM, id("lye_water_bucket"),
             new BucketItem(STILL_LYE_WATER, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
-        STILL_CAUSTIC_SODA_SOLUTION = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "caustic_soda_solution"),
+        STILL_CAUSTIC_SODA_SOLUTION = Registry.register(Registries.FLUID, id("caustic_soda_solution"),
             new CausticSodaSolutionFluid.Still());
-        FLOWING_CAUSTIC_SODA_SOLUTION = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_caustic_soda_solution"),
+        FLOWING_CAUSTIC_SODA_SOLUTION = Registry.register(Registries.FLUID, id("flowing_caustic_soda_solution"),
             new CausticSodaSolutionFluid.Flowing());
-        CAUSTIC_SODA_SOLUTION_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "caustic_soda_solution_block"),
+        CAUSTIC_SODA_SOLUTION_FLUID_BLOCK = Registry.register(Registries.BLOCK, id("caustic_soda_solution_block"),
             new CorrosiveFluidBlock(STILL_CAUSTIC_SODA_SOLUTION, FabricBlockSettings.copyOf(Blocks.WATER), 4.0f){});
-        CAUSTIC_SODA_SOLUTION_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "caustic_soda_solution_bucket"),
+        CAUSTIC_SODA_SOLUTION_BUCKET = Registry.register(Registries.ITEM, id("caustic_soda_solution_bucket"),
             new BucketItem(STILL_CAUSTIC_SODA_SOLUTION, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
-        STILL_CAUSTIC_SODA_CAKE = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "caustic_soda_cake"),
+        STILL_CAUSTIC_SODA_CAKE = Registry.register(Registries.FLUID, id("caustic_soda_cake"),
             new CausticSodaCakeFluid.Still());
-        FLOWING_CAUSTIC_SODA_CAKE = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_caustic_soda_cake"),
+        FLOWING_CAUSTIC_SODA_CAKE = Registry.register(Registries.FLUID, id("flowing_caustic_soda_cake"),
             new CausticSodaCakeFluid.Flowing());
-        CAUSTIC_SODA_CAKE_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "caustic_soda_cake_block"),
+        CAUSTIC_SODA_CAKE_FLUID_BLOCK = Registry.register(Registries.BLOCK, id("caustic_soda_cake_block"),
             new CorrosiveFluidBlock(STILL_CAUSTIC_SODA_CAKE, FabricBlockSettings.copyOf(Blocks.WATER), 4.5f){});
-        CAUSTIC_SODA_CAKE_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "caustic_soda_cake_bucket"),
+        CAUSTIC_SODA_CAKE_BUCKET = Registry.register(Registries.ITEM, id("caustic_soda_cake_bucket"),
             new BucketItem(STILL_CAUSTIC_SODA_CAKE, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
-        STILL_CONCENTRATED_CAUSTIC_SODA = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "concentrated_caustic_soda_solution"),
+        STILL_CONCENTRATED_CAUSTIC_SODA = Registry.register(Registries.FLUID, id("concentrated_caustic_soda_solution"),
             new ConcentratedCausticSodaFluid.Still());
-        FLOWING_CONCENTRATED_CAUSTIC_SODA = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_concentrated_caustic_soda_solution"),
+        FLOWING_CONCENTRATED_CAUSTIC_SODA = Registry.register(Registries.FLUID, id("flowing_concentrated_caustic_soda_solution"),
             new ConcentratedCausticSodaFluid.Flowing());
-        CONCENTRATED_CAUSTIC_SODA_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "concentrated_caustic_soda_solution_block"),
+        CONCENTRATED_CAUSTIC_SODA_FLUID_BLOCK = Registry.register(Registries.BLOCK, id("concentrated_caustic_soda_solution_block"),
             new CorrosiveFluidBlock(STILL_CONCENTRATED_CAUSTIC_SODA, FabricBlockSettings.copyOf(Blocks.WATER), 9.5f){});
-        CONCENTRATED_CAUSTIC_SODA_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "concentrated_caustic_soda_solution_bucket"),
+        CONCENTRATED_CAUSTIC_SODA_BUCKET = Registry.register(Registries.ITEM, id("concentrated_caustic_soda_solution_bucket"),
             new BucketItem(STILL_CONCENTRATED_CAUSTIC_SODA, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
-        STILL_SULFURIC_ACID = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "sulfuric_acid"),
+        STILL_SULFURIC_ACID = Registry.register(Registries.FLUID, id("sulfuric_acid"),
             new SulfuricAcidFluid.Still());
-        FLOWING_SULFURIC_ACID = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_sulfuric_acid"),
+        FLOWING_SULFURIC_ACID = Registry.register(Registries.FLUID, id("flowing_sulfuric_acid"),
             new SulfuricAcidFluid.Flowing());
-        SULFURIC_ACID_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "sulfuric_acid_block"),
+        SULFURIC_ACID_FLUID_BLOCK = Registry.register(Registries.BLOCK, id("sulfuric_acid_block"),
             new CorrosiveFluidBlock(STILL_SULFURIC_ACID, FabricBlockSettings.copyOf(Blocks.WATER), 16.0f){});
-        SULFURIC_ACID_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "sulfuric_acid_bucket"),
+        SULFURIC_ACID_BUCKET = Registry.register(Registries.ITEM, id("sulfuric_acid_bucket"),
             new BucketItem(STILL_SULFURIC_ACID, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
-        STILL_IMPURE_DILUTE_SULFURIC_ACID = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "impure_dilute_sulfuric_acid"),
+        STILL_IMPURE_DILUTE_SULFURIC_ACID = Registry.register(Registries.FLUID, id("impure_dilute_sulfuric_acid"),
             new ImpureDiluteSulfuricAcidFluid.Still());
-        FLOWING_IMPURE_DILUTE_SULFURIC_ACID = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_impure_dilute_sulfuric_acid"),
+        FLOWING_IMPURE_DILUTE_SULFURIC_ACID = Registry.register(Registries.FLUID, id("flowing_impure_dilute_sulfuric_acid"),
             new ImpureDiluteSulfuricAcidFluid.Flowing());
-        IMPURE_DILUTE_SULFURIC_ACID_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "impure_dilute_sulfuric_acid_block"),
+        IMPURE_DILUTE_SULFURIC_ACID_FLUID_BLOCK = Registry.register(Registries.BLOCK, id("impure_dilute_sulfuric_acid_block"),
             new CorrosiveFluidBlock(STILL_IMPURE_DILUTE_SULFURIC_ACID, FabricBlockSettings.copyOf(Blocks.WATER), 9.0f){});
-        IMPURE_DILUTE_SULFURIC_ACID_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "impure_dilute_sulfuric_acid_bucket"),
+        IMPURE_DILUTE_SULFURIC_ACID_BUCKET = Registry.register(Registries.ITEM, id("impure_dilute_sulfuric_acid_bucket"),
             new BucketItem(STILL_IMPURE_DILUTE_SULFURIC_ACID, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
-        STILL_HYDROCHLORIC_ACID = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "hydrochloric_acid"),
+        STILL_HYDROCHLORIC_ACID = Registry.register(Registries.FLUID, id("hydrochloric_acid"),
             new HydrochloricAcidFluid.Still());
-        FLOWING_HYDROCHLORIC_ACID = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_hydrochloric_acid"),
+        FLOWING_HYDROCHLORIC_ACID = Registry.register(Registries.FLUID, id("flowing_hydrochloric_acid"),
             new HydrochloricAcidFluid.Flowing());
-        HYDROCHLORIC_ACID_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "hydrochloric_acid_block"),
+        HYDROCHLORIC_ACID_FLUID_BLOCK = Registry.register(Registries.BLOCK, id("hydrochloric_acid_block"),
             new CorrosiveFluidBlock(STILL_HYDROCHLORIC_ACID, FabricBlockSettings.copyOf(Blocks.WATER), 6.0f){});
-        HYDROCHLORIC_ACID_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "hydrochloric_acid_bucket"),
+        HYDROCHLORIC_ACID_BUCKET = Registry.register(Registries.ITEM, id("hydrochloric_acid_bucket"),
             new BucketItem(STILL_HYDROCHLORIC_ACID, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
-        STILL_KELP_ASH_MUD = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "kelp_ash_mud"),
+        STILL_KELP_ASH_MUD = Registry.register(Registries.FLUID, id("kelp_ash_mud"),
             new KelpAshMudFluid.Still());
-        FLOWING_KELP_ASH_MUD = Registry.register(Registries.FLUID, new Identifier(BreakingFemme.MOD_ID, "flowing_kelp_ash_mud"),
+        FLOWING_KELP_ASH_MUD = Registry.register(Registries.FLUID, id("flowing_kelp_ash_mud"),
             new KelpAshMudFluid.Flowing());
-        KELP_ASH_MUD_FLUID_BLOCK = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "kelp_ash_mud_block"),
+        KELP_ASH_MUD_FLUID_BLOCK = Registry.register(Registries.BLOCK, id("kelp_ash_mud_block"),
             new CorrosiveFluidBlock(STILL_KELP_ASH_MUD, FabricBlockSettings.copyOf(Blocks.WATER), 1.0f){});
-        KELP_ASH_MUD_BUCKET = Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, "kelp_ash_mud_bucket"),
+        KELP_ASH_MUD_BUCKET = Registry.register(Registries.ITEM, id("kelp_ash_mud_bucket"),
             new BucketItem(STILL_KELP_ASH_MUD, new FabricItemSettings().recipeRemainder(Items.BUCKET).maxCount(1)));
 
         //AUTOGENERATION LABEL DO NOT TOUCH
@@ -471,65 +413,65 @@ public class ModFluids {
 
         //cauldron fluid content registrations (need to be done after everything else fluid-related)
         //https://maven.fabricmc.net/docs/fabric-api-0.88.2+1.20.2/net/fabricmc/fabric/api/transfer/v1/fluid/CauldronFluidContent.html
-        MACERATING_SOY_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "macerating_soy_cauldron"), new MaceratingSoyCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
-        REDOX_REACTION_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "redox_reaction_cauldron"), new RedoxReactionCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
-        ANDROSTADIENEDIONE_EXTRACTION_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "androstadienedione_extraction_cauldron"), new AndrostadienedioneExtractionCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
-        YEAST_STARTER_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "yeast_starter_cauldron"), new YeastStarterCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
-        YEAST_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "yeast_cauldron"), new YeastCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
-        HYDROCHLORIC_ACID_SYNTHESIS_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "hydrochloric_acid_synthesis_cauldron"), new HydrochloricAcidSynthesisCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
-        ESTRONE_RECRYSTALLIZATION_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "estrone_recrystallization_cauldron"), new EstroneRecrystallizationCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
-        ESTRONE_REDUCTION_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "estrone_reduction_cauldron"), new EstroneReductionCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
-        HYDROGEN_GENERATOR_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "hydrogen_generator_cauldron"), new HydrogenGeneratorCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
-        ESTRADIOL_RECRYSTALLIZATION_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "estradiol_recrystallization_cauldron"), new EstradiolRecrystallizationCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
-        EGEL_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "egel_cauldron"), new EgelCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
-        THICK_POTION_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "thick_potion_cauldron"), new ThickPotionCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
+        MACERATING_SOY_CAULDRON = Registry.register(Registries.BLOCK, id("macerating_soy_cauldron"), new MaceratingSoyCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
+        REDOX_REACTION_CAULDRON = Registry.register(Registries.BLOCK, id("redox_reaction_cauldron"), new RedoxReactionCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
+        ANDROSTADIENEDIONE_EXTRACTION_CAULDRON = Registry.register(Registries.BLOCK, id("androstadienedione_extraction_cauldron"), new AndrostadienedioneExtractionCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
+        YEAST_STARTER_CAULDRON = Registry.register(Registries.BLOCK, id("yeast_starter_cauldron"), new YeastStarterCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
+        YEAST_CAULDRON = Registry.register(Registries.BLOCK, id("yeast_cauldron"), new YeastCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
+        HYDROCHLORIC_ACID_SYNTHESIS_CAULDRON = Registry.register(Registries.BLOCK, id("hydrochloric_acid_synthesis_cauldron"), new HydrochloricAcidSynthesisCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
+        ESTRONE_RECRYSTALLIZATION_CAULDRON = Registry.register(Registries.BLOCK, id("estrone_recrystallization_cauldron"), new EstroneRecrystallizationCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
+        ESTRONE_REDUCTION_CAULDRON = Registry.register(Registries.BLOCK, id("estrone_reduction_cauldron"), new EstroneReductionCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
+        HYDROGEN_GENERATOR_CAULDRON = Registry.register(Registries.BLOCK, id("hydrogen_generator_cauldron"), new HydrogenGeneratorCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
+        ESTRADIOL_RECRYSTALLIZATION_CAULDRON = Registry.register(Registries.BLOCK, id("estradiol_recrystallization_cauldron"), new EstradiolRecrystallizationCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
+        EGEL_CAULDRON = Registry.register(Registries.BLOCK, id("egel_cauldron"), new EgelCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
+        THICK_POTION_CAULDRON = Registry.register(Registries.BLOCK, id("thick_potion_cauldron"), new ThickPotionCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
         //TODO: find a way to make it bind to create's thick potion fluid *variant*. it's NOT a fluid. it's a VARIANT. and that makes it annoying.
         //that would call for ditching CauldronFluidContent entirely. since it only supports fluids.
 
         //for the fluids that go in cauldrons, instead of cauldron alone
-        COPPER_SULFATE_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "copper_sulfate_cauldron"), new CopperSulfateCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
+        COPPER_SULFATE_CAULDRON = Registry.register(Registries.BLOCK, id("copper_sulfate_cauldron"), new CopperSulfateCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
         CauldronFluidContent.registerCauldron(COPPER_SULFATE_CAULDRON, STILL_COPPER_SULFATE, FluidConstants.BUCKET, null);
-        NICKEL_SULFATE_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "nickel_sulfate_cauldron"), new NickelSulfateCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
+        NICKEL_SULFATE_CAULDRON = Registry.register(Registries.BLOCK, id("nickel_sulfate_cauldron"), new NickelSulfateCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
         CauldronFluidContent.registerCauldron(NICKEL_SULFATE_CAULDRON, STILL_NICKEL_SULFATE, FluidConstants.BUCKET, null);
-        ET32_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "ethanol32_cauldron"), new Et32CauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
+        ET32_CAULDRON = Registry.register(Registries.BLOCK, id("ethanol32_cauldron"), new Et32CauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
         CauldronFluidContent.registerCauldron(ET32_CAULDRON, STILL_ET32, FluidConstants.BOTTLE, Et32CauldronBlock.LEVEL);
-        ET64_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "ethanol64_cauldron"), new Et64CauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
+        ET64_CAULDRON = Registry.register(Registries.BLOCK, id("ethanol64_cauldron"), new Et64CauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
         CauldronFluidContent.registerCauldron(ET64_CAULDRON, STILL_ET64, FluidConstants.BOTTLE, Et64CauldronBlock.LEVEL);
-        ET95_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "ethanol95_cauldron"), new Et95CauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
+        ET95_CAULDRON = Registry.register(Registries.BLOCK, id("ethanol95_cauldron"), new Et95CauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
         CauldronFluidContent.registerCauldron(ET95_CAULDRON, STILL_ET95, FluidConstants.BOTTLE, Et95CauldronBlock.LEVEL);
-        STEROL_SOLUTION_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "sterol_solution_cauldron"), new SterolSolutionCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
+        STEROL_SOLUTION_CAULDRON = Registry.register(Registries.BLOCK, id("sterol_solution_cauldron"), new SterolSolutionCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
         CauldronFluidContent.registerCauldron(STEROL_SOLUTION_CAULDRON, STILL_STEROL_SOLUTION, FluidConstants.BUCKET, null);
-        ANDROSTADIENEDIONE_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "androstadienedione_solution_cauldron"), new AndrostadienedioneCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
+        ANDROSTADIENEDIONE_CAULDRON = Registry.register(Registries.BLOCK, id("androstadienedione_solution_cauldron"), new AndrostadienedioneCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
         CauldronFluidContent.registerCauldron(ANDROSTADIENEDIONE_CAULDRON, STILL_ANDROSTADIENEDIONE, FluidConstants.BOTTLE, AndrostadienedioneCauldronBlock.LEVEL);
-        TAR_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "tar_cauldron"), new TarCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
+        TAR_CAULDRON = Registry.register(Registries.BLOCK, id("tar_cauldron"), new TarCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
         CauldronFluidContent.registerCauldron(TAR_CAULDRON, STILL_TAR, FluidConstants.BUCKET, null);
-        BEER_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "beer_cauldron"), new BeerCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
+        BEER_CAULDRON = Registry.register(Registries.BLOCK, id("beer_cauldron"), new BeerCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
         CauldronFluidContent.registerCauldron(BEER_CAULDRON, STILL_BEER, FluidConstants.BOTTLE, BeerCauldronBlock.LEVEL);
-        NETHER_BEER_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "nether_beer_cauldron"), new NetherBeerCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
+        NETHER_BEER_CAULDRON = Registry.register(Registries.BLOCK, id("nether_beer_cauldron"), new NetherBeerCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
         CauldronFluidContent.registerCauldron(NETHER_BEER_CAULDRON, STILL_NETHER_BEER, FluidConstants.BOTTLE, NetherBeerCauldronBlock.LEVEL);
-        SLUDGE_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "sludge_cauldron"), new SludgeCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
+        SLUDGE_CAULDRON = Registry.register(Registries.BLOCK, id("sludge_cauldron"), new SludgeCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
         CauldronFluidContent.registerCauldron(SLUDGE_CAULDRON, STILL_SLUDGE, FluidConstants.BUCKET, null);
-        ANDROSTADIENEDIONE_OIL_SOLUTION_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "androstadienedione_oil_solution_cauldron"), new AndrostadienedioneOilSolutionCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
+        ANDROSTADIENEDIONE_OIL_SOLUTION_CAULDRON = Registry.register(Registries.BLOCK, id("androstadienedione_oil_solution_cauldron"), new AndrostadienedioneOilSolutionCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
         CauldronFluidContent.registerCauldron(ANDROSTADIENEDIONE_OIL_SOLUTION_CAULDRON, STILL_ANDROSTADIENEDIONE_OIL_SOLUTION, FluidConstants.BOTTLE, AndrostadienedioneOilSolutionCauldronBlock.LEVEL);
-        COAL_OIL_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "coal_oil_cauldron"), new CoalOilCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
+        COAL_OIL_CAULDRON = Registry.register(Registries.BLOCK, id("coal_oil_cauldron"), new CoalOilCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
         CauldronFluidContent.registerCauldron(COAL_OIL_CAULDRON, STILL_COAL_OIL, FluidConstants.BOTTLE, CoalOilCauldronBlock.LEVEL);
-        ESTRONE_OIL_SOLUTION_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "estrone_oil_solution_cauldron"), new EstroneOilSolutionCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
+        ESTRONE_OIL_SOLUTION_CAULDRON = Registry.register(Registries.BLOCK, id("estrone_oil_solution_cauldron"), new EstroneOilSolutionCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
         CauldronFluidContent.registerCauldron(ESTRONE_OIL_SOLUTION_CAULDRON, STILL_ESTRONE_OIL_SOLUTION, FluidConstants.BUCKET, null);
-        LYE_WATER_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "lye_water_cauldron"), new LyeWaterCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
+        LYE_WATER_CAULDRON = Registry.register(Registries.BLOCK, id("lye_water_cauldron"), new LyeWaterCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
         CauldronFluidContent.registerCauldron(LYE_WATER_CAULDRON, STILL_LYE_WATER, FluidConstants.BUCKET, null);
-        CAUSTIC_SODA_SOLUTION_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "caustic_soda_solution_cauldron"), new CausticSodaSolutionCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
+        CAUSTIC_SODA_SOLUTION_CAULDRON = Registry.register(Registries.BLOCK, id("caustic_soda_solution_cauldron"), new CausticSodaSolutionCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON).ticksRandomly()));
         CauldronFluidContent.registerCauldron(CAUSTIC_SODA_SOLUTION_CAULDRON, STILL_CAUSTIC_SODA_SOLUTION, FluidConstants.BUCKET, null);
-        CAUSTIC_SODA_CAKE_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "caustic_soda_cake_cauldron"), new CausticSodaCakeCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
+        CAUSTIC_SODA_CAKE_CAULDRON = Registry.register(Registries.BLOCK, id("caustic_soda_cake_cauldron"), new CausticSodaCakeCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
         CauldronFluidContent.registerCauldron(CAUSTIC_SODA_CAKE_CAULDRON, STILL_CAUSTIC_SODA_CAKE, FluidConstants.BUCKET, null);
-        CONCENTRATED_CAUSTIC_SODA_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "concentrated_caustic_soda_solution_cauldron"), new ConcentratedCausticSodaCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
+        CONCENTRATED_CAUSTIC_SODA_CAULDRON = Registry.register(Registries.BLOCK, id("concentrated_caustic_soda_solution_cauldron"), new ConcentratedCausticSodaCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
         CauldronFluidContent.registerCauldron(CONCENTRATED_CAUSTIC_SODA_CAULDRON, STILL_CONCENTRATED_CAUSTIC_SODA, FluidConstants.BOTTLE, ConcentratedCausticSodaCauldronBlock.LEVEL);
-        SULFURIC_ACID_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "sulfuric_acid_cauldron"), new SulfuricAcidCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
+        SULFURIC_ACID_CAULDRON = Registry.register(Registries.BLOCK, id("sulfuric_acid_cauldron"), new SulfuricAcidCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
         CauldronFluidContent.registerCauldron(SULFURIC_ACID_CAULDRON, STILL_SULFURIC_ACID, FluidConstants.BUCKET, null);
-        IMPURE_DILUTE_SULFURIC_ACID_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "impure_dilute_sulfuric_acid_cauldron"), new ImpureDiluteSulfuricAcidCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
+        IMPURE_DILUTE_SULFURIC_ACID_CAULDRON = Registry.register(Registries.BLOCK, id("impure_dilute_sulfuric_acid_cauldron"), new ImpureDiluteSulfuricAcidCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
         CauldronFluidContent.registerCauldron(IMPURE_DILUTE_SULFURIC_ACID_CAULDRON, STILL_IMPURE_DILUTE_SULFURIC_ACID, FluidConstants.BUCKET, null);
-        HYDROCHLORIC_ACID_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "hydrochloric_acid_cauldron"), new HydrochloricAcidCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
+        HYDROCHLORIC_ACID_CAULDRON = Registry.register(Registries.BLOCK, id("hydrochloric_acid_cauldron"), new HydrochloricAcidCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
         CauldronFluidContent.registerCauldron(HYDROCHLORIC_ACID_CAULDRON, STILL_HYDROCHLORIC_ACID, FluidConstants.BUCKET, null);
-        KELP_ASH_MUD_CAULDRON = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "kelp_ash_mud_cauldron"), new KelpAshMudCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
+        KELP_ASH_MUD_CAULDRON = Registry.register(Registries.BLOCK, id("kelp_ash_mud_cauldron"), new KelpAshMudCauldronBlock(FabricBlockSettings.copyOf(Blocks.CAULDRON)));
         CauldronFluidContent.registerCauldron(KELP_ASH_MUD_CAULDRON, STILL_KELP_ASH_MUD, FluidConstants.BUCKET, null);
         //AUTOGENERATION LABEL DO NOT TOUCH
 

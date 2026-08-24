@@ -1,12 +1,6 @@
 package com.breakingfemme;
 
-import java.io.BufferedReader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import com.mojang.serialization.Codec;
-
 import net.fabricmc.fabric.api.attachment.v1.AttachmentRegistry;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentType;
 import net.minecraft.entity.passive.VillagerEntity;
@@ -15,19 +9,26 @@ import net.minecraft.resource.ResourceManager;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
+import java.io.BufferedReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static com.breakingfemme.BreakingFemme.id;
+
 public class VillagerAttachments {
     public static final AttachmentType<Boolean> IS_TRANSFEM = AttachmentRegistry.createPersistent( //is villager transfem?
-        Identifier.of(BreakingFemme.MOD_ID, "is_transfem"), Codec.BOOL);
+            id("is_transfem"), Codec.BOOL);
     public static final AttachmentType<Boolean> IS_NAMEFLUID = AttachmentRegistry.createPersistent( //is villager namefluid? (changes name every once in a while)
-        Identifier.of(BreakingFemme.MOD_ID, "is_namefluid"), Codec.BOOL);
+            id("is_namefluid"), Codec.BOOL);
     
     //TODO: add villagers that turn into the agents from the matrix and try to kill you
  
     public static final AttachmentType<String> NAME = AttachmentRegistry.createPersistent( //custom name of the villager (if it doesnt exist, it doesnt have one)
-        Identifier.of(BreakingFemme.MOD_ID, "name"), Codec.STRING);
+            id("name"), Codec.STRING);
 
 
-    static final Identifier NAMES_PATH = Identifier.of(BreakingFemme.MOD_ID, "names.txt"); //in assets folder
+    static final Identifier NAMES_PATH = id("names.txt"); //in assets folder
     static ArrayList<String> NAMES;
 
     //if i dont do this, attachments wont exist before a villager gets ticked, i.e. during deserialization of the world
@@ -65,7 +66,7 @@ public class VillagerAttachments {
             }
         } catch (Throwable error) {
             error.printStackTrace();
-            BreakingFemme.LOGGER.error("ERROR: was unable to load data file " + NAMES_PATH.toString());
+            BreakingFemme.LOGGER.error("ERROR: was unable to load data file " + NAMES_PATH);
             NAMES = (ArrayList<String>)List.of("NO AVAILABLE NAMES");
         }
     }

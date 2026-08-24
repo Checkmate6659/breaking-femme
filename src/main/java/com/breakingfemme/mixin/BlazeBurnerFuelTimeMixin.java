@@ -1,16 +1,15 @@
 package com.breakingfemme.mixin;
 
+import com.breakingfemme.ModFluids;
+import com.breakingfemme.ModItems;
+import com.llamalad7.mixinextras.sugar.Local;
+import com.simibubi.create.content.processing.burner.BlazeBurnerBlockEntity;
+import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
-import com.breakingfemme.ModFluids;
-import com.breakingfemme.ModItems;
-import com.breakingfemme.datagen.ModItemTagProvider;
-import com.llamalad7.mixinextras.sugar.Local;
-import com.simibubi.create.content.processing.burner.BlazeBurnerBlockEntity;
-
-import net.minecraft.item.ItemStack;
+import static com.breakingfemme.ModTags.Item.BLAZE_BURNER_FUEL_CUSTOM;
 
 //if create mod is not loaded, just fail harmlessly
 //btw using IMixinConfigPlugin does NOT work. it will try to locate the class anyway and fail the same way.
@@ -22,7 +21,7 @@ public class BlazeBurnerFuelTimeMixin {
     @ModifyConstant(method = "tryUpdateFuel", constant = @Constant(intValue = 1600))
     private int breakingfemme$giveCustomFuelValues(int value, @Local ItemStack itemStack) {
         //if not in this tag, switch all these checks (to speed up stuff)
-        if(itemStack.isIn(ModItemTagProvider.BLAZE_BURNER_FUEL_CUSTOM))
+        if (itemStack.isIn(BLAZE_BURNER_FUEL_CUSTOM))
         {
             if(itemStack.isOf(ModItems.CRUDE_ESTRONE)) return 4800;
             if(itemStack.isOf(ModItems.PURE_ESTRONE)) return 6400;

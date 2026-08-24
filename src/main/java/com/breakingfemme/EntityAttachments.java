@@ -4,13 +4,14 @@ import com.mojang.serialization.Codec;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentRegistry;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentType;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 
 import java.util.function.Predicate;
+
+import static com.breakingfemme.BreakingFemme.id;
+import static com.breakingfemme.ModTags.Entity.ESTROGENABLE;
+
+@SuppressWarnings("UnstableApiUsage")
 public class EntityAttachments {
     public static final class IsEstrogennablePredicate implements Predicate<Entity> {
 
@@ -20,12 +21,12 @@ public class EntityAttachments {
         }
     }
     public static final int MAX_ESTRO_PROGRESS = 1728000; //this really is the amount of time the entity needs to transition: 1 irl day, i.e. ... 72 mc days. oh yeah that's quick!
+    @SuppressWarnings("Nullable")
     public static final AttachmentType<Integer> ESTRO_PROGRESS = AttachmentRegistry.createPersistent( //basically like number of doses of estrogen
-            Identifier.of(BreakingFemme.MOD_ID, "estro_progress"), Codec.intRange(0, MAX_ESTRO_PROGRESS));
+            id("estro_progress"), Codec.intRange(0, MAX_ESTRO_PROGRESS));
     public static final AttachmentType<Long> ESTRO_NEED_TIME = AttachmentRegistry.createPersistent( //age when needing estrogen again
-            Identifier.of(BreakingFemme.MOD_ID, "estro_need_time"), Codec.LONG);
+            id("estro_need_time"), Codec.LONG);
 
-    public static final TagKey<EntityType<?>> ESTROGENABLE = TagKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(BreakingFemme.MOD_ID,"estrogenable"));
     public static int getTransitionTime(Entity entity)
     {
         // will never transition

@@ -19,17 +19,21 @@
 			"com.breakingfemme.BreakingFemme"
 		],
 		"client": [
-			"com.breakingfemme.BreakingFemmeClient"
+			"com.breakingfemme.client.BreakingFemmeClient"
 		],
 		"fabric-datagen": [
-			"com.breakingfemme.BreakingFemmeDataGenerator"
+			"com.breakingfemme.datagen.BreakingFemmeDataGenerator"
 		],
 		"rei_client": [
-			"com.breakingfemme.compat.BreakingFemmeREICompatPlugin"
+			"com.breakingfemme.client.compat.rei.BreakingFemmeREICompatPlugin"
 		]
 	},
 	"mixins": [
-		"breakingfemme.mixins.json"
+		"breakingfemme.mixins.json",
+		{
+			"config": "breakingfemme.client.mixins.json",
+			"environment": "client"
+		}
 	],
 	"accessWidener" : "breakingfemme.classtweaker",
 	"depends": {

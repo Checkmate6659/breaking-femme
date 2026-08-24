@@ -1,20 +1,12 @@
 package com.breakingfemme.block.entity;
 
-import java.util.Optional;
-
-import com.breakingfemme.BreakingFemme;
-import com.breakingfemme.ModBlockEntities;
-import com.breakingfemme.ModBlocks;
-import com.breakingfemme.ModFluids;
-import com.breakingfemme.ThermalUtil;
+import com.breakingfemme.*;
 import com.breakingfemme.block.FermenterControllerBlock;
 import com.breakingfemme.block.FermenterHeaterBlock;
 import com.breakingfemme.block.FermenterMixerBlock;
 import com.breakingfemme.block.FermenterPanelBlock;
-import com.breakingfemme.datagen.ModBlockTagProvider;
 import com.breakingfemme.recipe.FermentingRecipe;
 import com.breakingfemme.screen.FermenterScreenHandler;
-
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -38,6 +30,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Direction.Axis;
 import net.minecraft.world.World;
+
+import java.util.Optional;
 
 public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory, ImplementedInventory { //could be transitioned to SimpleInventory for less hassle/not have an extra class?
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(8, ItemStack.EMPTY);
@@ -250,7 +244,7 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
         int bottom = Integer.MAX_VALUE;
         for(int i = 0; i < 3; i++)
         {
-            if(world.getBlockState(insidePos.offset(Axis.Y, i)).isIn(ModBlockTagProvider.FERMENTER_TOP_PANEL))
+            if (world.getBlockState(insidePos.offset(Axis.Y, i)).isIn(ModTags.Block.FERMENTER_TOP_PANEL))
             {
                 top = insidePos.getY() + i;
                 break;
@@ -258,7 +252,7 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
         }
         for(int i = 0; i < 3; i++)
         {
-            if(world.getBlockState(insidePos.offset(Axis.Y, -i)).isIn(ModBlockTagProvider.FERMENTER_BOTTOM_PANEL))
+            if (world.getBlockState(insidePos.offset(Axis.Y, -i)).isIn(ModTags.Block.FERMENTER_BOTTOM_PANEL))
             {
                 bottom = insidePos.getY() - i;
                 break;
@@ -275,7 +269,7 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
         int minusz = Integer.MAX_VALUE;
         for(int i = 1; i < 4; i++)
         {
-            if(world.getBlockState(insidePos.offset(Axis.X, i)).isIn(ModBlockTagProvider.FERMENTER_SIDE_PANEL))
+            if (world.getBlockState(insidePos.offset(Axis.X, i)).isIn(ModTags.Block.FERMENTER_SIDE_PANEL))
             {
                 plusx = insidePos.getX() + i;
                 break;
@@ -283,7 +277,7 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
         }
         for(int i = 1; i < 4; i++)
         {
-            if(world.getBlockState(insidePos.offset(Axis.X, -i)).isIn(ModBlockTagProvider.FERMENTER_SIDE_PANEL))
+            if (world.getBlockState(insidePos.offset(Axis.X, -i)).isIn(ModTags.Block.FERMENTER_SIDE_PANEL))
             {
                 minusx = insidePos.getX() - i;
                 break;
@@ -291,7 +285,7 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
         }
         for(int i = 1; i < 4; i++)
         {
-            if(world.getBlockState(insidePos.offset(Axis.Z, i)).isIn(ModBlockTagProvider.FERMENTER_SIDE_PANEL))
+            if (world.getBlockState(insidePos.offset(Axis.Z, i)).isIn(ModTags.Block.FERMENTER_SIDE_PANEL))
             {
                 plusz = insidePos.getZ() + i;
                 break;
@@ -299,7 +293,7 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
         }
         for(int i = 1; i < 4; i++)
         {
-            if(world.getBlockState(insidePos.offset(Axis.Z, -i)).isIn(ModBlockTagProvider.FERMENTER_SIDE_PANEL))
+            if (world.getBlockState(insidePos.offset(Axis.Z, -i)).isIn(ModTags.Block.FERMENTER_SIDE_PANEL))
             {
                 minusz = insidePos.getZ() - i;
                 break;
@@ -315,20 +309,20 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
             for(int z = minusz + 1; z < plusz; z++)
             {
                 //check top
-                if(!world.getBlockState(new BlockPos(x, top, z)).isIn(ModBlockTagProvider.FERMENTER_TOP_PANEL))
+                if (!world.getBlockState(new BlockPos(x, top, z)).isIn(ModTags.Block.FERMENTER_TOP_PANEL))
                     return;
 
                 BlockState bottom_state = world.getBlockState(new BlockPos(x, bottom, z));
-                if(!bottom_state.isIn(ModBlockTagProvider.FERMENTER_BOTTOM_PANEL))
+                if (!bottom_state.isIn(ModTags.Block.FERMENTER_BOTTOM_PANEL))
                     return;
                 //counting heaters and checking if there's an active mixer
-                else if(bottom_state.isIn(ModBlockTagProvider.FERMENTER_HEATER) && safeGetBooleanProperty(bottom_state, FermenterHeaterBlock.POWERED))
+                else if (bottom_state.isIn(ModTags.Block.FERMENTER_HEATER) && safeGetBooleanProperty(bottom_state, FermenterHeaterBlock.POWERED))
                     n_heaters++;
-                else if(!is_mixing && bottom_state.isIn(ModBlockTagProvider.FERMENTER_MIXER) && safeGetBooleanProperty(bottom_state, FermenterMixerBlock.POWERED))
+                else if (!is_mixing && bottom_state.isIn(ModTags.Block.FERMENTER_MIXER) && safeGetBooleanProperty(bottom_state, FermenterMixerBlock.POWERED))
                     is_mixing = true;
 
                 //check airlock
-                if(world.getBlockState(new BlockPos(x, top + 1, z)).isIn(ModBlockTagProvider.FERMENTER_AIRLOCK))
+                if (world.getBlockState(new BlockPos(x, top + 1, z)).isIn(ModTags.Block.FERMENTER_AIRLOCK))
                     no_airlock = false;
             }
         if(no_airlock) return;
@@ -340,10 +334,10 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
             {
                 //check east (panels must be facing east!) and west
                 BlockState east_state = world.getBlockState(new BlockPos(plusx, y, z));
-                if(!east_state.isIn(ModBlockTagProvider.FERMENTER_SIDE_PANEL) || !safeCheckDirectionProperty(east_state, FermenterPanelBlock.FACING, Direction.EAST))
+                if (!east_state.isIn(ModTags.Block.FERMENTER_SIDE_PANEL) || !safeCheckDirectionProperty(east_state, FermenterPanelBlock.FACING, Direction.EAST))
                     return;
                 BlockState west_state = world.getBlockState(new BlockPos(minusx, y, z));
-                if(!west_state.isIn(ModBlockTagProvider.FERMENTER_SIDE_PANEL) || !safeCheckDirectionProperty(west_state, FermenterPanelBlock.FACING, Direction.WEST))
+                if (!west_state.isIn(ModTags.Block.FERMENTER_SIDE_PANEL) || !safeCheckDirectionProperty(west_state, FermenterPanelBlock.FACING, Direction.WEST))
                     return;
 
                 //controller block uniqueness
@@ -357,10 +351,10 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
             for(int x = minusx + 1; x < plusx; x++)
             {
                 BlockState south_state = world.getBlockState(new BlockPos(x, y, plusz));
-                if(!south_state.isIn(ModBlockTagProvider.FERMENTER_SIDE_PANEL) || !safeCheckDirectionProperty(south_state, FermenterPanelBlock.FACING, Direction.SOUTH))
+                if (!south_state.isIn(ModTags.Block.FERMENTER_SIDE_PANEL) || !safeCheckDirectionProperty(south_state, FermenterPanelBlock.FACING, Direction.SOUTH))
                     return;
                 BlockState north_state = world.getBlockState(new BlockPos(x, y, minusz));
-                if(!north_state.isIn(ModBlockTagProvider.FERMENTER_SIDE_PANEL) || !safeCheckDirectionProperty(north_state, FermenterPanelBlock.FACING, Direction.NORTH))
+                if (!north_state.isIn(ModTags.Block.FERMENTER_SIDE_PANEL) || !safeCheckDirectionProperty(north_state, FermenterPanelBlock.FACING, Direction.NORTH))
                     return;
 
                 //controller block uniqueness
@@ -380,8 +374,8 @@ public class FermenterBlockEntity extends BlockEntity implements ExtendedScreenH
 
         //step 5: compute variables from this state
         int height = top - bottom + 1;
-        int widthx = (int)(plusx - minusx - 1);
-        int widthy = (int)(plusz - minusz - 1);
+        int widthx = plusx - minusx - 1;
+        int widthy = plusz - minusz - 1;
         volume = height * widthx * widthy; //whats inside should be an integer due to the checks before
         surface_area = 2 * (height * widthx + height * widthy + widthx * widthy); //is there a way to factor this expression? yes its equal to (sum of dimensions)^2 - sum of (dimensions^2) wait why is it the same formula as the variance for probability distributions. can you do cool stuff with this? also this same formula is found somewhere when using characters, like the decomposition of the tensor product of characters of dimension >1 iirc, but i cant find it right now.
         conductivity = surface_area * 0.91f; //in W / K; coef should be *0.91

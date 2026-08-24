@@ -40,6 +40,7 @@ import net.minecraft.village.VillagerProfession;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.PlacedFeature;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,15 +51,15 @@ public class BreakingFemme implements ModInitializer {
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
 	//register nickel and ruby ore generation
-	public static final RegistryKey<PlacedFeature> NICKEL_ORE_PLACED_FEATURE = RegistryKey.of(RegistryKeys.PLACED_FEATURE, Identifier.of(MOD_ID, "ore_nickel"));
-	public static final RegistryKey<PlacedFeature> RUBY_ORE_PLACED_FEATURE = RegistryKey.of(RegistryKeys.PLACED_FEATURE, Identifier.of(MOD_ID, "ore_ruby"));
-	public static final RegistryKey<PlacedFeature> ROCK_SALT_PLACED_FEATURE = RegistryKey.of(RegistryKeys.PLACED_FEATURE, Identifier.of(MOD_ID, "ore_rock_salt"));
+	public static final RegistryKey<PlacedFeature> NICKEL_ORE_PLACED_FEATURE = RegistryKey.of(RegistryKeys.PLACED_FEATURE, id("ore_nickel"));
+	public static final RegistryKey<PlacedFeature> RUBY_ORE_PLACED_FEATURE = RegistryKey.of(RegistryKeys.PLACED_FEATURE, id("ore_ruby"));
+	public static final RegistryKey<PlacedFeature> ROCK_SALT_PLACED_FEATURE = RegistryKey.of(RegistryKeys.PLACED_FEATURE, id("ore_rock_salt"));
 
 	//register damage types
-	public static final RegistryKey<DamageType> NOVIKOV = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, new Identifier(BreakingFemme.MOD_ID, "novikov"));
-	public static final RegistryKey<DamageType> DISTRACTION = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, new Identifier(BreakingFemme.MOD_ID, "distraction"));
-	public static final RegistryKey<DamageType> HEADACHE = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, new Identifier(BreakingFemme.MOD_ID, "headache"));
-	public static final RegistryKey<DamageType> CORROSION = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, new Identifier(BreakingFemme.MOD_ID, "corrosion"));
+	public static final RegistryKey<DamageType> NOVIKOV = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, id("novikov"));
+	public static final RegistryKey<DamageType> DISTRACTION = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, id("distraction"));
+	public static final RegistryKey<DamageType> HEADACHE = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, id("headache"));
+	public static final RegistryKey<DamageType> CORROSION = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, id("corrosion"));
 
 	//register particles
 	// This DefaultParticleType gets called when you want to use your particle in code.
@@ -84,10 +85,9 @@ public class BreakingFemme implements ModInitializer {
 		EntityAttachments.registerAttachments();
 		VillagerAttachments.registerAttachments();
 		ModNetworking.registerC2SPackets();
-		ModNetworking.registerS2CPackets();
-		
+
 		//add flexibility enchantment
-		Registry.register(Registries.ENCHANTMENT, new Identifier(BreakingFemme.MOD_ID, "flexibility"), new FlexibilityEnchantment(Rarity.UNCOMMON, EquipmentSlot.CHEST));
+		Registry.register(Registries.ENCHANTMENT, id("flexibility"), new FlexibilityEnchantment(Rarity.UNCOMMON, EquipmentSlot.CHEST));
 
 		//Register kinetics command (shows levels of different chemicals in the player)
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> KineticsCommand.register(dispatcher));
@@ -220,5 +220,18 @@ public class BreakingFemme implements ModInitializer {
 			if(world.getRandom().nextInt(4) != 0 && world.isAir(target)) //theres some randomness added... why? idk.
 				world.setBlockState(target, fluid.getFlowing().getDefaultState().with(FlowableFluid.LEVEL, world.getRandom().nextBoolean() ? level : 8).getBlockState());
 		}
+	}
+
+	/**
+	 * returns a proper id with the namespace of this mod.
+	 *
+	 * @param path the path to be added after the mod id so modid:path
+	 * @return an {@link Identifier} with this mod's id.
+	 */
+	public static @NotNull Identifier id(String path) {
+		var id = Identifier.of(MOD_ID, path);
+		if (id == null) throw
+				new NullPointerException("id was invalid whilst attempting to create it with the path '%s'".formatted(path));
+		return id;
 	}
 }

@@ -1,6 +1,5 @@
 package com.breakingfemme.criterions;
 
-import com.breakingfemme.BreakingFemme;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import net.minecraft.advancement.criterion.AbstractCriterion;
@@ -16,8 +15,10 @@ import net.minecraft.util.JsonHelper;
 
 import java.util.Objects;
 
+import static com.breakingfemme.BreakingFemme.id;
+
 public class FormedValidMultiblockCriterion extends AbstractCriterion<FormedValidMultiblockCriterion.Conditions> {
-    static final Identifier ID = Identifier.of(BreakingFemme.MOD_ID, "formed_valid_multiblock");
+    static final Identifier ID = id("formed_valid_multiblock");
 
     @Override
     protected FormedValidMultiblockCriterion.Conditions conditionsFromJson(JsonObject obj, LootContextPredicate playerPredicate, AdvancementEntityPredicateDeserializer predicateDeserializer) {

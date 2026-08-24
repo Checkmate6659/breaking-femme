@@ -1,11 +1,11 @@
 package com.breakingfemme;
 
-import com.breakingfemme.datagen.ModItemTagProvider;
-
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
+
+import static com.breakingfemme.ModTags.Item.ALREADY_FLEXIBLE;
 
 public class FlexibilityEnchantment extends Enchantment {
     public FlexibilityEnchantment(Rarity weight, EquipmentSlot... slotTypes)
@@ -30,6 +30,6 @@ public class FlexibilityEnchantment extends Enchantment {
 
 	@Override
 	public boolean isAcceptableItem(ItemStack stack) {
-		return !stack.isIn(ModItemTagProvider.ALREADY_FLEXIBLE) && super.isAcceptableItem(stack);
+		return !stack.isIn(ALREADY_FLEXIBLE) && super.isAcceptableItem(stack);
 	}
 }

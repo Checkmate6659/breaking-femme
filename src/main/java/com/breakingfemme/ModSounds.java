@@ -5,9 +5,11 @@ import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 
+import static com.breakingfemme.BreakingFemme.id;
+
 public class ModSounds {
     private static SoundEvent registerSound(String id) {
-		Identifier identifier = Identifier.of(BreakingFemme.MOD_ID, id);
+		Identifier identifier = id(id);
 		return Registry.register(Registries.SOUND_EVENT, identifier, SoundEvent.of(identifier));
 	}
 

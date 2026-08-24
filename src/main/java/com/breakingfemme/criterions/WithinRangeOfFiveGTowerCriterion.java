@@ -1,6 +1,5 @@
 package com.breakingfemme.criterions;
 
-import com.breakingfemme.BreakingFemme;
 import com.google.gson.JsonObject;
 import net.minecraft.advancement.criterion.AbstractCriterion;
 import net.minecraft.advancement.criterion.AbstractCriterionConditions;
@@ -9,8 +8,10 @@ import net.minecraft.predicate.entity.LootContextPredicate;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 
+import static com.breakingfemme.BreakingFemme.id;
+
 public class WithinRangeOfFiveGTowerCriterion extends AbstractCriterion<WithinRangeOfFiveGTowerCriterion.Conditions> {
-    static final Identifier ID = Identifier.of(BreakingFemme.MOD_ID, "within_range_of_five_g_tower");
+    static final Identifier ID = id("within_range_of_five_g_tower");
 
     @Override
     protected Conditions conditionsFromJson(JsonObject obj, LootContextPredicate playerPredicate, AdvancementEntityPredicateDeserializer predicateDeserializer) {

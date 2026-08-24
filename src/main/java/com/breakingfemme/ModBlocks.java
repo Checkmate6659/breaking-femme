@@ -1,7 +1,6 @@
 package com.breakingfemme;
 
 import com.breakingfemme.block.*;
-
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
@@ -12,7 +11,8 @@ import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.item.BlockItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.util.Identifier;
+
+import static com.breakingfemme.BreakingFemme.id;
 
 public class ModBlocks {
     public static final Block NICKEL_ORE = registerBlock("nickel_ore", new Block(FabricBlockSettings.copyOf(Blocks.IRON_ORE)));
@@ -23,8 +23,8 @@ public class ModBlocks {
     public static final Block RUBY_BLOCK = registerBlock("ruby_block", new Block(FabricBlockSettings.copyOf(Blocks.EMERALD_BLOCK)));
     public static final Block PARTIALLY_REDUCED_RUBY_BLOCK = registerBlock("partially_reduced_ruby_block", new Block(FabricBlockSettings.copyOf(Blocks.EMERALD_BLOCK)));
     public static final Block ROCK_SALT_BLOCK = registerBlock("rock_salt_block", new Block(FabricBlockSettings.copyOf(Blocks.CALCITE)));
-    public static final Block SOY_CROP = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "soy"), new SoyCropBlock(FabricBlockSettings.copyOf(Blocks.WHEAT)));
-    public static final Block CHILI_CROP = Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, "chili_pepper"), new ChiliCropBlock(FabricBlockSettings.copyOf(Blocks.WHEAT)));
+    public static final Block SOY_CROP = Registry.register(Registries.BLOCK, id("soy"), new SoyCropBlock(FabricBlockSettings.copyOf(Blocks.WHEAT)));
+    public static final Block CHILI_CROP = Registry.register(Registries.BLOCK, id("chili_pepper"), new ChiliCropBlock(FabricBlockSettings.copyOf(Blocks.WHEAT)));
     public static final Block MILK_SEPARATOR = registerBlock("milk_separator", new MilkSeparatorBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).pistonBehavior(PistonBehavior.BLOCK).ticksRandomly()));
     public static final Block KELP_ASH_BLOCK = registerBlock("kelp_ash_block", new KelpAshBlock(FabricBlockSettings.copyOf(Blocks.SAND).mapColor(MapColor.DARK_GREEN)));
     public static final Block LIMESTONE_CHUNKS = registerBlock("limestone_chunks", new SandBlock(MapColor.PALE_YELLOW.color, FabricBlockSettings.copyOf(Blocks.SAND).mapColor(MapColor.PALE_YELLOW)));
@@ -56,15 +56,15 @@ public class ModBlocks {
     //register block and item
     private static final Block registerBlock(String name, Block block)
     {
-        Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, name), new BlockItem(block, new FabricItemSettings()));
-        return Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, name), block);
+        Registry.register(Registries.ITEM, id(name), new BlockItem(block, new FabricItemSettings()));
+        return Registry.register(Registries.BLOCK, id(name), block);
     }
 
     //register block and item but the item is fireproof. repeat code but kinda dont want param bloat
     private static final Block registerBlockFireproof(String name, Block block)
     {
-        Registry.register(Registries.ITEM, new Identifier(BreakingFemme.MOD_ID, name), new BlockItem(block, new FabricItemSettings().fireproof()));
-        return Registry.register(Registries.BLOCK, new Identifier(BreakingFemme.MOD_ID, name), block);
+        Registry.register(Registries.ITEM, id(name), new BlockItem(block, new FabricItemSettings().fireproof()));
+        return Registry.register(Registries.BLOCK, id(name), block);
     }
 
     public static void registerModBlocks()

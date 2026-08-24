@@ -1,0 +1,154 @@
+package com.breakingfemme.datagen.providers;
+
+import com.breakingfemme.ModBlocks;
+import com.breakingfemme.ModFluids;
+import com.breakingfemme.ModItems;
+import com.breakingfemme.block.FiveGTowerControllerBlock;
+import com.breakingfemme.block.SoyCropBlock;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
+import net.minecraft.data.client.*;
+
+import static com.breakingfemme.BreakingFemme.id;
+import static net.minecraft.data.client.BlockStateModelGenerator.createNorthDefaultHorizontalRotationStates;
+
+public class ModModelProvider extends FabricModelProvider {
+
+    public ModModelProvider(FabricDataOutput output) {
+        super(output);
+    }
+
+    @Override
+    public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
+        blockStateModelGenerator.registerCrop(ModBlocks.SOY_CROP, SoyCropBlock.AGE, 0, 1, 2, 3);
+        blockStateModelGenerator.registerCrop(ModBlocks.CHILI_CROP, SoyCropBlock.AGE, 0, 1, 2, 3);
+
+        blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.NICKEL_BLOCK);
+        blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.NICKEL_ORE);
+        blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.DEEPSLATE_NICKEL_ORE);
+        blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.RUBY_BLOCK);
+        blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.PARTIALLY_REDUCED_RUBY_BLOCK);
+        blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.RUBY_ORE);
+        blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.DEEPSLATE_RUBY_ORE);
+
+        blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.KELP_ASH_BLOCK);
+        blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.LIMESTONE_CHUNKS);
+        blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.QUICKLIME);
+        blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.SLAKED_LIME);
+        blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.ROCK_SALT_BLOCK);
+        blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.FIRE_BRICKS);
+
+        blockStateModelGenerator.registerNorthDefaultHorizontalRotation(ModBlocks.FIVE_G_TOWER_HEAD);
+        blockStateModelGenerator.registerAxisRotated(ModBlocks.FIVE_G_SCAFFOLDING, id("block/5gtower_scaffolding"));
+//        blockStateModelGenerator.registerNorthDefaultHorizontalRotation(ModBlocks.FIVE_G_TOWER_CONTROLLER);
+        blockStateModelGenerator.blockStateCollector.accept(
+                VariantsBlockStateSupplier.create(ModBlocks.FIVE_G_TOWER_CONTROLLER)
+                        .coordinate(BlockStateVariantMap.create(FiveGTowerControllerBlock.WORKING)
+                                .register(false, BlockStateVariant.create().put(VariantSettings.MODEL, ModelIds.getBlockModelId(ModBlocks.FIVE_G_TOWER_CONTROLLER)))
+                                .register(true, BlockStateVariant.create().put(VariantSettings.MODEL, ModelIds.getBlockSubModelId(ModBlocks.FIVE_G_TOWER_CONTROLLER, "_on"))))
+                        .coordinate(createNorthDefaultHorizontalRotationStates())
+
+
+        );
+        //registering fermenter panels by hand, because they are unlike any vanilla blocks
+        //cauldrons need to be handmade apparently
+    }
+
+    @Override
+    public void generateItemModels(ItemModelGenerator itemModelGenerator) {
+        //regular items
+        itemModelGenerator.register(ModItems.ACT_RIGHT_MUSIC_DISC, Models.GENERATED);
+        itemModelGenerator.register(ModItems.CHILI_PEPPER, Models.GENERATED);
+        itemModelGenerator.register(ModItems.DRIED_CHILI_PEPPER, Models.GENERATED);
+        itemModelGenerator.register(ModItems.RUBY, Models.GENERATED);
+        itemModelGenerator.register(ModItems.RAW_NICKEL, Models.GENERATED);
+        itemModelGenerator.register(ModItems.NICKEL_INGOT, Models.GENERATED);
+        itemModelGenerator.register(ModItems.PULVERIZED_IRON, Models.GENERATED);
+        itemModelGenerator.register(ModItems.PULVERIZED_COPPER, Models.GENERATED);
+        itemModelGenerator.register(ModItems.PULVERIZED_NICKEL, Models.GENERATED);
+        itemModelGenerator.register(ModItems.PULVERIZED_ALUMINUM, Models.GENERATED);
+        itemModelGenerator.register(ModItems.ALUMINUM_SCRAP, Models.GENERATED);
+        itemModelGenerator.register(ModItems.NI_AL_BLEND, Models.GENERATED);
+        itemModelGenerator.register(ModItems.NI_AL_INGOT, Models.GENERATED);
+        itemModelGenerator.register(ModItems.PULVERIZED_NI_AL, Models.GENERATED);
+        itemModelGenerator.register(ModItems.RANEY_NICKEL, Models.GENERATED);
+        itemModelGenerator.register(ModItems.COPPER_SULFATE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.NICKEL_SULFATE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.STEROLS, Models.GENERATED);
+        itemModelGenerator.register(ModItems.CRUDE_ESTRONE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.PURE_ESTRONE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.CRUDE_ESTRADIOL, Models.GENERATED);
+        itemModelGenerator.register(ModItems.PURE_ESTRADIOL_CRYSTALS, Models.GENERATED);
+        itemModelGenerator.register(ModItems.PURE_ESTRADIOL_POWDER, Models.GENERATED);
+        itemModelGenerator.register(ModItems.HORSE_JUICE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.BEER_BOTTLE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.NETHER_BEER_BOTTLE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.ET32_BOTTLE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.ET64_BOTTLE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.ET95_BOTTLE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.COAL_OIL_BOTTLE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.ANDROSTADIENEDIONE_BOTTLE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.ANDROSTADIENEDIONE_OIL_BOTTLE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.IRON_BP_BLEND, Models.GENERATED);
+        itemModelGenerator.register(ModItems.IRON_SULFIDE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.ROCK_SALT, Models.GENERATED);
+        itemModelGenerator.register(ModItems.INGOT_MOLD, Models.GENERATED);
+        itemModelGenerator.register(ModItems.SKIMMED_MILK_BUCKET, Models.GENERATED);
+        itemModelGenerator.register(ModItems.MILKGOT_MOLD, Models.GENERATED);
+        itemModelGenerator.register(ModItems.MILKGOT, Models.GENERATED);
+        itemModelGenerator.register(ModItems.SMP, Models.GENERATED);
+        itemModelGenerator.register(ModItems.CREAMGOT_MOLD, Models.GENERATED);
+        itemModelGenerator.register(ModItems.CREAMGOT, Models.GENERATED);
+        itemModelGenerator.register(ModItems.MORTAR_PESTLE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.FLOUR, Models.GENERATED);
+        itemModelGenerator.register(ModItems.YEAST, Models.GENERATED);
+        itemModelGenerator.register(ModItems.DOUGH, Models.GENERATED);
+        itemModelGenerator.register(ModItems.SAWDUST, Models.GENERATED);
+        itemModelGenerator.register(ModItems.UNFIRED_CERAMIC_FILTER, Models.GENERATED);
+        itemModelGenerator.register(ModItems.CERAMIC_FILTER, Models.GENERATED);
+        itemModelGenerator.register(ModItems.TAR, Models.GENERATED);
+        itemModelGenerator.register(ModItems.KELP_ASH, Models.GENERATED);
+        itemModelGenerator.register(ModItems.LYE_WATER_BOTTLE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.CONCENTRATED_CAUSTIC_SODA_BOTTLE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.MASHED_POTATOES, Models.GENERATED);
+        itemModelGenerator.register(ModItems.DRIED_MASHED_POTATOES, Models.GENERATED);
+        itemModelGenerator.register(ModItems.ROUGH_ESTRO_POTATO_BLEND, Models.GENERATED);
+        itemModelGenerator.register(ModItems.FINE_ESTRO_POTATO_BLEND, Models.GENERATED);
+        itemModelGenerator.register(ModItems.ESTROGEN_PILL, Models.GENERATED);
+        itemModelGenerator.register(ModItems.EGEL_BOTTLE, Models.GENERATED);
+
+        //buckets
+        itemModelGenerator.register(ModFluids.COPPER_SULFATE_BUCKET, Models.GENERATED);
+        itemModelGenerator.register(ModFluids.NICKEL_SULFATE_BUCKET, Models.GENERATED);
+        itemModelGenerator.register(ModFluids.ET32_BUCKET, Models.GENERATED);
+        itemModelGenerator.register(ModFluids.ET64_BUCKET, Models.GENERATED);
+        itemModelGenerator.register(ModFluids.ET95_BUCKET, Models.GENERATED);
+        itemModelGenerator.register(ModFluids.STEROL_SOLUTION_BUCKET, Models.GENERATED);
+        itemModelGenerator.register(ModFluids.ANDROSTADIENEDIONE_BUCKET, Models.GENERATED);
+        itemModelGenerator.register(ModFluids.TAR_BUCKET, Models.GENERATED);
+        itemModelGenerator.register(ModFluids.BEER_BUCKET, Models.GENERATED);
+        itemModelGenerator.register(ModFluids.NETHER_BEER_BUCKET, Models.GENERATED);
+        itemModelGenerator.register(ModFluids.SLUDGE_BUCKET, Models.GENERATED);
+        itemModelGenerator.register(ModFluids.ANDROSTADIENEDIONE_OIL_SOLUTION_BUCKET, Models.GENERATED);
+        itemModelGenerator.register(ModFluids.COAL_OIL_BUCKET, Models.GENERATED);
+        itemModelGenerator.register(ModFluids.ESTRONE_OIL_SOLUTION_BUCKET, Models.GENERATED);
+        itemModelGenerator.register(ModFluids.LYE_WATER_BUCKET, Models.GENERATED);
+        itemModelGenerator.register(ModFluids.CAUSTIC_SODA_SOLUTION_BUCKET, Models.GENERATED);
+        itemModelGenerator.register(ModFluids.CAUSTIC_SODA_CAKE_BUCKET, Models.GENERATED);
+        itemModelGenerator.register(ModFluids.CONCENTRATED_CAUSTIC_SODA_BUCKET, Models.GENERATED);
+        itemModelGenerator.register(ModFluids.SULFURIC_ACID_BUCKET, Models.GENERATED);
+        itemModelGenerator.register(ModFluids.IMPURE_DILUTE_SULFURIC_ACID_BUCKET, Models.GENERATED);
+        itemModelGenerator.register(ModFluids.HYDROCHLORIC_ACID_BUCKET, Models.GENERATED);
+        itemModelGenerator.register(ModFluids.KELP_ASH_MUD_BUCKET, Models.GENERATED);
+        //AUTOGENERATION LABEL DO NOT TOUCH
+
+
+        //fermenter and funnel
+        itemModelGenerator.register(ModBlocks.FERMENTER_PANEL.asItem(), Models.GENERATED);
+        itemModelGenerator.register(ModBlocks.FERMENTER_TOP.asItem(), Models.GENERATED);
+        itemModelGenerator.register(ModBlocks.FERMENTER_BOTTOM.asItem(), Models.GENERATED);
+        itemModelGenerator.register(ModBlocks.FERMENTER_CONTROLLER.asItem(), Models.GENERATED);
+        itemModelGenerator.register(ModBlocks.FERMENTER_AIRLOCK.asItem(), Models.GENERATED);
+        itemModelGenerator.register(ModBlocks.FUNNEL.asItem(), Models.GENERATED);
+    }
+}

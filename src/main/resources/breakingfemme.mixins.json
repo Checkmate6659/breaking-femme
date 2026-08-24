@@ -15,30 +15,6 @@
 		"VillagerAssignMixin",
 		"VillagerPickupMixin"
 	],
-	"client": [
-		"AdvancementTabMixin",
-		"GuideBookMixin",
-		"JustShutUpMixin",
-		"PleaseShutUpMixin",
-		"PostEffectPassAccessor",
-		"ScreenShakeMixin",
-		"StaggeringMixin",
-		"StaggeringSneakMixin",
-
-		"AllayFeaturesMixin",
-		"BipedFeaturesMixin",
-		"CreeperFeaturesMixin",
-		"DummyFeaturesMixin",
-		"DrownedFeaturesMixin",
-		"EnderwomanFeaturesMixin",
-		"IllagerFeaturesMixin",
-		"IronGolemFeaturesMixin",
-		"SkeletonFeaturesMixin",
-		"SnowGolemFeaturesMixin",
-		"VillagerFeaturesMixin",
-		"WardenFeaturesMixin",
-		"ZombieVillagerFeaturesMixin"
-	],
 	"injectors": {
 		"defaultRequire": 1
 	},

@@ -1,16 +1,8 @@
 package com.breakingfemme.mixin;
 
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import com.breakingfemme.datagen.ModFluidTagProvider;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
@@ -18,6 +10,13 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.registry.tag.TagKey;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import static com.breakingfemme.ModTags.Fluid.WATER_LIKE;
 
 @Mixin(Entity.class)
 public class CustomFluidTagsMixin {
@@ -25,20 +24,20 @@ public class CustomFluidTagsMixin {
     private void breakingfemme$addCustomFluidMovement(CallbackInfoReturnable<Boolean> cir)
     {
         if(!cir.getReturnValue())
-            cir.setReturnValue(((Entity)(Object)this).updateMovementInFluid(ModFluidTagProvider.WATER_LIKE, 0.014)); //same speed as water
+            cir.setReturnValue(((Entity) (Object) this).updateMovementInFluid(WATER_LIKE, 0.014)); //same speed as water
     }
 
     //this one does the flowing!!
     @WrapOperation(method = "getVelocityMultiplier", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/BlockState;isOf(Lnet/minecraft/block/Block;)Z"))
     private boolean breakingfemme$isWaterLikeVSM(BlockState state, Block block, Operation<Boolean> original)
     {
-        return state.getFluidState().isIn(ModFluidTagProvider.WATER_LIKE) || original.call(state, block);
+        return state.getFluidState().isIn(WATER_LIKE) || original.call(state, block);
     }
 
     @WrapOperation(method = "Lnet/minecraft/entity/Entity;updateSwimming()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/fluid/FluidState;isIn(Lnet/minecraft/registry/tag/TagKey;)Z"))
     private boolean breakingfemme$isWaterLikeSwim(FluidState state, TagKey<Fluid> tag, Operation<Boolean> original)
     {
-        return state.isIn(ModFluidTagProvider.WATER_LIKE) || original.call(state, tag);
+        return state.isIn(WATER_LIKE) || original.call(state, tag);
     }
 
     //this method would put out fires, so we need another mixin
@@ -46,7 +45,7 @@ public class CustomFluidTagsMixin {
     private boolean breakingfemme$isWaterLikeWSt(Entity entity, TagKey<Fluid> tag, double d, Operation<Boolean> original)
     {
         //this way, if the original call would have interacted with a fluid, it doesn't process WATER_LIKE
-        return original.call(entity, tag, d) || original.call(entity, ModFluidTagProvider.WATER_LIKE, d);
+        return original.call(entity, tag, d) || original.call(entity, WATER_LIKE, d);
     }
 
     //introducing
@@ -70,6 +69,6 @@ public class CustomFluidTagsMixin {
     private boolean breakingfemme$isWaterLikeSub(Entity entity, TagKey<Fluid> tag, Operation<Boolean> original)
     {
         //this way, if the original call would have detected submerged in a fluid (water, or not if other mods installed), it still works
-        return original.call(entity, tag) || original.call(entity, ModFluidTagProvider.WATER_LIKE);
+        return original.call(entity, tag) || original.call(entity, WATER_LIKE);
     }
 }

@@ -1,18 +1,17 @@
 package com.breakingfemme;
 
-import com.breakingfemme.datagen.ModBlockTagProvider;
 
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.registry.tag.BiomeTags;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.tag.BiomeTags;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.Pair;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import net.minecraft.world.Heightmap.Type;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.densityfunction.DensityFunction;
 
@@ -42,8 +41,8 @@ public class ThermalUtil {
     
     public static boolean isBlockHot(BlockState state)
     {
-		return state.isIn(ModBlockTagProvider.HOT) || state.isIn(ModBlockTagProvider.CREATE_HOT) ||
-			(state.isIn(ModBlockTagProvider.FURNACE) && state.get(Properties.LIT));
+        return state.isIn(ModTags.Block.HOT) || state.isIn(ModTags.Block.CREATE_HOT) ||
+                (state.isIn(ModTags.Block.FURNACE) && state.get(Properties.LIT));
     }
 
     //basically, is the block in the hot category or is it a lit furnace
@@ -77,7 +76,7 @@ public class ThermalUtil {
 
                     if(j > 0) continue;  //only count cold up to level of the cauldron, not blocks above
 
-                    if(nstate.isIn(ModBlockTagProvider.COLD)) //cold blocks
+                    if (nstate.isIn(ModTags.Block.COLD)) //cold blocks
                         cold_count -= 8 >> (i*i + j*j + k*k); //4 for neighbors, 2 for touching edge, 1 for touching corner
                     else if(cold_biome && (nstate.getFluidState().isOf(Fluids.WATER) ||
                         (nstate.isOf(Blocks.WATER_CAULDRON) && (j != -1 || !isBlockHot(world, pos.add(i, j-1, k)))) //j != -1 because otherwise the previous check would catch the hot block.
@@ -160,7 +159,7 @@ public class ThermalUtil {
                 while(top_y > cpos.getY() && cur_coverage < coverage)
                 {
                     cpos = cpos.up();
-                    if(world.getBlockState(cpos).isIn(ModBlockTagProvider.STONES)) //count stone blocks in column
+                    if (world.getBlockState(cpos).isIn(ModTags.Block.STONES)) //count stone blocks in column
                         cur_coverage++;
                 }
 

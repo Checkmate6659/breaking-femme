@@ -7,5 +7,4 @@
 # These are Windows script files and should use crlf
 *.bat           text eol=crlf
 
-# json should use lf because that's what's already been comitted
-*.json text eol=lf
+*.json text eol=auto
