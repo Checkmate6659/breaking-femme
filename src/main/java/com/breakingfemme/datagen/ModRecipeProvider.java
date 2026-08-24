@@ -77,7 +77,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         offerSmelting(exporter, ImmutableList.of(ModItems.UNFIRED_CERAMIC_FILTER), RecipeCategory.TOOLS, ModItems.CERAMIC_FILTER, 0, 200, "ceramic_filter_fire");
 
         //fire bricks: same recipe as gregtech (not the most realistic... it would be cooler if we needed to manufacture high alumina cement etc)
-        Ingredient CLAY_INGREDIENT = Ingredient.ofEntries(Stream.of(new Ingredient.TagEntry(ModItemTagProvider.CLAY_DUST), new Ingredient.StackEntry(new ItemStack(Items.CLAY_BALL))));
+        Ingredient CLAY_INGREDIENT = Ingredient.fromTag(ModItemTagProvider.CLAY_DUST);
         ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.FIRE_BRICKS, 1).input('>', CLAY_INGREDIENT).input(':', ModItemTagProvider.BRICK).input('3', ModItemTagProvider.WATER_BUCKET).pattern(">:>").pattern(":3:").pattern(">:>").group("fire_bricks").criterion(hasItem(Items.BRICK), conditionsFromTag(ModItemTagProvider.BRICK)).offerTo(exporter);
 
         //bread dough, and cooking it to get bread

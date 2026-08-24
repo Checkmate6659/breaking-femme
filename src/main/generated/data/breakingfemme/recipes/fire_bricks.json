@@ -9,14 +9,9 @@
     ":": {
       "tag": "c:bricks/normal"
     },
-    ">": [
-      {
-        "tag": "c:dusts/clay"
-      },
-      {
-        "item": "minecraft:clay_ball"
-      }
-    ]
+    ">": {
+      "tag": "c:dusts/clay"
+    }
   },
   "pattern": [
     ">:>",

@@ -3,8 +3,6 @@ plugins {
 	id 'maven-publish'
 }
 
-version = project.mod_version
-group = project.maven_group
 
 base {
 	archivesName = project.archives_base_name
@@ -12,6 +10,9 @@ base {
 
 loom {
 	accessWidenerPath = file("src/main/resources/breakingfemme.classtweaker")
+	runConfigs.configureEach {
+		preferGradleTask = true
+	}
 }
 
 repositories {
@@ -86,10 +87,11 @@ dependencies {
 }
 
 processResources {
-	inputs.property "version", project.version
+	def version = project.version
+	inputs.property "version", version
 
 	filesMatching("fabric.mod.json") {
-		expand "version": inputs.properties.version
+		expand "version": version
 	}
 }
 
