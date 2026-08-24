@@ -80,12 +80,12 @@ fabricApi {
 
 		createSourceSet = true
 	}
+
 	tasks.named("processDatagenResources", ProcessResources) {
 
 		from(generateDataModJson.flatMap { it.outputFile })
 	}
 }
-
 dependencies {
 	// To change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
