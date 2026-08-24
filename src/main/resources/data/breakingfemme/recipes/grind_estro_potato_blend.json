@@ -1,0 +1,11 @@
+{
+    "type": "breakingfemme:grinding",
+    "input":
+    {
+        "item": "breakingfemme:rough_estrogen_potato_blend"
+    },
+    "output":
+    {
+        "item": "breakingfemme:fine_estrogen_potato_blend"
+    }
+}

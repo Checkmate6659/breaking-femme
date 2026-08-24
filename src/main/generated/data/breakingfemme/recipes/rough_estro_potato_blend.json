@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "rough_estro_potato_blend",
+  "ingredients": [
+    {
+      "item": "breakingfemme:pure_estradiol_powder"
+    },
+    {
+      "item": "breakingfemme:dried_mashed_potatoes"
+    },
+    {
+      "item": "breakingfemme:dried_mashed_potatoes"
+    },
+    {
+      "item": "breakingfemme:dried_mashed_potatoes"
+    },
+    {
+      "item": "breakingfemme:dried_mashed_potatoes"
+    }
+  ],
+  "result": {
+    "item": "breakingfemme:rough_estrogen_potato_blend"
+  }
+}

@@ -150,5 +150,11 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         //lime calcination
         offerSmelting(exporter, ImmutableList.of(ModBlocks.LIMESTONE_CHUNKS), RecipeCategory.MISC, ModBlocks.QUICKLIME, 0.0f, 200, "lime_smelt");
         offerBlasting(exporter, ImmutableList.of(ModBlocks.LIMESTONE_CHUNKS), RecipeCategory.MISC, ModBlocks.QUICKLIME, 0.0f, 100, "lime_blast");
+
+        //potatoes processing line
+        offerSmelting(exporter, ImmutableList.of(ModItems.MASHED_POTATOES), RecipeCategory.FOOD, ModItems.DRIED_MASHED_POTATOES, 0.15f, 200, "dried_mashed_potatoes_smelt");
+        offerFoodCookingRecipe(exporter, "smoking", RecipeSerializer.SMOKING, 100, ModItems.MASHED_POTATOES, ModItems.DRIED_MASHED_POTATOES, 0.15F);
+        offerFoodCookingRecipe(exporter, "campfire_cooking", RecipeSerializer.CAMPFIRE_COOKING, 600, ModItems.MASHED_POTATOES, ModItems.DRIED_MASHED_POTATOES, 0.15F);
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.ROUGH_ESTRO_POTATO_BLEND).input(ModItems.PURE_ESTRADIOL_POWDER).input(Ingredient.ofItems(ModItems.DRIED_MASHED_POTATOES), 4).group("rough_estro_potato_blend").criterion(hasItem(ModItems.PURE_ESTRADIOL_POWDER), conditionsFromItem(ModItems.PURE_ESTRADIOL_POWDER)).offerTo(exporter, "rough_estro_potato_blend");
     }
 }

@@ -97,7 +97,14 @@ public class ModItems {
     public static final Item LYE_WATER_BOTTLE = registerItem("lye_water_bottle", new LyeWaterBottleItem(new FabricItemSettings().maxCount(1).recipeRemainder(Items.GLASS_BOTTLE).food(new FoodComponent.Builder().hunger(0).saturationModifier(0f).alwaysEdible().build())));
     public static final Item CONCENTRATED_CAUSTIC_SODA_BOTTLE = registerItem("concentrated_caustic_soda_solution_bottle", new ConcentratedCausticSodaBottleItem(new FabricItemSettings().maxCount(1).recipeRemainder(Items.GLASS_BOTTLE).food(new FoodComponent.Builder().hunger(0).saturationModifier(0f).alwaysEdible().build())));
 
+    //Stuff that involves potatoes
+    public static final Item MASHED_POTATOES = registerItem("mashed_potatoes", new Item(new FabricItemSettings().food(FoodComponents.POTATO))); //can be eaten like ptatoes
+    public static final Item DRIED_MASHED_POTATOES = registerItem("dried_mashed_potatoes", new Item(new FabricItemSettings()));
+    public static final Item ROUGH_ESTRO_POTATO_BLEND = registerItem("rough_estrogen_potato_blend", new Item(new FabricItemSettings()));
+    public static final Item FINE_ESTRO_POTATO_BLEND = registerItem("fine_estrogen_potato_blend", new Item(new FabricItemSettings()));
+
     //Estrogens
+    public static final Item ESTROGEN_PILL = registerItem("estrogen_pill", new Item(new FabricItemSettings().food(new FoodComponent.Builder().hunger(0).saturationModifier(0f).alwaysEdible().snack().build()))); //TODO: custom pill item! to get an effect
     public static final Item EGEL_BOTTLE = registerItem("egel_bottle", new EgelItem(new FabricItemSettings().maxDamage(64)));
 
     private static Item registerItem(String name, Item item)
@@ -208,6 +215,10 @@ public class ModItems {
             entries.add(ModBlocks.DISTILLER_COLUMN);
             entries.add(ModBlocks.DISTILLER_TOP);
             entries.add(ModBlocks.FUNNEL);
+            entries.add(MASHED_POTATOES);
+            entries.add(DRIED_MASHED_POTATOES);
+            entries.add(ROUGH_ESTRO_POTATO_BLEND);
+            entries.add(FINE_ESTRO_POTATO_BLEND);
             entries.add(ModBlocks.FIVE_G_SCAFFOLDING);
             entries.add(ModBlocks.FIVE_G_TOWER_CONTROLLER);
             entries.add(ModBlocks.FIVE_G_TOWER_HEAD);
@@ -220,7 +231,7 @@ public class ModItems {
             entries.add(DRIED_CHILI_PEPPER);
             entries.add(GROUND_CHILI_PEPPER);
 
-            //TODO: add other estrogens
+            entries.add(ESTROGEN_PILL);
             entries.add(EGEL_BOTTLE);
 
             entries.add(ACT_RIGHT_MUSIC_DISC);

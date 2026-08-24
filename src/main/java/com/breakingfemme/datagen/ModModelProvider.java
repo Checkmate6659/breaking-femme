@@ -111,6 +111,11 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.KELP_ASH, Models.GENERATED);
         itemModelGenerator.register(ModItems.LYE_WATER_BOTTLE, Models.GENERATED);
         itemModelGenerator.register(ModItems.CONCENTRATED_CAUSTIC_SODA_BOTTLE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.MASHED_POTATOES, Models.GENERATED);
+        itemModelGenerator.register(ModItems.DRIED_MASHED_POTATOES, Models.GENERATED);
+        itemModelGenerator.register(ModItems.ROUGH_ESTRO_POTATO_BLEND, Models.GENERATED);
+        itemModelGenerator.register(ModItems.FINE_ESTRO_POTATO_BLEND, Models.GENERATED);
+        itemModelGenerator.register(ModItems.ESTROGEN_PILL, Models.GENERATED);
         itemModelGenerator.register(ModItems.EGEL_BOTTLE, Models.GENERATED);
 
         //buckets
