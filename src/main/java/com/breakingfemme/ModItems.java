@@ -208,9 +208,9 @@ public class ModItems {
             entries.add(ModBlocks.DISTILLER_COLUMN);
             entries.add(ModBlocks.DISTILLER_TOP);
             entries.add(ModBlocks.FUNNEL);
-                    entries.add(ModBlocks.FIVE_G_SCAFFOLDING);
-                    entries.add(ModBlocks.FIVE_G_TOWER_CONTROLLER);
-                    entries.add(ModBlocks.FIVE_G_TOWER_HEAD);
+            entries.add(ModBlocks.FIVE_G_SCAFFOLDING);
+            entries.add(ModBlocks.FIVE_G_TOWER_CONTROLLER);
+            entries.add(ModBlocks.FIVE_G_TOWER_HEAD);
             //AUTOGENERATION LABEL DO NOT TOUCH
 
 
