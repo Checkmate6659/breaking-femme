@@ -1,6 +1,8 @@
 package com.breakingfemme;
 
 import com.breakingfemme.block.entity.*;
+import com.breakingfemme.block.entity.press.PressBottomBlockEntity;
+import com.breakingfemme.block.entity.press.PressTopBlockEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.minecraft.block.entity.BlockEntityType;
@@ -31,6 +33,13 @@ public class ModBlockEntities {
             Registry.register(Registries.BLOCK_ENTITY_TYPE, id("funnel_be"),
         FabricBlockEntityTypeBuilder.create(FunnelBlockEntity::new, ModBlocks.FUNNEL).build());
 
+    public static final BlockEntityType<PressBottomBlockEntity> PRESS_BOTTOM_BLOCK_ENTITY = Registry
+            .register(Registries.BLOCK_ENTITY_TYPE, id("press_bottom_be"),
+                    FabricBlockEntityTypeBuilder.create(PressBottomBlockEntity::new, ModBlocks.PRESS_BOTTOM).build());
+
+    public static final BlockEntityType<PressTopBlockEntity> PRESS_TOP_BLOCK_ENTITY = Registry
+            .register(Registries.BLOCK_ENTITY_TYPE, id("press_top_be"),
+                    FabricBlockEntityTypeBuilder.create(PressTopBlockEntity::new, ModBlocks.PRESS_TOP).build());
     public static void registerBlockEntities() {
         FluidStorage.SIDED.registerForBlockEntity(DistillerBlockEntity::getFluidStorage, DISTILLER_BLOCK_ENTITY);
         FluidStorage.SIDED.registerForBlockEntity(DistillerTopBlockEntity::getFluidStorage, DISTILLER_TOP_BLOCK_ENTITY);

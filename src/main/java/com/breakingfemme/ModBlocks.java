@@ -1,6 +1,9 @@
 package com.breakingfemme;
 
 import com.breakingfemme.block.*;
+import com.breakingfemme.block.press.PressBottomBlock;
+import com.breakingfemme.block.press.PressHandleBlock;
+import com.breakingfemme.block.press.PressTopBlock;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
@@ -53,6 +56,11 @@ public class ModBlocks {
     public static final Block FIVE_G_TOWER_CONTROLLER = registerBlock("5gtower_controller", new FiveGTowerControllerBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
     public static final Block FIVE_G_SCAFFOLDING = registerBlock("5gtower_scaffolding", new FiveGTowerScaffolding(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
     public static final Block FIVE_G_TOWER_HEAD = registerBlock("5gtower_head", new FiveGTowerHead(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
+
+    // press blocks
+    public static final Block PRESS_BOTTOM = registerBlock("press_bottom", new PressBottomBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
+    public static final Block PRESS_TOP = registerBlock("press_top", new PressTopBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
+    public static final Block PRESS_CRANK = registerBlock("press_handle", new PressHandleBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
     //register block and item
     private static final Block registerBlock(String name, Block block)
     {

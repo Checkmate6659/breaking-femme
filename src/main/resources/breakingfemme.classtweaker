@@ -9,3 +9,5 @@ accessible method net/minecraft/recipe/Ingredient$TagEntry <init> (Lnet/minecraf
 # for some reason method became inaccessable with fabric updates
 accessible method net/minecraft/recipe/Ingredient ofEntries (Ljava/util/stream/Stream;)Lnet/minecraft/recipe/Ingredient;
 #extendable method net/minecraft/block/ConcretePowderBlock hardensIn
+
+accessible field net/minecraft/util/math/Direction HORIZONTAL [Lnet/minecraft/util/math/Direction;
