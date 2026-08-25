@@ -1,9 +1,6 @@
 package com.breakingfemme;
 
-import com.breakingfemme.recipe.DistillingRecipe;
-import com.breakingfemme.recipe.FermentingRecipe;
-import com.breakingfemme.recipe.FilteringRecipe;
-import com.breakingfemme.recipe.GrindingRecipe;
+import com.breakingfemme.recipe.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 
@@ -28,5 +25,9 @@ public class ModRecipes {
         //filtering
         Registry.register(Registries.RECIPE_SERIALIZER, id(FilteringRecipe.Serializer.ID), FilteringRecipe.Serializer.INSTANCE);
         Registry.register(Registries.RECIPE_TYPE, id(FilteringRecipe.Type.ID), FilteringRecipe.Type.INSTANCE);
+
+        //pressing
+        Registry.register(Registries.RECIPE_SERIALIZER, id(PressingRecipe.Serializer.ID), PressingRecipe.Serializer.INSTANCE);
+        Registry.register(Registries.RECIPE_TYPE, id(PressingRecipe.Type.ID), PressingRecipe.Type.INSTANCE);
     }
 }
