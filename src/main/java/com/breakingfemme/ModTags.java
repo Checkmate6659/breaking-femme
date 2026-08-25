@@ -1,5 +1,6 @@
 package com.breakingfemme;
 
+import com.breakingfemme.registries.press.PressHead;
 import net.minecraft.entity.EntityType;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
@@ -145,6 +146,14 @@ public class ModTags {
          * Tag for entities which can be affected by estrogen
          */
         public static final TagKey<EntityType<?>> ESTROGENABLE = TagKey.of(RegistryKeys.ENTITY_TYPE, id("estrogenable"));
+    }
+
+    public static class Press {
+        public static final TagKey<PressHead> Pressable = null;
+
+        private static final TagKey<PressHead> create(Identifier id) {
+            return TagKey.of(ModRegistries.Keys.PRESS_HEAD_KEY, id);
+        }
     }
 
 }

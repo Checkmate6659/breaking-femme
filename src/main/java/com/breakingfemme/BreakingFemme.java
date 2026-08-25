@@ -72,6 +72,8 @@ public class BreakingFemme implements ModInitializer {
 		// Proceed with mild caution.
 
 		LOGGER.info("Jesse I'm trans! We gotta cook estrogen!");
+		ModRegistries.init();
+		ModPresses.register();
 		ModTags.init();
 		ModCriterions.registerAll();
 		ModItems.registerModItems();
