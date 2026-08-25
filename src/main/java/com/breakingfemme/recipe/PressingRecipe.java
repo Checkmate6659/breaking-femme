@@ -1,21 +1,57 @@
 package com.breakingfemme.recipe;
 
+import com.breakingfemme.ModRegistries;
+import com.breakingfemme.registries.press.PressHead;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.*;
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
+import java.util.function.Predicate;
 
 public class PressingRecipe implements Recipe<PressingRecipe.Input> {
+
+    public static class PressHeadIngredient implements Predicate<PressHead> {
+        private @Nullable TagKey<PressHead> tag = null;
+        public static final Codec<PressHead> codec = RecordCodecBuilder.create(i -> i.group(
+                RegistryKey.createCodec(ModRegistries.Keys.PRESS_HEAD_KEY).optionalFieldOf("press"),
+                TagKey.codec(ModRegistries.Keys.PRESS_HEAD_KEY).optionalFieldOf("tag")
+        ));
+
+        public PressHeadIngredient(@Nullable TagKey<PressHead> tag, @Nullable PressHead press) {
+            this.tag = tag;
+            this.press = press;
+        }
+
+        private @Nullable PressHead press = null;
+
+        public PressHeadIngredient(@Nullable TagKey<PressHead> tag) {
+            this.tag = tag;
+        }
+
+        public PressHeadIngredient(@Nullable PressHead press) {
+            this.press = press;
+        }
+
+        @Override
+        public boolean test(PressHead head) {
+            return false;
+        }
+    }
     private final Ingredient inputItem;
     private final ItemStack resultItem;
     private final Identifier id;
