@@ -15,6 +15,8 @@ public class PressHandleBlock extends WallMountedBlock {
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         super.appendProperties(builder);
+        builder.add(FACING);
+        builder.add(FACE);
     }
 
     @Override
