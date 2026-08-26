@@ -52,15 +52,13 @@ public class PressTopBlockEntity extends BlockEntity implements SingleStackInven
     @Override
     protected void writeNbt(NbtCompound nbt) {
         super.readNbt(nbt);
-        NbtCompound compound = new NbtCompound();
-        getStack().writeNbt(compound);
-        nbt.put("head", compound);
+        Inventories.writeNbt(nbt, stacks);
     }
 
     @Override
     public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
-        setStack(ItemStack.fromNbt(nbt.getCompound("head")));
+        Inventories.readNbt(nbt, stacks);
     }
 
     @Override

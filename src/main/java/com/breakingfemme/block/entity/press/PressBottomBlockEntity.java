@@ -14,6 +14,7 @@ import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -143,6 +144,20 @@ public class PressBottomBlockEntity extends BlockEntity implements SidedInventor
     @Override
     public void clear() {
         this.slots.clear();
+    }
+
+
+    @Override
+    public void readNbt(NbtCompound nbt) {
+        super.readNbt(nbt);
+
+        Inventories.writeNbt(nbt, slots);
+    }
+
+    @Override
+    protected void writeNbt(NbtCompound nbt) {
+        super.writeNbt(nbt);
+        Inventories.readNbt(nbt, slots);
     }
 
     public @Nullable PressTopBlockEntity getTop() {
