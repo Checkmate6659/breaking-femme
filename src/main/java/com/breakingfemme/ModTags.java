@@ -14,6 +14,7 @@ public class ModTags {
         Item.init();
         Fluid.init();
         Entity.init();
+        Press.init();
     }
 
     private ModTags() {
@@ -149,7 +150,15 @@ public class ModTags {
     }
 
     public static class Press {
-        public static final TagKey<PressHead> Pressable = null;
+        public static final TagKey<PressHead> MASHES = create(id("mashes"));
+        public static final TagKey<PressHead> ENCASES_PILLS = create(id("encases_pills"));
+
+        private Press() {
+            throw new AssertionError();
+        }
+
+        public static void init() {
+        }
 
         private static final TagKey<PressHead> create(Identifier id) {
             return TagKey.of(ModRegistries.Keys.PRESS_HEAD_KEY, id);
