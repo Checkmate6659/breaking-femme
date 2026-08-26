@@ -13,7 +13,7 @@ public class BreakingFemmeDataGenerator implements DataGeneratorEntrypoint {
 	@Override
 	public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
 		FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
-
+		pack.addProvider(ModPressHeadTagProvider::new);
 		pack.addProvider(ModLanguageProvider::new);
 		pack.addProvider(ModEntityTagProvider::new);
 		pack.addProvider(ModBlockTagProvider::new);

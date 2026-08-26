@@ -1,0 +1,13 @@
+{
+  "type": "breakingfemme:pressing",
+  "category": "misc",
+  "head": {
+    "tag": "#breakingfemme:mashes"
+  },
+  "input": {
+    "item": "minecraft:potato"
+  },
+  "output": {
+    "item": "breakingfemme:mashed_potatoes"
+  }
+}

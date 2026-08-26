@@ -11,6 +11,8 @@ base {
 }
 
 loom {
+	// we should use blaze3d for our graphics.
+	runtimeOnlyLwjglGraphics = true
 	splitEnvironmentSourceSets()
 	runtimeOnlyLog4j = true
 	accessWidenerPath = file("src/main/resources/breakingfemme.classtweaker")

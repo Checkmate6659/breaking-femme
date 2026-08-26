@@ -4,6 +4,7 @@ import com.breakingfemme.ModBlocks;
 import com.breakingfemme.ModFluids;
 import com.breakingfemme.ModItems;
 import com.breakingfemme.ModTags;
+import com.breakingfemme.recipe.datagen.PressingRecipeJsonBuilder;
 import com.google.common.collect.ImmutableList;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
@@ -151,6 +152,11 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         offerBlasting(exporter, ImmutableList.of(ModBlocks.LIMESTONE_CHUNKS), RecipeCategory.MISC, ModBlocks.QUICKLIME, 0.0f, 100, "lime_blast");
 
         //potatoes processing line
+        new PressingRecipeJsonBuilder(RecipeCategory.MISC, ModItems.MASHED_POTATOES.getDefaultStack().copyWithCount(1))
+                .criterion(hasItem(Items.POTATO), conditionsFromItem(Items.POTATO))
+                .input(Items.POTATO)
+                .head(ModTags.Press.MASHES)
+                .offerTo(exporter);
         offerSmelting(exporter, ImmutableList.of(ModItems.MASHED_POTATOES), RecipeCategory.FOOD, ModItems.DRIED_MASHED_POTATOES, 0.15f, 200, "dried_mashed_potatoes_smelt");
         offerFoodCookingRecipe(exporter, "smoking", RecipeSerializer.SMOKING, 100, ModItems.MASHED_POTATOES, ModItems.DRIED_MASHED_POTATOES, 0.15F);
         offerFoodCookingRecipe(exporter, "campfire_cooking", RecipeSerializer.CAMPFIRE_COOKING, 600, ModItems.MASHED_POTATOES, ModItems.DRIED_MASHED_POTATOES, 0.15F);

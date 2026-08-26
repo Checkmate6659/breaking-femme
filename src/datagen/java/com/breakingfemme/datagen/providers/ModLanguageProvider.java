@@ -2,6 +2,7 @@ package com.breakingfemme.datagen.providers;
 
 import com.breakingfemme.ModBlocks;
 import com.breakingfemme.ModItems;
+import com.breakingfemme.ModPresses;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.fabricmc.loader.api.FabricLoader;
@@ -22,6 +23,8 @@ public class ModLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add(ModBlocks.FIVE_G_SCAFFOLDING, "5G Tower Scaffolding");
         translationBuilder.add(ModBlocks.FIVE_G_TOWER_HEAD, "5G Tower Transmitter");
         translationBuilder.add(Registries.ITEM_GROUP.getKey(ModItems.ITEM_GROUP).orElseThrow(), "Breaking Femme");
+        translationBuilder.add(ModPresses.MASHING_HEAD.asItem(), "Mashing Press Head");
+        translationBuilder.add(ModPresses.PILL_HEAD.asItem(), "Pill Press Head");
         translationBuilder.add("advancement.breakingfemme.five_g_affected.title", "Get 5Ged");
         translationBuilder.add("advancement.breakingfemme.five_g_affected.description", "Get affected by a 5G tower");
         translationBuilder.add("advancement.breakingfemme.five_g_built.title", "5G Online");
