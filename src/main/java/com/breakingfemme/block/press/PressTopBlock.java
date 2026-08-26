@@ -1,12 +1,24 @@
 package com.breakingfemme.block.press;
 
+import com.breakingfemme.ModBlockEntities;
 import com.breakingfemme.block.entity.press.PressTopBlockEntity;
+import com.breakingfemme.registries.press.PressHead;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.Inventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.ItemScatterer;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-
 public class PressTopBlock extends BlockWithEntity {
     public PressTopBlock(Settings settings) {
         super(settings);
@@ -15,5 +27,71 @@ public class PressTopBlock extends BlockWithEntity {
     @Override
     public @Nullable BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
         return new PressTopBlockEntity(pos, state);
+    }
+
+    @Override
+    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+        if (!state.isOf(newState.getBlock())) {
+            BlockEntity blockEntity = world.getBlockEntity(pos);
+            if (blockEntity instanceof Inventory inv) {
+                ItemScatterer.spawn(world, pos, inv);
+                world.updateComparators(pos, this);
+            }
+
+            super.onStateReplaced(state, world, pos, newState, moved);
+        }
+    }
+
+    @Override
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        var stack = player.getStackInHand(hand);
+        if (stack.isEmpty()) {
+            /// empty behavior
+            if (world instanceof ServerWorld server) {
+                var entity = server.getBlockEntity(pos, ModBlockEntities.PRESS_TOP_BLOCK_ENTITY).orElseThrow();
+                if (!entity.isEmpty()) {
+                    playRemoveSound(world, pos);
+                    player.setStackInHand(hand, entity.removeStack());
+                }
+            }
+            return ActionResult.success(world.isClient());
+        }
+        var head = PressHead.getPressHead(stack).orElse(null);
+        if (head != null) {
+            /// has a head behavior ,TLDR: if we don't have a head we just grab one head from the player's hand.
+            /// if we do have a head but the player is only holding one head we just swap them.
+            /// if we can combine the stacks we currently have with the one the player is holding then we just do that.
+            if (world instanceof ServerWorld server) {
+                var entity = server.getBlockEntity(pos, ModBlockEntities.PRESS_TOP_BLOCK_ENTITY).orElseThrow();
+                if (entity.isEmpty()) {
+                    player.setStackInHand(hand, stack.copyWithCount(stack.getCount() - 1));
+                    entity.setStack(stack);
+                    playInsertSound(world, pos);
+                } else {
+                    if (ItemStack.canCombine(stack, entity.getStack()) && stack.getCount() < stack.getMaxCount()) {
+                        var removedStack = entity.removeStack(0, 1);
+                        player.getStackInHand(hand).increment(removedStack.getCount());
+                        playRemoveSound(world, pos);
+                    } else if (stack.getCount() == 1) {
+                        var removedStack = entity.removeStack();
+                        player.setStackInHand(hand, removedStack);
+                        entity.setStack(stack);
+                        playRemoveSound(world, pos);
+                        playInsertSound(world, pos);
+                    }
+                }
+            }
+
+            return ActionResult.success(world.isClient());
+        }
+        return super.onUse(state, world, pos, player, hand, hit);
+    }
+
+    private static void playInsertSound(World world, BlockPos pos) {
+        world.playSound(null, pos, SoundEvents.ITEM_BUNDLE_INSERT, SoundCategory.BLOCKS, 1.0f, 1.0f);
+    }
+
+    private static void playRemoveSound(World world, BlockPos pos) {
+        world.playSound(null, pos, SoundEvents.ITEM_BUNDLE_REMOVE_ONE, SoundCategory.BLOCKS, 1.0f, 1.0f);
     }
 }
