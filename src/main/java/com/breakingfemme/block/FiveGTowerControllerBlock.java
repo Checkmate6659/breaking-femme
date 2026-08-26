@@ -64,7 +64,7 @@ public class FiveGTowerControllerBlock extends BlockWithEntity {
         super.onPlaced(world, pos, state, placer, itemStack);
         if (world.isClient) return;
         if (placer instanceof ServerPlayerEntity entity) {
-            var potentialBlockEntity = world.getBlockEntity(pos, ModBlockEntities.FIVE_G_TOWER_BLOCK_ENTITY_BLOCK_ENTITY);
+            var potentialBlockEntity = world.getBlockEntity(pos, ModBlockEntities.FIVE_G_TOWER_BLOCK_ENTITY);
             if (potentialBlockEntity.isEmpty()) return;
             var blockEntity = potentialBlockEntity.get();
             blockEntity.placedBy = entity.getUuid();
@@ -80,7 +80,7 @@ public class FiveGTowerControllerBlock extends BlockWithEntity {
     @Override
     public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
         if (world.isClient) return null;
-        return checkType(type, ModBlockEntities.FIVE_G_TOWER_BLOCK_ENTITY_BLOCK_ENTITY,
+        return checkType(type, ModBlockEntities.FIVE_G_TOWER_BLOCK_ENTITY,
                 (world1, pos, state1, blockEntity) -> blockEntity.tick((ServerWorldAccess) world1, state));
     }
 }

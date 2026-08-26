@@ -29,7 +29,7 @@ public class FiveGTowerBlockEntity extends BlockEntity {
     private int last_checked = -1;
     private boolean valid = false;
     public FiveGTowerBlockEntity( BlockPos pos, BlockState state) {
-        super(ModBlockEntities.FIVE_G_TOWER_BLOCK_ENTITY_BLOCK_ENTITY, pos, state);
+        super(ModBlockEntities.FIVE_G_TOWER_BLOCK_ENTITY, pos, state);
         topPosition = pos;
     }
 

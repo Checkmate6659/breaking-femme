@@ -10,7 +10,7 @@ import net.minecraft.registry.Registry;
 import static com.breakingfemme.BreakingFemme.id;
 
 public class ModBlockEntities {
-    public static final BlockEntityType<FiveGTowerBlockEntity> FIVE_G_TOWER_BLOCK_ENTITY_BLOCK_ENTITY = Registry.register(
+    public static final BlockEntityType<FiveGTowerBlockEntity> FIVE_G_TOWER_BLOCK_ENTITY = Registry.register(
             Registries.BLOCK_ENTITY_TYPE, id("5gtower_be"),
             FabricBlockEntityTypeBuilder.create(FiveGTowerBlockEntity::new,ModBlocks.FIVE_G_TOWER_CONTROLLER).build()
     );

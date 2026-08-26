@@ -510,7 +510,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                 )
                 .parent(root)
                 .criterion("built_five5_tower",
-                        new FormedValidMultiblockCriterion.Conditions(LootContextPredicate.EMPTY, ModBlockEntities.FIVE_G_TOWER_BLOCK_ENTITY_BLOCK_ENTITY))
+                        new FormedValidMultiblockCriterion.Conditions(LootContextPredicate.EMPTY, ModBlockEntities.FIVE_G_TOWER_BLOCK_ENTITY))
                 .build(consumer, id("five_g_built")
                         .toString());
 
