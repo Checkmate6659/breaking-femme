@@ -1,9 +1,36 @@
 {
-	"parent": "block/block",
 	"texture_size": [32, 16],
 	"textures": {
 		"texture": "breakingfemme:block/press_top",
 		"particle": "breakingfemme:block/press_top"
+	},
+	"display": {
+		"thirdperson_righthand": {
+			"translation": [-0.00390625, 4, 0]
+		},
+		"thirdperson_lefthand": {
+			"translation": [-0.00390625, 4, 0]
+		},
+		"firstperson_righthand": {
+			"rotation": [15, 90, 0],
+			"translation": [0, 8, 1]
+		},
+		"firstperson_lefthand": {
+			"rotation": [15, 90, 0],
+			"translation": [0, 8, 1]
+		},
+		"ground": {
+			"rotation": [90, 0, 0],
+			"translation": [0, 0, 8]
+		},
+		"gui": {
+			"rotation": [43, -160, 30],
+			"translation": [3.25, 5, 0],
+			"scale": [0.9, 0.9, 0.9]
+		},
+		"fixed": {
+			"translation": [0, 8, 0]
+		}
 	},
 	"elements": [
 		{
