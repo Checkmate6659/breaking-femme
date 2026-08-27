@@ -180,6 +180,9 @@
     "block.breakingfemme.quicklime": "Quicklime",
     "block.breakingfemme.slaked_lime": "Slaked Lime",
     "block.breakingfemme.fire_bricks": "Fire Bricks",
+    "block.breakingfemme.press_bottom": "Press Base",
+    "block.breakingfemme.press_top": "Press Slide",
+    "block.breakingfemme.press_handle": "Press Handle",
 
     "block.breakingfemme.copper_sulfate_solution_block": "Copper Sulfate Solution",
     "block.breakingfemme.nickel_sulfate_solution_block": "Nickel Sulfate Solution",
