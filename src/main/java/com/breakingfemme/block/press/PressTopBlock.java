@@ -1,6 +1,7 @@
 package com.breakingfemme.block.press;
 
 import com.breakingfemme.ModBlockEntities;
+import com.breakingfemme.ModBlocks;
 import com.breakingfemme.block.entity.press.PressTopBlockEntity;
 
 import net.minecraft.block.Block;
@@ -8,12 +9,12 @@ import net.minecraft.block.BlockRenderType;
 import com.breakingfemme.registries.press.PressHead;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
-import net.minecraft.state.property.Properties;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.entity.player.PlayerEntity;
@@ -32,9 +33,12 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
+import net.minecraft.world.WorldView;
+
 import org.jetbrains.annotations.Nullable;
 public class PressTopBlock extends BlockWithEntity {
-    public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
+    public static final DirectionProperty FACING = PressBottomBlock.FACING; //must be strictly identical to the property of PressBottomBlock
 
     public PressTopBlock(Settings settings) {
         super(settings);
@@ -57,9 +61,22 @@ public class PressTopBlock extends BlockWithEntity {
     }
 
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        BlockState blockState = this.getDefaultState();
-        blockState = blockState.with(FACING, ctx.getHorizontalPlayerFacing().getOpposite());
-        return blockState;
+        BlockPos pos = ctx.getBlockPos();
+        WorldView world = ctx.getWorld();
+        BlockState bottom_state = world.getBlockState(pos.down());
+
+        if(!bottom_state.isOf(ModBlocks.PRESS_BOTTOM)) //shouldnt even be able to place it actually in this case. so whatever.
+            return this.getDefaultState();
+
+        return this.getDefaultState().with(FACING, bottom_state.get(FACING));
+    }
+
+    public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
+        return world.getBlockState(pos.down()).isOf(ModBlocks.PRESS_BOTTOM);
+    }
+
+    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+        return !state.canPlaceAt(world, pos) ? Blocks.AIR.getDefaultState() : super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
