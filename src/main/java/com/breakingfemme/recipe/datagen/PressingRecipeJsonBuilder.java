@@ -1,5 +1,6 @@
 package com.breakingfemme.recipe.datagen;
 
+import com.breakingfemme.recipe.PressHeadIngredient;
 import com.breakingfemme.recipe.PressingRecipe;
 import com.breakingfemme.registries.press.PressHead;
 import com.google.gson.JsonObject;
@@ -31,7 +32,7 @@ public class PressingRecipeJsonBuilder extends RecipeJsonBuilder implements Craf
     @Nullable
     private String group;
     private Ingredient input = null;
-    private PressingRecipe.PressHeadIngredient headInput = null;
+    private PressHeadIngredient headInput = null;
 
     public PressingRecipeJsonBuilder(RecipeCategory category, ItemStack stack) {
         this.output = stack.copy();
@@ -53,16 +54,16 @@ public class PressingRecipeJsonBuilder extends RecipeJsonBuilder implements Craf
     }
 
     public PressingRecipeJsonBuilder head(TagKey<PressHead> head) {
-        return this.head(new PressingRecipe.PressHeadIngredient(null, head));
+        return this.head(PressHeadIngredient.of(head));
     }
 
-    public PressingRecipeJsonBuilder head(PressingRecipe.PressHeadIngredient ingredient) {
+    public PressingRecipeJsonBuilder head(PressHeadIngredient ingredient) {
         this.headInput = ingredient;
         return this;
     }
 
     public PressingRecipeJsonBuilder head(PressHead head) {
-        return this.head(new PressingRecipe.PressHeadIngredient(head, null));
+        return this.head(PressHeadIngredient.of(head));
     }
 
     public PressingRecipeJsonBuilder criterion(String string, CriterionConditions criterionConditions) {
@@ -113,11 +114,11 @@ public class PressingRecipeJsonBuilder extends RecipeJsonBuilder implements Craf
         private final String group;
         private final ItemStack output;
         private final Ingredient input;
-        private final PressingRecipe.PressHeadIngredient headInput;
+        private final PressHeadIngredient headInput;
         private final Advancement.Builder advancementBuilder;
         private final Identifier advancementId;
 
-        protected PressingRecipeJsonProvider(CraftingRecipeCategory craftingCategory, Identifier recipeId, String group, ItemStack output, Ingredient input, PressingRecipe.PressHeadIngredient headInput, Advancement.Builder advancementBuilder, Identifier advancementId) {
+        protected PressingRecipeJsonProvider(CraftingRecipeCategory craftingCategory, Identifier recipeId, String group, ItemStack output, Ingredient input, PressHeadIngredient headInput, Advancement.Builder advancementBuilder, Identifier advancementId) {
             super(craftingCategory);
             this.recipeId = recipeId;
             this.group = group;

@@ -1,30 +1,25 @@
 package com.breakingfemme.recipe;
 
-import com.breakingfemme.BreakingFemme;
-import com.breakingfemme.ModRegistries;
 import com.breakingfemme.registries.press.PressHead;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-import com.mojang.datafixers.util.Either;
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.JsonOps;
-import com.mojang.serialization.codecs.EitherCodec;
-import net.minecraft.inventory.SimpleInventory;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.Inventory;
+import net.minecraft.inventory.RecipeInputInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.*;
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.registry.Registries;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
 import java.util.Map;
-import java.util.function.Predicate;
+import java.util.Optional;
 
 public class PressingRecipe implements Recipe<PressingRecipe.Input> {
 
@@ -47,7 +42,10 @@ public class PressingRecipe implements Recipe<PressingRecipe.Input> {
     @Override
     public boolean matches(Input inventory, World world) {
         if (inventory.isEmpty()) return false;
-        for (int i = 0; i < inventory.size(); i++) if (inputItem.test(inventory.getStack(i))) return true;
+        var head = inventory.getHead();
+        if (head.isEmpty()) return false;
+        inputItem.test(inventory.ingredientStack);
+        headIngredient.test(head.get());
         return false;
     }
 
@@ -58,7 +56,7 @@ public class PressingRecipe implements Recipe<PressingRecipe.Input> {
 
     @Override
     public boolean fits(int width, int height) {
-        return true;
+        return width == 1 && height == 2;
     }
 
     @Override
@@ -74,73 +72,6 @@ public class PressingRecipe implements Recipe<PressingRecipe.Input> {
     @Override
     public RecipeType<?> getType() {
         return Type.INSTANCE;
-    }
-
-    public record PressHeadIngredient(@Nullable PressHead head,
-                                      @Nullable TagKey<PressHead> tag) implements Predicate<PressHead> {
-        public static final Codec<PressHeadIngredient> CODEC =
-                new EitherCodec<>(
-                        ModRegistries.PRESS_HEAD_REGISTRY
-                                .getCodec()
-                                .fieldOf("head").codec()
-                        , TagKey
-                        .codec(ModRegistries.Keys.PRESS_HEAD_KEY)
-                        .fieldOf("tag").codec())
-                        .xmap(PressHeadIngredient::decodeEither, PressHeadIngredient::encodeAsEither);
-
-        public PressHeadIngredient {
-            assert !(head != null && tag != null);
-            assert !(head == null && tag == null);
-        }
-
-        public static PressHeadIngredient fromPacket(PacketByteBuf buf) {
-            var either = buf.readEither(c -> buf.readRegistryValue(ModRegistries.PRESS_HEAD_REGISTRY),
-                    c -> TagKey.of(ModRegistries.Keys.PRESS_HEAD_KEY, c.readIdentifier()));
-            return decodeEither(either);
-        }
-
-        public static PressHeadIngredient fromJson(final JsonElement json) {
-            return CODEC.decode(JsonOps.INSTANCE, json).resultOrPartial(BreakingFemme.LOGGER::error).orElseThrow().getFirst();
-        }
-
-        private static PressHeadIngredient decodeEither(Either<PressHead, TagKey<PressHead>> it) {
-            if (it.left().isPresent()) {
-                return new PressHeadIngredient(it.left().get(), null);
-            } else {
-                assert it.right().isPresent();
-                return new PressHeadIngredient(null, it.right().get());
-            }
-        }
-
-        public void write(PacketByteBuf buf) {
-            buf.writeEither(encodeAsEither(), (l, h) -> l.writeRegistryValue(ModRegistries.PRESS_HEAD_REGISTRY, h), (l, t) -> l.writeIdentifier(t.id()));
-        }
-
-        public JsonElement toJson() {
-            return CODEC.encodeStart(JsonOps.INSTANCE, this).resultOrPartial(BreakingFemme.LOGGER::error).orElseThrow();
-        }
-
-        private Either<PressHead, TagKey<PressHead>> encodeAsEither() {
-            if (this.head != null && this.tag != null)
-                throw new RuntimeException("ingredient had both tag and head set!! only one can be set at a time!!");
-            else if (this.head != null) return Either.left(this.head);
-            else if (this.tag != null) return Either.right(this.tag);
-            else throw new RuntimeException("tried to encode empty recipe!!");
-        }
-
-        @Override
-        public boolean test(PressHead head) {
-            if (this.head != null) return this.head.equals(head);
-            else if (this.tag != null) {
-                for (RegistryEntry<PressHead> entry : ModRegistries.PRESS_HEAD_REGISTRY.iterateEntries(this.tag)) {
-                    if (head.equals(entry.value())) {
-                        return true;
-                    }
-                }
-                return false;
-            }
-            throw new AssertionError();
-        }
     }
 
     public static class Type implements RecipeType<PressingRecipe> {
@@ -218,9 +149,142 @@ public class PressingRecipe implements Recipe<PressingRecipe.Input> {
 
     }
 
-    public static class Input extends SimpleInventory {
+    public static class Input implements Inventory, RecipeInputInventory {
+        public Input(@NotNull ItemStack headStack, @NotNull ItemStack ingredientStack) {
+            this.headStack = headStack;
+            this.ingredientStack = ingredientStack;
+        }
+
         public Input() {
-            super(2);
+        }
+
+        private @NotNull ItemStack headStack = ItemStack.EMPTY;
+        private @NotNull ItemStack ingredientStack = ItemStack.EMPTY;
+
+        private ItemStack getSlotStack(int slot) {
+            return switch (slot) {
+                case 1 -> headStack;
+                case 0 -> ingredientStack;
+                default -> throw new ArrayIndexOutOfBoundsException();
+            };
+        }
+
+        private void setSlotStack(@NotNull ItemStack stack, int slot) {
+            switch (slot) {
+                case 1 -> this.headStack = stack;
+                case 0 -> this.ingredientStack = stack;
+                default -> throw new ArrayIndexOutOfBoundsException();
+            }
+        }
+
+        public boolean isValid(int slot, @NotNull ItemStack stack) {
+            return switch (slot) {
+                case 1 -> PressHead.isPressHead(stack);
+                case 0 -> true;
+                default -> throw new ArrayIndexOutOfBoundsException();
+            };
+        }
+
+        public @NotNull ItemStack getHeadStack() {
+            return headStack.copy();
+        }
+
+        public Optional<PressHead> getHead() {
+            if (this.headStack.isEmpty()) {
+                return Optional.empty();
+            }
+            return PressHead.getPressHead(this.getHeadStack());
+        }
+
+        public @NotNull ItemStack getIngredientStack() {
+            return ingredientStack.copy();
+        }
+
+        @Override
+        public int size() {
+            return 2;
+        }
+
+        @Override
+        public boolean isEmpty() {
+            return headStack.isEmpty() && ingredientStack.isEmpty();
+        }
+
+        @Override
+        public ItemStack getStack(int slot) {
+            return getSlotStack(slot);
+        }
+
+        @Override
+        public ItemStack removeStack(int slot, int amount) {
+            assert amount >= 0;
+            var stack = getSlotStack(slot);
+            if (stack.isEmpty() || amount == 0) return ItemStack.EMPTY;
+
+            int amountToRemove = Math.min(amount, stack.getCount());
+            if (amountToRemove <= 0) return ItemStack.EMPTY;
+
+            int newCount = stack.getCount() - amountToRemove;
+
+            if (newCount == 0) setSlotStack(ItemStack.EMPTY, slot);
+            else setSlotStack(stack.copyWithCount(newCount), slot);
+
+            return stack.copyWithCount(amountToRemove);
+        }
+
+        @Override
+        public ItemStack removeStack(int slot) {
+            var stack = getSlotStack(slot);
+            if (stack.isEmpty()) {
+                return ItemStack.EMPTY;
+            } else {
+                setSlotStack(stack, slot);
+                return stack.copy();
+            }
+        }
+
+        @Override
+        public void setStack(int slot, ItemStack stack) {
+        }
+
+        @Override
+        public int getMaxCountPerStack() {
+            return Inventory.MAX_COUNT_PER_STACK;
+        }
+
+        @Override
+        public void markDirty() {/*not needed */}
+
+        @Override
+        public boolean canPlayerUse(PlayerEntity player) {
+            return false;
+        }
+
+        @Override
+        public void clear() {
+            setSlotStack(ItemStack.EMPTY, 0);
+            setSlotStack(ItemStack.EMPTY, 1);
+        }
+
+        @Override
+        public int getWidth() {
+            return 1;
+        }
+
+        @Override
+        public int getHeight() {
+            return 2;
+        }
+
+        @Override
+        public List<ItemStack> getInputStacks() {
+            return List.of(ingredientStack, headStack);
+        }
+
+        @Override
+        public void provideRecipeInputs(RecipeMatcher finder) {
+            finder.addInput(ingredientStack);
+            finder.addInput(headStack);
         }
     }
 
