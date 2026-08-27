@@ -21,7 +21,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class PressBottomBlock extends BlockWithEntity {
     public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
-    private static final VoxelShape SHAPE;
+    private static final VoxelShape SHAPE_NORTH, SHAPE_EAST, SHAPE_SOUTH, SHAPE_WEST;
 
     public PressBottomBlock(Settings settings) {
         super(settings);
@@ -50,7 +50,17 @@ public class PressBottomBlock extends BlockWithEntity {
     }
 
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return SHAPE;
+        switch(state.get(FACING))
+        {
+            case EAST:
+                return SHAPE_EAST;
+            case SOUTH:
+                return SHAPE_SOUTH;
+            case WEST:
+                return SHAPE_WEST;
+            default:
+                return SHAPE_NORTH;
+        }
     }
 
     @Override
@@ -64,9 +74,44 @@ public class PressBottomBlock extends BlockWithEntity {
     }
 
     static {
-        //TODO: complete shape!
-        SHAPE = VoxelShapes.union(
-                Block.createCuboidShape(1.0, 0.0, 1.0, 15.0, 1.0, 15.0)
+        SHAPE_NORTH = VoxelShapes.union(
+            Block.createCuboidShape(4, 0, 15, 12, 10, 16), //back plate when facing north
+            Block.createCuboidShape(5, 14, 10, 11, 15, 11), //ring bit missing on south
+            Block.createCuboidShape(10, 14, 5, 11, 15, 11), //ring bit missing on east
+            Block.createCuboidShape(5, 14, 5, 6, 15, 11), //ring bit missing on west
+            Block.createCuboidShape(6, 14, 5, 7, 15, 6), //ring tooth 1 (north)
+            Block.createCuboidShape(9, 14, 5, 10, 15, 6), //ring tooth 2 (north)
+            Block.createCuboidShape(1, 0, 1, 15, 1, 15) //bed
+        );
+
+        SHAPE_EAST = VoxelShapes.union(
+            Block.createCuboidShape(0, 0, 4, 1, 10, 12), //back plate when facing east
+            Block.createCuboidShape(5, 14, 10, 11, 15, 11), //ring bit missing on south
+            Block.createCuboidShape(5, 14, 5, 11, 15, 6), //ring bit missing on north
+            Block.createCuboidShape(5, 14, 5, 6, 15, 11), //ring bit missing on west
+            Block.createCuboidShape(10, 14, 6, 11, 15, 7), //ring tooth 1 (east)
+            Block.createCuboidShape(10, 14, 9, 11, 15, 10), //ring tooth 2 (east)
+            Block.createCuboidShape(1, 0, 1, 15, 1, 15) //bed
+        );
+    
+        SHAPE_SOUTH = VoxelShapes.union(
+            Block.createCuboidShape(4, 0, 0, 12, 10, 1), //back plate when facing south
+            Block.createCuboidShape(10, 14, 5, 11, 15, 11), //ring bit missing on east
+            Block.createCuboidShape(5, 14, 5, 11, 15, 6), //ring bit missing on north
+            Block.createCuboidShape(5, 14, 5, 6, 15, 11), //ring bit missing on west
+            Block.createCuboidShape(6, 14, 10, 7, 15, 11), //ring tooth 1 (south)
+            Block.createCuboidShape(9, 14, 10, 10, 15, 11), //ring tooth 2 (south)
+            Block.createCuboidShape(1, 0, 1, 15, 1, 15) //bed
+        );
+
+        SHAPE_WEST = VoxelShapes.union(
+            Block.createCuboidShape(15, 0, 4, 16, 10, 12), //back plate when facing west
+            Block.createCuboidShape(5, 14, 10, 11, 15, 11), //ring bit missing on south
+            Block.createCuboidShape(10, 14, 5, 11, 15, 11), //ring bit missing on east
+            Block.createCuboidShape(5, 14, 5, 11, 15, 6), //ring bit missing on north
+            Block.createCuboidShape(5, 14, 6, 6, 15, 7), //ring tooth 1 (west)
+            Block.createCuboidShape(5, 14, 9, 6, 15, 10), //ring tooth 2 (west)
+            Block.createCuboidShape(1, 0, 1, 15, 1, 15) //bed
         );
     }
 
