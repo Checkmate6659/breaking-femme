@@ -225,7 +225,7 @@ public class ModItems {
             entries.add(ModBlocks.FIVE_G_TOWER_HEAD);
             entries.add(ModBlocks.PRESS_TOP);
             entries.add(ModBlocks.PRESS_BOTTOM);
-            entries.add(ModBlocks.PRESS_CRANK);
+            entries.add(ModBlocks.PRESS_HANDLE);
             //AUTOGENERATION LABEL DO NOT TOUCH
 
 

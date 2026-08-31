@@ -60,7 +60,7 @@ public class ModBlocks {
     // press blocks
     public static final Block PRESS_BOTTOM = registerBlock("press_bottom", new PressBottomBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
     public static final Block PRESS_TOP = registerBlock("press_top", new PressTopBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
-    public static final Block PRESS_CRANK = registerBlock("press_handle", new PressHandleBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
+    public static final Block PRESS_HANDLE = registerBlock("press_handle", new PressHandleBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
     //register block and item
     private static final Block registerBlock(String name, Block block)
     {

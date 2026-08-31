@@ -235,7 +235,7 @@ public class PressBottomBlockEntity extends BlockEntity implements SidedInventor
                 // we check all the sideways directions
                 var leverPos = topPos.offset(facing);
                 var leverState = world.getBlockState(leverPos);
-                if (!leverState.isOf(ModBlocks.PRESS_CRANK)) continue;
+                if (!leverState.isOf(ModBlocks.PRESS_HANDLE)) continue;
                 // we get facing
                 var leverFacing = leverState.get(PressHandleBlock.FACING);
                 // we found our match!

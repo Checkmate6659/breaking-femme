@@ -1,0 +1,19 @@
+{
+    "variants": {
+      "facing=east": {
+        "model": "breakingfemme:block/press_handle",
+        "y": 90
+      },
+      "facing=north": {
+        "model": "breakingfemme:block/press_handle"
+      },
+      "facing=south": {
+        "model": "breakingfemme:block/press_handle",
+        "y": 180
+      },
+      "facing=west": {
+        "model": "breakingfemme:block/press_handle",
+        "y": 270
+      }
+    }
+  }
