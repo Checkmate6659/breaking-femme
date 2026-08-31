@@ -3,40 +3,29 @@ package com.breakingfemme.block.press;
 import com.breakingfemme.ModBlockEntities;
 import com.breakingfemme.ModBlocks;
 import com.breakingfemme.block.entity.press.PressTopBlockEntity;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockRenderType;
 import com.breakingfemme.registries.press.PressHead;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.BlockWithEntity;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.ShapeContext;
+import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.DirectionProperty;
-import net.minecraft.util.BlockMirror;
-import net.minecraft.util.BlockRotation;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
+import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.ItemScatterer;
+import net.minecraft.state.StateManager;
+import net.minecraft.state.property.DirectionProperty;
+import net.minecraft.util.*;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
-
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
-
 import org.jetbrains.annotations.Nullable;
+
 public class PressTopBlock extends BlockWithEntity {
     public static final DirectionProperty FACING = PressBottomBlock.FACING; //must be strictly identical to the property of PressBottomBlock
 
@@ -81,8 +70,10 @@ public class PressTopBlock extends BlockWithEntity {
 
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         double y_offset = 0;
-        //if(world.getBlockEntity(pos) instanceof PressTopBlockEntity)
-        //    y_offset = (world.getBlockEntity(pos).getWorld().getTime() % 20) * 0.2; //TEST
+        var entity = world.getBlockEntity(pos, ModBlockEntities.PRESS_TOP_BLOCK_ENTITY).orElse(null);
+        if (entity != null) {
+            y_offset = 6.5 * -entity.getProgress(); //TEST
+        }
         return Block.createCuboidShape(6, y_offset - 7.5, 6, 10, y_offset + 8.5, 10);
     }
 
@@ -94,7 +85,7 @@ public class PressTopBlock extends BlockWithEntity {
     @Override
     public BlockRenderType getRenderType(BlockState state)
     {
-        return BlockRenderType.MODEL;
+        return BlockRenderType.ENTITYBLOCK_ANIMATED;
     }
 
 

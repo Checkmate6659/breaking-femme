@@ -16,12 +16,17 @@ import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.Range;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class PressTopBlockEntity extends BlockEntity implements SingleStackInventory {
     private final DefaultedList<ItemStack> stacks = DefaultedList.ofSize(1, ItemStack.EMPTY);
+    @Range(from = 0, to = 1)
+    private float progress = 0;
     public PressTopBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.PRESS_TOP_BLOCK_ENTITY, pos, state);
     }
@@ -40,12 +45,23 @@ public class PressTopBlockEntity extends BlockEntity implements SingleStackInven
         return PressHead.getPressHead(getStack());
     }
 
+    public float getProgress() {
+        return progress;
+    }
+
+    public void setProgress(float progress) {
+        var clampedProgress = MathHelper.clamp(progress, 0, 1);
+        if (this.progress != clampedProgress) this.markDirty();
+        this.progress = clampedProgress;
+    }
+
     @Override
     public void markDirty() {
         super.markDirty();
         if (world instanceof ServerWorld server) {
             BlockState state = getCachedState();
             server.updateListeners(pos, state, state, 0);
+            server.getChunkManager().markForUpdate(pos);
         }
     }
 
@@ -53,12 +69,15 @@ public class PressTopBlockEntity extends BlockEntity implements SingleStackInven
     protected void writeNbt(NbtCompound nbt) {
         super.readNbt(nbt);
         Inventories.writeNbt(nbt, stacks);
+        nbt.putFloat("progress", progress);
     }
 
     @Override
     public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
+        if (Objects.requireNonNull(world).isClient) stacks.clear();
         Inventories.readNbt(nbt, stacks);
+        progress = MathHelper.clamp(nbt.getFloat("progress"), 0, 1);
     }
 
     @Override

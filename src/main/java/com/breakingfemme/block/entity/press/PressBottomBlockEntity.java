@@ -4,8 +4,6 @@ import com.breakingfemme.ModBlockEntities;
 import com.breakingfemme.ModBlocks;
 import com.breakingfemme.block.press.PressBottomBlock;
 import com.breakingfemme.block.press.PressHandleBlock;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -179,7 +177,6 @@ public class PressBottomBlockEntity extends BlockEntity implements SidedInventor
             }
         }
 
-        @Environment(EnvType.SERVER)
         private void tickServer(ServerWorldAccess world, BlockPos pos, BlockState state) {
             if (multiblockVerifier.isValid(world)) setValid();
             else setInvalid();
@@ -187,6 +184,7 @@ public class PressBottomBlockEntity extends BlockEntity implements SidedInventor
             if (!valid) return;
             var top = getTop();
             assert top != null;
+            top.setProgress((float) ((top.getProgress() + 0.1) % 1));
             if (top.isEmpty()) {
             } //we have no head so we can't work
             /// todo: do multiblock shit
@@ -219,13 +217,11 @@ public class PressBottomBlockEntity extends BlockEntity implements SidedInventor
         }
 
         private boolean isValid(ServerWorldAccess world) {
-            if (!world.getBlockState(getPressTopPosition()).isOf(ModBlocks.PRESS_TOP))
-                return false;
+            return world.getBlockState(getPressTopPosition()).isOf(ModBlocks.PRESS_TOP);
 
-            var lever = checkForLever(world);
-            if (lever == null) return false;
-            validLever = lever;
-            return true;
+//            var lever = checkForLever(world);
+//            if (lever == null) return false;
+//            validLever = lever;
         }
 
         @Nullable

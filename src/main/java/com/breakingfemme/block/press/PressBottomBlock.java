@@ -1,8 +1,11 @@
 package com.breakingfemme.block.press;
 
+import com.breakingfemme.ModBlockEntities;
 import com.breakingfemme.block.entity.press.PressBottomBlockEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
@@ -126,5 +129,10 @@ public class PressBottomBlock extends BlockWithEntity {
 
             super.onStateReplaced(state, world, pos, newState, moved);
         }
+    }
+
+    @Override
+    public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+        return checkType(type, ModBlockEntities.PRESS_BOTTOM_BLOCK_ENTITY, ((world1, pos, state1, blockEntity) -> blockEntity.getTicker().tick(world, pos, state, blockEntity)));
     }
 }

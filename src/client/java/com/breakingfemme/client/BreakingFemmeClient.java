@@ -3,6 +3,7 @@ package com.breakingfemme.client;
 import com.breakingfemme.*;
 import com.breakingfemme.cauldron.EstroneReductionCauldronBlock;
 import com.breakingfemme.client.block.entity.DistillerBlockEntityRenderer;
+import com.breakingfemme.client.block.entity.PressHeadTopBlockEntityRenderer;
 import com.breakingfemme.client.mixin.PostEffectPassAccessor;
 import com.breakingfemme.client.screen.FermenterScreen;
 import net.fabricmc.api.ClientModInitializer;
@@ -110,6 +111,7 @@ public class BreakingFemmeClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.FIVE_G_TOWER_HEAD, RenderLayer.getCutout());
         //block entity renderers
         BlockEntityRendererFactories.register(ModBlockEntities.DISTILLER_BLOCK_ENTITY, DistillerBlockEntityRenderer::new);
+        BlockEntityRendererFactories.register(ModBlockEntities.PRESS_TOP_BLOCK_ENTITY, PressHeadTopBlockEntityRenderer::new);
 
         //fermenter airlock
         ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
