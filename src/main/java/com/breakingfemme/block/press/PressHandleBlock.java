@@ -1,8 +1,11 @@
 package com.breakingfemme.block.press;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
@@ -15,9 +18,12 @@ import net.minecraft.util.math.Direction.Axis;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 
-import com.breakingfemme.ModBlocks;
+import org.jetbrains.annotations.Nullable;
 
-public class PressHandleBlock extends Block { //TODO: BlockWithEntity! (block entity required to make the model spin)
+import com.breakingfemme.ModBlocks;
+import com.breakingfemme.block.entity.press.PressHandleBlockEntity;
+
+public class PressHandleBlock extends BlockWithEntity { //TODO: BlockWithEntity! (block entity required to make the model spin)
     public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
 
     public PressHandleBlock(Settings settings) {
@@ -56,7 +62,21 @@ public class PressHandleBlock extends Block { //TODO: BlockWithEntity! (block en
         return !state.canPlaceAt(world, pos) ? Blocks.AIR.getDefaultState() : super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
-    //TODO: shape
+    @Override
+    public @Nullable BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+        return new PressHandleBlockEntity(pos, state);
+    }
 
-    //TODO: block entity type
+    @Override
+    public BlockRenderType getRenderType(BlockState state) {
+        return BlockRenderType.MODEL;
+    }
+
+    //TODO: ticker
+    /*@Override
+    public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+        return checkType(type, ModBlockEntities.PRESS_HANDLE_BLOCK_ENTITY, ((world1, pos, state1, blockEntity) -> blockEntity.tick(world, pos, state, blockEntity)));
+    }*/
+
+    //TODO: shape
 }
