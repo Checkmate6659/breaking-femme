@@ -1,11 +1,14 @@
 package com.breakingfemme.registries.press;
 
 import com.breakingfemme.ModRegistries;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.TagKey;
+import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -15,6 +18,7 @@ import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 public class PressHead implements ItemConvertible {
+    public static final BooleanProperty DIE = BooleanProperty.of("is_die");
     public PressHead(Item item) {
         assert item != null;
         this.item = item;
@@ -69,6 +73,11 @@ public class PressHead implements ItemConvertible {
         return ModRegistries.PRESS_HEAD_REGISTRY.streamEntries()
                 .filter(it -> it.value().asItem() == item)
                 .findFirst().map(RegistryEntry.Reference::value);
+    }
+
+    @Environment(EnvType.CLIENT)
+    public Identifier getVariantFile() {
+        return getId().withPrefixedPath("block/press/");
     }
 
     public static Stream<PressHead> getTagged(TagKey<PressHead> tag) {

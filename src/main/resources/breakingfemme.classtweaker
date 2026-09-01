@@ -11,3 +11,5 @@ accessible method net/minecraft/recipe/Ingredient ofEntries (Ljava/util/stream/S
 #extendable method net/minecraft/block/ConcretePowderBlock hardensIn
 
 accessible field net/minecraft/util/math/Direction HORIZONTAL [Lnet/minecraft/util/math/Direction;
+extendable class net/minecraft/data/client/VariantsBlockStateSupplier
+extendable method net/minecraft/data/client/VariantsBlockStateSupplier <init> (Lnet/minecraft/block/Block;Ljava/util/List;)V

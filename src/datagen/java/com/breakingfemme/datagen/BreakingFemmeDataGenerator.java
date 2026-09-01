@@ -23,6 +23,7 @@ public class BreakingFemmeDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(ModModelProvider::new);
 		pack.addProvider(ModRecipeProvider::new);
 		pack.addProvider(ModAdvancementProvider::new);
+		pack.addProvider(ModPressModelProvider::new);
 	}
 
 	@Override

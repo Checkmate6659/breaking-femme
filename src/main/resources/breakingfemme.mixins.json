@@ -2,7 +2,9 @@
 	"required": true,
 	"package": "com.breakingfemme.mixin",
 	"compatibilityLevel": "JAVA_17",
-	"mixinextras": {"minVersion": "0.5.0"},
+	"mixinextras": {
+		"minVersion": "0.5.0"
+	},
 	"mixins": [
 		"BlazeBurnerFuelTimeMixin",
 		"CustomFluidTagsMixin",
@@ -12,6 +14,7 @@
 		"LightningStrikeMixin",
 		"MetalPipeClangMixin",
 		"ServerWorldPlaySoundMixin",
+		"VariantsBlockStateSupplierAccessor",
 		"VillagerAssignMixin",
 		"VillagerPickupMixin"
 	],

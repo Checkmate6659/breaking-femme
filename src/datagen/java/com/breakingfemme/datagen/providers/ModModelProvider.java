@@ -54,6 +54,7 @@ public class ModModelProvider extends FabricModelProvider {
         //cauldrons need to be handmade apparently
     }
 
+
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
         //regular items
