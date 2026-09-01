@@ -18,7 +18,7 @@ import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 public class PressHead implements ItemConvertible {
-    public static final BooleanProperty DIE = BooleanProperty.of("is_die");
+    public static final BooleanProperty DIE = BooleanProperty.of("breakingfemmeis_die");
     public PressHead(Item item) {
         assert item != null;
         this.item = item;

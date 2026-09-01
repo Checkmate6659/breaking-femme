@@ -20,7 +20,6 @@ import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Range;
 
-import java.util.Objects;
 import java.util.Optional;
 
 public class PressTopBlockEntity extends BlockEntity implements SingleStackInventory {
@@ -75,7 +74,7 @@ public class PressTopBlockEntity extends BlockEntity implements SingleStackInven
     @Override
     public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
-        if (Objects.requireNonNull(world).isClient) stacks.clear();
+        if (world != null && world.isClient()) stacks.clear();
         Inventories.readNbt(nbt, stacks);
         progress = MathHelper.clamp(nbt.getFloat("progress"), 0, 1);
     }

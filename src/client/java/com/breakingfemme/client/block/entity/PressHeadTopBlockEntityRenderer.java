@@ -1,9 +1,11 @@
 package com.breakingfemme.client.block.entity;
 
 import com.breakingfemme.block.entity.press.PressTopBlockEntity;
+import com.breakingfemme.client.utils.PressUtils;
 import com.breakingfemme.registries.press.PressHead;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
@@ -28,22 +30,18 @@ public class PressHeadTopBlockEntityRenderer implements BlockEntityRenderer<Pres
         try {
             matrices.translate(0f, 0.39 * -entity.getProgress(), 0f);
             renderRodPosition(entity, matrices, vertexConsumers, light, overlay);
-            var head = entity.getHead().orElse(null);
-            if (head != null) {
-                renderHeadPosition(head, matrices, vertexConsumers, light, overlay, entity.getPos());
-            }
+            entity.getHead().ifPresent(head -> renderHeadPosition(head, matrices, vertexConsumers, light, overlay, entity.getPos(), entity.getCachedState()));
         } finally {
             matrices.pop();
         }
     }
 
-    private void renderHeadPosition(PressHead head, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, BlockPos pos) {
-        var id = head.getVariantFile();
+    private void renderHeadPosition(PressHead head, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, BlockPos pos, BlockState state) {
         matrices.push();
         try {
-            var model = context.getRenderManager().getModels().getModelManager().getModel(id);
+            var head_model = context.getRenderManager().getModels().getModelManager().getModel(PressUtils.headModelId(head.getId()));
 
-            context.getRenderManager().getModelRenderer().render(context.getRenderDispatcher().world, context.getRenderManager().getModels().getModelManager().getModel(id), null, pos, matrices, vertexConsumers.getBuffer(RenderLayer.getSolid()), false, context.getRenderDispatcher().world.random, 20, overlay);
+            context.getRenderManager().getModelRenderer().render(context.getRenderDispatcher().world, head_model, state, pos, matrices, vertexConsumers.getBuffer(RenderLayer.getSolid()), false, context.getRenderDispatcher().world.random, 20, overlay);
         } finally {
             matrices.pop();
         }

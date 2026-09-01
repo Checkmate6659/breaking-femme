@@ -17,6 +17,7 @@
     "IllagerFeaturesMixin",
     "IronGolemFeaturesMixin",
     "JustShutUpMixin",
+    "ModelLoaderMixin",
     "PleaseShutUpMixin",
     "PostEffectPassAccessor",
     "ScreenShakeMixin",

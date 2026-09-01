@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "breakingfemmeis_die=false": {
+      "model": "breakingfemme:block/press/mash_head"
+    },
+    "breakingfemmeis_die=true": {
+      "model": "breakingfemme:block/press/empty"
+    }
+  }
+}
