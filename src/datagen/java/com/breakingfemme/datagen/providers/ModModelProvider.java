@@ -3,6 +3,7 @@ package com.breakingfemme.datagen.providers;
 import com.breakingfemme.ModBlocks;
 import com.breakingfemme.ModFluids;
 import com.breakingfemme.ModItems;
+import com.breakingfemme.ModPresses;
 import com.breakingfemme.block.FiveGTowerControllerBlock;
 import com.breakingfemme.block.SoyCropBlock;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -151,5 +152,9 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModBlocks.FERMENTER_CONTROLLER.asItem(), Models.GENERATED);
         itemModelGenerator.register(ModBlocks.FERMENTER_AIRLOCK.asItem(), Models.GENERATED);
         itemModelGenerator.register(ModBlocks.FUNNEL.asItem(), Models.GENERATED);
+
+        //Presses
+        itemModelGenerator.register(ModPresses.MASHING_HEAD.asItem(), Models.GENERATED);
+        itemModelGenerator.register(ModPresses.PILL_HEAD.asItem(), Models.GENERATED);
     }
 }
