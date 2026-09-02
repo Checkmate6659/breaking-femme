@@ -223,9 +223,12 @@ public class ModItems {
             entries.add(ModBlocks.FIVE_G_TOWER_CONTROLLER);
             entries.add(ModBlocks.FIVE_G_SCAFFOLDING);
             entries.add(ModBlocks.FIVE_G_TOWER_HEAD);
+                    // press heads
             entries.add(ModBlocks.PRESS_TOP);
             entries.add(ModBlocks.PRESS_BOTTOM);
             entries.add(ModBlocks.PRESS_HANDLE);
+                    entries.add(ModPresses.MASHING_HEAD);
+                    entries.add(ModPresses.PILL_HEAD);
             //AUTOGENERATION LABEL DO NOT TOUCH
 
 
