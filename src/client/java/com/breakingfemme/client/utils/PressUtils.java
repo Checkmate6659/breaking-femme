@@ -16,10 +16,10 @@ public class PressUtils {
     }
 
     public static ModelIdentifier headModelId(Identifier id) {
-        return new ModelIdentifier(id.withPrefixedPath("press/"), BlockModels.propertyMapToString(Map.of(PressHead.DIE, true)));
+        return new ModelIdentifier(id.withPrefixedPath("press/"), BlockModels.propertyMapToString(Map.of(PressHead.DIE, false)));
     }
 
     public static ModelIdentifier dieModelId(Identifier id) {
-        return new ModelIdentifier(id.withPrefixedPath("press/"), BlockModels.propertyMapToString(Map.of(PressHead.DIE, false)));
+        return new ModelIdentifier(id.withPrefixedPath("press/"), BlockModels.propertyMapToString(Map.of(PressHead.DIE, true)));
     }
 }
