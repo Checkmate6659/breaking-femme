@@ -153,7 +153,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModBlocks.FERMENTER_AIRLOCK.asItem(), Models.GENERATED);
         itemModelGenerator.register(ModBlocks.FUNNEL.asItem(), Models.GENERATED);
 
-        //Presses
+        //Presses TODO: add permanent textures, current ones are placeholders!!
         itemModelGenerator.register(ModPresses.MASHING_HEAD.asItem(), Models.GENERATED);
         itemModelGenerator.register(ModPresses.PILL_HEAD.asItem(), Models.GENERATED);
     }
