@@ -26,6 +26,7 @@ public class PressTopBlockEntity extends BlockEntity implements SingleStackInven
     private final DefaultedList<ItemStack> stacks = DefaultedList.ofSize(1, ItemStack.EMPTY);
     @Range(from = 0, to = 1)
     private float progress = 0;
+    private boolean freezeProgress = false;
     public PressTopBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.PRESS_TOP_BLOCK_ENTITY, pos, state);
     }
@@ -49,9 +50,18 @@ public class PressTopBlockEntity extends BlockEntity implements SingleStackInven
     }
 
     public void setProgress(float progress) {
+        if (freezeProgress) return;
         var clampedProgress = MathHelper.clamp(progress, 0, 1);
         if (this.progress != clampedProgress) this.markDirty();
         this.progress = clampedProgress;
+    }
+
+    public void freezeProgress() {
+        freezeProgress = true;
+    }
+
+    public void unfreezeProgress() {
+        freezeProgress = false;
     }
 
     @Override

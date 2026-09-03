@@ -61,9 +61,7 @@ public class DistillingRecipe implements Recipe<FluidInventory> {
         if(fluid1.getRight() < inputq || !fluid1.getLeft().equals(input)) return false;
 
         Pair<FluidVariant, Integer> fluid2 = inventory.getFluid(inventory.size() - 1);
-        if(fluid2.getRight() + outputq > FluidConstants.BUCKET || (fluid2.getRight() > 0 && !fluid2.getLeft().equals(output))) return false; //TODO: less jank way, not to rely on fixed capacity!
-
-        return true;
+        return fluid2.getRight() + outputq <= FluidConstants.BUCKET && (fluid2.getRight() <= 0 || fluid2.getLeft().equals(output)); //TODO: less jank way, not to rely on fixed capacity!
     }
     
     @Override
@@ -98,15 +96,25 @@ public class DistillingRecipe implements Recipe<FluidInventory> {
         return Type.INSTANCE;
     }
 
-    public static class Type implements RecipeType<DistillingRecipe>
+    public static class Type implements RecipeType<DistillingRecipe>, IIdentifiableSubtype
     {
         private Type() {}
         public static final Type INSTANCE = new Type();
         public static final String ID = "distilling"; //does this need to be unique between mods? i guess not, i got no warning
+
+        @Override
+        public String getId() {
+            return ID;
+        }
     }
 
-    public static class Serializer implements RecipeSerializer<DistillingRecipe>
+    public static class Serializer implements RecipeSerializer<DistillingRecipe>, IIdentifiableSubtype
     {
+        @Override
+        public String getId() {
+            return ID;
+        }
+
         public static final Serializer INSTANCE = new Serializer();
         public static final String ID = "distilling"; //name given in the json file
 

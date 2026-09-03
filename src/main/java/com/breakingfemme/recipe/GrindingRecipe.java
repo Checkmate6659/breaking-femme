@@ -1,16 +1,11 @@
 package com.breakingfemme.recipe;
 
 import com.google.gson.JsonObject;
-
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.recipe.Recipe;
-import net.minecraft.recipe.RecipeSerializer;
-import net.minecraft.recipe.RecipeType;
-import net.minecraft.recipe.ShapedRecipe;
+import net.minecraft.recipe.*;
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
@@ -75,15 +70,19 @@ public class GrindingRecipe implements Recipe<PlayerInventory> {
         return Type.INSTANCE;
     }
 
-    public static class Type implements RecipeType<GrindingRecipe>
-    {
+    public static class Type implements RecipeType<GrindingRecipe>, IIdentifiableSubtype {
         private Type() {}
         public static final Type INSTANCE = new Type();
         public static final String ID = "grinding"; //does this need to be unique between mods? i guess not, i got no warning
+
+        @Override
+        public String getId() {
+            return ID;
+        }
+
     }
 
-    public static class Serializer implements RecipeSerializer<GrindingRecipe>
-    {
+    public static class Serializer implements RecipeSerializer<GrindingRecipe>, IIdentifiableSubtype {
         public static final Serializer INSTANCE = new Serializer();
         public static final String ID = "grinding"; //name given in the json file
 
@@ -111,5 +110,11 @@ public class GrindingRecipe implements Recipe<PlayerInventory> {
             recipe.input.write(buf);
             buf.writeItemStack(recipe.output);
         }
+
+        @Override
+        public String getId() {
+            return ID;
+        }
+
     }
 }

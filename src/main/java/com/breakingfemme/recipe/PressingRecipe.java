@@ -34,6 +34,10 @@ public class PressingRecipe implements Recipe<PressingRecipe.Input> {
         this.headIngredient = head;
     }
 
+    public Ingredient getInputItem() {
+        return inputItem;
+    }
+
     @Override
     public Serializer getSerializer() {
         return Serializer.INSTANCE;
@@ -74,16 +78,21 @@ public class PressingRecipe implements Recipe<PressingRecipe.Input> {
         return Type.INSTANCE;
     }
 
-    public static class Type implements RecipeType<PressingRecipe> {
+    public static class Type implements RecipeType<PressingRecipe>, IIdentifiableSubtype {
         private Type() {
         }
 
         public static Type INSTANCE = new Type();
 
         public static final String ID = "pressing";
+
+        @Override
+        public String getId() {
+            return ID;
+        }
     }
 
-    public static class Serializer implements RecipeSerializer<PressingRecipe> {
+    public static class Serializer implements RecipeSerializer<PressingRecipe>, IIdentifiableSubtype {
         public static final String ID = "pressing";
 
         @Override
@@ -138,6 +147,11 @@ public class PressingRecipe implements Recipe<PressingRecipe.Input> {
                 return inputJson;
             }
             return inputJson;
+        }
+
+        @Override
+        public String getId() {
+            return ID;
         }
 
         private record PressingRecipeJsonFormat(

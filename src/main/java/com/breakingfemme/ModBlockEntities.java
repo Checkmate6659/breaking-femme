@@ -2,6 +2,7 @@ package com.breakingfemme;
 
 import com.breakingfemme.block.entity.*;
 import com.breakingfemme.block.entity.press.PressBottomBlockEntity;
+import com.breakingfemme.block.entity.press.PressHandleBlockEntity;
 import com.breakingfemme.block.entity.press.PressTopBlockEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
@@ -40,10 +41,10 @@ public class ModBlockEntities {
     public static final BlockEntityType<PressTopBlockEntity> PRESS_TOP_BLOCK_ENTITY = Registry
         .register(Registries.BLOCK_ENTITY_TYPE, id("press_top_be"),
         FabricBlockEntityTypeBuilder.create(PressTopBlockEntity::new, ModBlocks.PRESS_TOP).build());
-    
-    public static final BlockEntityType<PressTopBlockEntity> PRESS_HANDLE_BLOCK_ENTITY = Registry
+
+    public static final BlockEntityType<PressHandleBlockEntity> PRESS_HANDLE_BLOCK_ENTITY = Registry
         .register(Registries.BLOCK_ENTITY_TYPE, id("press_handle_be"),
-        FabricBlockEntityTypeBuilder.create(PressTopBlockEntity::new, ModBlocks.PRESS_HANDLE).build());
+                FabricBlockEntityTypeBuilder.create(PressHandleBlockEntity::new, ModBlocks.PRESS_HANDLE).build());
     
     public static void registerBlockEntities() {
         FluidStorage.SIDED.registerForBlockEntity(DistillerBlockEntity::getFluidStorage, DISTILLER_BLOCK_ENTITY);

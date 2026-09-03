@@ -64,9 +64,7 @@ public class FilteringRecipe implements Recipe<FunnelBlockEntity> {
     public static boolean storagesMissing(BlockPos pos, World world)
     {
         if(FluidStorage.SIDED.find(world, pos.up(), Direction.DOWN) == null) return true; //top storage missing
-        if(FluidStorage.SIDED.find(world, pos.down(), Direction.UP) == null) return true; //bottom storage missing
-
-        return false;
+        return FluidStorage.SIDED.find(world, pos.down(), Direction.UP) == null; //bottom storage missing
     }
 
     //get max amount of fluid that can be extracted from the top; return smallest possible step that's above inputq; if no such step exists return 0
@@ -217,15 +215,25 @@ public class FilteringRecipe implements Recipe<FunnelBlockEntity> {
         return Type.INSTANCE;
     }
 
-    public static class Type implements RecipeType<FilteringRecipe>
+    public static class Type implements RecipeType<FilteringRecipe>, IIdentifiableSubtype
     {
         private Type() {}
         public static final Type INSTANCE = new Type();
         public static final String ID = "filtering"; //does this need to be unique between mods? i guess not, i got no warning
+
+        @Override
+        public String getId() {
+            return ID;
+        }
     }
 
-    public static class Serializer implements RecipeSerializer<FilteringRecipe>
+    public static class Serializer implements RecipeSerializer<FilteringRecipe>, IIdentifiableSubtype
     {
+        @Override
+        public String getId() {
+            return ID;
+        }
+
         public static final Serializer INSTANCE = new Serializer();
         public static final String ID = "filtering"; //name given in the json file
 
