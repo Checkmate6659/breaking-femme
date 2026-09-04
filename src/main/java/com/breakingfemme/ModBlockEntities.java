@@ -44,7 +44,7 @@ public class ModBlockEntities {
 
     public static final BlockEntityType<PressHandleBlockEntity> PRESS_HANDLE_BLOCK_ENTITY = Registry
         .register(Registries.BLOCK_ENTITY_TYPE, id("press_handle_be"),
-                FabricBlockEntityTypeBuilder.create(PressHandleBlockEntity::new, ModBlocks.PRESS_HANDLE).build());
+        FabricBlockEntityTypeBuilder.create(PressHandleBlockEntity::new, ModBlocks.PRESS_HANDLE).build());
     
     public static void registerBlockEntities() {
         FluidStorage.SIDED.registerForBlockEntity(DistillerBlockEntity::getFluidStorage, DISTILLER_BLOCK_ENTITY);
