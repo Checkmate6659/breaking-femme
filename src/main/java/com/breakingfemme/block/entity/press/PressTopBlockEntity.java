@@ -25,7 +25,7 @@ import org.jetbrains.annotations.Range;
 import java.util.Optional;
 
 public class PressTopBlockEntity extends BlockEntity implements SingleStackInventory {
-    public static final double SCALE = 0.4375; //going up and down for rendering; just barely causes zfighting
+    public static final double SCALE = 0.43359375; //going up and down for rendering; just barely doesnt cause zfighting with the press bed when seen from the bottom (TODO: better solution)
 
     private final DefaultedList<ItemStack> stacks = DefaultedList.ofSize(1, ItemStack.EMPTY);
     @Range(from = 0, to = 1)

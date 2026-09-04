@@ -40,7 +40,7 @@ public class PressHeadTopBlockEntityRenderer implements BlockEntityRenderer<Pres
         matrices.push();
         try {
             var head_model = context.getRenderManager().getModels().getModelManager().getModel(PressUtils.headModelId(head.getId()));
-            matrices.translate(0f, -0.99609375f, 0f);
+            matrices.translate(0f, -1f, 0f);
             context.getRenderManager().getModelRenderer().render(context.getRenderDispatcher().world, head_model, state, pos, matrices, vertexConsumers.getBuffer(RenderLayer.getTranslucent()), false, context.getRenderDispatcher().world.random, 20, overlay);
         } finally {
             matrices.pop();
