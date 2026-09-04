@@ -28,7 +28,7 @@ public class PressHeadTopBlockEntityRenderer implements BlockEntityRenderer<Pres
     public void render(PressTopBlockEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
         matrices.push();
         try {
-            matrices.translate(0f, 0.39 * -entity.getProgress(), 0f);
+            matrices.translate(0f, PressTopBlockEntity.SCALE * -entity.getProgress(), 0f);
             renderRodPosition(entity, matrices, vertexConsumers, light, overlay);
             entity.getHead().ifPresent(head -> renderHeadPosition(head, matrices, vertexConsumers, light, overlay, entity.getPos(), entity.getCachedState()));
         } finally {

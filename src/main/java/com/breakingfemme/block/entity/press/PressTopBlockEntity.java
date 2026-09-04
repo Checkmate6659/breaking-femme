@@ -14,6 +14,8 @@ import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -23,6 +25,8 @@ import org.jetbrains.annotations.Range;
 import java.util.Optional;
 
 public class PressTopBlockEntity extends BlockEntity implements SingleStackInventory {
+    public static final double SCALE = 0.4375; //going up and down for rendering; just barely causes zfighting
+
     private final DefaultedList<ItemStack> stacks = DefaultedList.ofSize(1, ItemStack.EMPTY);
     @Range(from = 0, to = 1)
     private float progress = 0;
@@ -54,6 +58,17 @@ public class PressTopBlockEntity extends BlockEntity implements SingleStackInven
         var clampedProgress = MathHelper.clamp(progress, 0, 1);
         if (this.progress != clampedProgress) this.markDirty();
         this.progress = clampedProgress;
+    }
+
+    public void addProgress(float added)
+    {
+        boolean previously_in_air = progress != 1f; //i think float equality can be checked here because of clamp function
+        setProgress(progress + added);
+        if(previously_in_air && progress == 1f)
+        {
+            craft(); //apply recipe
+            world.playSound(null, pos, SoundEvents.BLOCK_ANVIL_PLACE, SoundCategory.BLOCKS); //play sound
+        }
     }
 
     public void freezeProgress() {
@@ -131,4 +146,9 @@ public class PressTopBlockEntity extends BlockEntity implements SingleStackInven
         return Inventory.canPlayerUse(this, player);
     }
 
+    //TODO: apply recipe
+    void craft()
+    {
+        //
+    }
 }

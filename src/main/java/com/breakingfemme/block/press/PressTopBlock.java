@@ -68,12 +68,12 @@ public class PressTopBlock extends BlockWithEntity {
         return !state.canPlaceAt(world, pos) ? Blocks.AIR.getDefaultState() : super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
+    //slight issue: outline shape beyond cube boundary is just visuals, cannot actually click there
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         double y_offset = 0;
         var entity = world.getBlockEntity(pos, ModBlockEntities.PRESS_TOP_BLOCK_ENTITY).orElse(null);
-        if (entity != null) {
-            y_offset = 6.5 * -entity.getProgress(); //TEST
-        }
+        if (entity != null)
+            y_offset = -16 * PressTopBlockEntity.SCALE * entity.getProgress();
         return Block.createCuboidShape(6, y_offset - 7.5, 6, 10, y_offset + 8.5, 10);
     }
 
