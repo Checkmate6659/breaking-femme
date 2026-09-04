@@ -61,7 +61,7 @@ public class DistillerTopBlock extends BlockWithEntity {
         return false;
     }
 
-        public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit)
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit)
     {
         ItemStack stack = player.getStackInHand(hand);
 
