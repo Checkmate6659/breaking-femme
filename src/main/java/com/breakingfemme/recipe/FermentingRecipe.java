@@ -194,15 +194,25 @@ public class FermentingRecipe implements Recipe<ImplementedInventory> {
         return Type.INSTANCE;
     }
 
-    public static class Type implements RecipeType<FermentingRecipe>
+    public static class Type implements RecipeType<FermentingRecipe>, IIdentifiableSubtype
     {
         private Type() {}
         public static final Type INSTANCE = new Type();
         public static final String ID = "fermenting"; //does this need to be unique between mods? i guess not, i got no warning
+
+        @Override
+        public String getId() {
+            return ID;
+        }
     }
 
-    public static class Serializer implements RecipeSerializer<FermentingRecipe>
+    public static class Serializer implements RecipeSerializer<FermentingRecipe>, IIdentifiableSubtype
     {
+        @Override
+        public String getId() {
+            return ID;
+        }
+
         public static final Serializer INSTANCE = new Serializer();
         public static final String ID = "fermenting"; //name given in the json file
 

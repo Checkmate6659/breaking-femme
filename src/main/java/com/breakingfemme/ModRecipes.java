@@ -12,14 +12,15 @@ import static com.breakingfemme.BreakingFemme.id;
 //https://www.youtube.com/watch?v=4N5BY2aHins
 public class ModRecipes {
     public static final ModRecipe<GrindingRecipe, GrindingRecipe.Type, GrindingRecipe.Serializer>
-            GRINDING_RECIPE =
-            registerRecipe(GrindingRecipe.Type.INSTANCE, GrindingRecipe.Serializer.INSTANCE);
-    public static final ModRecipe<GrindingRecipe, GrindingRecipe.Type, GrindingRecipe.Serializer>
-            FERMENTING_RECIPE =
-            registerRecipe(
-                    GrindingRecipe.Type.INSTANCE,
-                    GrindingRecipe.Serializer.INSTANCE
-            );
+            GRINDING_RECIPE = registerRecipe(
+            GrindingRecipe.Type.INSTANCE,
+            GrindingRecipe.Serializer.INSTANCE
+    );
+    public static final ModRecipe<FermentingRecipe, FermentingRecipe.Type, FermentingRecipe.Serializer>
+            FERMENTING_RECIPE = registerRecipe(
+            FermentingRecipe.Type.INSTANCE,
+            FermentingRecipe.Serializer.INSTANCE
+    );
     public static final ModRecipe<DistillingRecipe, DistillingRecipe.Type, DistillingRecipe.Serializer>
             DISTILLING_RECIPE = registerRecipe(
             DistillingRecipe.Type.INSTANCE,
