@@ -12,7 +12,6 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction.Axis;
 
-import org.apache.commons.lang3.NotImplementedException;
 import org.jetbrains.annotations.Nullable;
 
 public class PressHandleBlockEntity extends BlockEntity {
@@ -20,18 +19,6 @@ public class PressHandleBlockEntity extends BlockEntity {
 
     public PressHandleBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.PRESS_HANDLE_BLOCK_ENTITY, pos, state);
-    }
-
-    public void setAngle(double angle) {
-//        final double TWO_PI = 2 * PI;
-//        final int rotations = (int) Math.abs(angle / TWO_PI);
-//        rotationsSinceLastChecked += rotations;
-//        var clamped = Math.clamp(0,1,angle);
-//        if (normalized != angle_normalized) {
-//            onAngleChanged();
-//        }
-//        angle_normalized = normalized;
-        throw new NotImplementedException("todo");
     }
 
     private void onAngleChanged() {
