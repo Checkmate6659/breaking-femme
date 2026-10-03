@@ -1,10 +1,12 @@
 package com.breakingfemme.client.mixin;
 
 import net.minecraft.client.render.entity.feature.ArmorFeatureRenderer;
+import net.minecraft.client.texture.SpriteAtlasTexture;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
 //TODO: try look at ArmorFeatureRenderer instead!!!
@@ -20,6 +22,9 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(value = ArmorFeatureRenderer.class)
 public interface ArmorFeatureRendererTextureAccessor {
+	@Accessor("armorTrimsAtlas")
+	SpriteAtlasTexture breakingfemme$getArmorTrimsAtlas();
+
 	@Invoker("getArmorTexture")
 	Identifier breakingfemme$getArmorTexture(ArmorItem item, boolean secondLayer, @Nullable String overlay);
 }
