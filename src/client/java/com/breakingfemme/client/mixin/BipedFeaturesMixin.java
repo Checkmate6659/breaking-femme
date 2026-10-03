@@ -75,7 +75,7 @@ public class BipedFeaturesMixin {
     private void breakingfemme$copy_features(BipedEntityModel<?> model, CallbackInfo ci) {
 		BipedFeaturesMixin model_mixin = (BipedFeaturesMixin)(Object)model;
 		model_mixin.breakingfemme$features.copyTransform(breakingfemme$features);
-		if(breakingfemme$features_jacket != null)
+		if(breakingfemme$features_jacket != null && model_mixin.breakingfemme$features_jacket != null)
 			model_mixin.breakingfemme$features_jacket.copyTransform(breakingfemme$features_jacket);
     }
 
