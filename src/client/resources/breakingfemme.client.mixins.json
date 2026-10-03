@@ -8,6 +8,8 @@
   "client": [
     "AdvancementTabMixin",
     "AllayFeaturesMixin",
+    "ArmorFeatureRendererMixin",
+    "ArmorFeatureRendererTextureAccessor",
     "BipedFeaturesMixin",
     "CreeperFeaturesMixin",
     "DrownedFeaturesMixin",
