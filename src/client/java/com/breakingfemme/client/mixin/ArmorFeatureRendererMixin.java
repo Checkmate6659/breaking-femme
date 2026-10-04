@@ -32,16 +32,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-//TODO: try look at ArmorFeatureRenderer instead!!!
-//especially the renderArmorParts method
-//the item could be checked against a tag & check if flexibility enchant to see if boobs should be rendered (and mb against some ingame methods too, check if its actually a chestplate lol)
-//and we have the vertex consumer and texture on hand, for free!
-
-
-//line 56 issues?? the model variable is overwritten!!
-//may need to modify the return value of getContextModel instead? idk
-//or the rendering directly
-//it is possible that I should have added the features by messing with the BipedEntityModel render method instead of this mixin? idk
+//invoking an extra render method with a custom model part (not an entire model)
+//to render an extra cuboid, with transform, when a chestplate is rendered
 
 @Mixin(value = ArmorFeatureRenderer.class)
 public class ArmorFeatureRendererMixin {
@@ -73,10 +65,12 @@ public class ArmorFeatureRendererMixin {
 		//TODO: do animation!!! (aka physics)
 		//TODO: adjust growth parameters! it seems a bit off at the moment
 		float normalized_offset = EntityAttachments.getNormalizedFeatureOffset(target_entity);
-		float zero_offset = (target_entity.getType().equals(EntityType.ZOMBIE_VILLAGER)) ? -1.5F : -0.5F; //small zombie villager distinction
+		boolean is_zombie_villager = target_entity.getType().equals(EntityType.ZOMBIE_VILLAGER);
+		float zero_offset = is_zombie_villager ? 1.0F : 0.875F; //small zombie villager distinction
+		float height = is_zombie_villager ? 0.0F : 1.0F;
 
 		//set the pivot and rotate it in place
-		part.setPivot(0.0F, 1.0F, zero_offset - 1.25F * normalized_offset); //the real y position adjuster is this thing's y actually :3
+		part.setPivot(0.0F, height, zero_offset - 1.25F * normalized_offset); //the real y position adjuster is this thing's y actually :3
 		part.rotate(new Vector3f(1.0F, 0.0F, 0.0F));
 
 		return part;

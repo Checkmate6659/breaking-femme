@@ -102,7 +102,7 @@ public class BipedFeaturesMixin {
 		else if(type.equals(EntityType.ZOMBIE_VILLAGER))
 		{
 			height = 2.0F;
-			zero_offset = -1.5F;
+			zero_offset = -1.25F;
 		}
 
 		breakingfemme$features.setPivot(0.0F, height, zero_offset - 1.25F * normalized_offset);
