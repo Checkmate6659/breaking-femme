@@ -27,7 +27,6 @@ import java.util.Set;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -37,8 +36,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = ArmorFeatureRenderer.class)
 public class ArmorFeatureRendererMixin {
-	@Unique
-	private static LivingEntity target_entity;
+	private static LivingEntity breakingfemme$target_entity;
 	boolean should_render = false;
 
 	@Inject(method = "renderArmor", at = @At("HEAD"))
@@ -46,13 +44,12 @@ public class ArmorFeatureRendererMixin {
 	{
 		should_render = armorSlot == EquipmentSlot.CHEST; //only render on the chest
 
-		target_entity = entity;
-		if(!EntityAttachments.isEstrogenable(target_entity)) //not the right entity
+		breakingfemme$target_entity = entity;
+		if(!EntityAttachments.isEstrogenable(breakingfemme$target_entity)) //not the right entity
 			should_render = false;
 	}
 
-	@Unique
-	private ModelPart getFeaturePart()
+	private ModelPart breakingfemme$getFeaturePart()
 	{
 		//create the extra part
 		ModelPart part = new ModelPart(List.of(
@@ -64,8 +61,8 @@ public class ArmorFeatureRendererMixin {
 		), Map.of());
 
 		//TODO: do animation!!! (aka physics)
-		float normalized_offset = EntityAttachments.getNormalizedFeatureOffset(target_entity);
-		boolean is_zombie_villager = target_entity.getType().equals(EntityType.ZOMBIE_VILLAGER);
+		float normalized_offset = EntityAttachments.getNormalizedFeatureOffset(breakingfemme$target_entity);
+		boolean is_zombie_villager = breakingfemme$target_entity.getType().equals(EntityType.ZOMBIE_VILLAGER);
 		float zero_offset = is_zombie_villager ? 1.0F : 0.875F; //small zombie villager distinction
 		float height = is_zombie_villager ? 0.0F : 1.0F;
 
@@ -87,7 +84,7 @@ public class ArmorFeatureRendererMixin {
 
 		Identifier texture = ((ArmorFeatureRendererTextureAccessor)(Object)this).breakingfemme$getArmorTexture(item, secondTextureLayer, overlay);
 		VertexConsumer vertexConsumer = vertexConsumers.getBuffer(RenderLayer.getArmorCutoutNoCull(texture));
-		getFeaturePart().render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, red, green, blue, 1.0F);
+		breakingfemme$getFeaturePart().render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, red, green, blue, 1.0F);
 	}
 
     @Inject(method = "renderTrim", at = @At("TAIL"))
@@ -98,7 +95,7 @@ public class ArmorFeatureRendererMixin {
 
 		Sprite sprite = ((ArmorFeatureRendererTextureAccessor)(Object)this).breakingfemme$getArmorTrimsAtlas().getSprite(trim.getGenericModelId(material));
 		VertexConsumer vertexConsumer = sprite.getTextureSpecificVertexConsumer(vertexConsumers.getBuffer(TexturedRenderLayers.getArmorTrims()));
-		getFeaturePart().render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
+		breakingfemme$getFeaturePart().render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
 	}
 
     @Inject(method = "renderGlint", at = @At("TAIL"))
@@ -107,6 +104,6 @@ public class ArmorFeatureRendererMixin {
 		if(!should_render)
 			return;
 
-		getFeaturePart().render(matrices, vertexConsumers.getBuffer(RenderLayer.getArmorEntityGlint()), light, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
+		breakingfemme$getFeaturePart().render(matrices, vertexConsumers.getBuffer(RenderLayer.getArmorEntityGlint()), light, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
 	}
 }
