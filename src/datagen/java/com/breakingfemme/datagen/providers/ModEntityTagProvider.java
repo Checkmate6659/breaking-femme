@@ -19,7 +19,7 @@ public class ModEntityTagProvider extends FabricTagProvider.EntityTypeTagProvide
                 .add(EntityType.VILLAGER)
                 .add(EntityType.PLAYER)
                 .add(EntityType.CREEPER)
-                .add(EntityType.BLAZE) //TODO
+                .add(EntityType.BLAZE) //TODO (also TODO: figure out what the fuck blaze features even would be)
                 .add(EntityType.ENDERMAN)
                 .add(EntityType.DROWNED)
                 .add(EntityType.EVOKER)
