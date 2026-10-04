@@ -59,11 +59,11 @@ public class ArmorFeatureRendererMixin {
 			new ModelPart.Cuboid(18, 22,
 				-4.0F, -1.0F, -2.875F, //position (relative to the model's transform)
 				8.0F, 2.0F, 2.0F, //size of the cuboid
-				1.0F, 1.0F, 1.0F, false, 64, 32, Set.of(Direction.values()))
+				1.0F, 1.0F, 1.0F, false, 64, 32, //dilation (absolute) of 1, not mirrored, 64x32 texture
+				Set.of(Direction.NORTH, Direction.DOWN, Direction.EAST, Direction.WEST)) //only these faces need to be rendered + makes them look less weird because neck
 		), Map.of());
 
 		//TODO: do animation!!! (aka physics)
-		//TODO: adjust growth parameters! it seems a bit off at the moment
 		float normalized_offset = EntityAttachments.getNormalizedFeatureOffset(target_entity);
 		boolean is_zombie_villager = target_entity.getType().equals(EntityType.ZOMBIE_VILLAGER);
 		float zero_offset = is_zombie_villager ? 1.0F : 0.875F; //small zombie villager distinction
